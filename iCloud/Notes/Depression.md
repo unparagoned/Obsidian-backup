@@ -1,5 +1,8 @@
-#depression 
-
+---
+tags:
+  - exercise
+  - depression
+---
 
 Depression is an umbrella term for a variety of conditions some psychological and some physical.
 
@@ -46,6 +49,12 @@ So if the main cause is psychological then stuff like therapy are going to be qu
 If nothing works then maybe antidepressants might help, but we aren't really sure how they work. They might be more of a bandaid than something that fixes some underlying issue.
 
 Your brain needs exercise, good diet and sleep to work properly and be biologically healthy. Exercise increases levels of BDNF, increases brain volume, improves brain vascular health, improves brain connectivity, improves mitochondrial health, etc. all of which are linked depression. So if the depression is ultimately due to poor biological brain health, it might be that no amount of therapy or drugs can help. On the other hand if your brain is in good biological health it's much more likely that stuff like therapy is going to effective.
+
+
+>Today you're not going to get eaten by a wolf or a leopard, you'd be very unlucky to get a disease that kills you before you're old. You don't have to worry about starving to death due to a famine. You won't be killed or raped by a marauding army, nor are you likely to be drafted to go fight in a world war. If you have children you won't expect most of them to die before they reach adulthood, and you won't have to work seven days a week in a factory. The stresses of modern life may be real, but they're peanuts compared to what our ancestors had to deal with. So yes stress is actually a natural condition.
+>[neutronium](https://www.reddit.com/user/neutronium/)
+
+Do you think the life would have been less stressful, 1,000 years ago, what about 10,000 or 100,000 years ago?
 
 ## Exercise
 
@@ -445,12 +454,21 @@ Metas show that SSRI barely even have any positive impact
 The brain is very complex, so we don't think something as simple as a chemical imbalance explains most mental conditions.
 
 >79% of psychiatrists recommend immediate treatment with an antidepressant to an outpatient with depression, but only 39% of psychiatrists would immediately take an antidepressant if they personally had depression
-
 [https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/what-would-you-do-if-you-were-me-doctor-randomised-trial-of-psychiatrists-personal-v-professional-perspectives-on-treatment-recommendations/C306AD64D2B6D28AA413556F9239F7C5](https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/what-would-you-do-if-you-were-me-doctor-randomised-trial-of-psychiatrists-personal-v-professional-perspectives-on-treatment-recommendations/C306AD64D2B6D28AA413556F9239F7C5)
+
+>Most GPs say everyday stress is mislabelled as mental illness
+>More than 80 per cent of doctors think antidepressants are wrongly used to treat normal anxieties
+>[https://www.thetimes.com/uk/article/most-gps-say-everyday-stress-is-mislabelled-as-mental-illness-rm0mst0pv](https://www.thetimes.com/uk/article/most-gps-say-everyday-stress-is-mislabelled-as-mental-illness-rm0mst0pv)
+
+
+>Of the 752 GPs who took part in our research, 442 said they believed that over-diagnosis is a concern. 
+>https://www.bbc.co.uk/news/articles/cx2pvxdn9v4o
 
 >Studies have shown that 27% to 86% of patients who attempt to stop antidepressants, whether on their own or under supervision of a physician, experience ADS.[11](https://www.ccjm.org/content/89/1/18?utm_source=chatgpt.com#ref-11) One review[11](https://www.ccjm.org/content/89/1/18?utm_source=chatgpt.com#ref-11) included studies ranging from randomized clinical trials to online surveys, with a weighted average of 56%. Of patients experiencing discontinuation symptoms, 86.7% reported ongoing symptoms at 2 months, 58.6% at 1 year, and 16.2% beyond 3 years
 
 [https://www.ccjm.org/content/89/1/18](https://www.ccjm.org/content/89/1/18)
+
+
 
 Here the severity of withdrawal is rated as the most extreme severity rating they can. It's probably not as bad as heroin, but considering it lasts so long it's an issue.
 
@@ -588,11 +606,7 @@ Growth mindset, the belief that abilities and attributes are changeable, has bee
 
 From <[https://journals.plos.org/mentalhealth/article?id=10.1371/journal.pmen.0000182](https://journals.plos.org/mentalhealth/article?id=10.1371/journal.pmen.0000182)>
 
-Most GPs say everyday stress is mislabelled as mental illness
 
-More than 80 per cent of doctors think antidepressants are wrongly used to treat normal anxieties
-
-[https://www.thetimes.com/uk/article/most-gps-say-everyday-stress-is-mislabelled-as-mental-illness-rm0mst0pv](https://www.thetimes.com/uk/article/most-gps-say-everyday-stress-is-mislabelled-as-mental-illness-rm0mst0pv)
 
 mental health services also need to involve themselves in supporting their patients to maintain or improve their physical health, in relation to smoking, diet, obesity, and exercis
 
@@ -651,3 +665,6 @@ According to the scientific literature, based on the best meta analysis of SSRIs
 SSRIs also increase the risk of suicide in children, and SSRIs increase all cause mortality in the elderly.
 
 From <[https://www.reddit.com/r/science/comments/1nijr86/a_new_study_on_ssri_antidepressants_finds_no/](https://www.reddit.com/r/science/comments/1nijr86/a_new_study_on_ssri_antidepressants_finds_no/)>
+
+>Etiological models for depression are largely diathesis-stress models in which stressful experiences trigger depression in those who may be vulnerable due to biological and psychosocial characteristics and circumstances.
+https://www.ncbi.nlm.nih.gov/books/NBK215119/
