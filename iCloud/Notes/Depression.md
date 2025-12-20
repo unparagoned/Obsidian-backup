@@ -453,6 +453,30 @@ Metas show that SSRI barely even have any positive impact
 
 The brain is very complex, so we don't think something as simple as a chemical imbalance explains most mental conditions.
 
+
+>In short, there exists no rigorous corroboration of the serotonin theory, and a significant body of contradictory evidence  …
+>The impact of the widespread promotion of the serotonin hypothesis should not be underestimated. Antidepressant advertisements are ubiquitous in American media, and there is emerging evidence that these advertisements have the potential to confound the doctor–patient relationship. 
+
+>[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1277931/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1277931/)
+
+&#x200B;
+
+>The main areas of serotonin research provide no consistent evidence of there being an association between serotonin and depression, and no support for the hypothesis that depression is caused by lowered serotonin activity or concentrations.
+
+[https://www.nature.com/articles/s41380-022-01661-0](https://www.nature.com/articles/s41380-022-01661-0)
+
+>Simple biochemical theories that link low levels of serotonin with depressed mood are no longer tenable. ... 
+>This pattern of theory making – moving from the pharmacological actions of drugs with some efficacy in treatment to biochemical notions of causation – has been common in biological psychiatry. In such an undeveloped field this approach, though logically precarious, has been a useful heuristic and, in the case of the dopamine hypothesis of psychosis, has been strikingly upheld by advanced brain imaging techniques (2). However, the serotonin hypothesis of depression has not been clearly substantiated. Indeed, dogged by unreliable clinical biochemical findings and the difficulty of relating changes in serotonin activity to mood state, the serotonin hypothesis eventually achieved “conspiracy theory” status, whose avowed purpose was to enable industry to market selective serotonin reuptake inhibitors (SSRIs) to a gullible public  
+
+>[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4471964/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4471964/)
+
+&#x200B;
+
+The FDA label even make it clear that we aren't sure how they work.
+
+>The mechanism of action of citalopram is unclear
+>[https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf](https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf)
+
 >79% of psychiatrists recommend immediate treatment with an antidepressant to an outpatient with depression, but only 39% of psychiatrists would immediately take an antidepressant if they personally had depression
 [https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/what-would-you-do-if-you-were-me-doctor-randomised-trial-of-psychiatrists-personal-v-professional-perspectives-on-treatment-recommendations/C306AD64D2B6D28AA413556F9239F7C5](https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/what-would-you-do-if-you-were-me-doctor-randomised-trial-of-psychiatrists-personal-v-professional-perspectives-on-treatment-recommendations/C306AD64D2B6D28AA413556F9239F7C5)
 
@@ -477,40 +501,13 @@ Here the severity of withdrawal is rated as the most extreme severity rating the
 [https://pubmed.ncbi.nlm.nih.gov/30292574/](https://pubmed.ncbi.nlm.nih.gov/30292574/)
 
 >A new review of antidepressant withdrawal effects – written by academics, many of whom have close ties to drug manufacturers – risks underestimating the potential harms to long-term antidepressant users by focusing on short-term, industry-funded studies.
-
 >There is growing recognition that stopping antidepressants – especially after long-term use – can cause severe and sometimes debilitating withdrawal symptoms, and it is now acknowledged by the UK government as a public health issue.
-
 [https://www.independent.co.uk/life-style/health-and-families/antidepressant-withdrawal-symptoms-study-long-term-risks-b2789401.html](https://www.independent.co.uk/life-style/health-and-families/antidepressant-withdrawal-symptoms-study-long-term-risks-b2789401.html)
 
 What is exercise addiction? An addiction is when you are psychologically or physically dependent on a substance or behavior. “With an exercise addiction, you have the urge or feel the need to exercise even when it leads to negative consequences,” says Dr. Honaker. [https://health.clevelandclinic.org/exercise-addiction](https://health.clevelandclinic.org/exercise-addiction)
 
 &#x200B;
 
->In short, there exists no rigorous corroboration of the serotonin theory, and a significant body of contradictory evidence  …
-
->The impact of the widespread promotion of the serotonin hypothesis should not be underestimated. Antidepressant advertisements are ubiquitous in American media, and there is emerging evidence that these advertisements have the potential to confound the doctor–patient relationship. 
-
->[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1277931/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1277931/)
-
-&#x200B;
-
->The main areas of serotonin research provide no consistent evidence of there being an association between serotonin and depression, and no support for the hypothesis that depression is caused by lowered serotonin activity or concentrations.
-
-[https://www.nature.com/articles/s41380-022-01661-0](https://www.nature.com/articles/s41380-022-01661-0)
-
->Simple biochemical theories that link low levels of serotonin with depressed mood are no longer tenable. ... 
-
->This pattern of theory making – moving from the pharmacological actions of drugs with some efficacy in treatment to biochemical notions of causation – has been common in biological psychiatry. In such an undeveloped field this approach, though logically precarious, has been a useful heuristic and, in the case of the dopamine hypothesis of psychosis, has been strikingly upheld by advanced brain imaging techniques (2). However, the serotonin hypothesis of depression has not been clearly substantiated. Indeed, dogged by unreliable clinical biochemical findings and the difficulty of relating changes in serotonin activity to mood state, the serotonin hypothesis eventually achieved “conspiracy theory” status, whose avowed purpose was to enable industry to market selective serotonin reuptake inhibitors (SSRIs) to a gullible public  
-
->[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4471964/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4471964/)
-
-&#x200B;
-
-The FDA label even make it clear that we aren't sure how they work.
-
->The mechanism of action of citalopram is unclear
-
->[https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf](https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf)
 
 >SUICIDAL THOUGHTS AND BEHAVIORS
 

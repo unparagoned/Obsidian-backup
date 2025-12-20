@@ -16,3 +16,8 @@ https://help.obsidian.md/
 
 # Live Preview
 Might need to press Ctrl + p, for a command then select live preview
+
+
+# Sync reminders
+This should work, if needed
+https://apps.apple.com/us/app/remindersync-for-markdown/id6478323460?mt=12
