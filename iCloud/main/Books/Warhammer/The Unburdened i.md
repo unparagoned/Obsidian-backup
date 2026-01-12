@@ -1,0 +1,6 @@
+Quite nice story from the WB side, enjoy it more than ultramarines stuff
+   
+
+_The Unburdened_ is a Horus Heresy Series novella. Long considering themselves persecuted by the rest of the [Imperium](https://warhammer40k.fandom.com/wiki/Imperium), the apostles of the [Word Bearers](https://warhammer40k.fandom.com/wiki/Word_Bearers) Legion have courted sedition, betrayal and even open heresy for decades. But for Kurtha Sedd of the Third Hand Chapter, the Word Bearers’ assault on [Calth](https://warhammer40k.fandom.com/wiki/Calth) has proven to be troubling. Drawn into the haunted shadows of the planet’s underworld, the Chaplain and his devout brethren must now put aside all other concerns and continue to wage war against the [Ultramarines](https://warhammer40k.fandom.com/wiki/Ultramarines), no matter the ultimate cost. Both _The Unburdened_ and _The Honoured_ were also published together as the _Betrayal at Calth_ duology box set, a limited-edition premium version containing hard-back copies of both novellas and additional artwork.
+ \> From \<[https://warhammer40k.fandom.com/wiki/The_Horus_Heresy_(Novels)](https://warhammer40k.fandom.com/wiki/The_Horus_Heresy_\(Novels\))\>   
+The WB go down and just try and cause trouble. They do lots of sacrificing, then start to get some powers for the dark.

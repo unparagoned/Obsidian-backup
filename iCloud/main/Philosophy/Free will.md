@@ -3,6 +3,15 @@
 
 Making a voluntary action in line with my desires free from external coercion. 
 
+Not really, but I think we can take insight from how physics uses the word "free". 
+
+You have libertarian free will which is about making decisions free from determinism or the laws of physics, and that doesn't' exist and physics kind of impacts on that kind of free will. But most people don't really mean libertarian free will. 
+
+Studies suggest that most people actually have compatibilist intuitions. A compatibilist definition of free will would be something like "making a decision in line with your desires free from external coercion". So that's making a decision that you want to make and free from someone else trying to influence you. And that kind of free will doesn't really depend on physics.
+
+Where physics is useful in "what do we really mean by the term free". Libertarian free will is trying to say we are free from everything in the world, including the laws of physics. But in actual physics we pretty much never mean "free" in that way, in maths, stats, physics, biology, chemistry, economics, psychology, we always mean free from something in particular. So if in physics we almost never mean free from the laws of physics, why the hell would we use such a definition for free when talking about a high level psychology concept. 
+
+
 # What do people mean by free will
 
 Lay people have incoherent views around free will, but if you properly probe it lines up more with compatibilist intuitions. 
@@ -87,13 +96,16 @@ The Supreme Court found that he didn't smuggle the cocaine of his own free will.
 
 # Libet
 
+Libet has loads of issue. 
 
 >If Libet was right, that should have happened at 500 milliseconds before the movement. But the algorithm couldn’t tell any difference until about only 150 milliseconds before the movement, the time people reported making decisions in Libet’s original experiment.
 [https://www.theatlantic.com/health/archive/2019/09/free-will-bereitschaftspotential/597736/](https://www.theatlantic.com/health/archive/2019/09/free-will-bereitschaftspotential/597736/)
 
 Libet and other studies, are designed so there is no preplanning, they command people not to act with conscious planning.
 
-Free will is about important decisions, your consciously think about and deliberate. e.g. is about what career to pursue, not pressing a button.
+Free will is about important decisions, that you consciously think about and deliberate. e.g. is about what career to pursue, not pressing a button. So even if they do show that there is no free will in button pushing it doesn't really mean much. 
+
+Plus it's kind of dualist treating the person and the brain as different things. 
 
 Even Sam Harris wishes they never brought up that argument.
 
@@ -117,7 +129,6 @@ It seems like weakening free will belief makes people more prejudice and less mo
 
 >these results provide a potential explanation for the strength and prevalence of belief in free will: It is functional for holding others morally responsible and facilitates justifiably punishing harmful members of society.
 [https://www.academia.edu/15691341/Free_to_punish_A_motivated_account_of_free_will_belief?utm_content=buffercd36e&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer](https://www.academia.edu/15691341/Free_to_punish_A_motivated_account_of_free_will_belief?utm_content=buffercd36e&utm_medium=social&utm_source=twitter.com&utm_campaign=buffer)
-
 >[https://www.ethicalpsychology.com/search?q=free+will](https://www.ethicalpsychology.com/search?q=free+will)
 
 
@@ -133,11 +144,7 @@ Here Alex/cosmic sceptic admits that when it comes to courts or daily interactio
 >[https://youtu.be/CRpsJgYVl-8?si=oASNlEMfgo-jjw7C&t=735](https://youtu.be/CRpsJgYVl-8?si=oASNlEMfgo-jjw7C&t=735)
 
 
-> And for most people that is necessary and sufficient to conclude that they're seeing free will and action, intent, conscious awareness of you weren't coerced, you had options you did, and I should note that the legal criminal justice system sees that, in most cases as necessary and sufficient for deciding, there was a free choice made. There was culpability, there was responsibility, and so on.
-And from my standpoint, this is all very interesting, but it has absolutely nothing
-to do with free will.
 
-[https://video.ucdavis.edu/media/Exploring+the+Mind+Lecture+Series-+Mitchell++Sapolsky++Debate+%22Do+We+Have+Free+Will%22/1_ulil0emm](https://video.ucdavis.edu/media/Exploring+the+Mind+Lecture+Series-+Mitchell++Sapolsky++Debate+%22Do+We+Have+Free+Will%22/1_ulil0emm)
 # Sapolsky
 [[Robert Sapolsky]]
 
@@ -145,6 +152,10 @@ to do with free will.
 >[https://ndpr.nd.edu/reviews/determined-a-science-of-life-without-free-will/](https://ndpr.nd.edu/reviews/determined-a-science-of-life-without-free-will/)
 
 
+> And for most people that is necessary and sufficient to conclude that they're seeing free will and action, intent, conscious awareness of you weren't coerced, you had options you did, and I should note that the legal criminal justice system sees that, in most cases as necessary and sufficient for deciding, there was a free choice made. There was culpability, there was responsibility, and so on.
+And from my standpoint, this is all very interesting, but it has absolutely nothing
+to do with free will.
+[https://video.ucdavis.edu/media/Exploring+the+Mind+Lecture+Series-+Mitchell++Sapolsky++Debate+%22Do+We+Have+Free+Will%22/1_ulil0emm](https://video.ucdavis.edu/media/Exploring+the+Mind+Lecture+Series-+Mitchell++Sapolsky++Debate+%22Do+We+Have+Free+Will%22/1_ulil0emm)
 # Sam Harris
 [[Sam Harris]]
 
@@ -257,6 +268,9 @@ The hard incompatibilist Derk Pereboom argues that the really important sort of 
 [https://www.reddit.com/r/philosophy/comments/1f4rqcr/comment/lko7z4c/?context=3](https://www.reddit.com/r/philosophy/comments/1f4rqcr/comment/lko7z4c/?context=3)
 
 # Nahmias
+[[Eddy Nahmias]]
+
+
 
 [Ep. 28 - Eddy Nahmias: Neuroscience as a (Non) Threat to Free Will](https://www.youtube.com/watch?v=XsOsxuGVSgg)
 [https://www.youtube.com/watch?v=XsOsxuGVSgg](https://www.youtube.com/watch?v=XsOsxuGVSgg)

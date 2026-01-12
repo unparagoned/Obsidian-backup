@@ -9,7 +9,7 @@ Slider on habpanel can set temp
 
 
 ## Development
-Main folder is /etc/openhab2
+Main folder is /etc/openhab¦
 Openhab extension for VSCode works well too.
 ## Migrate?
 
