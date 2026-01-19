@@ -1,0 +1,1 @@
+The Ion hands in Veritas save some salamanders at Isstavan V, but lost lots of in the fight, they escaped.

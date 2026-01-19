@@ -1,1 +1,0 @@
-Boring shot about angaron

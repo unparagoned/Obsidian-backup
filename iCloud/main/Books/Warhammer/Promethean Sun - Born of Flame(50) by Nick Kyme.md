@@ -1,9 +1,0 @@
-“Promethean Sun” offers an intimate look at Primarch Vulkan and the Salamanders during the Great Crusade, as well as reflections set around the time of the Horus Heresy. Much of the narrative unfolds through Vulkan’s perspective, revealing his deep sense of responsibility and compassion toward both his Legion and the people he has sworn to protect.  
-Key elements of the story include:
-
-- **Vulkan’s Character**: The novella highlights the Primarch’s defining traits—his paternal care for his Legionaries and his moral code, emphasizing the Salamanders’ focus on humanity and protecting the innocent.
-- **Great Crusade Flashbacks**: Vulkan recalls a harsh campaign against alien foes on a treacherous world, illustrating the Salamanders’ resilience and skill at war, as well as Vulkan’s introspection on leadership and the burdens of command.
-- **Salamanders’ Ideals**: The tale underscores the Salamanders’ Promethean creed—rooted in self-reliance, honor, and the forging of strength through adversity. This creed shapes the Legion’s identity, influencing everything from their tactics in battle to their compassion for civilian populations.
-- **Foreshadowing the Heresy**: Although “Promethean Sun” focuses primarily on Vulkan’s past experiences, it subtly foreshadows the tragedy of the Drop Site Massacre and the trials the Salamanders will endure during the Horus Heresy.
-
-In essence, “Promethean Sun” offers a deeper exploration of Vulkan’s mindset and the Salamanders’ ethos, portraying how their bond of brotherhood and humanitarian values set them apart—traits that will be severely tested in the dark days to come.

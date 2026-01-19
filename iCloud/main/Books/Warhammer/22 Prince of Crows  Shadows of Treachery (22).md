@@ -1,6 +1,0 @@
-Sevatar takes control over fleet after Curze is hurt. He plans for them to split up, some going to earth and others doing whatever. But then Dark Angels show up, Sevatar decides to stay with 50 ships and attack the enemy main ship allowing other ships to escape. In the end Curse wakes up and they teleport to enemy main ship. Sevatar gets captured.
-       
-‘Jago Sevatarion, born in City’s Edge. First Captain of the Eighth Legion, Commander of the Atramentar, officer of the Kyroptera, known also by the names Sevatar the Condemned, and…’ Trez snorted, shaking his head, ‘…and by the rather amusing title, Prince of Crows.’
-    
-The **Thramas Crusade** draws to its inevitable conclusion, with the forces of the **Dark Angels** and the **Night Lords** locked in a struggle which neither side can abandon. The **Night Haunter** lies comatose after being mauled by his **primarch** brother **Lion El'Jonson**, and in his absence it falls to **Sevatar** and the remaining members of the **Kyroptera** to command the **Legion**. But the self-styled "Prince of Crows" has his own plans to save the Night Lords from annihilation – plans he intends to follow, with or without his comrades in tow...**[1]**
- \> From \<[https://wh40k.lexicanum.com/wiki/Prince_of_Crows_(Novella)](https://wh40k.lexicanum.com/wiki/Prince_of_Crows_\(Novella\))\>

@@ -1,3 +1,0 @@
-Alpha legion join attack on Nurth
- 
-This spy, John Grammaticus, works for an organisation he knows as the Cabal, a group of Xenos species. This Cabal is dedicated to the excision of the Primordial Annihilator, Chaos. Aware of the coming Heresy, they believe that the Alpha Legion represent the last chance to save the galaxy from the predations of the Chaos powers. To this end, they confer with the Primarch of the Legion, Alpharius Omegon, and sway him/them to their viewpoint. In order for Chaos to perish, Horus must win the Heresy. In order for that to happen, the Alpha Legion must side with him

@@ -1,4 +1,0 @@
-Honour to the dead
- 
-As **Calth** burns, the **Battle Titans** of the **Fire Masters** **legion** take to the streets of the city of **Ithraca**, ready to massacre the fleeing civilian population in the name of their new, **dark masters**. But the remaining **loyalist** engines of the **Legio Praesagius** — the True Messengers - still stand ready to defend the **Imperium**, even in the face of almost certain death. With the nearby **Ultramarines** forces scattered and lost, the people of Ithraca must fend for themselves as gigantic war machines unleash apocalyptic weaponry across the ravaged skyline...
- \> From \<[https://wh40k.lexicanum.com/wiki/Honour_to_the_Dead_(Audio_Drama)](https://wh40k.lexicanum.com/wiki/Honour_to_the_Dead_\(Audio_Drama\))\>

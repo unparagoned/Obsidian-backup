@@ -1,1 +1,0 @@
-A psycher looks for volkan. Is hallucinating people and forgot who he is, and in the end kills a load of enemies.
