@@ -16,11 +16,8 @@ Fast food is more expensive per calorie than basic ingredients
 
 It looks like the poor and less educated people do have more free time.
 
->In the richest countries, hours worked are flat or increasing in income
->[https://fuchsschuendeln.com/wp-content/uploads/2020/12/aer_hours.pdf](https://fuchsschuendeln.com/wp-content/uploads/2020/12/aer_hours.pdf)
 
 >The more surprising discovery, however, is a corresponding leisure gap has opened up between the highly-educated and less-educated. Low-educated men saw their leisure hours grow to 39.1 hours in 2003-2007, from 36.6 hours in 1985. Highly-educated men saw their leisure hours shrink to 33.2 hours from 34.4 hours.
->
 >A similar pattern emerged for women. Low-educated women saw their leisure time grow to 35.2 hours a week from 35 hours. High-educated women saw their leisure time decrease to 30.3 hours from 32.2 hours. Educated women, in other words, had the largest decline in leisure time of the four groups.
 >[https://www.wsj.com/articles/BL-WHB-5080](https://www.wsj.com/articles/BL-WHB-5080)
 
@@ -29,6 +26,10 @@ It looks like the poor and less educated people do have more free time.
 
 >A study conducted by the General Social Surveys of NORAC at the University of Chicago found that 34.1 percent of American families making less than $9,000 per year averaged watching more than five hours of television per day. Of families making more than $150,000 per year, only 1.1 percent watched more than five hours a day.
 [https://www.movieguide.org/news-articles/study-poverty-and-high-rates-of-tv-viewing-are-linked.html](https://www.movieguide.org/news-articles/study-poverty-and-high-rates-of-tv-viewing-are-linked.html)
+
+>In the richest countries, hours worked are flat or increasing in income
+>[https://fuchsschuendeln.com/wp-content/uploads/2020/12/aer_hours.pdf](https://fuchsschuendeln.com/wp-content/uploads/2020/12/aer_hours.pdf)
+
 
 Whenever I've looked up detailed studies on health/obesity-class/income gap they focus on education as the key factor. Education is something we can implement now to help poor people, so it seems really immoral and toxic to claim it's impossible for poor people to be healthy.
 

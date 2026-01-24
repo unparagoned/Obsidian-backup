@@ -125,8 +125,6 @@ https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.3c00269
 
 # Drugs
 
-
-
 >In this study, suvorexant acutely decreased tau phosphorylation and amyloid-β concentrations in the central nervous system.
 https://onlinelibrary.wiley.com/doi/10.1002/ana.26641
 
@@ -151,3 +149,10 @@ There are literally hundreds, if not thousands of studies like this, all with th
 The only thing that will change my mind is a good study like a RCT of a million people from birth in a controlled lab until old age.
 
 Look at all the suckers thinking that exercise, sleep and diet might help with dementia. Idiots for not seeing these are just correlation studies and we all know correlation means no causation.
+
+# Notes
+
+Exercise is important, need blood flow to keep blood vesicles open.
+
+Might be related to blood vessels and BBB
+[Axel Montagne, Ph.D., on Solving Alzheimer’s and Dementia with Blood-Brain Barrier Repair](https://www.youtube.com/watch?v=lChdNK0I8bw)

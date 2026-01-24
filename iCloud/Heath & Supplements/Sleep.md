@@ -32,10 +32,6 @@ Sleep is linked to all sorts of health issues like depression and dementia, much
 [[Depression#Sleep]] 
 [[Dementia#Sleep]]
 
-It might be that it takes a long time to get over a bad night of sleep, but I don't think that's right. Some of the damage done by a bad night of sleep is permanent and irreversible and will never be undone. The amount during a single night of bad sleep is soo small it's undetectable but if it happens a lot it will start to add up over the years. 
-
->Man who didn't sleep for a record 264 hours suffered from crippling effects for years after
-[https://www.unilad.com/community/life/man-didnt-sleep-science-project-140654-20231212](https://www.unilad.com/community/life/man-didnt-sleep-science-project-140654-20231212)
 
 Two nights of sleep isn't enough to recover from lack of sleep. I suspect that people that say they have to have an alarm clock to wake up otherwise they would sleep 10h+ each night, are just chronically sleep deprived and it might take quite a few days of 10h+ sleep to recover. It's not that 10h+ is their natural sleep length. 
 
@@ -124,10 +120,11 @@ So your body releases hormones and stuff before and when you should be alseep ac
 >These results confirm the considerable influence of sleep in driving the GH rhythm and the existence of a circadian influence revealed by an acute shift in the sleep period. They also provide evidence of an incomplete adjustment of GH rhythms in night workers.
 https://pubmed.ncbi.nlm.nih.gov/9042551/
 
-Regularity is more important than duration
+Regularity is a key factor distinct from just duration
 
 >These findings indicate that sleep regularity is an important predictor of mortality risk and is a stronger predictor than sleep duration.
-https://www.researchgate.net/publication/374810139_Sleep_regularity_is_a_stronger_predictor_of_mortality_risk_than_sleep_duration_A_prospective_cohort_study
+https://academic.oup.com/sleep/article/47/1/zsad253/7280269
+
 
 Increased dementia risk
 #dementia
@@ -319,16 +316,45 @@ https://www.antenatalandpostnatalpsychology.com.au/information-posts/mind-too-bu
 
 ## Supplements
 
+### Magnesium
+#magnesium
 
+There are various forms. Threonate might have some advantages but other forms might also work.
 
+Magnesium threonate  1g - This has more effect in those that are mag deficient, threonate passes blood brain barrier others may just relax muscles which may mean it's more effective, but limited evidence. 
 
+It increased gaba, which can help with sleep.
 
-Magnesium threonate  - This has more effect in those that are mag deficient, threonate passes blood brain barrier others may just relax muscles which does help
-help allow increased gaba
+>This showed MgT improved sleep quality, especially deep/REM sleep stages, improved mood, energy, alertness, and daily activity and productivity.
+https://pubmed.ncbi.nlm.nih.gov/39252819/
 
-Apigenin
+Magnesium Glycinate can come in liquid form, which could result in faster absorption and avoid the gut. Magnesium citrate also works.
 
-L-theanine
+### Ashwagandha
+#ashwagandha 
+200-600+mg/day
+
+Good evidence that it works, but effects are modest.
+
+>treatment dosage ≥600 mg/day, and treatment duration ≥8 weeks. Ashwagandha extract was also found to improve mental alertness on rising and anxiety level
+>https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0257843
+
+### Apigenin and chamomile
+#apigenin #chamomile 
+
+There is weak evidence that apigenin works by itself. There is some evidence that chamomile works which has apigenin as an active ingredient but it also has other stuff which might be helping.
+
+>Chamomile appears to be efficacious and safe for sleep quality and GAD.
+>https://pubmed.ncbi.nlm.nih.gov/31006899/
+
+### L-theanine
+#ltheanine
+200-450mg
+
+Some good evidence it works
+
+>L-theanine was shown to significantly improve subjective [sleep onset latency](https://www.sciencedirect.com/topics/medicine-and-dentistry/sleep-onset-latency "Learn more about sleep onset latency from ScienceDirect's AI-generated Topic Pages") (SMD = 0.15, 95 % CI [0.01, 0.29], _p_ = 0.04; n = 10 studies), subjective daytime dysfunction (SMD = 0.33, 95 % CI [0.16, 0.49], _p_ < 0.001; n = 9 studies), and overall subjective sleep quality score (SMD = 0.43, 95 % CI [0.04, 0.83], _p_ = 0.03; n = 12 studies_)_.
+>https://www.sciencedirect.com/science/article/pii/S1087079225000292
 
 >L-theanine promotes relaxation and facilitates sleep by contributing to a number of changes in the brain:
 >- **Boosts levels of GABA and other calming brain chemicals:** L-theanine elevates levels of [GABA](https://sleepdoctor.com/pages/sleep-aids/gaba), as well as serotonin and dopamine. These chemicals are known as neurotransmitters, and they work in the brain to regulate emotions, mood, concentration, alertness, and sleep, as well as appetite, energy, and other cognitive skills. Increasing levels of these calming brain chemicals promotes relaxation and can help with sleep.
@@ -336,7 +362,11 @@ L-theanine
 >- **Enhances alpha brain waves:** Alpha brain waves are associated with a state of “wakeful relaxation.” That’s the state of mind you experience when meditating, being creative, or letting your mind wander in daydreaming. Alpha waves are also present during REM sleep. L-theanine appears to trigger the release of alpha-waves, which enhances relaxation, focus, and creativity.
 >https://sleepdoctor.com/pages/sleep-aids/l-theanine
 
-1-3g Glycine might help.
+
+### Glycine 
+1-3g
+
+Some evidence it works
 
 >Glycine also has the property to enhance the quality of sleep and neurological functions.
  https://pubmed.ncbi.nlm.nih.gov/28337245/
@@ -347,20 +377,38 @@ L-theanine
 >11 healthy adults were given either 3 grams of glycine or a placebo 1 hour before bedtime for a period of 2 days on 2 different occasions. St. Mary’s Hospital (SMH) Sleep Questionnaire showed improvements in subjective sleep quality and awakening, and polysomnography (PSG) revealed shortened latency to sleep onset and to slow wave sleep
 [https://supplementsinreview.com/sleep/glycine-sleep/](https://supplementsinreview.com/sleep/glycine-sleep/)
 
-
+### Phosphatidylserine
+#Phosphatidylserine
+Weak evidence it works
 Fosfadile serine?
 
-Gotu kola
-Inositol
+### Gotu kola
+#gotukola
 
-ZMA
+None in humans
 
-Valerian, some evidence it works but it's weak and there isn't strong evidence it's good.
+### Inositol
+#insitol
+No clear evidence it works if you aren't pregnant.
+
+### ZMA
+#zma #magnesium #zinc #b6
+
+No real evidence
+
+### Valerian
+#valerian
+
+Some evidence it works but it's weak and there isn't strong evidence it's good.
 
 >The qualitative dichotomous results suggest that valerian would be effective for a subjective improvement of insomnia, although its effectiveness has not been demonstrated with quantitative or objective measurements.
 https://www.sciencedirect.com/science/article/abs/pii/S1389945710001000
 
-Montmorency Tart Cherry - For DOMS & sleep
+### Montmorency Tart Cherry 
+#tartcherry
+
+Mixed evidence
+Maybe better for DOMS than sleep
 
 # Drugs
 
@@ -405,7 +453,7 @@ I think there is some evidence of this helping older adults or if you are jet-la
 >Zolpidem used might be associated with increased risk for dementia in elderly population. Increased accumulative dose might have higher risk to develop dementia, especially in patients with underlying diseases such as hypertension, diabetes, and stroke.
 [https://pmc.ncbi.nlm.nih.gov/articles/PMC4603066/](https://pmc.ncbi.nlm.nih.gov/articles/PMC4603066/)
 
->The scientists also found that the sleep drug zolpidem, better known as Ambien, impedes the blood vessel oscillations and the fluid flow they promote, implying it could hamper cleansing. 
+>The scientists also found that the sleep drug zolpidem, better known as Ambient, impedes the blood vessel oscillations and the fluid flow they promote, implying it could hamper cleansing. 
 [https://www.science.org/content/article/scientists-uncover-how-brain-washes-itself-during-sleep](https://www.science.org/content/article/scientists-uncover-how-brain-washes-itself-during-sleep)
 
 >On the contrary, the sleep aid zolpidem suppressed norepinephrine oscillations and glymphatic flow, highlighting the critical role of norepinephrine-driven vascular dynamics in brain clearance.
@@ -417,7 +465,7 @@ I think there is some evidence of this helping older adults or if you are jet-la
 
 
 
->FWIW, I don't generally comment in such a vague way but I am bound by NDA in this case. Nothing nefarious--simply an agreement that I signed. I doubt that I would be "caught" either, but I try to be a person of their word. What I have seen, datawise, is suggestive that it is important to understand that (a) OX1 and OX2R indeed subserve differential functions vis-a-vis REM and non-REM sleep and (b) when both antagonized (in combination), adverse events may be more likely--even though the clinical profile of a dual (OX1+2) antagonist is probably superior to that of, say, Ambien.
+>FWIW, I don't generally comment in such a vague way but I am bound by NDA in this case. Nothing nefarious--simply an agreement that I signed. I doubt that I would be "caught" either, but I try to be a person of their word. What I have seen, datawise, is suggestive that it is important to understand that (a) OX1 and OX2R indeed subserve differential functions vis-a-vis REM and non-REM sleep and (b) when both antagonized (in combination), adverse events may be more likely--even though the clinical profile of a dual (OX1+2) antagonist is probably superior to that of, say, Ambient.
 >In plain English, specificity matters. A quick drill-down into the OX1 and 2 literature from 2009-2015 is actually pretty illuminating whereas the later stuff (2017-2020) is less convincing, at least to someone who has seen raw data... This seems counterintuitive, I know. Disinformation be like that.
 >Dual antagonists absolutely will knock you out, but somewhat at the expense of sleep architecture, whereas more specific antagonism will better preserve REM vs NREM (at least in rats) but with less efficacy that dual. In my view.
 [https://www.reddit.com/r/science/comments/1hyychf/comment/m6uec90/?context=3](https://www.reddit.com/r/science/comments/1hyychf/comment/m6uec90/?context=3)

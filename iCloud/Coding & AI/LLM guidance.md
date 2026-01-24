@@ -1,9 +1,25 @@
 
+# Structure
+
+## OpenAI prompts
+1. Goal
+2. Return format
+3. Warnings - remind GPT about restrictions, etc.
+4. Context - Situation and why you need it to do it
+
+
+
 Telling the model to ask questions
 - number them
 - give a suggested answer 
 
 That makes it easy to response, like 1 yes.
+
+
+
+# Sources
+
+
 
 # Docker
 

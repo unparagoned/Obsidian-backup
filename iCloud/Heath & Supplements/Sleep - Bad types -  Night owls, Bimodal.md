@@ -1,6 +1,6 @@
 #sleep
 
-While there is a biological aspect to whether you area night owl, the main factors for your circadian rhythm and sleep that result in people being night owls are poor lifestyle, lack of self control, poor sleep habits and poor health habits. When exposed to natural sunlight night owls start waking up earlier more in line with early birds suggesting many people who think they are night owls are actually morning birds but are doing almost everything to fuck up their circadian rhythm. Night owls have higher mortality rates, cancer risk, heart issues, mental health issues, etc. They find forcing a night owl to wake up early reduces depression symptoms and improves physical and mental performance. 
+Being a night owl has a biological component, but modern environment and behaviours(late night light, screens, late meals, alcohol, poor health habits, poor sleep habits, etc.) can push your circadian rhythm later and create "social jetlag".  When exposed to natural sunlight night owls start waking up earlier more in line with early birds suggesting many people who think they are night owls are actually morning birds but behaviours keep them up at night. Night owls have higher mortality rates, cancer risk, heart issues, mental health issues, etc. They find forcing a night owl to wake up early reduces depression symptoms and improves physical and mental performance. 
 
 
 # Night owls

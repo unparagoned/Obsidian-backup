@@ -1,5 +1,6 @@
 
 
+# I was so wrong about time dilation (My mind is blown)
 https://www.youtube.com/watch?v=F_eVrN8Z8gM
 Time doesn't slow down. It's just how things are measured.
 Straight paths are the longest path between two events due to hyperbolic geometry (t^2 - x^2). And faster speeds are shorter paths, so they experience less time. Not that time slow down. 

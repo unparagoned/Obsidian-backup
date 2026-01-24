@@ -339,6 +339,21 @@ Only 2.7% of people taking SSRIs have it working long term.
 >Only 2.7% of patients had a QIDS-SR determined remission after up to 4 rounds of AD drug care and neither relapsed nor dropped out as evidenced by taking at least 1 of the months 10-to-12 QIDS-SR telephonic assessments and not scoring as having relapsed in any of the 12 monthly administered assessments.
 https://pmc.ncbi.nlm.nih.gov/articles/PMC4314062/
 
+Studies are usually just 8 weeks long and all less than 2years long, but most people are on them for much longer.
+
+>A substantial discordance exists between the typical 8-week duration of clinical trials and the median 5-year real-world use of antidepressants. This gap, compounded by inadequate monitoring for withdrawal effects and post-treatment outcomes, raises important questions about the evidence supporting current long-term prescribing practices
+>https://pubmed.ncbi.nlm.nih.gov/40324551/
+
+>"We don’t have enough information on the potential long-term benefits and harms of antidepressants, even though people often take them for years,”
+https://www.cochrane.org/about-us/news/antidepressants-reduce-anxiety-long-term-impact-remains-unclear
+
+Some even think that antidepressants long term make depression even worse.
+
+>The possibility that antidepressant drugs may worsen the course of depression needs to be tested, even though its scientific exploration is likely to encounter considerable methodological and ideological difficulties.
+>https://pubmed.ncbi.nlm.nih.gov/12633120/
+
+Or the studies take people off SSRI quickly, so it's not a relapse but withdrawal effect form the drug.
+
 Study 329, Paxil, GSK did a study that showed there were no benefits in adolescents but caused suicidal behaviour, so wasn't suitable for adolescents. But they got a PR firm to ghostwrite the study and lied about it, resulting in the one of the largest fines ever $3bn. 
 
 >Published in July 2001 in the _[Journal of the American Academy of Child and Adolescent Psychiatry](https://en.wikipedia.org/wiki/Journal_of_the_American_Academy_of_Child_and_Adolescent_Psychiatry "Journal of the American Academy of Child and Adolescent Psychiatry")_ (_JAACAP_), which listed Keller and 21 other researchers as co-authors, study 329 became controversial when it was discovered that the article had been [ghostwritten](https://en.wikipedia.org/wiki/Medical_ghostwriter "Medical ghostwriter")by a PR firm hired by SmithKline Beecham, had made false claims about the drug's efficacy, and had downplayed safety concerns.[[8]](https://en.wikipedia.org/wiki/Study_329#cite_note-8)[[9]](https://en.wikipedia.org/wiki/Study_329#cite_note-Godlee17Sept2015-9)[[3]](https://en.wikipedia.org/wiki/Study_329#cite_note-Doshi16Sept2015-3) The controversy led to several lawsuits and strengthened calls for drug companies to disclose all their clinical research data. _[New Scientist](https://en.wikipedia.org/wiki/New_Scientist "New Scientist")_ wrote in 2015: "You may never have heard of it, but Study 329 changed medicine."[[10]](https://en.wikipedia.org/wiki/Study_329#cite_note-10)
@@ -381,6 +396,17 @@ The FDA label even make it clear that we aren't sure how they work.
 >[https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf](https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf)
 
 
+### Dangers
+
+They looked at antidepressant use broken down by race/ethnicity, and where there was an increase in use by say white people suicide rates increased. But say it was fairly steady in hispanic or black populations there wasn't an increase in suicide rates. You'd expect that the marginalised races/ethnicities would have have environmental issues resulting in larger increases in suicide over time than white people. 
+
+![[Pasted image 20260122192729.png]]
+>The results of our analysis consistently demonstrated positive trends for both antidepressant prescription prevalence and suicide rates over time as well as positive associations between them.
+https://pubmed.ncbi.nlm.nih.gov/38353035/
+
+SSRIs make sleep worse. We know how important sleep is for mental health, so taking a drug that impairs it might be counterproductive.
+
+In animal studies on monkeys, SSRIs have all kinds of negative effects both in behaviour, mental tests and brain health.
 
 ### What would doctors or psychiatrists do and think?
 
