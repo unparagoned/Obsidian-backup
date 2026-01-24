@@ -2,7 +2,7 @@
 
 - Exercise snacks - 1minute of burpees or swats.
 - Vigorous activity is good for the brain and body. 
-	- Norwegian 4x4 has best evidence, 4 minutes as fast as possible, then 3 minutes slow, then 4 fast.
+	- Norwegian 4x4 has best evidence, 4 minutes as fast as possible, then 3 minutes slow, then 4 fast. Working window is **~155–170 bpm**.
 	- Any other type of interval training is good
 	
 
