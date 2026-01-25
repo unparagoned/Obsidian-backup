@@ -127,7 +127,7 @@ Central limit theorem, if you take enough values of the expected value(mean), it
 
 Or means would be normally distributed
 
-Probability distribution - list of outcomes and the assiciated probs
+Probability distribution - list of outcomes and the associated probs
 
 Probability mass function - a function that represents a discrete probability distribution
 
@@ -157,7 +157,7 @@ Ds_heights.mask(ds_heights == 0)
 
 NaN not a number is a floating point
 
-Replace high hights by mean
+Replace high heights by mean
 
 Heights.mask(heights>160, np.mean(heights))
 

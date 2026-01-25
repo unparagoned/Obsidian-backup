@@ -20,4 +20,8 @@ Does consciousness has causal impact on the brain separate to the laws of physic
 
 You could also think about what would happen if we just simulated the laws of physics of a person. If like the OP you accept that your theory aligns with the laws of physics, then the simulation would perfectly simulate a human and would talk about their conscious experience. Which would suggest that the conscious experience is fully embedded and explained by the laws of physics, and is substrate independent. It's a type of computation.
 
+Either it does create a subjective experience or it doesn't. Both situations have major issues.
+
+Let's look at the other situation and say it doesn't create a cognitive/phenomenal experience. Then it's a philosophical zombie. Which is a big issue. It would be really weird for a pure simulation of physics, to have something that is talking about its phenomenal experience that it's not actually having. How is that even possible?
+
 Some people don't agree on causal theories of reference. Say process x gives rise to both the statement about x and the phenomenal experience. But wouldn't that mean we are talking about brain state x, and never about our actual epiphenomenal experiences. 

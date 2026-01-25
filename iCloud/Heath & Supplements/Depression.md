@@ -404,9 +404,17 @@ They looked at antidepressant use broken down by race/ethnicity, and where there
 >The results of our analysis consistently demonstrated positive trends for both antidepressant prescription prevalence and suicide rates over time as well as positive associations between them.
 https://pubmed.ncbi.nlm.nih.gov/38353035/
 
+Reduced cognitive performance
+
+>MMSE scores of our patients showed a gradual decline over the consecutive weeks after taking SSRI drugs. It seems that the use of SSRIs in patients with depression or OCD, can cause cognitive dysfunction in the acute phase of treatment.
+>https://pmc.ncbi.nlm.nih.gov/articles/PMC5002481/
+
 SSRIs make sleep worse. We know how important sleep is for mental health, so taking a drug that impairs it might be counterproductive.
 
 In animal studies on monkeys, SSRIs have all kinds of negative effects both in behaviour, mental tests and brain health.
+
+Coming off SSRI can be harder than heroin. 
+https://www.youtube.com/shorts/6GNbC-gXEKQ
 
 ### What would doctors or psychiatrists do and think?
 
