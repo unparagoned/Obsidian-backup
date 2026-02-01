@@ -1,7 +1,7 @@
 #dementia
 #alzheimer
 
- I don't think we know anything for sure, but your best bet for preventing and treating dementia is diet, exercise and sleep. 
+ I don't think we know anything for sure, but your best bet for preventing and treating dementia is the shingles vaccine, then the usual exercise, diet and sleep. 
 
 Pretty much all the sleeping pills are linked to dementia, from anti-histamines you can pick off the shelf to Z-drugs your doctor prescribes and anti-psychotics(pharma companies have paid billions in fines relating to pushing this but doctors still irresponsibly prescribe them for insomnia). The only exception are DORA drugs which might actually help clear amyloid(but I've herd from an insider to be very suspicious of anything relating to DORA drugs and the data they have seen doesn't match the published data.)
 
@@ -15,9 +15,13 @@ Some mechanisms for the sleep drug and dementia here
 >An online lifestyle intervention program aimed at improving diet, exercise and other modifiable risk factors for dementia has resulted in better cognition in older adults, Australian research has found.  
 [https://www.abc.net.au/news/health/2025-01-29/dementia-cognition-memory-clinical-trial-internet-brain-decline/104868518](https://www.abc.net.au/news/health/2025-01-29/dementia-cognition-memory-clinical-trial-internet-brain-decline/104868518)
 
+It might be related to chicken pox/shingles which stays hidden in your body but might be doing damage over time.
+
+>this study provides evidence of a dementia-preventing or dementia-delaying effect from zoster vaccination
+>https://www.nature.com/articles/s41586-025-08800-x
 # Exercise
 
-Exercise was more effective than all medicines tested.
+Exercise was more effective than everything else tested.
 
 >For the AD portrait, the top three scoring treatments for reversing AD expression with little effect on exacerbating AD expression were for exercise.
 [https://www.nature.com/articles/s41598-022-22179-z#Sec2](https://www.nature.com/articles/s41598-022-22179-z#Sec2)
@@ -54,6 +58,11 @@ Exercise improves brain vascularity, which is also linked to dementia
 Our work suggests that therapies that target brain insulin action may be able to ward off dementia
 [https://www.eurekalert.org/news-releases/1071574](https://www.eurekalert.org/news-releases/1071574)
 
+>Physical activity should be recommended to adults with normal cognition to reduce the risk of cognitive decline.
+Quality of evidence: moderate
+Strength of the recommendation: strong
+https://iris.who.int/server/api/core/bitstreams/8fc586d7-b864-42eb-9274-95462496b328/content
+
 # Diet
 
 Diet is associated with  lower levels of dementia.
@@ -83,6 +92,12 @@ https://cdn.nutrition.org/article/S2475-2991(25)03081-1/fulltext
 >"This crucial result was discovered because we investigated Alzheimer's disease pathology as early as midlife—in the 40s and 50s—when the disease pathology is at its earliest stages, and potential modifications like weight loss and reducing visceral fat are more effective as a means of preventing or delaying the onset of the disease,"
 [https://press.rsna.org/timssnet/media/pressreleases/14_pr_target.cfm?ID=2541](https://press.rsna.org/timssnet/media/pressreleases/14_pr_target.cfm?ID=2541)
 
+> Nutritional interventions
+> The Mediterranean-like diet may be recommended to adults with normal cognition and mild cognitive impairment to reduce the risk of cognitive decline and/or dementia. Quality of evidence: moderate Strength of the recommendation: conditional
+> A healthy, balanced diet should be recommended to all adults based on WHO recommendations on healthy diet. Quality of evidence: low to high (for different dietary components) Strength of the recommendation: strong
+> Vitamins B and E, polyunsaturated fatty acids and multi-complex supplementation should not be recommended to reduce the risk of cognitive decline and/or dementia. Quality of evidence: moderate Strength of the recommendation: strong
+> https://iris.who.int/server/api/core/bitstreams/8fc586d7-b864-42eb-9274-95462496b328/content
+
 In terms of mechanism.
 
 >Long-Term High-Fat Diet Impairs AQP4-Mediated Glymphatic Clearance of Amyloid Beta
@@ -94,6 +109,7 @@ In terms of mechanism.
 # Sleep
 
 Sleep is associated with increased dementia risk, probably through multiple mechanisms. When you sleep your clear out amyloid and other metabolites from the brain. When you don't sleep you release less PTN, which is lined to dementia. 
+
 
 >Persistent short sleep duration at age 50, 60, and 70 compared to persistent normal sleep duration was also associated with a 30% increased dementia risk independently of sociodemographic, behavioural, cardiometabolic, and mental health factors.  
 >[https://www.nature.com/articles/s41467-021-22354-2](https://www.nature.com/articles/s41467-021-22354-2)

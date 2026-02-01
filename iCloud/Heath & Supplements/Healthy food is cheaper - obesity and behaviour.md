@@ -105,3 +105,9 @@ Last healthy food is cheaper.
 >[https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2199553](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2199553)
 
 https://www.reddit.com/r/nutrition/comments/1qa19lj/comment/nyzf9z3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+
+
+If you actually read a lot of the stuff they don't even use the official half-mile distance for a food desert and reduce it down a quarter of a mile. Seriously they are saying walking 6 minutes is too much for many people.
+
+>Although the USDA defines food deserts in urban areas as further than a half-mile, we chose to look at a quarter-mile walking distance to not overwhelm the map and to portray a more realistic image of how far New Yorkers would walk to get food. We assume that an able-bodied person can walk this distance in 5–10 minutes.
+https://medium.com/@olivialimone/mapping-food-deserts-and-swamps-in-manhattan-and-the-bronx-46c6d8fc0804

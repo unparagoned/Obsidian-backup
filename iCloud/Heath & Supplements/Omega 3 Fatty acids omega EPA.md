@@ -2,14 +2,13 @@
 
 
 Get over 1000mg EPA a day
-
 Maybe over 4g a day.
-
 Dark bottle - prevents light making it go off easily
-
 Get Triglyceride version
-
 Keep in fridge
+
+Maybe this is a good brand Peter Attia uses it. carlson elite omega 3
+
 
 Also help with mental health
 

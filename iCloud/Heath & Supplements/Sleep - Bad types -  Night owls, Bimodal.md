@@ -12,6 +12,9 @@ Being a night owl has a biological component, but modern environment and behavio
 >We find evening chronotype to have a significant indirect negative effect on wages, which occurs through accumulating less work experience and through poor health outcomes...Unsurprisingly, we find that evening chronotype is associated with the poor sleep outcomes of insomnia and sleeping less than 7 h per night. But we also find the choice of low [physical activity](https://www.sciencedirect.com/topics/social-sciences/physical-activity "Learn more about physical activity from ScienceDirect's AI-generated Topic Pages") in leisure time, higher alcohol consumption, and poor [eating habits](https://www.sciencedirect.com/topics/agricultural-and-biological-sciences/eating-habit "Learn more about eating habits from ScienceDirect's AI-generated Topic Pages") are more common for evening chronotypes than for morning chronotype individuals.
 https://www.sciencedirect.com/science/article/pii/S1570677X23000473?via%3Dihub
 
+>Participants with a “definite evening” chronotype were associated with 79% higher prevalence of an overall poor LE8 score... LE8 framework comprises 4 health behaviors—diet, physical activity, nicotine exposure, and sleep health—and 4 health factors: body weight, blood lipids, blood glucose, and blood pressure, totaling 8 components...LE8 explained 75% of the association between evening chronotype and CVD (natural indirect effect comparing “definite evening” with “intermediate”: HR, 1.11 [95% CI, 1.09–1.13]).
+https://www.ahajournals.org/doi/10.1161/JAHA.125.044189
+
 Then people who wake up earlier are fitter and exercise more. 
 
 >ECs presented with higher fitness and engaged in more PA throughout the day. Whether raising fitness and/or LPA in LCs would induce comparable fat oxidation and/or NOGD remains to be seen. 
@@ -53,12 +56,10 @@ Even if you have a circadian rhythm disorder there are ways to treat it.
 [https://pubmed.ncbi.nlm.nih.gov/38204380/](https://pubmed.ncbi.nlm.nih.gov/38204380/)
 ## Light exposure
 
-Night owls go to sleep earlier similar to early birds when just exposed to natural light, showing that for many it's not your biology forcing you to be on tiktok at 2am. It's actually the tiktok usage that makes you a night owl.
-
-Without light exposure bedtimes are mainly in a 3 hour range. 
+Night owls go to sleep earlier similar to early birds when just exposed to natural light, showing that for many it's not your biology forcing you to be on tiktok at 2am. It's actually the tiktok usage that makes you a night owl. Without light exposure bedtimes are mainly in a 3 hour range. 
 
 >Furthermore, we find that after exposure to only natural light, the internal circadian clock synchronizes to solar time such that the beginning of the internal biological night occurs at sunset and the end of the internal biological night occurs before wake time just after sunrise. In addition, we find that later chronotypes show larger circadian advances when exposed to only natural light, making the timing of their internal clocks in relation to the light-dark cycle more similar to earlier chronotypes.
-[https://www.cell.com/current-biology/fulltext/S0960-9822(13)00764-1](https://www.cell.com/current-biology/fulltext/S0960-9822\(13\)00764-1)
+[[https://www.cell.com/current-biology/fulltext/S0960-9822(13)00764-1](https://www.cell.com/current-biology/fulltext/S0960-9822\(13\)00764-1)](https://pubmed.ncbi.nlm.nih.gov/23910656/)
 
 
 >The most notable finding was that nocturnal time in bed and estimated sleep time, as measured by actigraphy, markedly increased during the experimental period compared to the periods prior to and following the experiment. These increases were primarily driven by a phase-advance shift of sleep onset.

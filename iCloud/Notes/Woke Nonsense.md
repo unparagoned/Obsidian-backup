@@ -1,4 +1,6 @@
 
+They say this is a microaggression that should be avoided.
+
 >I believe the most qualified person should get the job. We need excellence!
 https://www.imperial.ac.uk/media/imperial-college/faculty-of-engineering/public/Resource---Examples-of-Microaggressions.pdf
 

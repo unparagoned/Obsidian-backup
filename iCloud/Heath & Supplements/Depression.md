@@ -366,6 +366,7 @@ Study 329, Paxil, GSK did a study that showed there were no benefits in adolesce
 >Some antidepressants increase serotonin levels, some decrease it, and some have no effect at all on serotonin. Nevertheless, they all show the same therapeutic benefit. Even the small statistical difference between antidepressants and placebos may be an enhanced placebo effect, due to the fact that most patients and doctors in clinical trials successfully break blind.
 https://pmc.ncbi.nlm.nih.gov/articles/PMC4172306/
 
+
 A detailed video from someone who worked for the FDA, explains how the science around SSRIs doesn't really show what you've been told. [[Dr. Josef]]
 https://www.youtube.com/watch?v=**wNJEjojH7sE
 

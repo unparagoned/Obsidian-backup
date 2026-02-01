@@ -11,7 +11,7 @@ Studies suggest that most people actually have compatibilist intuitions. A compa
 
 Where physics is useful in "what do we really mean by the term free". Libertarian free will is trying to say we are free from everything in the world, including the laws of physics. But in actual physics we pretty much never mean "free" in that way, in maths, stats, physics, biology, chemistry, economics, psychology, we always mean free from something in particular. So if in physics we almost never mean free from the laws of physics, why the hell would we use such a definition for free when talking about a high level psychology concept. 
 
-
+Free will is more about counter factuals rather than determinism. So could a reasonable person have done otherwise, with hindsight could I have done otherwise. So it's a counter factual question rather than a deterministic if everything was exactly the same could have done otherwise.
 # What do people mean by free will
 
 Lay people have incoherent views around free will, but if you properly probe it lines up more with compatibilist intuitions. 

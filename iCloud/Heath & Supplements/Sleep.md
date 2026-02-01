@@ -510,6 +510,13 @@ Add Sin(adenosoine) to coffee to stay awake
 However, while CCHa1 is present in both the nervous system and the gut, it was only when we depleted it in the gut that flies were roused more easily. The cells in the gut that produce CCHa1 are called enteroendocrine cells, and they actually share many characteristics with neurons and can even connect and communicate with neurons. These cells face the inside of the gut, and they sort of “taste” the contents of the gut.
 We found that the higher concentration of protein in the diet, the more CCHa1 these gut cells produced. This molecule then travels from the gut to the brain, where it signals to a small group of dopaminergic neurons that also receive information about vibrations. These neurons produce dopamine, which usually promotes arousal, but in this case suppresses arousal. Vibrations weaken the activity of the dopaminergic neurons, which causes the flies to wake up more easily. CCHa1 produced by the gut essentially buffers the dopaminergic neurons against vibrations, allowing the flies to ignore the environment to a greater degree and sleep more deeply.
 https://hms.harvard.edu/news/untangling-mystery-sleep
+
+
+
+>The increasing prevalence of sleep deprivation poses a public health challenge in modern society. Manifestations of reduced alertness, such as slowed reaction times and increased errors, are well-documented behavioral indicators of sleep loss (SL)...  Our study reveals significant effects of sleep deprivation on myelin integrity. As a result, we identify increased conduction delays in nerve signal propagation, hindered interhemispheric synchronization, and impaired cognitive and motor performance associated with SL... Our findings highlight a possible role of oligodendrocyte cholesterol dysregulation in behavioral deficits associated with SL and unveil a novel target for intervention.
+>https://www.pnas.org/doi/abs/10.1073/pnas.2523438123
+
+
 # Notes
 
 
