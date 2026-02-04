@@ -59,7 +59,7 @@ Sleep aids
 20:30: Take some ZMA (Zinc Magnesium B6) and 3g glycine. Most supplements have limited evidence of efficacy, and most drugs/medicines probably don’t actually help with “sleep” and shouldn’t be taken long term.
 
 - Melatonin. I think there is some evidence of this helping older adults or if you are jet-lagged. But I wouldn’t use it regularly; it's a powerful hormone that is a key factor in puberty and has effects on your reproductive organs. So kids/teenagers should probably steer clear. In most developed countries it's prescription-only, so I would only consider it after speaking to a doctor.
-- Most drugs used to help with sleep, like alcohol, zolpidem (Ambien), zopiclone, etc., are depressants and help make you unconscious, which is kind of the complete opposite state your brain is in when you are sleeping. (There are some sleep stages where your brain is more active than when you are awake.)
+- Most drugs used to help with sleep, like alcohol, zolpidem (Ambient), zopiclone, etc., are depressants and help make you unconscious, which is kind of the complete opposite state your brain is in when you are sleeping. (There are some sleep stages where your brain is more active than when you are awake.)
 - So if you take a drug and are unconscious for 12 hours, you may still find your self sleepy since some of that time would be “poor” quality sleep if it counts as sleep at all. There may also be lingering depressant effects after you wake up.
 - While I would never use a drug long term to help with sleep, there may be occasions where I’d discuss short term use with my doctor.
 - One of the first classes of sleep aids used are anti-histamines like Promethazine. You can usually get them without needing a prescription.

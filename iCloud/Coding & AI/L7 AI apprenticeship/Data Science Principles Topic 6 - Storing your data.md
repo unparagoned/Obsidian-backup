@@ -230,7 +230,7 @@ They are more flexible and can handle unstructured or semi-structured data. Can 
 - Wide column
 - Graph
 
-Key-value
+## Key-value
 
 Key is used to retrieve data from the object
 
@@ -238,7 +238,7 @@ For large databases, simple data
 
 e.g. Riak, Voldemort, Redis
 
-Wide column
+## Wide column
 
 Different columns can contain different numbers of rows
 
@@ -246,7 +246,7 @@ For large databases, including sparse datasets
 
 e.g. Cassandrea, Hbase
 
-Document
+## Document
 
 Sets of key-value pairs stored in a document. The Documents are grouped into collections
 
@@ -254,7 +254,7 @@ For where flexibility and fast continual development
 
 e.g. MongoDB
 
-Graph
+## Graph
 
 Flexible, graph0like. Elements:nodes, edges
 
@@ -296,7 +296,7 @@ SQL follow ACID, which aren't flexible if strictly ensured.
 
 NoSQL relies on BASE
 
-- Bascially available. Always a response to a request
+- Basically available. Always a response to a request
 - Soft state. State of the system could change over time
 - Eventual consistency. Will eventually become conistent once it stops receiving input.
 
@@ -434,7 +434,7 @@ Edges
 
 Properties: Both nodes and edges can have properties. Including types or weights of relationships, timestamps, etc.
 
-Lanaguage like Cypher.
+Language like Cypher.
 
 Social networks
 
@@ -466,7 +466,7 @@ Advantages
 
 - Schema-less
 - Queries that require deep joins can be executed faster
-- Repid development cycles
+- Rapid development cycles
 
 Here are three papers that  you might find interesting. You can access them on Google Scholar
 
