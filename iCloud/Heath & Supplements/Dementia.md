@@ -123,6 +123,10 @@ This seems to line up with the fact people who have a better diet and exercise m
 >weaker and more fragmented circadian RARs and later peak activity time were prospectively associated with elevated dementia risk
 >https://www.neurology.org/doi/10.1212/WNL.0000000000214513
 
+
+>Approximately 13% of dementia cases, almost half a million cases, among U.S. older adults may be attributable to insomnia.
+https://academic.oup.com/biomedgerontology/advance-article-abstract/doi/10.1093/gerona/glaf289/8405748
+
 And there are animal studies that suggest mechanisms for this.
 
 >Not only does a lack of sleep make you feel awful, research has shown it impairs the brain. What’s more, sleep loss over long periods can even increase risk for Alzheimer’s and other neurological diseases. Researchers want to understand how sleep deprivation causes this harm. In a new study in ACS’ _Journal of Proteome Research_, a team working with mice has identified a protective protein whose level declines with sleep deprivation, leading to neuronal death.
@@ -133,6 +137,7 @@ https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.3c00269
 
 >The researchers scanned participants' brains after getting a full night's rest and after a night of sleep deprivation (about 31 hours without sleep). Beta-amyloid increased about 5% in the participants' brains after losing a night of sleep.
 >https://www.nih.gov/news-events/nih-research-matters/sleep-deprivation-increases-alzheimers-protein
+
 # Other
 
 >They found that factors detrimental to vascular health, such as inflammation and high glucose levels, are associated with an older-looking brain, while healthy lifestyles were linked to brains with a younger appearance. The results are presented in Alzheimer's & Dementia: The Journal of the Alzheimer's Association.

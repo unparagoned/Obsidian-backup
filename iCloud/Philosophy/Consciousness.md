@@ -7,6 +7,12 @@ https://consc.net/papers/facing.pdf
 
 
 
+# P-Zombies
+
+>The phrase “experiencing the redness of red” is part of a higher‐level vocabulary we use to talk about the emergent behavior of the underlying physical system, not something separate from the physical system…
+There are certain processes that can transpire within the neurons and synapses of my brain, such that when they occur I say, “I am experiencing redness.”
+[https://nautil.us/zombies-must-be-dualists-235983/](https://nautil.us/zombies-must-be-dualists-235983/)
+
 ## Mary's room
 #marysroom #physicalism #frankjackson [[Frank Jackson]]
 
@@ -38,3 +44,7 @@ Either it does create a subjective experience or it doesn't. Both situations hav
 Let's look at the other situation and say it doesn't create a cognitive/phenomenal experience. Then it's a philosophical zombie. Which is a big issue. It would be really weird for a pure simulation of physics, to have something that is talking about its phenomenal experience that it's not actually having. How is that even possible?
 
 Some people don't agree on causal theories of reference. Say process x gives rise to both the statement about x and the phenomenal experience. But wouldn't that mean we are talking about brain state x, and never about our actual epiphenomenal experiences. 
+
+# Physicalism
+
+Effective Field Theory (EFT) is the successful paradigm underlying modern theoretical physics, including the “Core Theory” of the Standard Model of particle physics plus Einstein’s general relativity. I will argue that EFT grants us a unique insight: each EFT model comes with a built-in specification of its domain of applicability. Hence, once a model is tested within some domain (of energies and interaction strengths), we can be confident that it will continue to be accurate within that domain. Currently, the Core Theory has been tested in regimes that include all of the energy scales relevant to the physics of everyday life (biology, chemistry, technology, etc.). Therefore, we have reason to be confident that the laws of physics underlying the phenomena of everyday life are completely known. [https://philpapers.org/archive/CARTQF-5.pdf](https://philpapers.org/archive/CARTQF-5.pdf)

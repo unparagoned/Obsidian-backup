@@ -25,6 +25,7 @@ Clear communication of vision and progress on early wins
 ### Lewin's unfreeze, change refreeze model
 ![[Pasted image 20260204081544.png]]
 
+If working on a key system you might use Lewin's model. Where you have to have clear states. Rather than having a long flowing state. e.g. a Bank might make a change at midnight then refreeze.
 ### Kotter's eight-step change model
 ![[Pasted image 20260204081848.png]]
 

@@ -16,7 +16,7 @@ So if I ask you how a neural network or LLM does path finding - i.e. you don't k
 >**People outside the field are often surprised and alarmed to learn that we do not understand how our own AI creations work.**  They are right to be concerned: this lack of understanding is essentially unprecedented in the history of technology.  For several years, we (both Anthropic and the field at large) have been trying to solve this problem, to create the analogue of a highly precise and accurate MRI that would fully reveal the inner workings of an AI model.  This goal has often felt very distant, but multiple [recent](https://www.anthropic.com/research/auditing-hidden-objectives) [breakthroughs](https://transformer-circuits.pub/2025/attribution-graphs/biology.html) have convinced me that we are now on the right track and have a real chance of success.
 [https://www.darioamodei.com/post/the-urgency-of-interpretability](https://www.darioamodei.com/post/the-urgency-of-interpretability)
 
-Claude uses an algorithm to multiply numbers rather than regurgitating memorised answers.
+Claude created a bespoke algorithm to multiply numbers rather than regurgitating memorised answers. We couldn't have predicted or known what algorithm it would learn by itself from first principles it's just an empirical investigation into how it works. 
 
 >Claude wasn't designed as a calculator—it was trained on text, not equipped with mathematical algorithms. Yet somehow, it can add numbers correctly "in its head". How does a system trained to predict the next word in a sequence learn to calculate, say, 36+59, without writing out each step?
 >
@@ -66,4 +66,4 @@ From <[https://www.reddit.com/r/singularity/comments/1mmp2xp/comment/n7z652m/](h
 # The most complex model we actually understand
 https://www.youtube.com/watch?v=D8GOeCFFby4
 
-The most complex we understand is a very simple model that adds numbers. It's estimating sins and cosins, using trig identities in order to add the numbers. None of this was taught or embedded, it was all learnt. You can see that it's more than just memorising the training data, it actually removes memorised data.
+The most complex NN we fully understand is a very simple model that adds numbers. It's estimating sins and cosins, using trig identities in order to add the numbers. None of this was taught or embedded, it was all learnt. You can see that it's more than just memorising the training data, it actually removes memorised data.

@@ -195,6 +195,7 @@ We show that the responsiveness of sleeping flies and mice to mechanical vibrati
 [https://www.cell.com/cell/fulltext/S0092-8674(23)00165-4](https://www.cell.com/cell/fulltext/S0092-8674\(23\)00165-4)
 
 ### Caffeine
+#caffeine [[Caffeine - Coffee]]
 
 I used to recommend no caffeine after 11am but a single large European size coffee early in the morning still significantly impacted sleep that night. Some people also suggest avoiding decaf coffee after 11am since it still contains some caffeine.
 

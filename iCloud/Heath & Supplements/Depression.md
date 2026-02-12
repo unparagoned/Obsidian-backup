@@ -7,7 +7,7 @@ tags:
 
 Depression is an umbrella term for a variety of conditions some psychological and some physical, with complex feedback loops between biological and environmental aspects. Someone with a biologically impaired brained might not be able to cope with normal stressors in life. 
 
-The brain is just part of the body and needs good diet, sleep and exercise to function properly.  Exercise increases levels of BDNF, increases brain volume, improves brain connectivity, improves brain vascularity, improves brain mitochondrial health, lactate levels(which are healthy for the brain), SGK1 levels, etc. all of which are linked depression.
+The brain is just part of the body and needs good diet, sleep and exercise to function properly. Exercise increases levels of BDNF, increases brain volume, improves brain connectivity, improves brain vascularity, improves brain mitochondrial health, lactate levels(which are healthy for the brain), SGK1 levels, etc. all of which are linked depression.
 
 If someone's mental illness is due to to a physically impaired brain then it might be that no amount of "therapy" or drugs will help. If say it's due to poor mitochondrial health, they aren't going to fix that. Sure therapy and drugs might be useful in the short term to get someone back into a state where they can exercise, have a good diet and sleep. 
 
@@ -37,7 +37,8 @@ There are good strong causal studies showing that exercise reduces anxiety and d
 >In this study, relatively small doses of physical activity were associated with substantially lower risks of depression.
 [https://jamanetwork.com/journals/jamapsychiatry/fullarticle/2790780?guestAccessKey=67cf8fd3-e6b0-49af-be4f-d08f5219fc7b](https://jamanetwork.com/journals/jamapsychiatry/fullarticle/2790780?guestAccessKey=67cf8fd3-e6b0-49af-be4f-d08f5219fc7b)
 
-
+>The findings of the study support that exercise based interventions, in all formats and parameters, can help mitigate depression and anxiety symptoms across all population categories. These results can help health professionals provide targeted, cost effective, evidence based support that aligns with individual profiles and preferences.
+https://bjsm.bmj.com/content/early/2026/02/02/bjsports-2025-110301
 ## Exercise is as if not more effective
 
 In terms of effect size, studies show that exercise is as good if not more effective than therapy or drugs.
@@ -476,14 +477,16 @@ Traditionally this would have been classical addiction.
 The results support the overall safety and tolerability of clinically administered MDMA and, importantly, suggest that the ‘come downs’ previously associated with the substance may be explained by confounds in research relating to the illicit sourcing of the drug and specific environmental setting for recreational consumption.
 [https://journals.sagepub.com/doi/10.1177/02698811211055809](https://journals.sagepub.com/doi/10.1177/02698811211055809)
 
-Here are a couple kind of related studies.
-
->Increased scores on self-report depression scales in MDMA users are not entirely attributable to MDMA use. MDMA users do not show the same attentional bias towards negatively toned material as depressed patients.
-[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2556104/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2556104/)
 
 >Halpern’s team compared ecstasy users with non-users who had a history of all-night dancing with limited exposure to alcohol and drugs. Both groups completed tests for verbal fluency, memory, depression and other factors.
 [https://www.newscientist.com/article/mg20928012-700-is-lack-of-sleep-and-water-giving-ecstasy-a-bad-name/](https://www.newscientist.com/article/mg20928012-700-is-lack-of-sleep-and-water-giving-ecstasy-a-bad-name/)
 
+
+
+Here are a couple kind of related studies.
+
+>Increased scores on self-report depression scales in MDMA users are not entirely attributable to MDMA use. MDMA users do not show the same attentional bias towards negatively toned material as depressed patients.
+[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2556104/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2556104/)
 
 # Other treatments or causes
 
