@@ -4,6 +4,7 @@
 - 6g 3x a day ~18g Citrulline malate
 - Have with an anti-oxidant like vitamin C - the nitric oxide will get recycled
 
+
 The best dose to take in a 24 hour period is 6-18 grams. 6 grams is the minimal amount needed to notice any effects, and doses taken at 18 grams per day had extremely noticeable effects. The best way to do this is to split doses into 4 different times and one of those times should be pre-workout.
 
 From <[https://us.myprotein.com/thezone/supplements/citrulline-malate-benefits-dosage-when-to-take/](https://us.myprotein.com/thezone/supplements/citrulline-malate-benefits-dosage-when-to-take/)>
@@ -35,3 +36,4 @@ Both have their strengths, but the win goes to citrulline malate. The key differ
 From <[https://www.bodybuilding.com/content/l-citrulline-or-citrulline-malate-n-o-content.html](https://www.bodybuilding.com/content/l-citrulline-or-citrulline-malate-n-o-content.html)>
 
 [How To Increase Testosterone, Improve Sleep, & Enhance Sex with These Supplements | Eric Trexler](https://youtu.be/VYGEherP7YE?t=4926)
+

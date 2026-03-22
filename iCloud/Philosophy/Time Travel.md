@@ -1,0 +1,1 @@
+Maybe the grandfather paradox is just like Newcomb's paradox. If a supercomputer predicts you will take one box it will put £1m in that one box. Do you pick one or two boxes. 

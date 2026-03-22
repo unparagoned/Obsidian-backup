@@ -11,6 +11,7 @@ description: Arguing why a simulation is not required to explain live, and that 
 tags:
   - clippings
   - platonicworld
+  - "#simulation"
 ---
 [Back to writing](https://chfritz.github.io/writing)
 

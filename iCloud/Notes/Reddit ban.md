@@ -62,7 +62,7 @@ From <[https://www.reddit.com/r/conservativeterrorism/comments/1ed5qqt/comment/l
 
 [https://www.reddit.com/r/conservativeterrorism/comments/1ed5qqt/hes_just_openly_calling_for_authoritarianism_and/lf6ehox/](https://www.reddit.com/r/conservativeterrorism/comments/1ed5qqt/hes_just_openly_calling_for_authoritarianism_and/lf6ehox/)
 
-I really hate when people mix up trans and intersex. They are completley different things.
+I really hate when people mix up trans and intersex. They are completely different things.
 
 J.K. Rowling attacks another Black cis female athlete with anti-trans hate
 
@@ -72,7 +72,7 @@ This kind of transvestigating is often aimed at Black women athletes like Caster
 
 Funny they mention her. That was a case of intersex.
 
-They targetted Caster since she was intersex. Caster claimed it was all racism, when it wasn't. Sounds like people are literally using an old playbook, that was debunked with Caster.
+They targeted Caster since she was intersex. Caster claimed it was all racism, when it wasn't. Sounds like people are literally using an old playbook, that was debunked with Caster.
 
 From <[https://www.reddit.com/r/seculartalk/comments/1h2pqly/comment/lzuabhf/](https://www.reddit.com/r/seculartalk/comments/1h2pqly/comment/lzuabhf/)>
 

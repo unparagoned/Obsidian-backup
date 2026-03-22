@@ -1,4 +1,6 @@
 
+Is religious he talks about prayer practice https://www.youtube.com/watch?v=hlOA8ObQJXo
+
 [Optimize & Control Your Brain Chemistry to Improve Health & Performance | Huberman Lab Podcast #80](https://www.youtube.com/watch?v=T65RDBiB5Hs&t=367s)
 Studies show that moving the sleep schedule of people who think they are night owels forward had lots of health benefits. So 2-3h earlier.
 

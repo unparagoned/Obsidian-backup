@@ -12,16 +12,16 @@ https://www.sciencedirect.com/science/article/pii/S2213158225001962?lid=jua9g5tk
 
 # ADHD drugs have the same type of effect on everyone
 
-It's funny how half the comments in many threads are about how stimulants made all their friends study but they were just giggling, which is how they knew they had ADHD. The other half are that stimulants made them study, but their friends all were giggling, which is why they know they have ADHD.
+It weird that no matter what or how contradictory the effects someone says they have on stimulants there will always be someone saying that's a sign of ADHD. "Oh stimulants make you concentrate on work and not happy, that means you have ADHD." or "Oh stimulants make you happy rather than concentrate on work, that means you have ADHD". "Stimulants have a strong effect on you, you have ADHD". "Stimulants have a weak effect on you, you have ADHD".
 
-I've never seen any evidence that ADHD drugs or stimulants have a different types of effect on people with ADHD. They make everyone focus and concentrate and everyone can get high off them in high doses. Now if you have a starting point of not being able to focus, the effect of focusing is going to have more effect. 
+
+I've never seen any evidence that ADHD drugs or stimulants have a different types of effect on people with ADHD. They make everyone focus and concentrate and everyone can get high off them in high doses, and they impair the sleep of everyone even if you don't realise it. Now if you have a starting point of not being able to focus, the effect of focusing is going to have more effect. 
 
 >The present data support the premise that amphetamine improves vigilance irrespective of disease state[https://www.researchgate.net/publication/320429079_Amphetamine_Modestly_Improves_Conners'_Continuous_Performance_Test_Performance_in_Healthy_Adults](https://www.researchgate.net/publication/320429079_Amphetamine_Modestly_Improves_Conners'_Continuous_Performance_Test_Performance_in_Healthy_Adults)
 
 You have strong double blind studies showing similar responses. 
 
->The behavioral, cognitive, and electrophysiological effect of a single dose of dextroamphetamine (0.5 milligram per kilogram of body weight) or placebo was examined in 14 normal prepubertal boys (mean age, 10 years 11 months) in a double-blind study. When amphetamine was given, the group showed a marked decrease in motor activity and reaction time and improved performance on cognitive tests. The similarity of the response observed in normal children to that reported in children with "hyperactivity" or minimal brain dysfunction casts doubt on pathophysiological models of minimal brain dysfunction which assume that children with this syndrome have a clinically specific or "paradoxical" response to stimulants.
-[https://www.researchgate.net/publication/22798084_Dextroamphetamine_Cognitive_and_Behavioral_Effects_in_Normal_Prepubertal_Boys](https://www.researchgate.net/publication/22798084_Dextroamphetamine_Cognitive_and_Behavioral_Effects_in_Normal_Prepubertal_Boys)
+>The behavioral, cognitive, and electrophysiological effect of a single dose of dextroamphetamine (0.5 milligram per kilogram of body weight) or placebo was examined in 14 normal prepubertal boys (mean age, 10 years 11 months) in a double-blind study. When amphetamine was given, the group showed a marked decrease in motor activity and reaction time and improved performance on cognitive tests. The similarity of the response observed in normal children to that reported in children with "hyperactivity" or minimal brain dysfunction casts doubt on pathophysiological models of minimal brain dysfunction which assume that children with this syndrome have a clinically specific or "paradoxical" response to stimulants.[https://www.researchgate.net/publication/22798084_Dextroamphetamine_Cognitive_and_Behavioral_Effects_in_Normal_Prepubertal_Boys](https://www.researchgate.net/publication/22798084_Dextroamphetamine_Cognitive_and_Behavioral_Effects_in_Normal_Prepubertal_Boys)
 
 For normal people ADHD drugs result in increased mental performance.
 
@@ -42,14 +42,21 @@ Then stimulant medication causes sleep issues with people with ADHD as well.
 >Insomnia or delayed SOL greater than 30 minutes is one of the most common adverse events associated with stimulant medications
  [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3441938/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3441938/)
 
-Caffeine is related to alertness rather than sleepiness.
-
->In contrast, the positive influence of caffeine and derivatives on working memory, alertness and, in general, cognitive performance has always been undeniable, with some authors suggesting low doses of caffeine in ADHD children, together with prescribed stimulants as a complementary compound, amplifying their therapeutic effects 
-[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7700297/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7700297/)
 
 >Additionally, caffeine use is more consistently associated with poorer subjective sleep functioning in adolescents with ADHD
 [https://pubmed.ncbi.nlm.nih.gov/32386419/](https://pubmed.ncbi.nlm.nih.gov/32386419/)
 
+No evidence that caffeine helps with ADHD.
+>Conclusion: overall, the totality of the evidence suggests no significant benefit of caffeine over placebo in the treatment of children with ADHD.
+https://pubmed.ncbi.nlm.nih.gov/37759905/
+
+And Caffeine has all sorts of positive benefits in the average person.
+
+>Most of the analyzed studies revealed that caffeine led to a beneficial effect, mitigating anxiety and depressive-like behaviors and possible cognitive impairments induced by stress
+>https://www.nature.com/articles/s41398-025-03668-x
+
+>Drinking two to three cups of coffee a day might be the sweet spot for lowering the risk of anxiety and depression.
+>https://www.psypost.org/two-to-three-cups-of-coffee-a-day-may-protect-your-mental-health/
 # Mechanisms
 
 ># Stimulant medications affect arousal and reward, not attention networks

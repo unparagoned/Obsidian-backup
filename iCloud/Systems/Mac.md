@@ -16,6 +16,7 @@ Window management and multi-tasking recommended from reddit
 | Ctrl Shift z/x/c | Move window to screen           |
 | Cmd Ctrl <-      | left half of screen             |
 | Cmd Ctrl m       | Maximise                        |
+| Cmd + option +v  | makes the paste a cut and paste |
 
 Set up dev to be beginning desktops on a screen, so it's easier to remember those numbers. Can't move or rename the desktops, 
 1
@@ -42,7 +43,7 @@ Some games don't work
 
 Parallels worked well with chos gate demonhunters
 
-Coud use clouddeck to play those games remotely
+Could use clouddeck to play those games remotely
 
 [https://clouddeck.app/blog/warhammer-40000-chaos-gate-daemonhunters-mac/](https://clouddeck.app/blog/warhammer-40000-chaos-gate-daemonhunters-mac/)
 
@@ -132,7 +133,7 @@ If you write
 
 Smb://unpar@CRONE/g
 
-Then windows default passwork can access that nework drive
+Then windows default passwork can access that network drive
 
 ## PC -> Mac
 

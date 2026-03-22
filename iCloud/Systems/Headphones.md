@@ -8,3 +8,8 @@ The normal headphones make the clicking sound from the toy much louder - with so
 
 # Apple
 Apples earphones don't have that issue sony had.
+
+# SomniPods 3
+
+Supposed to be good sleep/noise cancelling earbuds that you can sleep on your side with.
+Some users couldn't work out how to use it without paying for the app.

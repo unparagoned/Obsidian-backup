@@ -1,0 +1,4 @@
+People act like the health guidelines are constantly changing and are the complete opposite. But we can go back to the 1977 guide and the only thing that's really changed is cholesterol consumption and even that's still good advice for a large number of people. The rest sounds pretty much spot on.
+
+>Goals discussed concern avoiding overweight; increasing consumption of complex carbohydrates and naturally occurring sugars; reducing consumption of refined and other processed sugars; reducing overall fat consumption, saturated fat consumption, and cholesterol consumption; and limiting intake of sodium. Specific amounts of intake are provided with each goal. Recommendations for governmental action are included.
+[https://naldc.nal.usda.gov/catalog/1759572](https://naldc.nal.usda.gov/catalog/1759572)

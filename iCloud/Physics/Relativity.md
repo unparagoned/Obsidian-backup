@@ -12,3 +12,9 @@ So if you were travelling close to c for interstellar travel, you are covering l
 
 In relativity, there is no objective, universal "now". What one observer considers “now” can correspond to another observer’s past or future. All observers views are equally valid, which means past, present and future can all coexist. Which suggests a block universe. 
 
+# Black holes
+
+# What Really Happens If You Fall Into an Evaporating Black Hole?
+https://www.youtube.com/watch?v=kRIDi-no1BI
+
+Maybe you can't ever fall into a black hole since it will evaporate before you cross the event horizon.

@@ -5,6 +5,10 @@ tags:
 # Guide and help
 https://help.obsidian.md/
 
+# How the CEO of Obsidian Takes his Notes (Underrated Genius)
+https://www.youtube.com/watch?v=Dq3R3uS0sQ4
+
+This looks like a good guide in how to set things up.
 
 # Keyboard shortcut key
 

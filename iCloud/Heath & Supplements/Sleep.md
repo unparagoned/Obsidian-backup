@@ -392,6 +392,8 @@ None in humans
 #insitol
 No clear evidence it works if you aren't pregnant.
 
+Some evidence it helps with anxiety
+
 ### ZMA
 #zma #magnesium #zinc #b6
 

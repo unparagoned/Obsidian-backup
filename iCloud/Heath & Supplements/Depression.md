@@ -7,7 +7,7 @@ tags:
 
 Depression is an umbrella term for a variety of conditions some psychological and some physical, with complex feedback loops between biological and environmental aspects. Someone with a biologically impaired brained might not be able to cope with normal stressors in life. 
 
-The brain is just part of the body and needs good diet, sleep and exercise to function properly. Exercise increases levels of BDNF, increases brain volume, improves brain connectivity, improves brain vascularity, improves brain mitochondrial health, lactate levels(which are healthy for the brain), SGK1 levels, etc. all of which are linked depression.
+The brain is just part of the body just like everything else and needs good diet, sleep and exercise to function properly. Exercise increases levels of BDNF, increases brain volume, improves brain connectivity, improves brain vascularity, improves brain mitochondrial health, lactate levels(which are healthy for the brain), SGK1 levels, etc. all of which are linked depression.
 
 If someone's mental illness is due to to a physically impaired brain then it might be that no amount of "therapy" or drugs will help. If say it's due to poor mitochondrial health, they aren't going to fix that. Sure therapy and drugs might be useful in the short term to get someone back into a state where they can exercise, have a good diet and sleep. 
 
@@ -39,6 +39,10 @@ There are good strong causal studies showing that exercise reduces anxiety and d
 
 >The findings of the study support that exercise based interventions, in all formats and parameters, can help mitigate depression and anxiety symptoms across all population categories. These results can help health professionals provide targeted, cost effective, evidence based support that aligns with individual profiles and preferences.
 https://bjsm.bmj.com/content/early/2026/02/02/bjsports-2025-110301
+
+
+>Muscle strength may represent an important modifiable factor for preventing and treating depression and several specific symptoms, including core symptoms such as anhedonia.
+>https://www.sciencedirect.com/science/article/pii/S0165032726002880?via%3Dihub
 ## Exercise is as if not more effective
 
 In terms of effect size, studies show that exercise is as good if not more effective than therapy or drugs.
@@ -76,6 +80,7 @@ This meta analysis looked at RCT, evidencing that exercise improves mental perfo
 >Exercise may be moderately more effective than a control intervention for reducing symptoms of depression. Exercise appears to be no more or less effective than psychological or pharmacological treatments
 https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004366.pub7/full
 
+
 Exercise impacts the gut, like changing SCFA, which have also been linked to depression.
 
 >Results of this study indicate that gut microbiome, SCFA concentrations, stool frequency, and diet quality vary between periods of high and low training load in athletes.
@@ -88,17 +93,24 @@ Exercise impacts the gut, like changing SCFA, which have also been linked to dep
 
 There are some studies suggesting that diet has a causal impact of mental health.
 
->MD interventions appear to have substantial potential for alleviating depressive symptoms in people experiencing major or mild depression.
+>MD interventions appear to have substantial potential for alleviating depressive symptoms in people experiencing major or mild depression...We included randomized controlled trials (RCTs) comparing outcomes after MD interventions with outcomes for control conditions in adults with depressive disorders or depressive symptoms.
 [https://academic.oup.com/nutritionreviews/article-abstract/83/1/29/7536069?redirectedFrom=fulltext&login=false](https://academic.oup.com/nutritionreviews/article-abstract/83/1/29/7536069?redirectedFrom=fulltext&login=false)
 
->Mendelian randomization studies suggest that obesity is a causal risk factor for elevated risk of depression. 
+>Mendelian randomization studies suggest that obesity is a **causal risk factor** for elevated risk of depression. 
 >[https://www.sciencedirect.com/science/article/abs/pii/S0022395623002200](https://www.sciencedirect.com/science/article/abs/pii/S0022395623002200)
 
->The diet may have a significant effect on preventing and treating depression for the individual. A diet that protects and promotes depression should consist of vegetables, fruits, fibre, fish, whole grains, legumes and less added sugar, and processed foods. In the public health nurse’s preventative and health-promoting work, support and assistance with changing people’s dietary habits may be effective in promoting depression.
+>The diet may have a significant effect on preventing and treating depression for the individual. A diet that protects and promotes depression should consist of vegetables, fruits, fibre, fish, whole grains, legumes and less added sugar, and processed foods. In the public health nurse’s preventative and health-promoting work, support and assistance with changing people’s dietary habits may be effective in promoting depression.... The result included two randomized controlled trial (RCT) studies [[31](https://pmc.ncbi.nlm.nih.gov/articles/PMC7084175/#B31-ijerph-17-01616),[35](https://pmc.ncbi.nlm.nih.gov/articles/PMC7084175/#B35-ijerph-17-01616)] that we are able to demonstrate a causal relationship between diet and mental illness.
 >[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7084175/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7084175/)
+
+>Higher levels of genetically predicted relative sugar intake were causally associated with lower MDD risk... No reverse causality was detected in the opposite direction as MDD was not associated with sugar consumption.
+https://www.nature.com/articles/s41398-024-03089-2
 
 >Current evidence supports the finding that omega-3 PUFAs with EPA ≥ 60% at a dosage of ≤1 g/d would have beneficial effects on  depression
 >[Https://www.nature.com/articles/s41398-019-0515-5](Https://www.nature.com/articles/s41398-019-0515-5)
+
+>Significant improvements were observed in the intervention group regarding stress, anxiety, depression, sleep quality, and memory outcomes...
+Omega-3 supplementation resulted in notable psychological and cognitive improvements, suggesting its potential as a safe and effective adjunct for managing stress, mood disorders, and sleep disturbances among participants with psychological distress.
+https://www.sciencedirect.com/science/article/pii/S0165032725024978?via%3Dihub
 
 >After adjusting for sociodemographic characteristics and lifestyle and health-related behaviours, participants with the highest relative intake of ultra-processed food were at increased odds of elevated psychological distress compared to participants with the lowest intake (aOR: 1.23; 95%CI: 1.10, 1.38, p for trend = 0.001). 
 [https://www.sciencedirect.com/science/article/pii/S0165032723006092?via%3Dihub](https://www.sciencedirect.com/science/article/pii/S0165032723006092?via%3Dihub)
@@ -120,7 +132,6 @@ https://link.springer.com/article/10.1186/s12889-025-25748-9
 >The findings suggest that dietary intake of SFAs is associated with the risk of depression in relation to the chain length of SFAs, and this may be due to the mediating effect of DII.
 [https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1396029/full?utm_source=F-AAE&utm_source=sfmc&utm_medium=EMLF&utm_medium=email&utm_campaign=MRK_2374358_a0P58000000G0XwEAK_Nutrit_20240621_arts_A&utm_campaign=Article%20Alerts%20V4.1-Frontiers&id_mc=316770838&utm_id=2374358&Business_Goal=%25%25__AdditionalEmailAttribute1%25%25&Audience=%25%25__AdditionalEmailAttribute2%25%25&Email_Category=%25%25__AdditionalEmailAttribute3%25%25&Channel=%25%25__AdditionalEmailAttribute4%25%25&BusinessGoal_Audience_EmailCategory_Channel=%25%25__AdditionalEmailAttribute5%25%25](https://www.frontiersin.org/journals/nutrition/articles/10.3389/fnut.2024.1396029/full?utm_source=F-AAE&utm_source=sfmc&utm_medium=EMLF&utm_medium=email&utm_campaign=MRK_2374358_a0P58000000G0XwEAK_Nutrit_20240621_arts_A&utm_campaign=Article%20Alerts%20V4.1-Frontiers&id_mc=316770838&utm_id=2374358&Business_Goal=%25%25__AdditionalEmailAttribute1%25%25&Audience=%25%25__AdditionalEmailAttribute2%25%25&Email_Category=%25%25__AdditionalEmailAttribute3%25%25&Channel=%25%25__AdditionalEmailAttribute4%25%25&BusinessGoal_Audience_EmailCategory_Channel=%25%25__AdditionalEmailAttribute5%25%25)
 
-&#x200B;
 
 >The results indicated that participants with severe GAD had significantly lower levels of DAI compared to healthy controls (p < 0.001). After 6 weeks of antioxidant supplementation, a significant decrease in GAD-7 scores of participants was observed (p < 0.001). The study found a significant negative relationship between DAI and GAD.
 [https://www.tandfonline.com/doi/full/10.1080/1028415X.2024.2408972](https://www.tandfonline.com/doi/full/10.1080/1028415X.2024.2408972)
@@ -133,6 +144,11 @@ https://link.springer.com/article/10.1186/s12889-025-25748-9
 >- [Nuts and seeds:](https://www.clinicalnutritionjournal.com/article/S0261-5614%2823%2900246-7/fulltext) Almonds, walnuts, chia, and flax seeds provide essential nutrients and healthy fats that have been associated with improved mental health.
 [https://www.zmescience.com/science/why-oranges-and-lemons-are-surprisingly-good-for-your-mental-health/](https://www.zmescience.com/science/why-oranges-and-lemons-are-surprisingly-good-for-your-mental-health/)
 
+
+CCG and glycemic control has positive effects in people with diabetes
+
+>Higher self-management adherence was a protective factor against both anxiety and depression.
+>https://pmc.ncbi.nlm.nih.gov/articles/PMC12732679/
 # Sleep
 
 Sleep is really important, if you aren't sleeping properly you have have a tenfold higher risk of depression,
@@ -155,6 +171,13 @@ And it's a bidirectional relationship not that just that depressed people sleep 
 
 >In this national longitudinal cohort study, middle-aged and older adults at high risk of OSA had consistently worse mental health outcomes.
 https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2843180?guestAccessKey=1b34668e-afe8-4888-aa3d-dd05b3b83eff
+
+# Other causes
+
+Many with depression have immune system issues.
+
+>We demonstrated that the proteomic signatures of MDD patients share Th2 skewing and dysregulation of other immune/neurovascular-related proteins with AD.
+https://www.nature.com/articles/s41380-025-03383-5
 
 # Mechanisms
 
@@ -315,6 +338,9 @@ There are also benefits of strength when it comes to depression, either through 
 >The study that did not administer any drugs suggested a positive association between the expression of dopamine-related genes and habitual PA
 >[https://pmc.ncbi.nlm.nih.gov/articles/PMC8301978/](https://pmc.ncbi.nlm.nih.gov/articles/PMC8301978/)
 
+
+>Our findings suggest depression and its genetic liability are not directly associated with telomere length or attrition in older women. In contrast, waist-to-hip ratio, a modifiable factor, was linked to accelerated telomere shortening, pointing to central adiposity as a potential intervention target with relevance for both mental and physical health.
+https://www.sciencedirect.com/science/article/pii/S0165032725023079?via%3Dihub
 ## Gut health
 
 >Exercise helps stimulate beneficial [bacteria](https://www.zmescience.com/medicine/woof-woof-superbug-our-pets-could-be-fueling-drug-resistance/) like F. prausnitzii, creating a virtuous cycle that promotes both gut and mental health.
@@ -376,13 +402,14 @@ https://www.youtube.com/watch?v=**wNJEjojH7sE
 The brain is very complex, so we don't think something as simple as a chemical imbalance explains most mental conditions.
 
 
+>The main areas of serotonin research provide no consistent evidence of there being an association between serotonin and depression, and no support for the hypothesis that depression is caused by lowered serotonin activity or concentrations.
+[https://www.nature.com/articles/s41380-022-01661-0](https://www.nature.com/articles/s41380-022-01661-0)
+
+
 >In short, there exists no rigorous corroboration of the serotonin theory, and a significant body of contradictory evidence  …
 >The impact of the widespread promotion of the serotonin hypothesis should not be underestimated. Antidepressant advertisements are ubiquitous in American media, and there is emerging evidence that these advertisements have the potential to confound the doctor–patient relationship. 
 >[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1277931/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1277931/)
 
-
->The main areas of serotonin research provide no consistent evidence of there being an association between serotonin and depression, and no support for the hypothesis that depression is caused by lowered serotonin activity or concentrations.
-[https://www.nature.com/articles/s41380-022-01661-0](https://www.nature.com/articles/s41380-022-01661-0)
 
 >Simple biochemical theories that link low levels of serotonin with depressed mood are no longer tenable. ... 
 >This pattern of theory making – moving from the pharmacological actions of drugs with some efficacy in treatment to biochemical notions of causation – has been common in biological psychiatry. In such an undeveloped field this approach, though logically precarious, has been a useful heuristic and, in the case of the dopamine hypothesis of psychosis, has been strikingly upheld by advanced brain imaging techniques (2). However, the serotonin hypothesis of depression has not been clearly substantiated. Indeed, dogged by unreliable clinical biochemical findings and the difficulty of relating changes in serotonin activity to mood state, the serotonin hypothesis eventually achieved “conspiracy theory” status, whose avowed purpose was to enable industry to market selective serotonin reuptake inhibitors (SSRIs) to a gullible public  
@@ -510,7 +537,10 @@ Depressive symptoms are treated by sunlight exosure
 >BLT alleviates depressive symptoms and changes the CC dFC variability in StD, and pre-treatment dFC variability of the CC could be used as a biomarker for improved BLT treatment in StD. Furthermore, dFC changes with specific neurotransmitter systems after BLT may underline the antidepressant mechanisms of BLT.
 [https://www.sciencedirect.com/science/article/abs/pii/S0165032725000473](https://www.sciencedirect.com/science/article/abs/pii/S0165032725000473)
 
-# Bespoke treatment
+# Bespoke 
+
+>Personalized brain circuit scores identify clinically distinct biotypes in depression and anxiety.... The six biotypes showed consistency with our theoretical taxonomy and were distinguished by symptoms, behavioral performance on general and emotional cognitive computerized tests, and response to pharmacotherapy as well as behavioral therapy.
+>https://www.nature.com/articles/s41591-024-03057-9
 
 >Pre-treatment scans of brain activity predicted whether depressed patients would best achieve remission with an antidepressant medication or psychotherapy, in a study funded by the National Institutes of Health.
 https://www.nimh.nih.gov/news/science-updates/2013/scan-predicts-whether-therapy-or-meds-will-best-lift-depression

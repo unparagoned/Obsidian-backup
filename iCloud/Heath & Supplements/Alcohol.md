@@ -18,6 +18,7 @@
 - Bad breath
 - High heart rate - over 120bpm
 - Bad back
+- A single drink doesn’t really do much
 
 No level of alcohol consumption is safe for our health
 

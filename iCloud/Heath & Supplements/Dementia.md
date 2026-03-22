@@ -1,14 +1,14 @@
 #dementia
 #alzheimer
 
- I don't think we know anything for sure, but your best bet for preventing and treating dementia is the shingles vaccine, then the usual exercise, diet and sleep. 
+We know anything for sure, but your best bet for preventing and treating dementia is the shingles vaccine, then the usual exercise, diet and sleep. 
 
 Pretty much all the sleeping pills are linked to dementia, from anti-histamines you can pick off the shelf to Z-drugs your doctor prescribes and anti-psychotics(pharma companies have paid billions in fines relating to pushing this but doctors still irresponsibly prescribe them for insomnia). The only exception are DORA drugs which might actually help clear amyloid(but I've herd from an insider to be very suspicious of anything relating to DORA drugs and the data they have seen doesn't match the published data.)
 
-
 Some mechanisms for the sleep drug and dementia here
 [[Sleep#Sleeping pills]]
- 
+
+ 
 >Comprehensive lifestyle changes may significantly improve cognition and function after 20 weeks in many patients with MCI or early dementia due to AD.
 [https://alzres.biomedcentral.com/articles/10.1186/s13195-024-01482-z](https://alzres.biomedcentral.com/articles/10.1186/s13195-024-01482-z)
 
@@ -63,6 +63,11 @@ Quality of evidence: moderate
 Strength of the recommendation: strong
 https://iris.who.int/server/api/core/bitstreams/8fc586d7-b864-42eb-9274-95462496b328/content
 
+>ABCA7 deficiency exacerbates glutamate excitotoxicity in Alzheimer’s disease mice – A new pharmacological target for Glu-related neurotoxicity
+>https://www.sciencedirect.com/science/article/pii/S0301008226000171
+
+>Exercise enhances synaptic signaling and normalizes glutamate dysregulation.
+https://www.ibroneuroscience.org/article/S0306-4522(25)01021-8/abstract
 # Diet
 
 Diet is associated with  lower levels of dementia.
@@ -106,6 +111,10 @@ In terms of mechanism.
 >studies in animals and humans showing that gut microbiota dysbiosis has been implicated in behavioral and neurologic pathologies, such as depression, Alzheimer's (AD) and Parkinson's (PD) diseases and autism spectrum disorder (ASD)
 [https://www.frontiersin.org/articles/10.3389/fendo.2020.00025/full](https://www.frontiersin.org/articles/10.3389/fendo.2020.00025/full)
 
+Poor diet can lead to bacteria entering the brain via the gut.
+
+ >Here, we reveal that bacteria can translocate directly from the gut to the brain in small numbers when mice are fed an atherogenic, high-fat diet (Paigen diet) that causes alterations in gut microbiome composition and gut barrier permeability... Localization of bacteria to the brain in Paigen diet-fed mice was reversible with return to normal diet. Bacteria were also detected in the brain of murine models of Alzheimer’s, Parkinson’s, and autism spectrum disorder fed standard diet.
+ https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3003652
 # Sleep
 
 Sleep is associated with increased dementia risk, probably through multiple mechanisms. When you sleep your clear out amyloid and other metabolites from the brain. When you don't sleep you release less PTN, which is lined to dementia. 

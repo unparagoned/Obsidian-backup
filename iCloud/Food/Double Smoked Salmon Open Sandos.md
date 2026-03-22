@@ -2,6 +2,8 @@
 # Smørrebrød Inspired Double Smoked Salmon Open Sandos
 
 Was good, but added poached egg to take it to the next level. Don't overcook potatoes.
+Just do buns for 3:00 to toast not 3:30
+
 
 with Creamy Dill Potato Salad and Pickled Cucumber
 

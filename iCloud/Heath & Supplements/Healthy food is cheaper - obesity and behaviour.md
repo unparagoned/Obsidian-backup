@@ -14,9 +14,10 @@ Fast food is more expensive per calorie than basic ingredients
 
 [https://efficiencyiseverything.com/calorie-per-dollar-list/](https://efficiencyiseverything.com/calorie-per-dollar-list/)
 
-It looks like the poor and less educated people do have more free time.
+I hate toxic commits like this, it does nothing to help people. It phrases things as if it's impossible for poor people to be healthy. And it's not even true. It's basically lies to keep poor people down.
 
-
+If anything the rich work more, have less leisure time and spend less time watching TV. 
+ 
 >The more surprising discovery, however, is a corresponding leisure gap has opened up between the highly-educated and less-educated. Low-educated men saw their leisure hours grow to 39.1 hours in 2003-2007, from 36.6 hours in 1985. Highly-educated men saw their leisure hours shrink to 33.2 hours from 34.4 hours.
 >A similar pattern emerged for women. Low-educated women saw their leisure time grow to 35.2 hours a week from 35 hours. High-educated women saw their leisure time decrease to 30.3 hours from 32.2 hours. Educated women, in other words, had the largest decline in leisure time of the four groups.
 >[https://www.wsj.com/articles/BL-WHB-5080](https://www.wsj.com/articles/BL-WHB-5080)
@@ -34,7 +35,6 @@ It looks like the poor and less educated people do have more free time.
 Whenever I've looked up detailed studies on health/obesity-class/income gap they focus on education as the key factor. Education is something we can implement now to help poor people, so it seems really immoral and toxic to claim it's impossible for poor people to be healthy.
 
 >Due to the large rate of deaths caused by diseases directly linked to obesity, the governments of many countries implement prevention programmes of overweight and obesity. These programmes are based primarily on educating the public about a healthy lifestyle based on healthy eating, daily physical activity and avoiding alcohol and cigarettes.
-
 [https://pubmed.ncbi.nlm.nih.gov/25292135/](https://pubmed.ncbi.nlm.nih.gov/25292135/)
 
 Improved food access through establishment of a full-service food retailer, by itself, does not show strong evidence towards enhancing health-related outcomes over short durations.
@@ -111,3 +111,28 @@ If you actually read a lot of the stuff they don't even use the official half-mi
 
 >Although the USDA defines food deserts in urban areas as further than a half-mile, we chose to look at a quarter-mile walking distance to not overwhelm the map and to portray a more realistic image of how far New Yorkers would walk to get food. We assume that an able-bodied person can walk this distance in 5–10 minutes.
 https://medium.com/@olivialimone/mapping-food-deserts-and-swamps-in-manhattan-and-the-bronx-46c6d8fc0804
+
+
+
+[donairhistorian](https://www.reddit.com/user/donairhistorian/)
+
+•[2h ago](https://www.reddit.com/r/nutrition/comments/1rh5jo6/comment/o7wbgam/)
+
+>We have forgotten how to eat and it's become harder to practice home economy because wages aren't enough to run a household and people have to work long hours. Home economy and food literacy haven't been passed down and processed food reliance becomes generational. The whole landscape is car dependent and people are forced to drive to the grocery store, or walk/drive to whatever is closer (convenience stores, fast food). 
+
+>The truth is: food literacy needs to be a priority. 
+
+>Healthy food is not expensive. It is actually cheaper to eat healthy than buying processed foods and fast food. But you need to know how to cook, how to shop for deals, and you need to be willing to plan ahead and to lean towards foods that may be less familiar to you now. 
+
+>Beans and rice (legumes and grain) are the staple diet in the majority of the world. Dried beans are very cheap but require some time and planning. Canned beans are still affordable and can be used to make a quick meal. Vegetables like carrots, onions, cabbage, and turnip last a long time when stored properly. Managing home economy means that you use every vegetable, every wilted scrap, before throwing it out. But frozen vegetables are also fine to lean on.
+
+>Healthy food is not expensive. It can just be time consuming. I can make 3 meals in an hour (my lunch and two meals to take to my 10 hour shifts) but that's probably a superpower. Many people find food prep easier if it's something they commit to once per week. On Sunday, for example, you could make a big pot of beans, a big pot of grains, a big pot of strewed leafy greens, some roasted beets, maybe a roasted pork loin or chicken (though rotisserie chickens at the grocery store are great time savers). Maybe cut up some raw veggies that you can snack on or throw into salads/rice bowls throughout the week. 
+
+>If you get tired of eating the same thing every day, freeze some of your prep. You can pick and choose from your freezer throughout the week from previous weeks' meals. 
+
+>And there are always the simple meals: a bowl of oatmeal, eggs and toast, a baked potato, a sandwich, a salad, a smoothie... 
+
+>Stop listening to social media influencers and best selling authors. You know how to eat. Eat your vegetables, eat balanced meals, eat the food groups. Avoid too much sugary foods or things like bacon/ham. Don't overeat, and keep your body moving. 
+
+>There are obviously strategies for optimization and specific health goals, but for most of history people didn't overthink how to eat.
+>https://www.reddit.com/r/nutrition/comments/1rh5jo6/comment/o7wbgam/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button

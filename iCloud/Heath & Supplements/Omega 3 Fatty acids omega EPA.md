@@ -10,6 +10,13 @@ Keep in fridge
 Maybe this is a good brand Peter Attia uses it. carlson elite omega 3
 
 
+
+Improves mental health
+>Significant improvements were observed in the intervention group regarding stress, anxiety, depression, sleep quality, and memory outcomes...
+Omega-3 supplementation resulted in notable psychological and cognitive improvements, suggesting its potential as a safe and effective adjunct for managing stress, mood disorders, and sleep disturbances among participants with psychological distress.
+https://www.sciencedirect.com/science/article/pii/S0165032725024978?via%3Dihub
+
+
 Also help with mental health
 
 [Understanding & Conquering Depression | Huberman Lab Podcast #34](https://www.youtube.com/watch?v=Xu1FMCxoEFc&t=4304s)

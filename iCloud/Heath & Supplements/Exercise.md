@@ -15,6 +15,9 @@ Less exercise is related to increase chronic stress when older.
 
 >Both lower-than-recommended and decreasing LTPA levels through adulthood are associated with the accumulation of chronic stress when transitioning from early adulthood to midlife.
 >https://www.sciencedirect.com/science/article/pii/S0306453025004482?via%3Dihub
+
+>Exercise increased ripple rate in the hippocampus. Exercise also enhanced the coupling and phase-synchrony between cortical ripples in the limbic and the default mode (DM) cortical networks and hippocampal SWRs. Further, a higher heart rate during exercise, reflecting exercise intensity, was related to a subsequent increase in resting state ripples across specific cortical networks, including the DM network. These results offer the first direct evidence that a single exercise session elicits changes in ripple events, a well-established neurophysiological marker of mnemonic processing. The characterisation and anatomical distribution of the described modulation points to hippocampal ripples as a potential mechanism by which exercise elicits its reported short-term effects in cognition.
+https://academic.oup.com/braincomms/article/8/2/fcag041/8503963
 # Vigorous activity
 
 1 minute of vigorous activity is equivalent to 53-94 minutes of light intensity exercise like walking.

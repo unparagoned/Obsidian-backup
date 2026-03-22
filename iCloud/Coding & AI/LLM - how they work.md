@@ -38,6 +38,10 @@ LLMs, create internal representations of chess board states.
 > we find evidence of internal representations of board state.
 [https://arxiv.org/html/2403.15498v1](https://arxiv.org/html/2403.15498v1)
 
+And in terms of language it can think conceptually and just translate out to the different languages, which isn't what would happen with a stochastic parrot. 
+
+>Claude sometimes thinks in a conceptual space that is shared between languages, suggesting it has a kind of universal “language of thought.” We show this by translating simple sentences into multiple languages and tracing the overlap in how Claude processes them.
+https://www.anthropic.com/news/tracing-thoughts-language-model
 
 LLM are Turing complete, so there is no fundamental limit preventing them from doing any kind of computation including anything the brain does.
 
@@ -67,3 +71,11 @@ From <[https://www.reddit.com/r/singularity/comments/1mmp2xp/comment/n7z652m/](h
 https://www.youtube.com/watch?v=D8GOeCFFby4
 
 The most complex NN we fully understand is a very simple model that adds numbers. It's estimating sins and cosins, using trig identities in order to add the numbers. None of this was taught or embedded, it was all learnt. You can see that it's more than just memorising the training data, it actually removes memorised data.
+
+# Hallucinations
+
+If you look internally at what's happening when it hallucinates it's different than normal activity.
+
+>Can LLMs Predict Their Own Failures? Self-Awareness via Internal Circuits
+>We introduced Gnosis, a lightweight mechanism that allows frozen LLMs to detect their own errors by interpreting internal hidden and attention traces rather than relying on external judges
+>https://arxiv.org/abs/2512.20578

@@ -1,5 +1,8 @@
 #IQ
 
+# IQ
+
+
 >‘Wilson effect’ – the observation that environmental influences on intelligence are stronger in childhood while genetic influences become more prominent with age.
 
 [https://www.psypost.org/genetics-not-shared-environments-drives-parent-child-similarities-in-cognitive-ability/](https://www.psypost.org/genetics-not-shared-environments-drives-parent-child-similarities-in-cognitive-ability/)
@@ -45,8 +48,11 @@
 >We conclude that there is now strong evidence that virtually all individual psychological differences, when reliably measured, are moderately to substantially heritable 
 
 >[https://onlinelibrary.wiley.com/doi/10.1002/neu.10160](https://onlinelibrary.wiley.com/doi/10.1002/neu.10160)
-
 >
+
+Social economic status is primarily driven by genetic rather than environmental factors.
+>Genetic factors further explained most of the IQ–SES association (69–98%), and genetic correlations between IQ and SES exceeded environmental correlations. These findings seem to underscore the importance of researchers and policymakers to also considering genetic factors when examining the life outcomes of young adults.
+>https://www.nature.com/articles/s41598-026-37786-3
 
 Personality
 
@@ -87,3 +93,9 @@ For the 52 pairs with similar schooling, the average IQ difference was just 5.8 
 The most striking finding came from the 10 pairs with “very dissimilar” educational experiences. In this group, the average IQ difference was 15.1 points. This gap is approaching the average difference seen between two randomly selected, unrelated individuals, which is about 17 points. The intraclass correlation for this group dropped to 0.56, a value much closer to what is observed between non-twin siblings. The pattern was clear: as the differences in schooling between the identical twins increased, the differences in their IQ scores also increased substantially.
 
 [https://www.psypost.org/major-iq-differences-in-identical-twins-linked-to-schooling-challenging-decades-of-research/](https://www.psypost.org/major-iq-differences-in-identical-twins-linked-to-schooling-challenging-decades-of-research/)
+
+# Genetics
+
+>There is now a large body of evidence that supports the conclusion that individual differences in most, if not all, reliably measured psychological traits, normal and abnormal, are substantively influenced by genetic factors. This fact has important implications for research and theory building in psychology, as evidence of genetic influence unleashes a cascade of questions regarding the sources of variance in such traits. A brief list of those questions is provided, and representative findings regarding genetic and environmental influences are presented for the domains of personality, intelligence, psychological interests, psychiatric illnesses, and social attitudes. These findings are consistent with those reported for the traits of other species and for many human physical traits, suggesting that they may represent a general biological phenomenon.
+>https://www.researchgate.net/publication/241644869_Genetic_Influence_on_Human_Psychological_TraitsA_Survey
+

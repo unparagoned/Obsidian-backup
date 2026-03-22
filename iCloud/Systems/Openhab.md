@@ -4,7 +4,7 @@ Existing is soo old, nothing updates. ~~The GUI is all gone so, not sure how to 
 
 Contintue to use old openhab until it breaks. 
 
-## Temperature Termostat
+## Temperature Thermostat
 Slider on habpanel can set temp
 
 
@@ -19,5 +19,5 @@ Seems like a pain to setup my script again.
 
 Try Home Assistant, I think that's where I got the stuff for the script in the first place. So might be more streamlined. Wouldn't boot. Maybe need to run on Raspberry Pi
 
-# Debia
+# Debian
 Make sure you get the DVD iso, the min distro couldn't connected to network and has no GUI making it hard to fix things.
