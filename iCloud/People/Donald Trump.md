@@ -8,4 +8,4 @@ Isreal tried to get Obama and Bidden to attack Iran, but they weren't stupid or 
 >https://www.cbsnews.com/amp/news/top-trump-counterterrorism-official-resigns-over-iran/
 
 ![[Pasted image 20260319182545.png]]
-![[Pasted image 20260321212106.png]]
+![[Pasted image 20260321212106.png]]![[Pasted image 20260322134334.png]]

@@ -30,7 +30,7 @@ Off job hours - 6 hours a week.
 
 Learning plan, see set activities
 
-Clicks to QA site. Then you can go through those learning, tests, quizes. Need to mark every page as completed
+Clicks to QA site. Then you can go through those learning, tests, quizzes. Need to mark every page as completed
 
 Need to get all the certificates, then submit the certificates on bud.co.uk
 
@@ -62,7 +62,7 @@ DPS reading Topic 1, they might refer to topic one, so reading topic 1 and 2 bef
 
 Maintain a journal and note learning points against standards
 
-Virtual Learning Envirnment(VLE) is bud
+Virtual Learning Environment(VLE) is bud
 
 Need to do one, but multiple might be good.
 

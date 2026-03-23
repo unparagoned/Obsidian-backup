@@ -441,24 +441,37 @@ Database queries to extract from FoodTrack, MemberTrack and CheckoutTrack, such 
 - Queries to FoodTrack probably only need to be done once a day. Since if deliveries are just once a day, it just needs to be in time to plan for that delivery. Having realtime updates wouldn't make the delivery faster or different.  Similarly for order food, the analysis just needs to be done once before that happens. 
 - 
 
-Data from the MetOffice/Owns would be obtained using an API. 
-
-
+Data from the MetOffice/Owns would be obtained using an API, just when needed. 
 
 Initial image data for id or face to be sent by the app to secure server.
-Weighted shelves could send the data over bluetooth or wifi.
+Weighted shelves could send the data over bluetooth or wifi. 
 
-There need to be some push capabilities from certain systems so they push the data to a central place. e.g. when someone leaves a store. 
-Use API for metoffice, Owns and CCI.
+There need to be some push capabilities from certain systems so they push the data to a central place. e.g. when someone wants to checkout/leaves a store. 
 
 
 **c) Explain how data from multiple systems can be linked to meet business** **objectives.**
 
-If FoodTrack, MemberTrack and CheckoutTrack are established systems then a Mesh network or virtualisation can be used so the data from those system databases can easily be combined for data analytics like like knowing when to reorder.
-
-For the realtime functionality you want an api so that one system can speak to another exactly when something happens.
+Ideally the long term plan would be to have a lakehouse, but shorter term solutions might need to utilise and integrate existing systems.
 
 A lakehouse could be useful when combining lots of different types of data. The external providers might provide the data in different formats so the datalake would be useful for storing and analysing different formats of data. It could also store image and video data.
+
+If FoodTrack, MemberTrack and CheckoutTrack are established systems then a data fabric using virtualisation can be used so the data from those system databases can easily be combined for data analytics like like knowing when to reorder.
+
+For the realtime functionality you want an api so that one system can speak to another exactly when something happens. So using push functionality rather than constantly polling databases or data sources. 
+
+There would need to be common Ids to link between different systems. 
+Customer ID to link between MemberTrack and CheckoutTrack
+Food items should have an ID to link between FoodTrack and checkoutTrack
+
+When it comes to external data sources, there would need to be linking. 
+MetOffice would have weather by location. There would need to be linking by latintude and longitude to the the store. So working out what is the closest to the store. If it's between multiple locations then maybe some kind of average of the data would be useful. So you'd need the longitude and longitude of stores as well and they should be stored in a database. Can use euclidean distance.
+
+
+
+
+
+
+
 
 
 
