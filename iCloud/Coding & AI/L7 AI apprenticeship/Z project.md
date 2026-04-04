@@ -34,6 +34,7 @@ Normalise for correctness, denormalised for performance & usability
 
 NN has hyperparameters like the dimension and NN size which would be specific to the input dimension and number of classes, with larger datasets the number of classes could be increased since there would be sufficient population of the minor classes. Also input text size would increase. But it's not possible to do hyperparameter testing on such a large dataset. Which would make it a bit of a guessing game. 
 
+Denormalisation. Where you include redundant copies of data in multiple tables. Means you don't need to join as many tables together. 
 
 TFIDF outperformed BERT when using SVM
 

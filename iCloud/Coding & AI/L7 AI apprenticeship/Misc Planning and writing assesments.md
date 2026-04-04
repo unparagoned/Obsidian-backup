@@ -1,157 +1,48 @@
 [https://www.qa.com/media/lb2k4mwy/2-planning-and-writing-assignments-workshop-slides.pdf](https://www.qa.com/media/lb2k4mwy/2-planning-and-writing-assignments-workshop-slides.pdf)
+Paragraph should be around 200-250 words, around a single point.
 
-<<ae2f75b986.html>>
+**Slides from today:**
 
-<<bd0c27d822-2.html>>
+[Planning and Writing Assignments Workshop Slides](https://www.qa.com/media/lb2k4mwy/2-planning-and-writing-assignments-workshop-slides.pdf)
 
-<<d1a2b3c0a7.html>>
+**Useful resources:**
 
-<<f74eff3368-2.html>>
+[ACE Planning and Writing Assignments Video Guide on Vimeo](https://vimeo.com/1130217365/7ed2aead60)
 
-<<c9e685e168.html>>
+[Understanding the Assignment Brief Quick Guide](https://www.qa.com/media/peanfdpo/understanding-the-assignment-brief-quick-guide.pdf)
 
-<<55d45d1142.html>>
+[Assignment Planning Quick Guide](https://www.qa.com/media/5fdgwbej/assignment-planning-quick-guide.pdf)
 
-<<48580619b2.html>>
+[Linear Planning Template](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.qa.com%2Fmedia%2Fqdzbq3o0%2Fassignment-planning-template-linear-planning.docx&wdOrigin=BROWSELINK)
 
-<<be7440a482-2.html>>
+[Tabular Planning Template](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.qa.com%2Fmedia%2F1h4pu0mb%2Fassignment-planning-template-tabular-planning.docx&wdOrigin=BROWSELINK)
 
-<<f18f6e8ec6.html>>
+[Flow Diagram Planning Template](https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fwww.qa.com%2Fmedia%2Fntdjz0j4%2Fassignment-planning-template-flow-diagram.docx&wdOrigin=BROWSELINK)
 
-<<f02ac29f32.html>>
+[Critical Writing: Building an Argument Quick Guide](https://www.qa.com/media/u3anzgtp/critical-writing-building-an-argument-quick-guide.pdf)
 
-<<43a685a51e.html>>
+[ACE Critical Writing - Using TEEEL Video Guide on Vimeo](https://vimeo.com/1065176256/be7440a482)
 
-<<d4f97d7a8d.html>>
+[Academic Style Video Guide](https://vimeo.com/1130217424/f74eff3368)
 
-<<7ed2aead60.html>>
+[Academic Writing Essentials Quick Guide](https://www.qa.com/media/tcdpwfrm/academic-writing-essentials-quick-guide.pdf)
 
-<<e12f531cea.html>>
+[Hedging Quick Guide](https://www.qa.com/media/rnmdfq0q/hedging-quick-guide.pdf)
 
-<<end-point-assessment-quick-guide.pdf>>
+**ACE Page:**
 
-<<writing-an-abstract-quick-guide.pdf>>
+[Academic Community of Excellence](https://www.qa.com/apprenticeships/portals/apprentice-learners-portal/academic-community-of-excellence/)
 
-<<writing-a-literature-review-quick-guide.pdf>>
+**ACE Workshop Schedules:**
 
-<<word-literature-review-reading-log-template.docx>>
+[ACE Study Skills Inductions for New Learners January 2026](https://www.qa.com/media/4vvnrul1/ace-study-skills-inductions-for-new-learners-january-2026.pdf)
 
-<<excel-literature-review-reading-log-template.xlsx>>
+[ACE Study Skills Workshops for ALL Learners January-March 2026](https://www.qa.com/media/bfjh5uft/ace-study-skills-workshops-for-all-learners-january-march-2026.pdf)
 
-<<creating-a-literature-review-reading-log-quick-guide.pdf>>
+**ACE 121 Tutorials:**
 
-<<conducting-a-literature-review-quick-guide.pdf>>
+[ACE DA Study Skills Support](https://outlook.office365.com/book/ACEDAStudySkillsSupport@qalearning.onmicrosoft.com/)
 
-<<writing-a-research-question-quick-guide.pdf>>
+**ACE Feedback Form:**
 
-<<table-of-contents-quick-guide.pdf>>
-
-<<tables-and-figures-quick-guide.pdf>>
-
-<<appendices-quick-guide.pdf>>
-
-<<qa-harvard-referencing-workshop-slides.pdf>>
-
-<<writing-a-reference-list-qa-harvard-quick-guide.pdf>>
-
-<<in-text-citations-qa-harvard-quick-guide.pdf>>
-
-<<bd0c27d822.html>>
-
-<<qa-apprenticeships-harvard-referencing-full-guide.pdf>>
-
-<<introducing-paraphrases-quick-guide.pdf>>
-
-<<hedging-quick-guide.pdf>>
-
-<<writing-concisely-quick-guide.pdf>>
-
-<<coherence-quick-guide.pdf>>
-
-<<paraphrasing-workshop-slides.pdf>>
-
-<<paraphrasing-quick-guide.pdf>>
-
-<<academic-style-workshop-slides.pdf>>
-
-<<f74eff3368.html>>
-
-<<academic-writing-essentials-quick-guide.pdf>>
-
-<<writing-essays-and-academic-reports-quick-guide.pdf>>
-
-<<academic-presentations-quick-guide.pdf>>
-
-<<avoiding-academic-misconduct-quick-guide.pdf>>
-
-<<editing-and-proofreading-quick-guide.docx>>
-
-<<writing-the-main-body-quick-guide.pdf>>
-
-<<introductions-and-conclusions-workshop-slides.pdf>>
-
-<<introductions-and-conclusions-quick-guide.pdf>>
-
-<<reflective-writing-2-texts-and-tasks.docx>>
-
-<<reflective-writing-2-advanced-reflective-analysis-workshop-slides.pdf>>
-
-<<reflective-writing-1-introduction-to-reflective-models-workshop-slides.pdf>>
-
-<<reflective-models-quick-guide.pdf>>
-
-<<relating-theory-to-practice-quick-guide.pdf>>
-
-<<critical-analysis-2-writing-workshop-slides.pdf>>
-
-<<critical-analysis-1-thinking-and-reading-workshop-slides.pdf>>
-
-<<critical-writing-building-an-argument-quick-guide.pdf>>
-
-<<be7440a482.html>>
-
-<<use-of-sources-quick-guide.pdf>>
-
-<<critical-thinking-quick-guide.pdf>>
-
-<<critical-thinking-checklist.docx>>
-
-<<generating-ideas-through-writing-quick-guide.pdf>>
-
-<<mind-mapping-quick-guide.pdf>>
-
-<<onenote-quick-guide.pdf>>
-
-<<cornell-notetaking-quick-guide.pdf>>
-
-<<reading-and-notetaking-workshop-slides.pdf>>
-
-<<evaluating-sources-and-reading-critically-quick-guide.pdf>>
-
-<<assignment-planning-template-tabular-planning.docx>>
-
-<<assignment-planning-template-linear-planning.docx>>
-
-<<assignment-planning-template-flow-diagram.docx>>
-
-<<assignment-planning-checklist.docx>>
-
-<<assignment-planning-quick-guide.pdf>>
-
-<<understanding-the-assignment-brief-quick-guide.pdf>>
-
-<<smart-goals-quick-guide.pdf>>
-
-<<pomodoro-technique-quick-guide.pdf>>
-
-<<time-management-tools-quick-guide.pdf>>
-
-<<weekly-planner-template.docx>>
-
-<<daily-planner-template.docx>>
-
-<<time-management-and-organisation-quick-guide.pdf>>
-
-<<3-searching-for-sources-and-referencing-workshop-slides.pdf>>
-
-<<2-planning-and-writing-assignments-workshop-slides.pdf>>
+[ACE Feedback Form](https://forms.office.com/Pages/ResponsePage.aspx?id=lwcinDfD-EmwhqmiSXn3KP-2prNDq1dFrYob9O280jRUQUVERlNBWUdaWlROVE5XWUJMMEdYMjRRWS4u)

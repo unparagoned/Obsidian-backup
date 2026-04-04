@@ -1,5 +1,5 @@
 
-Really nice combo of lentils and prawns. 
+Really nice combo of [[Lentils]] and prawns. 
 
 But definitely need to cut off skin on butternut squash
 

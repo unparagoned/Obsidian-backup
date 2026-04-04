@@ -1,5 +1,7 @@
 #sleep 
 
+[[Sleep - Bad types -  Night owls, Bimodal]]
+
 The cornerstone to healthy sleep is a regular routine. 
 
 
@@ -125,6 +127,8 @@ Regularity is a key factor distinct from just duration
 >These findings indicate that sleep regularity is an important predictor of mortality risk and is a stronger predictor than sleep duration.
 https://academic.oup.com/sleep/article/47/1/zsad253/7280269
 
+>irregular sleep timing was a significant risk factor for MACEs.
+https://link.springer.com/article/10.1186/s12872-026-05762-4
 
 Increased dementia risk
 #dementia

@@ -189,7 +189,7 @@ Protect
 8. Sex
 9. Sexual orientation
 
-Bias in lending alorthm
+Bias in lending algorithm
 
 [https://edition.cnn.com/2019/11/10/business/goldman-sachs-apple-card-discrimination/index.html?utm_source=fbCNN&utm_medium=social&utm_content=2019-11-10T22%3A00%3A04&utm_term=link](https://edition.cnn.com/2019/11/10/business/goldman-sachs-apple-card-discrimination/index.html?utm_source=fbCNN&utm_medium=social&utm_content=2019-11-10T22%3A00%3A04&utm_term=link)
 

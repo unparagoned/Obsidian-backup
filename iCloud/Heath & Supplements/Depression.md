@@ -298,6 +298,10 @@ Maybe it's related to Shor Chain Fatty Acids(SCFA)
 >- Behavioural Intentions to look after Health increased by 6.5% beyond control.
 [https://www.bath.ac.uk/announcements/just-10-minutes-of-mindfulness-daily-boosts-wellbeing-and-fights-depression/](https://www.bath.ac.uk/announcements/just-10-minutes-of-mindfulness-daily-boosts-wellbeing-and-fights-depression/)
 
+# Characteristics
+
+>Depressive symptoms were related to pessimistic bias and inaccuracy in predictions.
+>https://www.sciencedirect.com/science/article/pii/S0005796726000112?via%3Dihub
 # Social/environmental impacts
 
 While environmental factors will have some impact, it doesn't look like stuff like isolation cause a large measurable physical impact on the brain.

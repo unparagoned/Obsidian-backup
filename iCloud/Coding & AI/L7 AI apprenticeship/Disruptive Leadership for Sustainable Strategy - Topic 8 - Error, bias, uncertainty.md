@@ -201,7 +201,8 @@ White box model testing, looks at the training data and internal structure
 
 # Uncertainty
 
-Uncertainty is the quantitive estimate of error present in data. Results from ML or analysis always have some uncertainty.
+~~Uncertainty is the quantitive estimate of error present in data.~~
+Lack of confidence in the data or outputs. Results from ML or analysis always have some uncertainty.
 
 Sources of uncertainty include 
 - variance in data(noisy data)

@@ -132,7 +132,7 @@ Research issues
 
 - Research goal - should be a beneficial intelligence
 - Research funding - should cover ethics and other issues as well
-- Science-Policy Link - constructure exchange between the two
+- Science-Policy Link - constructor exchange between the two
 - Research culture - Culture of cooperation, trust and transparency
 - Race avoidance: Should work cooperatively to avoid corner-cutting on safety standards
 

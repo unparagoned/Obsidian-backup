@@ -68,3 +68,13 @@ Best to do everything as early as possible, so there is time for resits.
 mapping doc: [st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf](https://skillsengland.education.gov.uk/media/3685/st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf)
 
 [st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf](https://skillsengland.education.gov.uk/media/3685/st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf)
+
+[st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf](https://skillsengland.education.gov.uk/media/3685/st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf) use this for the KSB's
+
+[anne.james@qa.com](mailto:anne.james@qa.com)
+
+mapping doc: [st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf](https://skillsengland.education.gov.uk/media/3685/st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf)
+
+[st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf](https://skillsengland.education.gov.uk/media/3685/st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf)
+
+ACE Degree Apprenticeships <[aceda@qa.com](mailto:aceda@qa.com)>

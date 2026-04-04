@@ -1,8 +1,23 @@
+Don't bother.
+
+* NR and NMN both get broken down into B3(nicotinamide). 
+- Plus no evidence increasing NAD level has benefits.
+- Exercise keeps your bodies levels of NAD high naturally.
+
 
 
 # Notes
 
 NAD doesn't get into the cells, much better to just use NMN
+
+
+# New Study Says I Was Wrong About NMN and NR?
+https://www.youtube.com/watch?v=XB6B_XjQMa8
+NR and NMN both get broken down into cheap B3, so are just a waste of money. 
+Plus there isn't much evidence of increasing NAD levels has beneficial impacts.
+
+
+
 
 [Important NAD Boosting News!](https://www.youtube.com/watch?v=rof_30zq3Jg)
 

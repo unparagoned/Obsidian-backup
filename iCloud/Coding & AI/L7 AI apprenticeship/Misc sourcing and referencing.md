@@ -74,3 +74,38 @@ Harvard referencing
 [qa-apprenticeships-harvard-referencing-full-guide.pdf](https://www.qa.com/media/g5jjklcq/qa-apprenticeships-harvard-referencing-full-guide.pdf)
 
 [https://www.qa.com/media/umjdd5ay/3-searching-for-sources-and-referencing-workshop-slides.pdf](https://www.qa.com/media/umjdd5ay/3-searching-for-sources-and-referencing-workshop-slides.pdf)
+
+
+_From <[https://teams.microsoft.com/v2/](https://teams.microsoft.com/v2/)>_
+
+CRAPP test
+
+Currency
+
+Relevance
+
+Authority
+
+Accuracy
+
+Purpose
+
+[qa-apprenticeships-harvard-referencing-full-guide.pdf](https://www.qa.com/media/g5jjklcq/qa-apprenticeships-harvard-referencing-full-guide.pdf)
+
+[https://www.qa.com/media/ld4baohe/google-scholar-quick-guide.pdf](https://www.qa.com/media/ld4baohe/google-scholar-quick-guide.pdf)
+
+e.g.
+
+Analysing data (Sarker, 2024)
+
+If quoting use page number
+
+"analysing data" (Sarker, 2024, p. 1774)
+
+(McGaughey, 2021)
+
+If no name, can use the name of the organisation
+
+If more than four authors, first named and et al.
+
+[https://www.qa.com/media/umjdd5ay/3-searching-for-sources-and-referencing-workshop-slides.pdf](https://www.qa.com/media/umjdd5ay/3-searching-for-sources-and-referencing-workshop-slides.pdf)

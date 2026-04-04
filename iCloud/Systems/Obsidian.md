@@ -25,3 +25,12 @@ Might need to press Ctrl + p, for a command then select live preview
 # Sync reminders
 This should work, if needed
 https://apps.apple.com/us/app/remindersync-for-markdown/id6478323460?mt=12
+
+# Task notes
+
+https://www.reddit.com/r/ObsidianMD/comments/1s1qah7/how_i_manage_tasks_with_obsidian_and_the/
+
+
+- [[learn how to use tasks 🔽]]
+
+- [[new tasks]]
