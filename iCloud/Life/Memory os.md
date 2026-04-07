@@ -8,7 +8,7 @@ Ray
 Law
 Jaw
 Key
-Free
+Fee
 Pee
 
 # 0-100
@@ -113,3 +113,17 @@ Pee
 98  Beef
 99  Pope
 100 Daises
+
+# Phone numbers
+
+## Mine
+07968482719
+ski bush fire fan cat pee
+my new phone phone SKIing into a BUSH that sets onto FIRE, then phone has a FAN that blow CAT PEE
+
+## Dads
+07976259028
+ski book genie lips sun fee
+Dad doesn't know how to ski, so SKIs using BOOK, prays to GENIE who's LIPS are bright like the SUN but asks for a FEE
+
+

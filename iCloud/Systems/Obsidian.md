@@ -28,6 +28,8 @@ https://apps.apple.com/us/app/remindersync-for-markdown/id6478323460?mt=12
 
 # Task notes
 
+I removed all notes for a reason. Maybe just use inbuilt app? I really should note reasons why I do stuff here.
+
 https://www.reddit.com/r/ObsidianMD/comments/1s1qah7/how_i_manage_tasks_with_obsidian_and_the/
 
 

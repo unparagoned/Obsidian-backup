@@ -32,7 +32,7 @@ Sleep is linked to all sorts of health issues like depression and dementia, much
 #depression #dementia 
 
 [[Depression#Sleep]] 
-[[Dementia#Sleep]]
+[[Dementia alzheimer#Sleep]]
 
 
 Two nights of sleep isn't enough to recover from lack of sleep. I suspect that people that say they have to have an alarm clock to wake up otherwise they would sleep 10h+ each night, are just chronically sleep deprived and it might take quite a few days of 10h+ sleep to recover. It's not that 10h+ is their natural sleep length. 

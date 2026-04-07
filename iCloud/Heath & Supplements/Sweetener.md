@@ -97,7 +97,6 @@ saccharin, sucralose, aspartame, and stevia 
 From <[https://www.cell.com/cell/fulltext/S0092-8674(22)00919-9?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867422009199%3Fshowall%3Dtrue#secsectitle0020](https://www.cell.com/cell/fulltext/S0092-8674\(22\)00919-9?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS0092867422009199%3Fshowall%3Dtrue#secsectitle0020)>
 
 >saccharin and sucralose significantly impaired glycemic responses.
-
 [https://www.cell.com/cell/fulltext/S0092-8674(22)00919-9](https://www.cell.com/cell/fulltext/S0092-8674\(22\)00919-9)
 
  Sucralose on Insulin Resistance

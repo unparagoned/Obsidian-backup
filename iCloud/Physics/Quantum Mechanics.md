@@ -34,3 +34,13 @@ https://arxiv.org/abs/2601.08102
 # Basics
 
 Unitary operators are rotations, so <Uo|Uw> = <o|w>, they preserve probabilities. U hermitian = U inverse
+
+# Angular momentum
+
+>This Simple Wave Explains Quantum Mechanics
+https://www.youtube.com/watch?v=pJvV7MI-LyY
+
+Electrons have angular momentum when rotating in a atom. 
+
+The static picture is due to rotations cancelling out. 
+

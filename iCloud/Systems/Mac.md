@@ -154,3 +154,8 @@ Lock.command
 Sync_onedrive_cloud.command
 
 That way either I have it one me, or I can get into at least one of the apple or MicrosoftÏ systems.
+
+
+# Hang login
+
+Rebooted three times, then logged into jkjk, which worked then logged out and logged into unparagoned

@@ -11,6 +11,11 @@
 >These findings suggest that pre-class acute exercise enhances EF and provides a benefit to cognitive flexibility. Accordingly, our results extend previous knowledge by indicating that the cognitive benefits of acute exercise observed primarily in laboratory settings can be translated to real-world educational contexts.
 https://www.techscience.com/IJMHP/v27n10/64306
 
+Resistance exercise slow brain againg.
+
+>Exercise improves cognition, mental wellbeing, and protects against neurodegeneration. ...These effects emerged at the whole-brain level, rather than within isolated networks such as the default mode, motor, or cerebellar systems. These findings suggest a hierarchical organization of brain aging, driven by distributed network-level changes and expressed through focal regional patterns. Resistance exercise training decelerates brain ageing, as indexed by brain clocks, reinforcing its role as a preventive strategy for brain health.
+>https://link.springer.com/article/10.1007/s11357-026-02141-x
+
 Less exercise is related to increase chronic stress when older. 
 
 >Both lower-than-recommended and decreasing LTPA levels through adulthood are associated with the accumulation of chronic stress when transitioning from early adulthood to midlife.
