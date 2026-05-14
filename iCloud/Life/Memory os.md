@@ -11,6 +11,10 @@ Key
 Fee
 Pee
 
+![[Pasted image 20260410221742.jpg]]
+![[Pasted image 20260410221759.jpg]]
+
+
 # 0-100
 00  Sause
 01  Seed
@@ -114,9 +118,39 @@ Pee
 99  Pope
 100 Daises
 
+# Pi
+
+14 tor on bed eating pie bobbing head to
+15 adele playing a
+92 piano so hard it pushes a 
+65 chilli off the desk onto a mole 
+35 Mole which take it into other room to
+89 Phoebe who balances a
+79 cube on the
+32 moon shining light on the
+38 mafia hiding under an
+46 arch casting shadows on 
+26 nachos dipped into
+43 rum controlled by the
+38 mafia betting that the
+32 moon balances on a
+79 cube which throws a
+50 lasso over a 
+28 knife shining a light to set a
+84 fire melting a
+19 tuba scaring a 
+71 cat jumping on a 
+69 ship navigating to a
+39 map showing a 
+93 beam blinding a 
+75 koala rolling 
+10 dice
+
 # Phone numbers
 
 ## Mine
+1985-03-15
+Tuna eats fly then eaten by sumo, 
 07968482719
 ski bush fire fan cat pee
 my new phone phone SKIing into a BUSH that sets onto FIRE, then phone has a FAN that blow CAT PEE

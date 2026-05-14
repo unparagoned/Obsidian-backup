@@ -21,3 +21,16 @@ So I don't waste my time, answer this question first. There is no point having a
 
 >Our results show that the criminal justice system exerts a large influence on crime activity. Increasing the risk of apprehension and conviction is more influential in reducing crime than raising the expected severity of punishment.
 [https://link.springer.com/article/10.1007/s00181-019-01758-6](https://link.springer.com/article/10.1007/s00181-019-01758-6)
+
+# Stats
+
+Shoplifting levels are very high now.
+
+>The police recorded 516,971 shop theft offences for year ending December 2024, a year-on-year increase of 20%. This is the highest level since the current Home Office Counting Rules were introduced in 2002/03
+https://www.gov.uk/government/publications/crime-and-policing-bill-2025-factsheets/crime-and-policing-bill-retail-crime-factsheet
+
+If you are talking about US stats, that's simply because stores are reporting stuff since the police don't do anything anyway. In San Francisco the shoplifting stats doubled in one month, when they investigated it was just a single store that thought they were supposed to report everything.  I can't even imagine what would happen if they all actually reported stuff.
+
+>Shoplifting numbers for all of San Francisco doubled in September after one Target location changed the method it uses to report the crime
+SF
+https://www.businessinsider.com/san-francisco-shoplifting-numbers-doubled-after-store-changed-reporting-method-2021-12?r=US&IR=T

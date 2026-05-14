@@ -159,3 +159,11 @@ That way either I have it one me, or I can get into at least one of the apple or
 # Hang login
 
 Rebooted three times, then logged into jkjk, which worked then logged out and logged into unparagoned
+
+# Sound
+
+Middle speaker stopped working
+
+Set AVR to pure
+
+Maybe **Audio MIDI Setup**

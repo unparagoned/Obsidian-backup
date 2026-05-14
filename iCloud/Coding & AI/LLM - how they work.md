@@ -43,6 +43,11 @@ And in terms of language it can think conceptually and just translate out to the
 >Claude sometimes thinks in a conceptual space that is shared between languages, suggesting it has a kind of universal “language of thought.” We show this by translating simple sentences into multiple languages and tracing the overlap in how Claude processes them.
 https://www.anthropic.com/news/tracing-thoughts-language-model
 
+Why predicting the next word of a detective Novel, requires real understanding.
+https://x.com/vitrupo/status/2050736968041210316
+
+
+
 LLM are Turing complete, so there is no fundamental limit preventing them from doing any kind of computation including anything the brain does.
 
 >Memory Augmented Large Language Models are Computationally Universal

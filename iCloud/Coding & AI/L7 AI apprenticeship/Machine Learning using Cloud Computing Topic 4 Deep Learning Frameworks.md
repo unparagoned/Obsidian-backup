@@ -51,7 +51,7 @@ Could have softmax on output layer to convert to a probability distriubtion
 
 ### Compile has three args
 
-- A loss function. Measures the performance on the training data compared to true output labels. e.g. Mean Squared Error(MSE).
+- A loss function. Measures the performance on the training data compared to true output labels. e.g. Mean Squared Error a(MSE).
 
 - If you are doing binary classification, there is binary cross-entropy.
 - For more than two categories, there is categorical cross-entropy or sparse categorical cross-entropy.

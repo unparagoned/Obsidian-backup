@@ -416,52 +416,54 @@ How do you prevent people from removing goods from the store if means to pay has
 
 Image data to verify and link to ID on setup, unstructured.
 Image/video data of face as reference for facial reference, unstructured.
-Other biological data like height(numeric continuous ratio), which could improve detection when combined with facial recognition.
-MemberTrack data about users, to link them to the person in the shop and payment method. Data in the database would be structured data. Data like names or payment method, card number would be text, categorical data, nominal.
-CCTV and camera data for facial recognition. This would be video data. Unstructued.
+CCTV and camera data for facial recognition and tracking objects, unstructured.
+Other biological data like height would be numeric, continuous ratio, which could improve detection when combined with facial recognition.
+
+MemberTrack data about users, to link them to the person in the shop and payment method. Data in the database would be structured data. Data such as names or payment method, card number would be text, categorical data, nominal.
+
 Weighted shelves, this would be numeric data, continuous ratio data.
 Json data for interaction would mobile application. structured/semi-structured
-List of items removed, maybe from CheckoutTrack could be json(structured) or other structured format.
-FoodTrack data about current stock levels in the store(numeric, discrete), when items will expire(temporial normally stored as a number). 
+
+List of items removed, from CheckoutTrack could be json(structured) or other structured format.
+
+FoodTrack data about current stock levels in the store/distribution centers would be numeric, discrete data. Trigger levels would be numeric, discrete. Expiry dates would be temporial normally stored as a number. 
+
 CCI data about customer spending habits to impact stock purchases, numeric continuous data.
+
 Owns customer demographics for each store locations, can impact order level when to reorder products. This would be structured numeric continuous ratio data
-MetOffice weather patterns. for planning stock levels and purchases. The data would likely be structured as continuous ratio data, e.g. 5% chance of rain, or 1% chance of storm. 
-wind speed/temperature numeric continuous(interval)
+MetOffice weather patterns. For planning stock levels and purchases. The data would likely be structured as continuous ratio data, e.g. 5% chance of rain, or 1% chance of storm. 
+wind speed/temperature numeric continuous, interval.
 Survey results, scores - categorical ordinal, written responses unstructured text
 
 #### **b) Describe your process for extracting the data.**
 
 Database queries to extract from FoodTrack, MemberTrack and CheckoutTrack, such as SQL or similar depending on the database. 
 - When someone enters the store, you'd just need to query the MemberTrack once to verify who it is, verify ID and payment details. 
-- Queries to FoodTrack probably only need to be done once a day. Since if deliveries are just once a day, it just needs to be in time to plan for that delivery. Having realtime updates wouldn't make the delivery faster or different.  Similarly for order food, the analysis just needs to be done once before that happens. 
-- 
+- Queries to FoodTrack probably only need to be done once a day. Since if deliveries are just once a day, it just needs to be in time to plan for that delivery. Having realtime updates wouldn't make the delivery faster or different.  
+
+
+ETL using AWS Glue to bring all the data together on the lakehouse for analysis and ML.
 
 Data from the MetOffice/Owns would be obtained using an API, as required, using CI/CD the run batched ETL jobs should be sufficient, since a real time feed isn't required.
 
 Initial image data for id or face to be sent by the app to secure server.
-Weighted shelves could send the data over bluetooth or wifi. 
 
-There need to be some push capabilities from certain systems so they push the data to a central place. e.g. when someone wants to checkout/leaves a store. 
+Weighted shelves could send the data over bluetooth or wifi, with a REST API.  
+
+There need to be some real time streaming using Kinesis.  For events such as when someone wants to checkout/leaves a store. 
+
 
 
 #### **c) Explain how data from multiple systems can be linked to meet business** **objectives.**
 
-Ideally the long term plan would be to have a lakehouse, but shorter term solutions might need to utilise and integrate existing systems.
+If FoodTrack, MemberTrack and CheckoutTrack are established systems that require high throughput then keeping them as relational databases makes sense. They can be connected using a data fabric using virtualisation tool like Denodo.  
 
-A lakehouse could be useful when combining lots of different types of data. The external providers might provide the data in different formats so the datalake would be useful for storing and analysing different formats of data. It could also store image and video data.
+For data analytics and ML you'd want a lakehouse which combines lots of different types of data, such as structured, semi-structured and unstructured data. AWS glue catalogue could be used to create schemas across the data sets linking them.
 
-If FoodTrack, MemberTrack and CheckoutTrack are established systems then a data fabric using virtualisation can be used so the data from those system databases can easily be combined for data analytics like like knowing when to reorder.
-
-For the realtime functionality you want an api so that one system can speak to another exactly when something happens. So using push functionality rather than constantly polling databases or data sources. 
-
-There would need to be common Ids to link between different systems.  Ideally these would be primary and foreign keys in databases.
-Customer ID to link between MemberTrack and CheckoutTrack
-Food items should have an ID to link between FoodTrack and checkoutTrack
+There would need to be common Ids to link between different systems.  Ideally these would be primary and foreign keys in databases. You'd want Customer ID, Item ID, Store ID.
 
 When it comes to external data sources, there would need to be linking. 
-MetOffice would have weather by location. There would need to be linking by latintude and longitude to the the store. So working out what is the closest to the store. If it's between multiple locations then maybe some kind of average of the data would be useful. So you'd need the longitude and longitude of stores as well and they should be stored in a database. Can use euclidean distance.
-
-
+MetOffice would have weather by location. There would need to be linking by latitude and longitude to the the store.  
 
 #### **d) Within your chosen data sets and sources, explain the potential for:**
 • **Error.**
@@ -543,11 +545,16 @@ Uncertainty in the inputs can also feed through to the outputs.
 #### **a) Explain how the extracted data can be stored, analysed and visualised.**
 
 Ideally the data would be stored in a lakehouse, which can deal with big data(high volume, large variety, high velocity). It can data storage such as S3 bucket, which can deal with a variety of data from images/video to structured data.
-For the structured data you would want ETL that can ensure the data has a fixed schema before writing. You'd want keys in the structured data that can be easily identified and linked to other data. 
+For the structured data you would want ETL that can ensure the data has a fixed schema before writing. You'd want keys in the structured data that can be easily identified and linked to other data. Can be stored as a delta lake.
+Stored on S3. Structured data in parquet file after ETL. Stored in Apache Iceberg format. AWS glue data catalog. Query with Athena and Redshift. 
+Primary key for products and people to link them to the different tables. 
+
+Video data can track items using SORT or DeepSORT 
+
 
 A lakehouse would then allow analysis of the data. There are ML based systems for analysing the images and video. Or you could us CNN or RNN for images. For video data SORT or DeepSORT can track items across frames.
 
-But if there are existing systems and databases, then the data can be stored in the database and then a data fabric could be useful in joining the existing databases together using virtualisation like Denodo.
+But if there are existing systems and relational databases, then the data can be stored in the database and then a data fabric could be useful in joining the existing databases together using virtualisation like Denodo. For fast recording and access you'd want a relational database rather than the s3.
 
 Systems like athena can be used for the dataanalysis over the structured data in s3.
 
@@ -562,13 +569,15 @@ End business users could use systems like PowerBI, which would also be useful si
 
 It's big data, high variety, high velocity, high volume.
 
+The image and video data is unstructured data - variety, relational database can't handle it.
+
 Image data to verify and link to ID on setup, unstructured.
 Image/video data of face as reference for facial reference, unstructured.
 Image and video data can take up a lot of space, so the system would require a large capacity and can handle unstructured data. It would need to scale to increase space over time. You might need to store the data for a month or so to deal with any issues. If there if theft then that data might need to stored longer. There would need to be fast access times, since the ML to identify items picked up would need to be close to real time. 
 
 
 MemberTrack data about users, to link them to the person in the shop and payment method. Data in the database would be structured data. Data like names or payment method, card number would be text, categorical data, nominal.
-There wouldn't need large scale storage. It would be structured data so would fit well in a relational database or lakehouse
+There wouldn't need large scale storage. It would be structured data so would fit well in a relational database or Lakehouse.
 
 
 Json data for interaction would mobile application. structured
@@ -589,11 +598,18 @@ Survey results, scores - categorical ordinal, written responses unstructured tex
 
 Rather than having lots of different storage types, s3 allows a central system which can ease admin and maintenance. It is also easier to integrate that data expically if there are new requirements in the future.
 
+AWS was just an illustrative example. The Lakehouse could be implemented using various providers or technology. If existing architecture is based on microsoft platform it might make sense to use their technology. 
+
+They are long term plans that would be able to scale with the data and make it easier to combine data from different systems. In the short term if there are already existing databases a data fabric could be used to join those systems together.
+
+You'd want something like Icebert or Datalake to ensure ACIDity. using a pure datalake with raw parquets could have all sorts of issues, race conditions, partial writes, no rollbacks, etc.
+
+You have OLTP for transactional data. Which means we need a traditional database. Lakehouse if good for OLAP
 
 #### **d) Explain how your intended solution will make use of the data by** **comparing a choice of two or more machine learning algorithms and** **approaches which you may apply to present the best solution for the** **organisation.**
 
 Image recognition. NN, convolutional? vs LLM style ChatGPT system.
-
+CNN to detect images. 
 NN would have to be built inhouse, tested and maintained, it might require a higher skillset to develop.
 Using a system like ChatGPT could be developed with more minimal skill and it would work fairly well out of the box and would improve with fine tuning. 
 
@@ -601,8 +617,11 @@ ChatGPT would be much more expensive and would be slower. It might work well wit
 
 ML about predicting when to order more products
 
-You could use Holt-winters or SARIMA to forecast stock or demand. 
+You could use Holt-winters doesn't deal with external variables
+SARIMAX as a statistical model to forecast stock or demand and that can include stuff like weather. 
 
+LSTM could be used as a ML model.
+. 
 ### **Question 3**
 
 #### **a)** **Through analysis of internal and external business factors:**
@@ -666,15 +685,32 @@ Evaluate model
 Deploy model
 
 
+
+
+
 #### **b) List the resources and architecture required.**
 
 Lakehouse and virtualisation for existing databases. 
 
 Amazon, s3 buckets, athena, python for image processing and recognition.
-
+sagemaker for ML
 Denodo for virtualisation.
+
+Product Owner
+Scrum Master
+Data Scientist 
+Data Engineer
+MLOps engineer
+Software engineer
+ML architect
 
 
 #### **c) Provide justification for your approach.**
 
+Agile is useful since it involves the product owner who can feed in and provide feedback quickly helping ensure that development is on track and meets the needs of the business.
+
 For example you could start testing facial recognition to start, it doesn't rely on the other requirements and if it's not possible to implement that to the required level time and resource isn't wasted working on stuff that wouldn't be used. 
+
+Using CRISP-DM for the ML part makes more sense since the various steps don't always have fixed times that would fit nicely into formal sprints. So for the ML development use CRISP-DM.
+
+I wouldn't use something like waterfall, it can be hard to come up with all the right requirement for a ML based project with lots of different parts that interact with each other. 

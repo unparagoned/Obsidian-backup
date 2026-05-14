@@ -7,7 +7,7 @@ tags:
 
 Depression is an umbrella term for a variety of conditions some psychological and some physical, with complex feedback loops between biological and environmental aspects. Someone with a biologically impaired brained might not be able to cope with normal stressors in life. 
 
-The brain is just part of the body just like everything else and needs good diet, sleep and exercise to function properly. Exercise increases levels of BDNF, increases brain volume, improves brain connectivity, improves brain vascularity, improves brain mitochondrial health, lactate levels(which are healthy for the brain), SGK1 levels, etc. all of which are linked depression.
+The brain is part of the body just like everything else and needs good diet, sleep and exercise to function properly. Exercise increases levels of BDNF, increases brain volume, improves brain connectivity, improves brain vascularity, improves brain mitochondrial health, lactate levels(which are healthy for the brain), SGK1 levels, etc. all of which are linked depression.
 
 If someone's mental illness is due to to a physically impaired brain then it might be that no amount of "therapy" or drugs will help. If say it's due to poor mitochondrial health, they aren't going to fix that. Sure therapy and drugs might be useful in the short term to get someone back into a state where they can exercise, have a good diet and sleep. 
 
@@ -47,7 +47,8 @@ https://bjsm.bmj.com/content/early/2026/02/02/bjsports-2025-110301
 
 In terms of effect size, studies show that exercise is as good if not more effective than therapy or drugs.
 
->University of South Australia researchers are calling for exercise to be a mainstay approach for managing depression as a new study shows that physical activity is 1.5 times more effective than counselling or the leading medications. [https://www.unisa.edu.au/media-centre/Releases/2023/exercise-more-effective-than-medicines-to-manage-mental-health](https://www.unisa.edu.au/media-centre/Releases/2023/exercise-more-effective-than-medicines-to-manage-mental-health)
+>Physical activity is 1.5 times more effective at reducing mild-to-moderate symptoms of depression, psychological stress, and anxiety than medication or cognitive behavior therapy, according to the study’s lead author, Dr. Ben Singh.
+https://www.medicalnewstoday.com/articles/is-exercise-more-effective-than-medication-for-depression-and-anxiety
 
 >Four trials (n = 300) compared exercise with pharmacological treatment and found no significant difference (SMD -0.11, -0.34, 0.12). From [https://pubmed.ncbi.nlm.nih.gov/24026850/](https://pubmed.ncbi.nlm.nih.gov/24026850/)
 
@@ -97,7 +98,7 @@ There are some studies suggesting that diet has a causal impact of mental health
 [https://academic.oup.com/nutritionreviews/article-abstract/83/1/29/7536069?redirectedFrom=fulltext&login=false](https://academic.oup.com/nutritionreviews/article-abstract/83/1/29/7536069?redirectedFrom=fulltext&login=false)
 
 >Mendelian randomization studies suggest that obesity is a **causal risk factor** for elevated risk of depression. 
->[https://www.sciencedirect.com/science/article/abs/pii/S0022395623002200](https://www.sciencedirect.com/science/article/abs/pii/S0022395623002200)
+[https://www.sciencedirect.com/science/article/abs/pii/S0022395623002200](https://www.sciencedirect.com/science/article/abs/pii/S0022395623002200)
 
 >The diet may have a significant effect on preventing and treating depression for the individual. A diet that protects and promotes depression should consist of vegetables, fruits, fibre, fish, whole grains, legumes and less added sugar, and processed foods. In the public health nurse’s preventative and health-promoting work, support and assistance with changing people’s dietary habits may be effective in promoting depression.... The result included two randomized controlled trial (RCT) studies [[31](https://pmc.ncbi.nlm.nih.gov/articles/PMC7084175/#B31-ijerph-17-01616),[35](https://pmc.ncbi.nlm.nih.gov/articles/PMC7084175/#B35-ijerph-17-01616)] that we are able to demonstrate a causal relationship between diet and mental illness.
 >[https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7084175/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7084175/)
@@ -405,7 +406,6 @@ https://www.youtube.com/watch?v=**wNJEjojH7sE
 
 The brain is very complex, so we don't think something as simple as a chemical imbalance explains most mental conditions.
 
-
 >The main areas of serotonin research provide no consistent evidence of there being an association between serotonin and depression, and no support for the hypothesis that depression is caused by lowered serotonin activity or concentrations.
 [https://www.nature.com/articles/s41380-022-01661-0](https://www.nature.com/articles/s41380-022-01661-0)
 
@@ -428,7 +428,9 @@ The FDA label even make it clear that we aren't sure how they work.
 >The mechanism of action of citalopram is unclear
 >[https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf](https://www.accessdata.fda.gov/drugsatfda_docs/label/2022/020822s041lbl.pdf)
 
-
+[okhi2u](https://www.reddit.com/user/okhi2u/)
+>I like to joke that chemical imbalances are as legit as saying I have anxiety due to abnormal lack of alcohol in my blood disorder. Like yeah alcohol can be a stupid af way to feel less anxious, but the lack of alcohol is not the direct cause of the anxiety even if it kinda helps.
+>https://www.reddit.com/r/science/comments/1sq83r3/comment/oh8ww8n/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 ### Dangers
 
 They looked at antidepressant use broken down by race/ethnicity, and where there was an increase in use by say white people suicide rates increased. But say it was fairly steady in hispanic or black populations there wasn't an increase in suicide rates. You'd expect that the marginalised races/ethnicities would have have environmental issues resulting in larger increases in suicide over time than white people. 
@@ -449,6 +451,9 @@ In animal studies on monkeys, SSRIs have all kinds of negative effects both in b
 Coming off SSRI can be harder than heroin. 
 https://www.youtube.com/shorts/6GNbC-gXEKQ
 
+>I have been off it for over 5 years and still get brain zaps.
+https://www.reddit.com/r/science/comments/1sq83r3/comment/oh6zqyp/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+
 ### What would doctors or psychiatrists do and think?
 
 >79% of psychiatrists recommend immediate treatment with an antidepressant to an outpatient with depression, but only 39% of psychiatrists would immediately take an antidepressant if they personally had depression
@@ -463,7 +468,6 @@ https://www.youtube.com/shorts/6GNbC-gXEKQ
 
 
 >"Researchers at the Rand Corp. in 2002 surveyed close to 700 adults who had received a prescription for an antidepressant. Of those who reported receiving the [medication](https://www.psychologytoday.com/intl/basics/psychopharmacology) for [depression](https://www.psychologytoday.com/intl/basics/depression), just 20% tested positive when screened for the disease. Fewer than 30% of those receiving the medication had any depressive symptoms at all."
->
 Put another way, more than 70% of patients in the survey presented no medical need for antidepressant treatment, and a further 10% fell into a significant gray area, with an insufficient number of symptoms to warrant a [DSM](https://www.psychologytoday.com/intl/basics/dsm) diagnosis.
 [https://www.psychologytoday.com/intl/blog/side-effects/200905/overprescribing-antidepressants](https://www.psychologytoday.com/intl/blog/side-effects/200905/overprescribing-antidepressants)
 
@@ -548,3 +552,11 @@ Depressive symptoms are treated by sunlight exosure
 
 >Pre-treatment scans of brain activity predicted whether depressed patients would best achieve remission with an antidepressant medication or psychotherapy, in a study funded by the National Institutes of Health.
 https://www.nimh.nih.gov/news/science-updates/2013/scan-predicts-whether-therapy-or-meds-will-best-lift-depression
+
+# Toxic people r/thanksimcured
+
+Some people will always reject anything helpful and productive, it's been long documented. 
+
+>**MANIPULATIVE HELP-REJECTERS**
+>They actually seem the opposite of entitled; they appear to feel that no regimen will help. Appearing almost smugly satisfied, they return again and again to the office or clinic to report that, once again, the regimen did not work. Their pessimism and tenacious nay-saying appear to increase in direct proportion to the physician’s efforts and enthusiasm. When one of their symptoms is relieved, another mysteriously appears in its place. Apparently, what is sought is not relief of symptoms.
+>https://pubmed.ncbi.nlm.nih.gov/634331/

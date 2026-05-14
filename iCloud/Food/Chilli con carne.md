@@ -43,7 +43,7 @@ https://www.youtube.com/watch?v=pkPjD3UrYxE
 
 - 1 teaspoon Chipotle paste
 
-- 1/4 -1/2 bottle [Red wine](https://www.bigoven.com/article/details/red-wine) or red wine jus
+- 1/4 -1/2 bottle [Red wine](https://www.bigoven.com/article/details/red-wine) or red wine just
 
 - 380 ml Water
 
@@ -85,7 +85,7 @@ Add msg and 1 teaspoon of each cumin, turmeric, paprika and hot chilli powder an
 
 Add chipotle paste and a few shakes of Worcestershire sauce, Tabasco sauce and Chipotle sauce, a pinch of sugar.
 
-Add half a bottle of red wine or could use red wine jus.
+Add half a bottle of red wine or could use red wine just.
 
 Cook for 10min or so until the red wine has reduced a bit.
 
@@ -193,3 +193,10 @@ Only after searing do I cut it into stew-sized chunks. The chunks aren’t brown
 Once you’re finished simmering, you’ll wind up with incredibly tender, juicy chunks of meat that are deeply meaty with rich, well-browned flavors.
 
 From <[https://www.allrecipes.com/how-to-make-stew-meat-tender-7273984](https://www.allrecipes.com/how-to-make-stew-meat-tender-7273984)>
+
+# Why Restaurant Ragu Tastes So Much Better
+https://www.youtube.com/watch?v=-xT57w8ZS8U
+
+Add some vinegar not much just a touch
+Add milk at the beginning when cooking meat and then again at the end.
+Add butter at the end.

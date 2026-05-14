@@ -285,14 +285,14 @@ Based on Google paper on MapReduce
 Open source tools
 
 - Mapreduce: Processing using different languages
-- Hive & Drill: Analytical SQL on aDoop
+- Hive & Drill: Analytical SQL on Haooop
 - Mahout & Spark Mlib: Machine learning
 - PIG: Scripting
 - Hbase: NoSQL database
 - Zookeeper & Ambari: Management and coordination
 - Spark: In-memory, data flow engine
 - Kafka & Storm: streaming
-- Solar & Lucene: Searchign and indexing
+- Solar & Lucene: Searching and indexing
 - Ooxie: Scheduling
 - YARN: Resource management
 - Storage: Hadoop Distributed File System (HDFS)

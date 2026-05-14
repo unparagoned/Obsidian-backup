@@ -14,7 +14,14 @@ In relativity, there is no objective, universal "now". What one observer conside
 
 # Black holes
 
-# What Really Happens If You Fall Into an Evaporating Black Hole?
+## What Really Happens If You Fall Into an Evaporating Black Hole?
 https://www.youtube.com/watch?v=kRIDi-no1BI
 
 Maybe you can't ever fall into a black hole since it will evaporate before you cross the event horizon.
+
+##  The most misunderstood idea about black holes! (I finally get it)
+https://www.youtube.com/watch?v=lZrW5cGl1fU
+
+- When falling into a black hole, he doesn't see all the future of the world
+- From outside you do see someone freeze and never enter.
+- 

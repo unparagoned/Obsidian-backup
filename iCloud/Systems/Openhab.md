@@ -21,3 +21,10 @@ Try Home Assistant, I think that's where I got the stuff for the script in the f
 
 # Debian
 Make sure you get the DVD iso, the min distro couldn't connected to network and has no GUI making it hard to fix things.
+
+# Debugging
+
+# Alexa doesn't connect
+
+If https://myopenhab.org is offline then restart and it might take a while for this to work
+`sudo systemctl status openhab.service`

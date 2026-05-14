@@ -1,12 +1,31 @@
 #qm
 # Collapse
 
-Say you have a double slit experiment but put polarisers perpendicularly aligned across the slits, the the interference pattern goes away. People often say it's the interaction between the photon and the polariser which collapses the wavefunction. But if the polarisers across a double slit are aligned you get the interference pattern. So you have the photon interacting with the polariser but no collapse, so if that's not it what is it. 
+Say you have a double slit experiment but put polarisers perpendicularly aligned across the slits, the the interference pattern goes away. People often say it's the interaction between the photon and the polariser which collapses the wavefunction. But if the polarisers across a double slit are aligned you get the interference pattern. So you have the photon interacting with the polariser but no collapse.
 
 >Only if θ= π/2 do our pair of polarizers act as “which way” detectors. In this case slit “1” will only allow vertically polarized photons to pass through wile slit “2” admits only horizontally polarized photons, so that no interference pattern emerges, as can be seen from eq. (7). For θ ̸= π/2, then a vertically polarized photon can in principle pass through either slit and an interference pattern results; superimposed on this interference pattern for vertically polarized photons is a diﬀraction pattern for horizontally polarized photons which only pass through one slit.
 https://arxiv.org/pdf/1110.4309
 
 Also the usual experiment people use is the quantum eraser experiment. Where adding a polariser after the perpendicular polarisers brings back the interference pattern. But if the perpendicular polarisers collapsed the wavefunction it should be possible to bring it back. 
+
+
+# Schrödinger’s cat
+
+The answer depends on your interpretation of QM.
+
+Copenhagen interpretation, doesn't have an answer. The point in the thought experiment was the poke holes in the Copenhagen interpretation and it works. It's not clear what happens, since the Copenhagen interpretation never defines when or why a wavefunction collapses. The wavefunction collapse in the Copenhagen interpretation has never been established, it's not testable even in theory. 
+
+Objective collapse. This is where a physical interaction causes a real collapse. This is like Penrose theory that when the gravity gets large enough it causes a wavefunction collapse. So there is actual physics around something that physically causes the wavefunction to collapse. This is nice in that it makes testable predictions, but so far every experiment has failed and people don't really expect it to pan out. I think the double slit polarizer experiments cause issues for this. If the polarizers are perpendicular the interference disappears, and it's often claimed the polarizer interacts with the photon physically causing a collapse. But if the polaizers are aligned you have the interference pattern so it's not the physical interaction with the polaizer which causes a collapse. 
+
+Superdeterminism, the cat is either alive or dead, never in a superposition.
+
+Everett. Since there is no evidence for the wavefunction collapse postulates, it just drops that postulate. Basically everything obeys the same laws of physics, a cat or person isn't magical or different and have their own rules. So the cat becomes a superposition of half alive and half dead, but there is decoherence meaning the two parts don't interact. Then when a human views the cat they becomes a superposition as well of seeing half alive and half dead. It uses the foundation that most other interpretations have, but they add in an unproven postulate to get rid of the superposition state whereas this doesn't. 
+
+
+
+
+
+
 # MWI
 #mwi
 

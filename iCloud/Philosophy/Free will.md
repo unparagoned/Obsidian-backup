@@ -21,6 +21,10 @@ Lay people have incoherent views around free will, but if you properly probe it 
 In one of the first studies, Nahmias et al. (2006) asked participants to imagine that, in the next century, humans build a supercomputer able to accurately predict future human behavior on the basis of the current state of the world. Participants were then asked to imagine that, in this future, an agent has robbed a bank, as the supercomputer had predicted before he was even born. In this case, 76% of participants answered that this agent acted of his own free will, and 83% answered that he was morally blameworthy. These results suggest that most participants have compatibilist intuitions, since most answered that this agent could act freely and be morally responsible, despite living in a deterministic universe.
 [https://philpapers.org/archive/ANDWCI-3.pdf](https://philpapers.org/archive/ANDWCI-3.pdf)
 
+>our results suggest that if people are persuaded that the universe is deterministic, they will not end up concluding that human beings are never morally responsible. Instead, it seems that they will simply conclude that moral responsibility is compatible with determinism.
+https://philpapers.org/archive/CHAIBI-2.pdf
+
+
 >Despite the fact that dualism was most strongly related to general free will beliefs, the latter were at least partly explained by libertarian and compatibilist beliefs as well. Evidently, these theories are not mutually exclusive in the eyes of the general public [23].
 [https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0221617](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0221617)
 
@@ -42,7 +46,15 @@ Most philosophers are compatibilist and it's not by a small amount, about five t
 
 Free almost never means free from everything, we almost always mean free in a specific respect. So we use the word free in physics, chemistry, biology, psychology, sports, etc. Just like those uses the free in free will, isn't about freedom from determinism.
 
+# Could have done otherwise
 
+When people say I could have done otherwise they usually mean in the sense of their mindstate being different with say hindsight. So yes if you rewind things and change the brain state of a person they might choose otherwise.
+
+So if someone asks if you want chocolate or vanilla ice cream and you choose chocolate. If you rewind time and change your mindstate to want vanilla, and with that change if you could pick vanilla then that's free. 
+
+Or in the legal sense I really like, "could a reasonable person in that situation have chosen otherwise". We might ask if we rewind time could a reasonable person have chosen vanilla, yes.
+
+In every situation the mind state in the "could have done otherwise" is different, and if a different mind state could choose a different action then it's free. Free will is about the ability to act on your desires, it's not about determining your desires.
 
 # Voluntary and involuntary
 

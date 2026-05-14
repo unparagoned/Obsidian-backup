@@ -1,8 +1,8 @@
-#rhondrapatrick #bdnf #exercise #omega3 
+#rhondrapatrick #bdnf #exercise #omega3 #foundmyfitness
 
 Overall good, but oversells some stuff a bit too much. 
 
-
+She is religious
 
 
 

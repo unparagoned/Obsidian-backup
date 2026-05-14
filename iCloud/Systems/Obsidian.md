@@ -36,3 +36,8 @@ https://www.reddit.com/r/ObsidianMD/comments/1s1qah7/how_i_manage_tasks_with_obs
 - [[learn how to use tasks 🔽]]
 
 - [[new tasks]]
+# Claud code integration
+
+https://www.youtube.com/watch?v=OSZdFnQmgRw
+
+Basically use claude to create wiki for notes, which then makes it easy for it to navigate and grab the right documents so it doesn't need to read or scan every file. 

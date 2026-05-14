@@ -9,3 +9,11 @@ Isreal tried to get Obama and Bidden to attack Iran, but they weren't stupid or 
 
 ![[Pasted image 20260319182545.png]]
 ![[Pasted image 20260321212106.png]]![[Pasted image 20260322134334.png]]
+
+
+
+
+
+https://www.youtube.com/shorts/NjgMR-IsOGQ
+Trump trying to increase levels of roundup and get them out from lawsuits
+

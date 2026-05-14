@@ -192,3 +192,69 @@ So this Nema meta which your tic tocker brings up as suggesting that actually th
  
 I'm not going to look at every meta review in detail, but I expect similar results. The vast majority of studies are on aspartame hence I don't expect general metas to really get at saccharin and sucralose. Sweeteners are completely different chemicals which work in different kinds of ways, you just can't lump them all together. But if there is a specific meta which does say that saccharin and sucralose don't have a negative impact on glycaemic response let me know.
   The point around period is fair criticism for this cell study. But that meta your doctor referred to did cover a longer period and did suggest that it's a long term problem.
+
+# Sucralose
+
+[
+
+![[3db0fe169c2b48841182c9acd7a37ab2_MD5.jpg]]
+
+Go to ScientificNutrition](https://www.reddit.com/r/ScientificNutrition/)
+
+[r/ScientificNutrition](https://www.reddit.com/r/ScientificNutrition/)•7mo ago
+
+[Acrobatic_Golf9325](https://www.reddit.com/user/Acrobatic_Golf9325/)
+
+# What is the Scientific Consensus on Sucralose? (and other artificial sweeteners)
+
+Upon reviewing some studies on sucralose, I'm confused as to why MDs (except Peter Attia) think they're very safe when there are human studies showing they cause harm that I will link below.
+
+Post prandial glucose responses / decreased insulin sensitivity:
+
+[Sucralose affects glycemic and hormonal responses to an oral glucose load - PubMed](https://pubmed.ncbi.nlm.nih.gov/23633524/)
+
+[Sucralose decreases insulin sensitivity in healthy subjects: a randomized controlled trial - PubMed](https://pubmed.ncbi.nlm.nih.gov/30535090/)
+
+[Effects of sucralose on insulin and glucagon-like peptide-1 secretion in healthy subjects: a randomized, double-blind, placebo-controlled trial - PubMed](https://pubmed.ncbi.nlm.nih.gov/30005329/)
+
+[A Single 48 mg Sucralose Sip Unbalances Monocyte Subpopulations and Stimulates Insulin Secretion in Healthy Young Adults - PubMed](https://pubmed.ncbi.nlm.nih.gov/31183389/)
+
+[Chronic sucralose consumption induces elevation of serum insulin in young healthy adults: a randomized, double blind, controlled trial - PubMed](https://pubmed.ncbi.nlm.nih.gov/32284053/)
+
+Sucralose's affect on the hypothalamus/sweet cravings:
+
+[Non-caloric sweetener effects on brain appetite regulation in individuals across varying body weights - PubMed](https://pubmed.ncbi.nlm.nih.gov/40140714/)
+
+[Dietary sugars and non-caloric sweeteners elicit different homeostatic and hedonic responses in the brain - PubMed](https://pubmed.ncbi.nlm.nih.gov/30529886/)
+
+[Brain activity and connectivity changes in response to nutritive natural sugars, non-nutritive natural sugar replacements and artificial sweeteners - PubMed](https://pubmed.ncbi.nlm.nih.gov/31288630/)
+
+[Short-Term Consumption of Sucralose with, but Not without, Carbohydrate Impairs Neural and Metabolic Sensitivity to Sugar in Humans - PubMed](https://pubmed.ncbi.nlm.nih.gov/32130881/)
+
+Microbiome:
+
+[Ten-Week Sucralose Consumption Induces Gut Dysbiosis and Altered Glucose and Insulin Levels in Healthy Young Adults - PubMed](https://pubmed.ncbi.nlm.nih.gov/35208888/)
+
+[Personalized microbiome-driven effects of non-nutritive sweeteners on human glucose tolerance: Cell](https://www.cell.com/cell/fulltext/S0092-8674%2822%2900919-9?utm_source=chatgpt.com)
+
+[Synthetic vs. non-synthetic sweeteners: their differential effects on gut microbiome diversity and function - PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC12119465/?utm_source=chatgpt.com)
+
+[https://pubmed.ncbi.nlm.nih.gov/40742298/](https://pubmed.ncbi.nlm.nih.gov/40742298/)
+
+Additional studies:
+
+[https://pubmed.ncbi.nlm.nih.gov/38541649/](https://pubmed.ncbi.nlm.nih.gov/38541649/)
+
+[https://pubmed.ncbi.nlm.nih.gov/37246822/](https://pubmed.ncbi.nlm.nih.gov/37246822/)
+
+[https://pmc.ncbi.nlm.nih.gov/articles/PMC11510020/?utm](https://pmc.ncbi.nlm.nih.gov/articles/PMC11510020/?utm)
+
+[https://pmc.ncbi.nlm.nih.gov/articles/PMC6221534/?utm](https://pmc.ncbi.nlm.nih.gov/articles/PMC6221534/?utm)
+
+New 2025 sucralose studies:
+
+[https://pubmed.ncbi.nlm.nih.gov/40907790/](https://pubmed.ncbi.nlm.nih.gov/40907790/)
+
+[https://pubmed.ncbi.nlm.nih.gov/41451263/](https://pubmed.ncbi.nlm.nih.gov/41451263/)
+
+https://www.reddit.com/r/ScientificNutrition/comments/1n1quuu/what_is_the_scientific_consensus_on_sucralose_and/
