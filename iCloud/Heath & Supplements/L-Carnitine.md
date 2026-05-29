@@ -1,11 +1,17 @@
 # Summary
 
+Probably not worth it, not much benefit for most people.
+
 Lots of goof effects for the body.
 
 Mostly broken down during digestion, so not much actually makes it to the muscle
 
 Small amount of fat loss as well
 
+
+## GPT
+Potential downside people ignore:  
+Gut bacteria can convert carnitine into TMAO, which has been associated with cardiovascular risk markers. The evidence is mixed and not “L-carnitine is dangerous,” but it’s another reason not to treat it like a miracle supplement.
 # Notes
 
 [How Foods and Nutrients Control Our Moods | Huberman Lab Podcast #11](https://www.youtube.com/watch?v=XfURDjegrAw)

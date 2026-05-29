@@ -84,3 +84,15 @@ If you look internally at what's happening when it hallucinates it's different t
 >Can LLMs Predict Their Own Failures? Self-Awareness via Internal Circuits
 >We introduced Gnosis, a lightweight mechanism that allows frozen LLMs to detect their own errors by interpreting internal hidden and attention traces rather than relying on external judges
 >https://arxiv.org/abs/2512.20578
+
+
+# Ability to use understand and use new words
+
+>>wertwert is the act of transferring a substance onto something else and is visible. poipoi is the act of removing any secondary substance on another substance. a jkljkl is a white substance. a iopiop is a graphite substance that can wertwert. a asdads is a rubbery substance that can poipoi. If I want to make an image by wertwert onto a jkljkl, what of the defined objects would I use?
+
+>You would use a **iopiop** to wertwert onto a **jkljkl**.
+Based on the definitions:
+>- **wertwert** = transferring a visible substance onto something else
+>- **jkljkl** = a white substance
+>- **iopiop** = a graphite substance that can wertwert
+So the graphite substance is the thing that performs the visible transfer onto the white surface. The **asdads** is for removing marks, not making them.

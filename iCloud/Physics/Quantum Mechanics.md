@@ -49,6 +49,10 @@ https://www.reddit.com/r/seancarroll/comments/1r1j980/comment/o4qrkpv/?utm_sourc
 >It is commonly thought that observers in distinct branches of an Everettian multiverse cannot communicate without violating the linearity of quantum theory. Here we show a counterexample, demonstrating that inter-branch communication is in fact possible, entirely within standard quantum theory. We do this by considering a Wigner's-friend scenario, where an observer (Wigner) can have quantum control over another observer (the friend). We present a thought experiment where the friend in superposition can receive a message written by a distinct copy of themselves in the multiverse, with the aid of Wigner. To maintain the unitarity of quantum theory, the observers must have no memory of the message that they sent. Our thought experiment challenges conventional wisdom regarding the ultimate limits of what is possible in an Everettian multiverse. It has a surprising potential application which involves using knowledge-creation paradoxes for testing Everettian quantum theory against single-world theories.
 https://arxiv.org/abs/2601.08102
 
+## Solo: Looking Quantum Mechanics in the Eyeball | Mindscape 355
+https://www.youtube.com/watch?v=b-d-5z3CUxQ
+Like in relativity coordinates are arbitrary and not reality. Similarly in QM position and momentum are just useful coordinates, what is real is the wavefunction.
+
 
 # Basics
 

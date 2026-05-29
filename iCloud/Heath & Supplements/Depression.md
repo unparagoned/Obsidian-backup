@@ -27,8 +27,7 @@ https://www.sciencedirect.com/science/article/pii/S001094522300151X
 
 There are good strong causal studies showing that exercise reduces anxiety and depression.
 
->Aerobic exercises, including jogging, swimming, cycling, walking, gardening, and dancing, **have been proved to reduce anxiety and depression**.3 These improvements in mood are proposed to be caused by exercise-induced increase in blood circulation to the brain and by an influence on the hypothalamic-pituitary-adrenal (HPA) axis and, thus, on the physiologic reactivity to stress.3 This physiologic influence is probably mediated by the communication of the HPA axis with several regions of the brain, including the limbic system, which controls motivation and mood; the amygdala, which generates fear in response to stress; and the hippocampus, which plays an important part in memory formation as well as in mood and motivation.
-
+>Systematic reviews with meta-analyses of randomised controlled trials...Aerobic exercises, including jogging, swimming, cycling, walking, gardening, and dancing, **have been proved to reduce anxiety and depression**.3 These improvements in mood are proposed to be caused by exercise-induced increase in blood circulation to the brain and by an influence on the hypothalamic-pituitary-adrenal (HPA) axis and, thus, on the physiologic reactivity to stress.3 This physiologic influence is probably mediated by the communication of the HPA axis with several regions of the brain, including the limbic system, which controls motivation and mood; the amygdala, which generates fear in response to stress; and the hippocampus, which plays an important part in memory formation as well as in mood and motivation.
 >In conclusion, PA is effective for improving depression and anxiety across a very wide range of populations. All PA modes are effective, and higher intensity is associated with greater benefit. 
 [https://bjsm.bmj.com/content/early/2023/03/02/bjsports-2022-106195](https://bjsm.bmj.com/content/early/2023/03/02/bjsports-2022-106195)
 
@@ -303,7 +302,7 @@ Maybe it's related to Shor Chain Fatty Acids(SCFA)
 
 >Depressive symptoms were related to pessimistic bias and inaccuracy in predictions.
 >https://www.sciencedirect.com/science/article/pii/S0005796726000112?via%3Dihub
-# Social/environmental impacts
+# Social/environmental factors
 
 While environmental factors will have some impact, it doesn't look like stuff like isolation cause a large measurable physical impact on the brain.
 
@@ -433,7 +432,14 @@ The FDA label even make it clear that we aren't sure how they work.
 >https://www.reddit.com/r/science/comments/1sq83r3/comment/oh8ww8n/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 ### Dangers
 
-They looked at antidepressant use broken down by race/ethnicity, and where there was an increase in use by say white people suicide rates increased. But say it was fairly steady in hispanic or black populations there wasn't an increase in suicide rates. You'd expect that the marginalised races/ethnicities would have have environmental issues resulting in larger increases in suicide over time than white people. 
+It seems like every other treatment for depression significantly reduces suicide attempts, but the standard care of SSRIs doesn't. 
+
+>Our primary analysis found that Cognitive therapy (CT) (OR=0.19, 95%CI =0.04-0.81), Dialectical Behavior Therapy (DBT) (OR=0.37, 95%CI =0.13-0.97), Cognitive-behavioral therapy (CBT) (OR=0.42, 95%CI =0.17-0.99), and Brief intervention and contact (BIC) (OR=0.65, 95%CI=0.44-0.94) were superior to TAU (within the longest available follow-up time) in preventing suicide attempts,
+>https://pubmed.ncbi.nlm.nih.gov/38219553/
+
+Now you also need to realise pretty much all the studies on SSRIs are short term so aren't really long enough to show any signal, but I suspect if it did help with suicide they would definitely do those long term studies, maybe it's that the signal would be the other way around.
+
+They tracked SSRI and suicide rates over time. And as you'd expect they tracked fairly well. No surprise there. But they also split it by race and certain races had increasing SSRI use over time and increased suicide rates over time and others has fairly steady SSRI usage and steady suicide rates. Now the interesting bit was that it was hispanic and black populations who had absolute lower suicide rates and they had been consistent over time. They are generally discriminated against more and of lower social class and are more distrusting of the psychological industry. It was the white people who are more accepting of the psychological industry who had absolute higher suicide rates and that had increased drastically over time.  
 
 ![[Pasted image 20260122192729.png]]
 >The results of our analysis consistently demonstrated positive trends for both antidepressant prescription prevalence and suicide rates over time as well as positive associations between them.
@@ -552,6 +558,14 @@ Depressive symptoms are treated by sunlight exosure
 
 >Pre-treatment scans of brain activity predicted whether depressed patients would best achieve remission with an antidepressant medication or psychotherapy, in a study funded by the National Institutes of Health.
 https://www.nimh.nih.gov/news/science-updates/2013/scan-predicts-whether-therapy-or-meds-will-best-lift-depression
+
+>This pilot study introduces a personalized, data-driven approach to treating depression. We use smartwatches and brief daily surveys to track a participant's lifestyle, and leverage machine learning to identify the domain (sleep, exercise, diet, social) that impacts their mood most. Instead of a "one-size-fits-all" therapy, this method allows patients to focus on a specific lifestyle aspect that will have the biggest impact on their mental health. Our results show that this targeted approach successfully reduces ymptoms of depression.
+https://www.nature.com/articles/s44277-026-00062-3.epdf?sharing_token=4w5pDnH1E_K0HA5ad5Kb3tRgN0jAjWel9jnR3ZoTv0PgqsxbR8BwTp9maOIsLkMjRHAtZQiVAlzwJfrIC-ZTM75I1hOTs-cgKKQOP3UJYQ4AslhfHIOjpC43Fv2TQnaQi87aSGdyaS6-_b5nSLwOz0Hy7Hx3CePT83vpOq-Bfjk%3D
+# Impacts
+
+>These findings indicate that depression can reshape autobiographical memory of adversity, probably via negative emotional processing and memory bias. This highlights the need to account for depression-driven distortions when assessing trauma history, and suggests that alleviating depressive symptoms may reduce trauma-related distress.
+https://www.nature.com/articles/s44220-025-00580-7
+
 
 # Toxic people r/thanksimcured
 

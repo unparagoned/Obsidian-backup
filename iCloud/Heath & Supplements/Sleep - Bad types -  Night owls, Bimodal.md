@@ -148,6 +148,7 @@ People often refer to this study but it's really just talking about people being
 [https://royalsocietypublishing.org/doi/10.1098/rspb.2017.0967](https://royalsocietypublishing.org/doi/10.1098/rspb.2017.0967)
 
 # Bimodal sleep
+If it was true we'd see it in indigenous populations. 
 
 > I was particularly surprised by the discovery reported by Yetish et al.[1](https://pmc.ncbi.nlm.nih.gov/articles/PMC4763365/#B1) that the members of all three of these equatorial societies did not “regularly awaken for extended periods in the middle of the night.” In short, these individuals did not experience a “bimodal sleep pattern.”
 [https://pmc.ncbi.nlm.nih.gov/articles/PMC4763365/](https://pmc.ncbi.nlm.nih.gov/articles/PMC4763365/)

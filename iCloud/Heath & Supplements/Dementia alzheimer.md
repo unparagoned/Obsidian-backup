@@ -15,7 +15,7 @@ Some mechanisms for the sleep drug and dementia here
 >An online lifestyle intervention program aimed at improving diet, exercise and other modifiable risk factors for dementia has resulted in better cognition in older adults, Australian research has found.  
 [https://www.abc.net.au/news/health/2025-01-29/dementia-cognition-memory-clinical-trial-internet-brain-decline/104868518](https://www.abc.net.au/news/health/2025-01-29/dementia-cognition-memory-clinical-trial-internet-brain-decline/104868518)
 
-It might be related to chicken pox/shingles which stays hidden in your body but might be doing damage over time.
+It might be related to chicken pox/shingles which stays hidden in your body but might be doing damage over time. The vaccine also helped with heart disease.
 
 >this study provides evidence of a dementia-preventing or dementia-delaying effect from zoster vaccination
 >https://www.nature.com/articles/s41586-025-08800-x

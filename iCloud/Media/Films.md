@@ -1,0 +1,2 @@
+# Perfect Blue
+Too many twists and overlapping bits. Like the film she was staring in had the same overlap as the actual film and it wasn't clear what was going on. There was no way to watch it and just understand what's going on. 

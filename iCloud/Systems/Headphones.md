@@ -9,6 +9,8 @@ The normal headphones make the clicking sound from the toy much louder - with so
 # Apple
 Apples earphones don't have that issue sony had.
 
+If the sound cancellation gets worse, make sure you properly clean them all properly, the speakers and all the mics. 
+
 # SomniPods 3
 
 Supposed to be good sleep/noise cancelling earbuds that you can sleep on your side with.

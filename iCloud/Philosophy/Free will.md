@@ -149,7 +149,7 @@ Various studies
 
 # Incompatibilists accept we use compatibilism in real life
 
-Here Alex/cosmic sceptic admits that when it comes to courts or daily interactions it's compatibilists free will people use. But he is talking about something different.
+Here [[Alex O'Connor]]/cosmic sceptic admits that when it comes to courts or daily interactions it's compatibilists free will people use. But he is talking about something different.
 
 >we're talking about Free Will and determinism compatibilism there are different kinds of compatibilists and all that compatibilism is is the compatibility…
 >so on a practical level when it comes to our laws when it comes to the way that we interact with each other we can use this Free Will and and I think people do they use the term free will to describe something like that something like your actions coming from within you but if we're interested in philosophy if we're interested in what's actually happening what's really going on

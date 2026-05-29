@@ -319,8 +319,14 @@ Here's how it's done.
 5. An additional tip: Breathe in as you come up with the word. Breathe out as you visualise the word. If it takes longer to visualise the word, you'll be giving yourself lovely long out breaths which will calm your body.
 https://www.antenatalandpostnatalpsychology.com.au/information-posts/mind-too-busy-to-sleep-do-the-cognitive-shuffle
 
-## Supplements
+## Supplements/Foods
 
+### Kiwi
+
+Some basic evidence.
+
+>The results demonstrated a positive impact of kiwifruit consumption on key aspects of sleep and recovery in elite athletes. From baseline to post-intervention, there were clinically significant improvements in sleep quality
+>https://pmc.ncbi.nlm.nih.gov/articles/PMC10220871/
 ### Magnesium
 #magnesium
 
@@ -406,7 +412,7 @@ No real evidence
 ### Valerian
 #valerian
 
-Some evidence it works but it's weak and there isn't strong evidence it's good.
+Some evidence it works but not strong evidence.
 
 >The qualitative dichotomous results suggest that valerian would be effective for a subjective improvement of insomnia, although its effectiveness has not been demonstrated with quantitative or objective measurements.
 https://www.sciencedirect.com/science/article/abs/pii/S1389945710001000
