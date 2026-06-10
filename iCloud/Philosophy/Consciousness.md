@@ -30,6 +30,15 @@ So you believe in Kastrup's analytical idealism, that means you think the brain 
 
 But what if on that computer you run the a simulation of physics of say a brain. That simulation would act just like a real human, and talk about its phenomenal consciousness. But wouldn't the mental activity giving rise to a computer be different than what the simulation is saying it's experiencing?
 
+## Kastrup
+
+>It can be summarized as follows: there is only cosmic consciousness. We, as well as all other living organisms, are but dissociated alters of cosmic consciousness, surrounded by its thoughts.
+>The living organisms we share the world with are the extrinsic appearances of other dissociated alters.
+[https://www.ingentaconnect.com/contentone/imp/jcs/2018/00000025/f0020005/art00006](https://www.ingentaconnect.com/contentone/imp/jcs/2018/00000025/f0020005/art00006)
+
+>As such, the significant self-transcending experiences that follow psychedelic intake are—counterintuitively—accompanied by reductions of brain activity.
+[https://philpapers.org/archive/KASAIA-3.pdf](https://philpapers.org/archive/KASAIA-3.pdf)
+
 # Panpsychism
 #panpsychism
 

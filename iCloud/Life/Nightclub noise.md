@@ -9,3 +9,6 @@
 2026-05-16 One song woke me up, otherwise good
 2026-05-22 No noise, good
 2026-05-24 One song at ~01:30 woke me up.
+2026-05-30 2am woke up bass, need air plugs
+2026-05-30 11pm loud, needed air plugs but could still hear it
+

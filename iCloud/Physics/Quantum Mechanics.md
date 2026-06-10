@@ -34,10 +34,14 @@ https://arxiv.org/html/2510.26562v1
 # Born rule
 #bornrule
 
+
+
 You can derive the Born rule, as being the only way probabilities work with certain assumptions
 https://www.youtube.com/watch?v=PZUZgOUOOIU
 
-Maybe related to Gleason's Theorem 
+
+Gleason’s theorem is often used in discussions of MWI as a route to the Born rule: it shows that, under noncontextuality and standard Hilbert-space assumptions, the only consistent probability assignments are given by the Born rule P=⟨ψ∣Π∣ψ⟩P=⟨ψ∣Π∣ψ⟩
+
 
 >The standard approach OP is referencing, can be found starting at p71 of Hugh Everett's thesis [here](https://cqi.inf.usi.ch/qic/everett_phd.pdf). Carroll/Sebens don't add that much to what Everett wrote, IMO, apart from emphasizing the interpretation of where the probabilities are coming from as arising from self-locating uncertainty, though I think arguably this was implicit in Everett's thesis. Mathematically, there is no question about the Born rule being the only one that is possible. This is what Everett showed in the above link, and what Gleason and others [proved](https://en.wikipedia.org/wiki/Gleason%27s_theorem) around the same time.
 >The real question that remains, that I think OP is gesturing at, is not whether _mathematically_ the rule must be Born, but intuitively and conceptually, why the wave function amplitude _is not itself the thing we should count_when we measure the "volume of branches." Yes we can imagine more than merely two or three observers -- we can break any wave function into a million delta-function spikes corresponding to any arbitrary number of observers, if that helps. But that doesn't address the core difficulty, which is: why can't we just "count up" the wave function amplitude, if that is what the observers are made of!
@@ -49,6 +53,8 @@ https://www.reddit.com/r/seancarroll/comments/1r1j980/comment/o4qrkpv/?utm_sourc
 >It is commonly thought that observers in distinct branches of an Everettian multiverse cannot communicate without violating the linearity of quantum theory. Here we show a counterexample, demonstrating that inter-branch communication is in fact possible, entirely within standard quantum theory. We do this by considering a Wigner's-friend scenario, where an observer (Wigner) can have quantum control over another observer (the friend). We present a thought experiment where the friend in superposition can receive a message written by a distinct copy of themselves in the multiverse, with the aid of Wigner. To maintain the unitarity of quantum theory, the observers must have no memory of the message that they sent. Our thought experiment challenges conventional wisdom regarding the ultimate limits of what is possible in an Everettian multiverse. It has a surprising potential application which involves using knowledge-creation paradoxes for testing Everettian quantum theory against single-world theories.
 https://arxiv.org/abs/2601.08102
 
+>We provide a derivation of the Born Rule in the context of the Everett (Many-Worlds) approach to quantum mechanics. Our argument is based on the idea of self-locating uncertainty: in the period between the wave function branching via decoherence and an observer registering the outcome of the measurement, that observer can know the state of the universe precisely without knowing which branch they are on. We show that there is a uniquely rational way to apportion credence in such cases, which leads directly to the Born Rule. Our analysis generalizes straightforwardly to cases of combined classical and quantum self-locating uncertainty, as in the cosmological multiverse.
+>https://arxiv.org/abs/1405.7907
 ## Solo: Looking Quantum Mechanics in the Eyeball | Mindscape 355
 https://www.youtube.com/watch?v=b-d-5z3CUxQ
 Like in relativity coordinates are arbitrary and not reality. Similarly in QM position and momentum are just useful coordinates, what is real is the wavefunction.
@@ -67,3 +73,24 @@ Electrons have angular momentum when rotating in a atom.
 
 The static picture is due to rotations cancelling out. 
 
+# QFT
+
+### Where is the Hilbert space?
+
+A quantum field is an operator attached to every spacetime point, and particles are quantized excitations of those fields. The Hilbert space contains all possible excitation states of the fields.
+
+The Hilbert space still exists.
+
+In fact QFT is often defined as:
+
+1. A Hilbert space HH
+2. A collection of field operators ϕ^(x)ϕ^​(x)
+3. Rules relating them (commutation relations, dynamics, symmetries)
+
+The fields act on the Hilbert space.
+
+So schematically:
+
+ϕ^(x):H→Hϕ^​(x):H→H
+
+for every spacetime point xx.

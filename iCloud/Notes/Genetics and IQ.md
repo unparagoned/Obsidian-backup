@@ -16,19 +16,15 @@
 &#x200B;
 
 >Intelligence is a heritable trait, with twin- and family-based estimates of heritability indicating that between 50–80% of differences in intelligence can be explained by genetic factors  …
-
 >First, we found 187 independent associations for intelligence in our GWAS, and highlighted the role of 538 genes being involved in intelligence 
-
 >[https://www.nature.com/articles/s41380-017-0001-5](https://www.nature.com/articles/s41380-017-0001-5)
 
 &#x200B;
 
 >Nowadays, it is generally accepted that the heritability of intelligence increases from about 20% in infancy to perhaps 80% in later adulthood ([Plomin et al. 2014](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7709590/#B17-jintelligence-08-00041); [Plomin and Deary 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7709590/#B16-jintelligence-08-00041))
-
 [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7709590/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7709590/)
 
 >The main influence on IQ variation was genetic. Controlled for scale unreliability, additive genetic effects accounted for 67% of the population variance. 
-
 >[https://www.sciencedirect.com/science/article/abs/pii/S1041608007000982](https://www.sciencedirect.com/science/article/abs/pii/S1041608007000982)
 
 &#x200B;
@@ -40,7 +36,6 @@
 &#x200B;
 
 >These are "big" findings, both in terms of effect size and potential impact on psychological science, such as linearly increasing heritability of intelligence from infancy (20%) through adulthood (60%).
-
 [https://pubmed.ncbi.nlm.nih.gov/26817721/](https://pubmed.ncbi.nlm.nih.gov/26817721/)
 
 &#x200B;

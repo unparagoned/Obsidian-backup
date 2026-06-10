@@ -27,6 +27,11 @@ UPF is associated with worse health metrics, even when trying to control for thi
 Regardless of sex, high UPF consumption in individuals at risk for KOA was associated with higher muscle fat content on thigh MRI scans.
 https://pubs.rsna.org/doi/10.1148/radiol.251129
 
+Even when controlling for food quality the issue with UPF remains.
+
+>UPF consumption is associated with adverse risk factors, disease conditions, and all-cause  
+mortality, only partly explained by nutritional quality.
+https://ajph.aphapublications.org/doi/epdf/10.2105/AJPH.2026.308499
 # Emulsifiers
 
 >The present study provides direct evidence on the detrimental effects of food emulsifiers P20 and P80 on intestinal epithelial integrity. 

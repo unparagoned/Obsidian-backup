@@ -401,6 +401,15 @@ https://pmc.ncbi.nlm.nih.gov/articles/PMC4172306/
 A detailed video from someone who worked for the FDA, explains how the science around SSRIs doesn't really show what you've been told. [[Dr. Josef]]
 https://www.youtube.com/watch?v=**wNJEjojH7sE
 
+
+In the latest studies drugs seems to be very effective, but when they are compared against they have lower effectiveness. Which suggests something is misleading or wrong about those initial studies showing how effective they are.
+
+>Within the head-to-head comparisons, when a treatment was the novel or experimental drug of comparison, it appeared to be significantly more effective than when that same treatment was the older or control drug of comparison (difference 1·18-times, 95% CrI 1·09–1·27). Adjusting for this novelty effect diminished the differences between antidepressants.
+>https://www.thelancet.com/article/S0140-6736(17)32802-7/fulltext
+
+
+ >We included 29 double-blind randomized trials in our analysis. The findings suggest that SSRIs primarily offer short-term protection against suicidal ideation... However, their long-term effectiveness in mitigating suicidal ideation and preventing suicidal behaviors is limited.
+ https://www.sciencedirect.com/science/article/abs/pii/S0165178124002026?casa_token=eppStlEY-FIAAAAA:_NkxCpN4lbs7AoyfpI_A5lituzSc5Cq1R5mjKnY8Oc2inmjqAzvpLn9jYDjg-17dKvnJRkqGoI4
 ### Chemical imbalance theory
 
 The brain is very complex, so we don't think something as simple as a chemical imbalance explains most mental conditions.

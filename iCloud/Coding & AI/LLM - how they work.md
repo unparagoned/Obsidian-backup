@@ -58,6 +58,12 @@ Maybe not but not sure
 [https://lifeiscomputation.com/transformers-are-not-turing-complete/](https://lifeiscomputation.com/transformers-are-not-turing-complete/)
 From <[https://www.reddit.com/r/singularity/comments/1mmp2xp/comment/n7z652m/](https://www.reddit.com/r/singularity/comments/1mmp2xp/comment/n7z652m/)>
 
+>Our results indicate that: (1) LLMs consistently encode more factual knowledge internally than what they express externally, with an average relative gap of 40%. (2) Surprisingly, some knowledge is so deeply hidden that a model can internally know an answer perfectly, yet fail to generate it even once, despite large-scale repeated sampling of 1,000 answers.
+https://arxiv.org/abs/2503.15299
+
+>To this end, we make the following key contributions: (i) We demonstrate the existence of a two-dimensional subspace, along which the activation vectors of true and false statements can be separated. Notably, this finding is universal and holds for various LLMs, including Gemma-7B, LLaMA2-13B, Mistral-7B and LLaMA3-8B. Our analysis explains the generalisation failures observed in previous studies and sets the stage for more robust lie detection; (ii) Building upon (i), we construct an accurate LLM lie detector. 
+https://arxiv.org/html/2407.12831v2
+
 >The Internal State of an LLM Knows When It’s Lying
 [https://aclanthology.org/2023.findings-emnlp.68.pdf](https://aclanthology.org/2023.findings-emnlp.68.pdf)
 
@@ -96,3 +102,8 @@ Based on the definitions:
 >- **jkljkl** = a white substance
 >- **iopiop** = a graphite substance that can wertwert
 So the graphite substance is the thing that performs the visible transfer onto the white surface. The **asdads** is for removing marks, not making them.
+
+# humans
+
+>Human brains are misaligned, hallucinative, stochastic parrots. Let’s finally build Biological General Intelligence
+https://samuelfitoussi.substack.com/p/human-brains-are-misaligned-hallucinative

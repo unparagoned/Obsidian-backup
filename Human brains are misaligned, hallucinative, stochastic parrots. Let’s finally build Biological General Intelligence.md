@@ -1,0 +1,1 @@
+[Human brains are misaligned, hallucinative, stochastic parrots. Let’s finally build Biological General Intelligence](https://substack.com/@samuelfitoussi/p-191268395)

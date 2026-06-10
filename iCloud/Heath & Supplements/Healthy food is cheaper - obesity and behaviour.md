@@ -2,9 +2,7 @@
 
 
 
->the authors find that healthy foods cost less than less healthy foods … 
->the analysis makes clear that it is not possible to conclude that healthy foods are more expensive than less healthy foods 
->[https://www.ers.usda.gov/webdocs/publications/44678/19980_eib96.pdf](https://www.ers.usda.gov/webdocs/publications/44678/19980_eib96.pdf) Are Healthy Foods Really More Expensive?
+>Are Healthy Foods Really More Expensive?the authors find that healthy foods cost less than less healthy foods … the analysis makes clear that it is not possible to conclude that healthy foods are more expensive than less healthy foods 
 >[https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2199553](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2199553)
 
 >Healthy foods cheaper than junk food in UK supermarkets, study reveals

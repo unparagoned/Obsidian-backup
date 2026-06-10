@@ -20,3 +20,11 @@ Many shows rated well have a terrible storyline or just don't do anything intere
 
 A benefit, would be that this idea is very controversial, which would be good for advertising. 
 
+# API terminal tool
+
+Installing new tools directly now is risky, could just have a single installed tool, and then everything and like extensions that all connect via an api and processing is done online.
+
+e.g. connect to an online tool to convert markdown to pdf. 
+
+Maybe the online tool could be hosted in docker or something locked down. 
+

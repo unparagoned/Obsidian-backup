@@ -22,3 +22,7 @@ And poof he disappears
 This is where philosophy students start to snicker, as they are familiar with Descartes postulate, “I think, therefore I am.”
 
 But telling you that first would be putting Descartes before the horse
+
+# Mine
+
+The greatest lie AI ever pulled was convincing the world it wasn't intelligent. 

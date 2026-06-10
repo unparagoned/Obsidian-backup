@@ -1,7 +1,7 @@
 
 So I don't waste my time, answer this question first. There is no point having a conversation if you think this the death penalty wouldn't change the rate of speeding. Too many people think it would have no difference and we just live in different worlds.
 
->Say there was the death penalty for speeding, do you think that would have zero effect of speeding?
+>Say there was the death penalty for speeding, do you think that would have zero effect on speeding?
 
 
 
@@ -34,3 +34,4 @@ If you are talking about US stats, that's simply because stores are reporting st
 >Shoplifting numbers for all of San Francisco doubled in September after one Target location changed the method it uses to report the crime
 SF
 https://www.businessinsider.com/san-francisco-shoplifting-numbers-doubled-after-store-changed-reporting-method-2021-12?r=US&IR=T
+
