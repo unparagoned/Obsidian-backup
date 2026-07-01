@@ -11,6 +11,8 @@ Apples earphones don't have that issue sony had.
 
 If the sound cancellation gets worse, make sure you properly clean them all properly, the speakers and all the mics. 
 
+Weird noises when scrolling reddit, maybe another reddit screen playing a video, open separately on youtube will get it working without the stuttering style sounds.
+
 # SomniPods 3
 
 Supposed to be good sleep/noise cancelling earbuds that you can sleep on your side with.

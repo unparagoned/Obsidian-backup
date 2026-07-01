@@ -22,6 +22,9 @@ So I don't waste my time, answer this question first. There is no point having a
 >Our results show that the criminal justice system exerts a large influence on crime activity. Increasing the risk of apprehension and conviction is more influential in reducing crime than raising the expected severity of punishment.
 [https://link.springer.com/article/10.1007/s00181-019-01758-6](https://link.springer.com/article/10.1007/s00181-019-01758-6)
 
+
+>Drug diversion schemes led by police that steer people away from the criminal justice system and into treatment and education services are significantly more effective in reducing reoffending than prosecution, according to a new analysis.
+https://www.theguardian.com/uk-news/2026/jun/13/drug-diversion-schemes-reoffending-rates-police
 # Stats
 
 Shoplifting levels are very high now.

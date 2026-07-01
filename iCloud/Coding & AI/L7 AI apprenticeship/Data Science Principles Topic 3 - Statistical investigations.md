@@ -98,7 +98,7 @@ The sample mean is the population mean
 
 If the population is normal the sample will be normal
 
-If the population is not normal, but the sample size is greater than 30 the sampe l mean will be roughly normal
+If the population is not normal, but the sample size is greater than 30 the sample l mean will be roughly normal
 
 The standard deviation equals the population sd divided by the square root of n
 

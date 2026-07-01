@@ -56,6 +56,8 @@ Or in the legal sense I really like, "could a reasonable person in that situatio
 
 In every situation the mind state in the "could have done otherwise" is different, and if a different mind state could choose a different action then it's free. Free will is about the ability to act on your desires, it's not about determining your desires.
 
+ >Fate works through us. We are kind of one of the parties involved.
+ >John Sellars https://www.youtube.com/watch?v=lQOWyoO92Co
 # Voluntary and involuntary
 
 Just like how voluntary actions can be distinguished at the level of the brain, you could do something similar for free decisions. The brain activity of someone doing something they want to do is going to be completely different than someone doing it because someone is pointing a gun at them and forcing them to.

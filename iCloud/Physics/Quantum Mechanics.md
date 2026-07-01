@@ -1,6 +1,38 @@
 #qm
 # Collapse
 
+This is the biggest unresolved issue with QM. It's the main reason geniuses like Einstein and Schrödinger had issues with the Copenhagen interpretation.
+
+You have various QM interpretations and they all suggest different answers.
+
+- Copenhagen interpretation, doesn't define what a wavefunction collapse is or when it happens or why. This results in various issues like Schrödinger's cat, or that it suggests FTL wavefunction collapse. But nowadays many people don't take it as ontological(what is actually happening) but just epistemic(shut up and calculate). The wavefunction collapse has never been established and isn't even testable in theory.
+    
+- Objective collapse, there is a real physical interaction which collapses the wavefunction, like Penrose's theory around how if the gravity gets high enough it causes it to collapse. The nice thing about it is, that it makes testable predictions, but so far all the experiments have failed and not many people expect it to pan out.
+    
+- Hidden variables, so you have the wavefunction acting deterministically, and a separate particle which is what you are actually observing when you do a measurement. It still requires non-locality and doesn't play nicely with special relativity.
+    
+- Everett(MWI), basically says you just have deterministic wavefunction evolution. What looks like collapse is essentially just decoherence. It's nice in that it's deterministic, local, no FTL activity, and is just based on the well evidence QM postulates. Some think there might be an issue with how to derive the probabilities but others think it's mainly solved or a minor issue.
+    
+
+> In the double slit experiment, the wave function of the particle being studied isn’t collapsed until the screen or a detector measures the particle
+
+I think an interesting variant is where you put perpendicular polarisers across the slits, which means that you can detect which slit the photon went through, and the interference pattern disappears and many would say the wavefunction collapses going through one slit or the other. Many argue it's the physical interaction between the polariser and the photon which collapses its position. But if you put a 45 degree polariser between the splits and the screen, the interference pattern comes back. Which means the photon's position was never physically collapsed at the initial polarisers.
+
+> Yet none of these “regular” interactions collapse the particle’s wave function (they do cause decoherence, but decoherence doesn’t cause wave function collapse)
+
+Decoherence would look like collapse in whatever model you use. If it's impossible to tell the difference between collapse and decoherence it's a good question to ask if they really are different.
+
+> Why is this? What makes the interaction with the detector or screen special?
+
+I think that's a good reason to question some QM interpretations. So with Copenhagen measurement is special but it can't tell you why or what a measurement is.
+
+With Everett, the interaction with the detector or screen is nothing special it's just the standard wavefunction evolution.
+
+Now do people really believe in a wavefunction collapse? One of the biggest problems has been around does a black hole destroy information. Now if people really believed in a wavefunction collapse which does destroy information, then then it's perfectly possible for a black hole to destroy information and it's not really a big problem. But it seems like people are assuming that there is just unitary evolution and information isn't destroyed according to QM.
+
+Now people often treat Copenhagen just as a method of doing calculations not what's really happening, which would then mean actually you could treat Copenhagen as the epistemic side of an ontological interpretation like Everett's, rather than them really being competing interpretations.
+
+
 Say you have a double slit experiment but put polarisers perpendicularly aligned across the slits, the the interference pattern goes away. People often say it's the interaction between the photon and the polariser which collapses the wavefunction. But if the polarisers across a double slit are aligned you get the interference pattern. So you have the photon interacting with the polariser but no collapse.
 
 >Only if θ= π/2 do our pair of polarizers act as “which way” detectors. In this case slit “1” will only allow vertically polarized photons to pass through wile slit “2” admits only horizontally polarized photons, so that no interference pattern emerges, as can be seen from eq. (7). For θ ̸= π/2, then a vertically polarized photon can in principle pass through either slit and an interference pattern results; superimposed on this interference pattern for vertically polarized photons is a diﬀraction pattern for horizontally polarized photons which only pass through one slit.
@@ -73,6 +105,11 @@ Electrons have angular momentum when rotating in a atom.
 
 The static picture is due to rotations cancelling out. 
 
+## Schrodinger equation
+
+### I never understood why the Schrödinger's equation has an i...until now!
+https://www.youtube.com/watch?v=3QU-_PSbKlo
+
 # QFT
 
 ### Where is the Hilbert space?
@@ -94,3 +131,4 @@ So schematically:
 ϕ^(x):H→Hϕ^​(x):H→H
 
 for every spacetime point xx.
+

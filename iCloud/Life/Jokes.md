@@ -26,3 +26,8 @@ But telling you that first would be putting Descartes before the horse
 # Mine
 
 The greatest lie AI ever pulled was convincing the world it wasn't intelligent. 
+
+# Introvert
+
+[[1c5a807510246f49cfc5c3d6702d255a_MD5.jpg|Open: Pasted image 20260627110317.png]]
+![[1c5a807510246f49cfc5c3d6702d255a_MD5.jpg]]

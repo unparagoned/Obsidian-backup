@@ -18,14 +18,14 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 *KSBs: K4, K24, S21*
 
 ### 1a) Types of data to use
-- [[Data Science Principles Topic 1 - Intro to Data Science]] — structured vs. unstructured data types
+- [[Data Science Principles Topic 1 - Intro to Data Science =]] — structured vs. unstructured data types
 - [[Data Science Principles Topic 5 - Working with big data]] — big data characteristics (volume, velocity, variety)
 - [[Data Science Principles Topic 6 - Storing your data]] — data formats and storage types
 - [[Z Learning - Revision Notes]] — structured vs. semi-structured data definitions
 - [[Machine Learning using Cloud Computing Introduction to ML on AWS Course]] — AWS data types and services
 
 ### 1b) Process for extracting the data
-- [[Data Science Principles Topic 1 - Intro to Data Science]] — data pipelines, ETL
+- [[Data Science Principles Topic 1 - Intro to Data Science =]] — data pipelines, ETL
 - [[Data Science Principles Topic 5 - Working with big data]] — batch vs. streaming ingestion
 - [[Disruptive Leadership for Sustainable Strategy - Topic 6 - DataOps and MLOps]] — DataOps pipelines, CI/CD
 - [[Machine Learning using Cloud Computing Introduction to ML on AWS Course]] — AWS Glue, Kinesis, S3
@@ -38,12 +38,12 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 - [[Machine Learning using Cloud Computing Introduction to ML on AWS Course]] — AWS Athena, Glue catalogue
 
 ### 1d) Error, bias and uncertainty in data
-- [[AI and Data Science Professional Practice Term 2 Theme 6 Error, bias and uncertainty]] — full taxonomy of error types (random, systematic, data, model) and bias types (historical, sample, aggregation, coverage, selection, availability)
+- [[AI and Data Science Professional Practice Term 2 Theme 6 Error, bias and uncertainty =]] — full taxonomy of error types (random, systematic, data, model) and bias types (historical, sample, aggregation, coverage, selection, availability)
 - [[Disruptive Leadership for Sustainable Strategy - Topic 8 - Error, bias, uncertainty]] — data quality standards (consistency, accuracy, uniqueness, validity, timeliness, completeness); fairness testing methods
 - [[Data Science Principles Topic 7 - Data Governance]] — data quality and governance
 
 ### 1e) Differences in uncertainty before vs. after analysis
-- [[AI and Data Science Professional Practice Term 2 Theme 6 Error, bias and uncertainty]] — aleatoric, epistemic, ontological, structural uncertainty; Monte Carlo dropout; ensemble methods; confidence intervals
+- [[AI and Data Science Professional Practice Term 2 Theme 6 Error, bias and uncertainty =]] — aleatoric, epistemic, ontological, structural uncertainty; Monte Carlo dropout; ensemble methods; confidence intervals
 - [[Disruptive Leadership for Sustainable Strategy - Topic 8 - Error, bias, uncertainty]] — uncertainty quantification, fairness metrics
 - [[Data Science Principles Topic 3 - Statistical investigations]] — standard error, confidence intervals
 - [[Data Science Principles Topic 4 - Statistical testing]] — statistical uncertainty and significance
@@ -97,20 +97,20 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 *KSBs: K9, K12*
 
 ### Legal constraints
-- [[AI and Data Science Professional Practice Term 2 Theme 5 Legal aspects]] — GDPR/DPA 2018 (all 7 principles, legal bases, special category data, Article 22 automated decision-making, DPIA requirement, data subject rights); Equality Act 2010 (9 protected characteristics, indirect discrimination in algorithms); Human Rights Act 1998 (Article 8 privacy, Article 14 non-discrimination); international data transfers
+- [[AI and Data Science Professional Practice Term 2 Theme 5 Legal aspects =]] — GDPR/DPA 2018 (all 7 principles, legal bases, special category data, Article 22 automated decision-making, DPIA requirement, data subject rights); Equality Act 2010 (9 protected characteristics, indirect discrimination in algorithms); Human Rights Act 1998 (Article 8 privacy, Article 14 non-discrimination); international data transfers
 - [[Data Science Principles Topic 7 - Data Governance]] — data governance frameworks, compliance, regulatory requirements
-- [[AI and Data Science Professional Practice Term 2 Theme 4 Ethics and AI]] — AI-specific regulatory context, government AI strategy
+- [[AI and Data Science Professional Practice Term 2 Theme 4 Ethics and AI =]] — AI-specific regulatory context, government AI strategy
 
 ### Ethical impact
-- [[AI and Data Science Professional Practice Term 2 Theme 4 Ethics and AI]] — AI ethics frameworks (Asilomar, OECD, government data ethics framework), transparency, accountability
-- [[AI and Digital Innovation Topic 8 Ethics and NLP futures]] — ethical issues in AI deployment, surveillance, trust, privacy (Facebook Beacon case)
+- [[AI and Data Science Professional Practice Term 2 Theme 4 Ethics and AI =]] — AI ethics frameworks (Asilomar, OECD, government data ethics framework), transparency, accountability
+- [[AI and Digital Innovation Topic 8 Ethics and NLP futures -]] — ethical issues in AI deployment, surveillance, trust, privacy (Facebook Beacon case)
 - [[Disruptive Leadership for Sustainable Strategy - Topic 8 - Error, bias, uncertainty]] — fairness testing (statistical parity, equalized odds, counterfactual fairness); bias mitigation approaches
 
 ### Social impact (workplace automation)
-- [[AI and Digital Innovation Topic 8 Ethics and NLP futures]] — social context of AI, workplace automation, misuse of data
+- [[AI and Digital Innovation Topic 8 Ethics and NLP futures -]] — social context of AI, workplace automation, misuse of data
 - [[Disruptive Leadership for Sustainable Strategy - Topic 5 - Culture change and leadership]] — workforce change, resistance, redeployment
 - [[Disruptive Leadership for Sustainable Strategy - Topic 4 - Change management]] — change management frameworks (Kotter's 8-step model), managing workforce transitions
-- [[AI and Data Science Professional Practice Term 1 Theme 1]] — professional responsibility, BCS Code of Conduct
+- [[AI and Data Science Professional Practice Term 1 Theme 1 -]] — professional responsibility, BCS Code of Conduct
 
 ### Internal/external business impact
 - [[Disruptive Leadership for Sustainable Strategy - Topic 3 - Data Value]] — business value of data, internal impact of data-driven transformation
@@ -123,7 +123,7 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 *KSBs: K15, K27, S13*
 
 ### 4a) Approach to design, develop and deploy
-- [[AI and Data Science Professional Practice Term 4]] — CRISP-DM, TDSP, SEMMA, KDD; project management methodologies (Agile, Scrum, Kanban, Data Driven Scrum, PRINCE2, Lean, Six Sigma, Waterfall); phased deployment approaches
+- [[AI and Data Science Professional Practice Term 4 =]] — CRISP-DM, TDSP, SEMMA, KDD; project management methodologies (Agile, Scrum, Kanban, Data Driven Scrum, PRINCE2, Lean, Six Sigma, Waterfall); phased deployment approaches
 - [[Disruptive Leadership for Sustainable Strategy - Topic 6 - DataOps and MLOps]] — MLOps principles (reproducible, accountable, collaborative, continuous); CI/CD; continuous training and monitoring; DevOps for ML
 - [[Machine Learning using Cloud Computing Topic 6 Cloud Architecture and Service Platform Design]] — cloud-native design patterns, service architecture
 
@@ -135,7 +135,7 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 - [[Machine Learning using Cloud Computing Topic 7 Autoencoders]] — anomaly detection architecture (fraud detection use case)
 
 ### 4c) Justification for approach
-- [[AI and Data Science Professional Practice Term 4]] — justification for CRISP-DM vs. alternatives; when to use Agile vs. waterfall
+- [[AI and Data Science Professional Practice Term 4 =]] — justification for CRISP-DM vs. alternatives; when to use Agile vs. waterfall
 - [[Disruptive Leadership for Sustainable Strategy - Topic 6 - DataOps and MLOps]] — why MLOps matters; Kaizen/continuous improvement rationale; reproducibility and governance requirements
 - [[Disruptive Leadership for Sustainable Strategy - Topic 7 - Data strategy]] — strategic alignment of technology choices; build vs. buy decisions
 - [[Machine Learning using Cloud Computing Topic 3]] — model evaluation and validation frameworks

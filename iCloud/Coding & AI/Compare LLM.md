@@ -1,4 +1,10 @@
 
+
+# Taxonomy issue
+
+xhtml was having issues getting the taxonomies. Cursor had weird ideas and code seemed to make it even worse. Codex understood the root issue and fixed things .
+
+
 # Energy prices
 
 GPT had the best analysis but I had to tell it where I was from. Prices are expected to increase a lot in July making fixed best. 

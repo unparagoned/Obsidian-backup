@@ -1,3 +1,10 @@
+This seems like a better sibling study 
+
+ >In this population-based cohort study, a sibling-matched analysis found no evidence of an association between prenatal paracetamol exposure and the risk of ASD or ADHD in offspring. The positive signals observed in conventional studies are likely attributable to residual familial confounding. These findings provide important reassurance regarding the safety of indicated paracetamol use during pregnancy.
+ >https://jamanetwork.com/journals/jamainternalmedicine/article-abstract/2850975
+ 
+
+
 >Acetaminophen Use During Pregnancy and Children’s Risk of Autism, ADHD, and Intellectual Disability
 
 >Acetaminophen use during pregnancy was not associated with children’s risk of autism, ADHD, or intellectual disability in sibling control analysis. This suggests that associations observed in other models may have been attributable to familial confounding.

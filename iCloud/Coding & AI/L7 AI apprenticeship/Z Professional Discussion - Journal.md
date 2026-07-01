@@ -1,0 +1,1136 @@
+
+
+**Artificial Intelligence Data Specialist**
+
+**Level 7 Apprenticeship**
+
+**Journal**
+
+Learner Name: \_\_\_Jesse Karadia \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Organisation: \_\_\_\_HMRC\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+Contents
+
+[Introduction to the apprenticeship journal 3](#_Toc177659350)
+
+[Professional discussion overview 3](#_Toc177659351)
+
+[KSB evidence mapping 8](#_Toc177659352)
+
+# Introduction to the apprenticeship journal
+
+At the end of your apprenticeship, you will complete an End-Point Assessment (EPA) to demonstrate what you've learned. You can learn more about the EPA and what to expect by following this link: [https://www.instituteforapprenticeships.org/media/3685/st0763\_artificial-intelligence-ai-data-specialist\_l7\_ap-for-publication\_qm.pdf](https://www.instituteforapprenticeships.org/media/3685/st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.pdf).
+
+Throughout your apprenticeship, you will participate in various activities designed to help you develop the Knowledge, Skills, and Behaviours (KSBs) outlined in the apprenticeship standard. These activities will serve as evidence of your progress.
+
+In addition to these activities, your day-to-day work will contribute to your development against the KSBs. This journal is a tool for you to document your thoughts and collect evidence of how you’ve met the KSBs. Start using this journal from day one of your apprenticeship; it will be especially helpful when you prepare for your professional discussion as part of the EPA, serving as a valuable reminder of your achievements.
+
+# Professional discussion overview
+
+The professional discussion part of the assessment will be appropriately structured to draw out the best of the apprentice’s competence and excellence and cover the KSBs assigned to this assessment method.
+
+It will involve questions focusing on coverage of prior learning and activity and problem solving.
+
+This journal will allow you to build up evidence for each of the KSBs required for the professional discussion over the duration of the programme.
+
+The table below shows the grading criteria for each of the KSBs. This clearly explains what you need to do to achieve either a pass or distinction in the professional discussion.
+
+| Themes                                                                                                                                        | Fail                            | Pass                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Distinction                                                                                                                                                      |
+| --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Use and knowledge of computing and statistical foundations of AI and data science(K7, K16 K18, K19, K22, K25, S1, S16, S19, S20, S26)         | Does not meet the pass criteria | Describes how to use statistical, AI, and machine learning methodologies, such as data mining, supervised/unsupervised machine learning, natural language processing, and machine vision to meet business objectives.Explains how to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance, and usability testing in line with organisational requirements.Describes the relationship between mathematical principles and core techniques in AI and data science within the organisational context.Explains how they have used programming languages and modern machine learning libraries for commercially beneficial scientific analysis, simulation, and data engineering to meet business needs. Uses applied research and data modelling to design and refine the infrastructure and architectures to deliver secure, stable, and scalable data products, including enterprise, private, and public cloud resources and services.Explains how to design algorithms for accessing and analysing large amounts of data, including Application Programming Interfaces (API) to different databases and data sets. | Explains when they have challenged the norm through investigating and proposing a solution and the impact this had.                                              |
+| Professional practice in a commercial environment(K8, K10, S6, S8, S14, S23, S28, B1, B4, B7)                                                 | Does not meet the pass criteria | Explains how they have developed their professional working practices and leadership techniques with regard to AI and data science and how this has improved organisational practice.Justifies their choice of techniques, explaining the risks and benefits, and offers an alternative to technical and non-technical audiences.Explains how they share and disseminate AI and data science practices across organisations to improve industry practice.Explains how they have made independent impartial decisions, respecting the opinions and views of others in complex, unpredictable, and changing circumstances to benefit the business.Explains how they have worked with software engineers to ensure suitable testing and documentation processes are implemented in line with organisational requirements.                                                                                                                                                                                                                                                                                                                                                                    | Critically analyses the wider social context and current issues and trends, applying the findings with justification, and shares these with the wider community. |
+| Awareness of the current and future impact of AI and data science for industry and society(K11, K17, K21)                                     | Does not meet the pass criteria | Describes how the potential roles and impact of AI and data science could affect own organisation, industry, and society.Explains how they have assessed and addressed the potential business impact of ethical issues relating to AI and data science, the way procedures and methods are selected, and the unintended consequences to the business when they are applied.Describes how they have applied solutions, demonstrated awareness, and explained the changes and trends that have led to the enhancement of working practices within their organisation and other members of the team.Explains the impact, consequences, and risks of non-compliance to the business.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |                                                                                                                                                                  |
+| Development of suitable AI and data science solutions, with consideration for ethical, legal, regulatory, and governance issues(K29, S12, B3) | Does not meet the pass criteria | Evaluates the regulatory, ethical, and legal requirements that affect implementation of solutions, including the need for accessibility for all users and diversity of user needs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |                                                                                                                                                                  |
+| Continuous professional development(B5, B8)                                                                                                   | Does not meet the pass criteria | Analyses how they take responsibility for their own and their team’s currency of knowledge and skills, and their professional and personal growth and development.Explains how they selected and applied the most effective/appropriate AI and data science techniques to solve a complex business problem in line with organisational and regulatory requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                                                                                                  |
+
+# KSB evidence mapping
+
+Use the table below to gather evidence for each criterion. Consider what you have done in your role that demonstrates the required Knowledge, Skills, and Behaviours. Provide a variety of examples and continue to update this table as you progress through your apprenticeship programme.
+
+### K7. How to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance, and usability testing.
+
+**Situation:** iXBRL documents like the company accounts and tax computations have items tagged so a machine can easily extract that data. But the tax computations only have around 30% of figures tagged. Which means existing systems in place don't let us use or profile across all that data. When extracting this untagged data the figures could have various descriptions describing what they are.
+
+**Task:** Categorise the various descriptions.
+
+**Action:** I researched various methods to categorise the data, looking at scikit-learn classification models, like SVM, random forest, naïve bayes, etc.; neural network(NN) based models like convolutional neural networks(CNN); and finally transformer based classifiers like secBERT. Since the content was around accounts looking for a BERT based model trained over accountancy terms would mean it would understand the terminology commonly used in accounts.
+
+I compared the performance of the models, using various metrics, accuracy, f1-macro, speed, simplicity, maintainability and explainability. 
+?test, train, holdout?
+?For each class or type used systems like HalfvingGridRandomizedCVSearch or Optuna, to compare the models across various hyperparameters.?
+
+For the scikit-learn models the CV meant that there I could use T-test to see if certain models were significantly better. 
+
+During testing the secBERT did outperform other models like mpnet and e5 models.
+
+While secBERT had the best performance over all other models in testing, to properly train it required GPUs which would be expensive to implement and couldn't run on existing architecture.
+
+Also, secBERT isn't created by a well known reputable provider, it's a fairly niche creator which is a security risk to bring onto our estate. That could be direct or just be a model that actually doesn't always do what we expect it to do. It also has potential issues around explainability, why does it classify as it does.
+
+**Result:** LinearSVC using TFIDF was much faster and also had good quality results. It worked on existing CPU based infrastructure, and has much better explainability, both in terms of how the model works and the feature coefficients show what it takes into account to classify a description. It's a simpler model that is easier to maintain.
+
+There can be lots of different descriptions for the same concept so using LinearSVC to categorise them has helped end users use the extracted data.
+
+**Reflection:** The best and most complex models don't always mean they are the best option. Simpler models can get very similar results, and there can be other metrics and benefits that mean they can be more appropriate for the task.
+
+Also a lot of the work done around comparing the scikit-learn models involved quite a lot of manual work creating functions to help comparing an evaluating data, using different data sizes, iterations. With NN and BERT based analysis I found optuna, which did a lot of that manual work automatically. So in the future I'm going to spend more time researching if there are any packages that would do what I want to do rather than just rushing off and coding the functionality I want.
+
+---
+
+### K8. How to interpret organisational policies, standards, and guidelines in relation to AI and data.
+
+**Example 1**
+
+**Situation:** LLM and AI are newer technologies that could pose significant risks. So new guidance has come out on how to best use these technologies. But the guidance was overly restrictive.
+
+**Task:** Review the guidance and ensure any projects are in line with the guidance.
+
+**Action:** I reviewed the guidance but found that it was not possible to follow the guidance without significant impact on the business. The guidance treated all ML as AI. But the restrictions were  based on if it was all LLM style AI. There were restrictions on what systems could be used. But the restricted systems designed for LLMs did not have the functionality to do most of the basic ML functionality and would be very cumbersome to implement even if they did.
+
+I provided detailed feedback about the guidance, explaining that it wasn't possible to implement. I provided details about how and why it was wrong and how it could be changed.
+
+**Result:** They changed the guidance in line with the comments.
+
+**Reflection:** AI is changing very rapidly, so guidance may be old or not fit for purpose. It's important to critically review guidance and to ensure that the protections are balanced by business needs and the latest understanding.
+
+**Example 2**
+
+**Situation:** Machine learning over business data has inherent ethical and legal risks, especially around bias, misuse, and interpretability.
+
+**Task:** I needed to account for these frameworks while designing and deploying the classification model.
+
+**Action:** I first completed a Data Protection Impact Assessment(DPIA) before any work was done. I then assessed the model under GDPR and fairness considerations, ensuring human-in-the-loop validation before any operational use. I emphasised that the model's classifications were advisory — not for automated decisions — and documented this in deployment notes.
+
+**Result:** The DPIA helped understand the risks and put in place measures to address them beforehand. This approach ensured compliance with both data protection and ethical guidelines, avoiding reputational or legal risk.
+
+**Reflection:** Embedding ethical awareness into AI development avoids downstream problems. I'd like to put in place systems to ensure that a human in the loop guidance is always followed.
+
+---
+
+### K10. How own role fits with and supports organisational strategy and objectives.
+
+**Situation:** My role is around exploiting data we have to identify tax risks and also provide information about companies to the treasury. 
+?More on enabling with the DAP?
+
+**Task:** Develop tools and systems which help us identify tax risks. Provide support and mentorship to upskill others to help them identify tax risks.
+
+**Action:** I'm the lead developer on Hubble which extracts data from company accounts and uses ML to categorise that data.
+
+I arranged for the Data Analytics Platform(DAP), a POSIT platform, to be setup to run Hubble. This is a powerful platform which lets users use R and Python to create tools and analyse data. I provide support and advice on how to use the DAP, and also arrange for the DAP to be upgraded with features and functionality that staff require.
+
+I also provide general mentorship to others.
+
+**Result:** Hubble can extract 233% more data from company accounts and similar documents, which is very useful for identifying tax risks. Lots of analysts use the Hubble outputs in profiles. We have brought in millions of pounds as a result. This is the key function for our organisation.
+
+The DAP has gone from one user to over 150 users, who use it to help with various organisation functions, from understanding the data to directly finding tax risks. Analysts like using modern tools on a powerful system.
+
+The support, advice and mentorship has resulted in users creating new tools, such as ML being used to identify iXBRL concepts from a text description. Tools that connect to other systems and bring in that data to a dashboard.
+
+**Reflection:** I'm a T shaped person, with in depth understanding and knowledge of iXBRL. With a breadth of knowledge around IT systems, and various programming languages. This makes me flexible and able to contribute in a variety of areas and ways. It also means that often I'm the person in my area to come to for help and advice.
+
+---
+
+### K11. The roles and impact of AI, data science, and data engineering in industry and society.
+
+**Situation:** Many iXBRL documents such as accounts, aren't fully tagged, making it very hard/impossible to profile across them in bulk.
+
+**Task:** Use AI, data science and engineering to develop Hubble, which extracts data from iXBRL accounts and uses ML to categorise them.
+
+**Action:** I handled data engineering (extraction, cleaning, structuring), machine learning (model fine-tuning and evaluation), and deployment (storing outputs in Oracle for analysts). I collaborated with data analysts to align the outputs with real use cases.
+
+**Result:** The project demonstrated a tangible productivity improvement for analysts, freeing them from manual tagging. Analysts are using it to identify millions in tax risks.
+
+**Reflection:** While fundamentally I'm primarily extracting and categorising data, that data is used to bring in millions in additional tax, which is used to fund schools and hospitals. So, there is a significant positive impact on society.
+
+Notes:
+Effects all sorts of industries: medical detection, predicting risk, market prediction, when to order stock, pricing, etc. e.g. some models are better than humans at detecting cancer from scan results.
+
+---
+
+### K16. Understand high-performance computer architectures and how to make effective use of them.
+
+**Situation:** I work with big data, there is a large volume, with varied format — structured xml, semi-structured iXBRL, unstructured pdfs — which comes in quickly.
+
+**Task:** To process the data quickly and to make it easy to profile across that data.
+
+**Action:** Due to the large volume of data, we use Apache Solr for text searching and profiling. It's a document based database, which works well at large scale and is distributed over many servers, which have been increased over time for more data and better processing speeds.
+
+To extract the unstructured data into a structured form, I wrote Hubble. It's an R based tool that runs on a POSIT Data Analytics Platform. But due to the volume of data that platform wasn't large enough. So, I arranged for On Demand Compute(ODC), which is where I can fire up a large platform with say 128 cores or if doing something ML intensive it can have a GPU.
+
+The outputs are written to an Oracle, a relational database.
+
+**Result:** The Solr database allows for very fast searching and profiling.
+
+The large parallel processing using ODC allows for us to extract, transform and load using bespoke code quickly.
+
+The ODC is also cost effective, since we shut it down when it's not needed. This is particularly beneficial when it comes to GPUs which can be very expensive.
+
+**Reflection:** The Solr database is very fast, much faster than the Oracle relational database. So, I would like to ingest some of the data in the Oracle database into the Apache ecosystem, allowing us to benefit from the performance gains.
+
+In the longer term, as we move to a Lakehouse, it's possible to move the R code into EMR as a SparkR job, saving the data to Redshift. This would benefit from the power of a Lakehouse and allow better integration with other datasets.
+
+---
+
+### K17. How to identify current industry trends across AI and data science and how to apply them.
+
+**Situation:** There are lots of developments in relation to AI and our industry.
+
+**Task:** Staying up to date on developments, in order to best exploit them or to prepare to deal with changes.
+
+**Action:** I subscribe to industry explicit newsletters, like iXBRL international, which has the latest on the iXBRL format for company accounts and how AI can be used with them. For example they did an analysis where giving a LLM the whole html document didn't work well, but extracting the iXBRL and passing that separately worked better. I created a Graffiti iXBRL viewer, which extracts the iXBRL data, and passes that extracted data with a query to a LLM.
+
+**Result:** The Graffiti tool can then provide a detailed and accurate answer, making it easier to analyse company accounts.
+
+**Reflection:** LLM provide new opportunities to exploit data in a simpler and faster way. With the growth of tool and MCP functionality a LLM could use more data sets than just the data in the accounts. It could search the web to have more up to date data. It could also use the Companies House or Moodys API, to get say industry level data, or competitors data to include in any analysis.
+
+---
+
+### K18. The programming languages and techniques applicable to data engineering.
+
+**Situation:** The company return(xml), and iXBRL accounts(x/html) have a lot of valuable data.
+
+**Task:** Extract, Transform, Load(ETL) the data, so that it can be profiled against in bulk.
+
+**Action:** There is no one best language, and a variety of languages could be used. We use Java to move the data from the original data store into S3 buckets, and also use it to extract the iXBRL and xml data into Apache Solr.
+
+I created a tool in R which extracts the untagged(unstructured) data from the iXBRL documents. There are various packages in R which make working with html documents easier, allowing you to parse and extract data more easily. To categorise the data I needed to use some ML, but found that the R packages had weren't as extensive and has less documentation, so the ML was done using Python, which has more mature packages for ML, like scikit-learn and TensorFlow. In R I could use reticulate which meant that the core R code call the python functions. 
+
+I used SQL to create the tables in an Oracle database. R has packages like dbplyr, which lets you interact with a database using the tidyverse syntax, and behind the scenes it will convert it to SQL.
+
+**Result:** A variety of languages and packages were used for ETL, allowing us to transform structured, semi-structured and unstructured data, into formats and onto systems we can profile across in bulk.
+
+**Reflection:** It's important to use the best tool for the job. Depending on the systems, team, users, task, packages, different languages and techniques might be required for the specific use case.
+
+---
+
+### K19. The principles and properties behind statistical and machine learning methods.
+
+**Situation:** We have data collected at an agent level, that we can analyse and profile.
+
+**Task:** Determine if an agent poses a higher risk than others.
+
+**Action:** I proposed a null hypothesis that the agent has the same risk as others. They are two independent groups, that are normally distributed, with n>30. The population standard deviation was unknown and it's ratio data. The F-stat test showed that the variances were unequal, so used a Welch's t-test. This test showed that with a high 99% confidence level we can reject the null hypothesis.
+
+**Result:** Using appropriate statistical tests, I was able to show that a specific agent was higher risk than others.
+
+**Reflection:** Statistical tests can be used more widely. Often I might qualitatively think something is significantly different, but I could use a statistical test to show that's true quantitatively as well.
+
+Notes: k-means, lots of regression, neural networks, random forest, transformers, supervised, unsupervised. Building the network requires understanding of how various NN work. Neural networks are designed to simulate how the brain works, with networks connected to each other by a weighting. To train the model a loss function calculates the difference between the labelled output and updates each weight that contributed to that loss, then using backpropagation the loss is moved back through the network. More complicated neurons like LSTM have some long term memory which deals with issues around vanishing gradient. Some of these more advanced networks seemed like they would deal better with text, but it was possible to get results just as good using simpler networks.
+
+See notes at bottom.
+
+---
+
+### K21. How AI and data science techniques support and enhance the work of other members of the analytical team.
+
+**Situation:** Data analysts were spending too much time manually grouping descriptions in company accounts.
+
+**Task:** I aimed to create a machine learning tool that would automatically group different descriptions.
+
+**Action:** I developed the classification model to use existing XBRL taxonomy concepts, aligning with analysts' familiar processes. I engaged them during testing and encouraged direct feedback through email and video calls.
+
+**Result:** The analysts could perform profiling tasks faster with fewer errors, and their input helped refine the ML outputs.
+
+**Reflection:** Working with the analysts helped refine how things worked, allowing me to make changes and improve things for the analysts.
+
+Natural language to iXBRL.
+
+---
+
+### K22. The relationship between mathematical principles and core techniques in AI and data science within the organisational context.
+
+**Situation:** 
+Hubble needs to classify inconsistent text descriptions from iXBRL accounts into standard concepts.
+
+**Task**: 
+I needed to select a classification pipeline that would work well under the requirements and constraints of HMRC. The model would need to perform well. The model should be maintainable. It should only use well established packages and models. It should be easy to run on existing hardware. It should be quick enough to retrain on more recent data. The model should be explainable in terms of how it works technically but also to understand why it categorised something as it did.
+
+**Action:**
+I tried different embedding models for the text descriptions. Transformer based embeddings can group similar descriptions together even if the actual words used are different. I found that mpnet embeddings was significantly better than TFIDF at a 95% confidence level. But the absolute difference was very small 0.00003pp, and it was 67x slower. I also tested TFIDF both over words and characters. In the end I went with TFIDF just with words over more complicated TFIDF or embeddings, because it was faster and added to explainability(especially when combined with the model selection). TFIDF also captured the specific terminology well. 
+
+Transformer based models have a good are very good when it comes to text, but in testing generic models didn't perform that well with the specific accountancy terminology, when it came to classification. I found secBERT a model that was trained specifically over accountancy terms, and in testing this model had the best performance by f1-macro 2pp over all the models tested. But it's a fairly niche model, not maintained by any large organisation and doesn't have the level of assurance to bring onto the HMRC estate. In addition transformer based models would require GPU based architecture to train and take a long time to train. Transformer based models aren't explainable as other models. 
+
+LinearSVC worked well with TF-IDF, since TF-IDF was a very sparse matrix, which worked well with penalty l1, and dual = false, since it's able to put most feature to zero.
+
+Result: TF-IDF with LinearSVC worked very well, performance was good and it was much faster than much more complex models. The ability to look at feature coefficients increases explainability, so we can understand how the model works. The training was done on existing CPU based architecture, and the there is fast inference speeds. 
+
+Reflection: The best and most advanced methods aren't always the best choice for HMRC. Other simpler models can have lot of advantages that mean they are more suited for various situations.  
+
+
+
+
+
+
+---
+
+### K25. Programming languages and modern machine learning libraries for commercially beneficial scientific analysis and simulation.
+
+**Situation:** There are various descriptions used. With different words, phrasing, stemming, etc.
+
+**Task:** Categorise the descriptions.
+
+**Action:** I tried various methods to categorise the descriptions. I tried using R, but the packages for ML aren't as mature.
+
+Python is a leading language when it comes to ML and it has more mature libraries.
+
+I tried simple methods to start with, with just using the cosine similarity from scikit-learn.
+
+Then I looked at other methods for supervised learning.
+
+I used other classification models in scikit-learn, like random forrest and LinearSVC.
+
+Then I used BERT, and then fine-tuned it to categorise the descriptions. This has the benefit of using a big powerful model. I used datasets to grab the BERT model from Hugging Face. Transformers and torch were used to train the model.
+
+Then I created a smaller convolutional neural network to categorise the descriptions. This required using lower-level packages like Keras and TensorFlow, so I could select and configure each layer.
+
+**Result:** The cosine similarity didn't work that well.
+
+LinearSVC did fairly well, but results weren't perfect.
+
+The BERT model worked well, but there were some big performance issues with larger datasets.
+
+I created lots of different neural networks, with a multi-layer perceptron model coming out on top. It had good performance and could deal with more data.
+
+**Reflection:** Very simple methods like cosine similarity had bad results. This could be due to this having specific language, that normal embeddings don't contain.
+
+Initially I thought some of the more advanced BERT models would do better with this task, but they didn't have a clear advantage. I was surprised that the best method was a simpler MLP coming out on top considering all the factors. So, more complex isn't always better. While a BERT based model might have similar results, it's too big and slow to run over all the data, and its results weren't significantly better.
+
+Also designing the NN from scratch I expected RNN design to come out top, but this wasn't the case. Highlighting the importance of testing and using methods from different areas. Here some convolutional neural networks could also help with a text only analysis, which was very surprising since I thought it was just for images.
+
+---
+
+### K29. The need for accessibility for all users and diversity of user needs.
+
+**Situation:** Create a product for general use.
+
+**Task:** Ensure the project meets accessibility needs.
+
+**Action:** In one project I engaged with an expert on the WCAG requirements. We analysed the existing project and had a plan on how to fix it.
+
+I started making various fixes to be in line with WCAG.
+
+With this project the bookmarklet is designed to be dragged to the bookmark bar. I created alternative guidance about how else they can add the bookmarklet to the bookmark bar.
+
+**Result:** All users can now run the Graffiti tool.
+
+Other projects have an accessible design making it easy for them to read and understand the tools.
+
+**Reflection:** It's much harder to fix accessibility from scratch, but easier to develop a tool with it in mind and using the latest packages to help.
+
+---
+
+### S6. Provide direction and technical guidance for the business with regard to AI and data science opportunities.
+
+**Situation:** I'm in charge of the Data Analytics Platform(DAP) where a great deal of AI and data science happens.
+
+**Task:** Provide support, advice and direction on how the DAP can be used for AI and data science. Upgrade and increase functionality so it can best use AI. Create and maintain a wiki with key guidance.
+
+**Action:** Mentor for projects where ML can improve. Regular meetings discussing ML for our area of the business. Working to improve features and functionality for ML, such as making available GPU enabled machines for anyone that needs them.
+
+Created a wiki with lots of guidance, for example how to use virtual environments, access data, etc.
+
+**Result:** Users have the right environment and support to use AI and data science.
+
+---
+
+### S8. Coordinate, negotiate with, and manage expectations of diverse stakeholders and suppliers with conflicting priorities, interests, and timescales.
+
+**Situation:** I'm in charge of the Data Analytics Platform(DAP).
+
+**Task:** I have to ensure the DAP keeps running, has enough licences, the correct functionality and features, the right funding, etc.
+
+**Action:** I work with internal stakeholders in charge of the budget, to ensure we have enough licences for the increasing demand and growth. I need to ensure any expansions are clearly set out with the budget we want.
+
+I work with both internal and external stakeholders who can provide features and functionality. Internal stakeholders provided On Demand Compute functionality we wanted.
+
+In discussion with external stakeholders they advised not to connect up a database but to transfer the data directly over to their system.
+
+Users wanted GPU functionality, which we were about to deliver in time.
+
+Some users want to write to an S3 bucket so POSIT Connect can access the data as well, rather than manually copying the data across. I've suggested that they use the existing databases, rather than setting up something completely new.
+
+**Result:** The DAP has increased to over 150 users, with enough licences for anyone else who needs a licence.
+
+The ODC allows us to power up massive instances, which could have a GPU for specific or dedicated ML processes in a cost-efficient manner.
+
+The DAP is being connected up to more data sources, so analysts can work over more data sets more easily.
+
+We have connected up the POSIT DAP to a SAS on Cloud environment, allowing more interoperability. From the POSIT DAP, you can run the processes using the SAS compute.
+
+**Reflection:** With lots of players, it's important to be in constant conversation with all of them. Sometimes they might have ideas you haven't thought of. They might be able to suggest better alternatives. It's also important to stay in contact with customers to ensure we know their requirements.
+
+But ultimately, I shouldn't just do what others suggest, but weigh them up and select the best solution for everyone.
+
+---
+
+### S12. Consider the associated regulatory, legal, ethical, and governance issues when evaluating choices at each stage of the data process.
+
+DPIA at work? Isn't this similar to others?
+
+Situation:
+My Hubble tool works over company accounts and tax computations, which contain sensitive data such as names, references, and detailed company/tax data. 
+
+Task: 
+Ensure that data is processed in a way that meets organisation, regulatory, legal  and ethical way. 
+
+Action:
+I completed a DPIA to cover all the steps in the process.
+I looked at data minimisation removing personal data like names and references from the data early on in the process. 
+Processing of HMRC data was done within the HMRC estate, to ensure the data was kept secure. 
+When looking at what models to use, it was decided not to use models like secBERT since they were not created by a large reputable organisation which poses various risks. 
+In the comms about the model it was made clear that any ML category shouldn't be the defining feature for any action, there should always be a human in the loop. 
+The selected pipeline focused on explainability, we want to be able to know why it has made the decisions it has made. 
+
+Result:
+The final project, was created using well know and established packages and models(LinearSVC), which means the underlying technology was something that was reliable and unlikely to have issues. 
+Using a DPIA ensured that the data would be processed in a way that meets both organisational and legal requirements. 
+Personal data was removed from the input data meaning none of that would influence or be leaked into the model itself.
+
+Reflection:
+You need to consider various factors at each step, and continuously update the DPIA or other documents as you progress through the project as things change from initial plans. 
+
+
+---
+
+### S14. Work collaboratively with software engineers to ensure suitable testing and documentation processes are implemented.
+
+**Situation:** The Hubble tool is a complex tool with many users and developers working on it.
+
+**Task:** Ensure there is sufficient testing and documentation.
+
+**Action:** Made it clear that all changes should be backed up by tests. If a function doesn't have a test, then make a test before making any changes.
+
+The tests should be run and passed before pushing anything to the main branch.
+
+There are various .md documentation files in the project. The README.md has full detail of everything you need to do to get it up and running. There are other docs in the docs folder, which explain how the project works and the choices made.
+
+**Result:** It's easy for new users to get up and running with the README.md documentation, even though there are lots of steps and systems involved.
+
+Users can more easily change functions, knowing there are unit tests they can verify their changes against.
+
+**Reflection:** The input data can be very varied and complicated, so it's not possible to create tests for everything, but there are integration style tests which have been created to cover the more complex cases.
+
+It can be a bit onerous creating tests, but the benefits outweigh the costs and in the long term they can actually save time.
+
+---
+
+### S16. Define requirements for, and supervise implementation and use of, data management infrastructure, including enterprise, private, and public cloud resources and services.
+
+**Situation:** There is a lot of valuable data stored in S3 buckets.
+
+**Task:** Ensure only those that need the data have access to that data.
+
+**Action:** To prevent everyone from accessing the S3 buckets, we created a proxy. I created a distribution list which limited who could access that proxy.
+
+**Result:** Only those that needed access had access to the data. But the proxy introduces some reliability and performance issues.
+
+**Reflection:** It can be difficult to restrict access to cloud resources, with restrictions primarily based on what system can access the data, without taking into account if all users of that system should have access.
+
+In the future the Lakehouse should have more functionality to limit access at a user level, which will increase speed and reliability over data access.
+
+---
+
+### S19. Use scalable infrastructures, high-performance networks, infrastructure and services management, and operation to generate effective business solutions.
+
+**Situation:** Some infrastructure needs to be scaled up or down depending on the need.
+
+**Task:** Setup the infrastructure in a way that it auto scales with use.
+
+**Action:** Using native AWS services, I created a database that would scale up with usage.
+
+**Result:** The native services were easier to use and setup, also easier to backup. But it turned out that these services were very expensive, with higher bills even with zero use. Understanding the costs was opaque and hard to understand.
+
+**Reflection:** There are some benefits of having a scaling function, especially with larger projects. But with the smaller projects I was working on, it was much better to select fixed price systems or even hosting them myself on EC2 instances.
+
+There just isn't a simple easy reliable way to predict costs, and there is a massive risk of a massive bill coming from out of nowhere. Serverless can end up costing more than a fixed database. It is also relatively easy to increase the size and capacity of a fixed size database when required.
+
+When extracting data initially there will be a large volume of data to process. This was too much for existing environments. So, I arranged for ODC to be setup, so that large systems with 128 cores can be temporarily run for large jobs, then closed down when finished. Some packages split up the work beforehand which caused issues since the documents can be very different in size, which meant that some cores were processing quite a few documents while other cores were unused. I had to look at other packages that split the work dynamically.
+
+---
+
+### S20. Design efficient algorithms for accessing and analysing large amounts of data, including Application Programming Interfaces (API) to different databases and data sets.
+
+Situation: Hubble needs to process a large volume of iXBRL documents. 
+
+Action: 
+Due to the large number of documents that were required to process, I used parallel processing to process many documents at the same time. 
+I worked the DevOps to setup On Demand Compute, where a dedicated platform can be spun up when required to process 128 returns in parallel and then closed when finished. 
+The large amount of data meant that just saving the data to files wouldn't be efficient so I setup a database to store the data once it was extracted. 
+
+Result:
+I could process lot of documents on a separate system without impacting on the main platform(and would often be beyond what the main platform could process). Saving that data to a database makes it much easier to query and use that data for analysts. R has packages like dbplyr which allows existing tidyverse style code to interact with database objects directly in an efficient manner, meaning existing code used to analyse the data could still be used. 
+
+Reflection:
+This was a situation where just using parallel processing alone wasn't enough I had to work with DevOps to also have much larger platforms to do the processing on in a cost efficient manner. Having large platform just when we need them makes it much more cost effective than having one running all the time.
+
+---
+
+### S23. Disseminate AI and data science practices across departments and in industry, promoting professional development and use of best practice.
+
+**Situation:** There is a lot of interest in using AI over iXBRL documents.
+
+**Task:** Understand the latest practices and look to share advice on how to improve them.
+
+**Action:** As an expert in iXBRL, I make the leading experts in the world aware of changes via Graffiti, which uses LLM over iXBRL data.
+
+I also share knowledge within the department using Teams channels and direct mentoring.
+
+**Result:** The understanding and use of iXBRL and LLM both inside the departments and externally have increased. The Graffiti tool they use has lots of benefits.
+
+**Reflection:** It can be difficult to disseminate best practices with AI, since it's moving so fast, that what was once best practice might not be anymore.
+
+---
+
+### S26. Select and apply the most effective/appropriate AI and data science techniques to solve complex business problems.
+
+**Situation:** There are various descriptions used in accounts. With different words, phrasing, stemming, etc.
+
+**Task:** Categorise the descriptions.
+
+**Action:** I tried various methods to categorise the descriptions. I tried using R, but the packages for ML aren't as mature.
+
+Python is a leading language when it comes to ML and it has more mature libraries.
+
+I tried simple methods to start with, with just using the cosine similarity from scikit-learn.
+
+Then I looked at other methods for supervised learning.
+
+Then I used some basic Naïve Bayes categorisation.
+
+Then I used BERT, and then fine-tuned it to categorise the descriptions. This has the benefit of using a big powerful model. I used datasets to grab the BERT model from Hugging Face. Transformers and torch were used to train the model.
+
+Then I created a smaller recurrent neural network to categorise the descriptions from scratch. This required using lower-level packages like Keras and TensorFlow.
+
+**Result:** The cosine similarity didn't work that well. This might be due to using specific accounting language that's not in public pretrained embeddings.
+
+Naïve Bayes did fairly well, but results weren't perfect.
+
+The BERT model worked well, but there were some big performance issues with larger datasets.
+
+I created lots of different models, with a multi-layer perceptron model coming out on top. It had good performance and could deal with more data.
+
+**Reflection:** Simpler methods like cosine similarity had bad results. This could be due to this having specific language, that normal embeddings don't understand.
+
+Naïve Bayes did have some good results, but overall the quality wasn't great.
+
+Initially I thought some of the more advanced BERT models would do better with this task, but they didn't have a clear advantage. I was surprised that the best method was a simpler MLP coming out on top considering all the factors. So, more complex isn't always better. While a BERT based model might have similar results, it's too big and slow to run over all the data, and its results weren't significantly better.
+
+Also designing the NN from scratch I expected RNN design to come out top, but this wasn't the case. Highlighting the importance of testing and using methods from different areas. Here some convolutional neural networks could also help with a text only analysis, which was very surprising.
+
+---
+
+### S28. Undertakes independent and impartial decision-making, respecting the opinions and views of others in complex, unpredictable, and changing circumstances.
+
+Situation: 
+With Hubble there were various stakeholders from technical to non-technical who had different views. Some of the non-technical stakeholders wanted to focus on accuracy as the key metric. Some analysts suggest using random forrest for the task. There was a lot of interest in more advanced transformer based models, since they were in fashion. 
+
+Task:
+Decide what models were best for classifying descriptions, taking into account, performance, cost, maintainability and explainability.
+
+Action: 
+I consulted various stakeholders about what they thought about models and metrics to use. Some of the non-technical stakeholders wanted to focus on accuracy, and while that would be a key metric due to the imbalanced nature of the data macro-f1 would be a better model to compare models, especially where the accuracy scores were similar.
+I compared a variety of models, which including various suggestions, then carefully compared them across various metrics, like performance, speed, explainability, security, maintainability, cost, etc.
+
+Result:
+The final model was selected based on comparing various metrics and a simpler TF-IDF LinearSVC model was selected because it had good f1-macro results, was quick, explainably, was secure, maintainable and could be run on existing architecture.
+
+Reflection:
+To be impartial there should be some metrics and tests created at the beginning, which you can then use as you start testing and comparing the various options. That way you don't just select what you want, but there is an objective way to mark and compare the different options. 
+
+
+
+
+
+---
+
+### B1. A strong work ethic and commitment to meeting the standards required.
+
+**Situation:** I have to prepare the material and work on the assessments.
+
+**Task:** I have to learn the material for a workshop and also submit assessments at the right level.
+
+**Action:** I spend a significant time ensuring I cover all the material on QM learning, including notes. But I also try to read the recommended reading, which provides details in more depth and in a different way.
+
+If I don't understand something, I'll try to find more about it and solve my confusion. Sometimes it's just an elaboration, otherwise it's more intense — like how does QM increase factorization speed? It's due to a specific algorithm that can use a quantum Fourier transformation, which gives it the speed up. It's not simply QM doing things in parallel.
+
+**Result:** I learn the material well, which helps me stay at the standards required.
+
+**Reflection:** My last assessment was 80%, which I was pleased with.
+
+---
+
+### B3. Acts with integrity with respect to ethical, legal, and regulatory, ensuring the protection of personal data, safety, and security.
+
+**Situation:** The dataset extracted from Companies House filings could contain sensitive data, such as names of directors or references to personal information within financial statements.
+
+**Task:** I needed to make sure the machine learning pipeline didn't compromise data privacy or breach any legal requirements such as GDPR.
+
+**Action:** I applied data minimisation and privacy-by-design from the start. During cleaning, I stripped or replaced identifiers (names, companies, dates, numbers) with placeholders and ensured no personal data was included in model training. All processing was done within secure AWS environments — VPC-contained EC2 instances and S3 storage — and outputs were stored in an access-controlled Oracle database.
+
+**Result:** The project met data protection and security requirements, with zero risk of personal data leakage. This allowed the ML workflow to be demonstrated safely in a regulated environment.
+
+**Reflection:** Integrity in AI isn't optional. It's what makes the work usable and defensible. I learned that ethical discipline early on prevents legal and reputational issues later. I'll continue embedding DPIA reviews into every future project.
+
+GDPR — OECD Collection limitation principle, Data quality principle, Purpose specification principle, Use limitation principle, Security safeguards principle, Openness principle, Individual participation principle, Accountability principle.
+
+Hide Optical LED — on a collection of lids, covering quality sweets, being eaten by someone on a perp walk, who then puts on a lid, on a safe, which is in an open plain, except for an individual having a party with a principal, and an accountant.
+
+---
+
+### B4. Initiative and personal responsibility for overcoming challenges and taking ownership for solutions.
+
+**Situation:** No off-the-shelf solution existed for tagging unstructured iXBRL data, and the initial attempts with simple NLP approaches performed poorly.
+
+**Task:** I needed to take ownership of the project's technical direction, solve issues independently, and deliver a working proof of concept.
+
+**Action:** I explored alternative architectures, retrained datasets, and built the fine-tuned BERT model from the ground up. When computing limitations hit (GPU constraints), I troubleshot runtime issues and reconfigured the workflow to run efficiently on available infrastructure. I managed the full lifecycle — extraction, cleaning, training, validation, and reporting — without relying on prebuilt templates or automation.
+
+**Result:** The project produced a functional and validated classification model with 0.86 accuracy. It was the first working demonstration of this approach in our environment, proving the business case for ML in data profiling.
+
+**Reflection:** Ownership means delivering, not just contributing. I took full responsibility from concept to execution. It taught me resilience and pragmatic problem-solving under real constraints.
+
+---
+
+### B5. Commitment to continuous professional development; maintaining their knowledge and skills in relation to AI developments that influence their work.
+
+**Situation:** There are lots of sources and learning material to stay up to date.
+
+**Task:** Use the most appropriate methods to stay up to date. The learning on QA is a good start, with recommended books being higher quality.
+
+**Action:** Read the mandatory QA material. Read the key optional recommended books.
+
+**Result:** Learning has increased.
+
+**Reflection:** You can't read all the recommended books, so you need to prioritise. Sometimes it's not possible to read everything before a workshop, but if it looks important I'll read it after.
+
+---
+
+### B7. Participates and shares best practice in their organisation and the wider community around all aspects of AI data science.
+
+**Situation:** There is lots of best practice in what people do.
+
+**Task:** Share best practice.
+
+**Action:** I write instruction and guidance wikis, which make it easy for others to see and learn.
+
+**Result:** There is a good wiki that people often learn from on how to follow best practice.
+
+**Reflection:** When I find something that's more efficient or best practice, it's important to save that on a wiki, so people in the future can easily see it, as well as informing current users.
+
+---
+
+### B8. Maintains awareness of trends and innovations in the subject area, utilising a range of academic literature, online sources, community interaction, conference attendance, and other methods.
+
+**Situation:** AI and NLP evolve fast, and to build a credible proof of concept, I needed to base my approach on up-to-date research and best practices.
+
+**Task:** I needed to ensure my design choices — particularly around transformer models and text classification — reflected the current state of AI research and not outdated methods.
+
+**Action:** I reviewed recent literature on transformer architectures (Vaswani et al., 2017) and practical sources like Rothman (2024) for fine-tuning BERT. I also studied documentation from Hugging Face and relevant GitHub repositories to benchmark against current methods.
+
+**Result:** The solution aligned with modern industry practice, achieving strong performance and technical credibility. My research-informed approach positioned the project as forward-looking, not just functional.
+
+**Reflection:** Staying current isn't just academic — it's strategic. By grounding my methods in research and community best practices, I made the work more defensible and adaptable to future advances.
+
+
+# Study Notes
+
+## ML Algorithms
+
+### Supervised Learning
+
+Supervised learning trains a model on labelled data — each training example has an input and a known correct output. The model learns a function that maps inputs to outputs, which it can then apply to unseen data.
+
+---
+
+#### Linear Regression
+
+**Definition:** Models the relationship between a continuous target variable and one or more input features by fitting a straight line (or hyperplane) that minimises prediction error.
+
+**Formula:** prediction = intercept + Σ(input × coefficient)
+
+**Use cases:** Predicting continuous values — house prices, tax revenue, demand forecasting.
+
+**Key assumptions:** Linearity, normally distributed errors, no multicollinearity.
+
+**Optimisation:** Ordinary Least Squares (OLS) minimises the sum of squared residuals. Gradient descent is used when the dataset is too large for OLS.
+
+**Bias-Variance Trade-off:** High bias = underfitting (too simple). High variance = overfitting (too complex). Regularisation (L1/Lasso, L2/Ridge) helps manage this.
+
+---
+
+#### Logistic Regression
+
+**Definition:** A classification algorithm (despite the name) that models the probability that an input belongs to a class using the sigmoid function, which maps any value to [0, 1].
+
+**Use cases:** Binary classification — spam detection, fraud detection, churn prediction.
+
+**Comparison with linear regression:** Linear regression predicts a continuous value; logistic regression predicts a probability and applies a threshold (typically 0.5) to classify. Logistic regression uses the log-odds (logit) rather than the raw output.
+
+---
+
+#### K-Nearest Neighbours (KNN)
+
+**Definition:** A non-parametric, lazy learning algorithm. To classify a new point, it calculates the distance to the K nearest training examples and assigns the most frequent class among those neighbours.
+
+**Use cases:** Classification and regression on smaller datasets; recommendation systems.
+
+**Advantages:** Simple, no training phase, naturally handles multi-class problems.
+
+**Disadvantages:** Computationally expensive at prediction time (must scan all training data); sensitive to irrelevant features and scale (requires normalisation); poor performance on high-dimensional data (curse of dimensionality).
+
+**Key parameter:** K — too small overfits, too large underfits. Chosen via cross-validation.
+
+**Comparison with Naive Bayes:** KNN makes no probabilistic assumptions but is computationally heavy. Naive Bayes is faster but assumes feature independence. KNN degrades significantly as dimensionality increases; Naive Bayes handles high dimensions better.
+
+---
+
+#### Naive Bayes
+
+**Definition:** A probabilistic classifier based on Bayes' theorem, assuming that all features are conditionally independent given the class label (the "naive" assumption).
+
+**Bayes' theorem:** P(A|B) = P(B|A) × P(A) / P(B)
+- **Prior probability:** probability of an event before new evidence is considered.
+- **Posterior probability:** updated probability after evidence is incorporated.
+
+**Variants:** Gaussian (continuous features), Multinomial (word counts in text), Bernoulli (binary features).
+
+**Use cases:** Text classification, spam filtering, document categorisation.
+
+**Advantages:** Fast to train and predict; works well with small data; handles high dimensions well.
+
+**Disadvantages:** Independence assumption is rarely fully satisfied in practice; poor probability calibration; cannot learn feature interactions.
+
+**Comparison with logistic regression:** Logistic regression is discriminative (learns the boundary directly); Naive Bayes is generative (models the data distribution per class). Logistic regression typically outperforms with more data; Naive Bayes can work better with very little data.
+
+---
+
+#### Decision Trees
+
+**Definition:** A tree-structured model where each internal node tests a feature, each branch represents an outcome, and each leaf node gives a class label or value. Built by recursively splitting data to maximise purity.
+
+**Splitting criteria:**
+- **Entropy / Information Gain (ID3, C4.5):** Measures disorder; splits that reduce entropy most are preferred. A pure set has entropy = 0.
+- **Gini Impurity (CART):** Measures the probability of misclassifying a randomly chosen element.
+
+**Algorithms:**
+- **ID3:** Uses information gain; handles categorical features only; no pruning.
+- **C4.5:** Handles continuous values and missing data; applies post-pruning.
+- **CART:** Produces binary trees; basis for Random Forests and Gradient Boosting. Uses Gini for classification, MSE for regression.
+
+**Use cases:** Classification and regression; interpretable models; feature importance analysis.
+
+**Advantages:** Highly interpretable and visualisable; no feature scaling needed; handles missing values; non-parametric.
+
+**Disadvantages:** Prone to overfitting; unstable (small data changes can produce a very different tree); biased towards features with many distinct values.
+
+---
+
+#### Random Forests
+
+**Definition:** An ensemble method that builds many decision trees on random subsets of data (bootstrapping) and random subsets of features at each split. The final prediction is the majority vote (classification) or mean (regression).
+
+**Key mechanism — Bagging (Bootstrap Aggregating):** Each tree is trained on a different random sample (with replacement), which reduces variance and prevents overfitting.
+
+**Use cases:** Classification and regression on tabular data; feature importance ranking; handling high-dimensional, noisy data.
+
+**Advantages:** More accurate than a single decision tree; resistant to overfitting; handles high-dimensional data well; provides feature importance estimates.
+
+**Disadvantages:** Less interpretable than a single tree; computationally heavier; slower to predict.
+
+**Comparison with Decision Trees:** Random Forests trade interpretability for accuracy and robustness. A single tree explains its decisions step by step; a forest of 100 trees does not.
+
+---
+
+#### Gradient Boosting (XGBoost, LightGBM)
+
+**Definition:** An ensemble method that builds trees sequentially, with each new tree correcting the errors of the previous one. Minimises a loss function using gradient descent in function space.
+
+**Key difference from Random Forests:** Random Forests build trees in parallel (independently); Gradient Boosting builds trees sequentially (each learns from previous errors). Boosting typically achieves higher accuracy but is more prone to overfitting without regularisation.
+
+**Popular implementations:** XGBoost (fast, regularisation built in), LightGBM (faster on large datasets), CatBoost (handles categorical features natively).
+
+**Use cases:** Tabular data, fraud detection, click-through rate prediction, credit scoring.
+
+**Disadvantages:** Computationally intensive; many hyperparameters to tune; can overfit with noisy data.
+
+---
+
+#### Support Vector Machines (SVM) and LinearSVC
+
+**Definition:** SVM finds the hyperplane that maximally separates classes in feature space. The margin is the distance between the hyperplane and the nearest data points (support vectors). SVM maximises this margin.
+
+**Key concepts:**
+- **Margin:** Distance between the decision boundary and the nearest training points. SVM maximises this.
+- **Support vectors:** The training examples closest to the decision boundary — these define the hyperplane.
+- **Kernel trick:** Maps data into a higher-dimensional space so a linear boundary becomes viable (RBF, polynomial kernels allow non-linear separation).
+- **C parameter:** Controls the margin-error trade-off. Small C = wide margin, allows more misclassifications (soft margin). Large C = narrow margin, fewer errors (harder margin, risk of overfitting).
+
+**LinearSVC:** A linear SVM implementation optimised for large-scale text classification. Uses only a linear kernel but is much faster than a full SVM on large datasets. Feature coefficients are directly interpretable.
+
+**Use cases:** Text classification (especially with TFIDF), high-dimensional data where other models struggle, bioinformatics.
+
+**Advantages:** Effective in high-dimensional spaces; memory efficient; robust to overfitting in high dimensions; good generalisation.
+
+**Disadvantages:** Slower to train than Naive Bayes; kernel choice matters; not the most interpretable; not well-suited to very large datasets (LinearSVC handles this better).
+
+**In my project:** LinearSVC with TFIDF features outperformed BERT and MLP when accounting for speed, explainability, and infrastructure constraints. Feature coefficients show which terms drive each classification — providing interpretability not available in neural approaches.
+
+---
+
+#### TFIDF (Term Frequency–Inverse Document Frequency)
+
+**Definition:** A text feature extraction technique that converts text into numerical vectors. It scores each word (or n-gram) by how often it appears in a document (TF) relative to how many documents contain it (IDF).
+
+**Formula:**
+- **TF(t, d)** = count of term t in document d / total terms in d
+- **IDF(t)** = log(N / df(t)), where N = total documents, df(t) = documents containing t
+- **TFIDF(t, d)** = TF(t, d) × IDF(t)
+
+**Effect:** Common words like "the" or "and" receive low scores; rare, domain-specific words receive high scores.
+
+**Use cases:** Text classification, information retrieval, document similarity, search engines.
+
+**N-grams:** TFIDF can capture sequences of words (bigrams: "interest receivable", trigrams: "interest income tax") rather than single words, improving classification of multi-word accounting concepts.
+
+**Comparison with word embeddings (Word2Vec, BERT):** TFIDF creates sparse, interpretable vectors; embeddings create dense semantic vectors that understand context and synonymy. TFIDF often outperforms embeddings on domain-specific tasks with limited training data and distinctive vocabulary. Embeddings need sufficient data to capture domain-specific language patterns.
+
+---
+
+### Unsupervised Learning
+
+Unsupervised learning finds patterns in unlabelled data — there is no known output to train against.
+
+---
+
+#### K-Means Clustering
+
+**Definition:** Partitions data into K clusters by iteratively assigning each point to its nearest centroid (arithmetic mean of the cluster) and updating centroids until convergence.
+
+**Algorithm:**
+1. Initialise K centroids randomly (K-means++ selects better starting points).
+2. Assign each point to the nearest centroid.
+3. Recompute centroids as the mean of assigned points.
+4. Repeat steps 2–3 until centroids stop moving.
+
+**Use cases:** Customer segmentation, document clustering, anomaly detection, data compression.
+
+**Key parameter:** K — must be chosen in advance. Use the elbow method (plot inertia vs K) or silhouette score to select K.
+
+**Advantages:** Simple, scalable, fast for large datasets.
+
+**Disadvantages:** Sensitive to initial centroid placement; sensitive to outliers (K-medoids is more robust); assumes spherical clusters of similar size; requires K to be specified.
+
+**Comparison with K-Medoids:** K-means uses the mean (affected by outliers); K-medoids uses an actual data point as the cluster centre (more robust to outliers but computationally heavier). Choose K-medoids when outliers are a concern.
+
+---
+
+#### Hierarchical Clustering
+
+**Definition:** Builds a tree (dendrogram) of clusters without requiring K in advance. Agglomerative (bottom-up: start with each point as its own cluster, merge closest pairs) or divisive (top-down).
+
+**Linkage methods:** Single linkage (nearest neighbour), complete linkage (furthest neighbour), average linkage, Ward's method (minimises within-cluster variance — often produces the most compact clusters).
+
+**Use cases:** Gene expression analysis, document clustering where hierarchy is meaningful, small-to-medium datasets.
+
+**Advantages:** No need to specify K; produces a dendrogram showing cluster relationships at all scales.
+
+**Disadvantages:** Computationally expensive O(n²) to O(n³); cannot revise merges once made.
+
+---
+
+#### Principal Component Analysis (PCA)
+
+**Definition:** A dimensionality reduction technique that projects data onto a lower-dimensional space by finding the directions (principal components) that capture the most variance. Components are orthogonal linear combinations of original features.
+
+**Use cases:** Visualisation (reducing to 2D/3D), noise reduction, removing multicollinearity before regression, speeding up downstream ML.
+
+**Key concepts:**
+- **Explained variance ratio:** How much variance each component captures.
+- **Singular Value Decomposition (SVD):** The underlying mathematical operation.
+
+**Advantages:** Reduces dimensionality and noise; removes correlated features; speeds up downstream models.
+
+**Disadvantages:** Principal components are linear combinations — not directly interpretable; loses some information; sensitive to feature scale (requires standardisation first).
+
+---
+
+### Deep Learning
+
+#### Neural Networks (Feedforward / MLP)
+
+**Definition:** A Multi-Layer Perceptron (MLP) consists of an input layer, one or more hidden layers, and an output layer. Each layer contains neurons connected by weighted edges. The network learns by adjusting weights to minimise a loss function.
+
+**Training process:**
+1. Forward pass: input flows through the network, producing a prediction.
+2. Loss calculation: compares prediction to the true label (cross-entropy for classification, MSE for regression).
+3. Backpropagation: the gradient of the loss is propagated backwards through the network.
+4. Weight update: weights updated via gradient descent (SGD, Adam, etc.).
+
+**Activation functions:**
+- **ReLU (Rectified Linear Unit):** f(x) = max(0, x). Most common in hidden layers; avoids vanishing gradient.
+- **Sigmoid:** Maps to [0,1]; used in output for binary classification.
+- **Softmax:** Maps to probabilities summing to 1; used for multi-class output.
+
+**Hyperparameters:** Number of layers, neurons per layer, learning rate, batch size, epochs, dropout rate.
+
+**Use cases:** Image recognition, NLP, complex non-linear relationships in tabular data.
+
+**Vanishing gradient problem:** In deep networks, gradients become very small during backpropagation, preventing early layers from learning. Addressed by ReLU, batch normalisation, residual connections.
+
+**Comparison with LinearSVC:** MLP can learn complex non-linear interactions; LinearSVC cannot. However, MLP requires more data, more tuning, and is a "black box" compared to the interpretable coefficients of LinearSVC.
+
+---
+
+#### Convolutional Neural Networks (CNNs)
+
+**Definition:** Apply learnable filters (kernels) across input data to detect local patterns. Designed for images but also effective for sequential/text data.
+
+**Key layers:**
+- **Convolutional layer:** Applies filters to detect features (edges, textures, patterns).
+- **Pooling layer:** Downsamples feature maps (max pooling keeps the maximum value in each region).
+- **Fully connected layer:** Final classification/regression layers.
+
+**Use cases:** Image classification, object detection, image segmentation, medical imaging (can outperform human experts at detecting cancer from scans). Also effective for 1D text classification — surprisingly so, given it was designed for spatial data.
+
+**Advantages:** Automatically learns spatial hierarchies of features; parameter sharing reduces weights; translation invariant.
+
+---
+
+#### Recurrent Neural Networks (RNNs) and LSTMs
+
+**Definition:** RNNs process sequential data by maintaining a hidden state that passes information from one time step to the next.
+
+**Problem — Vanishing gradient:** In standard RNNs, gradients shrink exponentially over long sequences, making it hard to learn long-range dependencies.
+
+**Long Short-Term Memory (LSTM):** A specialised RNN with gating mechanisms (input gate, forget gate, output gate) that selectively remember or forget information over long sequences.
+
+**Use cases:** Time series forecasting, speech recognition, language modelling, machine translation, sentiment analysis.
+
+**Comparison with Transformers:** LSTMs process sequences step-by-step (sequential); Transformers process the whole sequence at once via self-attention (parallelisable, faster to train). Transformers have largely replaced RNNs/LSTMs for most NLP tasks due to better performance and scalability.
+
+---
+
+#### Transformers and BERT
+
+**Transformer (Vaswani et al., 2017):** Uses self-attention to model relationships between all positions in a sequence simultaneously. Self-attention lets each token attend to every other token, capturing long-range dependencies efficiently without recurrence.
+
+**BERT (Bidirectional Encoder Representations from Transformers):**
+- Uses only the encoder stack of the Transformer.
+- **Bidirectional:** Reads context from both left and right simultaneously (unlike GPT which is left-to-right only).
+- **Architecture:** BERT Base — 12 layers, 768 dimensions, 12 attention heads. BERT Large — 24 layers, 1024 dimensions, 16 heads.
+- **Pre-training tasks:**
+  - **Masked Language Modelling (MLM):** 15% of tokens are masked; model predicts masked tokens. Breakdown: 80% replaced with [MASK], 10% with a random token, 10% unchanged. Forces bidirectional contextual understanding.
+  - **Next Sentence Prediction (NSP):** Determines whether two sentences naturally follow each other.
+- **Fine-tuning:** Pre-trained BERT can be fine-tuned on smaller labelled datasets for specific tasks (text classification, NER, question answering).
+
+**Special tokens:**
+- **[CLS]:** Added at the start; its final hidden state is used for classification.
+- **[SEP]:** Separates sentence pairs.
+- **[MASK]:** Used during MLM pre-training.
+
+**Input embeddings:** Token embeddings + segment embeddings + positional embeddings (learned).
+
+**Tokenisation:** WordPiece — rare words are split into subword units (e.g., "playing" → "play", "##ing").
+
+**RoBERTa:** Robustly optimised BERT — trained longer on more data, removes NSP, uses dynamic masking and byte-pair encoding (BPE). Consistently outperforms BERT on downstream tasks.
+
+**secBERT:** Domain-specific BERT pre-trained on financial/accounting data. Improves on specialist terminology but introduces risks around provenance, explainability, and infrastructure requirements.
+
+**BERT vs TFIDF+LinearSVC:**
+- BERT has better semantic understanding: handles context, synonymy, and word sense; generalises better to unseen phrasings.
+- BERT is large, slow, requires GPU, and is harder to explain (black box).
+- TFIDF+LinearSVC is fast, CPU-friendly, interpretable (feature coefficients show which terms drive classification), and often competitive or superior on domain-specific tasks with limited training data and highly distinctive vocabulary.
+
+---
+
+### Key ML Concepts
+
+#### Overfitting and Underfitting
+
+- **Overfitting:** Model learns training data too well, including noise. High training accuracy, low test accuracy. Addressed by: regularisation, more data, simpler model, dropout, cross-validation.
+- **Underfitting:** Model is too simple to capture the pattern. Low training and test accuracy. Addressed by: more complex model, better features, less regularisation.
+
+#### Bias-Variance Trade-off
+
+- **Bias:** Error from oversimplifying assumptions (underfitting).
+- **Variance:** Error from sensitivity to small fluctuations in training data (overfitting).
+- Goal: minimise total error (bias² + variance + irreducible noise).
+
+#### Cross-Validation
+
+Training on a single split is unreliable. K-fold cross-validation splits the data into k folds, trains on k-1 and validates on 1, repeating k times. Gives a more robust generalisation estimate.
+
+**Stratified cross-validation:** Ensures each fold has the same class proportions as the full dataset — essential for imbalanced data.
+
+#### Regularisation
+
+- **L1 (Lasso):** Adds the sum of absolute coefficient values to the loss. Drives some coefficients to exactly zero — acts as feature selection.
+- **L2 (Ridge):** Adds the sum of squared coefficients. Shrinks all coefficients but rarely to zero.
+- **Elastic Net:** Combines L1 and L2.
+
+#### Handling Imbalanced Data
+
+When one class vastly outnumbers another (e.g., fraud is rare), accuracy is misleading — a model predicting "no fraud" always would have 99%+ accuracy while being useless.
+
+Solutions:
+- **SMOTE (Synthetic Minority Oversampling Technique):** Generates synthetic examples of the minority class by interpolating between existing minority examples.
+- **Class weighting:** Penalises errors on the minority class more heavily during training.
+- **Undersampling:** Reduces the majority class.
+- Use precision, recall, F1, and AUC-ROC as primary metrics rather than accuracy.
+
+---
+
+## Performance Metrics
+
+### Classification Metrics
+
+#### Confusion Matrix
+
+| | Predicted Positive | Predicted Negative |
+|---|---|---|
+| **Actual Positive** | True Positive (TP) | False Negative (FN) |
+| **Actual Negative** | False Positive (FP) | True Negative (TN) |
+
+- **TP:** Correctly predicted positive.
+- **TN:** Correctly predicted negative.
+- **FP:** Predicted positive but actually negative (Type I error).
+- **FN:** Predicted negative but actually positive (Type II error — often more dangerous in medical/safety contexts).
+
+---
+
+#### Accuracy
+
+**Formula:** Accuracy = (TP + TN) / (TP + TN + FP + FN)
+
+**Use case:** Good when classes are balanced.
+
+**Limitation:** Misleading on imbalanced datasets. A model always predicting the majority class can have high accuracy while failing completely on the minority class.
+
+---
+
+#### Precision
+
+**Formula:** Precision = TP / (TP + FP)
+
+**Interpretation:** Of all instances predicted positive, what fraction actually are positive?
+
+**Use case:** Prioritise when false positives are costly. Example: spam filter — you do not want to incorrectly mark legitimate emails as spam.
+
+---
+
+#### Recall (Sensitivity / True Positive Rate)
+
+**Formula:** Recall = TP / (TP + FN)
+
+**Interpretation:** Of all actual positives, what fraction did the model correctly identify?
+
+**Use case:** Prioritise when false negatives are costly. Example: cancer detection — missing a real positive case is dangerous.
+
+---
+
+#### F1 Score
+
+**Formula:** F1 = 2 × (Precision × Recall) / (Precision + Recall)
+
+**Definition:** The harmonic mean of Precision and Recall. Balances both metrics.
+
+**Why harmonic mean?** Penalises extreme values — a model with very high precision but zero recall gets F1 = 0, not 50%.
+
+**F1 averaging methods for multi-class:**
+- **Macro F1:** Average F1 across all classes, weighting each class equally. Use when all classes matter equally, even small/rare ones. Best for my project where all XBRL taxonomy classes should perform well.
+- **Micro F1:** Aggregates TP, FP, FN across all classes before computing F1. Dominated by frequent classes.
+- **Weighted F1:** Average F1 weighted by class support (number of true instances per class). Balances class frequency.
+
+---
+
+#### ROC Curve and AUC
+
+**ROC (Receiver Operating Characteristic) curve:** Plots the True Positive Rate (Recall) against the False Positive Rate (FP / (FP + TN)) at different classification thresholds.
+
+**AUC (Area Under the Curve):**
+- AUC = 1.0: Perfect classifier.
+- AUC = 0.5: No better than random (diagonal line).
+
+**Use case:** Evaluating binary classifiers; useful when the threshold needs to be selected; robust to class imbalance.
+
+**Precision-Recall (PR) curve:** Alternative for highly imbalanced datasets — plots Precision vs. Recall across thresholds. Average Precision (area under PR curve) is more informative than AUC-ROC when the positive class is rare.
+
+---
+
+#### Balanced Accuracy
+
+**Formula:** Balanced Accuracy = (Sensitivity + Specificity) / 2
+
+Corrects for class imbalance by averaging recall per class.
+
+---
+
+### Regression Metrics
+
+#### Mean Absolute Error (MAE)
+
+**Formula:** MAE = (1/n) × Σ|yᵢ − ŷᵢ|
+
+**Interpretation:** Average absolute difference between predicted and actual values, in the same units as the target.
+
+**Advantages:** Intuitive; robust to outliers (treats all errors equally).
+
+---
+
+#### Mean Squared Error (MSE)
+
+**Formula:** MSE = (1/n) × Σ(yᵢ − ŷᵢ)²
+
+**Interpretation:** Average squared difference. Penalises large errors disproportionately.
+
+**Disadvantages:** Sensitive to outliers; units are squared.
+
+---
+
+#### Root Mean Squared Error (RMSE)
+
+**Formula:** RMSE = √MSE
+
+**Interpretation:** Same units as the target variable; penalises large errors more than MAE. Most common regression metric in practice.
+
+---
+
+#### R² (Coefficient of Determination)
+
+**Formula:** R² = 1 − (SS_res / SS_tot), where SS_res = Σ(yᵢ − ŷᵢ)² and SS_tot = Σ(yᵢ − ȳ)²
+
+**Interpretation:** Proportion of variance in the target explained by the model.
+- R² = 1: Perfect fit.
+- R² = 0: Model no better than predicting the mean.
+- R² < 0: Model worse than predicting the mean.
+
+**Limitation:** Always increases as more features are added (even noise). Use Adjusted R² when comparing models with different numbers of features.
+
+---
+
+### Clustering Metrics
+
+#### Silhouette Score
+
+Measures how similar a point is to its own cluster compared to other clusters. Ranges from -1 to 1.
+- 1: Well clustered.
+- 0: On the boundary between clusters.
+- -1: Likely in the wrong cluster.
+
+#### Adjusted Rand Index (ARI)
+
+Compares a clustering to a ground-truth labelling, adjusted for chance. ARI = 1 is perfect; ARI = 0 is random.
+
+---
+
+## Metric Selection Summary
+
+| Problem Type | Primary Metric | Secondary Metrics | Notes |
+|---|---|---|---|
+| Balanced classification | Accuracy | F1 (weighted), Confusion matrix | Fine when classes are equal |
+| Imbalanced classification | F1 macro / AUC-ROC | Precision, Recall per class | Avoid accuracy alone |
+| Multi-class, all classes matter | F1 macro | Confusion matrix | Equal weight to rare classes |
+| Regression | RMSE | MAE, R² | RMSE penalises large errors more |
+| Text classification (my project) | F1 macro | Confusion matrix, Per-class precision/recall | Important for varied class sizes |
+| Ranking / probability output | AUC-ROC | Average Precision (PR-AUC) | Threshold-independent |

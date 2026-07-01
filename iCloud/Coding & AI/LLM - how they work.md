@@ -107,3 +107,4 @@ So the graphite substance is the thing that performs the visible transfer onto t
 
 >Human brains are misaligned, hallucinative, stochastic parrots. Let’s finally build Biological General Intelligence
 https://samuelfitoussi.substack.com/p/human-brains-are-misaligned-hallucinative
+
