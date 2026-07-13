@@ -218,7 +218,7 @@ I used SQL to create the tables in an Oracle database. R has packages like dbply
 
 Notes: k-means, lots of regression, neural networks, random forest, transformers, supervised, unsupervised. Building the network requires understanding of how various NN work. Neural networks are designed to simulate how the brain works, with networks connected to each other by a weighting. To train the model a loss function calculates the difference between the labelled output and updates each weight that contributed to that loss, then using backpropagation the loss is moved back through the network. More complicated neurons like LSTM have some long term memory which deals with issues around vanishing gradient. Some of these more advanced networks seemed like they would deal better with text, but it was possible to get results just as good using simpler networks.
 
-See notes at bottom.
+See Study Notes below (ML algorithms, neural networks, key ML concepts, evaluation metrics).
 
 ---
 
@@ -689,7 +689,7 @@ All pass (above) and distinction criteria (below) must be met:
 # Study Notes
 
 
-# Statistical Methods
+## Statistical Methods
 
 Statistical methods are techniques used to **collect, summarize, analyze, and interpret data** to support decision‑making. They are broadly divided into **Descriptive Statistics** and **Inferential Statistics**.
 
@@ -995,7 +995,7 @@ ANOVA avoids increased **error risk** from repeated comparisons.
 
 ------------------------------------------------------------------------
 
-# Data Mining
+## Data Mining
 
 ------------------------------------------------------------------------
 
@@ -1030,7 +1030,7 @@ To **discover hidden patterns, trends, and relationships** in large datasets to 
 
 ------------------------------------------------------------------------
 
-# Supervised Machine Learning
+## Supervised Machine Learning
 
 **Purpose:**\
 To **train models on labelled data** so they can make accurate **predictions or classifications** on new, unseen data.
@@ -1201,6 +1201,14 @@ $$
 
 A decision tree repeatedly splits data to minimise uncertainty in predictions.
 
+**Decision tree algorithms**
+
+- **ID3:** Uses information gain; handles categorical features only; no pruning.
+
+- **C4.5:** Handles continuous values and missing data; applies post-pruning.
+
+- **CART:** Produces binary trees; basis for Random Forests and Gradient Boosting. Uses Gini for classification, MSE for regression.
+
 ------------------------------------------------------------------------
 
 **3. Random Forests – Mathematical Foundation**
@@ -1303,7 +1311,47 @@ Random forests average many weak, uncorrelated trees to produce a strong, stable
 
 ------------------------------------------------------------------------
 
-# Neural networks ( architecture, gradient, maths in the nodes, gradient descent, weights)
+**4. Logistic Regression**
+
+**Definition:** A classification algorithm (despite the name) that models the probability that an input belongs to a class using the sigmoid function, which maps any value to [0, 1].
+
+**Use cases:** Binary classification — spam detection, fraud detection, churn prediction.
+
+**Comparison with linear regression:** Linear regression predicts a continuous value; logistic regression predicts a probability and applies a threshold (typically 0.5) to classify. Logistic regression uses the log-odds (logit) rather than the raw output.
+
+------------------------------------------------------------------------
+
+**5. K-Nearest Neighbours (KNN)**
+
+**Definition:** A non-parametric, lazy learning algorithm. To classify a new point, it calculates the distance to the K nearest training examples and assigns the most frequent class among those neighbours.
+
+**Use cases:** Classification and regression on smaller datasets; recommendation systems.
+
+**Advantages:** Simple, no training phase, naturally handles multi-class problems.
+
+**Disadvantages:** Computationally expensive at prediction time (must scan all training data); sensitive to irrelevant features and scale (requires normalisation); poor performance on high-dimensional data (curse of dimensionality).
+
+**Key parameter:** K — too small overfits, too large underfits. Chosen via cross-validation.
+
+**Comparison with Naive Bayes:** KNN makes no probabilistic assumptions but is computationally heavy. Naive Bayes is faster but assumes feature independence. KNN degrades significantly as dimensionality increases; Naive Bayes handles high dimensions better.
+
+------------------------------------------------------------------------
+
+**6. Gradient Boosting (XGBoost, LightGBM)**
+
+**Definition:** An ensemble method that builds trees sequentially, with each new tree correcting the errors of the previous one. Minimises a loss function using gradient descent in function space.
+
+**Key difference from Random Forests:** Random Forests build trees in parallel (independently); Gradient Boosting builds trees sequentially (each learns from previous errors). Boosting typically achieves higher accuracy but is more prone to overfitting without regularisation.
+
+**Popular implementations:** XGBoost (fast, regularisation built in), LightGBM (faster on large datasets), CatBoost (handles categorical features natively).
+
+**Use cases:** Tabular data, fraud detection, click-through rate prediction, credit scoring.
+
+**Disadvantages:** Computationally intensive; many hyperparameters to tune; can overfit with noisy data.
+
+------------------------------------------------------------------------
+
+## Neural networks ( architecture, gradient, maths in the nodes, gradient descent, weights)
 
 ------------------------------------------------------------------------
 
@@ -1793,7 +1841,45 @@ $$
 
 ------------------------------------------------------------------------
 
-# Clustering
+**Convolutional Neural Networks (CNNs)**
+
+**Definition:** Apply learnable filters (kernels) across input data to detect local patterns. Designed for images but also effective for sequential/text data.
+
+**Key layers:**
+
+- **Convolutional layer:** Applies filters to detect features (edges, textures, patterns).
+
+- **Pooling layer:** Downsamples feature maps (max pooling keeps the maximum value in each region).
+
+- **Fully connected layer:** Final classification/regression layers.
+
+**Use cases:** Image classification, object detection, image segmentation, medical imaging (can outperform human experts at detecting cancer from scans). Also effective for 1D text classification — surprisingly so, given it was designed for spatial data.
+
+**Advantages:** Automatically learns spatial hierarchies of features; parameter sharing reduces weights; translation invariant.
+
+------------------------------------------------------------------------
+
+**Recurrent Neural Networks (RNNs) and LSTMs**
+
+**Definition:** RNNs process sequential data by maintaining a hidden state that passes information from one time step to the next.
+
+**Problem — Vanishing gradient:** In standard RNNs, gradients shrink exponentially over long sequences, making it hard to learn long-range dependencies.
+
+**Long Short-Term Memory (LSTM):** A specialised RNN with gating mechanisms (input gate, forget gate, output gate) that selectively remember or forget information over long sequences.
+
+**Use cases:** Time series forecasting, speech recognition, language modelling, machine translation, sentiment analysis.
+
+**Comparison with Transformers:** LSTMs process sequences step-by-step (sequential); Transformers process the whole sequence at once via self-attention (parallelisable, faster to train). Transformers have largely replaced RNNs/LSTMs for most NLP tasks due to better performance and scalability.
+
+------------------------------------------------------------------------
+
+**Comparison with LinearSVC (project context)**
+
+MLP can learn complex non-linear interactions; LinearSVC cannot. However, MLP requires more data, more tuning, and is a "black box" compared to the interpretable coefficients of LinearSVC.
+
+------------------------------------------------------------------------
+
+## Clustering
 
 ------------------------------------------------------------------------
 
@@ -1859,11 +1945,16 @@ $$
 
 Uses distance measures like:
 
-- Single linkage
+- Single linkage (nearest neighbour)
 
-- Complete linkage
+- Complete linkage (furthest neighbour)
 
 - Average linkage
+
+- Ward's method (minimises within-cluster variance — often produces the most compact clusters)
+
+**Pros:** No need to specify K; dendrogram shows cluster relationships at all scales\
+**Cons:** Computationally expensive O(n²) to O(n³); cannot revise merges once made
 
 ------------------------------------------------------------------------
 
@@ -2198,6 +2289,16 @@ Lower storage size with minimal quality loss.
 
 ------------------------------------------------------------------------
 
+**K‑Means — Additional Detail**
+
+- **Initialisation:** K-means++ selects better starting centroids than random initialisation (K-means is sensitive to initial placement).
+
+- **Choosing K:** Use the elbow method (plot inertia vs K) or silhouette score to select K.
+
+- **Comparison with K-Medoids:** K-means uses the mean (affected by outliers); K-medoids uses an actual data point as the cluster centre (more robust to outliers but computationally heavier). Choose K-medoids when outliers are a concern.
+
+------------------------------------------------------------------------
+
 **Model Evaluation Metrics**
 
 Metrics are used to **measure how well a machine‑learning model performs** by comparing predictions with actual values.
@@ -2421,7 +2522,75 @@ $$
 
 ------------------------------------------------------------------------
 
-# Types of Machine Learning
+**Confusion Matrix**
+
+| | Predicted Positive | Predicted Negative |
+|---|---|---|
+| **Actual Positive** | True Positive (TP) | False Negative (FN) |
+| **Actual Negative** | False Positive (FP) | True Negative (TN) |
+
+- **TP:** Correctly predicted positive.
+
+- **TN:** Correctly predicted negative.
+
+- **FP:** Predicted positive but actually negative (Type I error).
+
+- **FN:** Predicted negative but actually positive (Type II error — often more dangerous in medical/safety contexts).
+
+------------------------------------------------------------------------
+
+**F1 Averaging Methods for Multi-Class**
+
+**Why harmonic mean?** F1 penalises extreme values — a model with very high precision but zero recall gets F1 = 0, not 50%.
+
+- **Macro F1:** Average F1 across all classes, weighting each class equally. Use when all classes matter equally, even small/rare ones. Best for my project where all XBRL taxonomy classes should perform well.
+
+- **Micro F1:** Aggregates TP, FP, FN across all classes before computing F1. Dominated by frequent classes.
+
+- **Weighted F1:** Average F1 weighted by class support (number of true instances per class). Balances class frequency.
+
+------------------------------------------------------------------------
+
+**Precision-Recall (PR) Curve**
+
+Alternative to ROC for highly imbalanced datasets — plots Precision vs. Recall across thresholds. Average Precision (area under PR curve) is more informative than AUC-ROC when the positive class is rare.
+
+**Balanced Accuracy** = (Sensitivity + Specificity) / 2 — corrects for class imbalance by averaging recall per class.
+
+------------------------------------------------------------------------
+
+**3. Clustering Metrics**
+
+**Silhouette Score**
+
+Measures how similar a point is to its own cluster compared to other clusters. Ranges from -1 to 1.
+
+- 1: Well clustered.
+
+- 0: On the boundary between clusters.
+
+- -1: Likely in the wrong cluster.
+
+**Adjusted Rand Index (ARI)**
+
+Compares a clustering to a ground-truth labelling, adjusted for chance. ARI = 1 is perfect; ARI = 0 is random.
+
+------------------------------------------------------------------------
+
+**Metric Selection Summary**
+
+| Problem Type | Primary Metric | Secondary Metrics | Notes |
+|---|---|---|---|
+| Balanced classification | Accuracy | F1 (weighted), Confusion matrix | Fine when classes are equal |
+| Imbalanced classification | F1 macro / AUC-ROC | Precision, Recall per class | Avoid accuracy alone |
+| Multi-class, all classes matter | F1 macro | Confusion matrix | Equal weight to rare classes |
+| Regression | RMSE | MAE, R² | RMSE penalises large errors more |
+| Text classification (my project) | F1 macro | Confusion matrix, Per-class precision/recall | Important for varied class sizes |
+| Ranking / probability output | AUC-ROC | Average Precision (PR-AUC) | Threshold-independent |
+
+------------------------------------------------------------------------
+
+## Types of Machine Learning
 
 Machine learning can be broadly classified based on **how the model learns from data** and **whether labelled data is available**.
 
@@ -2631,7 +2800,7 @@ Learn useful representations without manual labelling.
 
 ------------------------------------------------------------------------
 
-# The Machine Learning Pipeline
+## The Machine Learning Pipeline
 
 The machine learning pipeline describes the **sequence of steps followed to build, train, evaluate, and deploy an ML model** in a systematic and repeatable way.
 
@@ -2939,7 +3108,7 @@ Deploy → Monitor → Retrain
 
 ------------------------------------------------------------------------
 
-# Model Drift
+## Model Drift
 
 ------------------------------------------------------------------------
 
@@ -3146,7 +3315,7 @@ Retraining Decision
 
 ------------------------------------------------------------------------
 
-## Clean Drift Monitoring Diagram
+### Clean Drift Monitoring Diagram
 
 <img src="./media/image9.png" style="width:6.26806in;height:2.7125in" />
 
@@ -3178,7 +3347,7 @@ Retraining Decision
 
 ------------------------------------------------------------------------
 
-## How are PSI and Chi‑Square Test Measured?
+### How are PSI and Chi‑Square Test Measured?
 
 Both **PSI** and **Chi‑Square tests** are used to **measure data drift**, but they differ in **what they compare and how they interpret change**.
 
@@ -3365,7 +3534,7 @@ $$
 
 ------------------------------------------------------------------------
 
-# KPIs for Algorithm Accuracy
+## KPIs for Algorithm Accuracy
 
 Algorithm accuracy KPIs measure **how well a model’s predictions match reality** and whether it is **fit for production use**.
 
@@ -3672,7 +3841,7 @@ print(f"{r2=}")
 
 ------------------------------------------------------------------------
 
-# Poor Data quality
+## Poor Data quality
 
 When **data quality is not good**, **pure accuracy metrics are unreliable**. In that situation, you should shift focus from *“how accurate is the prediction?”* to *“how reliable, stable, and trustworthy is the model given bad data?”*
 
@@ -3836,7 +4005,7 @@ They give a **false sense of performance**.
 
 ------------------------------------------------------------------------
 
-# select and apply the most effective/appropriate AI and data science techniques to solve complex business problems
+## select and apply the most effective/appropriate AI and data science techniques to solve complex business problems
 
 ------------------------------------------------------------------------
 
@@ -4125,7 +4294,7 @@ I also define:
 
 ------------------------------------------------------------------------
 
-# How do you disseminate AI and Data Science practices?
+## How do you disseminate AI and Data Science practices?
 
 ------------------------------------------------------------------------
 
@@ -4336,7 +4505,7 @@ Standards → Training → Tools/Assets → Use Cases → Governance → Scaling
 
 ------------------------------------------------------------------------
 
-# How do you identify trends in the current AI landscape?
+## How do you identify trends in the current AI landscape?
 
 ------------------------------------------------------------------------
 
@@ -4540,7 +4709,7 @@ You can mention these in interviews:
 
 ------------------------------------------------------------------------
 
-# Common algorithms to know
+## Common algorithms to know
 
 ------------------------------------------------------------------------
 
@@ -4676,6 +4845,14 @@ PCA:
 
 “PCA reduces dimensionality by projecting data onto directions of maximum variance using eigen decomposition.”
 
+**PCA — additional detail**
+
+- **Explained variance ratio:** how much variance each component captures. Singular Value Decomposition (SVD) is the underlying mathematical operation.
+
+- **Advantages:** Reduces dimensionality and noise; removes correlated features; speeds up downstream models.
+
+- **Disadvantages:** Principal components are linear combinations — not directly interpretable; loses some information; sensitive to feature scale (requires standardisation first).
+
 ------------------------------------------------------------------------
 
 **3. Apriori Algorithm**
@@ -4802,6 +4979,18 @@ Pick the higher probability.
 
 “Naive Bayes applies Bayes’ theorem with independence assumptions to compute class probabilities efficiently.”
 
+**Naive Bayes — additional detail**
+
+- **Prior probability:** probability of an event before new evidence is considered. **Posterior probability:** updated probability after evidence is incorporated.
+
+- **Variants:** Gaussian (continuous features), Multinomial (word counts in text), Bernoulli (binary features).
+
+- **Advantages:** Fast to train and predict; works well with small data; handles high dimensions well.
+
+- **Disadvantages:** Independence assumption is rarely fully satisfied in practice; poor probability calibration; cannot learn feature interactions.
+
+- **Comparison with logistic regression:** Logistic regression is discriminative (learns the boundary directly); Naive Bayes is generative (models the data distribution per class). Logistic regression typically outperforms with more data; Naive Bayes can work better with very little data.
+
 ------------------------------------------------------------------------
 
 **✅ Final Comparison (Quick Recall)**
@@ -4821,7 +5010,7 @@ Pick the higher probability.
 
 ------------------------------------------------------------------------
 
-# Hyperparameter tuning
+## Hyperparameter tuning
 
 ------------------------------------------------------------------------
 
@@ -4950,7 +5139,61 @@ You can add:
 
 ------------------------------------------------------------------------
 
-# Definition of SVM (Support Vector Machine)
+## Key ML Concepts
+
+**Overfitting and Underfitting**
+
+- **Overfitting:** Model learns training data too well, including noise. High training accuracy, low test accuracy. Addressed by: regularisation, more data, simpler model, dropout, cross-validation.
+
+- **Underfitting:** Model is too simple to capture the pattern. Low training and test accuracy. Addressed by: more complex model, better features, less regularisation.
+
+------------------------------------------------------------------------
+
+**Bias-Variance Trade-off**
+
+- **Bias:** Error from oversimplifying assumptions (underfitting).
+
+- **Variance:** Error from sensitivity to small fluctuations in training data (overfitting).
+
+- Goal: minimise total error (bias² + variance + irreducible noise).
+
+------------------------------------------------------------------------
+
+**Cross-Validation**
+
+Training on a single split is unreliable. K-fold cross-validation splits the data into k folds, trains on k-1 and validates on 1, repeating k times. Gives a more robust generalisation estimate.
+
+**Stratified cross-validation:** Ensures each fold has the same class proportions as the full dataset — essential for imbalanced data.
+
+------------------------------------------------------------------------
+
+**Regularisation**
+
+- **L1 (Lasso):** Adds the sum of absolute coefficient values to the loss. Drives some coefficients to exactly zero — acts as feature selection.
+
+- **L2 (Ridge):** Adds the sum of squared coefficients. Shrinks all coefficients but rarely to zero.
+
+- **Elastic Net:** Combines L1 and L2.
+
+------------------------------------------------------------------------
+
+**Handling Imbalanced Data**
+
+When one class vastly outnumbers another (e.g., fraud is rare), accuracy is misleading — a model predicting "no fraud" always would have 99%+ accuracy while being useless.
+
+Solutions:
+
+- **SMOTE (Synthetic Minority Oversampling Technique):** Generates synthetic examples of the minority class by interpolating between existing minority examples.
+
+- **Class weighting:** Penalises errors on the minority class more heavily during training.
+
+- **Undersampling:** Reduces the majority class.
+
+- Use precision, recall, F1, and AUC-ROC as primary metrics rather than accuracy.
+
+------------------------------------------------------------------------
+
+## Definition of SVM (Support Vector Machine)
 
 ------------------------------------------------------------------------
 
@@ -5016,7 +5259,53 @@ $$
 
 “SVM separates data by maximising the margin between classes using the most important boundary points called support vectors.”
 
-# ✅ Activation Functions in Neural Networks
+------------------------------------------------------------------------
+
+**✅ Key Concepts (Additional Detail)**
+
+- **Kernel trick:** Maps data into a higher-dimensional space so a linear boundary becomes viable (RBF, polynomial kernels allow non-linear separation).
+
+- **C parameter:** Controls the margin-error trade-off. Small C = wide margin, allows more misclassifications (soft margin). Large C = narrow margin, fewer errors (harder margin, risk of overfitting).
+
+**Advantages:** Effective in high-dimensional spaces; memory efficient; robust to overfitting in high dimensions; good generalisation.
+
+**Disadvantages:** Slower to train than Naive Bayes; kernel choice matters; not the most interpretable; not well-suited to very large datasets (LinearSVC handles this better).
+
+------------------------------------------------------------------------
+
+**✅ LinearSVC**
+
+A linear SVM implementation optimised for large-scale text classification. Uses only a linear kernel but is much faster than a full SVM on large datasets. Feature coefficients are directly interpretable.
+
+**Use cases:** Text classification (especially with TFIDF), high-dimensional data where other models struggle, bioinformatics.
+
+**In my project:** LinearSVC with TFIDF features outperformed BERT and MLP when accounting for speed, explainability, and infrastructure constraints. Feature coefficients show which terms drive each classification — providing interpretability not available in neural approaches.
+
+------------------------------------------------------------------------
+
+## TFIDF (Term Frequency–Inverse Document Frequency)
+
+**Definition:** A text feature extraction technique that converts text into numerical vectors. It scores each word (or n-gram) by how often it appears in a document (TF) relative to how many documents contain it (IDF).
+
+**Formula:**
+
+- **TF(t, d)** = count of term t in document d / total terms in d
+
+- **IDF(t)** = log(N / df(t)), where N = total documents, df(t) = documents containing t
+
+- **TFIDF(t, d)** = TF(t, d) × IDF(t)
+
+**Effect:** Common words like "the" or "and" receive low scores; rare, domain-specific words receive high scores.
+
+**Use cases:** Text classification, information retrieval, document similarity, search engines.
+
+**N-grams:** TFIDF can capture sequences of words (bigrams: "interest receivable", trigrams: "interest income tax") rather than single words, improving classification of multi-word accounting concepts.
+
+**Comparison with word embeddings (Word2Vec, BERT):** TFIDF creates sparse, interpretable vectors; embeddings create dense semantic vectors that understand context and synonymy. TFIDF often outperforms embeddings on domain-specific tasks with limited training data and distinctive vocabulary. Embeddings need sufficient data to capture domain-specific language patterns.
+
+------------------------------------------------------------------------
+
+## ✅ Activation Functions in Neural Networks
 
 Activation functions convert the neuron output $z$into a **non‑linear output**, enabling neural networks to learn **complex patterns**.
 
@@ -5220,7 +5509,7 @@ $$
 
 ------------------------------------------------------------------------
 
-# What is Softmax?
+## What is Softmax?
 
 **Softmax** is an **activation function** used in neural networks to convert raw outputs (logits) into **probabilities across multiple classes**.
 
@@ -5330,7 +5619,53 @@ You can add:
 
 ------------------------------------------------------------------------
 
-# Will AI remove jobs?
+## Transformers and BERT
+
+**Transformer (Vaswani et al., 2017):** Uses self-attention to model relationships between all positions in a sequence simultaneously. Self-attention lets each token attend to every other token, capturing long-range dependencies efficiently without recurrence.
+
+**BERT (Bidirectional Encoder Representations from Transformers):**
+
+- Uses only the encoder stack of the Transformer.
+
+- **Bidirectional:** Reads context from both left and right simultaneously (unlike GPT which is left-to-right only).
+
+- **Architecture:** BERT Base — 12 layers, 768 dimensions, 12 attention heads. BERT Large — 24 layers, 1024 dimensions, 16 heads.
+
+- **Pre-training tasks:**
+
+  - **Masked Language Modelling (MLM):** 15% of tokens are masked; model predicts masked tokens. Breakdown: 80% replaced with [MASK], 10% with a random token, 10% unchanged. Forces bidirectional contextual understanding.
+
+  - **Next Sentence Prediction (NSP):** Determines whether two sentences naturally follow each other.
+
+- **Fine-tuning:** Pre-trained BERT can be fine-tuned on smaller labelled datasets for specific tasks (text classification, NER, question answering).
+
+**Special tokens:**
+
+- **[CLS]:** Added at the start; its final hidden state is used for classification.
+
+- **[SEP]:** Separates sentence pairs.
+
+- **[MASK]:** Used during MLM pre-training.
+
+**Input embeddings:** Token embeddings + segment embeddings + positional embeddings (learned).
+
+**Tokenisation:** WordPiece — rare words are split into subword units (e.g., "playing" → "play", "##ing").
+
+**RoBERTa:** Robustly optimised BERT — trained longer on more data, removes NSP, uses dynamic masking and byte-pair encoding (BPE). Consistently outperforms BERT on downstream tasks.
+
+**secBERT:** Domain-specific BERT pre-trained on financial/accounting data. Improves on specialist terminology but introduces risks around provenance, explainability, and infrastructure requirements.
+
+**BERT vs TFIDF+LinearSVC (project context):**
+
+- BERT has better semantic understanding: handles context, synonymy, and word sense; generalises better to unseen phrasings.
+
+- BERT is large, slow, requires GPU, and is harder to explain (black box).
+
+- TFIDF+LinearSVC is fast, CPU-friendly, interpretable (feature coefficients show which terms drive classification), and often competitive or superior on domain-specific tasks with limited training data and highly distinctive vocabulary.
+
+------------------------------------------------------------------------
+
+## Will AI remove jobs?
 
 ------------------------------------------------------------------------
 
@@ -5465,7 +5800,7 @@ Focus on skills that are repeatedly identified as rising in importance:
 
 ------------------------------------------------------------------------
 
-# Impact of AI on Industry and Society
+## Impact of AI on Industry and Society
 
 AI is having a **transformational impact** across both **industries** (how businesses operate) and **society** (how people live and work). The impact is **mixed**—bringing significant benefits along with important risks.
 
@@ -5686,7 +6021,7 @@ If AI is used for:
 
 ------------------------------------------------------------------------
 
-# Why Do We Use Unsupervised Learning?
+## Why Do We Use Unsupervised Learning?
 
 We use **unsupervised learning when we don’t have labelled data** and want to **discover hidden patterns or structure** in data.
 
@@ -5894,504 +6229,3 @@ Incident Management
 
 ------------------------------------------------------------------------
 
-# Old notes
-
-## ML Algorithms
-
-### Supervised Learning
-
-Supervised learning trains a model on labelled data — each training example has an input and a known correct output. The model learns a function that maps inputs to outputs, which it can then apply to unseen data.
-
----
-
-#### Linear Regression
-
-**Definition:** Models the relationship between a continuous target variable and one or more input features by fitting a straight line (or hyperplane) that minimises prediction error.
-
-**Formula:** prediction = intercept + Σ(input × coefficient)
-
-**Use cases:** Predicting continuous values — house prices, tax revenue, demand forecasting.
-
-**Key assumptions:** Linearity, normally distributed errors, no multicollinearity.
-
-**Optimisation:** Ordinary Least Squares (OLS) minimises the sum of squared residuals. Gradient descent is used when the dataset is too large for OLS.
-
-**Bias-Variance Trade-off:** High bias = underfitting (too simple). High variance = overfitting (too complex). Regularisation (L1/Lasso, L2/Ridge) helps manage this.
-
----
-
-#### Logistic Regression
-
-**Definition:** A classification algorithm (despite the name) that models the probability that an input belongs to a class using the sigmoid function, which maps any value to [0, 1].
-
-**Use cases:** Binary classification — spam detection, fraud detection, churn prediction.
-
-**Comparison with linear regression:** Linear regression predicts a continuous value; logistic regression predicts a probability and applies a threshold (typically 0.5) to classify. Logistic regression uses the log-odds (logit) rather than the raw output.
-
----
-
-#### K-Nearest Neighbours (KNN)
-
-**Definition:** A non-parametric, lazy learning algorithm. To classify a new point, it calculates the distance to the K nearest training examples and assigns the most frequent class among those neighbours.
-
-**Use cases:** Classification and regression on smaller datasets; recommendation systems.
-
-**Advantages:** Simple, no training phase, naturally handles multi-class problems.
-
-**Disadvantages:** Computationally expensive at prediction time (must scan all training data); sensitive to irrelevant features and scale (requires normalisation); poor performance on high-dimensional data (curse of dimensionality).
-
-**Key parameter:** K — too small overfits, too large underfits. Chosen via cross-validation.
-
-**Comparison with Naive Bayes:** KNN makes no probabilistic assumptions but is computationally heavy. Naive Bayes is faster but assumes feature independence. KNN degrades significantly as dimensionality increases; Naive Bayes handles high dimensions better.
-
----
-
-#### Naive Bayes
-
-**Definition:** A probabilistic classifier based on Bayes' theorem, assuming that all features are conditionally independent given the class label (the "naive" assumption).
-
-**Bayes' theorem:** P(A|B) = P(B|A) × P(A) / P(B)
-- **Prior probability:** probability of an event before new evidence is considered.
-- **Posterior probability:** updated probability after evidence is incorporated.
-
-**Variants:** Gaussian (continuous features), Multinomial (word counts in text), Bernoulli (binary features).
-
-**Use cases:** Text classification, spam filtering, document categorisation.
-
-**Advantages:** Fast to train and predict; works well with small data; handles high dimensions well.
-
-**Disadvantages:** Independence assumption is rarely fully satisfied in practice; poor probability calibration; cannot learn feature interactions.
-
-**Comparison with logistic regression:** Logistic regression is discriminative (learns the boundary directly); Naive Bayes is generative (models the data distribution per class). Logistic regression typically outperforms with more data; Naive Bayes can work better with very little data.
-
----
-
-#### Decision Trees
-
-**Definition:** A tree-structured model where each internal node tests a feature, each branch represents an outcome, and each leaf node gives a class label or value. Built by recursively splitting data to maximise purity.
-
-**Splitting criteria:**
-- **Entropy / Information Gain (ID3, C4.5):** Measures disorder; splits that reduce entropy most are preferred. A pure set has entropy = 0.
-- **Gini Impurity (CART):** Measures the probability of misclassifying a randomly chosen element.
-
-**Algorithms:**
-- **ID3:** Uses information gain; handles categorical features only; no pruning.
-- **C4.5:** Handles continuous values and missing data; applies post-pruning.
-- **CART:** Produces binary trees; basis for Random Forests and Gradient Boosting. Uses Gini for classification, MSE for regression.
-
-**Use cases:** Classification and regression; interpretable models; feature importance analysis.
-
-**Advantages:** Highly interpretable and visualisable; no feature scaling needed; handles missing values; non-parametric.
-
-**Disadvantages:** Prone to overfitting; unstable (small data changes can produce a very different tree); biased towards features with many distinct values.
-
----
-
-#### Random Forests
-
-**Definition:** An ensemble method that builds many decision trees on random subsets of data (bootstrapping) and random subsets of features at each split. The final prediction is the majority vote (classification) or mean (regression).
-
-**Key mechanism — Bagging (Bootstrap Aggregating):** Each tree is trained on a different random sample (with replacement), which reduces variance and prevents overfitting.
-
-**Use cases:** Classification and regression on tabular data; feature importance ranking; handling high-dimensional, noisy data.
-
-**Advantages:** More accurate than a single decision tree; resistant to overfitting; handles high-dimensional data well; provides feature importance estimates.
-
-**Disadvantages:** Less interpretable than a single tree; computationally heavier; slower to predict.
-
-**Comparison with Decision Trees:** Random Forests trade interpretability for accuracy and robustness. A single tree explains its decisions step by step; a forest of 100 trees does not.
-
----
-
-#### Gradient Boosting (XGBoost, LightGBM)
-
-**Definition:** An ensemble method that builds trees sequentially, with each new tree correcting the errors of the previous one. Minimises a loss function using gradient descent in function space.
-
-**Key difference from Random Forests:** Random Forests build trees in parallel (independently); Gradient Boosting builds trees sequentially (each learns from previous errors). Boosting typically achieves higher accuracy but is more prone to overfitting without regularisation.
-
-**Popular implementations:** XGBoost (fast, regularisation built in), LightGBM (faster on large datasets), CatBoost (handles categorical features natively).
-
-**Use cases:** Tabular data, fraud detection, click-through rate prediction, credit scoring.
-
-**Disadvantages:** Computationally intensive; many hyperparameters to tune; can overfit with noisy data.
-
----
-
-#### Support Vector Machines (SVM) and LinearSVC
-
-**Definition:** SVM finds the hyperplane that maximally separates classes in feature space. The margin is the distance between the hyperplane and the nearest data points (support vectors). SVM maximises this margin.
-
-**Key concepts:**
-- **Margin:** Distance between the decision boundary and the nearest training points. SVM maximises this.
-- **Support vectors:** The training examples closest to the decision boundary — these define the hyperplane.
-- **Kernel trick:** Maps data into a higher-dimensional space so a linear boundary becomes viable (RBF, polynomial kernels allow non-linear separation).
-- **C parameter:** Controls the margin-error trade-off. Small C = wide margin, allows more misclassifications (soft margin). Large C = narrow margin, fewer errors (harder margin, risk of overfitting).
-
-**LinearSVC:** A linear SVM implementation optimised for large-scale text classification. Uses only a linear kernel but is much faster than a full SVM on large datasets. Feature coefficients are directly interpretable.
-
-**Use cases:** Text classification (especially with TFIDF), high-dimensional data where other models struggle, bioinformatics.
-
-**Advantages:** Effective in high-dimensional spaces; memory efficient; robust to overfitting in high dimensions; good generalisation.
-
-**Disadvantages:** Slower to train than Naive Bayes; kernel choice matters; not the most interpretable; not well-suited to very large datasets (LinearSVC handles this better).
-
-**In my project:** LinearSVC with TFIDF features outperformed BERT and MLP when accounting for speed, explainability, and infrastructure constraints. Feature coefficients show which terms drive each classification — providing interpretability not available in neural approaches.
-
----
-
-#### TFIDF (Term Frequency–Inverse Document Frequency)
-
-**Definition:** A text feature extraction technique that converts text into numerical vectors. It scores each word (or n-gram) by how often it appears in a document (TF) relative to how many documents contain it (IDF).
-
-**Formula:**
-- **TF(t, d)** = count of term t in document d / total terms in d
-- **IDF(t)** = log(N / df(t)), where N = total documents, df(t) = documents containing t
-- **TFIDF(t, d)** = TF(t, d) × IDF(t)
-
-**Effect:** Common words like "the" or "and" receive low scores; rare, domain-specific words receive high scores.
-
-**Use cases:** Text classification, information retrieval, document similarity, search engines.
-
-**N-grams:** TFIDF can capture sequences of words (bigrams: "interest receivable", trigrams: "interest income tax") rather than single words, improving classification of multi-word accounting concepts.
-
-**Comparison with word embeddings (Word2Vec, BERT):** TFIDF creates sparse, interpretable vectors; embeddings create dense semantic vectors that understand context and synonymy. TFIDF often outperforms embeddings on domain-specific tasks with limited training data and distinctive vocabulary. Embeddings need sufficient data to capture domain-specific language patterns.
-
----
-
-### Unsupervised Learning
-
-Unsupervised learning finds patterns in unlabelled data — there is no known output to train against.
-
----
-
-#### K-Means Clustering
-
-**Definition:** Partitions data into K clusters by iteratively assigning each point to its nearest centroid (arithmetic mean of the cluster) and updating centroids until convergence.
-
-**Algorithm:**
-1. Initialise K centroids randomly (K-means++ selects better starting points).
-2. Assign each point to the nearest centroid.
-3. Recompute centroids as the mean of assigned points.
-4. Repeat steps 2–3 until centroids stop moving.
-
-**Use cases:** Customer segmentation, document clustering, anomaly detection, data compression.
-
-**Key parameter:** K — must be chosen in advance. Use the elbow method (plot inertia vs K) or silhouette score to select K.
-
-**Advantages:** Simple, scalable, fast for large datasets.
-
-**Disadvantages:** Sensitive to initial centroid placement; sensitive to outliers (K-medoids is more robust); assumes spherical clusters of similar size; requires K to be specified.
-
-**Comparison with K-Medoids:** K-means uses the mean (affected by outliers); K-medoids uses an actual data point as the cluster centre (more robust to outliers but computationally heavier). Choose K-medoids when outliers are a concern.
-
----
-
-#### Hierarchical Clustering
-
-**Definition:** Builds a tree (dendrogram) of clusters without requiring K in advance. Agglomerative (bottom-up: start with each point as its own cluster, merge closest pairs) or divisive (top-down).
-
-**Linkage methods:** Single linkage (nearest neighbour), complete linkage (furthest neighbour), average linkage, Ward's method (minimises within-cluster variance — often produces the most compact clusters).
-
-**Use cases:** Gene expression analysis, document clustering where hierarchy is meaningful, small-to-medium datasets.
-
-**Advantages:** No need to specify K; produces a dendrogram showing cluster relationships at all scales.
-
-**Disadvantages:** Computationally expensive O(n²) to O(n³); cannot revise merges once made.
-
----
-
-#### Principal Component Analysis (PCA)
-
-**Definition:** A dimensionality reduction technique that projects data onto a lower-dimensional space by finding the directions (principal components) that capture the most variance. Components are orthogonal linear combinations of original features.
-
-**Use cases:** Visualisation (reducing to 2D/3D), noise reduction, removing multicollinearity before regression, speeding up downstream ML.
-
-**Key concepts:**
-- **Explained variance ratio:** How much variance each component captures.
-- **Singular Value Decomposition (SVD):** The underlying mathematical operation.
-
-**Advantages:** Reduces dimensionality and noise; removes correlated features; speeds up downstream models.
-
-**Disadvantages:** Principal components are linear combinations — not directly interpretable; loses some information; sensitive to feature scale (requires standardisation first).
-
----
-
-### Deep Learning
-
-#### Neural Networks (Feedforward / MLP)
-
-**Definition:** A Multi-Layer Perceptron (MLP) consists of an input layer, one or more hidden layers, and an output layer. Each layer contains neurons connected by weighted edges. The network learns by adjusting weights to minimise a loss function.
-
-**Training process:**
-1. Forward pass: input flows through the network, producing a prediction.
-2. Loss calculation: compares prediction to the true label (cross-entropy for classification, MSE for regression).
-3. Backpropagation: the gradient of the loss is propagated backwards through the network.
-4. Weight update: weights updated via gradient descent (SGD, Adam, etc.).
-
-**Activation functions:**
-- **ReLU (Rectified Linear Unit):** f(x) = max(0, x). Most common in hidden layers; avoids vanishing gradient.
-- **Sigmoid:** Maps to [0,1]; used in output for binary classification.
-- **Softmax:** Maps to probabilities summing to 1; used for multi-class output.
-
-**Hyperparameters:** Number of layers, neurons per layer, learning rate, batch size, epochs, dropout rate.
-
-**Use cases:** Image recognition, NLP, complex non-linear relationships in tabular data.
-
-**Vanishing gradient problem:** In deep networks, gradients become very small during backpropagation, preventing early layers from learning. Addressed by ReLU, batch normalisation, residual connections.
-
-**Comparison with LinearSVC:** MLP can learn complex non-linear interactions; LinearSVC cannot. However, MLP requires more data, more tuning, and is a "black box" compared to the interpretable coefficients of LinearSVC.
-
----
-
-#### Convolutional Neural Networks (CNNs)
-
-**Definition:** Apply learnable filters (kernels) across input data to detect local patterns. Designed for images but also effective for sequential/text data.
-
-**Key layers:**
-- **Convolutional layer:** Applies filters to detect features (edges, textures, patterns).
-- **Pooling layer:** Downsamples feature maps (max pooling keeps the maximum value in each region).
-- **Fully connected layer:** Final classification/regression layers.
-
-**Use cases:** Image classification, object detection, image segmentation, medical imaging (can outperform human experts at detecting cancer from scans). Also effective for 1D text classification — surprisingly so, given it was designed for spatial data.
-
-**Advantages:** Automatically learns spatial hierarchies of features; parameter sharing reduces weights; translation invariant.
-
----
-
-#### Recurrent Neural Networks (RNNs) and LSTMs
-
-**Definition:** RNNs process sequential data by maintaining a hidden state that passes information from one time step to the next.
-
-**Problem — Vanishing gradient:** In standard RNNs, gradients shrink exponentially over long sequences, making it hard to learn long-range dependencies.
-
-**Long Short-Term Memory (LSTM):** A specialised RNN with gating mechanisms (input gate, forget gate, output gate) that selectively remember or forget information over long sequences.
-
-**Use cases:** Time series forecasting, speech recognition, language modelling, machine translation, sentiment analysis.
-
-**Comparison with Transformers:** LSTMs process sequences step-by-step (sequential); Transformers process the whole sequence at once via self-attention (parallelisable, faster to train). Transformers have largely replaced RNNs/LSTMs for most NLP tasks due to better performance and scalability.
-
----
-
-#### Transformers and BERT
-
-**Transformer (Vaswani et al., 2017):** Uses self-attention to model relationships between all positions in a sequence simultaneously. Self-attention lets each token attend to every other token, capturing long-range dependencies efficiently without recurrence.
-
-**BERT (Bidirectional Encoder Representations from Transformers):**
-- Uses only the encoder stack of the Transformer.
-- **Bidirectional:** Reads context from both left and right simultaneously (unlike GPT which is left-to-right only).
-- **Architecture:** BERT Base — 12 layers, 768 dimensions, 12 attention heads. BERT Large — 24 layers, 1024 dimensions, 16 heads.
-- **Pre-training tasks:**
-  - **Masked Language Modelling (MLM):** 15% of tokens are masked; model predicts masked tokens. Breakdown: 80% replaced with [MASK], 10% with a random token, 10% unchanged. Forces bidirectional contextual understanding.
-  - **Next Sentence Prediction (NSP):** Determines whether two sentences naturally follow each other.
-- **Fine-tuning:** Pre-trained BERT can be fine-tuned on smaller labelled datasets for specific tasks (text classification, NER, question answering).
-
-**Special tokens:**
-- **[CLS]:** Added at the start; its final hidden state is used for classification.
-- **[SEP]:** Separates sentence pairs.
-- **[MASK]:** Used during MLM pre-training.
-
-**Input embeddings:** Token embeddings + segment embeddings + positional embeddings (learned).
-
-**Tokenisation:** WordPiece — rare words are split into subword units (e.g., "playing" → "play", "##ing").
-
-**RoBERTa:** Robustly optimised BERT — trained longer on more data, removes NSP, uses dynamic masking and byte-pair encoding (BPE). Consistently outperforms BERT on downstream tasks.
-
-**secBERT:** Domain-specific BERT pre-trained on financial/accounting data. Improves on specialist terminology but introduces risks around provenance, explainability, and infrastructure requirements.
-
-**BERT vs TFIDF+LinearSVC:**
-- BERT has better semantic understanding: handles context, synonymy, and word sense; generalises better to unseen phrasings.
-- BERT is large, slow, requires GPU, and is harder to explain (black box).
-- TFIDF+LinearSVC is fast, CPU-friendly, interpretable (feature coefficients show which terms drive classification), and often competitive or superior on domain-specific tasks with limited training data and highly distinctive vocabulary.
-
----
-
-### Key ML Concepts
-
-#### Overfitting and Underfitting
-
-- **Overfitting:** Model learns training data too well, including noise. High training accuracy, low test accuracy. Addressed by: regularisation, more data, simpler model, dropout, cross-validation.
-- **Underfitting:** Model is too simple to capture the pattern. Low training and test accuracy. Addressed by: more complex model, better features, less regularisation.
-
-#### Bias-Variance Trade-off
-
-- **Bias:** Error from oversimplifying assumptions (underfitting).
-- **Variance:** Error from sensitivity to small fluctuations in training data (overfitting).
-- Goal: minimise total error (bias² + variance + irreducible noise).
-
-#### Cross-Validation
-
-Training on a single split is unreliable. K-fold cross-validation splits the data into k folds, trains on k-1 and validates on 1, repeating k times. Gives a more robust generalisation estimate.
-
-**Stratified cross-validation:** Ensures each fold has the same class proportions as the full dataset — essential for imbalanced data.
-
-#### Regularisation
-
-- **L1 (Lasso):** Adds the sum of absolute coefficient values to the loss. Drives some coefficients to exactly zero — acts as feature selection.
-- **L2 (Ridge):** Adds the sum of squared coefficients. Shrinks all coefficients but rarely to zero.
-- **Elastic Net:** Combines L1 and L2.
-
-#### Handling Imbalanced Data
-
-When one class vastly outnumbers another (e.g., fraud is rare), accuracy is misleading — a model predicting "no fraud" always would have 99%+ accuracy while being useless.
-
-Solutions:
-- **SMOTE (Synthetic Minority Oversampling Technique):** Generates synthetic examples of the minority class by interpolating between existing minority examples.
-- **Class weighting:** Penalises errors on the minority class more heavily during training.
-- **Undersampling:** Reduces the majority class.
-- Use precision, recall, F1, and AUC-ROC as primary metrics rather than accuracy.
-
----
-
-## Performance Metrics
-
-### Classification Metrics
-
-#### Confusion Matrix
-
-| | Predicted Positive | Predicted Negative |
-|---|---|---|
-| **Actual Positive** | True Positive (TP) | False Negative (FN) |
-| **Actual Negative** | False Positive (FP) | True Negative (TN) |
-
-- **TP:** Correctly predicted positive.
-- **TN:** Correctly predicted negative.
-- **FP:** Predicted positive but actually negative (Type I error).
-- **FN:** Predicted negative but actually positive (Type II error — often more dangerous in medical/safety contexts).
-
----
-
-#### Accuracy
-
-**Formula:** Accuracy = (TP + TN) / (TP + TN + FP + FN)
-
-**Use case:** Good when classes are balanced.
-
-**Limitation:** Misleading on imbalanced datasets. A model always predicting the majority class can have high accuracy while failing completely on the minority class.
-
----
-
-#### Precision
-
-**Formula:** Precision = TP / (TP + FP)
-
-**Interpretation:** Of all instances predicted positive, what fraction actually are positive?
-
-**Use case:** Prioritise when false positives are costly. Example: spam filter — you do not want to incorrectly mark legitimate emails as spam.
-
----
-
-#### Recall (Sensitivity / True Positive Rate)
-
-**Formula:** Recall = TP / (TP + FN)
-
-**Interpretation:** Of all actual positives, what fraction did the model correctly identify?
-
-**Use case:** Prioritise when false negatives are costly. Example: cancer detection — missing a real positive case is dangerous.
-
----
-
-#### F1 Score
-
-**Formula:** F1 = 2 × (Precision × Recall) / (Precision + Recall)
-
-**Definition:** The harmonic mean of Precision and Recall. Balances both metrics.
-
-**Why harmonic mean?** Penalises extreme values — a model with very high precision but zero recall gets F1 = 0, not 50%.
-
-**F1 averaging methods for multi-class:**
-- **Macro F1:** Average F1 across all classes, weighting each class equally. Use when all classes matter equally, even small/rare ones. Best for my project where all XBRL taxonomy classes should perform well.
-- **Micro F1:** Aggregates TP, FP, FN across all classes before computing F1. Dominated by frequent classes.
-- **Weighted F1:** Average F1 weighted by class support (number of true instances per class). Balances class frequency.
-
----
-
-#### ROC Curve and AUC
-
-**ROC (Receiver Operating Characteristic) curve:** Plots the True Positive Rate (Recall) against the False Positive Rate (FP / (FP + TN)) at different classification thresholds.
-
-**AUC (Area Under the Curve):**
-- AUC = 1.0: Perfect classifier.
-- AUC = 0.5: No better than random (diagonal line).
-
-**Use case:** Evaluating binary classifiers; useful when the threshold needs to be selected; robust to class imbalance.
-
-**Precision-Recall (PR) curve:** Alternative for highly imbalanced datasets — plots Precision vs. Recall across thresholds. Average Precision (area under PR curve) is more informative than AUC-ROC when the positive class is rare.
-
----
-
-#### Balanced Accuracy
-
-**Formula:** Balanced Accuracy = (Sensitivity + Specificity) / 2
-
-Corrects for class imbalance by averaging recall per class.
-
----
-
-### Regression Metrics
-
-#### Mean Absolute Error (MAE)
-
-**Formula:** MAE = (1/n) × Σ|yᵢ − ŷᵢ|
-
-**Interpretation:** Average absolute difference between predicted and actual values, in the same units as the target.
-
-**Advantages:** Intuitive; robust to outliers (treats all errors equally).
-
----
-
-#### Mean Squared Error (MSE)
-
-**Formula:** MSE = (1/n) × Σ(yᵢ − ŷᵢ)²
-
-**Interpretation:** Average squared difference. Penalises large errors disproportionately.
-
-**Disadvantages:** Sensitive to outliers; units are squared.
-
----
-
-#### Root Mean Squared Error (RMSE)
-
-**Formula:** RMSE = √MSE
-
-**Interpretation:** Same units as the target variable; penalises large errors more than MAE. Most common regression metric in practice.
-
----
-
-#### R² (Coefficient of Determination)
-
-**Formula:** R² = 1 − (SS_res / SS_tot), where SS_res = Σ(yᵢ − ŷᵢ)² and SS_tot = Σ(yᵢ − ȳ)²
-
-**Interpretation:** Proportion of variance in the target explained by the model.
-- R² = 1: Perfect fit.
-- R² = 0: Model no better than predicting the mean.
-- R² < 0: Model worse than predicting the mean.
-
-**Limitation:** Always increases as more features are added (even noise). Use Adjusted R² when comparing models with different numbers of features.
-
----
-
-### Clustering Metrics
-
-#### Silhouette Score
-
-Measures how similar a point is to its own cluster compared to other clusters. Ranges from -1 to 1.
-- 1: Well clustered.
-- 0: On the boundary between clusters.
-- -1: Likely in the wrong cluster.
-
-#### Adjusted Rand Index (ARI)
-
-Compares a clustering to a ground-truth labelling, adjusted for chance. ARI = 1 is perfect; ARI = 0 is random.
-
----
-
-## Metric Selection Summary
-
-| Problem Type | Primary Metric | Secondary Metrics | Notes |
-|---|---|---|---|
-| Balanced classification | Accuracy | F1 (weighted), Confusion matrix | Fine when classes are equal |
-| Imbalanced classification | F1 macro / AUC-ROC | Precision, Recall per class | Avoid accuracy alone |
-| Multi-class, all classes matter | F1 macro | Confusion matrix | Equal weight to rare classes |
-| Regression | RMSE | MAE, R² | RMSE penalises large errors more |
-| Text classification (my project) | F1 macro | Confusion matrix, Per-class precision/recall | Important for varied class sizes |
-| Ranking / probability output | AUC-ROC | Average Precision (PR-AUC) | Threshold-independent |
