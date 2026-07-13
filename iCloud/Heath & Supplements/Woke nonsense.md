@@ -1,3 +1,4 @@
+#DEI #woke
 
 They say this is a microaggression that should be avoided.
 
@@ -11,3 +12,4 @@ https://www.bbc.co.uk/news/articles/c17zwde51vlo.amp
 
 >A blog published on 22 September by NHS England’s Genomics Education Programme said that marriage between first cousins had “various potential benefits,” while acknowledging that children of first cousins had an increased chance of being born with a genetic condition.
 https://www.bmj.com/content/391/bmj.r2061
+

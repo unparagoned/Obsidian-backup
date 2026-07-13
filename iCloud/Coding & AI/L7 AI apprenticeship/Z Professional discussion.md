@@ -283,3 +283,17 @@ In the lead-up to your discussion, practise presenting in-person and virtually, 
 Next up, you’ll be provided with the next steps for the rest of your EPA.
 
 
+1. Reference your portfolio
+2. Replay the question
+3. Use language from the KSBs
+4. State your roles and responsibilities
+5. Use your notes
+6. Speak in the first person
+7. Show your knowledge
+8. STARR
+
+Advantages and disadvantages between say PESSEL and SWOT
+
+Root cause problem solving, tools and techniques.
+- Is it normal and just user issue
+- 

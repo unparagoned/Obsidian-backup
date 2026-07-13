@@ -27,6 +27,12 @@ But telling you that first would be putting Descartes before the horse
 
 The greatest lie AI ever pulled was convincing the world it wasn't intelligent. 
 
+
+## Dating
+
+I was out at a concert and this girl asked if I thought she was hot, and I was like of-course your are hot, you've got sweat stains all over your top. 
+
+You know you are too hot to wear a white top like that, do you know why? You've got sweat stains all over it since it's soo hot. 
 # Introvert
 
 [[1c5a807510246f49cfc5c3d6702d255a_MD5.jpg|Open: Pasted image 20260627110317.png]]

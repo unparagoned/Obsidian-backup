@@ -17,7 +17,7 @@ Use these notes as a menu of approaches. In the exam, pick the approach that bes
 - [[AI and Data Science Professional Practice Term 2 Theme 5 Legal aspects =]]
 - [[AI and Data Science Professional Practice Term 2 Theme 6 Error, bias and uncertainty =]]
 - [[AI and Data Science Professional Practice Term 4 =]]
-- [[Data Science Principles Topic 4 - Statistical testing]]
+- [[Data Science Principles Topic 4 - Statistical testing =]]
 - [[Data Science Principles Topic 6 - Storing your data]]
 - [[Data Science Principles Topic 8 - Machine learning]]
 - [[Disruptive Leadership for Sustainable Strategy - Topic 6 - DataOps and MLOps]]

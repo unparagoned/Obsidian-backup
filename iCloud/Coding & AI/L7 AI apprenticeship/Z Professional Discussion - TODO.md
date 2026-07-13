@@ -1,0 +1,3 @@
+- ~~Watch video - https://app.qa.com/course/activity-instructions-for-assessment-method-2-ai/preparing-for-your-professional-discussion-19092024141245/?context_id=15088&context_resource=lp
+- Integrate previous learning journal
+- Printed copy of journal.

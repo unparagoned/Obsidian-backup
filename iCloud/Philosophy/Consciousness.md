@@ -13,6 +13,10 @@ https://consc.net/papers/facing.pdf
 There are certain processes that can transpire within the neurons and synapses of my brain, such that when they occur I say, “I am experiencing redness.”
 [https://nautil.us/zombies-must-be-dualists-235983/](https://nautil.us/zombies-must-be-dualists-235983/)
 
+
+A more interesting fact is that you are mostly a philosophical zombie. Almost everything you do and say is at the unconscious level.
+
+Most of what you do is really complex and at a really high level, but it's almost all completely unconscious. It would be quite strange for stuff much simpler to have any kind of experience when a complex human brain is mostly unconscious activity.
 ## Mary's room
 #marysroom #physicalism #frankjackson [[Frank Jackson]]
 
@@ -43,8 +47,10 @@ But what if on that computer you run the a simulation of physics of say a brain.
 #panpsychism
 
 Does consciousness has causal impact on the brain separate to the laws of physics.  
-	1.No. Then it's an epiphenomena. It can't be an epiphenomena since we can talk about our conscious experiences.
-	2. Yes. Then it means that electrons in the brain don't act in line with the laws of physics and we could in theory detect it. 
+1. No. 
+	1. Then either it's an epiphenomena or equivalent. It suffers from the closure problem since we can talk about our conscious experiences, but what we say is fully determined by physics. 
+	2. Or the physical construct is directly related to consciousness and it suffers from a simulation problem, in that a silicon based simulation of a human brain, would be talking about it's phenomenal experience but the conscious foundation and structure would be completely different than the biological style consciousness it's talking about. 
+2. Yes. Then it means that electrons in the brain don't act in line with the laws of physics and we could in theory detect it. Funny enough this is the only non-physicalist approach that I think is tenable from a philosophical level if you ignore science.  
 
 You could also think about what would happen if we just simulated the laws of physics of a person. If like the OP you accept that your theory aligns with the laws of physics, then the simulation would perfectly simulate a human and would talk about their conscious experience. Which would suggest that the conscious experience is fully embedded and explained by the laws of physics, and is substrate independent. It's a type of computation.
 

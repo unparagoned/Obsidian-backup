@@ -19,14 +19,14 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 
 ### 1a) Types of data to use
 - [[Data Science Principles Topic 1 - Intro to Data Science =]] — structured vs. unstructured data types
-- [[Data Science Principles Topic 5 - Working with big data]] — big data characteristics (volume, velocity, variety)
+- [[Data Science Principles Topic 5 - Working with big data =]] — big data characteristics (volume, velocity, variety)
 - [[Data Science Principles Topic 6 - Storing your data]] — data formats and storage types
 - [[Z Learning - Revision Notes]] — structured vs. semi-structured data definitions
 - [[Machine Learning using Cloud Computing Introduction to ML on AWS Course]] — AWS data types and services
 
 ### 1b) Process for extracting the data
 - [[Data Science Principles Topic 1 - Intro to Data Science =]] — data pipelines, ETL
-- [[Data Science Principles Topic 5 - Working with big data]] — batch vs. streaming ingestion
+- [[Data Science Principles Topic 5 - Working with big data =]] — batch vs. streaming ingestion
 - [[Disruptive Leadership for Sustainable Strategy - Topic 6 - DataOps and MLOps]] — DataOps pipelines, CI/CD
 - [[Machine Learning using Cloud Computing Introduction to ML on AWS Course]] — AWS Glue, Kinesis, S3
 
@@ -34,7 +34,7 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 - [[Disruptive Leadership for Sustainable Strategy - Topic 7 - Data strategy]] — data lakehouse, data fabric, Denodo virtualisation
 - [[Disruptive Leadership for Sustainable Strategy - Topic 6 - DataOps and MLOps]] — data lake vs. lakehouse
 - [[Data Science Principles Topic 6 - Storing your data]] — relational linking, keys
-- [[Data Science Principles Topic 5 - Working with big data]] — data architecture patterns
+- [[Data Science Principles Topic 5 - Working with big data =]] — data architecture patterns
 - [[Machine Learning using Cloud Computing Introduction to ML on AWS Course]] — AWS Athena, Glue catalogue
 
 ### 1d) Error, bias and uncertainty in data
@@ -45,8 +45,8 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 ### 1e) Differences in uncertainty before vs. after analysis
 - [[AI and Data Science Professional Practice Term 2 Theme 6 Error, bias and uncertainty =]] — aleatoric, epistemic, ontological, structural uncertainty; Monte Carlo dropout; ensemble methods; confidence intervals
 - [[Disruptive Leadership for Sustainable Strategy - Topic 8 - Error, bias, uncertainty]] — uncertainty quantification, fairness metrics
-- [[Data Science Principles Topic 3 - Statistical investigations]] — standard error, confidence intervals
-- [[Data Science Principles Topic 4 - Statistical testing]] — statistical uncertainty and significance
+- [[Data Science Principles Topic 3 - Statistical investigations ==]] — standard error, confidence intervals
+- [[Data Science Principles Topic 4 - Statistical testing =]] — statistical uncertainty and significance
 
 ---
 
@@ -61,7 +61,7 @@ source: BCS L7 AM3 Sample Paper V2.0 – Vault Reference Links
 
 ### 2b) Storage requirements
 - [[Data Science Principles Topic 6 - Storing your data]] — storage types, retrieval, volume considerations
-- [[Data Science Principles Topic 5 - Working with big data]] — scalable storage, HDFS, object storage
+- [[Data Science Principles Topic 5 - Working with big data =]] — scalable storage, HDFS, object storage
 - [[Disruptive Leadership for Sustainable Strategy - Topic 7 - Data strategy]] — AWS Redshift, Athena, S3, data governance in storage design
 - [[Machine Learning using Cloud Computing Topic 6 Cloud Architecture and Service Platform Design]] — cloud storage architecture
 

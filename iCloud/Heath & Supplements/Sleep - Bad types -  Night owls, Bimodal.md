@@ -94,7 +94,11 @@ https://pmc.ncbi.nlm.nih.gov/articles/PMC5320422/
 [https://onlinelibrary.wiley.com/doi/10.1111/jsr.14184](https://onlinelibrary.wiley.com/doi/10.1111/jsr.14184)
 
 >They found that students in the phone ban group experienced notable improvements in their sleep. On average, they were falling asleep 20 minutes faster than before the ban, and reported getting a full hour of extra rest each night. 
-[https://www.york.ac.uk/news-and-events/news/2024/research/school-smartphone-ban-better-sleep/](https://www.york.ac.uk/news-and-events/news/2024/research/school-smartphone-ban-better-sleep/)
+[https://www.york.ac.uk/news-and-events/news/2024/research/school-smartphone-ban-better-sleep/](https://www.york.ac.uk/news-and-events/news/2024/research/school-smartphone-ban-better-sleep/
+
+>These findings demonstrate the feasibility of naturalistic protocols and highlight the potential importance of brighter days and more stable, less fragmented light exposure patterns for sleep.
+>https://www.nature.com/articles/s44323-026-00087-z
+
 ## Night owls linked to worse mental health
 
 >Individuals with a morning preference who go to bed early (aligned) exhibit better mental health compared to morning-types who go to bed late (misaligned). Those with an evening preference who sleep late (aligned) demonstrate poorer mental health.
