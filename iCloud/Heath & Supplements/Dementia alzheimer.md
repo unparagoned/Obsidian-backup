@@ -152,6 +152,10 @@ https://pubs.acs.org/doi/abs/10.1021/acs.jproteome.3c00269
 >They found that factors detrimental to vascular health, such as inflammation and high glucose levels, are associated with an older-looking brain, while healthy lifestyles were linked to brains with a younger appearance. The results are presented in Alzheimer's & Dementia: The Journal of the Alzheimer's Association.
 [https://news.ki.se/poor-vascular-health-accelerates-brain-ageing](https://news.ki.se/poor-vascular-health-accelerates-brain-ageing)
 
+# Intelligence
+
+>Childhood intelligence is related to subsequent dementia risk
+>https://pmc.ncbi.nlm.nih.gov/articles/PMC5381709/
 ## Alcohol
 
 >Accumulating evidence supports that long-term heavy alcohol consumption is associated with enhanced neurodegeneration.

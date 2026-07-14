@@ -24,13 +24,13 @@ Assessment Method 2 is the professional discussion: a one-to-one, 60-minute stru
 
 The method is not underpinned by a summative portfolio — the journal is a memory aid only.
 
-| Theme | Pass | Distinction |
-|---|---|---|
-| **1. Computing and statistical foundations of AI and data science** (K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26) | Describes how to use statistical, AI and ML methodologies (data mining, supervised/unsupervised ML, NLP, machine vision) to meet business objectives. Explains how to solve problems and evaluate software solutions via test data, research, feasibility, acceptance and usability testing. Describes the relationship between mathematical principles and core AI/data science techniques in the organisational context. Explains use of programming languages and modern ML libraries for commercially beneficial analysis, simulation and data engineering. Uses applied research and data modelling to design/refine infrastructure delivering secure, stable, scalable data products across enterprise/private/public cloud. Explains how to design algorithms/APIs for accessing and analysing large data. | Explains when they challenged the norm through investigating and proposing a solution, and the impact this had. |
-| **2. Professional practice in a commercial environment** (K8, K10, S6, S8, S14, S23, S28, B1, B4, B7) | Explains how professional working practices and leadership techniques improved organisational practice. Justifies technique choices, risks/benefits, and alternatives to technical and non-technical audiences. Explains how AI/data science practices are shared to improve industry practice. Explains independent, impartial decision-making while respecting others' views in complex, unpredictable, changing circumstances. Explains how they worked with software engineers to implement testing and documentation processes. | Critically analyses the wider social context and current issues/trends, applies findings with justification, and shares them with the wider community. |
-| **3. Current and future impact of AI/data science on industry and society** (K11, K17, K21) | Describes the potential roles/impact of AI and data science on own organisation, industry and society. Explains how ethical issues, procedure/method selection, and unintended business consequences were assessed and addressed. Describes applied solutions and awareness of trends enhancing working practices. Explains impact, consequences and risks of non-compliance to the business. | — |
-| **4. Ethical, legal, regulatory and governance issues; accessibility** (K29, S12, B3) | Evaluates regulatory, ethical and legal requirements affecting implementation, including accessibility for all users and diversity of user needs. | — |
-| **5. Continuous professional development** (B5, B8) | Analyses how they take responsibility for their own and their team's currency of knowledge/skills and professional/personal growth. Explains how they selected and applied the most effective AI/data science techniques to solve a complex business problem in line with organisational and regulatory requirements. | — |
+| Theme                                                                                                                     | Pass                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | Distinction                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Computing and statistical foundations of AI and data science** (K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26) | Describes how to use statistical, AI and ML methodologies (data mining, supervised/unsupervised ML, NLP, machine vision) to meet business objectives. Explains how to solve problems and evaluate software solutions via test data, research, feasibility, acceptance and usability testing. Describes the relationship between mathematical principles and core AI/data science techniques in the organisational context. Explains use of programming languages and modern ML libraries for commercially beneficial analysis, simulation and data engineering. Uses applied research and data modelling to design/refine infrastructure delivering secure, stable, scalable data products across enterprise/private/public cloud. Explains how to design algorithms/APIs for accessing and analysing large data. | Explains when they challenged the norm through investigating and proposing a solution, and the impact this had.                                        |
+| **2. Professional practice in a commercial environment** (K8, K10, S6, S8, S14, S23, S28, B1, B4, B7)                     | Explains how professional working practices and leadership techniques improved organisational practice. Justifies technique choices, risks/benefits, and alternatives to technical and non-technical audiences. Explains how AI/data science practices are shared to improve industry practice. Explains independent, impartial decision-making while respecting others' views in complex, unpredictable, changing circumstances. Explains how they worked with software engineers to implement testing and documentation processes.                                                                                                                                                                                                                                                                              | Critically analyses the wider social context and current issues/trends, applies findings with justification, and shares them with the wider community. |
+| **3. Current and future impact of AI/data science on industry and society** (K11, K17, K21)                               | Describes the potential roles/impact of AI and data science on own organisation, industry and society. Explains how ethical issues, procedure/method selection, and unintended business consequences were assessed and addressed. Describes applied solutions and awareness of trends enhancing working practices. Explains impact, consequences and risks of non-compliance to the business.                                                                                                                                                                                                                                                                                                                                                                                                                     | —                                                                                                                                                      |
+| **4. Ethical, legal, regulatory and governance issues; accessibility** (K29, S12, B3)                                     | Evaluates regulatory, ethical and legal requirements affecting implementation, including accessibility for all users and diversity of user needs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | —                                                                                                                                                      |
+| **5. Continuous professional development** (B5, B8)                                                                       | Analyses how they take responsibility for their own and their team's currency of knowledge/skills and professional/personal growth. Explains how they selected and applied the most effective AI/data science techniques to solve a complex business problem in line with organisational and regulatory requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | —                                                                                                                                                      |
 
 ## Response structure (STAR / STARR)
 
@@ -94,6 +94,8 @@ KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 **Distinction angle:** "The norm would have been to rely on tagged iXBRL data only, or to use manually maintained matching rules for untagged descriptions. I challenged that by showing tagged items could be reused as supervision for a supervised ML classifier. The impact was a reusable method that extended analytical coverage, reduced manual effort, and gave analysts access to data they could not previously exploit at scale."
 
 ### K7
+"How to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance and usability testing."*
+
 **Problem solving and evaluating software solutions via test data, research, feasibility, acceptance and usability testing**
 
 **Situation:** iXBRL documents such as company accounts and tax computations have items tagged so a machine can extract them easily, but tax computations only had around 30% of figures tagged, so existing systems could not profile across the full data population. Extracted untagged figures could have many different free-text descriptions of what they represented.
@@ -107,6 +109,8 @@ KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 **Reflection:** The best and most complex models don't always mean they are the best operational choice — simpler models can get very similar results while offering speed, explainability, and lower deployment risk. A lot of the manual comparison work for the scikit-learn models involved building bespoke functions to evaluate across data sizes and iterations; discovering that Optuna automated much of this for the NN/BERT work taught me to spend more time researching whether a package already does what I want before rushing to code it myself.
 
 ### K16
+"Understand high-performance computer architectures and how to make effective use of these."*
+
 **High-performance computing architectures**
 
 **Situation:** HMRC data includes structured XML, semi-structured iXBRL/XHTML, and unstructured PDFs, arriving in large volume and varied format.
@@ -120,6 +124,8 @@ KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 **Reflection:** Solr is much faster than the Oracle relational store, so I'd like to bring more of the Oracle-held data into the Solr/Apache ecosystem. Longer term, as we move to a lakehouse, the R extraction code could become a SparkR job on EMR, writing to Redshift — better integrating with other datasets while keeping lakehouse-scale performance. A weakness I've hit with ODC: some parallel-processing packages split work statically before starting, which performs poorly when documents vary widely in size — some cores end up idle while others are overloaded. Packages that split work dynamically handle this better.
 
 ### K18
+"The programming languages and techniques applicable to data engineering."*
+
 **Programming languages and techniques applicable to data engineering**
 
 **Situation:** Company returns (XML) and iXBRL accounts (X/HTML) hold a lot of valuable data that needs to be extracted, transformed and loaded (ETL) so it can be profiled in bulk.
@@ -133,6 +139,8 @@ KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 **Reflection:** Use the best tool for the job — the right language and technique depends on the systems, team, users, task, package maturity, deployment environment and maintainability, not a fixed preference.
 
 ### K19
+"The principles and properties behind statistical and machine learning methods."*
+
 **Principles behind statistical and machine learning methods**
 
 **Situation:** Agent-level risk data needed a quantitative comparison to determine whether a specific agent posed higher risk than others.
@@ -145,7 +153,13 @@ KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 
 **Reflection:** Statistical tests can be used more widely than I initially applied them — I might qualitatively suspect something is significantly different, but a proper test shows that quantitatively rather than by impression. More broadly: supervised classification learns a function from labelled examples to unseen cases; text is converted to numeric features via TF-IDF or embeddings; LinearSVC learns separating hyperplanes in high-dimensional sparse feature space; neural networks learn weights via loss, gradients, backpropagation and optimisation; transformers use self-attention to model token relationships; regularisation controls overfitting; macro-F1, stratification and per-class metrics manage class imbalance. See the [technical answer bank](#technical-answer-bank) for full formulas across regression, classification, clustering, neural networks and statistical tests.
 
+* Add technical details here
+
+- Hubble ML stuff.
+
 ### K22
+"The relationship between mathematical principles and core techniques in AI and data science within the organisational context."*
+
 **Relationship between mathematical principles and core AI/data science techniques in the organisational context**
 
 **Situation:** Hubble needed to classify inconsistent free-text descriptions from iXBRL accounts into standard taxonomy concepts.
@@ -159,6 +173,8 @@ KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 **Reflection:** The most advanced method isn't always the right choice for HMRC. Simpler models can carry real advantages — speed, explainability, lower infrastructure risk — that make them better suited to the operational context even when a more complex model scores marginally higher.
 
 ### K25
+"Programming languages and modern machine learning libraries for commercially beneficial scientific analysis and simulation."*
+
 **Programming languages and modern machine learning libraries for commercially beneficial analysis and simulation**
 
 **Situation:** Descriptions in accounts use many different words, phrasing and stemming for the same underlying concept.
@@ -172,11 +188,16 @@ KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 **Reflection:** I expected the more advanced BERT/RNN-style models to have a clearer advantage; they didn't, and I was surprised an MLP came out ahead of both when weighed across all factors, including that a CNN could be genuinely useful for text-only analysis despite being designed for images. More complex isn't automatically better — even where BERT was competitive, it was too large and slow to run over all the data for a marginal, non-significant gain. This also informs the commercial benefit picture: faster analyst workflows, reusable methodology, lower manual effort, better risk identification and stronger analytical coverage — using MLflow for experiment tracking, comparison, reproducibility and model versioning discipline throughout. Important distinction for a discussion answer: describe the final deployed model (TF-IDF + LinearSVC, per K7/K22) and treat MLP/BERT/CNN/RNN as experimentation that informed that decision — not implying every prototype was production-ready.
 
 ### S1
+"Use applied research and data modelling to design and refine the database & storage architectures to deliver secure, stable and scalable data products to the business."*
+
 **Applied research and data modelling to design secure, stable, scalable data products**
 
 Applied research: compared model families and literature/documentation around transformers, BERT, TF-IDF, SVMs, neural networks and text classification before committing to an approach (see K7). Data modelling: transformed unstructured/semi-structured iXBRL text into structured records with descriptions, context, labels, predictions and metadata. Security/stability: processed data inside the HMRC estate, applied DPIA controls (see S12), avoided unassured niche models for production, and kept outputs in controlled systems (Oracle, access-controlled S3). Scalability: chose CPU-friendly models, used ODC for burst processing, Solr for distributed search, and Oracle/database outputs for querying — combining enterprise, private and public cloud resources as needed (see K16, S19).
 
+- Oracle database
 ### S16
+"Define requirements for, and supervise implementation of, and use of data management infrastructure; including enterprise, private and public cloud resources and services."*
+
 **Data management infrastructure**
 
 **Situation:** Valuable data sits in S3 buckets that not everyone should be able to access.
@@ -190,6 +211,8 @@ Applied research: compared model families and literature/documentation around tr
 **Reflection:** Restricting cloud resource access is difficult when restrictions are based on which *system* can reach the data rather than whether each individual user of that system should have access. The future lakehouse should support user-level access controls directly, removing the need for slower proxy workarounds and speeding up data access. Requirements for Hubble specifically included secure storage, scalable compute, controlled access, database outputs, and integration across enterprise/private/public cloud resources.
 
 ### S19
+"Use scalable infrastructures, high performance networks, infrastructure and services management and operation to generate effective business solutions."*
+
 **Scalable infrastructures, high-performance networks, and services management to generate effective business solutions**
 
 **Situation:** Some infrastructure needs to scale up or down with demand.
@@ -203,6 +226,8 @@ Applied research: compared model families and literature/documentation around tr
 **Reflection:** Scalability has to be judged on both technical throughput *and* financial sustainability; the "auto-scaling by default" answer isn't automatically the right one at every project size.
 
 ### S20
+"Design efficient algorithms for accessing and analysing large amounts of data, including Application Programming Interfaces (API) to different databases and data sets."*
+
 **Efficient algorithms/APIs for accessing and analysing large amounts of data**
 
 **Situation:** Hubble needs to process a large volume of iXBRL documents.
@@ -216,6 +241,8 @@ Applied research: compared model families and literature/documentation around tr
 **Reflection:** Parallel processing alone wasn't enough; it took working with DevOps to get large-enough platforms available on demand. Having large platforms available only when needed is far more cost-effective than running them continuously. Efficient design isn't only about algorithmic complexity — data locality, database access, batching, parallelism, and avoiding repeated manual file movement all matter.
 
 ### S26
+"Select and apply the most effective/appropriate AI and data science techniques to solve complex business problems."*
+
 **Selecting and applying the most effective/appropriate AI and data science techniques to solve complex business problems**
 
 **Situation:** Descriptions in accounts use many different words, phrasings and stems for the same concept.
@@ -237,6 +264,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Distinction angle:** increased use of AI in public-sector decisions requires transparency, accountability and proportionate governance. Foundation models are powerful but not always the right answer — smaller interpretable models can be better where data is structured, language is domain-specific, and governance matters. AI misuse and over-automation reduce trust, so professional practice must include honest communication of limitations.
 
 ### K8
+"How to interpret organisational policies, standards and guidelines in relation to AI and data."*
+
 **Interpreting organisational policies, standards and guidelines in relation to AI and data**
 
 **Example 1 — challenging overly broad AI guidance.**
@@ -264,6 +293,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Reflection:** Embedding ethical awareness into development up front avoids downstream problems; I'd like to build in systems that guarantee human-in-the-loop guidance is always followed, not just documented.
 
 ### K10
+"How own role fits with, and supports, organisational strategy and objectives."*
+
 **Own role supporting organisational strategy and objectives**
 
 **Situation:** My role centres on exploiting HMRC's data to identify tax risks and provide evidence to policy and Treasury.
@@ -277,6 +308,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Reflection:** I'm a T-shaped contributor — deep iXBRL domain knowledge combined with breadth across IT systems and languages — which makes me flexible and often the first port of call for help in this area.
 
 ### S6
+"Provide direction and technical guidance for the business with regard to AI and data science opportunities."*
+
 **Direction and technical guidance for the business on AI and data science opportunities**
 
 **Situation:** I'm responsible for the DAP, where a large amount of the organisation's AI and data science work happens.
@@ -288,6 +321,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Result:** Users have the right environment and support to use AI and data science effectively.
 
 ### S8
+"Coordinate, negotiate with and manage expectations of, diverse stakeholders, suppliers with conflicting priorities, interests and timescales."*
+
 **Coordinate, negotiate with and manage expectations of diverse stakeholders and suppliers with conflicting priorities**
 
 **Situation:** As DAP owner, I have to keep it running with enough licences, the right functionality, and appropriate funding — while stakeholders (analysts, SMEs, DevOps, budget holders, internal platform teams, external suppliers) sometimes want conflicting things.
@@ -301,6 +336,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Reflection:** With many stakeholders, constant conversation matters — they sometimes have ideas or better alternatives I hadn't considered. But ultimately I shouldn't just implement what others suggest; I weigh the options and select the best solution for everyone, gathering views, setting comparison criteria, and documenting trade-offs rather than following the loudest voice.
 
 ### S14
+"Work collaboratively with software engineers to ensure suitable testing and documentation processes are implemented."*
+
 **Work collaboratively with software engineers to ensure suitable testing and documentation processes**
 
 **Situation:** Hubble is a complex tool with many users and developers working on it.
@@ -314,6 +351,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Reflection:** Input data is too varied to test everything, so I've also built integration-style tests for the more complex real-world cases. Creating tests is a bit onerous up front, but the benefit — reduced risk, faster future change, easier onboarding — outweighs the cost.
 
 ### S23 and B7
+*ST0763 standard wording — S23: "Disseminate AI and data science practices across departments and in industry, promoting professional development and use of best practice." B7: "Participates and shares best practice in their organisation, and the wider community around all aspects of AI data science."*
+
 **Disseminate AI and data science practices across departments and industry; participate and share best practice**
 
 **Situation:** There's significant interest, inside and outside the department, in using AI over iXBRL documents.
@@ -327,6 +366,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Reflection:** Disseminating best practice in AI is hard because the field moves so fast — what was best practice recently might not be anymore, so guidance needs to be revisited and updated, not just written once.
 
 ### S28
+"Undertakes independent, impartial decision-making respecting the opinions and views of others in complex, unpredictable and changing circumstances."*
+
 **Independent and impartial decision-making, respecting the opinions and views of others in complex, changing circumstances**
 
 **Situation:** Stakeholders on Hubble had genuinely different views — some non-technical stakeholders wanted to focus purely on accuracy, some analysts suggested Random Forest, and there was a lot of interest in transformer-based models simply because they were fashionable.
@@ -340,6 +381,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Reflection:** Impartiality is much easier when the metrics and comparison criteria are agreed before you start testing — that way you have an objective way to compare rather than defaulting to what you personally wanted.
 
 ### B1
+"A strong work ethic and commitment in order to meet the standards required."*
+
 **Strong work ethic and commitment to meeting the standards required**
 
 **Situation:** Preparing workshop material and completing assessments to the right standard.
@@ -353,6 +396,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 **Reflection:** Standards are met through preparation, curiosity, evidence, documentation, testing, and being honest about limitations, not just ticking off required material.
 
 ### B4
+"Initiative and personal responsibility to overcome challenges and take ownership for solutions."*
+
 **Initiative and personal responsibility for overcoming challenges and taking ownership for solutions**
 
 **Situation:** No off-the-shelf solution existed for tagging unstructured iXBRL data, and my initial simple-NLP attempts performed poorly.
@@ -372,6 +417,8 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 KSBs: K11, K17, K21.
 
 ### K11
+"The roles and impact of AI, data science and data engineering in industry and society."*
+
 **Roles and impact of AI, data science and data engineering in industry and society**
 
 **Situation:** Many iXBRL documents, such as accounts, aren't fully tagged, making bulk profiling very hard or impossible.
@@ -385,6 +432,8 @@ KSBs: K11, K17, K21.
 **Reflection:** At its core the work is extraction and categorisation, but that data funds additional tax revenue, which funds schools and hospitals — a meaningful societal impact from what looks like a narrow technical task. AI/data science affects many industries similarly: medical detection (some models now outperform humans at detecting cancer from scans), fraud detection, demand forecasting, market prediction, pricing, and stock ordering. Risk: if AI outputs are over-trusted, they can drive wrong conclusions, unfair outcomes, or reputational damage — Hubble mitigates this by supporting analyst judgement rather than making decisions automatically.
 
 ### K17
+"How to identify current industry trends across AI and data science and how to apply these."*
+
 **How to identify current industry trends across AI and data science and apply them**
 
 **Situation:** There's constant development relevant to this industry.
@@ -398,6 +447,8 @@ KSBs: K11, K17, K21.
 **Reflection:** LLMs open opportunities to exploit data faster and more simply, but trends are only useful applied with evidence — they also introduce hallucination, prompt injection, data leakage, cost and governance risk. As tool-use/MCP functionality grows, an LLM could draw on more than just the accounts data — searching the web for more current information, or using the Companies House or Moody's APIs to bring in industry- or competitor-level context. More broadly I track LLMs, tool use/MCP, model cards, MLOps, drift detection, explainable AI, responsible AI, and privacy-enhancing techniques.
 
 ### K21
+"How AI and data science techniques support and enhance the work of other members of the analytical team."*
+
 **How AI and data science techniques support and enhance the work of other analytical team members**
 
 **Situation:** Analysts were spending significant time manually grouping inconsistent descriptions in company accounts.
@@ -419,6 +470,8 @@ KSBs: K29, S12, B3.
 **Good answer:** "I treated governance as part of the design, not something added after modelling. For example, PII canonicalisation improved both compliance and model quality, because high-cardinality names and addresses weren't useful predictive signal and increased privacy risk."
 
 ### K29
+"The need for accessibility for all users and diversity of user needs."*
+
 **Accessibility for all users and diversity of user needs**
 
 **Situation:** Tools need to be usable by people with different technical skill levels and accessibility needs.
@@ -432,6 +485,8 @@ KSBs: K29, S12, B3.
 **Reflection:** It's much harder to retrofit accessibility than to design it in from the start using modern packages built with it in mind. In this context accessibility isn't only screen-reader UI work — it includes usable documentation, clear outputs, and communication matched to different audiences.
 
 ### S12 and B3
+*ST0763 standard wording — S12: "Consider the associated regulatory, legal, ethical and governance issues when evaluating choices at each stage of the data process." B3: "Acts with integrity with respect to ethical, legal and regulatory ensuring the protection of personal data, safety and security."*
+
 **Regulatory, legal, ethical, governance issues; integrity around personal data, safety and security**
 
 **Situation (Hubble/DPIA):** Hubble works over company accounts and tax computations, which contain sensitive data such as names, references and detailed company/tax figures.
@@ -463,6 +518,8 @@ KSBs: B5, B8.
 **Good answer:** "My CPD wasn't only personal learning. I converted it into working practice by documenting the pipeline, creating setup scripts, explaining model limitations to analysts, and introducing more systematic experiment tracking and project management."
 
 ### B5
+"Commitment to continuous professional development; maintaining their knowledge and skills in relation to AI developments that influence their work."*
+
 **Commitment to continuous professional development; maintaining knowledge and skills relevant to AI developments**
 
 **Situation:** There are many sources and volumes of learning material available while on programme.
@@ -476,6 +533,8 @@ KSBs: B5, B8.
 **Reflection:** You can't read everything recommended before a workshop — I prioritise what looks most relevant and read the rest afterwards if it still looks important.
 
 ### B8
+"Maintains awareness of trends and innovations in the subject area, utilising a range of academic literature, online sources, community interaction, conference attendance and other methods."*
+
 **Awareness of trends and innovation using academic literature, online sources, community interaction and conferences**
 
 **Situation:** AI and NLP evolve quickly, and building a credible proof of concept meant grounding the approach in current research rather than outdated methods.
