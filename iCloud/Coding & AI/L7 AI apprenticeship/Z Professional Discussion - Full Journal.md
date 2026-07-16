@@ -26,11 +26,11 @@ The method is not underpinned by a summative portfolio — the journal is a memo
 
 | Theme                                                                                                                     | Pass                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Distinction                                                                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **1. Computing and statistical foundations of AI and data science** (K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26) | Describes how to use statistical, AI and ML methodologies (data mining, supervised/unsupervised ML, NLP, machine vision) to meet business objectives.  <br><br>Explains how to solve problems and evaluate software solutions via test data, research, feasibility, acceptance and usability testing in line with organisational requirements.<br><br>Describes the relationship between mathematical principles and core AI/data science techniques in the organisational context. Explains use of programming languages and modern ML libraries for commercially beneficial analysis, simulation and data engineering. Uses applied research and data modelling to design/refine infrastructure delivering secure, stable, scalable data products across enterprise/private/public cloud. Explains how to design algorithms/APIs for accessing and analysing large data. | Explains when they challenged the norm through investigating and proposing a solution, and the impact this had.                                        |
-| **2. Professional practice in a commercial environment** (K8, K10, S6, S8, S14, S23, S28, B1, B4, B7)                     | Explains how professional working practices and leadership techniques improved organisational practice. Justifies technique choices, risks/benefits, and alternatives to technical and non-technical audiences. Explains how AI/data science practices are shared to improve industry practice. Explains independent, impartial decision-making while respecting others' views in complex, unpredictable, changing circumstances. Explains how they worked with software engineers to implement testing and documentation processes.                                                                                                                                                                                                                                                                                                                                       | Critically analyses the wider social context and current issues/trends, applies findings with justification, and shares them with the wider community. |
-| **3. Current and future impact of AI/data science on industry and society** (K11, K17, K21)                               | Describes the potential roles/impact of AI and data science on own organisation, industry and society. Explains how ethical issues, procedure/method selection, and unintended business consequences were assessed and addressed. Describes applied solutions and awareness of trends enhancing working practices. Explains impact, consequences and risks of non-compliance to the business.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | —                                                                                                                                                      |
-| **4. Ethical, legal, regulatory and governance issues; accessibility** (K29, S12, B3)                                     | Evaluates regulatory, ethical and legal requirements affecting implementation, including accessibility for all users and diversity of user needs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | —                                                                                                                                                      |
-| **5. Continuous professional development** (B5, B8)                                                                       | Analyses how they take responsibility for their own and their team's currency of knowledge/skills and professional/personal growth. Explains how they selected and applied the most effective AI/data science techniques to solve a complex business problem in line with organisational and regulatory requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | —                                                                                                                                                      |
+| **1. Computing and statistical foundations of AI and data science** (K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26) | Describes how to use statistical, AI and machine learning methodologies such as data mining, supervised/unsupervised machine learning, natural language processing and machine vision to meet business objectives.<br><br>Explains how to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance and usability testing in line with organisational requirements.<br><br>Describes the relationship between mathematical principles and core techniques in AI and data science within the organisational context.<br><br>Explains how they have used programming languages and modern machine learning libraries for commercially beneficial scientific analysis, simulation and data engineering to meet business needs.<br><br>Uses applied research and data modelling to design and refine the infrastructure and architectures to deliver secure, stable and scalable data products, including enterprise, private and public cloud resources and services.<br><br>Explains how to design algorithms for accessing and analysing large amounts of data, including Application Programming Interfaces (API) to different databases and data sets. | Explains when they have challenged the norm through investigating and proposing a solution and the impact this had.                                        |
+| **2. Professional practice in a commercial environment** (K8, K10, S6, S8, S14, S23, S28, B1, B4, B7)                     | Explains how they have developed their professional working practices and leadership techniques in regards to AI and data science and how this has improved organisational practice.<br><br>Justifies their choice of techniques, explaining the risks and benefits and offers an alternative to technical and non-technical audiences.<br><br>Explains how they share and disseminated AI and data science practices across organisations to improve industry practice.<br><br>Explains how they have made independent impartial decisions respecting the opinions and views of others in complex, unpredictable and changing circumstances to benefit the business.<br><br>Explains how they have worked with software engineers to ensure suitable testing and documentation processes are implemented in line with organisational requirements.                                                                                                                                                                                                                                                                                                                                       | Critically analyses the wider social context and current issues and trends, applying the findings with justification and shares these with the wider community. |
+| **3. Current and future impact of AI/data science on industry and society** (K11, K17, K21)                               | Describes how the potential roles and impact of AI and data science could affect own organisation, industry and society.<br><br>Explains how they have assessed and addressed the potential business impact of ethical issues relating to AI and Data Science, the way procedures and methods are selected, and the unintended consequences to the business when they are applied.<br><br>Describes how they have applied solutions, demonstrated awareness and explained the changes and trends that have led to the enhancement the working practices within their organisation and other members of the team.<br><br>Explains the impact, consequences and risks of non-compliance to the business.                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | —                                                                                                                                                      |
+| **4. Ethical, legal, regulatory and governance issues; accessibility** (K29, S12, B3)                                     | Evaluates the regulatory, ethical, and legal requirements that affect implementation of solutions including the need for accessibility for all users and diversity of user needs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | —                                                                                                                                                      |
+| **5. Continuous professional development** (B5, B8)                                                                       | Analyses how they take responsibility for their own and their team’s currency of knowledge and skills, their professional and personal growth and development.<br><br>Explains how they selected and applied the most effective/appropriate AI and data science techniques to solve a complex business problem in line with organisational and regulatory requirements.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | —                                                                                                                                                      |
 
 ## Response structure (STAR / STARR)
 
@@ -91,66 +91,105 @@ Useful closing sentence: *"The key judgement was balancing technical performance
 
 KSBs: K7, K16, K18, K19, K22, K25, S1, S16, S19, S20, S26.
 
-Describes how to use statistical, AI and ML methodologies (data mining, supervised/unsupervised ML, NLP, machine vision) to meet business objectives.
+**Pass criteria (exact wording):**
 
- - @TODO NER for rare description detection. 
+- Describes how to use statistical, AI and machine learning methodologies such as data mining, supervised/unsupervised machine learning, natural language processing and machine vision to meet business objectives.
+    - @TODO NER for rare description detection, Illuminate access.
+- Explains how to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance and usability testing in line with organisational requirements.
+	- @TODO maybe something about database key types, using a natural key, but users suggested numeric keys to make linking and joining faster. I'll need to have a think, we'll need to do testing on how much slower it is.  Does it matter on different styles of databases, like if we use no-sql or in our lakehouse? I think a natural key is nicer for users, with random numbers that have to be looked up on separate tables less user friendly. But it might have a massive difference in performance. 
+- Describes the relationship between mathematical principles and core techniques in AI and data science within the organisational context
+	- 
+- Explains how they have used programming languages and modern machine learning libraries for commercially beneficial scientific analysis, simulation and data engineering to meet business needs.
+	- @TODO data engineering - talk about cleaning all the data for Hubble
+- Uses applied research and data modelling to design and refine the infrastructure and architectures to deliver secure, stable and scalable data products, including enterprise, private and public cloud resources and services.
+	- @TODO Secure by limiting access by distribution list. 
+	- @TODO cloud stuff, talk about both HMRC, POSIT, external(dockr, ec2 vs cloud database), also google colab.
+- Explains how to design algorithms for accessing and analysing large amounts of data, including Application Programming Interfaces (API) to different databases and data sets.
+	- @TODO The first version of Hubble just saved data to file, and was often exported as csv/xlsx for compatibility with other systems. Hubble is slow to run and was just run on specific populations. The new version of Hubble extracts data to Oracle database(tbplyr for tidyverse style manipulation of database objects where in the background it's turned into a SQL query lazily) and also was using an rswat package to save the data to SAS but it was buggy, so ultimately used a shared FSX file system to save parquet files. 
+	- @TODO ODC parallel processing lots of CPU to extract the data. 
+	- @TODO Hubble ML testing used smaller subsets and used GPU to test and develop on public data. 
+	- @TODO NoSQL - use LLM to create SOLR queries after passing in data and schema information. 
 
-Explains how to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance and usability testing in line with organisational requirements.
+**Distinction criterion (exact wording):**
 
-Describes the relationship between mathematical principles and core AI/data science techniques in the organisational context. Explains use of programming languages and modern ML libraries for commercially beneficial analysis, simulation and data engineering. Uses applied research and data modelling to design/refine infrastructure delivering secure, stable, scalable data products across enterprise/private/public cloud. Explains how to design algorithms/APIs for accessing and analysing large data.
-
-
-**Distinction angle:** "The norm would have been to rely on tagged iXBRL data only, or to use manually maintained matching rules for untagged descriptions. I challenged that by showing tagged items could be reused as supervision for a supervised ML classifier. The impact was a reusable method that extended analytical coverage, reduced manual effort, and gave analysts access to data they could not previously exploit at scale."
+- Explains when they have challenged the norm through investigating and proposing a solution and the impact this had.
+	- @TODO Hubble's initial requirements were just to extract the untagged data not the iXBRL data, but I realised that to do proper profiling you want to have both in the same place. The existing iXBRL feed was taking over 9 months to ingest data and we need to open enquiries within a year, so it was causing a real business issue in that the profiling and cases needed to be opened in such a short period. A lot of that was that every year there are new taxonomies and they had to do a lot of mapping to simplify and turn it into a wide table, the tables were so wide they were hitting the limits in Oracle. But with Hubble I developed it in a way to extract data in a long format, which means it's taxonomy independent, it can ingest any new taxonomy without any manual updates. I had to work with analysts to see if they could work with a long format and they said they could. This meant users could start profiling across the data a few days after submission rather than waiting 9 months. 
+	- @TODO "The norm would have been to rely on tagged iXBRL data only, or to use manually maintained matching rules for untagged descriptions. I challenged that by showing tagged items could be reused as supervision for a supervised ML classifier. The impact was a reusable method that extended analytical coverage, reduced manual effort, and gave analysts access to data they could not previously exploit at scale."
+	- @TODO extracting more details like headings, table names, column numbers, etc. Allowed us to tackle a big issue with incorrect figure by a number of software companies, hundreds of of billions being incorrect. Hubble let us extract the untagged data and recreate the calculations to check if the figures in the returns were correct or not. The volume was just too much to do manually and often the tagged data was incorrectly tagged and relevant figures were just left untagged, so Hubble was the only way to do it. The nice thing was that I added the functionality to extract all the relevant features we might need beforehand, so when this issue arose Hubble could extract the data we needed without any changes. 
 
 ### K7
-"How to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance and usability testing."*
+"How to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance and usability testing."
 
-**Problem solving and evaluating software solutions via test data, research, feasibility, acceptance and usability testing**
+**Situation:** iXBRL documents such as company accounts and tax computations have items tagged so a machine can extract them easily, but tax computations only had around 30% of figures tagged. Which means existing iXBRL extraction tools would just extract the 30% of tagged figures. So if someone didn't tag their charitable donations, then that figure wouldn't be in out datamarts. Also existing software just extracts fixed taxonomy data, so if someone describes it as a Ferrari an iXBRL extractor will just extract that as VehicleCosts, but that's additional data that can be useful for HMRC. Is someone really using a Ferrari for business use and are they making adjustments for personal use. But the extracted different free-text descriptions, don't have a fixed taxonomy, which means the same concept could be described in all sorts of ways. So if a user was looking to Profile for just expensive sports cars like Ferarri, it was great, but if say a user wanted to profile just against untagged vehicles in general, analysts with customers would have needed to come up with an impossible complex and long regex to match against everything. 
 
-**Situation:** iXBRL documents such as company accounts and tax computations have items tagged so a machine can extract them easily, but tax computations only had around 30% of figures tagged, so existing systems could not profile across the full data population. Extracted untagged figures could have many different free-text descriptions of what they represented.
+**Task:** Categorise the various descriptions into standard taxonomy concepts so analysts could profile across the full data population, much more easily. 
 
-**Task:** Categorise the various descriptions into standard taxonomy concepts so analysts could profile across the full data population.
+**Action:** I researched a wide range of methods that could be used to classify text: scikit-learn classifiers (cosine similarity, SVC, LinearSVC, SGDClassifier, DecisionTree, RandomForrest, MultiinomialNB, ComplmentNB, PassiveAgressiveClassifier), neural-network approaches (CNN/MLP/RNN), and transformer-based classifiers (BERT, SEC-BERT), plus embedding models (MPNet, e5). Since the content was accountancy text, a BERT model trained specifically on accountancy terminology (SEC-BERT) was attractive because it should understand domain specific terminology better.  But SEC-BERT would require GPU to train large datasets, which would make the process flow more complex as the default machines don't have GPUs. Also SEC-BERT isn't made by a well known provider, so introduces a risk of bringing it onto the HMRC estate. Testing was done off the HMRC estate over public data, so I decided to test all variety of models to get a handle on the performance. If SEC-BERT performed significantly better but there were organisational reasons for not being able to use it, then maybe that would point towards us training our own model on UK based accountancy terms.  I looked at larger frontier LLM options, but they would be very expensive to use in comparison, mean the data needs to be transferred externally and processed externally, which introduces more risks. The descriptions are usually fairly short, so it's unlikely that a frontier model would provide enough benefit for the additional cost and complexity.  
 
-**Action:** I researched a wide range of methods: scikit-learn classifiers (cosine similarity, Naive Bayes, Random Forest, LinearSVC), neural-network approaches (CNN/MLP/RNN), and transformer-based classifiers (BERT, SEC-BERT), plus embedding models (MPNet, e5). Since the content was accountancy text, a BERT model trained specifically on accountancy terminology (SEC-BERT) was attractive because it should understand domain terminology better. I compared models using macro-F1, accuracy, precision, recall, speed, simplicity, maintainability and explainability, using stratified train/test/holdout splits and cross-validation so I could run paired t-tests to check whether performance differences between scikit-learn models were statistically meaningful. For hyperparameter tuning across many combinations I used tools such as HalvingGridSearchCV for the scikit-learn models and Optuna for the neural/transformer models, which automated a lot of the manual comparison work I'd otherwise have had to script by hand. During testing, SEC-BERT did outperform other models such as MPNet and e5-style embeddings.
+Since I was using a lot of different types of packages, I created a core dataset with various split, traint/test/holdout plus various subsplits as boolean columns, which worked well with polars filter in terms of simplicity/elegance and it ensure that each model is using the exact same split for comparison.  
 
-**Result:** While SEC-BERT had the best raw performance, properly training it required GPUs that would be expensive to provision and couldn't run on existing CPU architecture. SEC-BERT is also produced by a fairly niche creator rather than a well-known reputable provider, which is a security/provenance risk to bring onto the estate — directly, or because it might not behave as expected — and it has weaker explainability than simpler models. LinearSVC with TF-IDF was much faster, had good quality results, ran on existing CPU infrastructure, and had much better explainability both in terms of how the model works and via feature coefficients showing what it takes into account. It's simpler to maintain, and using it to categorise the many different descriptions of the same concept has directly helped end users exploit the extracted data.
+For sckit-learn classifiers I used cross-validation training so I could run paired differences t-tests to as an indicator about whether performance differences between models were statistically meaningful.(Students t-test since it's the differences, they are all compared to top model and over same split(data))
+
+*There were 9 models(Dummy, SVC, LinearSVC, SGDClassifier, DecisionTree, RandomForrest, MultiinomialNB, ComplmentNB, PassiveAgressiveClassifier) with a lot of hyperparameters but even limiting it all using HalvingRandomSearchCV to 10,000 candidates,  it wasn't possible to do massive number of folds, just 5 splits were done. So when reviewing results there was still some judgment used rather than taking the t-test results for granted.*   
+
+I used graphing of the hyperparameters vs performance vs time, there was an interesting graph showing groupings of runs of LinearSVC where one group had low performance and took long to run and the other had better performance and was much quicker, when plotting the hyperparameters as colors, I could see that it was the min number of occurrences that of 1 and 2 that were split into the two groups, and min of 1 was the quicker group, which was surprising since it means there were many more words being used which I thought would make it slower. But I guess those unique words provided useful signal and otherwise the model was working much harder to try and fit with not enough data resulting in it taking longer and still doing worse. 
+
+For the NN and transformer based models I used Optuna to compare them and various hyperparameters, which automated a lot of the manual comparison work I'd otherwise have had to script by hand, for example it has built in graphing of hyperparameters vs performance. So if I was doing a scikit-learn project again I'd try and use Optuna there as well. 
+
+**Result:** While SEC-BERT had the best raw performance f1-macro was 2% better, properly training it required GPUs that would be expensive to provision and couldn't run on existing CPU architecture. SEC-BERT is also produced by a fairly niche creator rather than a well-known reputable provider, which is a security/provenance risk to bring onto the estate, also looks to be unsupported with no new updates coming.  LinearSVC with TF-IDF was much faster, had good quality results, ran on existing CPU infrastructure, and had much better explainability both in terms of how the model works and via feature coefficients showing what it takes into account. But with tools like SHAP and LIME, they do a very good job of making more complex models more explainable.  
+LinearSVC is simpler to maintain, and using it to categorise the many different descriptions of the same concept has directly helped end users exploit the extracted data. I used a decision matrix with all the factors, and LinearSVC with TF-IDF came out top. 
+
+During acceptance testing, users tested final outputs and also reviewed summarised data in a dashboard. A user tried some more common concepts and noted that there were quite a few misclassifications for very unrelated concepts. On review the model was trying to classify items that had a blank description but did have a heading and table name, giving very poor results, so I changed it to not make any predictions if the description was missing. I think I need to be more systematic in terms of code that's used to create train and test data and the production model. So training data had empty descriptions filtered out, but you wouldn't want to filter that out from prod. One possible solution would to leave in the empty descriptions but train the model to give a blank or NA classification, but that might have some impact on performance. 
+
+Users noted that there wasn't enough iXBRL dimensional data for their needs, so rather than just extracting specific dimensional detail I updated the code to work more generally and extract it all. 
+
+For usability testing, There was a dashboard as part of the product so end users could test how it would classify items, including the top 5 matches. This was to help users see how the classification works. Often many of the top 5 matches would be very poor matches, and the scores weren't that meaningful to a lay person, so that was actually more confusing for end users. So I updated it to only show more confident matches and added a note about the scores. 
+
+*For the database data, users noted that they didn't want a natural text key, and would prefer a numeric key for faster joins. I kind of like understandable natural keys, like the actual dimension name in used in the accounts. But I think we'll have to do some performance testing to see if the difference is big enough both on SAS and Oracle and then see if we should change it.* 
 
 **Reflection:** The best and most complex models don't always mean they are the best operational choice — simpler models can get very similar results while offering speed, explainability, and lower deployment risk. A lot of the manual comparison work for the scikit-learn models involved building bespoke functions to evaluate across data sizes and iterations; discovering that Optuna automated much of this for the NN/BERT work taught me to spend more time researching whether a package already does what I want before rushing to code it myself.
 
+[[#Statistical tests]]
+
 ### K16
-"Understand high-performance computer architectures and how to make effective use of these."*
+"Understand high-performance computer architectures and how to make effective use of these."
 
-**High-performance computing architectures**
+**Situation:** Some big data, data that is high volume, variety of formats, coming in in at a high velocity, such as structured XML, semi-structured iXBRL/XHTML, and unstructured PDFs. 
 
-**Situation:** HMRC data includes structured XML, semi-structured iXBRL/XHTML, and unstructured PDFs, arriving in large volume and varied format.
+**Task:** We need to be able to process that data quickly in a way that analysts can use.
 
-**Task:** Process the data quickly and make it easy to profile at scale.
+**Action:** 
+We use Apache Solr, a distributed document database, for fast text searching and profiling across large volumes — its server count has increased over time for more data and better speed. And it can recover if a server goes down.
 
-**Action:** I use Apache Solr, a distributed document database, for fast text searching and profiling across large volumes — its server count has increased over time for more data and better speed. Hubble, the R-based extraction tool, runs on the POSIT Data Analytics Platform (DAP), but that platform wasn't large enough for the full extraction volume, so I arranged On-Demand Compute (ODC): large temporary platforms — for example 128 cores, or GPU-enabled where the work is ML-intensive — spun up for a job and shut down afterwards. Outputs are written to Oracle, a relational database, for analyst querying.
+Hubble, the R-based extraction tool, runs on the POSIT Data Analytics Platform (DAP), but that platform wasn't large enough for the full extraction volume, so I worked with platform engineers to setup On-Demand Compute (ODC): temporary EC2 instances that up spun up just for a piece of work, analysts can spin up just for a piece of work and would then shutdown after.  Outputs are written to Oracle, a relational database, for analyst querying. 
 
-**Result:** Solr gives very fast searching and profiling; ODC's large parallel processing extracts, transforms and loads bespoke code quickly and cost-effectively, since GPU time in particular is only paid for when needed.
+**Result:** Solr gives very fast searching and profiling; ODC's large parallel processing extracts, transforms and loads bespoke code quickly and cost-effectively.
 
-**Reflection:** Solr is much faster than the Oracle relational store, so I'd like to bring more of the Oracle-held data into the Solr/Apache ecosystem. Longer term, as we move to a lakehouse, the R extraction code could become a SparkR job on EMR, writing to Redshift — better integrating with other datasets while keeping lakehouse-scale performance. A weakness I've hit with ODC: some parallel-processing packages split work statically before starting, which performs poorly when documents vary widely in size — some cores end up idle while others are overloaded. Packages that split work dynamically handle this better.
+**Reflection:** Solr is much faster than the Oracle relational store, so I'd like to bring more of the Oracle-held data into the Solr/Apache ecosystem. Longer term, as we move to a lakehouse, the R extraction code could become a SparkR job on EMR, writing to Redshift — better integrating with other datasets while keeping lakehouse-scale performance. 
+
+A weakness I've hit with ODC: some parallel-processing packages split work statically before starting, which performs poorly when documents vary widely in size — some cores end up idle while others are overloaded. Packages that split work dynamically handle this better. 
+Also very long jobs have S3 bucket access tokens expire but updated tokens aren't shared between the threads, impacting performance. So we'll probably need to write that token to file in a secure way so it can be shared amongst the tokens, but that's not ideal.
 
 ### K18
-"The programming languages and techniques applicable to data engineering."*
+"The programming languages and techniques applicable to data engineering."
 
-**Programming languages and techniques applicable to data engineering**
-
-**Situation:** Company returns (XML) and iXBRL accounts (X/HTML) hold a lot of valuable data that needs to be extracted, transformed and loaded (ETL) so it can be profiled in bulk.
+**Situation:** Company returns (XML) and iXBRL accounts (X/HTML) hold a lot of valuable data that needs to be extracted, transformed and loaded (ETL) so it can be used directly and also used for a classification ML.
 
 **Task:** Choose the right language and tooling at each stage of that pipeline.
 
-**Action:** There's no single best language. Java moves data from the original stores into S3 buckets and extracts iXBRL/XML into Apache Solr. I built the untagged-data extraction tool in R, since R's HTML/XML parsing packages are strong and the analysts in this area already work in R. For the ML classification step, R's ML packages were less mature and less well documented than Python's (scikit-learn, TensorFlow), so I did the ML in Python and used `reticulate` to let the core R workflow call those Python functions — keeping an R-first workflow for analysts while using more mature Python ML tooling. SQL creates the Oracle tables holding extracted output; R's `dbplyr` lets tidyverse-style code interact with those database tables directly, translating operations to SQL behind the scenes.
+**Action:** There's no single best language. I built the data extraction tool in R, since R's HTML/XML parsing packages are strong and the analysts at HMRC primarily worked in R, so it would be more supported long term. 
+To clean and canonicalise the data for the ML steps, clean the data(made lowercase, remove extra whitespaces, punctuations, and standardising formatting). I tried replacing forward slashes with spaces but that actually reduced performance of the classification model. 
+It then replaces variable information such as personal names, company names, dates, postcodes and numbers with consistent placeholder values such as `hubble_name`, `hubble_company_name`, `hubble_date` and `hubble_number`.
+There was some target engineering where input features don't have enough data, e.g. all numbers or dates. 
 
-**Result:** A mix of languages and packages transforms structured, semi-structured and unstructured data into forms the business can profile across in bulk. Core pattern: extract, transform, canonicalise, validate, load, document, monitor.
+When I looked to add machine learning classification, I found that the R's ML packages were less mature and less well documented than Python's (scikit-learn, TensorFlow), so I did the ML in Python and used `reticulate` to let the core R workflow call those Python functions — keeping an R-first workflow for analysts while using more mature Python ML tooling. SQL creates the Oracle tables holding extracted output; R's `dbplyr` lets tidyverse-style code interact with those database tables directly, translating operations to SQL behind the scenes.
 
-**Reflection:** Use the best tool for the job — the right language and technique depends on the systems, team, users, task, package maturity, deployment environment and maintainability, not a fixed preference.
+**Result:** A mix of languages and packages Extract and  transforms semi-structured, and have ML categorise data data, with the outputs loaded into an Oracle database, for faster and secure access.
+
+**Reflection:** Use the best tool for the job — the right language and technique depends on the systems, team, users, task, package maturity, deployment environment and maintainability, not a fixed preference. Looking forward python seems to have more support in the AWS lakehouse, and there are more people at HMRC starting to use python, so it might be 
 
 ### K19
 "The principles and properties behind statistical and machine learning methods."*
-
-**Principles behind statistical and machine learning methods**
 
 **Situation:** Agent-level risk data needed a quantitative comparison to determine whether a specific agent posed higher risk than others.
 
@@ -162,14 +201,14 @@ Describes the relationship between mathematical principles and core AI/data scie
 
 **Reflection:** Statistical tests can be used more widely than I initially applied them — I might qualitatively suspect something is significantly different, but a proper test shows that quantitatively rather than by impression. More broadly: supervised classification learns a function from labelled examples to unseen cases; text is converted to numeric features via TF-IDF or embeddings; LinearSVC learns separating hyperplanes in high-dimensional sparse feature space; neural networks learn weights via loss, gradients, backpropagation and optimisation; transformers use self-attention to model token relationships; regularisation controls overfitting; macro-F1, stratification and per-class metrics manage class imbalance. See the [technical answer bank](#technical-answer-bank) for full formulas across regression, classification, clustering, neural networks and statistical tests.
 
-* Add technical details here
+Situation: 
 
-- Hubble ML stuff.
+* @TODO Add technical details here
+
+- @TODO Hubble ML stuff.
 
 ### K22
-"The relationship between mathematical principles and core techniques in AI and data science within the organisational context."*
-
-**Relationship between mathematical principles and core AI/data science techniques in the organisational context**
+"The relationship between mathematical principles and core techniques in AI and data science within the organisational context."
 
 **Situation:** Hubble needed to classify inconsistent free-text descriptions from iXBRL accounts into standard taxonomy concepts.
 
@@ -182,9 +221,8 @@ Describes the relationship between mathematical principles and core AI/data scie
 **Reflection:** The most advanced method isn't always the right choice for HMRC. Simpler models can carry real advantages — speed, explainability, lower infrastructure risk — that make them better suited to the operational context even when a more complex model scores marginally higher.
 
 ### K25
-"Programming languages and modern machine learning libraries for commercially beneficial scientific analysis and simulation."*
+"Programming languages and modern machine learning libraries for commercially beneficial scientific analysis and simulation."
 
-**Programming languages and modern machine learning libraries for commercially beneficial analysis and simulation**
 
 **Situation:** Descriptions in accounts use many different words, phrasing and stemming for the same underlying concept.
 
@@ -205,9 +243,8 @@ Applied research: compared model families and literature/documentation around tr
 
 - Oracle database
 ### S16
-"Define requirements for, and supervise implementation of, and use of data management infrastructure; including enterprise, private and public cloud resources and services."*
+"Define requirements for, and supervise implementation of, and use of data management infrastructure; including enterprise, private and public cloud resources and services."
 
-**Data management infrastructure**
 
 **Situation:** Valuable data sits in S3 buckets that not everyone should be able to access.
 
@@ -269,6 +306,18 @@ Applied research: compared model families and literature/documentation around tr
 # Theme 2: Professional practice in a commercial environment
 
 KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
+
+**Pass criteria (exact wording):**
+
+- Explains how they have developed their professional working practices and leadership techniques in regards to AI and data science and how this has improved organisational practice.
+- Justifies their choice of techniques, explaining the risks and benefits and offers an alternative to technical and non-technical audiences.
+- Explains how they share and disseminated AI and data science practices across organisations to improve industry practice.
+- Explains how they have made independent impartial decisions respecting the opinions and views of others in complex, unpredictable and changing circumstances to benefit the business.
+- Explains how they have worked with software engineers to ensure suitable testing and documentation processes are implemented in line with organisational requirements.
+
+**Distinction criterion (exact wording):**
+
+- Critically analyses the wider social context and current issues and trends, applying the findings with justification and shares these with the wider community.
 
 **Distinction angle:** increased use of AI in public-sector decisions requires transparency, accountability and proportionate governance. Foundation models are powerful but not always the right answer — smaller interpretable models can be better where data is structured, language is domain-specific, and governance matters. AI misuse and over-automation reduce trust, so professional practice must include honest communication of limitations.
 
@@ -423,6 +472,13 @@ KSBs: K8, K10, S6, S8, S14, S23, S28, B1, B4, B7.
 
 KSBs: K11, K17, K21.
 
+**Pass criteria (exact wording):**
+
+- Describes how the potential roles and impact of AI and data science could affect own organisation, industry and society.
+- Explains how they have assessed and addressed the potential business impact of ethical issues relating to AI and Data Science, the way procedures and methods are selected, and the unintended consequences to the business when they are applied.
+- Describes how they have applied solutions, demonstrated awareness and explained the changes and trends that have led to the enhancement the working practices within their organisation and other members of the team.
+- Explains the impact, consequences and risks of non-compliance to the business.
+
 ### K11
 "The roles and impact of AI, data science and data engineering in industry and society."*
 
@@ -474,6 +530,10 @@ KSBs: K11, K17, K21.
 
 KSBs: K29, S12, B3.
 
+**Pass criterion (exact wording):**
+
+- Evaluates the regulatory, ethical, and legal requirements that affect implementation of solutions including the need for accessibility for all users and diversity of user needs.
+
 **Good answer:** "I treated governance as part of the design, not something added after modelling. For example, PII canonicalisation improved both compliance and model quality, because high-cardinality names and addresses weren't useful predictive signal and increased privacy risk."
 
 ### K29
@@ -521,6 +581,11 @@ Non-compliance risks across this theme: GDPR/Data Protection Act breach, legal c
 # Theme 5: Continuous professional development
 
 KSBs: B5, B8.
+
+**Pass criteria (exact wording):**
+
+- Analyses how they take responsibility for their own and their team’s currency of knowledge and skills, their professional and personal growth and development.
+- Explains how they selected and applied the most effective/appropriate AI and data science techniques to solve a complex business problem in line with organisational and regulatory requirements.
 
 **Good answer:** "My CPD wasn't only personal learning. I converted it into working practice by documenting the pipeline, creating setup scripts, explaining model limitations to analysts, and introducing more systematic experiment tracking and project management."
 
