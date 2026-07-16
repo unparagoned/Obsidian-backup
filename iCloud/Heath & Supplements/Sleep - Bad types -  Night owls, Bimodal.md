@@ -99,6 +99,17 @@ https://pmc.ncbi.nlm.nih.gov/articles/PMC5320422/
 >These findings demonstrate the feasibility of naturalistic protocols and highlight the potential importance of brighter days and more stable, less fragmented light exposure patterns for sleep.
 >https://www.nature.com/articles/s44323-026-00087-z
 
+
+### Non-24h clock
+
+>During isolation, participants exhibited marked free-running behavior, completing 24-31 cycles (mean: 29.3 ± 2.6), with cycle duration increasing from 24.1 ± 2.3 h pre-isolation to 31.6 ± 8.0 h in-cave (_p_ < 0.001).
+>https://pubmed.ncbi.nlm.nih.gov/42009612/
+
+Light sets it to 24 h.
+
+>light:dark cycle is necessary for rhythmic physiological functions to be appropriately timed over the 24-h day.
+https://pubmed.ncbi.nlm.nih.gov/17502598/
+
 ## Night owls linked to worse mental health
 
 >Individuals with a morning preference who go to bed early (aligned) exhibit better mental health compared to morning-types who go to bed late (misaligned). Those with an evening preference who sleep late (aligned) demonstrate poorer mental health.

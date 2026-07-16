@@ -80,7 +80,7 @@ In Powell v Texas, they tried a defence that it wasn't of their own free will si
 In R v Ruzic, since they were being coerced, they didn't have compatibilist free will, and hence were acquitted.
 
 >It is a principle of fundamental justice that only voluntary conduct – behaviour that is the product of a free will and controlled body, unhindered by external constraints – should attract the penalty and stigma of criminal liability. 
->[https://scc-csc.lexum.com/scc-csc/scc-csc/en/item/1861/index.do](https://scc-csc.lexum.com/scc-csc/scc-csc/en/item/1861/index.do)
+>[https://scc-csc.lexum.com/scc-csc/scc-csc/en/item/1861/index.do](https://scc-csc.lexum.com/scc-csc/scc-csc/en/item/1861/index.do
 
 In the case of R. v. Ruzic
 
@@ -166,9 +166,7 @@ Here [[Alex O'Connor]]/cosmic sceptic admits that when it comes to courts or dai
 >[https://ndpr.nd.edu/reviews/determined-a-science-of-life-without-free-will/](https://ndpr.nd.edu/reviews/determined-a-science-of-life-without-free-will/)
 
 
-> And for most people that is necessary and sufficient to conclude that they're seeing free will and action, intent, conscious awareness of you weren't coerced, you had options you did, and I should note that the legal criminal justice system sees that, in most cases as necessary and sufficient for deciding, there was a free choice made. There was culpability, there was responsibility, and so on.
-And from my standpoint, this is all very interesting, but it has absolutely nothing
-to do with free will.
+> And for most people that is necessary and sufficient to conclude that they're seeing free will and action, intent, conscious awareness of you weren't coerced, you had options you did, and I should note that the legal criminal justice system sees that, in most cases as necessary and sufficient for deciding, there was a free choice made. There was culpability, there was responsibility, and so on. And from my standpoint, this is all very interesting, but it has absolutely nothing to do with free will.
 [https://video.ucdavis.edu/media/Exploring+the+Mind+Lecture+Series-+Mitchell++Sapolsky++Debate+%22Do+We+Have+Free+Will%22/1_ulil0emm](https://video.ucdavis.edu/media/Exploring+the+Mind+Lecture+Series-+Mitchell++Sapolsky++Debate+%22Do+We+Have+Free+Will%22/1_ulil0emm)
 # Sam Harris
 [[Sam Harris]]
