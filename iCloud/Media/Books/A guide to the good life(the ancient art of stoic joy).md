@@ -47,3 +47,8 @@ Marcus Aurelius — the Emperor. Roman emperor and author of Meditations, which 
 The shortest memory chain is: Founder → Adviser → Slave → Emperor.
 
 Another sign of progress in our practice of Stoicism is that our philosophy will consist of actions rather than words.
+
+>MODERN READERS will naturally wonder how Marcus was able to accomplish this feat, how he was able to overcome his disgust for his fellow humans
+
+>For many readers, I realize, this line of reasoning will fall flat. They will insist that duty is the enemy of happiness and consequently that the best way to have a good life is to escape all forms of duty: Rather than spending our days doing things we have to do, we should spend them doing things we want to do. In chapter 20 I return to this question. For now, let me say this: Throughout the millennia and across cultures, those who have thought carefully about desire have drawn the conclusion that spending our days working to get whatever it is we find ourselves wanting is unlikely to bring us either happiness or tranquility.
+
