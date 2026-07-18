@@ -107,27 +107,21 @@ Technical notes under each criterion now include the relevant clarification know
 
 **Task:** I needed to turn inconsistent, untagged descriptions into standard taxonomy concepts so that analysts could profile far more of the data and identify tax risk more efficiently. To do that, I had to decide which statistical, AI and machine learning methodologies actually suited the business objective, rather than assuming a particular model in advance.
 
-**Action:** I worked through the candidate methodologies deliberately instead of selecting a fashionable model, and challenged the assumption that population analysis had to rely on tagged items or matching rules.
+**Action:** I began by exploring the data. Descriptive statistics — summary measures of description length, histograms and boxplots, and Pareto plots of concept frequency — showed a long-tailed, heavily imbalanced label set. Accuracy alone would be dominated by common classes, so minority-class metrics had to drive selection.
 
-I started with descriptive statistics: summary measures of description length, histograms and boxplots of the distributions, and Pareto plots of concept frequency. That showed a long-tailed, heavily imbalanced label set, so accuracy alone would be dominated by common classes and minority-class metrics had to drive selection.
+I then mined patterns in the text and labels: frequency ranks, cosine similarity between descriptions. That showed enough labelled examples to train a model, but also real ambiguity — generic descriptions such as "Total" mapped to many concepts — and very similar concepts loan to group and loan to related party. Highlighted limits to any model. 
 
-I then used inferential statistics: likelihood-ratio tests on the label-frequency distribution (power law vs lognormal vs exponential), paired t-tests over cross-validation folds to drop significantly worse classical models, and bootstrap confidence intervals on the final holdout comparison so overlapping intervals stopped me treating SEC-BERT's point-estimate advantage as a proven win.
+From that exploration I decided supervised model was the right fit. Correctly tagged items already supplied target concepts, so I framed the work as multi-class text classification. I ruled out reinforcement learning because there was no environment or reward signal to learn from.
 
-I also mined patterns in the data: frequency ranks, description–concept overlap, cosine similarity between concept tokens, class balance and residual errors. That showed enough labels to train a model, but also ambiguity — generic descriptions such as "Total" mapped to many concepts — and near-duplicate taxonomy groups that would limit any model.
+I built an NLP pipeline that parsed the iXBRL, cleaned and canonicalised the text, built n-gram or embedding features, classified. Unsupervised methods stayed exploratory: I used silhouette scores over known concept labels to compare how well different vector spaces(tfidf vs BERT embeddings) separated concepts — a representation check.
 
-Supervised learning became the core method because correctly tagged items already supplied target concepts. I framed it as multi-class text classification and compared Naive Bayes, tree ensembles, SVC and LinearSVC, SGD-style models, CNN and other neural approaches, SEC-BERT, and MPNet and e5 embeddings.
+I then compared model families on that pipeline: Naive Bayes, decision trees ensembles, SVM, CNN and other neural approaches, SEC-BERT, and MPNet and e5 embeddings.
 
-The NLP pipeline parsed the iXBRL, cleaned and canonicalised the text, built n-gram or embedding features, classified, and retained prediction, score and provenance. Learned transformations were fitted on training data only and reused unchanged in production.
+Only once those candidates were in hand did I bring in inferential evaluation and operational criteria. Paired t-tests over cross-validation folds dropped significantly worse classical models; bootstrap confidence intervals on the final holdout comparison stopped me treating SEC-BERT's point-estimate advantage as a proven win. I also assessed macro-F1, accuracy, per-class results, speed, infrastructure, explainability, provenance, maintainability and cost. Wider analytical coverage and faster risk profiling mattered more than the highest laboratory score.
 
-Unsupervised methods stayed exploratory. I used silhouette scores over known concept labels to compare how well different vector spaces separated concepts; that was a representation check, not a clustering product, and I did not deploy K-means or hierarchical clustering.
+**Result:** TF-IDF with LinearSVC was the strongest operational recommendation, even though it did not have the highest point estimate on every metric. Its holdout macro-F1 was 0.800 against 0.808 for the CNN and 0.823 for SEC-BERT, and the confidence intervals overlapped. In exchange it offered far faster CPU-only training, it was explainable in terms of inspectable coefficients and lower lifecycle risk. What made the method suitable was that it met the business objective of widening coverage, reducing manual grouping and supporting faster risk profiling, not that it was technically possible.
 
-I ruled out reinforcement learning (no environment or reward signal) and machine vision (text and structure were already extractable from the iXBRL). OCR would only matter if scanned image-only PDFs entered scope.
-
-Finally I assessed every candidate on macro-F1, accuracy, per-class results, cross-validation, bootstrap intervals, speed, infrastructure, explainability, provenance, maintainability and cost. Wider analytical coverage and faster risk profiling mattered more than the highest laboratory score.
-
-**Result:** TF-IDF with LinearSVC was the strongest operational recommendation, even though it did not have the highest point estimate on every metric. Its holdout macro-F1 was 0.800 against 0.808 for the CNN and 0.823 for SEC-BERT, and the confidence intervals overlapped. In exchange it offered far faster CPU-only training, inspectable coefficients and lower lifecycle risk. What made the method suitable was that it met the business objective of widening coverage, reducing manual grouping and supporting faster risk profiling, not that it was technically possible.
-
-**Reflection:** Method selection must begin with the business objective, the availability of labels, the type of data and the deployment constraints. Supervised NLP was appropriate here. Unsupervised methods stayed exploratory, and machine vision and frontier LLMs would have been disproportionate. The best technical score alone does not define the best business solution.
+**Reflection:** Method selection must begin with the business objective, the availability of labels, the type of data and the deployment constraints. So while the core model was supervised NLP was appropriate here. Unsupervised methods were used to help explore and understand the data, and frontier LLMs would have been disproportionate. 
 
 ### Technical notes: clarification knowledge
 
@@ -137,9 +131,13 @@ Drawn from past-learner notes on Statistical Methods, Data Mining, Supervised/Un
 
 Statistical methods collect, summarise, analyse and interpret data to support decisions. They split into descriptive and inferential.
 
-**Descriptive statistics** summarise and describe the main features of a dataset. They organise, simplify and present data, and do not draw conclusions beyond the data itself. Key techniques: measures of central tendency (mean, median, mode); measures of dispersion (range, variance, standard deviation); presentation (tables, histograms, bar charts, box plots). One-liner: descriptive statistics explain *what the data shows*.
+**Descriptive statistics** summarise and describe the main features of a dataset. They organise, simplify and present data, and do not draw conclusions beyond the data itself. Key techniques: measures of central tendency (mean, median, mode); measures of dispersion (range, variance, standard deviation); presentation (tables, histograms, bar charts, box plots). 
 
-**Inferential statistics** draw conclusions or make predictions about a population from a sample, using probability and a stated confidence level. Key techniques: hypothesis testing (t-test, Z-test, chi-square, ANOVA); estimation (confidence intervals); predictive methods (regression, correlation). One-liner: inferential statistics explain *what the data means for a larger population*.
+One-liner: descriptive statistics explain *what the data shows*.
+
+**Inferential statistics** draw conclusions or make predictions about a population from a sample, using probability and a stated confidence level. Key techniques: hypothesis testing (t-test, Z-test, chi-square, ANOVA); estimation (confidence intervals); predictive methods (regression, correlation). 
+
+One-liner: inferential statistics explain *what the data means for a larger population*.
 
 **Common hypothesis tests (interview recall)**
 
@@ -154,15 +152,21 @@ Paired t-test formula on fold or score differences: `t = mean(d)/(sd(d)/√n)`. 
 
 #### Data mining
 
-Purpose: discover hidden patterns, trends and relationships in large datasets. Techniques: clustering (group similar points); association-rule mining (items that co-occur, e.g. Apriori with support/confidence/lift); anomaly detection (unusual behaviour). Applications include fraud/risk analysis, customer behaviour, IT anomaly detection and market-basket analysis. One-liner: data mining uncovers patterns that improve performance, reduce risk and support decisions.
+Purpose: discover hidden patterns, trends and relationships in large datasets. Techniques: clustering (group similar points); association-rule mining (items that co-occur, e.g. Apriori with support/confidence/lift); anomaly detection (unusual behaviour). Applications include fraud/risk analysis, customer behaviour, IT anomaly detection and market-basket analysis. 
+
+One-liner: data mining uncovers patterns that improve performance, reduce risk and support decisions.
 
 #### Supervised machine learning
 
-Purpose: train on labelled data to predict or classify unseen cases. Common techniques: linear regression (continuous); logistic regression (binary); decision trees; random forests; SVM/LinearSVC; neural networks. Applications: churn, fraud, credit scoring, ticket classification, demand forecasting. One-liner: supervised learning uses labelled examples to predict outcomes.
+Purpose: train on labelled data to predict or classify unseen cases. Common techniques: linear regression (continuous); logistic regression (binary); decision trees; random forests; SVM/LinearSVC; neural networks. Applications: churn, fraud, credit scoring, ticket classification, demand forecasting. 
+
+One-liner: supervised learning uses labelled examples to predict outcomes.
 
 #### Unsupervised machine learning
 
-Purpose: find structure in unlabelled data. Tasks: clustering, pattern discovery, dimensionality reduction, anomaly detection. Algorithms: K-means, hierarchical clustering, DBSCAN, PCA. Use when labels are absent or expensive, for segmentation, exploration or to bootstrap later supervised work. A clustering result still needs domain interpretation before it becomes a business decision. One-liner: unsupervised learning finds hidden patterns without labels.
+Purpose: find structure in unlabelled data. Tasks: clustering, pattern discovery, dimensionality reduction, anomaly detection. Algorithms: K-means, hierarchical clustering, DBSCAN, PCA. Use when labels are absent or expensive, for segmentation, exploration or to bootstrap later supervised work. A clustering result still needs domain interpretation before it becomes a business decision. 
+
+One-liner: unsupervised learning finds hidden patterns without labels.
 
 #### Other learning paradigms (clarification breadth)
 
@@ -191,17 +195,23 @@ Typical objectives these methodologies serve: improving customer retention and e
 
 **Action:** I first defined success more broadly than headline accuracy. The solution had to classify minority concepts as well as common ones, run at operational scale, remain explainable, use supportable technology, protect data and be genuinely usable by analysts.
 
-For research and feasibility, I compared literature, package and model documentation, and empirical results across classical machine learning, neural networks, transformers and embedding approaches. Feasibility covered much more than whether the code ran. I assessed CPU and GPU availability, memory, throughput, cost, package and model provenance, security approval, maintainability, retraining time, and whether the production estate could support the complete pipeline.
+I researched the literature, package and model documentation, then ran feasibility checks against our estate: CPU and GPU availability, memory, throughput, cost, package and model provenance, security approval, maintainability, retraining time, and whether production could support the full pipeline. That ruled out some approaches before I spent time scaling them.
 
-For the test design, I created fixed seeded 80/10/10 train, test and holdout flags plus a 10,000-row holdout sample so that comparisons were like for like. I used five-fold `StratifiedKFold` with `GridSearchCV` and `HalvingRandomSearchCV` for the scikit-learn models, and Optuna with MLflow tracking for the neural and transformer runs. During the classical model search I compared candidates with paired t-tests over the cross-validation folds at the 95% confidence level. Many models were significantly worse than the leading configuration, and models that were not significantly worse on the 1% population went forward to the full population, which kept the expensive full-scale runs to the candidates that had earned them. I analysed macro-F1, accuracy, precision and recall, confusion matrices, residual errors, bootstrap intervals, runtime and model size. For production evidence I moved to a chronological or unseen-taxonomy holdout, and fit all learned preprocessing (vocabulary, IDF weights). 
+For like-for-like testing I created fixed seeded 80/10/10 train, test and holdout flags plus a 10,000-row holdout sample. Classical models used five-fold `StratifiedKFold` with `GridSearchCV` and `HalvingRandomSearchCV`; neural and transformer runs used Optuna with MLflow tracking. During the classical search I used paired t-tests over the cross-validation folds at 95% confidence: many models were significantly worse than the leading configuration, and only those that were not significantly worse on the 1% population went forward to the full population. I analysed macro-F1, accuracy, precision and recall, confusion matrices, residual errors, bootstrap intervals, runtime and model size. For stronger production evidence I moved to a unseen holdout.
 
-For robustness analysis, I built crafted adversarial, contextual, long-context, OCR-noise, Unicode and typo cases. LinearSVC beat SEC-BERT on most categories, SEC-BERT won on Unicode substitution, and both were weak on abbreviations. These small synthetic groups diagnose failure modes rather than estimate population performance.
+I then stress-tested robustness with crafted adversarial, contextual, long-context, OCR-noise, Unicode and typo cases. LinearSVC beat SEC-BERT on most categories, SEC-BERT won on Unicode substitution.
 
-I then involved users directly. In acceptance testing, analysts checked whether the extracted dimensions and classifications supported the agreed business use. This exposed predictions being made from blank descriptions using only surrounding headings, so I changed the production logic to return no prediction where the description was missing. It also exposed missing dimensional content, so I generalised the extraction rather than coding a narrow subset. In usability testing, users found the top-five-matches display and the raw scores confusing, so I limited the display to more confident matches and added explanatory text about what the scores meant. One request remains open: analysts asked for numeric rather than natural database keys, and I am treating that as a performance question to benchmark on real Oracle and SAS workloads rather than a preference to accept without evidence.
+Finally I involved users. I created a dashboard which helped users test out the model and see how well it worked on various concepts. 
 
-**Result:** TF-IDF plus LinearSVC balanced model quality with speed, explainability, supportability and security. Its holdout macro-F1 was 0.800, SEC-BERT's higher point estimate was not separated from it by the confidence intervals, and the operational rubric favoured the simpler model. The rubric's interpretability field-name defect means I would not quote its numeric ranking until that is fixed. Acceptance testing changed extraction and prediction behaviour, and usability testing made the dashboard clearer. From the notebooks this is a validated comparison and proof of concept, not proven production deployment.
+In acceptance testing, That exposed predictions being made from blank descriptions using only surrounding headings, so I changed the logic to return no prediction where the description was missing. 
 
-**Reflection:** I learned to research established tooling before writing bespoke evaluation code. Optuna automated comparison and visualisation that I had partly built myself. I also learned that training, test and production preprocessing need a single controlled implementation so that rules like blank-description handling cannot diverge. In production I monitor extraction failures, the missing-description rate, input and prediction distributions, per-class metrics and analyst overrides, with drift tests flagging when to diagnose, contain, relabel, and retrain or roll back. In future I would agree acceptance criteria earlier, automate pipeline-parity checks and keep a traceable decision log.
+In usability testing, so users could put in various descriptions and see the top-5 results but some of those were very poor matches and it wasn't clear what the scores meant., so I limited the display to more confident matches and added explanatory text about what the scores meant. 
+
+One request remains open: analysts asked for numeric rather than natural database keys, and I am treating that as a performance question to benchmark on real Oracle and SAS workloads rather than a preference to accept without evidence.
+
+**Result:** TF-IDF plus LinearSVC balanced model quality with speed, explainability, supportability and security. Its holdout macro-F1 was 0.800; SEC-BERT's higher point estimate was not separated from it by the confidence intervals; and the operational rubric favoured the simpler model. I would not quote the rubric's numeric ranking unqualified while its interpretability field-name defect remains. Acceptance testing changed extraction and prediction behaviour, and usability testing made the dashboard clearer. I treat this as a validated comparison and proof of concept, not proven production deployment.
+
+**Reflection:** Some of the bespoke code I used around narrowing down the models and hyperparameters like the t-tests and graphing, and using multiple iterations with different sample sizes.  Optuna automated comparison and visualisation that I had partly built myself. I also learned that training, test and production preprocessing need a single controlled implementation so that rules like blank-description handling cannot diverge. In production I  monitor extraction failures, with drift tests(chi-squared), f1-macro scores.   
 
 ### Technical notes: clarification knowledge
 
@@ -255,27 +265,31 @@ Raw accuracy and R² mislead when labels or features are poor. Prefer robust sig
 
 **Task:** I needed to select and explain a technique whose mathematical properties suited sparse text, unequal class frequencies and HMRC's need for fast, supportable and interpretable processing.
 
-**Action:** The linear algebra came first. I represented each canonical description as a numeric vector using word TF-IDF over one-to-three-word n-grams. The raw n-gram counts are multiplied by a smoothed inverse document frequency, `IDF(t) = log((1+N)/(1+df(t))) + 1`, and each description vector is then L2-normalised. The effect is that common words are down-weighted while distinctive phrases such as "interest receivable" keep their signal. But since it’s just short phrases plain tf gives similar results. 
+**Action:** I started from the class distribution. With about 75 concepts covering roughly 95% of items, accuracy mostly measured performance on common classes. I challenged that as the headline measure and made macro-F1 — the unweighted mean of per-class F1 — the selection metric so each eligible class contributed equally. I still retained accuracy, per-class precision and recall, support counts and confusion analysis alongside it.
 
-The optimisation and geometry came next. LinearSVC finds one-versus-rest separating hyperplanes by convex optimisation. Each class gets a score `w_c·x + b_c` and the prediction is the class with the highest score. The objective is conceptually `||w||₁ + C Σ max(0, 1 − yᵢ(w·xᵢ + b))²`, with `C=2.8` and squared-hinge loss in the final configuration. I chose the L1 penalty deliberately because it drives many feature weights exactly to zero, which produces a sparse and inspectable coefficient set inside a very large feature space. Balanced class weights scaled each class's contribution inversely to its frequency, so errors on minority concepts genuinely mattered during training.
+I then represented each canonical description as a numeric vector using word TF-IDF over one-to-three-word n-grams. Raw n-gram counts are multiplied by a smoothed inverse document frequency, and each description vector is L2-normalised. Common words are down-weighted while distinctive phrases such as "interest receivable" keep their signal. For these short phrases, plain term frequency often gave similar results, which I checked rather than assumed. I also compared them to embedding vectors, so embedding vectors embed more semantic meaning into the vectors. 
 
-The probability and statistics shaped the evaluation. I challenged the stakeholder preference for accuracy as the headline measure, because with 75 concepts covering about 95% of items, accuracy mostly measures performance on common classes. I made macro-F1, the unweighted mean of per-class F1, the selection metric so that each eligible class contributed equally, and I retained accuracy, per-class precision and recall, support counts and confusion analysis alongside it. Stratified cross-validation estimated generalisation, and bootstrap intervals expressed the uncertainty in the holdout measures.
+It finds one-versus-rest separating hyperplanes using a decision boundary to maximise the geometric margin, the distance between the hyperplan and closest point, with `C=2.8` a moderately soft margin allowing some points within the boundary.  When optimizing for hyperparameters, L1 penalty with dual = False performed just as well but was much faster. L1 drives many feature weights exactly to zero, which produces a sparse and inspectable coefficient set inside a very large feature space. Which has the benefit in that it's more easily explainable. Balanced class weights scaled each class's contribution inversely to its frequency, so errors on minority concepts genuinely mattered during training. Since it's a really imbalanced data set this is more important. 
 
-I also quantified the embedding trade-off in the same mathematical terms, and it is my clearest example of statistical significance not being practical significance. On the standard 1% run, MPNet's advantage over TF-IDF was about 0.003 macro-F1 and it was statistically significant at the 95% level, but it cost roughly 67 times the fit time (9,602 seconds against 143). A statistically real improvement of a third of a percentage point did not justify a GPU dependency and that compute cost, so I rejected it on practical grounds. On the later square-root-weighted run the difference was about 0.0001 and not significant at all. These numbers translated directly into an organisational decision about GPUs, cost and explainability.
+I estimated generalisation with stratified cross-validation and expressed holdout uncertainty with bootstrap intervals. That same mathematics framed the embedding comparison. On the standard MPNet's advantage over TF-IDF was about 0.003 macro-F1 and was statistically significant at the 95% level, but it cost roughly 67 times the fit time — 9,602 seconds against 143. A statistically real improvement of a third of a percentage point did not justify a GPU dependency and that compute cost, so I rejected it on practical grounds. 
 
-**Result:** The mathematics supported an organisationally appropriate choice. The model was fast on existing CPUs, explainable through its coefficients, and better aligned to minority concepts than a selection made on accuracy alone. Reframing the evaluation around macro-F1 made rare-class performance visible and gave stakeholders an impartial basis for comparison.
+**Result:** The mathematics supported an organisationally appropriate choice. The model was fast on existing CPUs, explainable through its coefficients, and better aligned to minority concepts than a selection made on accuracy alone. Reframing the evaluation around macro-F1 made rare-class performance visible and gave stakeholders an impartial basis for comparison. A decision matrix was useful in terms of taking into account different factors and the organisational needs. 
 
-**Reflection:** Mathematical principles explain why a technique behaves as it does and whether its output is suitable for a decision. I would never present a p-value or a model metric as certainty. Sample size, assumptions, class representation, effect size and business consequences all matter alongside statistical significance.
+**Reflection:** Mathematical principles explain why a technique behaves as it does and whether its output is suitable for a decision. While theoretical understanding is useful, often empirical evidence was more useful. Initially more complex NN models didn't seem like they were explainable but packages like SHAP and LIME can actually do a fairly good job making the outputs more explainable. 
 
+[[423561a0248e4629398e9e2f2474efe2_MD5.jpg|Open: Pasted image 20260718143136.png]]
+![[423561a0248e4629398e9e2f2474efe2_MD5.jpg]]
+[[6c74de607b126f6e5ef6277e749f531b_MD5.jpg|Open: Pasted image 20260718143223.png]]
+![[6c74de607b126f6e5ef6277e749f531b_MD5.jpg]]
 ### STARR: testing whether an agent presented higher risk
 
 **Situation:** In a separate piece of agent-level risk work, a qualitative review suggested that one agent might present higher risk than the wider comparison group.
 
 **Task:** I needed to test that suspicion quantitatively rather than allow an impression to drive the conclusion.
 
-**Action:** I set the null hypothesis that the agent's risk equalled the comparison group's, and then I checked the assumptions before choosing a test. The data was two independent groups measured on a ratio scale, approximately normally distributed, with more than 30 observations and unknown population variances. An F-test indicated that the variances were unequal, so Student's pooled-variance t-test was inappropriate. I therefore selected Welch's t-test, `t = (m₁ − m₂)/√(s₁²/n₁ + s₂²/n₂)`, which uses adjusted degrees of freedom.
+**Action:** I set the null hypothesis that the agent's risk equalled the comparison group's, then checked the assumptions before choosing a test. The data was two independent groups on a ratio scale, approximately normally distributed, with more than 30 observations and unknown population variances. An F-test showed unequal variances, so Student's pooled-variance t-test was inappropriate. I therefore used Welch's t-test, `t = (m₁ − m₂)/√(s₁²/n₁ + s₂²/n₂)`, which adjusts the degrees of freedom.
 
-**Result:** At a 99% confidence level I rejected the null hypothesis and concluded that the agent presented higher risk than the comparison group. This gave the business quantitative evidence rather than a judgement based only on qualitative review. Rejecting at 99% means the observed difference would be unlikely if the means were truly equal; it does not mean there is a 99% probability that the conclusion is true.
+**Result:** At a 99% confidence level I rejected the null hypothesis and concluded that the agent presented higher risk than the comparison group. That gave the business quantitative evidence rather than a judgement based only on qualitative review. Rejecting at 99% means the observed difference would be unlikely if the means were truly equal; it does not mean there is a 99% probability that the conclusion is true.
 
 **Reflection:** The test must follow the data and its assumptions. I would present the confidence interval and the practical effect size as well as the p-value, because statistical significance alone does not show how important a difference is operationally.
 
@@ -326,23 +340,22 @@ Mathematical properties become organisational constraints: compute cost (dense e
 
 **Task:** I needed to select languages and libraries for extraction, cleaning, model experimentation and delivery without forcing the whole pipeline into one language or creating an unsupported workflow. That meant challenging the norm that a project stays in the language it started in.
 
-**Action:** I investigated package maturity, team capability, platform support and long-term maintenance rather than choosing a language by preference.
+**Action:** I investigated package maturity, team capability, platform support and long-term maintenance.
 
-For the data engineering layer in the workplace, I used R for the fuller XML and HTML extraction because it matched the supported analyst workflow and had mature parsing tooling. Keeping extraction in the language its maintainers actually used reduced the support burden. This part needs internal artefacts, because it is not in `Code/`.
+I did the initial data extracting R, because that had mature XML and HTML parsing tooling and that R was the primary language used within HMRC for data analytical work. Keeping extraction in the language its maintainers actually used reduced the support burden.
 
-At the cross-language boundary, `reticulate` embedded a Python session inside R and converted objects between the two languages. This let the R pipeline call the more mature Python model without rewriting the analyst-facing workflow. I treated its risks as part of the design rather than an afterthought: dependency and environment mismatch, conversion overhead, and error handling across languages were all managed with pinned R, Python and package versions, a reproducible environment and an integration test.
+When the classification work needed Python's machine learning ecosystem, I bridged rather than rewriting. Python has more mature and extensive packages and support for ML. I used `reticulate` that would allow me to call python functions from an R package.  
 
-For delivery through SQL and Oracle, `dbplyr` represented remote tables lazily and translated tidyverse verbs into SQL. Filtering, grouping and joins therefore executed inside the database rather than after downloading the whole dataset. I inspected the generated SQL and the query plans for expensive operations rather than assuming the translation was optimal.
+For the ML side of work I used packages like BeautifulSoup Numpy, Polars for the  EDA and data engineering; scikit-learn provides TF-IDF, the classical models, cross-validation and the halving searches; SentenceTransformers supplies MPNet and e5; TensorFlow and Keras implement the neural and CNN experiments; PyTorch and Hugging Face fine-tune SEC-BERT; Optuna runs the hyperparameter searches and MLflow records the experiments.
 
-The scientific analysis layer in Python is fully code-backed. BeautifulSoup and Pandas parse the filings and save Parquet. Polars and NumPy support the EDA and data engineering. Scikit-learn provides TF-IDF, the classical models, cross-validation and the halving searches. SentenceTransformers supplies MPNet and e5. TensorFlow and Keras implement the neural and CNN experiments. PyTorch and Hugging Face fine-tune SEC-BERT. Optuna runs the hyperparameter searches and MLflow records the experiments.
+*Feature engineering was empirical throughout that path. Lower-casing and whitespace and punctuation normalisation. Typed placeholders such as `hubble_name`, `hubble_date` and `hubble_number` removed high-cardinality identifiers while preserving the information that a name, date or number was present. I tested rather than assumed each choice: replacing forward slashes with spaces reduced performance, so it was not retained.* 
 
-The feature engineering was empirical throughout. Lower-casing and whitespace and punctuation normalisation reduced accidental vocabulary variation. Typed placeholders such as `hubble_name`, `hubble_date` and `hubble_number` removed high-cardinality identifiers while preserving the information that a name, date or number was present. I tested rather than assumed each choice: replacing forward slashes with spaces reduced performance, so it was not retained. The same tested functions create both training and production features, which prevents skew between the two.
+For delivery, `dbplyr` represented remote Oracle tables lazily and translated tidyverse verbs into SQL, so filtering, grouping and joins executed inside the database rather than after downloading the whole dataset. I inspected the generated SQL and the query plans for expensive operations rather than assuming the translation was optimal.
 
-On simulation I treat the claim narrowly. Controlled experiments comparing model and hyperparameter scenarios on fixed splits are experimental analysis, not a physical or Monte Carlo simulation of a real-world process.
 
-**Result:** The code shows a complete experimental path from semi-structured public filings to repeatable model comparisons over millions of rows, and why a CPU-compatible scikit-learn model could beat GPU-heavy alternatives operationally. The commercial benefit was not "using three languages". It was combining their strengths to widen the usable data, reduce manual preparation and deliver through a workflow the organisation could actually support.
+**Result:** The pipeline gave a complete experimental path from semi-structured public filings to repeatable model comparisons over millions of rows, and showed why a CPU-compatible scikit-learn model could beat GPU-heavy alternatives operationally. From a R based initial tool, python was able to be used in an integrated way to give the best of the ML world for the ML part.
 
-**Reflection:** The correct language is contextual. Data format, library maturity, user capability, deployment platform and supportability all matter. Python support is growing in HMRC's AWS lakehouse, so I would reassess the language boundary over time, migrating only where the benefit outweighs the disruption.
+**Reflection:**  Python support is growing in HMRC and looking forward with the AWS lakehouse, python is more supported, so looking forwards it might be that we need to rewrite the extraction part in python to better fit into the future ecosystem.  Also with the latest state of LLMS, using them to help with a rewrite makes it feasible as opposed to being a massive project using devs. 
 
 ### Technical notes: clarification knowledge
 
@@ -367,17 +380,17 @@ Past-learner notes are thin here (only a scikit-learn metrics snippet). Content 
 
 **Task:** I needed to define and refine an architecture that could burst for large extraction jobs, recover reliably, and provide queryable outputs without overloading the shared platform.
 
-**Action:** The applied research and data modelling came first. I investigated taxonomy change, Oracle width limits, the shape of the workload and user needs. From that I proposed a long-form data model, storing document, context, concept, description and value as rows, instead of the wide annual-taxonomy tables that created structural change and width pressure every year. The long model costs more rows and occasional pivots for some outputs, but it is taxonomy-independent and removes the annual schema remapping. I consulted analysts before committing, to confirm they could genuinely work with long data.
+**Action:** I began with applied research into the sources and constraints: taxonomy change, Oracle width limits(1,000 columns), the shape of the workload and what analysts actually needed. From that I proposed a long-form data model instead of the wide annual-taxonomy tables that forced structural change and width pressure every year. The long model costs more rows and occasional pivots for some outputs, but it is taxonomy-independent and removes the annual schema remapping. Before committing, I consulted analysts to confirm they could genuinely work with long data. To was 1NF(First normal form)(each field contains one value, not lists),  but not fully 3NF(non key only depend on primary key), since it was more practical, you don't want analyst to be doing lots of joins
+2ND - non-key fields just depend on primary key - mostly but not fully.
 
-For scalable compute, I worked with platform engineers to establish On-Demand Compute: temporary EC2 capacity, including large-core or GPU configurations when justified, spun up for a job and shut down afterwards. This isolated heavy workloads from the shared platform and controlled cost. Because document sizes varied widely, static partitioning left some workers idle while stragglers finished, so I used dynamic work allocation in which workers pulled the next document when they became free. I also understood where scaling stops helping: when input and output, database writes, serial setup or credential management becomes the bottleneck. 
+With the model agreed, I worked with platform engineers on scalable compute. We established On-Demand Compute: temporary EC2 capacity, including large-core or GPU configurations when justified, spun up for a job and shut down afterwards. That isolated heavy workloads from the shared platform and controlled cost. Because document sizes varied widely, static partitioning left some workers idle while stragglers finished, so I used dynamic work allocation in which workers pulled the next document when free. I also watched where scaling stops helping — when input and output, database writes, serial setup or credential management becomes the bottleneck.
 
-For storage, I matched each store to its access pattern. Apache Solr provided distributed, replicated free-text search across servers. Oracle held governed structured outputs for SQL querying and joins. Each store did what it suits rather than one being forced to do both.
-
-For security and stability, the DPIA, data minimisation, controlled-environment processing, model assurance, distribution-list access and controlled Oracle and S3 outputs addressed confidentiality. Replicated Solr, tested code, durable database outputs and workload isolation supported stability.
+Data and access was limited using distribution-list access which limited access to s3, Oracle, and filesystem. 
 
 **Result:** The architecture separated large jobs from the main platform, scaled compute only when needed, and provided fast search plus structured analyst access. The long-form model was taxonomy-independent, removed the wide annual mappings, and supported access to new submissions within days rather than the previous ingestion delay of around nine months.
 
-**Reflection:** Scalability includes operability, workload balance and governance, not just maximum throughput. I would handle token refresh for long-running jobs centrally rather than sharing refreshed S3 credentials between workers through a file. Longer term, Spark on EMR with Redshift or lakehouse-native storage may integrate the processing more effectively, subject to benchmarking and access-control assurance.
+**Reflection:** Longer term, Spark on EMR with Redshift or lakehouse-native storage may integrate the processing more effectively, subject to benchmarking and access-control assurance. 
+Currently the ETL is mainly in R, so while spark supports R, there is more support as a python ETL on AWS lakehouse, which might be something I'll need to consider going forwards. 
 
 ### STARR: controlling access to S3 data
 
@@ -385,7 +398,7 @@ For security and stability, the DPIA, data minimisation, controlled-environment 
 
 **Task:** I needed to define and supervise an access route that allowed authorised users to reach the data without opening the buckets broadly.
 
-**Action:** I created a proxy and controlled access to it through a distribution list. This kept the cloud resource behind an organisationally controlled route and limited access to people with a demonstrated need.
+**Action:** I created a proxy and controlled access to it through a distribution list. That kept the cloud resource behind an organisationally controlled route and limited access to people with a demonstrated need.
 
 **Result:** Only the intended user group could reach the S3 data. The control met the security requirement, although the extra layer introduced some reliability and performance overhead.
 
@@ -397,7 +410,7 @@ For security and stability, the DPIA, data minimisation, controlled-environment 
 
 **Task:** I needed to determine whether that architecture was technically and financially sustainable for the project's actual workload.
 
-**Action:** I reviewed the charges at low and zero usage and compared the managed auto-scaling design with fixed-price and self-hosted EC2 alternatives. I weighed the total cost of ownership, covering concurrency, storage, idle time, support effort, recovery and expected growth, rather than comparing headline compute prices. The serverless billing was opaque and the baseline cost was disproportionate for a small, intermittent workload. On that evidence I challenged the assumption that cloud-native auto-scaling is automatically the most cost effective choice.
+**Action:** I reviewed the charges at low and zero usage and compared the managed auto-scaling design with fixed-price and self-hosted EC2 alternatives. I weighed total cost of ownership — concurrency, storage, idle time, support effort, recovery and expected growth — rather than headline compute prices alone. The serverless billing was opaque and the baseline cost was disproportionate for a small, intermittent workload, so on that evidence I challenged the assumption that cloud-native auto-scaling is automatically the most cost-effective choice.
 
 **Result:** Fixed-price or self-hosted capacity was more predictable for this project and could still be resized when demand genuinely grew. The decision separated the technical ability to scale from the commercial question of whether the scaling model was appropriate.
 
@@ -431,19 +444,19 @@ Relational DB (governed SQL); search index (Solr — sharding/replication); obje
 
 **Task:** I needed to redesign the access and processing so that Hubble could handle large document populations without saturating the main platform, exposing results through data stores analysts already used.
 
-**Action:** I challenged the file-based workflow, investigated where time and manual effort were being lost, and designed around data locality, batching, query pushdown, parallelism, storage format and the cost of repeated serialisation.
+**Action:** I challenged the file-based workflow and investigated where time and manual effort were being lost. The redesign centred on data locality, batching, query pushdown, parallelism, storage format and the cost of repeated serialisation.
 
-For the parallel access design, I worked with DevOps to provision On-Demand Compute and used dynamic parallel scheduling. Documents went into a work queue and workers pulled the next one when free, so roughly 128 returns could be processed concurrently without the long tail caused by static batches of differently sized documents. The correct worker count sits just before contention at S3, the network, parsing memory or the Oracle writes removes the benefit of adding cores.
+I first worked with DevOps to provision On-Demand Compute and used dynamic parallel scheduling. Documents went into a work queue and workers pulled the next one when free, so roughly 128 returns could be processed concurrently without the long tail caused by static batches of differently sized documents. The correct worker count sits just before contention at S3, the network, parsing memory or the Oracle writes removes the benefit of adding cores.
 
-For the API layer I used defined programmatic interfaces rather than ordinary file copies: R database drivers with DBI-style calls to Oracle, `dbplyr` as a higher-level query interface, Solr's query interface, the controlled S3 proxy, and the Parquet-on-FSx storage interfaces. The value of `dbplyr` is its lazy execution: it builds a query representation and only sends the translated SQL when results are collected, so filters, aggregation and joins execute close to the data. That cuts transfer and client memory, and the benefit depends on suitable indexes and predicates the optimiser can push down.
+I then moved structured outputs off loose files. Results went to Oracle. Where a SAS-writing package proved unreliable, I used a shared FSx route with Parquet, which is far more efficient than CSV. 
 
-For the storage and format decisions, structured outputs went to Oracle rather than loose files. Where a SAS-writing package proved unreliable, I used a shared FSx route with Parquet, a compressed columnar format in which analytical queries read only the required columns and use metadata for predicate pruning, which is far more efficient than CSV. Batched database writes used sensible transaction boundaries so a failed batch could be retried without creating duplicates. Solr handled fast distributed text retrieval and the S3 proxy controlled object access.
+R database drivers with DBI-style calls to Oracle, `dbplyr` as a higher-level query interface. `dbplyr`'s value is lazy execution: it builds a query representation and only sends the translated SQL when results are collected, so filters, aggregation and joins execute close to the data. That cuts transfer and client memory, provided the indexes and predicates let the optimiser push the work down.
 
-Two design questions are held open deliberately. The analysts' request for numeric surrogate keys over natural keys is a benchmarking question about index size, query plans and end-to-end user effort on representative Oracle and SAS workloads, not a change to make on preference. And a possible future LLM-to-Solr natural-language query route remains clearly proposed rather than built. It would need a controlled schema, syntactic validation, field and operator allow-lists, authorisation in the user's own context, result-size limits, escaping against injection, audit logging and a preview step. The LLM must not become a route around existing access controls.
+Two design questions remain open deliberately. The analysts' request for numeric surrogate keys over natural keys is a benchmarking question about index size, query plans and end-to-end user effort on representative Oracle and SAS workloads, not a change to make on preference. 
 
 **Result:** Large extraction jobs ran on isolated temporary capacity without degrading the shared platform. The database and Parquet outputs made results easier to query, join and reuse, while the R analysts kept their familiar syntax and let the database do the heavy work.
 
-**Reflection:** An efficient algorithm is one part of a wider data-access design. Parallelism only helps if the work is balanced, the credentials stay valid and the output does not create a new bottleneck. I would add service interfaces only where they genuinely improve reuse, rather than adding a REST API for its own sake.
+**Reflection:** An efficient algorithm is one part of a wider data-access design. 
 
 ### Technical notes: clarification knowledge
 
@@ -466,11 +479,11 @@ Past-learner notes only lightly mention APIs/databases in the ML pipeline. Follo
 
 **Task:** I needed to investigate whether a different data model could remove the annual ingestion bottleneck without making the result unusable for analysts.
 
-**Action:** I challenged the assumption that the output needed to be a manually mapped wide table. I profiled the source data, investigated the pattern of taxonomy change and the database limitations, and proposed a long-form, taxonomy-independent representation. Before committing to the change, I consulted analysts to confirm that they could work with long data.
+**Action:** I challenged the assumption that the output needed to be a manually mapped wide table. I profiled the source data, investigated the pattern of taxonomy change and the database limitations, and proposed a long-form, taxonomy-independent representation. Before committing, I consulted analysts to confirm that they could work with long data.
 
 **Result:** New taxonomies could be ingested without annual structural remapping, and analysts could begin profiling submissions within days rather than waiting around nine months.
 
-**Reflection:** Challenging the norm works when it is based on evidence and user validation rather than novelty. The long format traded some immediate human readability for adaptability and scale, which is why consulting analysts was essential. I would retain the benchmarks, acceptance records and before-and-after timings so the impact is readily defensible.
+**Reflection:** Challenging the norm works when it is based on evidence and user validation rather than novelty. The long format traded some immediate human readability for adaptability and scale, which is why consulting analysts was essential. I would retain the benchmarks, acceptance records and before-and-after timings so the impact is easy to show later.
 
 ### STARR: reusing tagged descriptions to classify untagged content
 
@@ -478,7 +491,7 @@ Past-learner notes only lightly mention APIs/databases in the ML pipeline. Follo
 
 **Task:** I needed to investigate whether untagged content could be mapped to the standard taxonomy without analysts maintaining an impossibly large set of regular expressions.
 
-**Action:** I challenged the assumption that tagged and untagged data had to be treated separately. I proposed using the correctly tagged descriptions as supervised training labels for a classifier over the untagged content. I then researched and compared classical machine learning, embeddings, neural networks and transformers, and selected TF-IDF with LinearSVC on the combined basis of quality, speed, explainability, security, infrastructure and maintainability rather than raw score alone.
+**Action:** I challenged the assumption that tagged and untagged data had to be treated separately. I proposed using the correctly tagged descriptions as supervised training labels for a classifier over the untagged content, then researched and compared classical machine learning, embeddings, neural networks and transformers. I selected TF-IDF with LinearSVC on the combined basis of quality, speed, explainability, security, infrastructure and maintainability rather than raw score alone.
 
 **Result:** The classifier provided a reusable way to categorise untagged descriptions, extended analytical coverage and reduced the dependence on manual matching rules. Analysts gained access to data they could not previously exploit consistently at scale.
 
@@ -486,7 +499,7 @@ Past-learner notes only lightly mention APIs/databases in the ML pipeline. Follo
 
 ### STARR: extracting contextual features before a calculation issue emerged
 
-**Situation:** Hubble's original requirement focused on extracting untagged figures, but iXBRL documents also contain headings, table names and positional context, and it was not yet known which of those features future investigations would need.
+**Situation:** Hubble's original requirement focused on extracting untagged figures, and descriptions. but iXBRL documents also contain headings, table names and positional context, and it was not yet known which of those features future investigations would need.
 
 **Task:** I had to decide whether to meet only the narrow requirement or design a more general extraction that preserved useful context.
 
@@ -523,23 +536,30 @@ Past-learner notes have little narrative "challenge the norm" content; use their
 
 **Task:** As the platform owner, I needed to keep the service useful and funded, expand its capability, give technical direction and help users develop the skills to use it effectively.
 
-**Action:** I worked with budget holders to justify licence growth, arranged upgrades and new functionality, and collaborated with engineers on On-Demand Compute and GPU access. I supported users directly, mentored project teams and ran discussions about machine learning opportunities. I also created and maintained practical wiki guidance covering virtual environments, secure data access, reproducibility and platform use, and I tailored my communication for analysts, engineers, suppliers and decision-makers rather than giving every audience the same level of detail.
+**Action:** I worked with budget holders to justify licence growth, arranged upgrades and new functionality, and collaborated with engineers on On-Demand Compute and GPU access. Alongside that I supported users directly, mentored project teams and ran discussions about machine learning opportunities. I also created and maintained practical wiki guidance covering virtual environments, secure data access, reproducibility and platform use, and I tailored my communication for analysts, engineers, suppliers and decision-makers rather than giving every audience the same level of detail. 
+
+Also pushed users to use teams channels more, so I could get others to more easily help with questions, so I could easily point the platform teams to questions. Or just other users who can answer questions, rather than it always being private communications. Often a question one user had would be applicable to others. 
+
+Since I'm the main port of call, often I have to work out when I need to research it myself, vs get input, e.g. Database credentials. 
 
 **Result:** DAP grew from one user to more than 250 and supported teams building their own analytical and machine learning tools. Users developed tools and integrations themselves rather than relying on me for every change, which extended organisational capability beyond my own delivery.
 
-**Reflection:** My leadership developed from answering individual technical questions to shaping a service and the practices around it. I would strengthen this with formal skills reviews, succession planning and measured outcomes from mentoring.
+**Reflection:** 
+
 
 ### STARR: taking ownership of Hubble's technical direction
 
-**Situation:** No off-the-shelf solution could categorise untagged iXBRL descriptions, and the initial simple NLP approaches performed poorly. Hubble spanned extraction, cleaning, modelling, validation and delivery across several technologies.
+**Situation:** The Hubble project was too large for me alone to run, plus it was a single point of failure.
 
-**Task:** I needed to take personal responsibility for the technical direction, overcome the infrastructure and modelling problems, and prove that the business problem was tractable.
+**Task:** So rather than working on it myself, I requested more resource and moved into a more leadership role.
 
-**Action:** I investigated alternative architectures and model families, rebuilt the training datasets, fine-tuned BERT and tested classical and neural approaches. When GPU and throughput constraints emerged, I adapted the workflow to the infrastructure that was actually available and compared the candidates against operational criteria as well as model quality. I managed the lifecycle end to end, from extraction and cleaning through training, validation and reporting, and I introduced lightweight project controls as the contributor group grew.
+**Action:** With a team, regular meeting and a structured way to work were more important. Gitlab was used more, with issues and kanban boards created to structure work. I created templates for issues, tasks and pull requests. I also had to create deatailed READMEs and docs on how to use and setup the tool. I also had sessions, which I recorded to go through how to work on branches and merge requests worked. Highlighting the benefits of VSCode which had a GUII which was much better than trying to deal with merge conflicts. 
 
-**Result:** The work produced a validated classification proof of concept and established the business case for using machine learning in data profiling. The wider Hubble product extracted substantially more data than the previous approach and supported analysts identifying tax risk.
+I also pushed a system were users would review the merge requests from others. Also during calls I would often go through issues people had with the whole team, to upskill and show them how the system worked and how I would approach the issue. 
 
-**Reflection:** Ownership meant being accountable for the complete outcome, including its limitations and deployment fit, rather than only producing a model. I would make the prototype-versus-production status and the final performance evidence more explicit in the project record.
+**Result:** 
+
+**Reflection:** Working with a team, has meant that type of work I do as a leader has changed, and the importance of upskilling others on the team is. 
 
 ### Technical notes: clarification knowledge
 
@@ -572,17 +592,19 @@ Be ready with a verified organisational measure (users, delivery, mentoring outc
 
 **Task:** I needed to make an impartial recommendation, explain the benefits and risks, provide credible alternatives, and communicate the same decision appropriately to technical and non-technical audiences.
 
-**Action:** I consulted the stakeholders first and converted their concerns into a comparison covering macro-F1 and per-class reliability, accuracy, speed, compute cost, explainability, security and provenance, maintainability and deployment fit. The comparison narrowed to LinearSVC, CNN and SEC-BERT on one common holdout, plus rubric-scored operational criteria. SEC-BERT had the highest macro-F1 point estimate at 0.823 against 0.808 and 0.800, but the confidence intervals overlapped. LinearSVC trained in minutes rather than the better part of an hour, ran inference orders of magnitude faster, and was about 8 MB rather than about 1.8 GB, with stronger deployment, maintenance and dependency-risk ratings.
+**Action:** I consulted the stakeholders first and turned their concerns into a comparison covering macro-F1 and per-class reliability, accuracy, speed, compute cost, explainability, security and provenance, maintainability and deployment fit.
 
-I presented the risks and benefits in both directions. LinearSVC's risks are its linear decision boundary and its lack of contextual understanding. SEC-BERT's risks are its GPU dependency, slower throughput, weaker explainability, provenance and assurance concerns, and lifecycle cost.
+I then ran the shortlist — LinearSVC, CNN and SEC-BERT — on one common holdout, alongside rubric-scored operational criteria. SEC-BERT had the highest macro-F1 point estimate at 0.823 against 0.808 and 0.800, but the confidence intervals overlapped. LinearSVC trained in minutes rather than the better part of an hour, ran inference orders of magnitude faster, and was about 8 MB rather than about 1.8 GB, with stronger deployment, maintenance and dependency-risk ratings. A
 
-For technical audiences, I explained sparse TF-IDF vectors, L1 regularisation, the imbalance handling, cross-validation, bootstrap uncertainty and the CPU and GPU constraints. For non-technical audiences, I described macro-F1 as reliability across rare as well as common concepts, CPU execution as lower cost and easier deployment, and the coefficients as understandable evidence about which phrases influenced a result.
+When I presented the decision I gave risks and benefits in both directions. LinearSVC's risks are its linear decision boundary and its lack of contextual understanding. SEC-BERT's risks are its GPU dependency, slower throughput, weaker explainability, provenance and assurance concerns, and lifecycle cost.
 
-The alternative I offered was SEC-BERT or another assured domain model, in the event that a remapped, grouped evaluation established a worthwhile gain and future infrastructure, assurance and maintenance could support it. The decision matrix itself was designed to be honest about uncertainty: where a model's confidence interval overlapped the best model's on a metric, that metric's score was reduced by a confidence penalty, so an uncertain win could not carry the ranking. Even so I would not quote the current numeric decision score unqualified, because the matrix has a known field-name defect that drops interpretability from the calculation and its weights have not been sensitivity-tested.
+For technical audiences I explained sparse TF-IDF vectors, L1 regularisation, the imbalance handling, cross-validation, bootstrap uncertainty and the CPU and GPU constraints. For non-technical audiences I used examples  to explain some of the more technical concepts, e.g. macro vs weighted scores, confusion matrixes were more easily understandable than just terms like f1. Examples of coefficient values in terms of explainability. So there were examples where they were shown so you could see why the model selected that category.
+
+The alternative I offered was SEC-BERT or another assured domain model, if a remapped, grouped evaluation established a worthwhile gain and future infrastructure, assurance and maintenance could support it. The decision matrix itself was designed to be honest about uncertainty: where a model's confidence interval overlapped the best model's on a metric, that metric's score was reduced by a confidence penalty, so an uncertain win could not carry the ranking. So I made it clear that SEC-BERT had the best raw scores but the decision matrix helped me explain why some of disadvantages meant that LinearSVC was a better choice. 
 
 **Result:** TF-IDF with LinearSVC was the operational recommendation, offering competitive quality, fast CPU-compatible processing, clearer explanations and lower lifecycle risk.
 
-**Reflection:** Communicating alternatives strengthens a recommendation because it shows the choice was deliberate. In future I would agree metric definitions and risk tolerances even earlier and keep a short decision record containing both the technical comparison and a plain-English version.
+**Reflection:** 
 
 ### Technical notes: clarification knowledge
 
@@ -621,29 +643,34 @@ Always name a credible runner-up and the conditions under which it would win (e.
 
 **Relevant KSBs:** S23, B7.
 
+I came across an interesting article on how you don't need tokens for everything. 
+
+This was something that sparked my interests, since it resonated with me. 
+LLM can do almost everything, but they aren't always the best choice for cost, scalability or explainability or speed. 
+
+So I made a post about some of the issues with using LLMs for everything an alternatives.
+
+e.g. We have lots of accounts and some people were using LLMs with complex queries, for a single risk. The results were good but you can only do it over a few sets of accounts, it's expensive and slow. One alternative is asking a LLM on how to extract the data we need and make that more structured, so that in the future if you have another profile you already have the data. Then you can give a LLM examples and get it to write a query that will identify the risk, then you can run that SQL or other query across the full data set. 
+
+Also the explainability is very important. A LLM might mark something as high risk just due to the ethnicity of a name, but the reasons it might mark something as risky don't always line up with why it made that decision. So that's a big risk for us. 
+
+So I've got a follow up call to discuss some projects and how someone might be able to make changes to their existing project. 
+
+
+
 ### STARR: sharing practice internally through DAP guidance and mentoring
+
 
 **Situation:** DAP users came from different teams and had varying experience with environments, data access, reproducibility, testing and the limitations of machine learning.
 
 **Task:** I needed to make safe, effective practice reusable across the organisation rather than repeatedly solving the same setup and delivery problems for individuals.
 
-**Action:** I shared guidance through Teams channels, direct mentoring, demonstrations and a maintained wiki. The material covered virtual environments, secure data access, reproducibility, testing, model limitations, human-in-the-loop use and proportionate model selection. I also documented Hubble with a full README and detailed design notes so contributors could understand how to run it and why the important choices had been made.
+**Action:** I shared guidance through Teams channels, direct mentoring, demonstrations and a maintained wiki. The material covered virtual environments, secure data access, reproducibility, testing, model limitations, human-in-the-loop use and proportionate model selection. I also documented Hubble with a full README and detailed design notes so contributors could understand how to run it and why the important choices had been made. 
 
 **Result:** Users gained reusable guidance and support, and Hubble contributors adopted more consistent, reproducible workflows. The documentation reduced the reliance on individual knowledge and made it easier for colleagues to build their own tools.
 
-**Reflection:** Internal dissemination requires maintenance, feedback and examples, not just publishing a page. I would track wiki use, mentoring outcomes and reuse by other teams to demonstrate the improvement in organisational practice.
+**Reflection:** Internal dissemination needs maintenance, feedback and examples, not just publishing a page. I would track wiki use, mentoring outcomes and reuse by other teams to show the improvement in organisational practice.
 
-### STARR: sharing grounded-LLM practice through Graffiti
-
-**Situation:** The wider iXBRL community was exploring LLMs, but passing a complete, noisy HTML filing to a model produced poor results and could encourage overconfidence in ungrounded answers.
-
-**Task:** I needed to demonstrate and share a safer, more effective pattern without exposing HMRC data or presenting an experiment as settled best practice.
-
-**Action:** I built Graffiti using public filings. It extracts and structures the iXBRL first, selects the relevant context, and supplies that context together with the user's question to the LLM. I shared the developments with leading iXBRL experts, explaining both the benefit of grounding and the limitations, including hallucination, prompt injection, data leakage, opacity, cost and over-automation.
-
-**Result:** Graffiti provided a practical external demonstration of grounded LLM analysis over iXBRL and a vehicle for discussing responsible use with the professional community.
-
-**Reflection:** External dissemination should distinguish demonstrated behaviour from general claims of industry impact. I would retain the details of the audiences, feedback, reach and any concrete reuse or changed practice that Graffiti prompted.
 
 ### Technical notes: clarification knowledge
 
@@ -686,19 +713,8 @@ Influencing standards, best practice and guidelines. Be honest: sharing is evide
 
 **Result:** The guidance was changed in line with my comments, giving the organisation a more proportionate basis for governing different types of AI work.
 
-**Reflection:** Responsible practice requires the confidence to challenge policy with evidence. Proportional governance protects public trust more effectively than treating every technique as identical, and the guidance should continue to be reviewed as technology, regulation and public expectations change.
+**Reflection:** Responsible practice requires the confidence to challenge policy with evidence. Proportionate governance protects public trust more effectively than treating every technique as identical, and the guidance should continue to be reviewed as technology, regulation and public expectations change.
 
-### STARR: applying and sharing a grounded-LLM pattern through Graffiti
-
-**Situation:** Foundation models created strong interest in natural-language analysis of company filings. Industry evidence suggested that sending a complete HTML document to an LLM performed poorly, while structured iXBRL context improved grounding. In a public-sector setting, an ungrounded or over-trusted answer could damage confidence and lead to indefensible conclusions.
-
-**Task:** I needed to critically assess the trend, apply it where justified, and share a practical pattern with the wider iXBRL community.
-
-**Action:** I weighed the accessibility and productivity benefits of LLMs against their risks, including hallucination, prompt injection, data leakage, opacity, bias, cost and over-automation. I built Graffiti on public filings, extracting the iXBRL first and supplying the structured context with the user's query. I kept the tool analytical rather than making it an automated decision-maker, made human review explicit, and discussed the pattern and its limitations with iXBRL experts.
-
-**Result:** Graffiti demonstrated a grounded-LLM approach to the wider professional community without exposing HMRC data and without suggesting that model output should replace professional judgement.
-
-**Reflection:** The social licence for AI depends on transparency, accountability and accessible challenge, not simply capability. As MCP and tool use expand, I would keep external demonstrations on public or synthetic data and make the model's limits visible.
 
 ### Technical notes: clarification knowledge
 
@@ -736,15 +752,17 @@ Articles, presentations, forums, demonstrations on public data; keep limitations
 
 ### STARR: balancing licence, compute and funding priorities for DAP
 
-**Situation:** As DAP owner I received competing demands. Users needed more licences and GPU capability, engineers had platform constraints, and budget holders needed a defensible business case.
+**Situation:** As DAP owner I received competing demands. Users needed more licences and GPU capability, engineers had platform constraints, and budget holders needed a clear business case.
 
 **Task:** I needed to respect those perspectives and provide capacity where it benefited the organisation, without committing to unaffordable permanent infrastructure.
 
 **Action:** I gathered evidence of demand and of the work that additional capacity would enable. I justified licence growth with the budget holders, and I worked with the engineers to provide On-Demand Compute, including GPU instances that could be started for specific work and shut down afterwards.
 
-**Result:** DAP grew beyond 150 users with appropriate licences, and ODC provided large CPU and GPU capacity cost-effectively when projects needed it.
+Requesting funding for larger system, but have to balance cost with benefit. 
 
-**Reflection:** The solution came from separating the underlying need, which was occasional access to high-capacity compute, from the requested implementation of permanent capacity. I would keep short decision records showing the demand, options, cost and outcome.
+**Result:** DAP grew beyond 250 users with appropriate licences, and ODC provided large CPU and GPU capacity cost-effectively when projects needed it.
+
+**Reflection:** The solution came from separating the underlying need — occasional access to high-capacity compute — from the requested implementation of permanent capacity. I would keep short decision records showing the demand, options, cost and outcome.
 
 ### STARR: choosing an existing database route over a new S3 path
 
@@ -757,18 +775,6 @@ Articles, presentations, forums, demonstrations on public data; keep limitations
 **Result:** Avoiding an unnecessary new path limited the security, maintenance and delivery overhead while still giving users access to the data they required.
 
 **Reflection:** Respecting a proposal does not mean accepting its implementation. Impartial decisions start by separating the user's need from their preferred solution and making the trade-off visible.
-
-### STARR: making an impartial Hubble model decision
-
-**Situation:** Hubble stakeholders held different views. Some wanted accuracy as the headline metric, analysts suggested Random Forest, and others favoured transformer models because they were current and powerful.
-
-**Task:** I needed to choose the model that best benefited the business while ensuring those views were heard and tested fairly.
-
-**Action:** I gathered the requested models and metrics, explained why class imbalance made macro-F1 more informative than accuracy alone, and agreed the comparison criteria before the final selection. I then tested the candidates against model quality, speed, explainability, security, maintainability, infrastructure and cost, and documented the trade-offs.
-
-**Result:** TF-IDF with LinearSVC became the evidence-led recommendation rather than the fashionable choice, with competitive macro-F1, much faster training, coefficient-level explanations and lower operational risk.
-
-**Reflection:** Impartiality is easier to demonstrate when the criteria are agreed before the results are known. I would make the decision record routine so stakeholders can challenge it if the evidence or the constraints change.
 
 ### Technical notes: clarification knowledge
 
@@ -789,13 +795,15 @@ Past learners cover evidence-led trade-offs more than interpersonal impartiality
 
 **Task:** I needed to establish, with engineers and contributors, proportionate testing, change control and documentation that supported safe delivery without imposing a heavyweight process on a small team.
 
-**Action:** In the workplace repository I established the principle that changes require tests. If a function had no test, one was written before modifying it, and the suite had to pass before merging to main. Unit tests covered individual functions. Integration-style cases covered complex real documents, because input variation cannot be covered by isolated tests alone. User acceptance came through the analyst testing described under the evaluation criterion.
+**Action:** In the workplace repository I established the principle that changes require tests.So to create tests where possible, but due to the complexity of the data it isn't feasible to test everything, accounts are very complex with lots of software. Unit tests covered individual functions; integration-style cases covered complex real documents, because input variation cannot be covered by isolated tests alone. User acceptance came through the analyst testing described under the evaluation criterion.
 
-For traceability and planning, I used GitLab issues, templates, epics and milestones, together with a lightweight Kanban board.
+System testing, stuff like large datasets. Highlighted an issue with s3 token expiring and causing issues since everything is parallel. 
 
-The documentation worked at three levels. A full README covered the multi-system setup, serving as process documentation for new users. Detailed Markdown design notes covered the architecture, the workflows and the reasons behind the key decisions, serving as technical documentation. Analyst guidance explained how to interpret the outputs, serving as user documentation.
+For planning and traceability I used GitLab issues, templates, epics and milestones, together with a lightweight Kanban board.
 
-I collaborated with platform and DevOps engineers on ODC, data paths and environment constraints, and turned operational findings into tests or documentation wherever possible. In a public-sector context, undocumented behaviour or an unrepeatable result can undermine trust even when a metric looks strong, so reproducibility and traceability were treated as requirements rather than extras.
+I then documented at three levels as the work grew: a full README for multi-system setup, detailed Markdown design notes for architecture, workflows and the reasons behind key decisions, and analyst guidance on how to interpret the outputs.
+
+Throughout, I collaborated with platform and DevOps engineers on ODC, data paths and environment constraints, and turned operational findings into tests or documentation wherever possible. In a public-sector context, undocumented behaviour or an unrepeatable result can undermine trust even when a metric looks strong, so reproducibility and traceability were treated as requirements rather than extras.
 
 **Result:** New users could set up the project from the README, contributors could change tested functions with confidence, and the issues and milestones provided an audit trail from requirement to implementation.
 
@@ -832,11 +840,21 @@ Past-learner notes only lightly touch documentation, Git and MLOps. Follow the E
 
 **Task:** I needed to combine data engineering, data science and AI so analysts could exploit more of the information, while considering what wider impact this kind of automation could have.
 
-**Action:** I used data engineering to extract, clean, canonicalise and structure the iXBRL, data science to analyse quality, balance and performance, and supervised NLP to categorise the descriptions. Results were delivered to controlled stores so the model supported analyst judgement rather than replacing it. I also considered where similar methods apply beyond HMRC, such as fraud detection, medical imaging and demand forecasting, and the societal risks: over-trusted outputs, opaque decisions, privacy loss, under-representation of rare classes, deskilling and resistance from staff whose work changes.
+**Action:** I used data engineering to extract, clean, canonicalise and structure the iXBRL, data science to analyse quality, balance and performance, and supervised NLP to categorise the descriptions. Results went to controlled stores so the model supported analyst judgement rather than replacing it.
 
-**Result:** The approach can reduce repetitive grouping by mapping varied descriptions to consistent concepts. In the workplace, Hubble expanded analytical coverage and supported tax-risk profiling. At industry level, the public notebooks are a reproducible example of the method. At societal level, better evidence may support fairer and more efficient revenue work, but Hubble does not make tax decisions and does not itself prove an increase in public funding.
+Alongside that delivery I thought through the wider role of similar methods — fraud detection, medical imaging, demand forecasting — and the societal risks: over-trusted outputs, opaque decisions, privacy loss, under-representation of rare classes, deskilling and resistance from staff whose work changes.
 
-**Reflection:** A narrow technical pipeline can have material social consequences. Positive impact depends on human oversight, transparent limitations, secure processing and monitoring. The defensible role of AI here is augmenting analysts, not replacing them.
+In the industry in general people are using LLMs over the accounts direclty but there can be issues, so it's better to extract the data in a structured format like json and pass that to a LLM. iXBRL itnernational are using that. 
+
+A big impact is writing code, it will accelerate a lot of projects. For example switching hubble all over to python or making it more efficient seems like it's a real option going forwards. 
+
+We'll be able to better exploit the data and identify tax risks in the future. And since we raise money for public spending that could have great benefits for the country as a whole. 
+
+But it's risky using LLM for risking since we don't always know why they are making the choices they do.
+
+**Result:** The approach can reduce repetitive grouping by mapping varied descriptions to consistent concepts. In the workplace, Hubble expanded analytical coverage and supported tax-risk profiling. At societal level, better evidence may support fairer and more efficient revenue work, but Hubble does not make tax decisions and does not itself prove an increase in public funding.
+
+**Reflection:** A narrow technical pipeline can have material social consequences. Positive impact depends on human oversight, transparent limitations, secure processing and monitoring. The right role for AI here is augmenting analysts, not replacing them.
 
 ### Technical notes: clarification knowledge
 
@@ -876,15 +894,17 @@ AI more often **changes tasks** than eliminates whole occupations. Roles mix rou
 
 **Task:** I needed to assess those ethical issues before and during development, choose proportionate procedures and methods, and reduce the likelihood that unintended model behaviour would cause legal, operational or reputational harm.
 
-**Action:** On the assessment side, I completed a DPIA before work began and reviewed it as the design evolved. I also assessed representation and imbalance quantitatively, using frequency distributions, macro-F1, per-class measures, confusion matrices and residual examples rather than relying on overall accuracy.
+**Action:** I completed a DPIA before work began and reviewed it as the design evolved. That shaped the pipeline from the start: I canonicalised names, companies, dates, postcodes and numbers so high-cardinality identifiers were not the trained feature. That is feature minimisation, not anonymisation — the source description is retained, so access, retention and purpose controls remain necessary — and processing stayed inside controlled environments.
 
-On the addressing side, I canonicalised names, companies, dates, postcodes and numbers in the pipeline so that high-cardinality identifiers were not the trained feature. That is feature minimisation, not anonymisation: the source description is retained, so access, retention and purpose controls remain necessary. Processing stayed inside controlled environments. I tested balanced class weights, biased sampling and oversampling. The final LinearSVC used balanced weights, and several of the neural and transformer weighting approaches actually made performance worse. Demographic fairness is still proposed rather than completed. The notebook records the plan: detect bias by checking behaviour across regional names and sexes, assess fairness with demographic parity and equalised odds, and mitigate through re-sampling, re-weighting or a separate model if the classifier proved weaker for smaller companies, whose filings may use different software and wording.
+ Demographic fairness, so looked at how the model did for different size companies and different software. So larger companies had much better results than smaller companies and the there were some software that did very poorly. But looking at where there were differences they weren't objectively wrong, so it would be two concepts that were very similar, and based on the data it's something that a human might classify similarly. This highlighted the issue that the truth value being compared against isn't a perfect measure. 
 
-Ethics also shaped the method selection itself. I chose an explainable TF-IDF and LinearSVC pipeline partly so that coefficients, LIME and SHAP could expose feature influence, and model provenance was part of the selection decision.
+Ethics also shaped the model choice itself. I chose an explainable TF-IDF and LinearSVC pipeline partly so that coefficients, LIME and SHAP could expose feature influence, and model provenance was part of the selection decision.
 
-Unintended consequences were found and fixed through user testing. Acceptance testing found blank descriptions being classified from their surrounding context, so I stopped predictions where the description was absent. Usability feedback showed the top-five display created false confidence, so I simplified it. Both user changes need internal evidence.
+User testing then surfaced unintended consequences. Acceptance testing found blank descriptions being classified from their surrounding context, so I stopped predictions where the description was absent. Usability feedback showed the top-five display created false confidence, so I simplified it.
 
-**Result:** Identity-like tokens were removed from the modelling feature, minority-class and robustness failures were made visible, and a simpler model enabled direct inspection. Workplace controls kept the model as decision support rather than an automated determinant.
+For risky companies we need to make sure there is a human in the loop, rather than it being something that can make automated decision.s
+
+**Result:** 
 
 **Reflection:** Ethical assessment must cover the whole sociotechnical process: the data, labels, metrics, model, interface, users and downstream decisions. A technically explainable model can still be misused, so future improvements include monitoring, enforced workflow controls, periodic DPIA review and clearer warnings for low-reliability classes.
 
@@ -928,11 +948,11 @@ UK responsible-AI principles (safety/security/robustness; transparency/explainab
 
 ### STARR: testing modern model families before selecting a simpler Hubble model
 
-**Situation:** Transformers, domain-specific BERT models, embeddings and neural networks were prominent developments in text classification, and stakeholders could reasonably expect Hubble to consider them.
+**Situation:** The initial requirements were just to extract the raw data from accounts and tax computations. Initial versions required complex regexes and lots of input from customers of variouations of descriptions for the same concept. 
 
-**Task:** I needed to test whether those developments improved the classification problem enough to justify their infrastructure, assurance and maintenance costs.
+**Task:** I needed to test whether those developments improved the classification problem.
 
-**Action:** I followed the research literature, technical documentation and practical communities, and then implemented real comparisons across classical machine learning, MPNet and e5 embeddings, CNN and neural architectures, and SEC-BERT, all on fixed data flags. I assessed macro-F1 and per-class performance alongside runtime, CPU and GPU needs, provenance, explainability and deployment fit. The evidence was concrete: MPNet's advantage over TF-IDF was small to negligible across the runs, SEC-BERT's higher point estimate came with overlapping intervals, and the robustness categories exposed different failure modes in each model family. I explained the evidence through project documents, demonstrations and stakeholder discussions.
+**Action:** I followed the research literature, technical documentation and practical communities, then implemented real comparisons across classical machine learning, MPNet and e5 embeddings, CNN and neural architectures, and SEC-BERT, all on fixed data flags. I assessed macro-F1 and per-class performance alongside runtime, CPU and GPU needs, provenance, explainability and deployment fit. The evidence was concrete: MPNet's advantage over TF-IDF was small to negligible across the runs, SEC-BERT's higher point estimate came with overlapping intervals, and the robustness categories exposed different failure modes in each model family. I explained that evidence through project documents, demonstrations and stakeholder discussions.
 
 **Result:** The testing showed that the simpler TF-IDF and LinearSVC pipeline was the stronger operational recommendation, and that the recommendation was researched rather than assumed.
 
@@ -949,18 +969,6 @@ UK responsible-AI principles (safety/security/robustness; transparency/explainab
 **Result:** Graffiti provided a clearer route for interrogating public filings and demonstrated how grounding improves LLM analysis without treating the output as an automated decision.
 
 **Reflection:** I would continue monitoring LLM tool use and MCP, applying new capability only after controlled testing and an explicit assessment of what additional systems and data the model could access.
-
-### STARR: converting current practice into reusable team workflows
-
-**Situation:** Colleagues needed practical ways to adopt changing machine learning practice consistently, not just occasional updates about new tools.
-
-**Task:** I needed to turn the relevant developments into working practices that improved reproducibility, review and appropriate use across the team.
-
-**Action:** I promoted experiment tracking, repeatable environments, tests, per-class evaluation, documented limitations and human-in-the-loop use. The channels were Teams, mentoring, the README and design documents, and the DAP wiki.
-
-**Result:** Team members had reusable guidance and a stronger basis for matching model complexity to the evidence, the governance and the business need.
-
-**Reflection:** The next step is measuring the effect on speed, quality and reproducibility, rather than assuming that publishing guidance proves the enhancement.
 
 ### Technical notes: clarification knowledge
 
@@ -999,13 +1007,15 @@ Tangible improvements: efficiency, collaboration, quality, reproducibility (expe
 
 **Situation:** Hubble used sensitive data in a regulated public-sector environment. Non-compliance could arise through excessive collection, personal-data leakage, weak access controls, unassured technology, opaque model use, or decisions made without appropriate human review.
 
-**Task:** I needed to understand the impact of those failures and build preventive controls into the pipeline so the product remained legally, ethically and organisationally defensible.
+**Task:** I needed to understand the impact of those failures and build preventive controls into the pipeline so the product remained legally, ethically and organisationally sound.
 
-**Action:** I used the DPIA to identify the data-protection and governance risks. I minimised and canonicalised personal information, kept processing in controlled environments, restricted S3 and Oracle access, considered provenance in the model selection, documented lineage and design choices, and retained human review throughout. Hubble's classifications were advisory inputs, which matters because UK GDPR Article 22 restricts solely automated decisions that have legal or similarly significant effects, and a nominal human-in-the-loop is insufficient if the person lacks the time, information or authority to disagree.
+**Action:** I used the DPIA to identify the data-protection and governance risks, then designed the controls in from the start: minimising and canonicalising personal information, keeping processing in controlled environments, restricting S3 and Oracle access, considering provenance in the model selection, documenting lineage and design choices, and retaining human review throughout. Hubble's classifications were advisory inputs, which matters because UK GDPR Article 22 restricts solely automated decisions that have legal or similarly significant effects, and a nominal human-in-the-loop is insufficient if the person lacks the time, information or authority to disagree.
 
-I treated compliance as an operational requirement during model and infrastructure selection rather than as a final approval step, and I communicated that classifications were suggestions rather than the defining factor in any action.
+For HMRC it's particularly important since customers often appeal decisions and take us to the tribunal, so there is significant risk in if we start using AI without the right controls or have automated decision making. 
 
-I also ran the control lifecycle as a cycle rather than a one-off. Identify the requirements and owners, document the risks in the DPIA, implement minimisation, access controls, assurance and oversight, test the controls, approve the release, monitor use, and review whenever the data, purpose, model, users or infrastructure changes. Compliance evidence stays linked to the same version of the data, code and model that produced the output.
+It could put a significant amount of money at risk, if we were found to be doing anything improperly.
+
+The public needs to be able to trust HMRC and doing anything to harm our reputation can have significant long term impacts. 
 
 **Result:** The work avoided any known privacy or security incident and proceeded with proportionate controls. Those controls reduced the likelihood of regulatory investigation, legal challenge, invalid decisions, operational rollback, financial loss, reputational damage and loss of public trust.
 
@@ -1039,27 +1049,18 @@ Preventive framing: identify requirements → DPIA → controls → test → app
 
 **Situation:** Hubble processed accounts and tax computations containing names, references and detailed financial information. Its classifications could create privacy, fairness, transparency and accountability risks if used outside their intended purpose.
 
-**Task:** I needed to evaluate the legal, ethical, regulatory and governance requirements across the end-to-end data process and make the pipeline defensible in a public-sector environment.
+**Task:** I needed to evaluate the legal, ethical, regulatory and governance requirements across the end-to-end data process and make the pipeline sound in a public-sector environment.
 
-**Action:** I completed a DPIA before development and reviewed the controls as the design evolved. I then mapped the UK GDPR principles onto the pipeline concretely rather than treating them as abstract labels. Purpose limitation meant using the data only for the defined analytical purpose. Minimisation meant replacing unnecessary names, companies, dates, postcodes and numbers with typed placeholders before training, which reduced the identity signal reaching the model, while recognising that the retained source still needs access, retention and lawful-purpose governance. Security meant controlled environments and controlled output stores. Accountability meant retaining the DPIA, the decision records, the lineage and the tests.
+**Action:** I completed a DPIA before development and reviewed the controls as the design evolved. I then mapped the UK GDPR principles onto the pipeline concretely rather than treating them as abstract labels. Purpose limitation meant using the data only for the defined analytical purpose. Minimisation meant replacing unnecessary names, companies, dates, postcodes and numbers with typed placeholders before training, which reduced the identity signal reaching the model, while recognising that the retained source still needs access, retention and lawful-purpose governance. 
+In the past others have had issues with ML being discriminatory on factors like race, so removing any data like that upfront help minimise that risk, especially if things change in the future on how it works. 
+
+Security meant controlled environments and controlled output stores. Accountability meant retaining the DPIA, the decision records, the lineage and the tests.
 
 The lawful basis and any statutory power come from the approved DPIA rather than being guessed in discussion. Model provenance formed part of the selection, and I chose an established, explainable TF-IDF and LinearSVC pipeline with classifications documented as advisory under human review. That keeps the solution clear of Article 22's restriction on solely automated significant decisions.
 
-**Result:** The design reduced unnecessary personal-data signal in the model feature and made the model's use easier to explain and challenge. The DPIA, the retention and access controls and the controlled-environment evidence are needed to show that the identifiable source data itself was governed.
+**Result:** The design reduced unnecessary personal-data signal in the model feature and made the model's use easier to explain and challenge. Showing that the identifiable source data itself was governed still depends on the DPIA, retention and access controls, and controlled-environment evidence.
 
 **Reflection:** Governance is a lifecycle activity, not a one-off approval. I would link DPIA and control reviews to material changes in the data, purpose, model, users or infrastructure.
-
-### STARR: protecting personal data in a Companies House modelling pipeline
-
-**Situation:** In a pipeline using Companies House filings, otherwise public documents could still contain director names or personal information. Public availability does not stop it being personal data, and it does not supply a lawful basis.
-
-**Task:** I needed to ensure that model development did not unnecessarily retain personal information or create a leakage risk.
-
-**Action:** I applied privacy by design during cleaning, replacing names, company names, dates, postcodes and numbers with typed placeholders so they were not raw model features. The notebooks prove that transformation, though their saved data retains the original description, and they show a local demonstration rather than the controlled AWS and Oracle route. If that route is a separate workplace pipeline, its architecture and access-control artefacts are needed, and the separation should be stated explicitly.
-
-**Result:** The modelling workflow could be demonstrated without raw identifiers as training features. Controlled access to the retained source data is a separate workplace result that the notebooks do not establish.
-
-**Reflection:** Public availability does not remove the need for data minimisation. I would still document the lawful purpose, retention, access roles and any dependency or model-licence checks for the specific implementation.
 
 ### STARR: reviewing an existing product with a WCAG specialist
 
@@ -1068,6 +1069,8 @@ The lawful basis and any statutory power come from the approved DPIA rather than
 **Task:** I needed to identify the gaps with appropriate expertise and establish a practical remediation route.
 
 **Action:** I engaged a WCAG specialist, reviewed the existing product with them, agreed a plan to address the identified issues and began implementing the fixes.
+
+So items like aria-labels on icones that don't have text, like say a close button.
 
 **Result:** The project gained an expert-informed accessibility remediation plan and started moving accessibility work into the delivery process.
 
@@ -1142,6 +1145,24 @@ Cultural, social, economic and ability diversity. Interface diversity (assistive
 ## Analyses how they take responsibility for their own and their team's currency of knowledge and skills, and their professional and personal growth and development
 
 **Relevant KSBs:** B5, B8.
+
+@TODO
+
+STARR: Latest iXBRL knowledge
+
+Situation: There is a lot of interest in ML and various sources.
+
+Task: Keep up to date, using a variety of sources. I use mailing lists for accountancy sources and specific iXBRL International newsletters. While also using arciveX which has some of the latest papers. Also blogs by anthropic, sources like hackernews and even X. 
+
+Action: iXBRL international has some interesting blogs on how to best use LLM with accountancy data and how that passing the actual iXBRL documents to a LLM isn't best and how you can get better results by extracting the iXBRL data first. 
+
+Anthropic have some interesting articles on how a LLM works. So interestingly their LLM uses a weird bespoke method to do arithmatic, but that's not how it will tell you it does stuff. Which highlights the risk that people think you can just ask a LLM why it make a choice to and that's explainable. 
+
+
+
+
+Share details, e.g. not everything needs a token. 
+
 
 ### STARR: taking responsibility for my own structured development
 
@@ -1222,15 +1243,15 @@ Be ready to name specific courses, books and articles, with a brief reaction to 
 
 **Task:** I needed to choose and apply a technique that solved the business problem at scale while meeting organisational policy, data-protection, security, infrastructure, cost and maintenance requirements.
 
-**Action:** I defined the problem and the success criteria before recommending a model, and I framed the problem deliberately. The required output was a taxonomy classification. Labelled data already existed in the form of tagged items, so supervised classification fitted. The data was unstructured text, which pointed to NLP pipelines.
+**Action:** I defined the problem and success criteria first. The required output was a taxonomy classification; labelled data already existed in tagged items; and the data was unstructured text — so supervised NLP classification fitted.
 
-In applying the techniques, the pipeline extracted and cleaned millions of rows, canonicalised the high-cardinality identifiers and created fixed seeded splits. I established baselines first, then evaluated the classical models, MPNet and e5 embeddings, SEC-BERT and the CNN and neural alternatives. The evaluation used macro-F1, per-class measures, confusion and residual analysis, stratified cross-validation and bootstrap intervals, because accuracy alone hid minority-class performance. Alongside those I compared training and inference time, model size, CPU and GPU needs, explainability, provenance, maintainability and deployment complexity. On the common holdout, LinearSVC recorded 0.800 macro-F1 against 0.808 for the CNN and 0.823 for SEC-BERT, with overlapping intervals. The label-space remap for the neural and transformer heads remains outstanding before the cross-family difference is treated as final.
+I then applied that framing in the pipeline: extracted and cleaned millions of rows, canonicalised high-cardinality identifiers, and created fixed seeded splits. I established baselines, then evaluated classical models, MPNet and e5 embeddings, SEC-BERT and the CNN and neural alternatives. Evaluation used macro-F1, per-class measures, confusion and residual analysis, stratified cross-validation and bootstrap intervals, because accuracy alone hid minority-class performance. Alongside those I compared training and inference time, model size, CPU and GPU needs, explainability, provenance, maintainability and deployment complexity. On the common holdout, LinearSVC recorded 0.800 macro-F1 against 0.808 for the CNN and 0.823 for SEC-BERT, with overlapping intervals. The label-space remap for the neural and transformer heads remains outstanding before the cross-family difference is treated as final.
 
-The organisational and regulatory constraints shaped the choice directly rather than sitting alongside it. The DPIA and the minimisation requirements shaped the features. The explainability expectations favoured inspectable coefficients over a fine-tuned transformer. The infrastructure reality of a CPU estate with scarce GPUs, together with provenance and assurance concerns, weighed against SEC-BERT. Delivery had to fit the supported R workflow with controlled ODC and Oracle delivery. Internal artefacts are needed for the DPIA, the integration and the user changes.
+Organisational and regulatory constraints shaped that choice directly. The DPIA and minimisation requirements shaped the features. Explainability expectations favoured inspectable coefficients over a fine-tuned transformer. The infrastructure reality of a CPU estate with scarce GPUs, together with provenance and assurance concerns, weighed against SEC-BERT. Delivery had to fit the supported R workflow with controlled ODC and Oracle delivery.
 
 **Result:** The evidence supports an operational recommendation for TF-IDF plus LinearSVC. It is CPU-compatible, directly inspectable, and free of SEC-BERT's lifecycle burden in exchange for an uncertain point-estimate gain. I treat this as a validated comparison and a deployment recommendation rather than proof of live production.
 
-**Reflection:** The most effective technique is the one that meets the complete business and regulatory need, not the model with the highest laboratory score. My CPD let me test the modern methods credibly, while judgement favoured the simpler recommendation. Before formal deployment evidence I would fix the decision-matrix key, group the splits by filing, add time and taxonomy validation, define acceptance thresholds, verify test and production parity, and implement monitored human oversight.
+**Reflection:** The most effective technique is the one that meets the complete business and regulatory need, not the model with the highest laboratory score. My CPD let me test the modern methods credibly, while judgement favoured the simpler recommendation. Before formal deployment I would fix the decision-matrix key, group the splits by filing, add time and taxonomy validation, define acceptance thresholds, verify test and production parity, and implement monitored human oversight.
 
 ### Technical notes: clarification knowledge
 
