@@ -694,6 +694,8 @@ Input → Hidden Layers → Output
 
 Each layer consists of **neurons (nodes)** connected by **weights**.
 
+Deep NN: 2 or more hidden layers
+
 ------------------------------------------------------------------------
 
 **2. Mathematics Inside a Neuron (Node)**
@@ -1632,6 +1634,10 @@ $$
 R^{2} = 1 - \frac{SS_{res}}{SS_{tot}}
 $$
 
+- SSE: sum of squared errors (residuals), ∑(yi−y^i)2∑(yi​−y^​i​)2.
+    
+- SSTSST: total sum of squares, ∑(yi−yˉ)2∑(yi​−yˉ​)2.
+-
 - Measures **variance explained** by the model
 
 - Range: $0$to $1$(can be negative)
@@ -2912,31 +2918,6 @@ If your model has:
 
 ------------------------------------------------------------------------
 
-**4. Implementation in Python (scikit-learn)**
-
-python
-
-from sklearn.metrics import f1_score, roc_auc_score
-
-\# Example Predictions and Actual Labels
-
-y_true = \[0, 1, 1, 0, 1, 0\]
-
-y_scores = \[0.1, 0.9, 0.8, 0.2, 0.6, 0.3\] \# Probability scores
-
-y_pred = \[0, 1, 1, 0, 1, 0\] \# Thresholded predictions
-
-\# Calculate F1 Score
-
-f1 = f1_score(y_true, y_pred)
-
-\# Calculate AUC
-
-auc = roc_auc_score(y_true, y_scores)
-
-print(f"F1 Score: {f1:.4f}")
-
-print(f"AUC Score: {auc:.4f}")
 
 ------------------------------------------------------------------------
 
@@ -3002,44 +2983,6 @@ The \\R^{2}\\ value for this regression model is **\\0.9486\\**.\
 This indicates that approximately **\\94.86\\\\** of the variance in the actual data is accounted for by the model's predictions. \[[1](https://mbrenndoerfer.com/writing/r-squared-coefficient-of-determination-formula-intuition-model-fit), [2](https://lean6sigmahub.com/how-to-calculate-and-interpret-the-coefficient-of-determination-r-squared-in-data-analysis/)\]
 
 ------------------------------------------------------------------------
-
-python
-
-import numpy as np
-
-\# Simple example data
-
-y_true = np.array(\[3, -0.5, 2, 7\])
-
-y_pred = np.array(\[2.5, 0.0, 2, 8\])
-
-\# 1. Calculate Mean of y_true
-
-y_mean = np.mean(y_true)
-
-\# 2. Calculate Total Sum of Squares (SST)
-
-sst = np.sum((y_true - y_mean)\*\*2)
-
-\# 3. Calculate Residual Sum of Squares (SSR or SSE)
-
-ssr = np.sum((y_true - y_pred)\*\*2)
-
-\# 4. Calculate R2
-
-r2 = 1 - (ssr / sst)
-
-print(f"{y_true=}")
-
-print(f"{y_pred=}")
-
-print(f"{y_mean=}")
-
-print(f"{sst=}")
-
-print(f"{ssr=}")
-
-print(f"{r2=}")
 
 ------------------------------------------------------------------------
 

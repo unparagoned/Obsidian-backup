@@ -2,7 +2,7 @@
 **Learner:** Jesse Karadia
 **Organisation:** HMRC
 
-This document organises professional-discussion preparation around the EPA assessment criteria. Each criterion has the relevant KSBs, one or more STARR answers containing all the applied evidence (what I did, with the technical specifics), and a short block of technical notes covering the pure knowledge that the criterion's clarification expects. The technical notes hold definitions, techniques and frameworks only, with no applied content mixed in.
+This document organises professional-discussion preparation around the EPA assessment criteria. Each criterion has the relevant KSBs, one or more STARR answers containing all the applied evidence (what I did, with the technical specifics), and a technical-notes block covering the pure knowledge that the criterion's clarification expects. Technical notes pull in the relevant revision material from past-learner notes (definitions, techniques, frameworks and interview-ready summaries) with no applied workplace content mixed in. The Technical answer bank at the end remains the cross-cutting revision pack for algorithm maths and follow-up questions.
 
 Use the STARRs as speaking notes rather than a script. Speak in the first person ("I", not "we"), adapt the depth to the question, and be ready to name supporting artefacts such as test results, decision matrices, GitLab issues, dashboards, DPIAs, stakeholder feedback, wiki guidance and experiment records. The grading table assesses KSBs collectively within each theme, so the per-criterion KSB lists are a practical evidence map rather than official marking units.
 
@@ -29,7 +29,9 @@ The public notebooks use Companies House accounts and deliberately simplify the 
 
 ### Key figures to quote
 
-- Corpus: a Companies House monthly archive of 298,461 accounts, giving around 2.9 million extracted rows across 956 raw concepts, reducing to around 2.5 million rows and 826 engineered labels after cleaning. Modelling used the 141 labels with at least 350 examples each, and the 685 rarer labels were excluded.
+- Corpus: a Companies House monthly archive of 298,461 accounts, giving 2,857,703 extracted rows across 956 raw concepts (266,178 unique descriptions; mean 7.77 words; mode 2; max 1,762; 19,814 punctuation-only rows). After cleaning: 2,466,052 rows and 826 engineered labels (mean 3.07 words; mode 1; max 15). Modelling used the 141 labels with at least 350 examples each, and the 685 rarer labels were excluded.
+- Descriptive EDA: top 75 raw concepts cover about 95% of items; after cleaning the top 50 labels cover 95%. Word-count distributions are long-tailed (rough bell shape with a long right tail); boxplots of the top labels show IQR typically between 2 and 7 words.
+- Inferential EDA on the label-frequency distribution (`powerlaw`): raw counts fit a lognormal better than a power law (R=−6.12, p=0.020 vs lognormal; strongly reject exponential). After preprocessing the lognormal preference weakens (R=−2.89, p=0.111). Unsupervised representation check: silhouette on known labels peaked around 0.477–0.53 for tuned n-gram TF-IDF (MPNet about 0.467).
 - A fixed seeded 80/10/10 train/test/holdout split was used, with a 10,000-row holdout sample for like-for-like model comparisons.
 - The top 75 raw concepts cover about 95% of items, and generic descriptions such as "Total" map to many different concepts. This ambiguity and long tail is what motivated contextual features and macro-F1.
 - The final classical pipeline was word TF-IDF with 1-to-3-word n-grams, IDF weighting and L2 normalisation, feeding a LinearSVC with `C=2.8`, an L1 penalty, squared-hinge loss and balanced class weights.
@@ -50,11 +52,13 @@ The public notebooks use Companies House accounts and deliberately simplify the 
 
 ## Evidence gaps: search for `TODO:`
 
+Technical notes under each criterion now include the relevant clarification knowledge from `Z Professional Discussion - from past learners.md` (cleaned of interview fluff and IT-ops-only examples where needed). Items marked **Resolved from code** are backed by `Code/` notebooks; remaining TODOs are still workplace artefacts or unfinished experiments.
+
 ### Theme 1
 
-- **T1.1:** TODO: a verified measure of extra analytical coverage, manual effort avoided or profiling improvement attributable to classification specifically (not extraction generally).
-- **T1.2:** TODO: remap the 141 classes and rerun CNN/SEC-BERT on the same grouped split (confirmed outstanding in the code). Resolved from code: the statistical comparison design is now documented (paired t-tests over five CV folds at 95% for the classical search, bootstrap intervals for the final three-model comparison). TODO: the exact p-values and effect sizes are not recorded in the notebook summaries, so extract them from the saved results if a precise figure is needed. TODO: acceptance-testing record (date, users, criteria, blank-description and dimensional-data changes). TODO: usability-testing record (dashboard task, confusion evidence, change made, retest). TODO: natural-vs-numeric key benchmark status.
-- **T1.3:** TODO: agent-risk Welch test details (safe sample sizes, statistics, p-value, CI, effect size, confirm the "99% confidence" wording and name the artefact).
+- **T1.1:** Resolved from code: descriptive EDA (counts, word-length distributions, Pareto), inferential distribution tests (`powerlaw` R/p), silhouette embedding checks, supervised NLP comparison and the rejection of vision/RL are now in the STARR. TODO: a verified measure of extra analytical coverage, manual effort avoided or profiling improvement attributable to classification specifically (not extraction generally).
+- **T1.2:** TODO: remap the 141 classes and rerun CNN/SEC-BERT on the same grouped split (confirmed outstanding in the code). Resolved from code: statistical comparison design (paired t-tests over five CV folds at 95%; bootstrap holdout CIs); Dummy baseline ~0.007 macro-F1; sqrt-weighting lift; decision-matrix CI-overlap penalty (0.35). TODO: extract exact p-values/effect sizes from saved results if a precise figure is needed. TODO: acceptance-testing record (date, users, criteria, blank-description and dimensional-data changes). TODO: usability-testing record (dashboard task, confusion evidence, change made, retest). TODO: natural-vs-numeric key benchmark status.
+- **T1.3:** Resolved from code for Hubble maths STARR: TF-IDF IDF/L2, LinearSVC objective, macro-F1 rationale, MPNet vs TF-IDF significance vs practical cost, power-law/lognormal tests and silhouette scores are quoted from `Code/`. TODO: agent-risk Welch test details (safe sample sizes, statistics, p-value, CI, effect size, confirm the "99% confidence" wording and name the artefact).
 - **T1.4:** TODO: artefact showing the R-to-Python and Oracle-output boundary and an integration issue resolved. TODO: a specific commercial-benefit measure from the mixed-language design. (The simulation claim is already kept narrow in the STARR, so that item is done.)
 - **T1.5:** TODO: HMRC's classification of enterprise/private/public components plus a nameable architecture or security document. TODO: ODC configuration, volumes, runtimes and stability evidence. TODO: S3 proxy details (dataset, user group, approval flow) and evidence it worked. TODO: auto-scaling cost comparison record. TODO: verify the "days rather than nine months" timeline and name a witness.
 - **T1.6:** TODO: the exact workplace interfaces implemented (Oracle driver, `dbplyr`, Solr endpoint, S3 proxy, FSx). Resolved from code: the public Parquet interfaces are Pandas `to_parquet` in the extraction notebook and Polars `read_parquet`/`write_parquet` in the EDA notebook. TODO: what "roughly 128 concurrent" means (workers, cores or documents) and the observed bottleneck. TODO: Oracle/Parquet before-and-after workflow and analyst reuse. TODO: LLM-to-Solr status (built, prototyped or proposed).
@@ -83,7 +87,7 @@ The public notebooks use Companies House accounts and deliberately simplify the 
 ### Theme 5
 
 - **T5.1:** TODO: dated CPD record linking the strongest sources to decisions changed. TODO: community or conference evidence (do not imply attendance if it was online reading). TODO: link specific literature to a concrete experiment and decision. TODO: team development process and one before-and-after capability outcome. Describe informal mentoring accurately.
-- **T5.2:** TODO: confirm the final model status (deployed, recommended for deployment, or validated prototype) and use one wording throughout. TODO: final production evidence if any (holdout performance, infrastructure, monitoring, acceptance, DPIA). TODO: consistency audit of scores, class counts, split, deployment status and impact claims across this document.
+- **T5.2:** Resolved from code for technique-selection narrative: full compare path, holdout scores with CIs, and operational rubric are documented; keep wording as "validated comparison / deployment recommendation" until workplace status is confirmed. TODO: confirm the final model status (deployed, recommended for deployment, or validated prototype) and use one wording throughout. TODO: final production evidence if any (holdout performance, infrastructure, monitoring, acceptance, DPIA). TODO: consistency audit of scores, class counts, split, deployment status and impact claims across this document.
 
 ---
 
@@ -103,38 +107,77 @@ The public notebooks use Companies House accounts and deliberately simplify the 
 
 **Task:** I needed to turn inconsistent, untagged descriptions into standard taxonomy concepts so that analysts could profile far more of the data and identify tax risk more efficiently. To do that, I had to decide which statistical, AI and machine learning methodologies actually suited the business objective, rather than assuming a particular model in advance.
 
-**Action:** I worked through the candidate methodologies deliberately instead of selecting a fashionable model, and in doing so I challenged the assumption that population analysis had to rely on tagged items or matching rules.
+**Action:** I worked through the candidate methodologies deliberately instead of selecting a fashionable model, and challenged the assumption that population analysis had to rely on tagged items or matching rules.
 
-I started with descriptive statistics to understand the data.
+I started with descriptive statistics: summary measures of description length, histograms and boxplots of the distributions, and Pareto plots of concept frequency. That showed a long-tailed, heavily imbalanced label set, so accuracy alone would be dominated by common classes and minority-class metrics had to drive selection.
 
-I started with data mining. On the roughly 2.5 million cleaned rows I analysed frequency ranks, Pareto concentration, the overlap between descriptions and concepts, cosine similarity, class balance and residual errors. This established that sufficient labels existed to train a model. It also revealed a long-tailed and ambiguous problem: the top 75 raw concepts covered about 95% of items, while generic descriptions such as "Total" mapped to many different concepts. Just as importantly, it showed me where taxonomy quality and source-data quality would limit what any model could achieve.
+I then used inferential statistics: likelihood-ratio tests on the label-frequency distribution (power law vs lognormal vs exponential), paired t-tests over cross-validation folds to drop significantly worse classical models, and bootstrap confidence intervals on the final holdout comparison so overlapping intervals stopped me treating SEC-BERT's point-estimate advantage as a proven win.
 
-Supervised learning became the core method because correctly tagged items already supplied target concepts. I framed the work as multi-class text classification and compared a wide range of model families: Naive Bayes, tree ensembles, SVC and LinearSVC, SGD-style models, CNN and other neural approaches, SEC-BERT, and MPNet and e5 embeddings.
+I also mined patterns in the data: frequency ranks, description–concept overlap, cosine similarity between concept tokens, class balance and residual errors. That showed enough labels to train a model, but also ambiguity — generic descriptions such as "Total" mapped to many concepts — and near-duplicate taxonomy groups that would limit any model.
 
-The NLP pipeline I built ran as follows. Parse the iXBRL or XHTML, select the relevant descriptions and context, lower-case the text, normalise whitespace and punctuation, canonicalise names, companies, dates, postcodes and numbers into typed tokens, tokenise into word n-grams of one to three words, vectorise with TF-IDF or embeddings, classify, and retain the prediction, its score and its provenance. Every learned transformation was fitted on training data only and reused unchanged in production, which prevents leakage and pipeline divergence.
+Supervised learning became the core method because correctly tagged items already supplied target concepts. I framed it as multi-class text classification and compared Naive Bayes, tree ensembles, SVC and LinearSVC, SGD-style models, CNN and other neural approaches, SEC-BERT, and MPNet and e5 embeddings.
 
-Unsupervised methods stayed exploratory. I compared vector spaces using silhouette scores calculated over the known concept labels, but that is a representation test rather than an operationalised clustering model. A genuine clustering result would still need a subject-matter expert to interpret whether the discovered groups meant anything useful to the business.
+The NLP pipeline parsed the iXBRL, cleaned and canonicalised the text, built n-gram or embedding features, classified, and retained prediction, score and provenance. Learned transformations were fitted on training data only and reused unchanged in production.
 
-I also rejected some methods explicitly, with reasons. Reinforcement learning did not fit because this was a fixed, labelled classification problem with no environment or reward signal to learn from. Machine vision was unnecessary because the text and structure were already extractable from the iXBRL itself. OCR would only become relevant if scanned, image-only PDFs entered scope, and it would add an error-producing stage that would need its own accuracy and usability testing.
+Unsupervised methods stayed exploratory. I used silhouette scores over known concept labels to compare how well different vector spaces separated concepts; that was a representation check, not a clustering product, and I did not deploy K-means or hierarchical clustering.
 
-Finally, I assessed every candidate on macro-F1, accuracy, per-class results, stratified cross-validation, bootstrap intervals, speed, infrastructure requirements, explainability, provenance, maintainability and cost.
+I ruled out reinforcement learning (no environment or reward signal) and machine vision (text and structure were already extractable from the iXBRL). OCR would only matter if scanned image-only PDFs entered scope.
 
-**Result:** TF-IDF with LinearSVC was the strongest operational recommendation, even though it did not have the highest point estimate on every metric. Its holdout macro-F1 was 0.800 against 0.808 for the CNN and 0.823 for SEC-BERT, and the confidence intervals overlapped. In exchange it offered far faster CPU-only training, inspectable coefficients and lower lifecycle risk. What made the method suitable was that it met the business objective of widening coverage, reducing manual grouping and supporting faster risk profiling, not that it was technically possible. The business-impact claim itself still requires a workplace artefact and is kept separate from the technical result.
+Finally I assessed every candidate on macro-F1, accuracy, per-class results, cross-validation, bootstrap intervals, speed, infrastructure, explainability, provenance, maintainability and cost. Wider analytical coverage and faster risk profiling mattered more than the highest laboratory score.
+
+**Result:** TF-IDF with LinearSVC was the strongest operational recommendation, even though it did not have the highest point estimate on every metric. Its holdout macro-F1 was 0.800 against 0.808 for the CNN and 0.823 for SEC-BERT, and the confidence intervals overlapped. In exchange it offered far faster CPU-only training, inspectable coefficients and lower lifecycle risk. What made the method suitable was that it met the business objective of widening coverage, reducing manual grouping and supporting faster risk profiling, not that it was technically possible.
 
 **Reflection:** Method selection must begin with the business objective, the availability of labels, the type of data and the deployment constraints. Supervised NLP was appropriate here. Unsupervised methods stayed exploratory, and machine vision and frontier LLMs would have been disproportionate. The best technical score alone does not define the best business solution.
 
 ### Technical notes: clarification knowledge
 
-- **Statistical methods:** descriptive statistics summarise data (mean, median, spread, distributions). Inferential statistics generalise from samples through hypothesis testing, confidence intervals and regression analysis.
-- **Data mining:** discovering patterns and relationships in large datasets. Techniques include clustering, association rule mining and anomaly detection.
-- **Supervised ML:** trains on labelled data to predict or classify. Techniques include linear regression, logistic regression, decision trees, random forests, support vector machines and neural networks.
-- **Unsupervised ML:** finds hidden structure in unlabelled data. Techniques include K-means clustering, hierarchical clustering, PCA and anomaly detection.
-- **Semi-supervised learning:** a small labelled set plus a large unlabelled set, using self-training, label propagation or pseudo-labelling.
-- **Self-supervised learning:** the model generates its own targets from raw data, for example masked-word prediction. This underpins BERT and LLM pre-training.
-- **Reinforcement learning:** an agent learns a policy from rewards through interaction with an environment (Q-learning, Deep Q-Networks). Used in robotics, game AI and control problems.
-- **NLP:** enabling machines to process human language. Techniques include tokenisation, sentiment analysis, named entity recognition, topic modelling and text classification.
-- **Machine vision:** interpreting visual information. Techniques include image classification, object detection and segmentation, usually CNN-based.
-- **Business objectives these serve:** customer retention and experience, operational efficiency, sales and marketing effectiveness, fraud detection, risk management and quality control.
+Drawn from past-learner notes on Statistical Methods, Data Mining, Supervised/Unsupervised ML, Types of ML and Why Unsupervised Learning. Aligns to the EPA clarification's methodology list.
+
+#### Statistical methods
+
+Statistical methods collect, summarise, analyse and interpret data to support decisions. They split into descriptive and inferential.
+
+**Descriptive statistics** summarise and describe the main features of a dataset. They organise, simplify and present data, and do not draw conclusions beyond the data itself. Key techniques: measures of central tendency (mean, median, mode); measures of dispersion (range, variance, standard deviation); presentation (tables, histograms, bar charts, box plots). One-liner: descriptive statistics explain *what the data shows*.
+
+**Inferential statistics** draw conclusions or make predictions about a population from a sample, using probability and a stated confidence level. Key techniques: hypothesis testing (t-test, Z-test, chi-square, ANOVA); estimation (confidence intervals); predictive methods (regression, correlation). One-liner: inferential statistics explain *what the data means for a larger population*.
+
+**Common hypothesis tests (interview recall)**
+
+| Test | Use |
+| --- | --- |
+| t-test | Compare means; small samples / unknown σ. One-sample, independent, or paired. |
+| Z-test | Compare means or proportions; large samples (n ≥ 30), known variance or adequate counts. |
+| Chi-square (χ²) | Association or independence between categorical variables; also goodness of fit. |
+| ANOVA | Compare means across three or more groups (avoids inflated error from many t-tests). |
+
+Paired t-test formula on fold or score differences: `t = mean(d)/(sd(d)/√n)`. Welch's t-test for unequal variances: `t = (m₁−m₂)/√(s₁²/n₁+s₂²/n₂)`. Always pair statistical significance with effect size and practical cost.
+
+#### Data mining
+
+Purpose: discover hidden patterns, trends and relationships in large datasets. Techniques: clustering (group similar points); association-rule mining (items that co-occur, e.g. Apriori with support/confidence/lift); anomaly detection (unusual behaviour). Applications include fraud/risk analysis, customer behaviour, IT anomaly detection and market-basket analysis. One-liner: data mining uncovers patterns that improve performance, reduce risk and support decisions.
+
+#### Supervised machine learning
+
+Purpose: train on labelled data to predict or classify unseen cases. Common techniques: linear regression (continuous); logistic regression (binary); decision trees; random forests; SVM/LinearSVC; neural networks. Applications: churn, fraud, credit scoring, ticket classification, demand forecasting. One-liner: supervised learning uses labelled examples to predict outcomes.
+
+#### Unsupervised machine learning
+
+Purpose: find structure in unlabelled data. Tasks: clustering, pattern discovery, dimensionality reduction, anomaly detection. Algorithms: K-means, hierarchical clustering, DBSCAN, PCA. Use when labels are absent or expensive, for segmentation, exploration or to bootstrap later supervised work. A clustering result still needs domain interpretation before it becomes a business decision. One-liner: unsupervised learning finds hidden patterns without labels.
+
+#### Other learning paradigms (clarification breadth)
+
+- **Semi-supervised:** small labelled set + large unlabelled set (self-training, label propagation, pseudo-labelling).
+- **Self-supervised:** model generates its own targets from raw data (masked-word prediction). Underpins BERT and LLM pre-training.
+- **Reinforcement learning:** agent learns a policy from rewards in an environment (Q-learning, DQN). Robotics, games, control — not a fixed labelled classification problem.
+
+#### NLP and machine vision
+
+- **NLP:** enable machines to process human language. Techniques: tokenisation, sentiment analysis, NER, topic modelling, text classification, language models (BERT, GPT).
+- **Machine vision:** interpret visual information. Techniques: image classification, object detection, segmentation (usually CNN / vision transformer based). Only needed when the signal is in images rather than already-extractable text or structure.
+
+#### Meeting business objectives
+
+Typical objectives these methodologies serve: improving customer retention and experience; optimising operations; increasing sales and marketing effectiveness; fraud detection; risk management; quality control. The right methodology is the one that meets the objective under data, infrastructure, explainability and governance constraints — not the most fashionable model.
 
 ## Explains how to solve problems and evaluate software solutions via analysis of test data and results from research, feasibility, acceptance and usability testing in line with organisational requirements
 
@@ -152,22 +195,55 @@ For research and feasibility, I compared literature, package and model documenta
 
 For the test design, I created fixed seeded 80/10/10 train, test and holdout flags plus a 10,000-row holdout sample so that comparisons were like for like. I used five-fold `StratifiedKFold` with `GridSearchCV` and `HalvingRandomSearchCV` for the scikit-learn models, and Optuna with MLflow tracking for the neural and transformer runs. During the classical model search I compared candidates with paired t-tests over the cross-validation folds at the 95% confidence level. Many models were significantly worse than the leading configuration, and models that were not significantly worse on the 1% population went forward to the full population, which kept the expensive full-scale runs to the candidates that had earned them. I analysed macro-F1, accuracy, precision and recall, confusion matrices, residual errors, bootstrap intervals, runtime and model size. For production evidence I moved to a chronological or unseen-taxonomy holdout, and fit all learned preprocessing (vocabulary, IDF weights). 
 
-For robustness analysis, I built crafted adversarial, contextual, long-context, OCR-noise, Unicode and typo cases. LinearSVC beat SEC-BERT on most categories, SEC-BERT won on Unicode substitution, and both were weak on abbreviations. These small synthetic groups diagnose failure modes, and I am careful not to present them as population performance estimates.
+For robustness analysis, I built crafted adversarial, contextual, long-context, OCR-noise, Unicode and typo cases. LinearSVC beat SEC-BERT on most categories, SEC-BERT won on Unicode substitution, and both were weak on abbreviations. These small synthetic groups diagnose failure modes rather than estimate population performance.
 
 I then involved users directly. In acceptance testing, analysts checked whether the extracted dimensions and classifications supported the agreed business use. This exposed predictions being made from blank descriptions using only surrounding headings, so I changed the production logic to return no prediction where the description was missing. It also exposed missing dimensional content, so I generalised the extraction rather than coding a narrow subset. In usability testing, users found the top-five-matches display and the raw scores confusing, so I limited the display to more confident matches and added explanatory text about what the scores meant. One request remains open: analysts asked for numeric rather than natural database keys, and I am treating that as a performance question to benchmark on real Oracle and SAS workloads rather than a preference to accept without evidence.
 
-**Result:** TF-IDF plus LinearSVC balanced model quality with speed, explainability, supportability and security. Its holdout macro-F1 was 0.800, SEC-BERT's higher point estimate was not separated from it by the confidence intervals, and the operational rubric favoured the simpler model. I note that the rubric's interpretability-key defect must be fixed before its numeric ranking is quoted. Acceptance testing changed extraction and prediction behaviour, and usability testing made the dashboard clearer, though both user outcomes need named internal artefacts. The defensible status from the notebooks is a validated comparison and proof of concept, not proven production deployment.
+**Result:** TF-IDF plus LinearSVC balanced model quality with speed, explainability, supportability and security. Its holdout macro-F1 was 0.800, SEC-BERT's higher point estimate was not separated from it by the confidence intervals, and the operational rubric favoured the simpler model. The rubric's interpretability field-name defect means I would not quote its numeric ranking until that is fixed. Acceptance testing changed extraction and prediction behaviour, and usability testing made the dashboard clearer. From the notebooks this is a validated comparison and proof of concept, not proven production deployment.
 
 **Reflection:** I learned to research established tooling before writing bespoke evaluation code. Optuna automated comparison and visualisation that I had partly built myself. I also learned that training, test and production preprocessing need a single controlled implementation so that rules like blank-description handling cannot diverge. In production I monitor extraction failures, the missing-description rate, input and prediction distributions, per-class metrics and analyst overrides, with drift tests flagging when to diagnose, contain, relabel, and retrain or roll back. In future I would agree acceptance criteria earlier, automate pipeline-parity checks and keep a traceable decision log.
 
 ### Technical notes: clarification knowledge
 
-- **Problem solving:** define the business problem clearly, research potential solutions, and assess feasibility across technical, operational and financial dimensions.
-- **Testing phases:** unit testing checks individual components. Integration testing checks that modules work together. System testing checks the complete system against requirements. Acceptance testing (UAT) involves end users confirming the software meets their needs. Usability testing evaluates ease of use and user experience through interviews, task testing and surveys.
-- **Analysis of test data:** collect data from all testing phases, use statistical methods to identify patterns, trends and anomalies, then document findings and report actionable insights to stakeholders.
-- **Evaluation and decision-making:** compare solutions on performance, usability and feasibility, assess the risks of each, and decide on the evidence.
-- **Train, validate, test (the gold standard):** training data fits the parameters, validation data tunes the hyperparameters, and a final untouched test or holdout set evaluates the finished model. Cross-validation folds the train and validate phases together: split into K folds, train on K minus 1, validate on the held-out fold, rotate and average. Repeatedly checking the holdout while tuning turns it into another validation set.
-- **Overfitting:** high training performance with weak test performance, meaning the model learned noise. Mitigate with regularisation, simpler models, more data, dropout, early stopping and cross-validation. **Underfitting:** poor performance on both, mitigated with better features, more capacity or less regularisation. The bias-variance trade-off frames total error as bias squared plus variance plus irreducible noise.
+Drawn from past-learner notes on The Machine Learning Pipeline, KPIs for Algorithm Accuracy, Poor Data Quality, Model Drift / PSI–Chi-square, and Hyperparameter tuning. Aligns to the EPA clarification on problem solving, testing phases, analysis of test data, and evaluation.
+
+#### Problem solving and research / feasibility
+
+Define the business problem and success criteria first. Research candidate solutions (literature, package docs, empirical runs). Assess feasibility across technical (can it run on the estate?), operational (can the team support it?) and financial (cost, GPU, maintenance) dimensions. Do not force ML if rules or BI would solve the problem at lower risk.
+
+#### Testing phases (software and users)
+
+| Phase | Purpose |
+| --- | --- |
+| Unit | Individual components correct |
+| Integration | Modules / services work together |
+| System | Complete system against requirements |
+| Acceptance (UAT) | End users confirm the product meets needs |
+| Usability | Ease of use via interviews, task tests, surveys |
+
+For ML specifically, also treat train/validate/test and production monitoring as part of evaluation.
+
+#### Analysis of test data
+
+Collect data from all phases. Use statistical methods (means, CIs, paired tests, confusion matrices, residual analysis, bootstrap intervals) to find patterns, trends and anomalies. Document findings and give stakeholders actionable recommendations. Prefer metrics aligned to business risk: F1/AUC and precision/recall under imbalance; MAE/RMSE for regression; latency, throughput and cost for operations.
+
+#### Evaluation and decision-making
+
+Compare solutions on performance, usability and feasibility. Assess risks (wrong predictions, drift, opacity, infrastructure). Decide on the evidence, not preference. A decision matrix with pre-agreed weights and confidence penalties for overlapping intervals is one way to keep the choice impartial.
+
+#### Train / validate / test and overfitting
+
+Training fits parameters; validation tunes hyperparameters; a final untouched holdout evaluates once. Cross-validation folds train and validate: K folds, train on K−1, validate on the held-out fold, rotate and average. Stratify by class under imbalance. Fit learned preprocessing inside each training fold to avoid leakage. Repeatedly peeking at the holdout turns it into another validation set.
+
+**Overfitting:** high train, weak test — learned noise. Mitigate with regularisation, simpler models, more data, dropout, early stopping, CV. **Underfitting:** poor on both — need better features, more capacity or less regularisation. Bias–variance: total error ≈ bias² + variance + irreducible noise.
+
+#### Drift as ongoing evaluation (production)
+
+Data drift (input distribution), concept drift (input→output relationship), prediction drift (output distribution before labels). Detect with PSI (&lt;0.1 none; 0.1–0.25 moderate; &gt;0.25 significant), KS (continuous), chi-square (categorical), and sliding-window performance. Response: confirm type → contain → relabel → retrain → revalidate → redeploy → reset baselines.
+
+#### Poor data quality and KPIs
+
+Raw accuracy and R² mislead when labels or features are poor. Prefer robust signals: MAE / median absolute error, stability trends, drift KPIs, confidence/coverage, override rates, and the cost of wrong predictions. Hyperparameter tuning (grid, random, successive halving, Bayesian/Optuna) belongs inside validation, then confirm once on the holdout.
 
 ## Describes the relationship between mathematical principles and core techniques in AI and data science within the organisational context
 
@@ -199,19 +275,46 @@ I also quantified the embedding trade-off in the same mathematical terms, and it
 
 **Action:** I set the null hypothesis that the agent's risk equalled the comparison group's, and then I checked the assumptions before choosing a test. The data was two independent groups measured on a ratio scale, approximately normally distributed, with more than 30 observations and unknown population variances. An F-test indicated that the variances were unequal, so Student's pooled-variance t-test was inappropriate. I therefore selected Welch's t-test, `t = (m₁ − m₂)/√(s₁²/n₁ + s₂²/n₂)`, which uses adjusted degrees of freedom.
 
-**Result:** At a 99% confidence level I rejected the null hypothesis and concluded that the agent presented higher risk than the comparison group. This gave the business quantitative evidence rather than a judgement based only on qualitative review. Rejecting at 99% means the observed difference would be unlikely if the means were truly equal. It does not mean there is a 99% probability that the conclusion is true, and I am careful to keep that distinction.
+**Result:** At a 99% confidence level I rejected the null hypothesis and concluded that the agent presented higher risk than the comparison group. This gave the business quantitative evidence rather than a judgement based only on qualitative review. Rejecting at 99% means the observed difference would be unlikely if the means were truly equal; it does not mean there is a 99% probability that the conclusion is true.
 
 **Reflection:** The test must follow the data and its assumptions. I would present the confidence interval and the practical effect size as well as the p-value, because statistical significance alone does not show how important a difference is operationally.
 
 ### Technical notes: clarification knowledge
 
-- **Linear algebra:** vectors and matrices represent data and model weights. Matrix decompositions such as SVD underpin PCA, recommendation systems and compression.
-- **Calculus:** differentiation drives optimisation. Gradient descent minimises the loss function, and partial derivatives with the chain rule are the machinery of backpropagation.
-- **Probability and statistics:** probability distributions model uncertainty. Bayesian inference updates beliefs from evidence. Hypothesis testing, confidence intervals and regression infer patterns from samples.
-- **Optimisation:** convex optimisation, which has a single global minimum, underpins SVMs and linear models. Stochastic optimisation (SGD, Adam) handles large datasets efficiently.
-- **How the maths maps to core techniques:** regression and classification rest on least squares, maximum likelihood and hinge loss. Neural networks are matrix multiplications with non-linear activations, trained by gradient descent. Clustering minimises distances, for example K-means minimises the sum of squared distances to centroids. Dimensionality reduction maximises retained variance via eigen-decomposition. Transformers compute attention as scaled dot-products, `softmax(QKᵀ/√d_k)V`.
-- **Key formulas to recall:** macro-F1 = (1/K)ΣF1_k. Paired t-test `t = mean(d)/(sd(d)/√n)`. Welch's `t = (m₁−m₂)/√(s₁²/n₁+s₂²/n₂)` for unequal variances, checked first with an F-test. SVM objective `min ½‖w‖² + CΣmax(0, 1−yᵢ(w·xᵢ+b))`.
-- **Organisational relevance:** mathematical properties translate into compute cost, minority-class coverage, interpretability, uncertainty quantification and the ability to defend a decision to stakeholders and auditors.
+Drawn from past-learner notes on Statistical Methods, Supervised ML maths (linear regression / trees / forests), Neural networks, Activation functions / Softmax, Clustering maths, Common algorithms / SVM definition. Aligns to the EPA clarification on linear algebra, calculus, probability/statistics, optimisation, and core techniques in organisational context. Full algorithm walkthroughs also sit in the Technical answer bank.
+
+#### Mathematical principles
+
+- **Linear algebra:** vectors and matrices represent data and weights. SVD / eigen-decomposition underpin PCA, recommendations and compression. TF-IDF descriptions are sparse vectors; LinearSVC scores are `w·x + b`.
+- **Calculus:** differentiation drives optimisation. Gradient descent minimises loss; partial derivatives + chain rule = backpropagation. Activations introduce non-linearity (ReLU default for hidden layers; sigmoid/tanh; softmax for multi-class outputs).
+- **Probability and statistics:** distributions model uncertainty; Bayesian inference updates beliefs; hypothesis tests, CIs and regression infer from samples. Macro-F1, paired t-tests and bootstrap intervals are how uncertainty enters model choice.
+- **Optimisation:** convex problems (single global minimum) underpin least squares, logistic regression and SVMs. Stochastic methods (SGD, Adam) scale to large data. Tree splits are greedy local optimisation (Gini / entropy / information gain), not globally optimal.
+
+#### How maths maps to core techniques
+
+| Technique | Core maths idea |
+| --- | --- |
+| Linear regression | Least squares; normal equation or gradient descent; convex |
+| Logistic regression | Sigmoid / log-likelihood; linear decision boundary |
+| Decision tree | Gini = 1−Σp² or entropy; information gain; recursive partition |
+| Random forest | Bagging + random features → variance reduction |
+| SVM / LinearSVC | Max-margin; hinge / squared-hinge; soft-margin C; kernels for non-linear |
+| Neural net | Matrix multiplies + activations; backprop; cross-entropy / MSE |
+| K-means | Minimise Σ‖x−centroid‖²; silhouette for cohesion vs separation |
+| PCA | Eigen / SVD of covariance; max retained variance |
+| Transformer | Attention = softmax(QKᵀ/√d_k)V |
+
+#### Key formulas to recall
+
+- Macro-F1 = (1/K) Σ F1_k
+- Paired t: `t = mean(d)/(sd(d)/√n)`
+- Welch: `t = (m₁−m₂)/√(s₁²/n₁+s₂²/n₂)` (check variances with F-test first)
+- SVM: `min ½‖w‖² + C Σ max(0, 1−yᵢ(w·xᵢ+b))` (or squared-hinge / L1 variant)
+- Softmax: turns logits into a probability distribution over classes
+
+#### Organisational relevance
+
+Mathematical properties become organisational constraints: compute cost (dense embeddings vs sparse TF-IDF), minority-class coverage (macro-F1 vs accuracy), interpretability (coefficients vs black-box), uncertainty (CIs, overlapping intervals) and auditability (can you defend the choice?).
 
 ## Explains how they have used programming languages and modern machine learning libraries for commercially beneficial scientific analysis, simulation and data engineering to meet business needs
 
@@ -235,20 +338,24 @@ The scientific analysis layer in Python is fully code-backed. BeautifulSoup and 
 
 The feature engineering was empirical throughout. Lower-casing and whitespace and punctuation normalisation reduced accidental vocabulary variation. Typed placeholders such as `hubble_name`, `hubble_date` and `hubble_number` removed high-cardinality identifiers while preserving the information that a name, date or number was present. I tested rather than assumed each choice: replacing forward slashes with spaces reduced performance, so it was not retained. The same tested functions create both training and production features, which prevents skew between the two.
 
-On simulation I keep the claim narrow and honest. Controlled computational experiments comparing model and hyperparameter scenarios on fixed splits are a defensible form of experimental analysis, but they are not a physical or Monte Carlo simulation, and I say so explicitly rather than implying a separate simulation project.
+On simulation I treat the claim narrowly. Controlled experiments comparing model and hyperparameter scenarios on fixed splits are experimental analysis, not a physical or Monte Carlo simulation of a real-world process.
 
-**Result:** The code demonstrates a complete experimental path from semi-structured public filings to repeatable model comparisons over millions of rows, and it demonstrates why a CPU-compatible scikit-learn model could beat GPU-heavy alternatives operationally. The commercial benefit was not "using three languages". It was combining their strengths to widen the usable data, reduce manual preparation and deliver through a workflow the organisation could actually support. The workplace claims about coverage and adoption still need internal measures.
+**Result:** The code shows a complete experimental path from semi-structured public filings to repeatable model comparisons over millions of rows, and why a CPU-compatible scikit-learn model could beat GPU-heavy alternatives operationally. The commercial benefit was not "using three languages". It was combining their strengths to widen the usable data, reduce manual preparation and deliver through a workflow the organisation could actually support.
 
 **Reflection:** The correct language is contextual. Data format, library maturity, user capability, deployment platform and supportability all matter. Python support is growing in HMRC's AWS lakehouse, so I would reassess the language boundary over time, migrating only where the benefit outweighs the disruption.
 
 ### Technical notes: clarification knowledge
 
-- **Programming languages:** Python is dominant for data analysis and ML because of its extensive libraries and easy syntax. R is strong for statistical analysis and visualisation and in analyst communities. SQL provides declarative querying of relational data. Java and Scala serve JVM data engineering, for example Spark.
-- **ML libraries:** scikit-learn for classical ML, preprocessing and model selection. TensorFlow/Keras and PyTorch for deep learning. Hugging Face Transformers for pre-trained language models. XGBoost and LightGBM for gradient boosting. Libraries provide tested implementations, so effort goes into the problem rather than reimplementing algorithms.
-- **Scientific analysis:** analysing large datasets to identify trends, make predictions and optimise processes. Results must be reproducible and evidence-led.
-- **Simulation:** modelling real-world scenarios computationally so outcomes can be explored before committing. Examples include Monte Carlo methods, what-if scenario modelling and agent-based models.
-- **Data engineering:** the collection, cleaning, transformation and preparation of data. Reliable pipelines and formats such as Parquet ensure analysis and models receive accurate, consistent input.
-- **Meeting business needs:** the test of the technical work is business impact, such as efficiency gained, cost reduced, revenue or coverage increased, and decisions improved.
+Past-learner notes are thin here (only a scikit-learn metrics snippet). Content below follows the EPA clarification points directly, with Hubble-relevant library examples kept as knowledge rather than applied claims.
+
+#### Clarification checklist (hit each point)
+
+1. **Programming languages** — name languages used and why suitable. Python: data analysis/ML, extensive libraries. R: statistics, visualisation, analyst communities. SQL: declarative relational querying. Java/Scala: JVM data engineering (Spark). Mixed-language designs need pinned environments and integration tests (`reticulate`, drivers).
+2. **Modern ML libraries** — scikit-learn (classical ML, TF-IDF, CV, searches); TensorFlow/Keras and PyTorch (deep learning); Hugging Face Transformers / SentenceTransformers (pre-trained language models and embeddings); Optuna (hyperparameter search); MLflow (experiment tracking); XGBoost/LightGBM (boosting). Libraries supply tested implementations so effort goes into the problem.
+3. **Commercially beneficial scientific analysis** — analysing large datasets for trends, predictions or process optimisation; reproducible and evidence-led.
+4. **Simulation** — computational models of real-world scenarios (Monte Carlo, what-if, agent-based). Controlled model/hyperparameter experiments on fixed splits are experimental analysis, not physical simulation — say so honestly.
+5. **Data engineering** — collect, clean, transform, prepare; formats such as Parquet; lazy query pushdown (`dbplyr`/SQL); batching and durable writes.
+6. **Meeting business needs** — tie skills to efficiency, cost, coverage, revenue or better decisions.
 
 ## Uses applied research and data modelling to design and refine the infrastructure and architectures to deliver secure, stable and scalable data products, including enterprise, private and public cloud resources and services
 
@@ -298,11 +405,21 @@ For security and stability, the DPIA, data minimisation, controlled-environment 
 
 ### Technical notes: clarification knowledge
 
-- **Applied research and data modelling:** using research methods and modelling techniques to understand a problem before designing the solution. This includes profiling sources, prototyping schemas and benchmarking alternatives.
-- **Secure, stable and scalable:** secure means protected from unauthorised access through least privilege, controlled networks, encryption and audit. Stable means reliable, consistent performance with recovery from failure, supported by replication, tested code and durable storage. Scalable means handling growing data and users through horizontal scaling, parallelism and elastic compute.
-- **Enterprise, private and public cloud:** enterprise refers to an organisation's own internal platforms and services. Private cloud is dedicated cloud resources for a single organisation. Public cloud is third-party provider services (AWS, Azure, GCP) consumed on demand. Using a public provider does not make the data public. It stays within organisational accounts, networks and governance.
-- **Data architecture options:** relational databases give governed structured querying, joins and access control. Document and text search engines give distributed indexes with sharding and replication. A data lake gives cheap native-format storage but risks becoming a swamp without metadata and governance. A lakehouse adds transactions, schema enforcement and warehouse-style analytics on lake storage. A data fabric is a metadata-driven virtual layer, powerful but complex.
-- **Parallel-processing concepts:** embarrassingly parallel workloads, static versus dynamic scheduling, stragglers, and Amdahl's law, under which serial fractions and shared bottlenecks cap the achievable speed-up.
+Past-learner notes are thin on cloud architecture (only MLOps/deployment/monitoring). Follow EPA clarification; keep architecture vocabulary ready.
+
+#### Clarification checklist
+
+1. **Applied research and data modelling** — profile sources, prototype schemas, benchmark alternatives before locking the design (e.g. wide annual tables vs long-form taxonomy-independent rows).
+2. **Design and refine infrastructure/architectures** — continuously improve systems so they remain robust for required processing (ODC burst compute, dynamic work allocation, matched stores).
+3. **Secure, stable, scalable data products**
+   - Secure: least privilege, controlled networks, encryption, audit, distribution-list / proxy access
+   - Stable: replication, tested code, durable storage, workload isolation, recovery
+   - Scalable: horizontal scaling, parallelism, elastic compute — and know when scaling stops helping (Amdahl; I/O, DB writes, serial setup)
+4. **Enterprise, private and public cloud** — enterprise = internal platforms; private = dedicated org cloud; public = AWS/Azure/GCP on demand. Public *provider* ≠ public *data*. Know how HMRC classifies the components you used.
+
+#### Architecture options and parallel concepts
+
+Relational DB (governed SQL); search index (Solr — sharding/replication); object store (S3); lake vs lakehouse vs fabric. Embarrassingly parallel workloads; static vs dynamic scheduling; stragglers; total cost of ownership for auto-scaling vs fixed capacity. MLOps link: deployment and drift monitoring are part of a stable data product, not afterthoughts.
 
 ## Explains how to design algorithms for accessing and analysing large amounts of data, including Application Programming Interfaces (API) to different databases and data sets
 
@@ -318,7 +435,7 @@ For security and stability, the DPIA, data minimisation, controlled-environment 
 
 For the parallel access design, I worked with DevOps to provision On-Demand Compute and used dynamic parallel scheduling. Documents went into a work queue and workers pulled the next one when free, so roughly 128 returns could be processed concurrently without the long tail caused by static batches of differently sized documents. The correct worker count sits just before contention at S3, the network, parsing memory or the Oracle writes removes the benefit of adding cores.
 
-For the API layer, my starting point is that an API is a defined programmatic interface, not necessarily a public REST endpoint. The interfaces I actually used were R database drivers with DBI-style calls to Oracle, `dbplyr` as a higher-level query interface, Solr's query interface, the controlled S3 proxy, and the Parquet-on-FSx storage interfaces. I am careful not to describe an ordinary file copy as an API. The value of `dbplyr` is its lazy execution: it builds a query representation and only sends the translated SQL when results are collected, so filters, aggregation and joins execute close to the data. That cuts transfer and client memory, and the benefit depends on suitable indexes and predicates the optimiser can push down.
+For the API layer I used defined programmatic interfaces rather than ordinary file copies: R database drivers with DBI-style calls to Oracle, `dbplyr` as a higher-level query interface, Solr's query interface, the controlled S3 proxy, and the Parquet-on-FSx storage interfaces. The value of `dbplyr` is its lazy execution: it builds a query representation and only sends the translated SQL when results are collected, so filters, aggregation and joins execute close to the data. That cuts transfer and client memory, and the benefit depends on suitable indexes and predicates the optimiser can push down.
 
 For the storage and format decisions, structured outputs went to Oracle rather than loose files. Where a SAS-writing package proved unreliable, I used a shared FSx route with Parquet, a compressed columnar format in which analytical queries read only the required columns and use metadata for predicate pruning, which is far more efficient than CSV. Batched database writes used sensible transaction boundaries so a failed batch could be retried without creating duplicates. Solr handled fast distributed text retrieval and the S3 proxy controlled object access.
 
@@ -330,10 +447,14 @@ Two design questions are held open deliberately. The analysts' request for numer
 
 ### Technical notes: clarification knowledge
 
-- **Designing algorithms for large data:** choose methods suited to processing at scale, such as sorting, filtering and aggregating. Efficiency and scalability matter more as volumes grow, and complexity is about the whole data path rather than one function.
-- **Accessing data via APIs:** APIs let algorithms retrieve data from external sources. Examples include web services (REST and JSON), database drivers (ODBC, JDBC, DBI), cloud storage SDKs and query endpoints. They abstract the storage details behind a defined interface.
-- **Analysing data:** statistical analysis, machine learning and data mining turn raw data into information that can inform business decisions.
-- **Different databases and data sets:** SQL and relational databases offer structure, joins and transactions. NoSQL stores (document, key-value, wide-column) offer flexible schemas at scale. Search indexes, object stores and file formats (CSV versus columnar Parquet or ORC) each serve different access patterns. Integration means algorithms can work seamlessly across these sources.
+Past-learner notes only lightly mention APIs/databases in the ML pipeline. Follow EPA clarification.
+
+#### Clarification checklist
+
+1. **Designing algorithms for large data** — sorting, filtering, aggregating; efficiency and scalability; complexity of the *whole data path* (queueing, parallelism, batching, serialisation), not one function. Dynamic work allocation for uneven document sizes; choose worker count just before contention removes the benefit.
+2. **Accessing data via APIs** — an API is a defined programmatic interface, not only a public REST endpoint. Examples: REST/JSON web services; database drivers (ODBC, JDBC, DBI); higher-level query interfaces (`dbplyr` lazy SQL); Solr query API; cloud storage SDKs / controlled proxies; Parquet read/write interfaces. Do not call an ordinary file copy an API.
+3. **Analysing data** — statistical analysis, ML and data mining turn raw data into decision-ready information (pushdown filters/aggregations close to the data where possible).
+4. **APIs to different databases and datasets** — SQL/relational (structure, joins, transactions); NoSQL (document/key-value/wide-column); search indexes; object stores; columnar formats (Parquet/ORC vs CSV). Seamless integration means the algorithm can use each store for what it suits.
 
 ## Distinction: Explains when they have challenged the norm through investigating and proposing a solution and the impact this had
 
@@ -377,7 +498,12 @@ Two design questions are held open deliberately. The analysts' request for numer
 
 ### Technical notes: clarification knowledge
 
-The distinction criterion has four elements to hit explicitly. First, the norm challenged: the existing practice, process or belief that needed change. Second, the investigation: the research, data analysis or expert consultation showing the challenge was informed rather than assumed. Third, the proposed solution: what was innovative about it and how it differed from the norm. Fourth, the impact: the measurable benefit in efficiency, cost or performance, and how it was validated.
+Past-learner notes have little narrative "challenge the norm" content; use their select-and-apply / evidence-vs-accuracy framing as the investigation method. Four elements to hit explicitly:
+
+1. **Norm challenged** — the existing practice, process or belief that needed change (e.g. wide annual tables; tagged-only analysis; accuracy as headline metric; auto-scaling as default).
+2. **Investigation** — research, data analysis or expert consultation showing the challenge was informed. Past-learner method: baseline → data readiness → decision matrix → constraints → validate. Use KPIs and poor-data-quality thinking so you do not challenge fashion with fashion.
+3. **Proposed solution** — what was innovative and how it differed from the norm (long-form model; supervised reuse of tagged labels; contextual features; fixed-price capacity).
+4. **Impact** — measurable benefit (efficiency, cost, performance, coverage, time-to-profile) and how it was validated (before/after timings, user confirmation, experiment record). Keep claims to artefacts you can name.
 
 ---
 
@@ -417,9 +543,24 @@ The distinction criterion has four elements to hit explicitly. First, the norm c
 
 ### Technical notes: clarification knowledge
 
-- **Developing working practices:** adopting new tools and technologies, staying current with industry trends, and continuous learning through courses, workshops and self-study.
-- **Leadership techniques:** leading projects, mentoring, fostering collaboration, making strategic decisions, giving technical direction and tailoring communication to the audience.
-- **Organisational impact categories:** enhanced efficiency through streamlined processes, innovation through new AI and data solutions, improved decision-making through data-driven insights, and team development through effective mentorship.
+Drawn from EPA clarification plus past-learner dissemination / enablement notes (closest available leadership content).
+
+#### Developing professional working practices
+
+Adopt new tools and technologies; stay current with industry trends; continuous learning (courses, workshops, self-study); standardise methods (lifecycle, governance, templates); write reusable guidance (wikis, READMEs); promote reproducibility, testing and proportionate model selection.
+
+#### Leadership techniques
+
+Lead projects; mentor; foster collaboration; make strategic decisions; give technical direction; tailor communication by audience (analysts vs engineers vs budget holders); align senior stakeholders; build capability so others can deliver without you.
+
+#### Impact on organisational practice (clarification examples)
+
+- **Enhanced efficiency** — streamlined processes and workflows
+- **Innovation** — new AI/data solutions and competitive capability
+- **Improved decision-making** — data-driven insights
+- **Team development** — skilled, motivated team through mentorship and enablement
+
+Be ready with a verified organisational measure (users, delivery, mentoring outcome) rather than only describing activity.
 
 ## Justifies their choice of techniques, explaining the risks and benefits and offers an alternative to technical and non-technical audiences
 
@@ -437,18 +578,44 @@ I presented the risks and benefits in both directions. LinearSVC's risks are its
 
 For technical audiences, I explained sparse TF-IDF vectors, L1 regularisation, the imbalance handling, cross-validation, bootstrap uncertainty and the CPU and GPU constraints. For non-technical audiences, I described macro-F1 as reliability across rare as well as common concepts, CPU execution as lower cost and easier deployment, and the coefficients as understandable evidence about which phrases influenced a result.
 
-The alternative I offered was SEC-BERT or another assured domain model, in the event that a remapped, grouped evaluation established a worthwhile gain and future infrastructure, assurance and maintenance could support it. The decision matrix itself was designed to be honest about uncertainty: where a model's confidence interval overlapped the best model's on a metric, that metric's score was reduced by a confidence penalty, so an uncertain win could not carry the ranking. Even so, I would not present the current numeric decision score unqualified, because the matrix has a known field-name defect that drops interpretability from the calculation and its weights have not been sensitivity-tested. Explaining that defect openly is itself part of impartial, evidence-led decision making.
+The alternative I offered was SEC-BERT or another assured domain model, in the event that a remapped, grouped evaluation established a worthwhile gain and future infrastructure, assurance and maintenance could support it. The decision matrix itself was designed to be honest about uncertainty: where a model's confidence interval overlapped the best model's on a metric, that metric's score was reduced by a confidence penalty, so an uncertain win could not carry the ranking. Even so I would not quote the current numeric decision score unqualified, because the matrix has a known field-name defect that drops interpretability from the calculation and its weights have not been sensitivity-tested.
 
-**Result:** TF-IDF with LinearSVC was the operational recommendation, offering competitive quality, fast CPU-compatible processing, clearer explanations and lower lifecycle risk. A named meeting, decision paper or approval is still needed to prove how technical and non-technical stakeholders received it.
+**Result:** TF-IDF with LinearSVC was the operational recommendation, offering competitive quality, fast CPU-compatible processing, clearer explanations and lower lifecycle risk.
 
 **Reflection:** Communicating alternatives strengthens a recommendation because it shows the choice was deliberate. In future I would agree metric definitions and risk tolerances even earlier and keep a short decision record containing both the technical comparison and a plain-English version.
 
 ### Technical notes: clarification knowledge
 
-- **Justifying a technique:** show its suitability against the problem in terms of efficiency, accuracy, scalability, relevance and cost.
-- **Risks and benefits:** risks include limitations, potential errors, resource requirements and maintenance burden. Benefits include performance, cost savings and new capability. Present both sides rather than a sales pitch.
-- **Offering alternatives:** show the choice was deliberate by presenting credible alternatives and the conditions under which they would win.
-- **Audience tailoring:** technical audiences want algorithms, data structures, metrics and infrastructure. Non-technical audiences want the practical implications, meaning what problem it solves, what it costs, what could go wrong and what decision is needed.
+Drawn from past-learner notes on "select and apply the most effective/appropriate AI…", KPIs, Poor Data Quality, and Risks of adopting AI. Aligns to justification, risks/benefits, alternatives, and audience tailoring.
+
+#### Justifying a technique (decision process)
+
+1. Start with the business decision and measurable KPIs / constraints (accuracy, latency, interpretability, compliance, cost).
+2. Check whether ML is needed at all (rules / BI may be lower risk).
+3. Frame the ML task (regression, binary/multi-class, clustering, anomaly, NLP, vision, time series).
+4. Assess data readiness (labels, quality, leakage, freshness).
+5. Build a fast baseline.
+6. Choose with a decision matrix: performance vs interpretability vs latency vs governance — simplest model that meets all constraints.
+7. Validate with risk-aligned metrics; productionise with monitoring.
+
+Interview phrasing: "The best model is the one that meets the business outcome reliably under constraints — not the highest laboratory score."
+
+#### Risks and benefits (present both sides)
+
+- **Benefits:** performance, coverage, cost/speed, new capability, explainability where coefficients or SHAP/LIME apply.
+- **Risks:** limitations of the decision boundary, errors on edge cases, resource needs (GPU), maintenance and provenance, opacity, drift, over-dependence.
+- Use risk vocabulary from AI adoption notes: data, model (bias/opacity), operational (drift), business (wrong decisions), security, compliance, skills, financial, ethical.
+
+#### Offering alternatives
+
+Always name a credible runner-up and the conditions under which it would win (e.g. remapped evaluation shows a material gain *and* infrastructure/assurance can support a transformer). That proves the choice was deliberate.
+
+#### Audience tailoring
+
+| Audience | Emphasise |
+| --- | --- |
+| Technical | Algorithms, vectors, metrics, CIs, infrastructure, failure modes |
+| Non-technical | Problem solved, cost, what could go wrong, decision needed, plain-language metrics (e.g. "reliability across rare as well as common concepts") |
 
 ## Explains how they share and disseminate AI and data science practices across organisations to improve industry practice
 
@@ -480,9 +647,30 @@ The alternative I offered was SEC-BERT or another assured domain model, in the e
 
 ### Technical notes: clarification knowledge
 
-- **Sharing internally:** training sessions, workshops, demonstrations, wikis, communities of practice and mentoring.
-- **Disseminating externally:** conference presentations, publications, professional networks and forums, and open demonstrations on public data.
-- **Improving industry practice:** influencing standards and best practice and contributing to guidelines. Be honest about the difference between sharing, which has been done, and demonstrated industry change, which needs evidence.
+Drawn nearly in full from past-learner notes: "How do you disseminate AI and Data Science practices?"
+
+#### Internal sharing mechanisms
+
+1. **Standard frameworks and guidelines** — common ML lifecycle, model governance, ethical AI; templates for problem definition, evaluation, KPI dashboards and documentation. Ensures consistency, quality and auditability.
+2. **Knowledge sharing** — communities of practice; meetups; wikis (Confluence/SharePoint); playbooks; Git repositories.
+3. **Training and enablement** — role-based: business users (awareness), engineers (techniques), leaders (strategy/governance); hands-on workshops.
+4. **Reusable assets** — pipelines, feature libraries, prebuilt models/APIs, data-quality and drift tools. Faster delivery, less duplication.
+5. **Embedded governance** — validation/approval, bias/fairness checks, privacy compliance, version control and audit trails; MLOps and Responsible AI.
+6. **Pilots and use cases** — high-impact PoCs → scaled solutions; showcase cost, SLA or automation benefits.
+7. **Dashboards and transparency** — performance, drift and business-impact metrics (Power BI / Tableau) to build trust.
+8. **Data-driven culture** — encourage experimentation; reward outcomes; secure senior sponsorship.
+
+**End-to-end flow:** Standards → Training → Tools/Assets → Use Cases → Governance → Scaling → Culture.
+
+#### External dissemination
+
+Conference presentations, publications, professional networks/forums, and open demonstrations on public or synthetic data (never expose organisational data).
+
+#### Improving industry practice
+
+Influencing standards, best practice and guidelines. Be honest: sharing is evidenced by the activity; demonstrated industry change needs reuse, feedback or changed practice as evidence.
+
+**30-second answer:** "I disseminate AI practice by standardising frameworks and governance, enabling teams through training and communities of practice, providing reusable tools, demonstrating value through pilots, and embedding AI into processes with transparent metrics."
 
 ## Distinction: Critically analyses the wider social context and current issues and trends, applying the findings with justification and shares these with the wider community
 
@@ -514,7 +702,33 @@ The alternative I offered was SEC-BERT or another assured domain model, in the e
 
 ### Technical notes: clarification knowledge
 
-Four elements to hit explicitly. First, critical analysis of the wider social context, covering ethics, privacy, economic impact and public perception, supported by evidence rather than assertion. Second, current issues and trends, covering technology advances, regulatory change and emerging debates. Third, applying the findings with justification, meaning the action taken links back to the analysis. Fourth, sharing with the wider community through articles, presentations, forums or demonstrations.
+Drawn from past-learner notes on identifying AI trends, Will AI remove jobs?, and Impact of AI / Risks. Four distinction elements to hit explicitly.
+
+#### 1. Critically analyse the wider social context
+
+Examine ethics, privacy, economic impact, cultural influence and public perception with evidence. Useful framing for jobs: AI more often **changes tasks** than eliminates whole occupations (displacement vs augmentation). Credible scale figures: WEF ~170m roles created / 92m displaced by 2030; IMF ~40% global employment exposed (~60% advanced economies); ILO — clerical work especially exposed to GenAI. Biggest practical risk is often "people with AI skills vs without", plus loss of accountability if humans rubber-stamp outputs.
+
+#### 2. Current issues and trends
+
+How past learners track trends:
+1. Research and publications (arXiv, major labs, Gartner/McKinsey/Forrester)
+2. Vendor / ecosystem (AWS, Azure, Google; Hugging Face; copilots; agents)
+3. Enterprise adoption patterns (automation, GenAI, predictive analytics, governance)
+4. Data-driven signals (job demand, investment)
+5. Communities and conferences
+6. Use-case evolution (descriptive → predictive → prescriptive; standalone models → platforms)
+7. Regulatory/governance (EU AI Act, privacy law, trustworthy/explainable AI)
+8. Validate with PoCs; filter hype vs maturity (scalability, cost-benefit, integration, governance)
+
+Example talking points: LLMs/GenAI, copilots, multimodal AI, agents, responsible AI, edge inference.
+
+#### 3. Apply findings with justification
+
+Link action to analysis (e.g. proportionate AI guidance distinguishing conventional ML from GenAI risk; grounded-LLM pattern because unstructured HTML performs poorly). Justify with evidence, not fashion.
+
+#### 4. Share with the wider community
+
+Articles, presentations, forums, demonstrations on public data; keep limitations visible (hallucination, injection, leakage, opacity, cost, over-automation).
 
 ## Explains how they have made independent impartial decisions respecting the opinions and views of others in complex, unpredictable and changing circumstances to benefit the business
 
@@ -552,16 +766,18 @@ Four elements to hit explicitly. First, critical analysis of the wider social co
 
 **Action:** I gathered the requested models and metrics, explained why class imbalance made macro-F1 more informative than accuracy alone, and agreed the comparison criteria before the final selection. I then tested the candidates against model quality, speed, explainability, security, maintainability, infrastructure and cost, and documented the trade-offs.
 
-**Result:** TF-IDF with LinearSVC became the evidence-led recommendation rather than the fashionable choice, with competitive macro-F1, much faster training, coefficient-level explanations and lower operational risk. The workplace decision and approval still need to be named.
+**Result:** TF-IDF with LinearSVC became the evidence-led recommendation rather than the fashionable choice, with competitive macro-F1, much faster training, coefficient-level explanations and lower operational risk.
 
 **Reflection:** Impartiality is easier to demonstrate when the criteria are agreed before the results are known. I would make the decision record routine so stakeholders can challenge it if the evidence or the constraints change.
 
 ### Technical notes: clarification knowledge
 
-- **Independent and impartial:** decisions based on objective analysis and evidence rather than personal bias or external pressure.
-- **Respecting others' views:** active listening, valuing diverse perspectives, and incorporating relevant feedback into the decision process while still deciding on the evidence.
-- **Complex, unpredictable and changing circumstances:** unexpected challenges, new information and shifting priorities. Adapt the decision process, not the standard of evidence.
-- **Business benefit:** efficiency, conflict resolution, innovation and strategic goals. Be specific about the outcome achieved.
+Past learners cover evidence-led trade-offs more than interpersonal impartiality. Merge EPA clarification with the select-and-apply / stakeholder "value + risk" narrative.
+
+1. **Independent and impartial** — decide on objective analysis and evidence, not personal bias or pressure. Agree criteria and weights *before* seeing final scores where possible.
+2. **Respecting others' views** — active listening; value diverse perspectives; incorporate relevant feedback; still decide on the evidence. Separating the user's *need* from their preferred *implementation* is a practical impartiality technique.
+3. **Complex, unpredictable, changing circumstances** — unexpected challenges, new information, shifting priorities or funding. Adapt the process; do not drop the evidence standard.
+4. **Benefit to the business** — efficiency, conflict resolution, innovation, strategic goals. Name the outcome (capacity provided, path avoided, model chosen) and keep a short decision record (demand, options, cost, outcome).
 
 ## Explains how they have worked with software engineers to ensure suitable testing and documentation processes are implemented in line with organisational requirements
 
@@ -579,20 +795,28 @@ For traceability and planning, I used GitLab issues, templates, epics and milest
 
 The documentation worked at three levels. A full README covered the multi-system setup, serving as process documentation for new users. Detailed Markdown design notes covered the architecture, the workflows and the reasons behind the key decisions, serving as technical documentation. Analyst guidance explained how to interpret the outputs, serving as user documentation.
 
-I collaborated with platform and DevOps engineers on ODC, data paths and environment constraints, and turned operational findings into tests or documentation wherever possible. In a public-sector context, undocumented behaviour or an unrepeatable result can undermine trust even when a metric looks strong, so reproducibility and traceability were treated as requirements rather than extras. `Code/` contains research notebooks only, which means the internal test suite, the CI gates, the README and the reviews all need workplace artefacts.
+I collaborated with platform and DevOps engineers on ODC, data paths and environment constraints, and turned operational findings into tests or documentation wherever possible. In a public-sector context, undocumented behaviour or an unrepeatable result can undermine trust even when a metric looks strong, so reproducibility and traceability were treated as requirements rather than extras.
 
-**Result:** New users could set up the project from the README, contributors could change tested functions with confidence, and the issues and milestones provided an audit trail from requirement to implementation. This should be evidenced with a test report or CI result, the README, a representative merge request and an engineer witness.
+**Result:** New users could set up the project from the README, contributors could change tested functions with confidence, and the issues and milestones provided an audit trail from requirement to implementation.
 
 **Reflection:** Up-front tests and documentation reduce future change cost and dependency on individual knowledge, and they make AI work more open to review. The largest remaining risk is the diversity of source documents, so I would expand a versioned representative corpus, automate the integration tests in the merge pipeline, and link requirements, tests and release notes explicitly.
 
 ### Technical notes: clarification knowledge
 
-- **Collaboration with engineers:** regular communication, joint planning and collaborative problem-solving on requirements and constraints.
-- **Testing levels:** unit testing for individual components, integration testing for modules working together, system testing for the complete system against requirements, and user acceptance testing where end users validate functionality and usability.
-- **Documentation types:** technical documentation covers architecture, code and APIs. User documentation covers guides and manuals. Process documentation covers development, testing and maintenance procedures.
-- **Organisational alignment:** testing and documentation must comply with organisational standards, industry best practice, regulatory requirements and quality-assurance guidelines.
+Past-learner notes only lightly touch documentation, Git and MLOps. Follow the EPA clarification structure; add pipeline/MLOps vocabulary where useful.
 
----
+1. **Collaboration with software engineers** — regular communication, joint planning, shared understanding of technical constraints (ODC, data paths, environments), collaborative problem-solving.
+2. **Suitable testing processes**
+   - Unit — individual components
+   - Integration — modules/services together; complex real documents
+   - System — complete system against requirements
+   - UAT — end users validate functionality and usability
+   - Plus MLOps-style checks: schema, missing-rate, ranges; CI before merge
+3. **Documentation processes**
+   - Technical — architecture, code, APIs, design decisions
+   - User — guides and manuals for interpreting outputs
+   - Process — development, testing, maintenance, setup (README)
+4. **Organisational alignment** — comply with organisational standards, industry best practice, regulatory requirements and QA guidelines. In a public-sector context, undocumented or unrepeatable behaviour undermines trust even when a metric looks strong.
 
 # Theme 3: Awareness of the current and future impact of AI and data science for industry and society
 
@@ -610,16 +834,37 @@ I collaborated with platform and DevOps engineers on ODC, data paths and environ
 
 **Action:** I used data engineering to extract, clean, canonicalise and structure the iXBRL, data science to analyse quality, balance and performance, and supervised NLP to categorise the descriptions. Results were delivered to controlled stores so the model supported analyst judgement rather than replacing it. I also considered where similar methods apply beyond HMRC, such as fraud detection, medical imaging and demand forecasting, and the societal risks: over-trusted outputs, opaque decisions, privacy loss, under-representation of rare classes, deskilling and resistance from staff whose work changes.
 
-**Result:** The code demonstrates the potential to reduce repetitive grouping by mapping varied descriptions to consistent concepts. The workplace account is that Hubble expanded analytical coverage and supported tax-risk profiling, which needs an internal measure or witness. At the industry level the notebooks are a reproducible example rather than proof that practice changed. At the societal level, better evidence may support fairer and more efficient revenue work, but Hubble does not make tax decisions and does not directly prove an increase in public funding.
+**Result:** The approach can reduce repetitive grouping by mapping varied descriptions to consistent concepts. In the workplace, Hubble expanded analytical coverage and supported tax-risk profiling. At industry level, the public notebooks are a reproducible example of the method. At societal level, better evidence may support fairer and more efficient revenue work, but Hubble does not make tax decisions and does not itself prove an increase in public funding.
 
 **Reflection:** A narrow technical pipeline can have material social consequences. Positive impact depends on human oversight, transparent limitations, secure processing and monitoring. The defensible role of AI here is augmenting analysts, not replacing them.
 
 ### Technical notes: clarification knowledge
 
-- **Organisational impact:** operational efficiency through automation and optimised workflows, innovation through new products and services, and data-driven insight through trend discovery, prediction and strategic decisions.
-- **Industry impact:** changed market dynamics and business models, disruption of traditional practice, new regulation and standards, and cross-sector partnerships and integration.
-- **Societal impact:** ethical considerations around privacy, bias and fairness, economic change through job creation and displacement and the changed nature of work, and social change in healthcare, education and public services.
-- **AI and jobs (balanced answer):** AI more often changes jobs than eliminates them, because most roles mix routine tasks that can be automated, judgement tasks that are harder, and accountability tasks that policy often requires a person to hold. On scale, the WEF projects large churn by 2030 (around 170 million roles created, 92 million displaced), the IMF estimates about 40% of global employment is exposed (around 60% in advanced economies), and the ILO finds clerical work particularly exposed. The useful framing is displacement versus augmentation, and the organisational response is work redesign and reskilling rather than automation for its own sake.
+Drawn from past-learner notes on Impact of AI on Industry and Society and Will AI remove jobs? Aligns to organisation / industry / society.
+
+#### Impact on own organisation
+
+- **Operational efficiency** — automate repetitive tasks, optimise workflows, improve decisions
+- **Innovation** — new products/services, enhanced customer or analyst experience, competitive capability
+- **Data-driven insights** — trends, prediction, strategic decisions
+Keep Hubble claims to verified outcomes; distinguish extraction impact from classifier impact.
+
+#### Impact on the industry
+
+- Market dynamics and new business models; disruption of traditional practice
+- Regulatory change (privacy, AI regulation)
+- Collaboration and integration of AI across sectors
+Label industry impact as *potential* unless you can show external reuse or changed practice.
+
+#### Impact on society
+
+- **Ethical** — privacy, bias, fairness, accountability
+- **Economic** — job creation and displacement; changed nature of work
+- **Social** — healthcare, education, public services (including fairer/more efficient revenue work when used as decision support)
+
+#### AI and jobs (balanced past-learner answer)
+
+AI more often **changes tasks** than eliminates whole occupations. Roles mix routine (automatable), judgement (harder) and accountability (often required by policy). Credible figures: WEF ~170m created / 92m displaced by 2030; IMF ~40% global exposure (~60% advanced economies); ILO — clerical work especially exposed to GenAI. Frame **displacement vs augmentation**. Organisational response: work redesign and reskilling. Biggest risk often "people with AI skills vs without", plus loss of human accountability if outputs are rubber-stamped.
 
 ## Explains how they have assessed and addressed the potential business impact of ethical issues relating to AI and data science, the way procedures and methods are selected, and the unintended consequences to the business when they are applied
 
@@ -633,24 +878,49 @@ I collaborated with platform and DevOps engineers on ODC, data paths and environ
 
 **Action:** On the assessment side, I completed a DPIA before work began and reviewed it as the design evolved. I also assessed representation and imbalance quantitatively, using frequency distributions, macro-F1, per-class measures, confusion matrices and residual examples rather than relying on overall accuracy.
 
-On the addressing side, I canonicalised names, companies, dates, postcodes and numbers in the pipeline so that high-cardinality identifiers were not the trained feature. I am precise about what this achieves: it is feature minimisation, not anonymisation, because the source description is retained, and access, retention and purpose controls remain necessary. Processing stayed inside controlled environments. I tested balanced class weights, biased sampling and oversampling. The final LinearSVC used balanced weights, and several of the neural and transformer weighting approaches actually made performance worse. Demographic fairness remains proposed rather than completed, and I say so plainly. The notebook records the specific plan: detect bias by checking behaviour across regional names and sexes, assess fairness with demographic parity and equalised odds, and mitigate through re-sampling, re-weighting or a separate model if the classifier proved weaker for smaller companies, whose filings may use different software and wording.
+On the addressing side, I canonicalised names, companies, dates, postcodes and numbers in the pipeline so that high-cardinality identifiers were not the trained feature. That is feature minimisation, not anonymisation: the source description is retained, so access, retention and purpose controls remain necessary. Processing stayed inside controlled environments. I tested balanced class weights, biased sampling and oversampling. The final LinearSVC used balanced weights, and several of the neural and transformer weighting approaches actually made performance worse. Demographic fairness is still proposed rather than completed. The notebook records the plan: detect bias by checking behaviour across regional names and sexes, assess fairness with demographic parity and equalised odds, and mitigate through re-sampling, re-weighting or a separate model if the classifier proved weaker for smaller companies, whose filings may use different software and wording.
 
 Ethics also shaped the method selection itself. I chose an explainable TF-IDF and LinearSVC pipeline partly so that coefficients, LIME and SHAP could expose feature influence, and model provenance was part of the selection decision.
 
 Unintended consequences were found and fixed through user testing. Acceptance testing found blank descriptions being classified from their surrounding context, so I stopped predictions where the description was absent. Usability feedback showed the top-five display created false confidence, so I simplified it. Both user changes need internal evidence.
 
-**Result:** The code supports the narrower conclusions: identity-like tokens were removed from the modelling feature, minority-class and robustness failures were made visible, and a simpler model enabled direct inspection. The workplace controls kept the model as decision support rather than an automated determinant. The DPIA, the human-oversight instruction and the user evidence should be named to substantiate that result.
+**Result:** Identity-like tokens were removed from the modelling feature, minority-class and robustness failures were made visible, and a simpler model enabled direct inspection. Workplace controls kept the model as decision support rather than an automated determinant.
 
 **Reflection:** Ethical assessment must cover the whole sociotechnical process: the data, labels, metrics, model, interface, users and downstream decisions. A technically explainable model can still be misused, so future improvements include monitoring, enforced workflow controls, periodic DPIA review and clearer warnings for low-reliability classes.
 
 ### Technical notes: clarification knowledge
 
-- **Assessing ethical issues:** identify concerns such as privacy, algorithmic bias, transparency and accountability through ethical audits, stakeholder consultation and impact assessments such as a DPIA.
-- **Addressing them:** data-protection measures, fairness checks, transparency and explainability, and documented frameworks such as GDPR and ethical AI principles.
-- **Method selection:** weigh the ethical implications of alternative approaches alongside performance, with explicit decision criteria.
-- **Unintended consequences:** anticipate them through risk assessment, detect them through monitoring and user testing, and correct and retest when they are found.
-- **Business impact of getting it right:** customer and public trust, avoided legal issues and protected reputation.
-- **Ethical concern areas for AI generally:** transparency, accountability, bias, accuracy and privacy. Reference frameworks include the UK responsible-AI principles (safety, security and robustness, appropriate transparency and explainability, fairness, accountability and governance, contestability and redress), the OECD AI guidelines and the EU AI Act.
+Drawn from past-learner Risks of Adopting AI + mitigations, governance bullets, Model Drift / Poor Data Quality. Aligns to assess → address → method selection → unintended consequences → business impact.
+
+#### Assessing ethical issues
+
+Identify privacy, algorithmic bias, transparency, accountability, accuracy. Methods: ethical audits, stakeholder consultation, DPIA / impact assessments; quantitative representation and imbalance analysis (macro-F1, per-class, confusion, residuals) rather than headline accuracy alone.
+
+#### Addressing ethical issues
+
+Data-protection measures; fairness checks (demographic parity, equalised odds — if implemented); transparency/explainability (coefficients, LIME/SHAP); GDPR and ethical AI / Responsible AI principles; human-in-the-loop for significant decisions.
+
+#### Past-learner risk categories (useful vocabulary)
+
+Data (quality, privacy, access); model (bias, opacity); operational (drift, latency, weak monitoring); business (wrong predictions, over-dependence); security (adversarial, poisoning); compliance (audit trails, approval); skills/adoption; financial; ethical/societal.
+
+**Mitigations:** data governance; validation and explainability; continuous monitoring; meaningful human review; security testing; formal approval/audit; training and change management.
+
+#### Method selection
+
+Weigh ethical implications alongside performance (explainability may favour linear models over transformers). Explicit decision criteria. Prefer robust methods and HITL when label quality is poor.
+
+#### Unintended consequences
+
+Anticipate (risk assessment); detect (monitoring, UAT/usability); correct and retest. Examples: blank-description predictions; dashboard false confidence; drift after taxonomy or process change.
+
+#### Business impact of getting ethics right
+
+Public/customer trust; avoided legal issues; protected reputation; defensible decisions. For a public body, legitimacy can outweigh any fine.
+
+#### Reference frameworks
+
+UK responsible-AI principles (safety/security/robustness; transparency/explainability; fairness; accountability/governance; contestability/redress); OECD AI guidelines; EU AI Act risk tiers.
 
 ## Describes how they have applied solutions, demonstrated awareness and explained the changes and trends that have led to enhancement of working practices within their organisation and other members of the team
 
@@ -664,7 +934,7 @@ Unintended consequences were found and fixed through user testing. Acceptance te
 
 **Action:** I followed the research literature, technical documentation and practical communities, and then implemented real comparisons across classical machine learning, MPNet and e5 embeddings, CNN and neural architectures, and SEC-BERT, all on fixed data flags. I assessed macro-F1 and per-class performance alongside runtime, CPU and GPU needs, provenance, explainability and deployment fit. The evidence was concrete: MPNet's advantage over TF-IDF was small to negligible across the runs, SEC-BERT's higher point estimate came with overlapping intervals, and the robustness categories exposed different failure modes in each model family. I explained the evidence through project documents, demonstrations and stakeholder discussions.
 
-**Result:** The testing showed that the simpler TF-IDF and LinearSVC pipeline was the stronger operational recommendation. The code proves that the recommendation was researched. An internal approval or user measure is still needed to show the deployed benefit.
+**Result:** The testing showed that the simpler TF-IDF and LinearSVC pipeline was the stronger operational recommendation, and that the recommendation was researched rather than assumed.
 
 **Reflection:** Awareness of a trend does not require adopting it. Applying the trend meant testing it credibly and letting the result improve the team's model-selection practice.
 
@@ -694,10 +964,32 @@ Unintended consequences were found and fixed through user testing. Acceptance te
 
 ### Technical notes: clarification knowledge
 
-- **Applied solutions:** concrete implementations addressing organisational challenges, meaning new technologies, methodologies or strategies actually put into practice.
-- **Demonstrated awareness:** staying informed through courses, conferences, publications, professional networks, research tracking, vendor and ecosystem monitoring, and hands-on proof-of-concepts.
-- **Explaining changes and trends:** communicating the significance and potential impact of developments to the team and organisation, not just knowing about them.
-- **Enhancement of working practices:** tangible improvements in efficiency, collaboration, quality and reproducibility, with measurable examples.
+Drawn from past-learner "How do you identify trends…" plus dissemination (turning awareness into practice).
+
+#### Applied solutions
+
+Concrete implementations: new technologies, methodologies or strategies put into practice (tested model families; grounded-LLM tool; reusable wiki/README workflows) — not just awareness.
+
+#### Demonstrated awareness (how to identify trends)
+
+1. Track research and industry reports
+2. Monitor vendor/ecosystem updates
+3. Analyse enterprise adoption patterns
+4. Use data-driven signals (jobs, investment)
+5. Engage communities/networks
+6. Observe use-case evolution
+7. Track regulatory/governance trends
+8. Validate with PoCs; separate hype from maturity (scalability, cost-benefit, governance fit)
+
+Current talking points: GenAI/LLMs, copilots, multimodal AI, agents, responsible AI, edge inference; shift descriptive → predictive → prescriptive.
+
+#### Explaining changes and trends
+
+Communicate significance and impact to the team — demonstrations, docs, stakeholder discussions — not only personal reading.
+
+#### Enhancement of working practices
+
+Tangible improvements: efficiency, collaboration, quality, reproducibility (experiment tracking, environments, tests, per-class evaluation, HITL). Prefer a measured before/after where possible.
 
 ## Explains the impact, consequences and risks of non-compliance to the business
 
@@ -721,13 +1013,17 @@ I also ran the control lifecycle as a cycle rather than a one-off. Identify the 
 
 ### Technical notes: clarification knowledge
 
-- **Impact on operations:** disrupted activities, interrupted service delivery, forced shutdown of processing, outputs quarantined, decisions reviewed and systems rolled back.
-- **Legal consequences:** penalties, fines, sanctions, enforcement notices and litigation.
-- **GDPR penalty figures (a past-learner question):** under UK GDPR and the DPA 2018, the higher maximum is £17.5 million or 4% of annual worldwide turnover, whichever is higher. The standard maximum is £8.7 million or 2%. Under EU GDPR the figures are €20 million or 4%, and €10 million or 2%. The UK enforcement body is the ICO.
-- **Financial risks:** beyond fines, there is remediation, legal fees, incident response, new systems and processes, duplicated analysis and delayed outcomes.
-- **Reputational damage:** eroded customer and public trust and reduced investor and stakeholder confidence. For a public body, the loss of legitimacy can outweigh any fine.
-- **Operational risks:** data breaches, security vulnerabilities and inefficiencies from uncontrolled processes.
-- **Regulatory scrutiny:** increased oversight across otherwise unrelated programmes after a failure.
+Closely linked to the previous ethics criterion. Drawn from EPA clarification plus past-learner compliance/governance risk bullets. Prefer Assessment-criteria figures for UK GDPR fines (past learners mention GDPR but not the UK £ amounts).
+
+1. **Impact on business operations** — delays, interrupted service, forced shutdown, outputs quarantined, decisions reviewed, systems rolled back.
+2. **Legal consequences** — penalties, fines, sanctions, enforcement notices, litigation.
+3. **GDPR penalty figures** — UK GDPR/DPA 2018: higher max £17.5m or 4% worldwide turnover; standard £8.7m or 2%. EU GDPR: €20m/4% and €10m/2%. UK regulator: ICO.
+4. **Financial risks** — remediation, legal fees, incident response, new systems/processes, duplicated analysis, delayed outcomes; also unclear ROI / maintenance costs from past-learner financial-risk list.
+5. **Reputational damage** — eroded public/customer trust; stakeholder confidence. For a public body, legitimacy loss can outweigh any fine.
+6. **Operational risks** — breaches, security vulnerabilities, inefficiencies; missing audit trails or approval processes (past-learner compliance risks).
+7. **Regulatory scrutiny** — increased oversight across programmes after a failure.
+
+Preventive framing: identify requirements → DPIA → controls → test → approve → monitor → reassess on change. Article 22: solely automated significant decisions need valid condition and meaningful human review.
 
 ---
 
@@ -803,16 +1099,39 @@ The lawful basis and any statutory power come from the approved DPIA rather than
 
 ### Technical notes: clarification knowledge
 
-- **UK GDPR principles (seven):** lawfulness, fairness and transparency. Purpose limitation. Data minimisation. Accuracy. Storage limitation. Integrity and confidentiality. Accountability.
-- **Lawful bases (six):** consent, contract, legal obligation, vital interests, public task and legitimate interests.
-- **Special-category data:** racial or ethnic origin, political opinions, religious or philosophical beliefs, trade-union membership, genetic data, biometric data, health, sex life and sexual orientation. **Equality Act protected characteristics:** age, disability, gender reassignment, marriage and civil partnership, pregnancy and maternity, race, religion or belief, sex and sexual orientation.
-- **DPIA:** required where processing is likely to be high risk. It records the nature, scope, context and purpose, necessity and proportionality, risks to people, controls, residual risk, consultation and approval. It starts before processing and is revisited on material change.
-- **Article 22:** restricts solely automated decisions with legal or similarly significant effects unless a valid condition and safeguards apply. Meaningful human review requires understanding, evidence and the authority to override.
-- **UK versus EU GDPR:** the UK incorporated EU GDPR into law as UK GDPR and the DPA 2018 on leaving the EU. They are near-identical, with differences in scope (national security and immigration), age of consent (13 in the UK versus a default of 16 in the EU) and enforcement (the ICO versus the EDPB and member-state authorities). International transfers rely on adequacy regulations or appropriate safeguards such as standard contractual clauses and binding corporate rules.
-- **Wider frameworks:** the UK responsible-AI principles (safety, security and robustness, appropriate transparency and explainability, fairness, accountability and governance, contestability and redress), the OECD AI guidelines, and the EU AI Act with its risk-based tiers (banned, high-risk regulated, transparency duties, minimal).
-- **Legal and commercial checks:** dependency and model licences, intellectual property, supplier contracts, data-sharing conditions, processing roles, retention duties, support status and the right to audit.
-- **Accessibility and WCAG:** WCAG 2.2 is the current W3C standard, with conformance levels A, AA and AAA. UK public-sector websites and apps are legally required to meet Level AA under the Public Sector Bodies Accessibility Regulations. Core practice covers keyboard operation, visible focus, semantic structure, text alternatives, labels and error messages, contrast, zoom and reflow, captions, and avoiding colour as the only signal. Testing combines automated checks with keyboard, screen-reader and representative-user testing. WCAG 2.2 adds criteria for cognitive and learning disabilities, low vision, mobile use and input methods.
-- **Diversity of user needs:** users differ in cultural, social, economic and ability backgrounds. This covers interface diversity, meaning assistive technology, devices, language and technical confidence, and it also covers data diversity. Unrepresentative training sets produce biased models, as when facial recognition systems misclassify dark-skinned women. Diverse data improves generalisation and equity. Gather user feedback and incorporate diverse perspectives into the design.
+Past learners only give high-level privacy/bias/governance vocabulary — the GDPR/WCAG detail below is Assessment-criteria authored and must stay. Structured to the EPA clarification's five points; linked to the compliance criterion in Theme 3.
+
+#### 1. Regulatory requirements
+
+Stay current with laws and standards governing the industry: UK GDPR / DPA 2018, sector rules, accessibility regulations. Incorporate changes into solutions; name owners and reassessment triggers.
+
+**UK GDPR seven principles:** lawfulness, fairness and transparency; purpose limitation; data minimisation; accuracy; storage limitation; integrity and confidentiality; accountability.
+
+**Six lawful bases:** consent, contract, legal obligation, vital interests, public task, legitimate interests.
+
+**Special-category data:** racial/ethnic origin, political opinions, religious/philosophical beliefs, trade-union membership, genetic, biometric, health, sex life, sexual orientation. **Equality Act protected characteristics:** age, disability, gender reassignment, marriage/civil partnership, pregnancy/maternity, race, religion/belief, sex, sexual orientation.
+
+**DPIA:** required where processing is likely high risk. Records nature/scope/context/purpose, necessity/proportionality, risks to people, controls, residual risk, consultation, approval. Start before processing; revisit on material change.
+
+**Article 22:** restricts solely automated decisions with legal or similarly significant effects unless a valid condition and safeguards apply. Meaningful human review = understanding + evidence + authority to override.
+
+**UK vs EU GDPR:** near-identical; differences in scope (national security/immigration), age of consent (13 UK vs default 16 EU), enforcement (ICO vs EDPB/member states). Transfers: adequacy or SCCs/BCRs.
+
+#### 2. Ethical considerations
+
+Fairness, transparency, accountability; bias; privacy; responsible use. Past-learner mitigations: governance, SHAP/LIME, HITL, monitoring. UK responsible-AI principles; OECD; EU AI Act risk tiers (banned / high-risk / transparency / minimal).
+
+#### 3. Legal requirements
+
+IP, contracts, licences (dependencies and models), data-sharing conditions, controller/processor roles, retention, support status, right to audit. Protect stakeholder interests; keep solutions legally sound.
+
+#### 4. Accessibility for all users
+
+WCAG 2.2 (A / AA / AAA). UK public-sector digital services: Level AA under Public Sector Bodies Accessibility Regulations. Practice: keyboard, visible focus, semantics, text alternatives, labels/errors, contrast, zoom/reflow, captions, not colour-only. Test: automated + keyboard + screen reader + representative users. Includes setup routes and cognitive clarity (plain language, not overwhelming alternatives).
+
+#### 5. Diversity of user needs
+
+Cultural, social, economic and ability diversity. Interface diversity (assistive tech, devices, language, confidence) and data diversity (unrepresentative training → biased models). Gather feedback; incorporate diverse perspectives into design and evaluation.
 
 ---
 
@@ -862,11 +1181,36 @@ The lawful basis and any statutory power come from the approved DPIA rather than
 
 ### Technical notes: clarification knowledge
 
-- **Own currency:** continuous learning through courses, certifications and workshops, reading and research across journals, papers and articles, and networking through professional groups, conferences and online communities.
-- **Team development:** training programmes, mentorship, knowledge-sharing sessions and encouraging a learning culture.
-- **Professional growth:** set development goals with plans, hold regular performance and skills reviews, and provide coaching and recognition.
-- **Personal growth:** work-life balance, soft-skills development in communication, leadership and teamwork, and supporting broader interests.
-- Be ready to name specific courses, books and articles read, with a brief reaction to each, and any professional-community membership.
+Drawn from past-learner trend-tracking (own currency) and dissemination (team development), plus EPA clarification.
+
+#### 1. Staying current with knowledge and skills (own)
+
+- Continuous learning: courses, certifications, workshops, seminars (including structured apprenticeship material)
+- Reading/research: journals, papers, books; prioritise by relevance and credibility
+- Networking: professional groups, conferences, online communities — do not imply physical attendance if it was online reading
+- Trend methods from past learners: research tracking, vendor/ecosystem monitoring, adoption patterns, PoCs to separate hype from value
+
+#### 2. Team development
+
+- Training programmes and knowledge-sharing meetings
+- Mentorship and guidance (describe informal mentoring accurately)
+- Encourage continuous learning and further education
+- Dissemination toolkit: standards, CoP, wikis, reusable assets, governance, pilots
+
+#### 3. Professional growth
+
+- Clear development goals and plans
+- Regular performance/skills reviews; identify gaps
+- Coaching, advancement opportunities, recognition
+- Link learning to decisions changed (dated CPD record)
+
+#### 4. Personal growth
+
+- Work-life balance and well-being
+- Soft skills: communication, leadership, teamwork
+- Support broader interests that aid development
+
+Be ready to name specific courses, books and articles, with a brief reaction to each, and any community membership.
 
 ## Explains how they selected and applied the most effective/appropriate AI and data science techniques to solve a complex business problem in line with organisational and regulatory requirements
 
@@ -884,16 +1228,68 @@ In applying the techniques, the pipeline extracted and cleaned millions of rows,
 
 The organisational and regulatory constraints shaped the choice directly rather than sitting alongside it. The DPIA and the minimisation requirements shaped the features. The explainability expectations favoured inspectable coefficients over a fine-tuned transformer. The infrastructure reality of a CPU estate with scarce GPUs, together with provenance and assurance concerns, weighed against SEC-BERT. Delivery had to fit the supported R workflow with controlled ODC and Oracle delivery. Internal artefacts are needed for the DPIA, the integration and the user changes.
 
-**Result:** The evidence supports an operational recommendation for TF-IDF plus LinearSVC. It is CPU-compatible, directly inspectable, and free of SEC-BERT's lifecycle burden in exchange for an uncertain point-estimate gain. Until the workplace status is confirmed, I call this a validated comparison and a deployment recommendation, and I would describe any internal production outcome separately, with evidence.
+**Result:** The evidence supports an operational recommendation for TF-IDF plus LinearSVC. It is CPU-compatible, directly inspectable, and free of SEC-BERT's lifecycle burden in exchange for an uncertain point-estimate gain. I treat this as a validated comparison and a deployment recommendation rather than proof of live production.
 
 **Reflection:** The most effective technique is the one that meets the complete business and regulatory need, not the model with the highest laboratory score. My CPD let me test the modern methods credibly, while judgement favoured the simpler recommendation. Before formal deployment evidence I would fix the decision-matrix key, group the splits by filing, add time and taxonomy validation, define acceptance thresholds, verify test and production parity, and implement monitored human oversight.
 
 ### Technical notes: clarification knowledge
 
-- **Framing a problem to select a technique:** ask, in order, what output is wanted, what input data that needs and whether it exists, whether ML is needed at all or rules and statistics suffice, whether the problem is supervised (prediction or classification with labels) or unsupervised (pattern discovery, anomaly detection), whether the prediction is a continuous value (regression) or a category (classification), and whether the data is structured or unstructured. Answering these in order narrows the algorithm choice.
-- **Then apply the constraints:** platform restrictions, GDPR lawful basis and PII handling, explainability requirements (which can rule out deep learning), cost and infrastructure. Only after that, experiment across the remaining candidates with appropriate metrics.
-- **Application steps:** data preparation (collect, clean, preprocess), model development (build and train with appropriate tools), and validation and testing on unseen data against agreed performance standards.
-- **Compliance:** data privacy and security measures, handling of bias, fairness and transparency, and documentation and reporting for accountability.
+Primary past-learner source: "select and apply the most effective/appropriate AI and data science techniques…". Also Types of ML, ML Pipeline, KPIs / Poor Data Quality, Common algorithms, Model Drift, governance constraints.
+
+#### 1. Start with the business problem (not the model)
+
+Clarify the decision and who uses it. Convert to a measurable objective. Define success KPIs and constraints: accuracy targets, latency, interpretability, regulatory/compliance, cost, operational effort.
+
+#### 2. Diagnose whether AI/ML is needed
+
+- Rules/automation when logic is stable, auditability is high, or labels/data are missing
+- Analytics/BI when insight/reporting is enough
+- ML/AI when patterns are complex, scale is large, and predictions/segmentation are needed with usable data
+
+#### 3. Frame the ML task type
+
+| Business need | Formulation |
+| --- | --- |
+| Numerical estimate / forecast | Regression |
+| Yes/No | Binary classification |
+| Multiple categories | Multi-class classification |
+| Group similar items | Clustering |
+| Unusual behaviour | Anomaly detection |
+| Text / documents | NLP (+ classifier / transformer / RAG as needed) |
+| Images/video | CNN / vision transformers |
+| Sequential decisions | Reinforcement learning (less common enterprise) |
+
+#### 4. Assess data readiness
+
+Availability, quality, label quality/bias/timeliness, leakage, freshness/drift risk. Poor quality → robust methods, simple baselines, quality/drift KPIs, HITL for high-risk decisions.
+
+#### 5. Build a baseline first
+
+Naïve / rules / simple statistical or tree baseline. Confirms feasibility, sets a floor, helps stakeholders see improvement.
+
+#### 6. Decision matrix (performance vs constraints)
+
+- Interpretability critical → linear/logistic, trees, explainable boosting, SHAP for ensembles
+- Tabular performance → RF / gradient boosting
+- Text → embeddings + classifier; transformers where justified
+- Limited labels → semi/self-supervised, active learning, clustering + human validation
+Prefer the simplest model that meets performance, latency, interpretability and governance.
+
+#### 7. Validate with risk-aligned metrics
+
+Classification: F1/AUC under imbalance; precision if FP costly; recall if FN costly. Regression: MAE / RMSE. Operational: latency, throughput, cost, calibration, fairness. Business: SLA, cost, deflection, etc.
+
+#### 8. Production-ready (MLOps)
+
+Feature pipelines; versioning/reproducibility; automated tests; deployment strategy (shadow/A-B/canary); monitoring (PSI/KS/χ², prediction drift, performance drift); retraining triggers and governance approvals.
+
+#### 9. Organisational and regulatory compliance
+
+Data privacy/security (GDPR); ethical concerns (bias, fairness, transparency); documentation and reporting; human override and escalation when confidence is low.
+
+#### 60–90 second answer (past-learner)
+
+"I start by clarifying the business decision and KPIs, and checking whether ML is required. I map the problem to the right technique, assess data readiness, build a baseline, then select models on performance vs interpretability vs latency vs governance. I validate with risk-aligned metrics and productionise with MLOps, drift monitoring and retraining triggers, with stakeholder alignment and operational controls."
 
 ---
 
