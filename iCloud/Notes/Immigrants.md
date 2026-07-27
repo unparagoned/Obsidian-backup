@@ -16,4 +16,7 @@ https://www.bbc.co.uk/news/articles/crl19dzdd38o
 
 >Albanian drug dealer allowed to stay in UK after ruling it would be 'too harsh' on his family
 >https://www.lbc.co.uk/article/deportation-albanian-drug-dealer-stay-uk-5Hjddmd_2/
->
+
+
+>Afghan man fined £400 after sexually assaulting girl, 14
+https://www.dailystar.co.uk/news/latest-news/breaking-afghan-man-fined-400-37458555

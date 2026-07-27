@@ -237,26 +237,17 @@ List of over 1000 women losing out.
 
 [List of Female Athletes by Sport | She Won](https://www.shewon.org/)
 
+# UN Report
+
+
 Women have lost over 890 medals to trans athletes.
 
 >Violence against women and girls, its causes and consequences
-
->According to information received, by 30 March 2024, over 600 female
-
-athletes in more than 400 competitions have lost more than 890 medals in 29 different
-
-sports.
-
-Male athletes have specific attributes considered advantageous in certain sports,
-
-such as strength and testosterone levels that are higher than those of the average range
-
-for females, even before puberty,30 thereby resulting in the loss of fair opportunity
-
+>According to information received, by 30 March 2024, over 600 female athletes in more than 400 competitions have lost more than 890 medals in 29 different sports.
+Male athletes have specific attributes considered advantageous in certain sports, such as strength and testosterone levels that are higher than those of the average range for females, even before puberty,30 thereby resulting in the loss of fair opportunity
 [https://documents.un.org/doc/undoc/gen/n24/249/94/pdf/n2424994.pdf](https://documents.un.org/doc/undoc/gen/n24/249/94/pdf/n2424994.pdf)
 
 >Breakdown of over 1000 medals here.
-
 [https://www.shewon.org/](https://www.shewon.org/)
 
 >World Athletics bans transgender women from competing in female world ranking [https://www.bbc.com/sport/athletics/65051900](https://www.bbc.com/sport/athletics/65051900)

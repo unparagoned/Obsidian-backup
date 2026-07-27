@@ -52,18 +52,18 @@ Loads LinearSVC, CNN, and SEC-BERT results from MLflow. Has a subjective rubric 
 
 ### Technical / Code Issues
 
-| Notebook | Issue | Impact |
-|---|---|---|
-| **00** | `analyze_table` starts table iteration at index 1, silently skipping table 0 — rationale unexplained | May miss data from single-table documents |
-| **00** | `map()` is lazy; on file read failure, the entire `pd.concat` will fail rather than skip bad files | Silent data loss risk |
-| **01** | `AdvancesCreditsDirectors` — directors' names not fully caught by canonicalization (noted as TODO, cell 89) | PII leakage into training data; unreachable labels |
-| **01** | `MAX_WORDS = 15` used as a constant but its origin/justification isn't stated | Unclear if this is a data observation or an assumption |
-| **03** | `tf.random.set_seed(SEED)` in cell 3 but TensorFlow isn't imported in the visible import block | Potential runtime error if run fresh |
-| **03** | Training data is `v13`, test data is `v16` — version difference unexplained | Reproducibility concern; could introduce subtle differences |
-| **04** | Optuna memory leak (>120GB) documented but not resolved; `load_if_exists=True` allows resumption but not clean reruns | Reproducibility / infrastructure concern |
-| **04** | `vectorize` layer adapted once — unclear whether it's adapted on the full dataset or just the training subset | Could cause OOV tokens at test time |
-| **05** | Full test set requires 150GB RAM; `test_5_pct` used as a proxy without validating it's consistently representative | Potential evaluation bias |
-| **06** | `subjective_inputs` defined for LinearSVC but CNN and SEC-BERT entries appear incomplete | Comparison rubric is one-sided |
+| Notebook | Issue                                                                                                                 | Impact                                                      | Action                                                                |
+| -------- | --------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| **00**   | `analyze_table` starts table iteration at index 1, silently skipping table 0 — rationale unexplained                  | May miss data from single-table documents                   | Fixed                                                                 |
+| **00**   | `map()` is lazy; on file read failure, the entire `pd.concat` will fail rather than skip bad files                    | Silent data loss risk                                       | Ignore                                                                |
+| **01**   | `AdvancesCreditsDirectors` — directors' names not fully caught by canonicalization (noted as TODO, cell 89)           | PII leakage into training data; unreachable labels          | Removed                                                               |
+| **01**   | `MAX_WORDS = 15` used as a constant but its origin/justification isn't stated                                         | Unclear if this is a data observation or an assumption      | Wrong - it is explained                                               |
+| **03**   | `tf.random.set_seed(SEED)` in cell 3 but TensorFlow isn't imported in the visible import block                        | Potential runtime error if run fresh                        | Wrong                                                                 |
+| **03**   | Training data is `v13`, test data is `v16` — version difference unexplained                                           | Reproducibility concern; could introduce subtle differences | Explainable                                                           |
+| **04**   | Optuna memory leak (>120GB) documented but not resolved; `load_if_exists=True` allows resumption but not clean reruns | Reproducibility / infrastructure concern                    | Interesting point, to discuss, shouldn't really need to manage memory |
+| **04**   | `vectorize` layer adapted once — unclear whether it's adapted on the full dataset or just the training subset         | Could cause OOV tokens at test time                         | Noted, learning point going forward.                                  |
+| **05**   | Full test set requires 150GB RAM; `test_5_pct` used as a proxy without validating it's consistently representative    | Potential evaluation bias                                   | Was used across models                                                |
+| **06**   | `subjective_inputs` defined for LinearSVC but CNN and SEC-BERT entries appear incomplete                              | Comparison rubric is one-sided                              |                                                                       |
 
 ---
 
@@ -102,12 +102,12 @@ LinearSVC is the obvious production candidate — small model, fast inference, i
 ## To Do (Priority Order)
 
 - [ ] **Complete notebook 06** — add confusion matrices, side-by-side metrics with confidence intervals, and a decision matrix for all three models (LinearSVC, CNN, SEC-BERT).
-- [ ] **Resolve the `AdvancesCreditsDirectors` TODO** — or document it explicitly as a known limitation with a mitigation plan.
+- [x] **Resolve the `AdvancesCreditsDirectors` TODO** — or document it explicitly as a known limitation with a mitigation plan.
 - [ ] **Add per-class error analysis** — identify the top 10–20 misclassified classes and explain why (ambiguous descriptions, overlapping concepts, etc.).
-- [ ] **Add a data governance section** to notebook 01 — acknowledge PII handling even briefly (public data, no individual identified in outputs).
-- [ ] **Explain the v13 vs v16 dataset version difference** — add a markdown cell in notebook 03 or 04.
+- [x] **Add a data governance section** to notebook 01 — acknowledge PII handling even briefly (public data, no individual identified in outputs).
+- [x] **Explain the v13 vs v16 dataset version difference** — add a markdown cell in notebook 03 or 04.
 - [ ] **Add statistical significance testing to notebook 06** — confirm whether differences between final models are significant.
-- [ ] **Add CRISP-DM framing** to notebook 01 or a new intro notebook — reference it explicitly for K6/S24 evidence.
-- [ ] **Add deployment architecture discussion** — even a brief section on how LinearSVC would run operationally, retraining triggers, monitoring approach.
-- [ ] **Explain `MAX_WORDS = 15`** — add a comment or markdown cell showing where this value comes from.
-- [ ] **Explain table index 0 skip** in notebook 00 — add a comment explaining why iteration starts at index 1.
+- [x] **Add CRISP-DM framing** to notebook 01 or a new intro notebook — reference it explicitly for K6/S24 evidence.
+- [x] **Add deployment architecture discussion** — even a brief section on how LinearSVC would run operationally, retraining triggers, monitoring approach.
+- [x] **Explain `MAX_WORDS = 15`** — add a comment or markdown cell showing where this value comes from.
+- [x] **Explain table index 0 skip** in notebook 00 — add a comment explaining why iteration starts at index 1.

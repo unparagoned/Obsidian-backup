@@ -10,15 +10,11 @@ solution aligned to business value and organisational priorities.
 
 Structure & Content
 
-1.
-
-Introduction/Background: Context on organisation, challenge, and business priority.
+	1.Introduction/Background: Context on organisation, challenge, and business priority.
 
 2. Business Problem & Value: Deﬁne problem, state why and how it matters, quantify impact if solved.
 
-3. Methods/Justiﬁcation: List approaches (methodologies, tools, programming), and justify your choices
-
-against alternatives.
+3. Methods/Justiﬁcation: List approaches (methodologies, tools, programming), and justify your choices against alternatives.
 
 4. Scope & KPIs: Deﬁne boundaries, measurable indicators of success.
 
@@ -26,15 +22,11 @@ against alternatives.
 
 6. Alternatives Survey: Compare approaches (pros/cons, trade-offs, rationale).
 
-7.
-
-Implementation: Explain pipelines, technical setup, evaluation metrics, error/bias controls.
+7. Implementation: Explain pipelines, technical setup, evaluation metrics, error/bias controls.
 
 8. Results: Present ﬁndings, link to business goals, and critically reﬂect.
 
-9. Discussion/Recommendations: Analyse outcomes, propose improvements, lessons learned, and potential
-
-wider impact.
+9. Discussion/Recommendations: Analyse outcomes, propose improvements, lessons learned, and potential wider impact.
 
 10. Summary/Implications: Highlight main takeaways and strategic actions.
 

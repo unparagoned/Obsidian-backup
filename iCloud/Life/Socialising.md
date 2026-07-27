@@ -1,0 +1,1 @@
+Pretend a stranger already likes you, you don’t need to impress them. That makes you much more open when chatting to them which actually makes them like you more. 

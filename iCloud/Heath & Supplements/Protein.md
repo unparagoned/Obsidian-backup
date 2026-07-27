@@ -93,3 +93,9 @@ PBN - Premium Body Nutrition - Whey-ISOLATE Protein Powder, 2.27kg, Chocolate - 
 Bulk Pure Whey Protein Isolate Powder Shake, Vanilla, Packaging May Vary, 1000 g - Didn't taste great, don't get.
 
 Bulk Clear Whey All in One, Protein Powder Shake, Passion Fruit, 500 g - OK, but still heavy not light like an EAA
+
+# shakes
+
+Banana is fine with berries
+
+https://vm.tiktok.com/ZN8JMRC3B/

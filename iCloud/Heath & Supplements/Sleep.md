@@ -417,6 +417,9 @@ Some evidence it works but not strong evidence.
 >The qualitative dichotomous results suggest that valerian would be effective for a subjective improvement of insomnia, although its effectiveness has not been demonstrated with quantitative or objective measurements.
 https://www.sciencedirect.com/science/article/abs/pii/S1389945710001000
 
+This Sleep Cocktail Works 10x Better Than Medication (Scientific Proof)
+https://www.youtube.com/watch?v=AsEqmXqudeA
+
 ### Montmorency Tart Cherry 
 #tartcherry
 

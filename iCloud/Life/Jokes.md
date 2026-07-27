@@ -1,7 +1,11 @@
-
+# dark
 >I was tired of living so I found the tallest building downtown and jumped off of it. 
 I closed my eyes as I fell, and kept falling until a man caught me and announced, “It’s a boy!”
 https://www.reddit.com/r/TwoSentenceHorror/comments/1s8b2qn/i_was_tired_of_living_so_i_found_the_tallest/
+
+# dad jokes
+
+My dad works never tell me anything, there was a solar eclipse and I kept asking him but he wouldn’t tell me, he kept just saying no son, no sun
 
 # Meta jokes
 

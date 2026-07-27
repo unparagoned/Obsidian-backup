@@ -102,6 +102,8 @@ https://pmc.ncbi.nlm.nih.gov/articles/PMC5320422/
 
 ### Non-24h clock
 
+When not exposed to sunlight people naturally go on a non-24h clock. It's only regular patterns and sunlight exposure that sync people to 24h clock.
+
 >During isolation, participants exhibited marked free-running behavior, completing 24-31 cycles (mean: 29.3 ± 2.6), with cycle duration increasing from 24.1 ± 2.3 h pre-isolation to 31.6 ± 8.0 h in-cave (_p_ < 0.001).
 >https://pubmed.ncbi.nlm.nih.gov/42009612/
 
@@ -172,6 +174,13 @@ If it was true we'd see it in indigenous populations.
 >Historical evidence suggests that “until the close of the early modern era, Western Europeans experienced two major intervals of sleep bridged by up to an hour or more of quiet wakefulness[[30](https://pmc.ncbi.nlm.nih.gov/articles/PMC4720388/#R30), [33](https://pmc.ncbi.nlm.nih.gov/articles/PMC4720388/#R33)].” Our results suggest that the bimodal sleep pattern that may have existed in Western Europe is not today present in traditional equatorial groups, and by extension, was probably not present before humans migrated into such areas. Rather, this pattern may have been a consequence of longer winter nights in higher latitudes. In this view, the “recent” disappearance of bimodal sleep was not a pathological development caused by restricted sleep duration, but rather a return to a pattern still seen today in the groups we studied, enabled by the electric lights and temperature control that restored aspects of natural conditions in the tropical latitudes.
 >https://pmc.ncbi.nlm.nih.gov/articles/PMC4720388/#R23
 
+
+# Examples
+
+Actually changing your habits and behaviour does help most people. 
+
+>Used to. Then I stopped doomscrolling, began walking two miles straight every morning, getting in bed at 10 with my lights out, my kindle on and a gummy in my tummy. I’m out at 10:30 like clockwork.
+https://www.reddit.com/r/NonPoliticalTwitter/comments/1v5jtpw/comment/ozjmfd6/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 
 
 

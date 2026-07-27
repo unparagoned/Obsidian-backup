@@ -1,7 +1,7 @@
 #dementia
 #alzheimer
 
-We know anything for sure, but your best bet for preventing and treating dementia is the shingles vaccine, then the usual exercise, diet and sleep. 
+We know anything for sure, but your best bet for preventing and treating dementia is the usual exercise, diet and sleep. 
 
 Pretty much all the sleeping pills are linked to dementia, from anti-histamines you can pick off the shelf to Z-drugs your doctor prescribes and anti-psychotics(pharma companies have paid billions in fines relating to pushing this but doctors still irresponsibly prescribe them for insomnia). The only exception are DORA drugs which might actually help clear amyloid(but I've herd from an insider to be very suspicious of anything relating to DORA drugs and the data they have seen doesn't match the published data.)
 
@@ -15,10 +15,15 @@ Some mechanisms for the sleep drug and dementia here
 >An online lifestyle intervention program aimed at improving diet, exercise and other modifiable risk factors for dementia has resulted in better cognition in older adults, Australian research has found.  
 [https://www.abc.net.au/news/health/2025-01-29/dementia-cognition-memory-clinical-trial-internet-brain-decline/104868518](https://www.abc.net.au/news/health/2025-01-29/dementia-cognition-memory-clinical-trial-internet-brain-decline/104868518)
 
-It might be related to chicken pox/shingles which stays hidden in your body but might be doing damage over time. The vaccine also helped with heart disease.
+~~It might be related to chicken pox/shingles which stays hidden in your body but might be doing damage over time. The vaccine also helped with heart disease.
+
+The English study which is much bigger, shows that the Shingles vaccine doesn't help. The studies that said it worked shows that it would work very quickly within months, that's not really possible. 
 
 >this study provides evidence of a dementia-preventing or dementia-delaying effect from zoster vaccination
 >https://www.nature.com/articles/s41586-025-08800-x
+
+
+
 # Exercise
 
 Exercise was more effective than everything else tested.

@@ -14,7 +14,6 @@ https://www.sciencedirect.com/science/article/pii/S2213158225001962?lid=jua9g5tk
 
 It weird that no matter what or how contradictory the effects someone says they have on stimulants there will always be someone saying that's a sign of ADHD. "Oh stimulants make you concentrate on work and not happy, that means you have ADHD." or "Oh stimulants make you happy rather than concentrate on work, that means you have ADHD". "Stimulants have a strong effect on you, you have ADHD". "Stimulants have a weak effect on you, you have ADHD".
 
-
 I've never seen any evidence that ADHD drugs or stimulants have a different types of effect on people with ADHD. They make everyone focus and concentrate and everyone can get high off them in high doses, and they impair the sleep of everyone even if you don't realise it. Now if you have a starting point of not being able to focus, the effect of focusing is going to have more effect. 
 
 >The present data support the premise that amphetamine improves vigilance irrespective of disease state[https://www.researchgate.net/publication/320429079_Amphetamine_Modestly_Improves_Conners'_Continuous_Performance_Test_Performance_in_Healthy_Adults](https://www.researchgate.net/publication/320429079_Amphetamine_Modestly_Improves_Conners'_Continuous_Performance_Test_Performance_in_Healthy_Adults)

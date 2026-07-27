@@ -38,3 +38,7 @@ If you are talking about US stats, that's simply because stores are reporting st
 SF
 https://www.businessinsider.com/san-francisco-shoplifting-numbers-doubled-after-store-changed-reporting-method-2021-12?r=US&IR=T
 
+# Mental health treatment
+
+>New study finds mental health treatment for serious offenders could reduce harm to society and save money
+>https://www.kcl.ac.uk/news/new-study-finds-mental-health-treatment-for-serious-offenders-could-reduce-harm-to-society-and-save-money

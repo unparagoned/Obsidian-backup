@@ -9,7 +9,7 @@ Depression is an umbrella term for a variety of conditions some psychological an
 
 The brain is part of the body just like everything else and needs good diet, sleep and exercise to function properly. Exercise increases levels of BDNF, increases brain volume, improves brain connectivity, improves brain vascularity, improves brain mitochondrial health, lactate levels(which are healthy for the brain), SGK1 levels, etc. all of which are linked depression.
 
-If someone's mental illness is due to to a physically impaired brain then it might be that no amount of "therapy" or drugs will help. If say it's due to poor mitochondrial health, they aren't going to fix that. Sure therapy and drugs might be useful in the short term to get someone back into a state where they can exercise, have a good diet and sleep. 
+If someone's mental illness is due to a physically impaired brain then it might be that no amount of "therapy" or drugs will help. If say it's due to poor mitochondrial health, they aren't going to fix that. Sure therapy and drugs might be useful in the short term to get someone back into a state where they can exercise, have a good diet and sleep. 
 
 Do you think the life would have been less stressful, 1,000 years ago, what about 10,000 or 100,000 years ago?
 
@@ -42,6 +42,9 @@ https://bjsm.bmj.com/content/early/2026/02/02/bjsports-2025-110301
 
 >Muscle strength may represent an important modifiable factor for preventing and treating depression and several specific symptoms, including core symptoms such as anhedonia.
 >https://www.sciencedirect.com/science/article/pii/S0165032726002880?via%3Dihub
+
+>At week 8, the response rate was 89% 
+https://pubmed.ncbi.nlm.nih.gov/36841307/
 ## Exercise is as if not more effective
 
 In terms of effect size, studies show that exercise is as good if not more effective than therapy or drugs.
@@ -149,6 +152,10 @@ CCG and glycemic control has positive effects in people with diabetes
 
 >Higher self-management adherence was a protective factor against both anxiety and depression.
 >https://pmc.ncbi.nlm.nih.gov/articles/PMC12732679/
+
+> Remission, defined as a MADRS score <10, was achieved for 32.3% 
+https://pubmed.ncbi.nlm.nih.gov/28137247/
+
 # Sleep
 
 Sleep is really important, if you aren't sleeping properly you have have a tenfold higher risk of depression,
@@ -179,6 +186,8 @@ Many with depression have immune system issues.
 >We demonstrated that the proteomic signatures of MDD patients share Th2 skewing and dysregulation of other immune/neurovascular-related proteins with AD.
 https://www.nature.com/articles/s41380-025-03383-5
 
+>Improving sleep led to a significant medium-sized effect on composite mental health (g+ = −0.53), depression (g+ = −0.63), anxiety (g+ = −0.51)
+https://pmc.ncbi.nlm.nih.gov/articles/PMC8651630/
 # Mechanisms
 
 While we can say with confidence that exercise, diet and sleep have positive causal impacts on mental health, it's not so hard to say anything definitive about the mechanisms.

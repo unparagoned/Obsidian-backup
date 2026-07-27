@@ -52,3 +52,13 @@ Another sign of progress in our practice of Stoicism is that our philosophy will
 
 >For many readers, I realize, this line of reasoning will fall flat. They will insist that duty is the enemy of happiness and consequently that the best way to have a good life is to escape all forms of duty: Rather than spending our days doing things we have to do, we should spend them doing things we want to do. In chapter 20 I return to this question. For now, let me say this: Throughout the millennia and across cultures, those who have thought carefully about desire have drawn the conclusion that spending our days working to get whatever it is we find ourselves wanting is unlikely to bring us either happiness or tranquility.
 
+>as Epictetus puts it, “what upsets people is not things themselves but their judgments about these things.”
+
+
+>In normal, prospective negative visualization, we imagine losing something we currently possess; in retrospective negative visualization, we imagine never having had something that we have lost.
+>Seneca, think about how much worse off she would be today if she had never been able to enjoy his company. In other words, rather than mourning the end of his life, she should be thankful that he lived at all.
+
+
+They suffuse minimalism rather luxury
+
+>A cave would be fine, if one were available. He reminds us that houses with courtyards, fancy color schemes, and gilded ceilings are hard to maintain.
