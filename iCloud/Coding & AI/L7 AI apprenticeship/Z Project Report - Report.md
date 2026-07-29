@@ -51,6 +51,27 @@ Key performance indicators would be f1-macro, accuracy, precision, recall, train
 
 
 # Data selection, collection and pre-processing.
+
+HMRC's systems are locked down, making doing exploratory work trying different models difficult. Also there isn't quick easy access to a GPU device for more the more complex models. 
+
+So the public company accounts submitted at companies house, which are iXBRL format were used for the exploratory phase since that could be done on a standalone device with a GPU. The  accounts submitted in November 2015 were used. Using all the returns submitted in a month makes the data more representative. 
+
+For the implementation phase the company accounts and tax computations submitted to HMRC were used. 
+
+I extracted key data such as the description, heading, table name, iXBRL concept, iXBRL dimensional data, references, footnotes and structural data. 
+
+The text features like description were cleaned, lowercasing and replacing special characters with spaces. But testing showed that replacing forward slashes with spaces actually reduced performance, so it was dropped. 
+
+I canonicalised the feature, so most dates were replaced by a placeholder "hubble_date", except for 31 March 1982, which subject matter experts explained has a special meaning for tax so that was replaced with "hubble_date_1982_03_31". Similarly company names, individual names, postcodes and numbers were replaced by placeholders. This improves model performance, since it reduces a lot of the noise. Removing personal data like individual names enhances data security since personal data is removed and not used in latter steps.
+
+Then there was some label engineering, where the feature a placeholder by itself, then the label was changed to reflect that. e.g. if a description is just hubble_number, then the label would be changed to be HubbleNumber. The reason for this is that placeholders by themself don't contain enough information to predict a category, but knowing the type could be useful to know. 
+
+Then filtered for where there is at least 2 characters and less than 16 words in the description.
+
+I removed data that had concepts related to names or addresses. 
+
+
+
 # Survey of potential alternatives.
 
 Regex. 

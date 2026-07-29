@@ -6,3 +6,5 @@ What are you looking forward to tomorrow
 Speak slowly, people think you are more intelligent
 
 https://vm.tiktok.com/ZN8JCbEFN/
+
+Action creates motivation. So just start or plan to do a minute. 

@@ -40,6 +40,8 @@ Zeno — the Founder. A merchant from Cyprus who ended up in Athens and founded 
 
 Seneca — the Adviser. Wealthy Roman statesman, writer and adviser to Emperor Nero. He wrote practical letters about anger, death, time and adversity. Memory hook: Seneca = Senator. Think powerful political insider trying to live wisely in a corrupt world.
 
+Gaius Musonius Rufus - teacher, taught Epicurus. Memory hook: Musonius The mentor
+
 Epictetus — the Slave. Born enslaved, later freed, and became a philosophy teacher. His core idea: separate what you control from what you don’t. Memory hook: Epictetus = the ex-slave who mastered himself because he couldn’t control his circumstances.
 
 Marcus Aurelius — the Emperor. Roman emperor and author of Meditations, which was essentially his private notebook reminding himself how to behave properly under pressure. Memory hook: Marcus = the man with maximum power reminding himself not to be an arsehole.
@@ -62,3 +64,27 @@ Another sign of progress in our practice of Stoicism is that our philosophy will
 They suffuse minimalism rather luxury
 
 >A cave would be fine, if one were available. He reminds us that houses with courtyards, fancy color schemes, and gilded ceilings are hard to maintain.
+
+>It isn’t clear how Musonius died, but while alive, he was an advocate of suicide. In particular, he advised old people to “choose to die well while you can; wait too long, and it might become impossible to do so.”
+
+
+>Musonius goes on to suggest that we would also be better off if, instead of working hard to become wealthy, we trained ourselves to be satisfied with what we have; if, instead of seeking fame, we overcame our craving for the admiration of others; if, instead of spending time scheming to harm someone we envy, we spent that time overcoming our feelings of envy; and if, instead of knocking ourselves out trying to become popular, we worked to maintain and improve our relationships with those we knew to be true friends
+
+
+>Stoicism was also undermined by the rise of Christianity, in part because the claims made by Christianity were similar to those made by Stoicism
+
+
+
+>A primary motive in going to Walden, he tells us, was his fear that he would, “when I came to die, discover that I had not lived.”8
+
+
+>One study on the efficacy of grief counseling examined parents whose children had died of Sudden Infant Death Syndrome. It compared the parents who consciously tried to work through their loss, in accordance with the principles of grief therapy, with the parents who did not. Three weeks after the death of their child, the parents in the first group were experiencing more distress than the parents in the second group, and even after eighteen months the parents in the first group were worse off, emotionally speaking, than the parents in the second group. The obvious conclusion to draw from this research is that “forced grieving” in accordance with the principles of grief therapy, rather than curing grief, can delay the natural healing process; it is the psychological equivalent of picking at the scab on a wound. Similar research, by the way, has focused on Holocaust survivors, abused young women, and the partners of men who died of AIDS, and has obtained similar results.16
+>16. Sommers and Satel, 136.
+
+
+>“Recent findings suggest that reticence and suppression of feelings, far from compromising one’s psychological well-being, can be healthy and adaptive. For many temperaments, an excessive
+
+
+>The world is full of politicians who tell us that if we are unhappy it isn’t our fault. To the contrary, our unhappiness is caused by something the government did to us or is failing to do for us. We citizens are encouraged, in our pursuit of happiness, to resort to politics rather than philosophy. We are encouraged to march in the streets or write to our congressman rather than read Seneca or Epictetus.
+
+
