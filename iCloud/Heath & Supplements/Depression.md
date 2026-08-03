@@ -313,6 +313,10 @@ Maybe it's related to Shor Chain Fatty Acids(SCFA)
 >https://www.sciencedirect.com/science/article/pii/S0005796726000112?via%3Dihub
 # Social/environmental factors
 
+Generally event driven states don't count as depression. 
+
+Sure if say you are in a state of constant real significant stress to the state it changes your brain, then yeh environment can cause indirectly cause mental health issues. 
+
 While environmental factors will have some impact, it doesn't look like stuff like isolation cause a large measurable physical impact on the brain.
 
 >However, the results don’t demonstrate that isolation causes deterioration in brain function 
@@ -584,8 +588,12 @@ https://www.nature.com/articles/s44277-026-00062-3.epdf?sharing_token=4w5pDnH1E_
 >These findings indicate that depression can reshape autobiographical memory of adversity, probably via negative emotional processing and memory bias. This highlights the need to account for depression-driven distortions when assessing trauma history, and suggests that alleviating depressive symptoms may reduce trauma-related distress.
 https://www.nature.com/articles/s44220-025-00580-7
 
+# Over dianosis
 
+>"The more fixated we are on mental health, the more sensitive we become to anything that might qualify as a symptom and the more we use clinical language to describe normal emotional experiences like grief, burnout and loneliness. This broadening of what we think counts as a disorder — known as concept creep — encourages us to pathologize ordinary life and see ourselves as mentally unhealthy."
+https://www.nytimes.com/2026/07/26/opinion/mental-health-exercise-charity.html
 # Toxic people r/thanksimcured
+
 
 Some people will always reject anything helpful and productive, it's been long documented. 
 

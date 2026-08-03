@@ -1,0 +1,1 @@
+Evidence is mainly low quality, but some evidence it helps reduce blood pressure. 

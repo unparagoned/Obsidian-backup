@@ -28,3 +28,15 @@ e.g. connect to an online tool to convert markdown to pdf.
 
 Maybe the online tool could be hosted in docker or something locked down. 
 
+# Stories
+
+## Destroy AI
+
+Start far in the future, with people starving to death, pollution, rising sea. Or just show that at the end.
+
+Then hear a story about the past. AI had taken over and ran everything, humans had no control or choice. A group worked together to destroy the central AI, with a virus or something. The whole thing is framing them as the protagonists, in the end they win. But then the world goes from the utopia they actually lived in to a hell whole, since the AI was actually making life soo much better than humans could do alone. 
+
+## S1m0ne
+
+## Time travel to stop genocide
+
