@@ -400,7 +400,11 @@ None in humans
 
 ### Inositol
 #insitol
+Don't take
+
 No clear evidence it works if you aren't pregnant.
+
+Has some mixed evidence around bipolar. 
 
 Some evidence it helps with anxiety
 
@@ -492,6 +496,10 @@ Might help clear amyloid from the brain, which could help with dementia
 >In this study, suvorexant acutely decreased tau phosphorylation and amyloid-β concentrations in the central nervous system.
 https://onlinelibrary.wiley.com/doi/10.1002/ana.26641
 
+##### Daridorexant
+
+Available on the NHS
+https://www.youtube.com/watch?v=P5PWr4Xi1d0
 
 #### Antipsychotics - major tranquillisers - mood stabilisers 
 #seroquel #olanzapine 

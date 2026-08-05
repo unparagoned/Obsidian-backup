@@ -81,3 +81,7 @@ https://pubmed.ncbi.nlm.nih.gov/38767699/
 
 >With regard to ASD, the youngest children in their school year were more likely to be diagnosed with ASD. This review confirms a relative age effect for ADHD diagnosis and prescribed ADHD medication and suggests that differences in teacher and parent ratings might contribute to this.
 https://pmc.ncbi.nlm.nih.gov/articles/PMC11868292/
+
+No science that caffeine impact on someone means that have sdhd
+No evidence that caffeine helps with adhd and it’s been treated allot
+https://vm.tiktok.com/ZN8dHKSA3/

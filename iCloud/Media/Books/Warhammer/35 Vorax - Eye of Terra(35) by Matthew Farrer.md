@@ -1,0 +1,1 @@
+Bad mexhanicum on a ship trying to spread traps using bodies. But gets hunted and killed by vorax class hunters

@@ -1,6 +1,9 @@
 
 
-# How To Absorb Everything You Read Like A Sponge
+# Learning
+
+
+## How To Absorb Everything You Read Like A Sponge
 [[Justin Sung]] #memory
 
 https://www.youtube.com/watch?v=Xu7Yqxlc3ec
@@ -11,3 +14,11 @@ https://www.youtube.com/watch?v=Xu7Yqxlc3ec
 - Layering: Focus on what is relevant and familiar, then go back and look at the difficult or unfamiliar stuff. 
 - Relevance: Frame how something is relevant.With each layers more and more might be relevant.
 - Real estate: Mental capacity to hold onto and process data. Use paper/computer as a cognitive aid rather than trying to keep it all in your head. 
+
+
+# List
+
+## Rumination
+
+Ruminating about stuff is like having "rum in" you.
+

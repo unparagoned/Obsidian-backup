@@ -95,6 +95,10 @@ Set goals that you can achieve. Like set a goal of playing to the best of your a
 # Socialising
 
 
+>Other people are invariably annoying, though, so if we maintain relations with them, they will periodically upset our tranquility
+
+>OTHER PEOPLE, as we have seen, are the enemy in our battle for tranquility. It was for this reason that the Stoics spent time developing strategies for dealing with this enemy
+
 >MODERN READERS will naturally wonder how Marcus was able to accomplish this feat, how he was able to overcome his disgust for his fellow humans
 
 1. He expected bad behaviour so it wasn't a unexpected
@@ -102,11 +106,6 @@ Set goals that you can achieve. Like set a goal of playing to the best of your a
 3. If they don't deserve power over you, why be impacted by it. 
 4. self-control
 
-
->Other people are invariably annoying, though, so if we maintain relations with them, they will periodically upset our tranquility
-
-
->OTHER PEOPLE, as we have seen, are the enemy in our battle for tranquility. It was for this reason that the Stoics spent time developing strategies for dealing with this enemy
 
 
 # Goals and aims
@@ -140,6 +139,20 @@ Set goals that you can achieve. Like set a goal of playing to the best of your a
 >A primary motive in going to Walden, he tells us, was his fear that he would, “when I came to die, discover that I had not lived.”
 
 
+# Criticism
+
+### 4. It can encourage adaptation to injustice
+
+Stoicism can produce courage against oppression. It can also teach people to tolerate situations they should change.
+
+If suffering is framed mainly as a problem in the sufferer’s judgment, attention moves away from abusive partners, exploitative workplaces or unjust institutions. Sometimes anger is not a cognitive error; it is an accurate recognition that something is wrong. The proper response may be confrontation, collective action or escape—not greater serenity.
+
+### 8. Anti-luxury can become another status game
+
+Learning not to depend on comfort is valuable. But chosen deprivation can become moral theatre: pride in cold showers, minimalism or being tougher than everyone else.
+
+Luxury is not inherently corrupting. The important questions are whether it controls you, harms others, distorts your priorities or consumes resources you believe should be used differently. Enjoying good food or a comfortable home is not a character failure.
+
 # Criticism responses
 
 >One study on the efficacy of grief counseling examined parents whose children had died of Sudden Infant Death Syndrome. It compared the parents who consciously tried to work through their loss, in accordance with the principles of grief therapy, with the parents who did not. Three weeks after the death of their child, the parents in the first group were experiencing more distress than the parents in the second group, and even after eighteen months the parents in the first group were worse off, emotionally speaking, than the parents in the second group. The obvious conclusion to draw from this research is that “forced grieving” in accordance with the principles of grief therapy, rather than curing grief, can delay the natural healing process; it is the psychological equivalent of picking at the scab on a wound. Similar research, by the way, has focused on Holocaust survivors, abused young women, and the partners of men who died of AIDS, and has obtained similar results.16
@@ -147,6 +160,8 @@ Set goals that you can achieve. Like set a goal of playing to the best of your a
 
 
 >“Recent findings suggest that reticence and suppression of feelings, far from compromising one’s psychological well-being, can be healthy and adaptive. For many temperaments, an excessive
+
+
 
 
 # Further reading - Books
@@ -170,5 +185,61 @@ Handbook/Manual/Encheiridion
 ## Marcus Aurelius
 Meditations
 
+# Alternatives you would probably like
 
+### Aristotelian virtue ethics
 
+Probably your closest fit. It shares the emphasis on character, disciplined practice, reason and becoming a better person. But it gives friendship, community, emotion and external circumstances a larger role.
+
+Its central question is not merely “What can I control?” but “What kind of person should I become, and what does flourishing require?”
+
+### Epicureanism
+
+Despite the modern meaning of “epicurean,” this is not indulgent consumerism. Epicurus valued simple food, friendship, freedom from status competition, careful reasoning and learning to distinguish necessary desires from manufactured ones.
+
+Compared with Stoicism, it is less heroic and more humane about arranging your circumstances to reduce needless suffering.
+
+### Buddhism
+
+You may appreciate its work on craving, impermanence, disciplined attention and the distinction between unavoidable pain and the additional suffering created by resistance.
+
+Its advantage over Stoicism is a more developed understanding of how reactions arise before conscious reasoning. Its possible weakness is that some versions can also encourage detachment or withdrawal when action is needed.
+
+### Acceptance and Commitment Therapy
+
+ACT is perhaps the strongest modern psychological cousin of Stoicism. It teaches acceptance of internal experiences, distance from unhelpful thoughts, clarification of values and committed action.
+
+Crucially, acceptance does not mean believing a thought, liking a situation or refusing to change it. It means stopping the futile struggle to control every internal sensation so that you can act according to your values.
+
+### Pragmatism
+
+Think William James and John Dewey. Pragmatism values beliefs partly by what they enable people to do. It favours experimentation, revisability and consequences over ideological purity.
+
+This fits your preference for action and personal improvement while avoiding rigid claims that one philosophy supplies the final account of virtue.
+
+### Existentialism
+
+Existentialism shares the emphasis on responsibility and choosing how to respond, but takes contingency, anxiety, meaninglessness and personal freedom more seriously.
+
+It is less confident that nature supplies a ready-made rational moral order. Meaning is something you must help create through commitment.
+
+### Care ethics
+
+This is a valuable corrective rather than a total replacement. It argues that morality is not only about rational self-command and universal principles. It is also about attention, responsiveness, relationships and concrete obligations to particular people.
+
+It keeps personal responsibility while challenging the fantasy that the good person should be invulnerable.
+
+## A stronger, revised Stoicism
+
+You do not need to abandon Stoicism. The most defensible version would say:
+
+- Concentrate on your response without pretending circumstances are irrelevant.
+- Accept what cannot be changed while acting forcefully on what can be influenced.
+- Treat emotions as information and experiences to regulate, not enemies to defeat.
+- Take responsibility without assuming total culpability.
+- Use hardship to build capacity, not prove superiority.
+- Enjoy comfort without becoming dependent on it.
+- Examine the past when it helps change the present; stop when it becomes rumination.
+- Value character as central to flourishing, but recognise that love, health, community and justice are genuinely important.
+
+The best overall combination for what you describe is probably Stoic discipline, Aristotelian flourishing, Epicurean simplicity, ACT’s psychological realism and care ethics’ recognition that dependence is part of life.
