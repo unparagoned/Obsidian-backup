@@ -1,26 +1,29 @@
 
-# Introduction and background.
+# 1. Introduction and background.
+
+HMRC receive millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for operational/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies. 
+
+For fully tagged documents, previous workflows allows us to reliably extract, structure and analyse the data in those documents. Initial analysis showed that some document classes only have approximately 30% of the figures tagged, which means that existing workflows can't utilise 70% of the figures. There are various reasons for this, ranging from limitations in software used to create the documents to people deliberately leaving items they don't want HMRC to review untagged. 
+
+The previous workflows to extract iXBRL data, require complex and long schema updates to processes new taxonomies every year. The wide database format is also hitting the column limits of the Oracle database complicating things further. It can take up to 9 months for the updates, but HMRC only have 12 months to open an enquiry, leaving little time for profiling and opening an enquiry in time. 
+
+Hubble is a tool I developed that extracts both tagged and untagged items and uses supervised multi-class text classification to categorise the untagged items. The system scales with workload and uses a long format for the Oracle database, allowing it to deal with any taxonomy, resulting in data being ingested within days of receipt. 
+
+I initially worked on Hubble myself, writing the vast majority of the code and doing all the ML elements myself, but as the project became bigger and more important to HMRC I arranged for more resource and lead a virtual team working on the project.
+
+# 2. Outline of the issue or opportunity and the business problem to be solved.
+
+The business problem was that a significant amount of data submitted to HMRC couldn't be used in bulk analysis, since previous workflows didn't extract untagged data. So bulk numerical analysis was restricted the tagged figures, which could be missing 70% of the numerical data in those documents. This means profiles using such data don't have the data to properly identify high tax risk returns limiting compliance yield HMRC can bring in. Also we were unable to provide accurate data or statistics for the department/government to make informed decisions. 
+
+The initial requirements just included extracting the raw data such as descriptions, but  items can be described in lots of different ways with no fixed taxonomy. Analysis of the descriptions showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and SME highlighted that many are domain-specific technical terms that not all analysts would be familiar with. Initial usage required lots of complex regular expressions and working with SME due to the domain-specific terminology, which was error prone, incomplete and time-consuming. I considered ways to systemise the existing paradigm, and while it would help with some of the issues it would be too resource intensive, especially of the SME time, to be practical and would still not resolve all the issues to a sufficient level. 
 
 
-# Outline of the issue or opportunity and the business problem to be solved.
-
-HMRC receive financial documents such as company accounts and tax computations that contain a large amount of useful information, that are used to provide insight for operational/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with a concepts from fixed taxonomies. 
-
-For fully tagged documents, existing workflows allows us to reliably extract, structure and analyse the data in those documents. But some documents only have approximately 30% of the figures tagged, which means that existing workflows can't utilise 70% of the figures. There are various reasons for this, ranging from limitations in software used to create the documents to people deliberately leaving items they don't want HMRC to review untagged. 
-
-This was used to show that while some documents had good tagging levels average of 70% other documents had very poor tagging levels average of 30%.
-
-Graphs were useful, showing that there was a large variety of terms used for each class.
-
-Having most of the data in the some documents untagged means that profiles don't have the data to properly identify high tax risk return. We were also unable to provide accurate data or statistics for the department/government to make informed decisions. 
-
-The existing systems to extract iXBRL data, require complex and long updates to processes the schemas every year when new taxonomies come out. The wide database format is also hitting the column limits of the Oracle database. It can take up to 9 months for the updates, but HMRC only have 12 months to open an enquiry, leaving little time for profiling and opening an enquiry in time. 
-
-Hubble is a tool I develop that initially extracted untagged figures and their associated descriptions. People can describe items in lots of different ways with no fixed taxonomy. Initial data analysis required lots of complex regular expressions and working with SME due to the domain-specific terminology, which was error prone, incomplete and time-consuming. 
 
 I evaluated whether building a ML classifier was justified from a business perspective. I extracted all the descriptions for key classes and then worked with SME to go over some key terms used and all the possible variations that could be used. Some classes, had a large variety of words or phrases that could be used(some had over 23,000 unique descriptions), including domain-specific technical terms that not all analysts would be aware of. To manually use the descriptions, would be difficult, time consuming and error prone. So, I recommended to create a ML model to classify the descriptions.
 
 I investigated and implemented a solution that extracted additional data and used ML to categorise items increasing consistency so that analysts could more easily and robustly use the data.
+
+Graphs were useful, showing that there was a large variety of terms used for each class.
 
 # Methods used and justification.
 
