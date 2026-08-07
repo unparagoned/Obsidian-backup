@@ -170,14 +170,15 @@ And it's a bidirectional relationship not that just that depressed people sleep 
 >Sleep plays an important role in mental health, and may moderate the effectiveness of adaptive CER strategies by maintaining the executive functions on which they rely. 
 [https://www.sciencedirect.com/science/article/pii/S001094522300151X](https://www.sciencedirect.com/science/article/pii/S001094522300151X)
 
->Why Sleep is Key: Poor Sleep Quality is a Mechanism for the Bidirectional Relationship between Major Depressive Disorder and Generalized Anxiety Disorder Across
-[https://www.sciencedirect.com/science/article/abs/pii/S0887618522000743](https://www.sciencedirect.com/science/article/abs/pii/S0887618522000743)
 
 >Sixteen individuals (23%) with emerging mood disorders had abnormal phase angles between at least 1 pair of phase markers, consistent with internal misalignment of the circadian system. 
 [https://journals.sagepub.com/doi/10.1177/07487304251349408](https://journals.sagepub.com/doi/10.1177/07487304251349408)
 
 >In this national longitudinal cohort study, middle-aged and older adults at high risk of OSA had consistently worse mental health outcomes.
 https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2843180?guestAccessKey=1b34668e-afe8-4888-aa3d-dd05b3b83eff
+
+>Sleep quality mediated 18.5%, 36.3%, and 8.3% of the relationships between depression, anxiety, and PLE distress with academic functioning, respectively (total problems mediation was nonsignificant). Screen time was the second strongest mediator.
+https://www.cambridge.org/core/journals/psychological-medicine/article/mediating-effects-of-healthy-lifestyle-factors-on-associations-between-mental-health-and-functional-outcomes-in-early-adolescence/2316A2F2269538FEE1F7E8970198E82D
 
 # Other causes
 

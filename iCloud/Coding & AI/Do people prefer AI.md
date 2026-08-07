@@ -1,8 +1,7 @@
 
->A fascinating art social experiment unfolded on social media this week after someone shared an actual Monet painting as an AI-generated artwork and asked people to explain what makes the “AI image” inferior to a genuine Monet piece. There was no shortage of “sharp-eyed” critics eager to chime in.
-https://petapixel.com/2026/05/14/someone-shared-a-real-monet-painting-as-ai-and-asked-for-critiques/
 
-It's already winning competitions
+
+It's already winning art competitions
 
 >AI won an art contest, and artists are furious
 https://edition.cnn.com/2022/09/03/tech/ai-art-fair-winner-controversy
@@ -16,13 +15,22 @@ https://www.theguardian.com/books/2024/nov/18/ai-poetry-rated-better-than-poems-
 >Results revealed a significant preference for AI-generated artworks. 
 https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1497469/full
 
-People will prefer art less if they think it was AI made. 
+So studies do show that people prefer AI art, and that they like it even more if they "think" it's by humans.
+
+>Participants rated the AI-generated story as higher quality and more absorbing, but they rated the story better on both measures when they were told it was written by a human.
+>https://www.cambridge.org/core/services/aop-cambridge-core/content/view/45E6DC0BB90AA648654D5AE243F6C667/S1930297526100424a.pdf/div-class-title-bot-or-not-can-people-tell-the-difference-between-stories-written-by-a-human-or-by-an-ai-system-div.pdf
+
+ People will prefer art less if they think it was AI made, rather than the quality of the art. 
 
 >The same artwork is preferred less when labeled as AI-made (vs. human-made) because it is perceived as less creative and subsequently induces less awe, an emotional response typically associated with the aesthetic appreciation of art. These effects are more pronounced among people with stronger anthropocentric creativity beliefs (i.e., who believe that creativity is a uniquely human characteristic). Systematic depreciation of AI-made art (assignment of lower creative value, suppression of emotional reactions) appears to serve a shaken anthropocentric worldview whereby creativity is exclusively reserved for humans.
 https://www.sciencedirect.com/science/article/pii/S0747563223000584
 
 >These studies demonstrate that people tend to be negatively biased against AI-created artworks relative to purportedly human-created artwork, and suggest that knowledge of human engagement in the artistic process contributes positively to appraisals of art.
 https://pmc.ncbi.nlm.nih.gov/articles/PMC10319694/
+
+>A fascinating art social experiment unfolded on social media this week after someone shared an actual Monet painting as an AI-generated artwork and asked people to explain what makes the “AI image” inferior to a genuine Monet piece. There was no shortage of “sharp-eyed” critics eager to chime in.
+https://petapixel.com/2026/05/14/someone-shared-a-real-monet-painting-as-ai-and-asked-for-critiques/
+
 
 
 But it's not the "actual" effort but what they "think" the effort is. 
