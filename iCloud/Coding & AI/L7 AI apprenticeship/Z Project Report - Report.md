@@ -7,60 +7,62 @@ For fully tagged documents, previous workflows allows us to reliably extract, st
 
 The previous workflows to extract iXBRL data, require complex and long schema updates to processes new taxonomies every year. The wide database format is also hitting the column limits of the Oracle database complicating things further. It can take up to 9 months for the updates, but HMRC only have 12 months to open an enquiry, leaving little time for profiling and opening an enquiry in time. 
 
-Hubble is a tool I developed that extracts both tagged and untagged items and uses supervised multi-class text classification to categorise the untagged items. The system scales with workload and uses a long format for the Oracle database, allowing it to deal with any taxonomy, resulting in data being ingested within days of receipt. 
+Hubble is a tool I developed that extracts both tagged and untagged items; and uses supervised multi-class text classification to categorise the untagged items. The system scales with workload and uses a long format for the Oracle database, allowing it to deal with any taxonomy, resulting in data being ingested within days of receipt. 
 
 I initially worked on Hubble myself, writing the vast majority of the code and doing all the ML elements myself, but as the project became bigger and more important to HMRC I arranged for more resource and lead a virtual team working on the project.
 
 # 2. Outline of the issue or opportunity and the business problem to be solved.
 
-The business problem was that a significant amount of data submitted to HMRC couldn't be used in bulk analysis, since previous workflows didn't extract untagged data. So bulk numerical analysis was restricted the tagged figures, which could be missing 70% of the numerical data in those documents. This means profiles using such data don't have the data to properly identify high tax risk returns limiting compliance yield HMRC can bring in. Also we were unable to provide accurate data or statistics for the department/government to make informed decisions. 
+The business problem was that a significant amount of data submitted to HMRC couldn't be used in bulk analysis, since previous workflows didn't extract untagged data. So bulk numerical analysis was restricted the tagged figures, which could be missing 70% of the numerical data in those documents. This means profiles using such data don't have the data to properly identify high tax risk returns limiting compliance yield HMRC can bring in. Also we were unable to provide accurate data or statistics for the department/government to make informed decisions. This combined with the 9 month taxonomy lag was creating serious operational issues. 
 
-The initial requirements just included extracting the raw data such as descriptions, but  items can be described in lots of different ways with no fixed taxonomy. Analysis of the descriptions showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and SME highlighted that many are domain-specific technical terms that not all analysts would be familiar with. Initial usage required lots of complex regular expressions and working with SME due to the domain-specific terminology, which was error prone, incomplete and time-consuming. I considered ways to systemise the existing paradigm, and while it would help with some of the issues it would be too resource intensive, especially of the SME time, to be practical and would still not resolve all the issues to a sufficient level. 
+The initial requirements just included extracting the raw data such as descriptions, but  items can be described in lots of different ways with no fixed taxonomy. Analysis of the descriptions showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and SME highlighted that many are domain-specific technical terms that not all analysts would be familiar with. Graphs and stats showed a very long tail, beyond anything that could practically be investigated in depth. 
 
+Initial usage required lots of complex regular expressions and working with SME due to the domain-specific terminology, which was error prone, incomplete and time-consuming. I considered ways to systemise a rule-based system which would help with some of the issues but it would be too resource intensive, especially of the SME time, while still failing on the long tail. It wasn't a feasible business solution, so I investigated alternatives. 
 
+While 70% of items may be untagged, 30% of figures are tagged, and they are tagged by software or accountants so should be good quality training data for supervised learning that could then be applied to the 70%. So, I recommended creating a supervised multi-class text classification ML model to classify the descriptions. 
 
-I evaluated whether building a ML classifier was justified from a business perspective. I extracted all the descriptions for key classes and then worked with SME to go over some key terms used and all the possible variations that could be used. Some classes, had a large variety of words or phrases that could be used(some had over 23,000 unique descriptions), including domain-specific technical terms that not all analysts would be aware of. To manually use the descriptions, would be difficult, time consuming and error prone. So, I recommended to create a ML model to classify the descriptions.
+# 3. Methods used and justification.
 
-I investigated and implemented a solution that extracted additional data and used ML to categorise items increasing consistency so that analysts could more easily and robustly use the data.
+## 3.1. Project management
 
-Graphs were useful, showing that there was a large variety of terms used for each class.
+I selected an agile approach for the overall project(https://agilemanifesto.org/principles.html). I didn't strictly adhere to a specific framework, selecting features that were appropriate("Teams tailor Agile practices to their needs, blending frameworks like Scrum and Kanban for optimal results" https://www.atlassian.com/agile), with it being more Kanban focused since the project team was small and the overhead of SCRUM wouldn't be appropriate. The competing business demands on the team meant that fixed sprints weren't appropriate but regular Kanban updates ensured progress on this project while other business needs were accommodated. 
 
-# Methods used and justification.
+The agile approach allowed us to iterate quickly delivering usable pieces of work, with basic raw data initially delivered on file, then in additional steps more data, iXBRL information, ML categories, improved architectures and database. Regular meetings and a workshop with stakeholders helped get feedback such as the issues dealing with raw descriptions; validate business understanding and planned approaches. With each step evaluated for feasibility, benefits and risks. The customer requirements at the beginning wouldn't have foreseen the way the project developed, highlighting the benefit of an agile approach opposed to a more fixed waterfall approach. 
 
-I selected an agile approach for the overall project(https://agilemanifesto.org/principles.html). I didn't strictly adhere to a specific framework, selecting features that were appropriate, with it being more Kanban focused since the project team was small and the overhead of SCRUM wouldn't be appropriate. The teams members often had various competing work demands so having fixed sprints wouldn't be appropriate but regular updates on Kanban helped it in this project with wider team requirements.("Teams tailor Agile practices to their needs, blending frameworks like Scrum and Kanban for optimal results" https://www.atlassian.com/agile). 
+## 3.2 CRISP-DM
 
-While using GitLab to manage project isn't common in HMRC, I decided that the advantages of transparency, audibility and documentation outweighed the costs of learning a new tool.  Team members were encouraged to document issues in detail on GitLab, and to update one of the many markdown documentation files in the docs folder for the project. They were also encouraged to create comments on why code does what it does rather than just describing what it does, which could be gathered from just reading the code and adds bloat. 
+I used CRISP-DM since accommodates the cyclical nature of ML and provides a clear intuitive structure. Since I working on the ML aspect myself CRISP-DM is more appropriate than larger more complex methodologies like TDSP. Each stage produced documented artefacts, allowing evidence backed decisions in other steps. The iterative improved macro-f1 from under 0.50 to 0.787. 
 
-The agile approach allowed us to iterate quickly delivering usable pieces of work, so initially just extracting descriptions and values, then **extracting** iXBRL data, which then opened up having a ML category, then extracting more data such as headings and table names, allowing improved ML, then storing the data in a database increasing availability. At each stage the feasibility, risks and benefits were evaluated of expanding the project to the next step. The customer requirements at the beginning wouldn't have foreseen the way the project developed, highlighting the benefit of an agile approach opposed to a more fixed waterfall approach. But regular contact with stakeholders ensured that the project stayed aligned with their needs. 
+## 3.3 Languages and Tools
 
-More ethical replacing names with placeholders. 
+### 3.3.1 Gitlab
 
-A focus on collaboration meant that I got lots of feedback from analysts who use the data to create profiles, such as the difficulty working with raw descriptions, errors with extracts. 
+While using GitLab to manage project isn't common in HMRC, I decided that the advantages of transparency, audibility and documentation outweighed the costs of learning a new tool. 
+- The issues board worked well as the Kanban board helping us track issues and tasks. 
+- The epics were useful for working with management who were focused on longer term timelines. 
+- I created templates for issues, tasks and PR, which ensured they were completed to a consistent level by all team members. Covering details such as details of every step required to recreate the issue, expected vs actual and proposed fixes.
+- Team members were encouraged to document issues in detail on GitLab, to update project markdown documents, and guided that code comments should be why code does what it does rather than just describing what it does. 
+- Version control, branches and independent review of PR helped ensure changes were of sufficient quality and limit issues. This required training the team how to use branches, which I videoed for reference. 
 
-A Kanban based agile approach with regular meeting with end users allowed me to validate business understanding, planned approaches and feedback on progress.
+### 3.3.2 Languages and packages
 
-With the project team I used a more formal Kanban process using GitLab to track work and progress of team members, which resulted in team members being more productive.
+I used R due to its powerful packages and it is the default coding language used by analysts, so has much greater support and maintainability.  Packages such as rvest, xml2 were good for the html extraction work;  "parallel" to allow processing hundreds of documents in parallel; dbplyr for Oracle database access using familiar syntax; testthat for testing.
 
-Before expanding the project workshops were held with a variety of users, validated the need for the tool. 
+I used python for the ML aspects since the classification packages are more mature and have more support. The reticulate package in R allows importing python function into a R workflow, which made integrating it work well. The python ML packages used included MLflow to track tracks data version, model version, performance and various other metrics; sci-kit learn for traditional ML models; TensorFlow/Keras to build and train NN; HuggingFace Transformers to utilise pre-trained transformer based models; and Optuna to fine tune parameters and hyperparameters. The exploratory work was done in Jupyter notebooks to allow for detailed narrative alongside the code.  
 
-The epics in GitLab were useful for working with management on the longer term plans and timelines they were more focused on. 
+SQL was also used for setting up and managing the Oracle database and tables.
 
-The issues board in GitLab was used as the Kanban board which formed the core the development team regular meetings, helping us track issues and tasks. 
+## 3.4 Testing
 
-For issues on GitLab, I created a template which integrates into GitLab which ensured that issues were clear with details of every step required to recreate the issue, expected vs actual and proposed fixes.
-Version control, branches and independent review of PR helped ensure changes were of sufficient quality and limit issues. But this required training the team how to use branches, and best practices of merging the the target branch to their before making the PR, I videoed this so they could refer back to it if required. 
+While working with others to review the code base, we discussed the scope, coverage and implementation of unit, integration and system testing. Constraints such as that the tests shouldn’t contain any customer data, so to use synthetic or anonymised fixtures instead. For new issues I decided we should create tests for new issues and bugs, to make it easier to investigate and fix those bugs in the future. While a single command runs all the the tests, I would like to also add a CI pipeline in the future. 
 
-I used CRISP-DM since it works well on ML projects like this and provides a clear intuitive structure.  I used CRISP-DM ensuring that each stage produced documented evidence back decisions
+With user acceptance testing, it highlighted that users might prefer numeric primary keys for joining rather than natural keys for join performance reasons. They also suggested structuring data in a way they are more familiar with. 
 
-I used R for the extraction work since it has strong HTML parsing packages and is the default coding language used by analysts, so has much greater support and more people that would be able to take over. I used python for the ML aspects since the packages are more mature and have more support. The reticulate package in R allows importing python function into a R workflow, which made integrating it work well. R has parallel processing packages that allow processing hundreds of documents in parallel. The python ML packages used included MLflow, sci-kit learn, TensorFlow/Keras, HuggingFace Transformers and Optuna. The exploratory work was done in Jupyter notebooks to allow for detailed narrative alongside the code.  SQL was used for the Oracle database, with the dbplyr R package used which allows tidyverse style interaction with the Oracle database, streamlining use for analysts. 
+## 3.5 Scientific method and statistical analysis
 
-MLFlow helps tracks data version, model version, performance and various other metrics. 
-While I wrote the initial unit and integration tests, I assigned responsibility for updating the tests and taking ownership of overall testing to a teammate, partly to get a more independent view and approach to auditing and reviewing the system and outputs.  
+I used hypothesis formulation; controlled experimentation including DummyClassifier baselines; stratified cross validation with paired t-tests at the 95% confidence level to determine if models were statistically different from the top model. Challenges included class imbalance which required using score like macro-f1 which gives equal weighting to each class, stopping common classes from dominating the scores. On the modelling side different approaches were tested such as balanced weights and/or square-root weighted training samples.
 
-I used hypothesis formulation, controlled experimentation, stratified cross validation, grid/halving search, optuna, and comparison against DummyClassifer to ensure real performance gains. Challenges included class imbalance which required different approaches for different models, balanced weights and/or sqrt weighted training samples.
-
-
-# The scope of the project (including key performance indicators).
+# 4. The scope of the project (including key performance indicators).
 
 The project covers understanding the business issue and what they would like to do. 
 
@@ -101,6 +103,8 @@ The xbrl concept is a categorical nominal label from a fixed taxonomy. It's a si
 The text features like description were normalised, lowercasing and replacing special characters with spaces. Not all cleaning was effective, for example replacing forward slashes with spaces actually reduced performance, so it was dropped. 
 
 I asked about names and dates, whether replacing them with placeholders or removing them. They noted that pure names can be related to multiple classes, so best to remove them. For dates they noted that there are some specific dates like 31 March 1982 that have a specific meaning, but most of them have no meaning.
+
+More ethical replacing names with placeholders. 
 
 I implemented data quality controls aligned with HMRC expectation and broadly in line with DAMA UK’s quality dimensions(https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework)(https://www.dama-uk.org/resources/the-six-primary-dimensions-for-data-quality-assessment). Extracting untagged data increases completeness. The untagged data and iXBRL tagged data was structured and formatted in similar ways on the same tables making profiling across them more streamlined. The data was structured in a way and the architecture such that data is extracted and categorised within days of being received meeting timeliness requirements. Missing or low-quality and ambiguous descriptions were identified were dropped rather than poisoning the ML model. Feature engineering, replacing personally identifiable(names/addresses) were identified both by using regular expressions and labels and were replaced with placeholders allowing the model to work with placeholders while preserving privacy and compliance with the Data Protection Act 2018/UK GDPR. Systems and outputs were restricted to specific users limiting data access. 
 
@@ -210,7 +214,7 @@ I would often work collaboratively on tasks assigned to other team members, part
 
 I would work collaboratively with DevOps since they had knowledge, expertise and control over infrastructure that I did not have.
 
-I had the codebase reviewed. We reviewed the unit test which covered key functions and integration tests, and system tests to cover the end to end process. The testthat package in R was used for tests, and I was also able to write tests that covered the ML outputs. This was under the constraint that the unit tests shouldn’t contain any customer data, so used synthetic or anonymised fixtures instead. While a single command runs all the the tests, I would like to also add tests to be done by a CI pipeline in GitLab in the future.  I then implemented a policy of how issues created should be accompanied by a test that illustrates the issue.  With user acceptance testing, it highlighted that users might prefer numeric primary keys for joining rather than natural keys for performance reasons. They also suggested structuring data in a way they are more familiar with. 
+
 GitLab was used to document all key aspects, with documents covering data structures and types, guide to setup Oracle tables and create developer credentials, details of key decisions and the reason why they were made. The task list and issues were moved to the dedicated GitLab page.   
 
 The selection of TF-IDF and LinearSVC was selected due to performance, computational efficiency, explainability, scalability and suitability for HMRC working environment. The short domain-specific descriptions led itself well to TF-IDF(1-3 n-grams) with discriminatory vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without disturbing other users.
@@ -303,6 +307,7 @@ Presentations to non-technical audiences roughly follows the Problem-Solution-Ou
 
 Manual spreadsheet to record benefits showed tens of millions in estimated benefits, but completion was incomplete so I arranged for the central management system to have built in functionality to monitor benefits. 
 
+I investigated and implemented a solution that extracted additional data and used ML to categorise items increasing consistency so that analysts could more easily and robustly use the data.
 # Caveats and limitations.
 
 Analysts were educated that the ML category can be wrong and shouldn’t be used for automated decisions. There should always be a human in the loop before any action on it happens. This would include a person looking at the actual descriptions.
