@@ -91,7 +91,6 @@ The xbrl concept(label) is a categorical nominal label from a fixed taxonomy. It
 
 The descriptions are many-to-many with cosine similarity analysis, identifying situations where some descriptions like "Taxation and social security costs" were used for very similar concepts, but other descriptions such as pure dates were used for lots of different concepts. It also highlighted that taxonomy goes into a great deal of specificity, beyond what is generally required or could be predicted based on the human readable data in the accounts. Creating a real upper limit to any model. 
 
-
 ## 5.3 Preprocessing
 
 The text features like description were normalised, lowercasing and replacing special characters with spaces. Not all preprocessing was effective, for example replacing forward slashes with spaces actually reduced performance, so it was dropped. 
@@ -118,18 +117,17 @@ The work on preprocessing significantly improved the performance of the model go
 
 # 6. Survey of potential alternatives.
 
+The is multi-class text classification with over 826 nominal classes with strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology. Systematising the existing regular expression system wasn't a feasible business solution. 
 
-Various approaches were used to embed the words, from TF word and character ngrams, all-mpnet-base-v2 and infloat/e5-large-v2. The silhouette score was used to see how well the models embedded the descriptions for each concept. MPNET has the best silhouette score, suggesting it's able to capture the different descriptions which have the similar meaning better than just TF. 
+## 6.1 Unsupervised
 
-The tagged concepts go into a great deal of specificity beyond what is required, so unsupervised methods were considered, about whether they could group similar concepts together. The cosine similarity highlighted a limit to unsupervised methods. 
+While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But initial analysis using cosine similarity highlighted that the great variety in descriptions for some concepts meant that it wasn't feasible. So I focused on supervised learning models. 
 
-I initially used theory to limit the solutions to those that would work well with supervised classification of text.
 
-The primary feature is a free text "description". So this is text classification problem. While most figures are untagged, 30% of figures are tagged and due to the volume of the total data, this means that we can train the model on the 30% of tagged data, so it is a supervised multi-class classification problem.  
 
-The descriptions are normally just a word or a short phrase, but  have domain-specific terminology. There were two main methods used to embed the descriptions, TFIDF and dense vector embeddings. TFIDF extracts character and word n-grams, this can work well since it captures domain specific terminology and phrasing well and works well with a variety of models with good speeds and performance. Dense vector embeddings capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions. 
+## 6.2 Traditional ML algorithms
 
-There are a range of possible models that deal with text such as using traditional ML such as Naive Bayes and SVM; training a deep neural network from scratch; fine tuning a larger transformer based model locally; using a frontier LLM and fine tuning it via an API. 
+I compared various models such as  Multinomial Naive Bayes, Decision Trees and and SVM against each other and to a DummyClassifier floor using multiple stages, using HalvingRandomCV search of over 10,000 candidates on a 10% train subset, then GridSearchCV
 
 Traditional ML models can perform well with classifying short simple text, especially since descriptions in the accounts will normally have less variety than generic free text.
 
@@ -139,7 +137,23 @@ There are a number of BERT based models. These models have been pre-trained, so 
 
 It is expected that a frontier LLM would have the best semantic understanding, but it is likely to be excessive for this use case. A LLM would be good at understanding lots of text, but we just have short phrases and small sentences at most. There are additional technical, data security and governance issues around using an API. So a LLM based approach was not used.
 
-The existing approach of using regex's could could be systemised, creating a repository of concepts and the associated regular expressions that could be used to identify them from the description. This would be a very labour intensive approach, that would require large input from SME, would be incomplete and error prone. So this approach wasn't used. 
+## 6. Neural Networks
+
+## 6. Transformer models
+
+
+
+
+training a deep neural network from scratch; fine tuning a larger transformer based model locally; using a frontier LLM and fine tuning it via an API. 
+
+
+## 6.2 Embeddings
+
+Various approaches were used to embed the short phrase domain-specific terminology, tfidf word and character ngrams, all-mpnet-base-v2 and infloat/e5-large-v2. While dense vector embeddings should be able to better capture semantic meaning better than plain tfidf sparse vectorisation, tfidf vectorisation might have an advantage in preserving domain-specific terminology that a generic embedding might not capture well. Initially I did some classifier independent analysis, which showed that mpnet had the best silhouette score(0.467) suggesting it is able to capture meaning of the different descriptions better than plain tfidf(0.41). 
+
+With the final LinearSVC model using mpnet also was significantly better macro-F1 score than a simple tfidf embedding at the 95% confidence level but it was only by 0.003 and took 76 times as long. So I decided to stick with a simpler tfidf word only embeddings, which would be faster, easier to maintain and would make it easier to interpret models using them.  
+
+
 
 Exploratory analysis showed that unsupervised methods around the words used would be insufficient. 
 
@@ -161,7 +175,7 @@ I focused on macro-f1 scores since it provides a single value that that takes in
 
 Here LinearSVC had the best f1-macro score and was significantly better than the other models at the 95% confidence level. 
 
-I then tried different embeddings, such as mpnet, e5, various tfidf word and character embeddings. Complex tfidf with a complicated combination of word and character ngrams, performed significantly better than a simple tfidf word embedding,  the difference was very small ~0.003 and it took 2.46 times longer than simpler word only embeddings. mpnet also was significantly better but also by only 0.003 but took 76 times as long. So the choice was to stick with a simpler tfidf word only embeddings, which would be faster, easier to maintain and would make it easier to interpret models over the them.  
+
 
 
 
