@@ -64,78 +64,64 @@ I used hypothesis formulation; controlled experimentation including DummyClassif
 
 # 4. The scope of the project (including key performance indicators).
 
-The project covers understanding the business issue and what they would like to do. 
+The project scope evolved over time, from pure extraction of core data like descriptions and values to file; to extracting and formatting other relevant data such as headings, table names, structural data(table number, row number, column number) and iXBRL data(concept, dimensional data); adding ML capabilities; and an automated pipeline extracting to Oracle database. 
 
-Understanding current issues with iXBRL extraction and storage. 
+Working with stakeholders success criteria were established. 
+- Macro-F1 > 0.6, primary performance metric. 
+- Accuracy > 0.7, a secondary metric metric that is more intuitive and easier top understand by stakeholders.
+- Automated extraction coverage > 95%, data automatically extracted and classified
+- Timely extraction < 1 week from date of receipt. 
 
-Extracting relevant data such as description, headings, table names, structural data(table number, row number, column number), iXBRL data(concept, dimensional data) and value. 
+Secondary KPIs used were precision; recall, train time, inference time, interpretability, explainability, maintainability, reliability, cost control, data protection, AI safeguards, security, logging, and ability to scale to millions of records quickly.
 
-Processing and formatting data.
-
-Developing ML model to categorise the data. 
-
-Saving the data into an Oracle database to allow analysts to profile across it in bulk.
-
-Setup a reliable architecture that would automate the end extraction, categorisation and storing of data. 
-
-Monitor accuracy, f1-macro, logs and tests help monitor completeness. 
-
-Key performance indicators would be f1-macro, accuracy, precision, recall, train time, inference time, interpretability/explainability. 
-
-I designed a solution around HMRC’s priorities of maintainability, reliability, cost control, data protection, AI safeguards, security and ability to scale to millions of records quickly.
-
-# Data selection, collection and pre-processing.
-
-HMRC's systems are locked down, making doing exploratory work trying different models difficult. Also there wasn't quick easy access to a GPU device for more the more complex models. 
-
-So the public company accounts submitted at companies house, which are iXBRL format were used for the exploratory phase since that could be done on a standalone device with a GPU. From the 298,461 accounts submitted in November 2015 I used the html accounts that had html tables. Selecting the data submitted in a month makes it more representative, although many companies select specific dates like 31 December or 31 March for various reasons, so the data might not be completely representative but it shouldn't have any material impact for our analysis.
-
-This resulted in 2.8m lines of data with 956 concepts(labels). With rank frequency plots of both description and concept having a long tail. With a pareto chart showing that the most used 75 concepts cover 95% of items. Powerlaw analysis showed it was closer to a lognormal fit than powerlaw. 
-
-For the implementation phase the company accounts and tax computations submitted to HMRC were used. 
-
-I extracted key data such as the description, heading, table name, iXBRL concept, iXBRL dimensional data, references, footnotes and structural data. 
-
-There are various types of description, from nominal text, dates(temporal different formats), names(nominal) and figures(numeric ratio). 
-
-The xbrl concept is a categorical nominal label from a fixed taxonomy. It's a single CammelCase word, but splitting into words make it human readable with similar concepts have similar wording. 
-
-The text features like description were normalised, lowercasing and replacing special characters with spaces. Not all cleaning was effective, for example replacing forward slashes with spaces actually reduced performance, so it was dropped. 
-
-I asked about names and dates, whether replacing them with placeholders or removing them. They noted that pure names can be related to multiple classes, so best to remove them. For dates they noted that there are some specific dates like 31 March 1982 that have a specific meaning, but most of them have no meaning.
-
-More ethical replacing names with placeholders. 
-
-I implemented data quality controls aligned with HMRC expectation and broadly in line with DAMA UK’s quality dimensions(https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework)(https://www.dama-uk.org/resources/the-six-primary-dimensions-for-data-quality-assessment). Extracting untagged data increases completeness. The untagged data and iXBRL tagged data was structured and formatted in similar ways on the same tables making profiling across them more streamlined. The data was structured in a way and the architecture such that data is extracted and categorised within days of being received meeting timeliness requirements. Missing or low-quality and ambiguous descriptions were identified were dropped rather than poisoning the ML model. Feature engineering, replacing personally identifiable(names/addresses) were identified both by using regular expressions and labels and were replaced with placeholders allowing the model to work with placeholders while preserving privacy and compliance with the Data Protection Act 2018/UK GDPR. Systems and outputs were restricted to specific users limiting data access. 
+# 5. Data selection, collection and pre-processing.
 
 
+## 5.1 Data selection
 
-Replacing specific names with placeholders also help avoid overfitting and makes the model more generalisable. 
+HMRC's systems are locked down, without any readily available GPU access making it difficult to do exploratory work with complex models,  so exploratory work was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House in November 2025. A  month of data makes it more representative, although many companies select specific dates like 31 December or 31 March, so the data might not be completely representative but that shouldn't have any material impact for my analysis. For the implementation phase the company accounts and tax computations submitted to HMRC were used. This resulted in 2.8m lines of data with 956 concepts(labels).
 
-These controls improved model reliability and ensured the dataset met both HMRC and regulatory requirements.
+## 5.2 Exploratory Data Analysis(EDA)
+
+Rank frequency plots of both description and concept had a long tail. With a Pareto chart showing that the most used 75 concepts cover 95% of items; with a distribution closer to a lognormal fit than power-law. Motivating the use of macro-F1 over accuracy so that common classes don't dominate the metrics. 
+
+The main feature is a description that has various types, from nominal text, dates(temporal), names(nominal) and figures(numeric ratio). 
+
+The xbrl concept(label) is a categorical nominal label from a fixed taxonomy. It's a single CammelCase word, but splitting into words make it human readable with similar concepts have similar wording. 
+
+The descriptions are many-to-many with cosine similarity analysis, identifying situations where some descriptions like "Taxation and social security costs" were used for very similar concepts, but other descriptions such as pure dates were used for lots of different concepts. It also highlighted that taxonomy goes into a great deal of specificity, beyond what is generally required or could be predicted based on the human readable data in the accounts. Creating a real upper limit to any model. 
 
 
-I canonicalised the feature, so most dates were replaced by a placeholder "hubble_date", except for 31 March 1982, which subject matter experts explained has a special meaning for tax so that was replaced with "hubble_date_1982_03_31". Similarly company names, individual names, postcodes and numbers were replaced by placeholders. This improves model performance, since it reduces a lot of the noise. Removing personal data like individual names enhances data security since personal data is removed and not used in latter steps.
+## 5.3 Preprocessing
 
-Using cosine similarity analysis, it identified situations where some descriptions like "Taxation and social security costs" were used for very similar concepts, but other descriptions such as pure dates were used for lots of different concepts.  Creating a real upper limit to any model.  It also highlighted that taxonomy goes into a great deal of specificity, beyond what is generally required or could be predicted based on the visual data in the accounts. Maybe in future iterations grouping similar groups together would make a model perform better but also outputs easier to use for non-tax technical analysts. 
+The text features like description were normalised, lowercasing and replacing special characters with spaces. Not all preprocessing was effective, for example replacing forward slashes with spaces actually reduced performance, so it was dropped. 
 
-Cosine similarity analysis also highlighted that while some concepts had descriptions that were very similar, other concepts had descriptions which were very varied, meaning there would be fundamental limits if any unsupervised methods were used, if say we wanted to create a simplified number of categories. 
+I canonicalised the description, so most dates were replaced by a placeholder "hubble_date", except for 31 March 1982, which subject matter experts explained has a special meaning for tax so that was replaced with "hubble_date_1982_03_31". 
 
-Then there was some label engineering, where the feature a placeholder by itself, then the label was changed to reflect that. e.g. if a description is just hubble_number, then the label would be changed to be HubbleNumber. The reason for this is that placeholders by themself don't contain enough information to predict a category, but knowing the type could be useful to know. 
+Similarly company names, individual names, postcodes and numbers were identified using regular expressions and labels replaced by placeholders. This helps avoid overfitting and makes the model more generalisable; improves model performance since it reduces a lot of the noise;  preserves privacy; enhances data security through data minimisation. It is more ethical since it would treat less common ethnic names the same as more commonly used names. 
 
-The interquartile range for the number of words was between 2 and 5 words. A review of the data showed that some descriptions were just a single special character, which wouldn't have enough information to categorise on, so anything 2 or less characters was filtered out. Reviewing descriptions of 16 words or more showed that they weren't descriptions of the kind I was interested in, and there were very few over that length so were filtered out.
+SME advised that where there was a placeholder by itself, then that would not be enough information to categorise it, so we agreed to do label engineering and changing them to similar placeholders like HubbleName. So while we can't predict the actual concept the placeholder is related to, know it relates to a name can be useful in analysis. 
 
-I removed data that had concepts related to names or addresses. 
+Systems and outputs were restricted to specific users limiting data access. 
 
-Various approaches were used to embed the words, from TF word and character ngrams, all-mpnet-base-v2 and infloat/e5-large-v2. The silhouette score was used to see how well the models embedded the descriptions for each concept. MPNET has the best silhouette score, suggesting it's able to capture the different descriptions which have the similar meaning better than just TF. 
+I implemented data quality controls aligned with HMRC expectation and broadly in line with DAMA UK’s quality dimensions(https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework)(https://www.dama-uk.org/resources/the-six-primary-dimensions-for-data-quality-assessment).
+- Completeness improved since untagged data was now extracted. 
+- Consistency because the untagged data and iXBRL tagged data was structured and formatted in similar ways on the same tables. 
+- Timeliness, since the data was structured in a way and the architecture allowed extraction and categorised within days. 
+- Validity and accuracy were addressed by removing descriptions less than 2 characters, missing; low-quality; or longer than 16 words which analysis showed weren't valid descriptions. 
 
-Because the data was going to be used over various model architectures and packages, test/train/holdout including sub splits and sqrt weighted splits were created upfront so they could be read out of the source data file. 
+These measures and preprocessing improved model macro-F1 scores from under 0.5 to over 0.7, and ensured I was complying with both HMRC and regulatory requirements; DPIAs; and Data Protection Act 2018/UK GDPR. 
 
-Samples were selected to balance statistical power with processing time, ensuring conclusion were robust without delaying delivery.
+Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, test, train, holdout plus sub splits and square-root weighted splits.
 
 The work on preprocessing significantly improved the performance of the model going form a macro-f1 of 50% to over 70%.
 
-# Survey of potential alternatives.
+# 6. Survey of potential alternatives.
+
+
+Various approaches were used to embed the words, from TF word and character ngrams, all-mpnet-base-v2 and infloat/e5-large-v2. The silhouette score was used to see how well the models embedded the descriptions for each concept. MPNET has the best silhouette score, suggesting it's able to capture the different descriptions which have the similar meaning better than just TF. 
+
+The tagged concepts go into a great deal of specificity beyond what is required, so unsupervised methods were considered, about whether they could group similar concepts together. The cosine similarity highlighted a limit to unsupervised methods. 
 
 I initially used theory to limit the solutions to those that would work well with supervised classification of text.
 
@@ -188,7 +174,9 @@ There are a number of BERT based models. These models have been pre-trained, so 
 It is expected that a frontier LLM would have the best semantic understanding, but it is likely to be excessive for this use case. A LLM would be good at understanding lots of text, but we just have short phrases and small sentences at most. There are additional technical, data security and governance issues around using an API. So a LLM based approach was not used.
 
 
-# Implementation - performance metrics.
+# 7. Implementation - performance metrics.
+
+Samples were selected to balance statistical power with processing time, ensuring conclusion were robust without delaying delivery.
 
 The final pipelines used TFIDF(1-3 word ngrasms, min_df 1, norm l2) with LinearSVC(penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) from scikit-learn. 
 
@@ -218,7 +206,7 @@ I would work collaboratively with DevOps since they had knowledge, expertise and
 GitLab was used to document all key aspects, with documents covering data structures and types, guide to setup Oracle tables and create developer credentials, details of key decisions and the reason why they were made. The task list and issues were moved to the dedicated GitLab page.   
 
 The selection of TF-IDF and LinearSVC was selected due to performance, computational efficiency, explainability, scalability and suitability for HMRC working environment. The short domain-specific descriptions led itself well to TF-IDF(1-3 n-grams) with discriminatory vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without disturbing other users.
-# Results.
+# 8. Results.
 
 Sensitivity analysis and model robustness was tested over various categories, abbreviations, adversarial(So phrased to be misleading), scenario planning, command(command to inject LLM), contextual(semantically the same), long context, ocr issues, synonyms, typos, unicode and variations. 
 
@@ -255,7 +243,7 @@ The dashboard had a top-k, but some of those were very poor matches and the scor
 The ML category can be wrong, so should not be used for any automated decisions, so the process requires a human in the loop, who should review the actual description.
 
 The result is a dataset that reduces manual effort 
-# Discussion and conclusions/recommendations.
+# 9. Discussion and conclusions/recommendations.
 
 Separate models for every taxonomy would give the best raw performance, but I used a single taxonomy for each document type, resulting in consistent class names, to increase analyst usability.
 
@@ -294,8 +282,8 @@ Monitoring drift of inputs, are there new taxonomies. Drift on outputs is detect
 Moving to a core data source used widely, meeting with reliant data sources, discussing how formal data contracts will need to be created to ensure reliability in the service. 
 
 Cost benefit analysis, significant benefits already seen both in timeliness of existing data and also extracting new untagged data. So funding had been provided to expand and increase capability and reliability of the system.
-# Summary of findings.
-# Implications.
+# 10. Summary of findings.
+# 11. Implications.
 
 Hubble helped us meet our quality standards, such as completeness and consistency since we can extract all of the figures and have consistent ML classes.
 
@@ -308,7 +296,7 @@ Presentations to non-technical audiences roughly follows the Problem-Solution-Ou
 Manual spreadsheet to record benefits showed tens of millions in estimated benefits, but completion was incomplete so I arranged for the central management system to have built in functionality to monitor benefits. 
 
 I investigated and implemented a solution that extracted additional data and used ML to categorise items increasing consistency so that analysts could more easily and robustly use the data.
-# Caveats and limitations.
+# 12. Caveats and limitations.
 
 Analysts were educated that the ML category can be wrong and shouldn’t be used for automated decisions. There should always be a human in the loop before any action on it happens. This would include a person looking at the actual descriptions.
 
@@ -322,7 +310,7 @@ The integration of R and python while working well, does add more complexity to 
 
 
 
-# Appendices.
+# 13. Appendices.
 ## Code and documentation used for the project.
 ## Statistical rigour: uncertainty, bias, and error estimates where appropriate.
 ## Figures, tables, and visualisations.
