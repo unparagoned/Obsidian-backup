@@ -214,6 +214,9 @@ Sleep, diet and exercise, are all linked mostly causally to brain volume.
 >Conclusion: Our results suggest that lower CV fitness and exaggerated exercise BP and HR responses in middle-aged adults are associated with smaller brain volume nearly 2 decades later. Promotion of midlife CV fitness may be an important step towards ensuring healthy brain aging. 
 >[https://n.neurology.org/content/86/14/1313.short?rss=1](https://n.neurology.org/content/86/14/1313.short?rss=1)
 
+>aerobic exercise training is effective at reversing hippocampal volume loss in late adulthood, which is accompanied by improved memory function.
+https://www.pnas.org/doi/10.1073/pnas.1015950108
+
 
 >A better diet quality is associated with larger brain tissue volumes. 
 >[https://pubmed.ncbi.nlm.nih.gov/29769374/](https://pubmed.ncbi.nlm.nih.gov/29769374/)
@@ -453,6 +456,13 @@ The FDA label even make it clear that we aren't sure how they work.
 [okhi2u](https://www.reddit.com/user/okhi2u/)
 >I like to joke that chemical imbalances are as legit as saying I have anxiety due to abnormal lack of alcohol in my blood disorder. Like yeah alcohol can be a stupid af way to feel less anxious, but the lack of alcohol is not the direct cause of the anxiety even if it kinda helps.
 >https://www.reddit.com/r/science/comments/1sq83r3/comment/oh8ww8n/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+
+Lindsay Clancy trial where the therapist lies in a criminal trial about depression being about not enough serotonin. So the myth is alive and well. 
+
+https://x.com/DrJessTaylor/status/2086045181128671418
+
+
+
 ### Dangers
 
 It seems like every other treatment for depression significantly reduces suicide attempts, but the standard care of SSRIs doesn't. 
@@ -589,7 +599,7 @@ https://www.nature.com/articles/s44277-026-00062-3.epdf?sharing_token=4w5pDnH1E_
 >These findings indicate that depression can reshape autobiographical memory of adversity, probably via negative emotional processing and memory bias. This highlights the need to account for depression-driven distortions when assessing trauma history, and suggests that alleviating depressive symptoms may reduce trauma-related distress.
 https://www.nature.com/articles/s44220-025-00580-7
 
-# Over dianosis
+# Over diagnosis
 
 >"The more fixated we are on mental health, the more sensitive we become to anything that might qualify as a symptom and the more we use clinical language to describe normal emotional experiences like grief, burnout and loneliness. This broadening of what we think counts as a disorder — known as concept creep — encourages us to pathologize ordinary life and see ourselves as mentally unhealthy."
 https://www.nytimes.com/2026/07/26/opinion/mental-health-exercise-charity.html
@@ -601,3 +611,12 @@ Some people will always reject anything helpful and productive, it's been long d
 >**MANIPULATIVE HELP-REJECTERS**
 >They actually seem the opposite of entitled; they appear to feel that no regimen will help. Appearing almost smugly satisfied, they return again and again to the office or clinic to report that, once again, the regimen did not work. Their pessimism and tenacious nay-saying appear to increase in direct proportion to the physician’s efforts and enthusiasm. When one of their symptoms is relieved, another mysteriously appears in its place. Apparently, what is sought is not relief of symptoms.
 >https://pubmed.ncbi.nlm.nih.gov/634331/
+
+# Mental health practitioners
+
+## DSM
+
+>NIMH Won't Follow Psychiatry 'Bible' Anymore
+>"While DSM has been described as a 'Bible' for the field," he wrote, "it is, at best, a dictionary, creating a set of labels and defining each." Although the manual's strength has been to standardize these labels, he wrote, "[t]he weakness is its lack of validity," and "[p]atients with mental disorders deserve better."
+https://www.science.org/content/article/nimh-wont-follow-psychiatry-bible-anymore
+

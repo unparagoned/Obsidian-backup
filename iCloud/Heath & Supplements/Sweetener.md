@@ -26,9 +26,16 @@ Compare over attributes
 |Type|Natural|Natural|Artificial|nutritive||||||
 |Notes||Not supposed to taste good|||Not recommended for pregnant or bread feeding women|Supposed to taste good|Tastes great|||
 
->WHO advises against use of artificial sweeteners for weight control
+# Potential harms
 
+
+>WHO advises against use of artificial sweeteners for weight control
 [https://news.un.org/en/story/2023/05/1136667](https://news.un.org/en/story/2023/05/1136667)
+
+
+>Consumption of LNCSs was associated with an accelerated rate of cognitive decline during 8 years of follow-up. Our findings suggest the possibility of long-term harm from LNCS consumption, particularly artificial LNCSs and sugar alcohols, on cognitive function.
+https://www.neurology.org/doi/10.1212/WNL.0000000000214023
+
 
 The consumption of sugars, mainly as sucrose and glucose-fructose syrups, has dramatically increased worldwide and growing concerns about their adverse effects on health and metabolic diseases, such as metabolic syndrome, cardiovascular diseases, and type 2 diabetes (T2D), have motivated people to reduce the consumption of free sugars.
 

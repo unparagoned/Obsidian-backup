@@ -38,7 +38,11 @@ Really strong kick in terms of smell
 
 Nice taste
 
+## Johnnie Walker island green
 
+8/10
+
+Really nice and balanced. 
 
 # misc
 

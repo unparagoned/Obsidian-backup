@@ -2,9 +2,19 @@
 
 
 
+# Transphobic
 
+A lesbian only being into females is transphobic.
 
+>Saying "I'm only into cis girls" is transphobic...
+>That is intensely transphobic and this person does not consider trans women to be women. ...
+>Yay! Normalized transphobia....
+>yeah let's not normalize transphobia
+https://www.reddit.com/r/countwithchickenlady/comments/1vjg3wy/comment/p2m4z24/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 
+and this was voted down
+
+>It's not transphobic to not want to be with trans people
 # Sports
 
 >However, transwomen still had a 9% faster mean run speed after the 1 year period of testosterone suppression that is recommended by World Athletics for inclusion in women’s events.

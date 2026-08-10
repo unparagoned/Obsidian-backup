@@ -3,9 +3,9 @@
 
 HMRC receive millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for operational/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies. 
 
-For fully tagged documents, previous workflows allows us to reliably extract, structure and analyse the data in those documents. Initial analysis showed that some document classes only have approximately 30% of the figures tagged, which means that existing workflows can't utilise 70% of the figures. There are various reasons for this, ranging from limitations in software used to create the documents to people deliberately leaving items they don't want HMRC to review untagged. 
+For fully tagged documents, previous workflows allowed us to reliably extract, structure and analyse the data in those documents. Initial analysis showed that some document classes only have approximately 30% of the figures tagged, which means that previous workflows could not utilise 70% of the figures. There are various reasons for this, ranging from limitations in software used to create the documents to people deliberately leaving items they don't want HMRC to review untagged. 
 
-The previous workflows to extract iXBRL data, require complex and long schema updates to processes new taxonomies every year. The wide database format is also hitting the column limits of the Oracle database complicating things further. It can take up to 9 months for the updates, but HMRC only have 12 months to open an enquiry, leaving little time for profiling and opening an enquiry in time. 
+The previous workflows to extract iXBRL data, require complex and long schema updates to processes new taxonomies every year. The wide database format was also hitting the column limits of the Oracle database complicating things further. It can take up to 9 months for the updates, but HMRC only have 12 months to open an enquiry, leaving little time for profiling and opening an enquiry in time. 
 
 Hubble is a tool I developed that extracts both tagged and untagged items; and uses supervised multi-class text classification to categorise the untagged items. The system scales with workload and uses a long format for the Oracle database, allowing it to deal with any taxonomy, resulting in data being ingested within days of receipt. 
 
@@ -117,78 +117,54 @@ The work on preprocessing significantly improved the performance of the model go
 
 # 6. Survey of potential alternatives.
 
-The is multi-class text classification with over 826 nominal classes with strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology. Systematising the existing regular expression system wasn't a feasible business solution. 
+The is multi-class text classification with over 826 nominal classes with strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context then and then evaluated the leading candidates. 
+
+Systematising the existing regular expression process wasn't a feasible business solution since it would require too much SME resource and still have poor performance.  So various ML approaches were considered. 
 
 ## 6.1 Unsupervised
 
 While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But initial analysis using cosine similarity highlighted that the great variety in descriptions for some concepts meant that it wasn't feasible. So I focused on supervised learning models. 
 
-
-
 ## 6.2 Traditional ML algorithms
 
-I compared various models such as  Multinomial Naive Bayes, Decision Trees and and SVM against each other and to a DummyClassifier floor using multiple stages, using HalvingRandomCV search of over 10,000 candidates on a 10% train subset, then GridSearchCV
+Traditional ML models can perform well with classifying short simple text, especially since descriptions in the accounts will normally have less variety and more domain-specific terminology than generic free text. 
 
-Traditional ML models can perform well with classifying short simple text, especially since descriptions in the accounts will normally have less variety than generic free text.
+Scikit-learn is a package that provides various high quality models that can be used for text classification, such as SVC, LinearSVC, SGDClassifier, DecisionTreeClassifier, RandomForestClassifier, MultinomialNB, ComplementNB and PassiveAgressiveClassifier.
 
-A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in transitional ML. 
+## 6.3 Neural Networks
 
-There are a number of BERT based models. These models have been pre-trained, so have a lot of semantic understanding baked in. But many BERT models are trained on generic text,  SEC-BERT is a model that was trained on SEC filing(financial filings), so should have better semantic understanding of accountancy terms and concepts, which is very appropriate here.
+A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in transitional ML. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BI.
 
-It is expected that a frontier LLM would have the best semantic understanding, but it is likely to be excessive for this use case. A LLM would be good at understanding lots of text, but we just have short phrases and small sentences at most. There are additional technical, data security and governance issues around using an API. So a LLM based approach was not used.
+## 6.4 Transformer models
 
-## 6. Neural Networks
+ Transformer based models are a more advanced architecture that results in better semantic understanding of text that often outperforms other neural network architectures. Pre-trained models are trained over large data sets so have a lot of semantic understanding baked in. 
 
-## 6. Transformer models
+Various transformer based models were tested, roberta, sec-bert, mpnet, and MiniLM, covering different sizes, variations of architecture and training data. SEC-BERT is a model that was trained on SEC filing(financial filings), so should have better semantic understanding of accountancy terms and concepts, which is very appropriate here.
 
+## 6.5 Frontier LLM
 
+It is expected that a frontier LLM, such as Chat GPT would have better semantic understanding, but it is likely to be excessive for this use case. A LLM would be good at understanding lots of text, but we just have short phrases. There are additional technical, data security and governance issues around using an API, which made this approach unfeasible from a business perspective. 
 
+## 6.5 Embeddings
 
-training a deep neural network from scratch; fine tuning a larger transformer based model locally; using a frontier LLM and fine tuning it via an API. 
+There were two main methods used to embed the descriptions, sparse vectorisation(TF, TFIDF) and dense vector embeddings(mpnet, e5). TFIDF can work on character and word n-grams, this can perform well since it captures domain specific terminology and phrasing well and works well with a variety of models with good speeds and performance. Dense vector embeddings capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions. 
 
-
-## 6.2 Embeddings
-
-Various approaches were used to embed the short phrase domain-specific terminology, tfidf word and character ngrams, all-mpnet-base-v2 and infloat/e5-large-v2. While dense vector embeddings should be able to better capture semantic meaning better than plain tfidf sparse vectorisation, tfidf vectorisation might have an advantage in preserving domain-specific terminology that a generic embedding might not capture well. Initially I did some classifier independent analysis, which showed that mpnet had the best silhouette score(0.467) suggesting it is able to capture meaning of the different descriptions better than plain tfidf(0.41). 
-
-With the final LinearSVC model using mpnet also was significantly better macro-F1 score than a simple tfidf embedding at the 95% confidence level but it was only by 0.003 and took 76 times as long. So I decided to stick with a simpler tfidf word only embeddings, which would be faster, easier to maintain and would make it easier to interpret models using them.  
-
-
-
-Exploratory analysis showed that unsupervised methods around the words used would be insufficient. 
-
-The primary feature is a free text "description". So this is text classification problem. While most figures are untagged, 30% of figures are tagged and due to the volume of the total data, this means that we can train the model on the 30% of tagged data, so it is a supervised multi-class classification problem.  
-
-The descriptions are normally just a word or a short phrase, but are have domain-specific terminology. There were two main methods used to embed the descriptions, TFIDF and dense vector embeddings. TFIDF extracts character and word n-grams, this can work well since it captures domain specific terminology and phrasing well and works well with a variety of models with good speeds and performance. Vector embeddings capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions. 
-
-There are a range of possible models that deal with text such as using traditional ML such as Naive Bayes and SVM; training a deep neural network from scratch; fine tuning a larger transformer based model locally; using a frontier LLM and fine tuning it via an API. 
-
-
-
-It wasn't possible to test every model and hyperparameter over the full train dataset. So initially I tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller populations were representative of larger populations. I checked the Pearson correlation of the f1-macro scores for those models to the various populations. The 1% population had a fairly high score of 0.971 and 10% had a very high scores of 0.998. Using a paired T-test models that weren't not significantly worse over the 1% population were the same at 100% population. So this meant that it was reasonable to filter out models and hyperparameters using a smaller populations, and that the 10% train population was large enough for reliable results. 
-
-To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV, which let's me cover many models and hyperparameters in an efficient way. Robustness was improved through stratified cross validation which reduced variance. Since there were cross validation scores, I used this with a paired t-test to show which models were not significantly worse at the 95% level. This narrowed down the models to LinearSVC, SVC(linear) and PassiveAggressiveClassifier. 
-
-To get a better handle of the hyperparameters I plotted them against against scores, this helped narrow down the ranges to use in more in the next iteration using the full train population size.  A 2D graph using colour showed that min_df 1 had clusters with better speed and scores over min_df 2. 
-
-I focused on macro-f1 scores since it provides a single value that that takes into various factors and is appropriate for the high-class imbalance  to ensure the model worked well on the business requirement that it works well on as many classes as possible, even minority classes.
-
-Here LinearSVC had the best f1-macro score and was significantly better than the other models at the 95% confidence level. 
-
-
-
-
-
-Traditional ML models can perform well with classifying short simple text, especially since descriptions in the accounts will normally have less variety than generic free text. 
-
-A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in transitional ML. 
-
-There are a number of BERT based models. These models have been pre-trained, so have a lot of semantic understanding baked in. But many BERT models are trained on generic text,  SEC-BERT is a model that was trained on SEC filing(financial filings), so should have better semantic understanding of accountancy terms and concepts, which is very appropriate here in this use case where we are classifying descriptions in financial documents. 
-
-It is expected that a frontier LLM would have the best semantic understanding, but it is likely to be excessive for this use case. A LLM would be good at understanding lots of text, but we just have short phrases and small sentences at most. There are additional technical, data security and governance issues around using an API. So a LLM based approach was not used.
+Initially I did some classifier independent analysis, which showed that mpnet had the best silhouette score(0.467) suggesting it is able to capture meaning of the different descriptions better than plain tfidf(0.41). 
 
 
 # 7. Implementation - performance metrics.
+
+## 7.1 Population size validation
+
+It wasn't possible to compare every model and hyperparameter over the full train dataset. So initially I tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller populations were representative of larger populations. The 1% population had a fairly high score of Pearson correlation of 0.971 to the full train population and 10% had a very high score of 0.998. Paired T-tests showed that models that weren't not significantly worse over the 1% population were the same at 100% population. So this meant that it was reasonable to filter out models and hyperparameters using a smaller populations, and that the 10% train population was large enough for reliable results. 
+
+
+
+For initial comparison I focused on macro-f1 scores since it provides a single value that that takes into various factors and is appropriate for the high-class imbalance and the business requirements that it works well for as many classes as possible. 
+
+To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, which let's me cover many models and hyperparameters in an efficient way, while using a DummyClassifier floor to ensure real performance.  Robustness was improved through stratified cross validation which reduced variance and allowed paired T-test to show which models were not significantly worse at the 5% level. This narrowed down the best performing models to LinearSVC, SVC(linear) and PassiveAggressiveClassifier, with further iterations showing that LinearSVC was the best performing traditional ML algorithm.
+
+To get a better handle of the hyperparameters I plotted them against against scores, this helped narrow down the ranges to use in more in the next iteration using the full train population size.  A 2D graph using colour showed that min_df 1 had clusters with better speed and scores over min_df 2. 
 
 Samples were selected to balance statistical power with processing time, ensuring conclusion were robust without delaying delivery.
 
@@ -220,6 +196,8 @@ I would work collaboratively with DevOps since they had knowledge, expertise and
 GitLab was used to document all key aspects, with documents covering data structures and types, guide to setup Oracle tables and create developer credentials, details of key decisions and the reason why they were made. The task list and issues were moved to the dedicated GitLab page.   
 
 The selection of TF-IDF and LinearSVC was selected due to performance, computational efficiency, explainability, scalability and suitability for HMRC working environment. The short domain-specific descriptions led itself well to TF-IDF(1-3 n-grams) with discriminatory vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without disturbing other users.
+
+With the final LinearSVC model, at the 5% significance level mpnet performed better than a simple tfidf embedding at macro-F1, but it was only by 0.003 and took 76 times as long. So I decided to stick with a simpler tfidf word only embeddings, which would be faster, easier to maintain and would make it easier to interpret models using them.  
 # 8. Results.
 
 Sensitivity analysis and model robustness was tested over various categories, abbreviations, adversarial(So phrased to be misleading), scenario planning, command(command to inject LLM), contextual(semantically the same), long context, ocr issues, synonyms, typos, unicode and variations. 
