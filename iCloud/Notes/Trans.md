@@ -38,7 +38,12 @@ The advantage exists even before puberty
 [https://pubmed.ncbi.nlm.nih.gov/22561975/](https://pubmed.ncbi.nlm.nih.gov/22561975/)
 
 
+# Nude Spa 
 
+They sued a nude spa for only allowing biological females and won. 
+
+>Two Korean spas, collectively referred to as "the Spa," had a policy of granting entry only to biological women, excluding men and preoperative transgender women. The Washington State Human Rights Commission (HRC) initiated an enforcement action against the Spa, alleging that this policy violated the Washington Law Against Discrimination (WLAD), which prohibits discrimination in public facilities based on sexual orientation, including gender expression or identity.
+>https://law.justia.com/cases/federal/appellate-courts/ca9/23-4031/23-4031-2025-05-29.html
 
 
 

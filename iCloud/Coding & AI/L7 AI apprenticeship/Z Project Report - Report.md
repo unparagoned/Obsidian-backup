@@ -235,9 +235,7 @@ The overall system consisted of ODC used for extraction, ML and Oracle database.
 
 The extraction aspect was resource intensive so required more compute than we had, so I worked on a solution collaboratively with DevOps since they had knowledge, expertise and control over infrastructure. {ODC stuff here}
 
-On demand compute will help with scaling, and CPU EC2 instances are cheaper and have better availability ensuring reliability.
-
-
+To scale we would need additional infrastructure, I worked dev-ops to setup on-demand-compute, which allows us to fire up an EC2 instance just for a job and close it when finished, which is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but had better availability. 
 
 {database stuff}
 
@@ -245,17 +243,13 @@ On demand compute will help with scaling, and CPU EC2 instances are cheaper and 
 
 LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788). {beating KPI by}
 
-The model has high accuracy 97%, but high class imbalance means that it underperforms on minority classes, with some classes performing very poorly. Summaries of poorly performing classes have been created for analysts so that they are aware of when they might need to do more bespoke and complex description matches rather than using the ML category. I recommended and created an an interactive dashboard which has this data in it, this transparency helps people determine how well the model works and can see statistics on it's performance on certain categories, which is much more user friendly than just having a large dataset they would have to review themselves. Often the errors are misclassifying very similar categories and the features don’t have enough information to differentiate between those categories. Requesting feedback after each step. 
+But some classes perform very poorly. Summaries of poorly performing classes have been created for analysts so that they are aware of when they might need to do more bespoke and complex description matches or alternative filtering of the ML category. 
 
-The dashboard had a top-k, but some of those were very poor matches and the scores were confusing, so on feedback I just showed the top-k that were better actual possible matches. 
+Confusion matrixes combined with examples are useful both in terms that they are more easily understandable by stakeholders and also provide useful information from an analytical point of view. They are useful to see what kinds of mistakes the model is making for the different concepts. In some situations it the description alone does not have enough information to categorise the item, in later iterations using additional features, table name and heading improved macro-F1 by 9.8pp. 
 
-I worked autonomously when deep focus was required, such as during core modelling phases, building models and analysing metrics. I would then demo my current approach and get feedback in meetings with ML experts.
+SME also provided input explaining how that in some cases there simply isn't enough information at all in the document to predict the specific concept used. For example the description "amounts owed to group undertakings" is associated with multiple but similar concepts. So the data is in the form of multi-label, but we are just using a multi-class analysis.  This again highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
 
-The ML category can be wrong, so should not be used for any automated decisions, so the process requires a human in the loop, who should review the actual description.
-
-## 8.2 Residual analysis
-
-Confusion matrixes are useful to see what kinds of mistakes the model is making for the different concepts. In some situations it the description alone does not have enough information to categorise the item, in later iterations using additional features, table name and heading improved macro-F1 by 9.8pp. SME also provided input explaining how that in some cases there simply isn't enough information at all in the document to predict the specific concept used. So this isn't a limit of the model. 
+I recommended and created an an interactive dashboard which has this data in it, this transparency helps analysts determine how well the model works and can see its performance on certain categories, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, but some of those were very poor matches and after requesting feedback I found analysts found the scores confusing, so I changed the dashboard to just show the top-k plausible matches. 
 
 ## 8.1 Sensitivity analysis and model robustness
 
@@ -263,12 +257,17 @@ Sensitivity analysis and model robustness was tested over various categories, ab
 
 Overall LinearSVC outperformed SEC-BERT in robustness testing, which was unexpected since I would have expected the domain-specific training and theoretical better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by computers, rather than people typing every description. 
 
+## 8.2 Bias
+
+Bias was investigated both against size of companies and software provider. So large companies had a f1-macro score of 0.9343 vs 0.789835 for small companies. Which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184061 vs 0.913292. On residual analysis often the misclassifications were for very similar classes and not enough information to differentiate between them. This highlights an issues one that maybe the specificity of the model and testing to too high. Also it's highlighting just differences in how the software tags items, but it's a training proxy, and such issues wouldn't apply to untagged items, if we had human labelled classes this issue wouldn't show up. 
 
 # 9. Discussion and conclusions/recommendations.
 
 
 
-To scale we would need additional infrastructure, I worked dev-ops to setup on-demand-compute, which allows us to fire up an EC2 instance just for a job and close it when finished, which is much more cost effective than having a large machine running all the time. 
+The ML category can be wrong, so should not be used for any automated decisions, so the process requires a human in the loop, who should review the actual description.
+
+
 
 My communication approach evolved based on how stakeholders reacted to early explanations. Initial technical descriptions were too detailed for some audiences, so I shifted towards a visual and example-based explanations. So very simple visual decision trees showing what attribute was split on, or graphed SVM 2D decision boundary.
 A simple example helped illustrate the difference between weighted and macro scores.
@@ -290,7 +289,7 @@ I created a setup script and detailed readme to allow other users to setup and u
 
 Changed to using Oracle database. 
 
-Bias was investigated both against size of companies and software provider. So large companies had a f1-macro score of 0.9343 vs 0.789835 for small companies. Which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184061 vs 0.913292. On residual analysis often the misclassifications were for very similar classes and not enough information to differentiate between them. This highlights an issues one that maybe the specificity of the model and testing to too high. Also it's highlighting just differences in how the software tags items, but it's a training proxy, and such issues wouldn't apply to untagged items, if we had human labelled classes this issue wouldn't show up. But the ML category could be used in a variety of ways, including trying to detect 
+
 
 Regularly updating the features, model, etc.  
 
