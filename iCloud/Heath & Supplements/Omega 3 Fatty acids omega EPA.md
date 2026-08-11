@@ -6,6 +6,7 @@ Maybe over 4g a day.
 Dark bottle - prevents light making it go off easily
 Get Triglyceride version
 Keep in fridge
+antioxidants helps prevent it going bad
 
 Maybe this is a good brand Peter Attia uses it. carlson elite omega 3
 
