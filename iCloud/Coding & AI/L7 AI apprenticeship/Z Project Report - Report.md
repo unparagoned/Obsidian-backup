@@ -247,9 +247,7 @@ But some classes perform very poorly. Summaries of poorly performing classes hav
 
 Confusion matrixes combined with examples are useful both in terms that they are more easily understandable by stakeholders and also provide useful information from an analytical point of view. They are useful to see what kinds of mistakes the model is making for the different concepts. In some situations it the description alone does not have enough information to categorise the item, in later iterations using additional features, table name and heading improved macro-F1 by 9.8pp. 
 
-SME also provided input explaining how that in some cases there simply isn't enough information at all in the document to predict the specific concept used. For example the description "amounts owed to group undertakings" is associated with multiple but similar concepts. So the data is in the form of multi-label, but we are just using a multi-class analysis.  This again highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
-
-I recommended and created an an interactive dashboard which has this data in it, this transparency helps analysts determine how well the model works and can see its performance on certain categories, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, but some of those were very poor matches and after requesting feedback I found analysts found the scores confusing, so I changed the dashboard to just show the top-k plausible matches. 
+SME also provided input explaining how that in some cases there simply isn't enough information at all in the document to predict the specific concept used. For example the description "amounts owed to group undertakings" is associated with multiple but similar concepts. So the data is in the form of multi-label, but I am just using a multi-class analysis.  This again highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
 
 ## 8.1 Sensitivity analysis and model robustness
 
@@ -263,20 +261,23 @@ Bias was investigated both against size of companies and software provider. So l
 
 # 9. Discussion and conclusions/recommendations.
 
-
+An Agile approach worked well with CRISP-DM, allowing us to create initial version initial products that proved the approach and provided business value, then future iterations improved the both extraction and the ML aspects providing even more value to the business both in quality and completeness of data, increased scale of operation, and more streamlined access to data. 
 
 The ML category can be wrong, so should not be used for any automated decisions, so the process requires a human in the loop, who should review the actual description.
 
+I used a variety of communication methods, such as powerpoint presentations, markdown guides, interactive dashboards, meeting and dashboards. 
+
+My communication approach evolved based on how stakeholders reacted to early explanations, and methods tailored for the use case, such as powerpoint presentations, markdown guides, interactive dashboards, meeting, dashboards. Initial technical descriptions were too detailed for some audiences, so I shifted towards a visual and example-based explanations. So very simple visual decision trees showing what attribute was split on, or graphed SVM 2D decision boundary. I used a simple example helped illustrate the difference between weighted and macro scores rather than going into in depth formulas.
+
+I worked closely with analysts where I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples, so they understood where it would be good, situations where it would make mistakes and the kind of mistake they should expect.
+
+I also recommended and created an an interactive dashboard which has this data in it, this transparency helps analysts determine how well the model works and can see its performance on certain categories, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, but some of those were very poor matches and after requesting feedback I found analysts found the scores confusing, so I changed the dashboard to just show the plausible matches. 
 
 
-My communication approach evolved based on how stakeholders reacted to early explanations. Initial technical descriptions were too detailed for some audiences, so I shifted towards a visual and example-based explanations. So very simple visual decision trees showing what attribute was split on, or graphed SVM 2D decision boundary.
-A simple example helped illustrate the difference between weighted and macro scores.
 
 For more technical stakeholders rather than just stating what I did I started to give more detailed explanations for why certain choices were made and linking theory to the experimental results.
 
 I recommended that communications should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details.
-
-Worked closely with analysts where I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples, so they understood where it would be good, situations where it would make mistakes and the kind of mistake they should expect.
 
 With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
 
@@ -284,14 +285,10 @@ With managers I focused on the kinds of information they needed like business le
 
 With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, timeframes for improvements, and the benefits of more people working on the project, which resulted in work being reallocated for someone to focus on development. Memos were drafted with cost benefit analysis requesting more funding for infrastructure, this resulted in additional funding for infrastructure.
 
-The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to setup the tool. When users have issues or questions, I updated the docs to be clearer or cover such issues. 
-I created a setup script and detailed readme to allow other users to setup and use the tool. This means many analysts are now running the tool allowing me to focus on development.
-
-Changed to using Oracle database. 
+The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to setup the tool. This means many analysts are now running the tool allowing me to focus on development. But with more use a centralised approach extracting the full population and storing the data in an Oracle database streamlines the process even more with users just needing to do a database query rather than running the tool themselves. When users have issues or questions, I updated the docs to be clearer or cover such issues. 
 
 
 
-Regularly updating the features, model, etc.  
 
 Monitoring drift of inputs, are there new taxonomies. Drift on outputs is detected for both accuracy and f1-macro, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
 
