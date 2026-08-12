@@ -1,7 +1,7 @@
 
 # 1. Introduction and background.
 
-HMRC receive millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for operational/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies. 
+HMRC receives millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for operational/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies. 
 
 For fully tagged documents, previous workflows allowed us to reliably extract, structure and analyse the data in those documents. Initial analysis showed that some document classes only have approximately 30% of the figures tagged, which means that previous workflows could not utilise 70% of the figures. There are various reasons for this, ranging from limitations in software used to create the documents to people deliberately leaving items they don't want HMRC to review untagged. 
 
@@ -263,69 +263,55 @@ Bias was investigated both against size of companies and software provider. So l
 
 An Agile approach worked well with CRISP-DM, allowing us to create initial version initial products that proved the approach and provided business value, then future iterations improved the both extraction and the ML aspects providing even more value to the business both in quality and completeness of data, increased scale of operation, and more streamlined access to data. 
 
-The ML category can be wrong, so should not be used for any automated decisions, so the process requires a human in the loop, who should review the actual description.
+I explained how the ML category worked and gave examples to analysts explaining when it works well or not, using confusion matrices and examples. With greater understanding of the ML category analysts started using the ML category more when profiling, with Hubble being widely used in by multiple teams
 
 I used a variety of communication methods, such as powerpoint presentations, markdown guides, interactive dashboards, meeting and dashboards. 
 
 My communication approach evolved based on how stakeholders reacted to early explanations, and methods tailored for the use case, such as powerpoint presentations, markdown guides, interactive dashboards, meeting, dashboards. Initial technical descriptions were too detailed for some audiences, so I shifted towards a visual and example-based explanations. So very simple visual decision trees showing what attribute was split on, or graphed SVM 2D decision boundary. I used a simple example helped illustrate the difference between weighted and macro scores rather than going into in depth formulas.
 
+For more technical stakeholders rather than just stating what I did I started to give more detailed explanations for why certain choices were made and linking theory to the experimental results. {give technical example}
+
+With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
+
 I worked closely with analysts where I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples, so they understood where it would be good, situations where it would make mistakes and the kind of mistake they should expect.
 
 I also recommended and created an an interactive dashboard which has this data in it, this transparency helps analysts determine how well the model works and can see its performance on certain categories, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, but some of those were very poor matches and after requesting feedback I found analysts found the scores confusing, so I changed the dashboard to just show the plausible matches. 
 
-
-
-For more technical stakeholders rather than just stating what I did I started to give more detailed explanations for why certain choices were made and linking theory to the experimental results.
-
 I recommended that communications should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details.
 
-With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
+Presentations to non-technical audiences roughly follows the Problem-Solution-Outcome structure. Trying to explain complex concepts even step by step was still confusing for non-technical audiences, so I moved over to using simple concepts like confusion matrixes with examples. The solution is at a very high level without going into the technical detail, with the focus on the outcomes each slide focused on a separate benefit/functionality with clear examples they could understand explaining what it does without going into unnecessary detail. 
 
-With managers I focused on the kinds of information they needed like business level topics like timeframes, resource requirements, funding, blockers they could help with.
+With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, funding, blockers timeframes, and the benefits of more people working on the project, which resulted in additional people to help with development. I created a memos with a cost benefit analysis highlighting both improved timeliness and also extracting new untagged data, resulting in additional funding for infrastructure. Further funding will be required. 
 
-With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, timeframes for improvements, and the benefits of more people working on the project, which resulted in work being reallocated for someone to focus on development. Memos were drafted with cost benefit analysis requesting more funding for infrastructure, this resulted in additional funding for infrastructure.
-
-The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to setup the tool. This means many analysts are now running the tool allowing me to focus on development. But with more use a centralised approach extracting the full population and storing the data in an Oracle database streamlines the process even more with users just needing to do a database query rather than running the tool themselves. When users have issues or questions, I updated the docs to be clearer or cover such issues. 
-
-
-
+The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to setup the tool. This means many analysts are now running the tool allowing me to focus on development. But further developments resulted in a centralised approach extracting the full population and storing the data in an Oracle database streamlining the process with users just needing to do a database query rather than running the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. 
 
 Monitoring drift of inputs, are there new taxonomies. Drift on outputs is detected for both accuracy and f1-macro, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
 
-Moving to a core data source used widely, meeting with reliant data sources, discussing how formal data contracts will need to be created to ensure reliability in the service. 
-
-Cost benefit analysis, significant benefits already seen both in timeliness of existing data and also extracting new untagged data. So funding had been provided to expand and increase capability and reliability of the system.
 # 10. Summary of findings.
 
-Performance was balanced by infrastructure/costs, where selecting faster models that could run quickly on a CPU were prioritised allowing development on existing infrastructure.
+I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix. While SEC-BERT had the best macro-F1 score, LinearSVC had better interpretability, could be developed on existing architectures, doesn't require GPU, relies on well established packages, better meets the business requirements. The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC with accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788). {beating KPI by}. 
+
 # 11. Implications.
 
 The result is a dataset that reduces manual effort 
 
-Hubble helped us meet our quality standards, such as completeness and consistency since we can extract all of the figures and have consistent ML classes.
+Hubble helped us meet our quality standards, such as completeness and consistency since we can extract all of the figures and have consistent ML classes. Enabling analyssts to more easily and robustly use the data.
 
-The business value is that it reduces manual effort, allows us to better create statistics that informs and drives government policy and better identify risks. It's been used in projects where hundreds of billions of pounds of incorrect figures in returns have been identified. 
-
-I explained how the ML category worked and gave examples to analysts explaining when it works well or not, using confusion matrices and examples. With greater understanding of the ML category analysts started using the ML category more when profiling, with Hubble being widely used in by multiple teams
-
-Presentations to non-technical audiences roughly follows the Problem-Solution-Outcome structure. Trying to explain complex concepts even step by step was still confusing for non-technical audiences, so I moved over to using simple concepts like confusion matrixes with examples. The solution is at a very high level without going into the technical detail, with the focus on the outcomes each slide focused on a separate benefit/functionality with clear examples they could understand explaining what it does without going into unnecessary detail. 
+The business value is that it reduces manual effort, allows us to better create statistics that informs and drives government policy and better identify risks. 
 
 Manual spreadsheet to record benefits showed tens of millions in estimated benefits, but completion was incomplete so I arranged for the central management system to have built in functionality to monitor benefits. 
 
-I investigated and implemented a solution that extracted additional data and used ML to categorise items increasing consistency so that analysts could more easily and robustly use the data.
 # 12. Caveats and limitations.
 
-Analysts were educated that the ML category can be wrong and shouldn’t be used for automated decisions. There should always be a human in the loop before any action on it happens. This would include a person looking at the actual descriptions.
+The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different than the tagged data. e.g. An item might have been left untagged since there aren't any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged by SME, but it requires tax trained experts, who while do not have time to fully tag enough items themselves, will be feeding into a manual evaluation stage. 
 
-The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different than the tagged data. e.g. An item might have been left untagged since there aren't any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged by SME, but it requires tax trained experts, who have other much higher priority work to focus on. 
+Analysts were educated that the ML category can be wrong and shouldn’t be used for automated decisions. There should always be a human in the loop before any action on it happens. 
 
-LinearSVC has very good performance on smaller dataset sizes but doesn't scale as well on larger datasets, so it's not practical to train it on larger datasets. But going from 10% train data set to 100% saw only a 0.4pp increase in f1-macro, so much larger datasets are unlikely to increase performance significantly. 
+LinearSVC has very good train times on smaller dataset sizes but doesn't scale as well on larger datasets, so it's not practical to train it on larger datasets. But going from 10% train data set to 100% saw only a 0.4pp increase in f1-macro, so much larger datasets are unlikely to increase performance much. 
 
-Increasing data set size while keeping a fixed numeric cutoff, results in more labels, so model performance actually decreased, also different document types had different distributions in labels, also resulting in different performance, making comparison across different document types and sources difficult. 
+Increasing data set size while keeping a fixed numeric cutoff, results in more labels, so model performance actually decreased, also different document types had different distributions in labels, also resulting in varied performance, making comparison across different document types and sources difficult. 
 
-The integration of R and python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the the long term look to a lakehouse, it seems like python has more support for the ETL stake where Hubble would fit, and with higher python use in HMRC now, it might be worth considering porting in the future. 
-
-
+The integration of R and python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the the long term move to a lakehouse, initial investigations suggest like python has more support for the ETL stage where Hubble would fit. With higher python use in HMRC now, it might be worth considering porting in the future. 
 
 # 13. Appendices.
 ## Code and documentation used for the project.
