@@ -263,19 +263,15 @@ Bias was investigated both against size of companies and software provider. So l
 
 An Agile approach worked well with CRISP-DM, allowing us to create initial version initial products that proved the approach and provided business value, then future iterations improved the both extraction and the ML aspects providing even more value to the business both in quality and completeness of data, increased scale of operation, and more streamlined access to data. 
 
-I explained how the ML category worked and gave examples to analysts explaining when it works well or not, using confusion matrices and examples. With greater understanding of the ML category analysts started using the ML category more when profiling, with Hubble being widely used in by multiple teams
+While using metrics like macro-F1 works well for comparing similar classes of models, it's important to consider all the business requirements using method like decision matrixes. But some factors like interpretability are core requirements that could override a raw score. The coefficients of LinearSVC provide real interpretability not available with neural networks and I could explain to more technical audiences how it arrived at certain classifications. But tools like LIME and SHAP do provide explainability which does partially mitigate such risks with models that aren't interpretable. While SEC-BERT had the best macro-F1 score, LinearSVC better met business requirements with better interpretability, could be developed on existing architectures, doesn't require GPU(cheaper and more available EC2 instances), and relies on well-established packages that are regularly updated.
 
-I used a variety of communication methods, such as powerpoint presentations, markdown guides, interactive dashboards, meeting and dashboards. 
+My communication approach evolved based on how stakeholders reacted to early explanations, and methods tailored for the use case, such as powerpoint presentations, markdown guides, interactive dashboards, meeting, dashboards. Initial technical descriptions were too detailed for some audiences, so I shifted towards visual and example-based explanations. So very simple visual decision trees showing what attribute was split on, or graphed SVM 2D decision boundary.  I used a simple example helped illustrate the difference between weighted and macro scores rather than going into in depth formulas.
 
-My communication approach evolved based on how stakeholders reacted to early explanations, and methods tailored for the use case, such as powerpoint presentations, markdown guides, interactive dashboards, meeting, dashboards. Initial technical descriptions were too detailed for some audiences, so I shifted towards a visual and example-based explanations. So very simple visual decision trees showing what attribute was split on, or graphed SVM 2D decision boundary. I used a simple example helped illustrate the difference between weighted and macro scores rather than going into in depth formulas.
-
-For more technical stakeholders rather than just stating what I did I started to give more detailed explanations for why certain choices were made and linking theory to the experimental results. {give technical example}
+I worked closely with analysts where I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples, so they understood where it would be good, situations where it would make mistakes and the kind of mistake they should expect. I got similar questions about the ML, so I also created an an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, some of those were very poor matches confusing users, so I changed the dashboard to just show the plausible matches. As users understanding of how the ML worked their use increased. 
 
 With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
 
-I worked closely with analysts where I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples, so they understood where it would be good, situations where it would make mistakes and the kind of mistake they should expect.
 
-I also recommended and created an an interactive dashboard which has this data in it, this transparency helps analysts determine how well the model works and can see its performance on certain categories, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, but some of those were very poor matches and after requesting feedback I found analysts found the scores confusing, so I changed the dashboard to just show the plausible matches. 
 
 I recommended that communications should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details.
 
@@ -289,11 +285,13 @@ Monitoring drift of inputs, are there new taxonomies. Drift on outputs is detect
 
 # 10. Summary of findings.
 
-I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix. While SEC-BERT had the best macro-F1 score, LinearSVC had better interpretability, could be developed on existing architectures, doesn't require GPU, relies on well established packages, better meets the business requirements. The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC with accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788). {beating KPI by}. 
+I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix.  The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC with accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788). {beating KPI by}. 
 
 # 11. Implications.
 
 The result is a dataset that reduces manual effort 
+
+Hubble being widely used in by multiple teams
 
 Hubble helped us meet our quality standards, such as completeness and consistency since we can extract all of the figures and have consistent ML classes. Enabling analyssts to more easily and robustly use the data.
 
