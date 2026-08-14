@@ -223,7 +223,7 @@ The overall system consisted of the raw iXBRL documents in AWS S3, with ODC crea
 
 # 8. Results.
 
-LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788) beating KPIs of 0.7 and 0.6 respectively. The system also meets the KPIs by extracting over 99% of records; within 3 days; and has an interpretable and explainable ML model. 
+LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788) beating KPIs of 0.7 and 0.6 respectively. The system also meets the KPIs by extracting over 99% of records; within 3 days; meets security requirements and has an interpretable and explainable ML model. 
 
 Residual analysis helped identify which classes performed poorly and summaries were created for analysts. I worked closely with analysts where I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples, so they understood where it would be good, situations where it would make mistakes and the kind of mistake they should expect. I got similar questions about the ML, so I also created an an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, some of those were very poor matches confusing users, so I changed the dashboard to just show the plausible matches. As users understanding of how the ML worked their use increased.
 
@@ -270,7 +270,12 @@ While a single command runs all the the tests, I would like to also add a CI pip
 Optuna has built in visualisations and automatically tunes the hyperparameters. This automated the more manual process I used with scikit-learn, so I plan on trying Optuna with scikit-learn in the future.
 # 10. Summary of findings.
 
-I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix.  The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC with accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788). {beating KPI by}. 
+I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix. While SEC-BERT lead on macro-F1 by 2.3pp it was rejected because it wasn't as good on interpretability, deployment simplicity and dependency risk. 
+
+The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC with accuracy of 0.975(CI 0.975-0.976) and macro-F1 of 0.785(CI 0.780-0.788) beating KPIs of 0.7 and 0.6 respectively. The system also meets the KPIs by extracting over 99% of records; within 3 days; meets security requirements and has an interpretable and explainable ML model. 
+
+The biggest factors were actually pre-processing which increased macro-F1 by 20pp, and adding additional features by 9.8pp. 
+
 
 # 11. Implications.
 
