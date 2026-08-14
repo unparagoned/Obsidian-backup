@@ -287,15 +287,15 @@ The data has been used to better identify companies to investigate, and the esti
 
 # 12. Caveats and limitations.
 
-The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different than the tagged data. e.g. An item might have been left untagged since there aren't any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged by SME, but it requires tax trained experts, who while do not have time to fully tag enough items themselves, will be feeding into a manual evaluation stage. 
+The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different than the tagged data. e.g. An item might have been left untagged since there aren't any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged, but it would require a large number of tax-trained experts spending a long time to label the data, which isn't feasible. But they will be feeding into a manual evaluation stage. 
 
-Analysts were educated that the ML category can be wrong and shouldn’t be used for automated decisions. There should always be a human in the loop before any action on it happens. 
+Analysts were educated that the ML category can be wrong, so to use the dashboard to identify how well the concept performs. The ML category shouldn’t be used for automated decisions, and that there should always be a human in the loop before any action on it happens. 
 
-LinearSVC has very good train times on smaller dataset sizes but doesn't scale as well on larger datasets, so it's not practical to train it on larger datasets. But going from the 10% square-root weighted train data set to 100% saw only a 0.4pp increase in f1-macro, and from the 50% square-root weighted only 0.4pp, so much larger datasets are unlikely to increase performance much(Appendix A3.7.7). 
+LinearSVC has very good train times on smaller dataset sizes but doesn't scale as well on larger datasets, so it's not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in f1-macro, so much larger datasets are unlikely to increase performance much(Appendix A3.7.7). 
 
-Increasing data set size while keeping a fixed numeric cutoff, results in more labels, so model performance actually decreased, also different document types had different distributions in labels, also resulting in varied performance, making comparison across different document types and sources difficult. 
+Increasing data set size while keeping an absolute threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. 
 
-The integration of R and python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the the long term move to a lakehouse, initial investigations suggest like python has more support for the ETL stage where Hubble would fit. With higher python use in HMRC now, it might be worth considering porting in the future. 
+The integration of R and python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the the long term move to a lakehouse, initial investigations suggest like python has more support for the ETL. With higher python use in HMRC now, it might be worth considering porting in the future. 
 
 # 13. Appendices.
 
