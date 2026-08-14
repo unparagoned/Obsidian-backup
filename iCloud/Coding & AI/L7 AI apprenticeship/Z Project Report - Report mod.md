@@ -71,7 +71,7 @@ While working with others to review the code base, we discussed the scope, cover
 
 ## 3.5 Scientific method and statistical analysis
 
-I used hypothesis formulation; controlled experimentation including DummyClassifier baselines; stratified cross validation with paired t-tests at the 95% confidence level (Dietterich, 1998) to determine if models were statistically different from the top model (`compare_to_top` and `add_confidence_interval`, Appendix A3.2). Challenges included class imbalance which required using score like macro-F1 which gives equal weighting to each class, stopping common classes from dominating the scores. On the modelling side different approaches were tested such as balanced weights and/or square-root weighted training samples.
+I used hypothesis formulation; controlled experimentation including DummyClassifier baselines; stratified cross validation with paired t-tests at the 95% confidence level (Dietterich, 1998) to determine if models were statistically different from the top model (`compare_to_top` and `add_confidence_interval`, Appendix A3.2). Challenges included class imbalance which required using score like macro-F1 which gives equal weighting to each class. On the modelling side different approaches were tested such as balanced weights and/or square-root weighted training samples.
 
 # 4. The scope of the project (including key performance indicators).
 
@@ -124,7 +124,7 @@ I implemented data quality controls aligned with HMRC expectation and broadly in
 
 
 
-This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826, while keeping 86% of the rows of data (Appendix B15). The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). These measures and preprocessing improved model macro-F1 scores from under 0.5 to over 0.7. Along with measure like restricting access to systems and data to specific users ensured I was complying with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR. 
+This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826, while keeping 86% of the rows of data (Appendix B15). The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure like restricting access to systems and data to specific users ensured I was complying with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR. 
 
 Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, test, train, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6) (Kohavi, 1995). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
 
@@ -229,7 +229,7 @@ Bias was investigated both against size of companies and software provider (Mehr
 
 # 9. Discussion and conclusions/recommendations.
 
-An Agile approach worked well with CRISP-DM. Iterating allow delivering usable pieces of work: basic raw data on file, iXBRL information, ML categories, improved architectures and database. allowing us to create initial products that proved the approach and provided business value. With each step evaluated for feasibility, benefits and risks. Regular meetings and a workshop with stakeholders helped get feedback such as the issues dealing with raw descriptions; validate business understanding and planned approaches. The customer requirements at the beginning wouldn't have foreseen the way the project developed, highlighting the benefit of an agile approach opposed to a more fixed waterfall approach. The iterative approach improved macro-F1 from under 0.50 to 0.785 and adding additional features: table name and heading, improving macro-F1 by 9.8pp. 
+An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, ML categories, improved architectures and database, with each step evaluated for feasibility, benefits, risk, proving the approach and provided business value. Regular meetings and a workshop helped get feedback such as the issues dealing with raw descriptions; validate business understanding and planned approaches. The customer requirements at the beginning wouldn't have foreseen the way the project developed, highlighting the benefit of an agile approach opposed to a more fixed waterfall approach. The iterative approach improved macro-F1 from under 0.50 to 0.785 on the evaluation dataset and adding additional features: table name and heading, improving macro-F1 by 9.8pp over the production dataset. 
 
 
 While using metrics like macro-F1 works well for comparing similar classes of models, it's important to consider all the business requirements using method like decision matrixes. But some factors like interpretability and security are core requirements that could override a raw score. 
@@ -264,17 +264,15 @@ Recommendations:
 
 # 10. Summary of findings.
 
-I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix. While SEC-BERT lead on macro-F1 by 2.3pp it was rejected because it wasn't as good on interpretability, deployment simplicity and dependency risk. 
+I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix. While SEC-BERT lead on macro-F1 it was rejected because it wasn't as good on interpretability, deployment simplicity and dependency risk. 
 
-The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC with accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788) beating KPIs of 0.7 and 0.6 respectively. The system also meets the KPIs by extracting over 99% of records; within 3 days; meets security requirements and has an interpretable and explainable ML model. 
+The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC.
 
 The biggest factors were actually pre-processing which increased macro-F1 by 20pp, and adding additional features by 9.8pp. And going forwards I expect the main improvements would come from pre-processing or from simplifying the taxonomy used rather than changing the architectures or tweaking the hyperparameters. 
 
 # 11. Implications.
 
-The ability to ingest recent data means that we have been able to perform data analysis further in advance then previously possible. 
-
-Hubble helped us meet our quality standards, such as completeness and consistency since we can extract all of the figures and have consistent ML categories. The ML category reduce the manual regex style work previously done, improved consistency and reliability of the analysis. 
+Hubble helped us meet our quality standards. The ML category reduce the manual regex style work previously done, improved consistency and reliability of the analysis. 
 
 Hubble being widely used in by multiple teams, with data being integrated into various dashboards and across multiple tax heads.
 
