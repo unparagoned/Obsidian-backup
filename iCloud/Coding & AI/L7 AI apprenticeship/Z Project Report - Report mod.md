@@ -152,19 +152,17 @@ It is expected that a frontier LLM, such as Chat GPT would have better semantic 
 
 ## 7.1 Population size validation
 
-It wasn't possible to compare every model and hyperparameter over the full train dataset. So initially I tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller populations were representative of larger populations (Appendix A3.3). The 1% population had a fairly high score of Pearson correlation of 0.971 to the full train population and 10% had a very high score of 0.998 (Appendix B19 and B20). Paired T-tests showed that models that weren't not significantly worse over the 1% population were the same at 100% population. So this meant that it was reasonable to filter out models and hyperparameters using a smaller populations, and that the 10% train population was large enough for reliable results. 
+Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller populations were representative of larger populations (Appendix A3.3). The Pearson correlation to the full population for the 1%  and 10% populations was 0.971 and 0.998 respectively(Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% population were the same at 100% population, so I could filter out models and hyperparameters using a smaller population, and have reliable results on the 10%. 
 
 Initially I focused on macro-F1 scores for within-class comparison.
 
 ## 7.2 Traditional ML algorithms
 
-To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, which let me cover many models and hyperparameters in an efficient way, while using a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2; scores by model type and training time at Appendix B17, B18 and B21) (Bergstra and Bengio, 2012; Li et al., 2018). Robustness was improved through stratified cross validation which reduced variance and allowed paired T-test to indicate which models were not significantly worse at the 5% level, which was used to narrow down the models used at each stage. 
+To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, efficiently covering many models and hyperparameters, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2; scores by model type and training time at Appendix B17, B18 and B21) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-test to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. 
 
-To get a better handle of the hyperparameters I plotted them against against scores, helping narrow down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores over min_df 2, which was surprising on the speed aspect (Appendix B22). 
+To get a better handle of the hyperparameters I plotted them against scores, helping narrow down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores over min_df 2, which was surprising on the speed aspect (Appendix B22). 
 
 After fine tuning the hyper parameters and training on the full train dataset, LinearSVC was the best performing model beating out the alternatives at a 5% confidence level (Appendix A3.4.3 and A3.4.4). 
-
-To deal with the class imbalance and reduce systematic bias towards majority classes, I used explored both using balanced class weight as part of the model hyperparameters and square-root weighted training data. The 10% square-root weighted vs strait 10% train population resulted in 1.3pp better macro-F1 score but 0.0573pp lower accuracy. But training on the full 100% population using a balanced hyperparameter resulted in the best f1-macro and accuracy, and would have the simplest pipeline. 
 
 I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to stick with a simpler TFIDF word only embeddings, which would be faster, easier to maintain and would make it easier to interpret models using them. 
 
@@ -172,11 +170,11 @@ The final pipelines used TFIDF (1-3 word n-grams, min_df 1, norm l2) with Linear
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
-I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embeddings dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). It used dropout hyperparameters used as regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, demonstrating that the domain based pre-training was beneficial (Appendix A5.2, with macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM; loss curves at Appendix B29). 
+I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embeddings dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, demonstrating that the domain based pre-training was beneficial (Appendix A5.2, with macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM; loss curves at Appendix B29). 
 
 ## 7.4 Class imbalance
 
-To deal with the class imbalance (He and Garcia, 2009) and reduce systematic bias towards majority classes, I used explored various methods such as: 
+To deal with the class imbalance (He and Garcia, 2009) and reduce systematic bias towards majority classes, I explored various methods such as: 
 - Weighting models worked well with LinearSVC but reduced performance on the NN models (Appendix A4.4.1.1 and A5.3.7). 
 - Square-root weighted training data over various models provided good increases in macro-F1 but sometimes with a very small decreases in accuracy, e.g. 1.3pp macro-F1 increase vs 0.0573pp accuracy decrease (Appendix A3.7.7).
 - Random oversampling, actually reduced performance on the transformer based models (Appendix A5.3.9). 
@@ -203,17 +201,17 @@ To compare the model architectures a decision matrix was used (Appendix A6), cov
 - Dependency risk
 - Cost
 
-Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). With a rubric setting the standard/scores for the the subjective scores with an accompanying narrative (rubric at Appendix A6.2.5, scored assessubject matter expertsnts at Appendix B31). 
+Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). With a rubric setting the standard/scores for the subjective scores with an accompanying narrative (rubric at Appendix A6.2.5, scored assesments at Appendix B31). 
 
 To make comparison fair and due to memory/time constraints, all models were all trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 5% confidence intervals were created using the bootstrap method (Efron and Tibshirani, 1993) over using cross validation due to complexity and computational time constraint reasons (measured values at Appendix B32). 
 
 While SEC-BERT had the best macro-F1 score I chose LinearSVC (final scores at Appendix B34), trading marginal performance (2.3pp) for a solution that is simpler (more maintainable), more explainable (feature coefficients), quicker (220x), allows development on existing infrastructure (CPU based), with the ability to scale cost effectively, relies on well-established packages that are regularly updated.
 
-## 7.5 Wider system
+## 7.6 Wider system
 
-To scale we would need additional infrastructure, I worked dev-ops to setup on-demand-compute, which allows us to fire up an EC2 instance running POSIT just for a job and shuts it down when finished, which is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
+Scaling needed additional infrastructure, so I worked with DevOps to setup on-demand-compute, which fire up an EC2 instance running POSIT just for a job and shuts it down when finished, which is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
 
-The overall system consisted of the raw iXBRL documents in AWS S3, with ODC creating a dedicated EC2 instance running POSIT, where iXBRL document are accessed using `aws.s3`, then extracted using `rvest`/`xml2` and structured using bespoke R code, then `reticulate` allows the running of python function to canonicalise the features and use scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features, with the output save to an Oracle database via `dbplyr`. The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and also up-skill them.
+The overall system consisted of the raw iXBRL documents in AWS S3, with ODC creating a dedicated EC2 instance running POSIT, where iXBRL documents are accessed using `aws.s3`, then extracted using `rvest`/`xml2` and structured using bespoke R code. Then `reticulate` allows the running of python function to canonicalise the features and use scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features, with the output saved to an Oracle database via `dbplyr`. The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and also up-skill them.
 
 # 8. Results.
 
@@ -290,7 +288,7 @@ LinearSVC has very good train times on smaller dataset sizes but doesn't scale a
 
 Increasing data set size while keeping an absolute threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. 
 
-The integration of R and python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the the long term move to a lakehouse, initial investigations suggest like python has more support for the ETL. With higher python use in HMRC now, it might be worth considering porting in the future. 
+The integration of R and python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like python has more support for the ETL. With higher python use in HMRC now, it might be worth considering porting in the future. 
 
 # 13. Reference list.
 
