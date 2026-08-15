@@ -121,23 +121,21 @@ This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 t
 Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
 
-This is multi-class text classification with 826 nominal classes and with strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context, then evaluated the leading candidates (Sebastiani, 2002).
+This is multi-class text classification with 826 nominal classes and strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context, then evaluated the leading candidates (Sebastiani, 2002).
 
-I considered ways to systemise a rule-based system, using regular expressions which could have some successes but it would use too much subject matter expert's time, and would not cover the long tail. It was not a feasible business solution, so I investigated alternatives. 
-
-The raw data is a multi-class, but it could be transformed into a multi-label problem. While this could be useful from a technical sense, it would add unnecessary complexity for analysts when using the data.  
+I considered ways to systemise a rule-based system, using regular expressions which could have some successes but it would use too much subject matter expert time, and would not cover the long tail. It was not a feasible business solution, so I investigated alternatives. 
 
 While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But initial analysis using cosine similarity highlighted that the great variety in descriptions for some concepts meant that it was not feasible. So I focused on supervised learning models. 
 
-Traditional ML models can perform well with classifying short simple text, especially since descriptions in the accounts will normally have less variety and more domain-specific terminology than generic free text (Joachims, 1998). {Isn't this more about TFIDF than traditional ML algorithms}. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
+Traditional ML models can perform well with classifying short text, since there is a high signal to noise ratio. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
 
-There were two main methods used to embed the descriptions for the traditional ML models, sparse vectorisation (TF, TFIDF) and dense vector embeddings (MPNet, E5) (Song et al., 2020; Wang et al., 2022). TFIDF over character and word n-grams (Sparck Jones, 1972; Cavnar and Trenkle, 1994) can perform well since it captures domain-specific terminology and phrasing well and works with a variety of models, good speed and performance. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions (Appendix A2.5 and A3.5.2).  {seems some overlap or even duplication with the bit in the last section around embeddings}
+There were two main methods used to embed the descriptions for the traditional ML models, sparse vectorisation (TF, TFIDF) and dense vector embeddings (MPNet, E5) (Song et al., 2020; Wang et al., 2022). TFIDF over character and word n-grams (Sparck Jones, 1972; Cavnar and Trenkle, 1994) can perform well since it captures domain-specific terminology and phrasing well and works with a variety of models, with good speed and performance. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
 
 A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in traditional ML. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
 
-Transformer based models are a more advanced architecture with better semantic understanding of text that often outperforms other neural network architectures (Vaswani et al., 2017). Pre-trained models are trained over large amounts of text so have a lot of semantic understanding built in (Devlin et al., 2019). Various transformer based models were tested: RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures and training data (Appendix A5.1 and A5.2). SEC-BERT is a model that was trained on SEC filings (US financial filings), so should have better semantic understanding of accountancy terms and concepts.
+Transformer based models are a more advanced architecture with better semantic understanding of text, and often outperforms other neural network architectures (Vaswani et al., 2017). Pre-trained models are trained over large amounts of text so have a lot of semantic understanding built in (Devlin et al., 2019). Various transformer based models were tested: RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures, and training data (Appendix A5.1 and A5.2). SEC-BERT is a model that was trained on SEC filings (US financial filings), so should have better semantic understanding of accountancy terms and concepts.
 
-It is expected that a frontier LLM, such as ChatGPT would have better semantic understanding of text, but it is likely to be excessive for this use case. An LLM would be good at understanding lots of text, but we just have short phrases. At the time it was not possible to send taxpayer data to an external API under the HMRC data security and governance requirements, making this approach unfeasible. 
+It is expected that a frontier LLM, such as ChatGPT, would have better semantic understanding of text, but it is likely to be excessive for this use case. An LLM would be good at understanding lots of text, but we just have short phrases. At the time it was not possible to send taxpayer data to an external API under the HMRC data security and governance requirements, making this approach unfeasible. 
 
 # 7. Implementation - performance metrics.
 
@@ -145,19 +143,17 @@ It is expected that a frontier LLM, such as ChatGPT would have better semantic u
 
 Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller samples were representative (Appendix A3.3). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively (Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
 
-
-
 ## 7.2 Traditional ML algorithms
 
-To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2; scores by model type and training time at Appendix B17, B18 and B21) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-test to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
+To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-test to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
 
 To get a better handle of the hyperparameters I plotted them against scores, narrowing down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores over min_df 2, which was surprising on the speed aspect (Appendix B22). 
 
-After fine tuning the hyper parameters and training on the full train dataset, LinearSVC was the best performing model beating out the alternatives at a 5% confidence level (Appendix A3.4.3 and A3.4.4). 
+After fine tuning the hyperparameters and training on the full train dataset, LinearSVC was the best performing model beating out the alternatives at a 5% confidence level (Appendix A3.4.3 and A3.4.4). 
 
 I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to stick with a simpler TFIDF word only embedding, which is faster, easier to maintain and easier to interpret. 
 
-The final pipelines used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (`final_grid_search`, Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
+The final pipelines used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
@@ -188,21 +184,21 @@ To compare the model architectures a decision matrix was used (Appendix A6), cov
 - Deployment simplicity
 - Maintenance burden
 - Domain fit
-- Model Lifecycle
+- Model life cycle
 - Dependency risk
 - Cost
 
 Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (rubric at Appendix A6.2.5, scored assessments at Appendix B31). 
 
-To make comparison fair and due to memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 5% confidence intervals were created using the bootstrap method over using cross validation due to complexity and computational cost (Efron and Tibshirani, 1993; Kohavi, 1995) (measured values at Appendix B32). 
+To make comparison fair and due to memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 5% confidence intervals were created using the bootstrap method over using cross validation due to complexity and computational cost (Kohavi, 1995) (measured values at Appendix B32). 
 
-While SEC-BERT had the best macro-F1 score I chose LinearSVC (final scores at Appendix B34), trading marginal performance (2.3pp) for a solution that is simpler to maintainable, more explainable (feature coefficients), runs 220x faster, runs on existing CPU based infrastructure,  scales cost effectively, relies on well-established and regularly updated packages.
+While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintainable, more explainable (feature coefficients), runs 220x faster, runs on existing CPU based infrastructure,  scales cost effectively, relies on well-established and regularly updated packages(B32, B33, B34)
 
 ## 7.6 Wider system
 
-Scaling needed additional infrastructure, so I worked with DevOps to setup on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished, and is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
+Scaling needed additional infrastructure, so I worked with DevOps to setup on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
 
-The overall system consisted of the raw iXBRL documents in AWS S3, with ODC creating a dedicated EC2 instance running POSIT, where iXBRL documents are accessed using `aws.s3`, then extracted using `rvest`/`xml2` and structured using bespoke R code. Then `reticulate` allows the running of Python function to canonicalise the features and use scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features, with the output saved to an Oracle database via `dbplyr`. The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and also up-skill them.
+The overall system consisted of the raw iXBRL documents in AWS S3, that are accessed using `aws.s3`, then extracted using `rvest`/`xml2` and structured using bespoke R code. Then `reticulate` allows the running of Python function to canonicalise the features and use scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features, with the output saved to an Oracle database via `dbplyr`. The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
 
 # 8. Results.
 
@@ -210,7 +206,7 @@ LinearSVC trained on the full dataset and tested over the full holdout has an ac
 
 Residual analysis helped identify which classes performed poorly and summaries were created for analysts (Appendix A3.10). I worked closely with analysts where I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples (Appendix B24), so they understood where it would be good, situations where it would make mistakes and the kind of mistake they should expect. I got similar questions about the ML, so I also created an an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, which is much more user friendly than just having a large dataset they would have to filter/process themselves. The dashboard had a top-k, some of those were very poor matches confusing users, so I changed the dashboard to just show the plausible matches. As users understanding of how the ML worked their use increased.
 
-Subject matter experts also provided input explaining how that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example the description "amounts owed to group undertakings" is associated with multiple but similar concepts. So the data is in the form of multi-label, but multi-class analysis is being used (Tsoumakas and Katakis, 2007). This highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
+Subject matter experts also provided input explaining how that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
 
 Sensitivity analysis and model robustness was tested over various categories, abbreviations, adversarial (So phrased to be misleading), scenario planning, command (command to inject LLM), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8 and A5.3.5; results by category at Appendix B25) (Ribeiro et al., 2020). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was unexpected since I would have expected the domain-specific training and theoretical better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by computers, rather than people typing every description. 
 
@@ -293,7 +289,7 @@ Beck, K., et al. (2001) Principles behind the Agile Manifesto. Available at: htt
 
 Beck, K. (2003) Test-driven development: by example. Boston, MA: Addison-Wesley.
 
-Bergstra, J. and Bengio, Y. (2012) 'Random search for hyper-parameter optimization', Journal of Machine Learning Research, 13, pp. 281-305.
+Bergstra, J. and Bengio, Y. (2012) 'Random search for hyper-parameter optimization', Journal of Machine Learning Research, 13, pp. 281-305. Available at: https://jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf (Accessed: 14 August 2026)
 
 Cavnar, W. and Trenkle, J. (1994) 'N-gram-based text categorization', Proceedings of the Third Annual Symposium on Document Analysis and Information Retrieval (SDAIR-94). Las Vegas, 11-13 April. pp. 161-175. Available at: https://www.researchgate.net/publication/2375544_N-Gram-Based_Text_Categorization (Accessed: 14 August 2026)
 
@@ -310,8 +306,6 @@ Data Protection Act 2018, c. 12. Available at: https://www.legislation.gov.uk/uk
 Devlin, J., et al. (2019) 'BERT: pre-training of deep bidirectional transformers for language understanding', Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies. Minneapolis, 2-7 June. pp. 4171-4186. Available at: https://doi.org/10.18653/v1/N19-1423 (Accessed: 14 August 2026)
 
 Dietterich, T. (1998) 'Approximate statistical tests for comparing supervised classification learning algorithms', Neural Computation, 10(7), pp. 1895-1923. Available at: https://doi.org/10.1162/089976698300017197 (Accessed: 14 August 2026)
-
-Efron, B. and Tibshirani, R. (1993) An introduction to the bootstrap. New York: Chapman and Hall.
 
 Gama, J., et al. (2014) 'A survey on concept drift adaptation', ACM Computing Surveys, 46(4), pp. 1-37. Available at: https://doi.org/10.1145/2523813 (Accessed: 14 August 2026)
 
@@ -373,9 +367,7 @@ Song, K., et al. (2020) 'MPNet: masked and permuted pre-training for language un
 
 Sparck Jones, K. (1972) 'A statistical interpretation of term specificity and its application in retrieval', Journal of Documentation, 28(1), pp. 11-21. Available at: https://doi.org/10.1108/eb026526 (Accessed: 14 August 2026)
 
-Srivastava, N., et al. (2014) 'Dropout: a simple way to prevent neural networks from overfitting', Journal of Machine Learning Research, 15, pp. 1929-1958.
-
-Tsoumakas, G. and Katakis, I. (2007) 'Multi-label classification: an overview', International Journal of Data Warehousing and Mining, 3(3), pp. 1-13. Available at: https://doi.org/10.4018/jdwm.2007070101 (Accessed: 14 August 2026)
+Srivastava, N., et al. (2014) 'Dropout: a simple way to prevent neural networks from overfitting', Journal of Machine Learning Research, 15, pp. 1929-1958. Available at: https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf (Accessed: 14 August 2026)
 
 Vaswani, A., et al. (2017) 'Attention is all you need', Advances in Neural Information Processing Systems 30. Long Beach, 4-9 December. pp. 5998-6008. Available at: https://arxiv.org/abs/1706.03762 (Accessed: 14 August 2026)
 
@@ -8124,17 +8116,63 @@ display_wide(final_scores_table)
 
 ##### A6.2.5 Rubric
 
-###### Interpretability
+### Interpretability
 
-###### Deployment Simplicity
+| Score | Definition                                                                              |
+| ----- | --------------------------------------------------------------------------------------- |
+| 1     | Explanations are inconsistent or difficult to validate for real predictions.            |
+| 2     | Explanations are possible only with substantial post-hoc analysis and high uncertainty. |
+| 3     | Partial explanation is feasible for many cases, but not consistently for edge cases.    |
+| 4     | Explanations are reliable for most predictions with moderate analyst effort.            |
+| 5     | Explanations are clear, reproducible, and directly linked to prediction drivers.        |
+### Deployment Simplicity
 
-###### Maintenance Burden
+| Score | Definition                                                                               |
+| ----- | ---------------------------------------------------------------------------------------- |
+| 1     | Requires specialised infrastructure and substantial engineering effort to productionise. |
+| 2     | Requires significant compute and non-trivial deployment orchestration.                   |
+| 3     | Deployable with moderate complexity and some specialised setup.                          |
+| 4     | Straightforward deployment using common tooling and infrastructure.                      |
+| 5     | Lightweight deployment with minimal additional infrastructure.                           |
+### Maintenance Burden
 
-###### Domain Fit
+| Score | Definition                                                                                      |
+| ----- | ----------------------------------------------------------------------------------------------- |
+| 1     | Frequent intervention required; retraining, troubleshooting, or dependency management is heavy. |
+| 2     | Ongoing maintenance is substantial and needs specialist attention.                              |
+| 3     | Maintenance is moderate with scheduled monitoring and periodic retraining.                      |
+| 4     | Maintenance is predictable and manageable with standard team skills.                            |
+| 5     | Maintenance overhead is low and operational runbooks are stable.                                |
 
-###### Model Lifecycle & Sustainability
+### Domain Fit
 
-###### Dependency Risk
+| Score | Definition                                                                     |
+| ----- | ------------------------------------------------------------------------------ |
+| 1     | Weak alignment with domain language, labels, and error tolerance requirements. |
+| 2     | Limited alignment; important domain cases remain poorly handled.               |
+| 3     | Adequate alignment for core use cases with known limitations.                  |
+| 4     | Strong alignment with domain terminology and decision requirements.            |
+| 5     | Excellent alignment across common and difficult domain-specific cases.         |
+
+### Model Lifecycle & Sustainability
+
+| Score | Definition                                                                  |
+| ----- | --------------------------------------------------------------------------- |
+| 1     | Limited support path; high risk of obsolescence or unmaintained components. |
+| 2     | Weak maintenance signals and unclear future update path.                    |
+| 3     | Some support evidence, but medium-term sustainability remains uncertain.    |
+| 4     | Actively maintained with a clear upgrade and replacement path.              |
+| 5     | Strong long-term support and broad ecosystem resilience.                    |
+
+### Dependency Risk
+
+| Score | Definition                                                              |
+| ----- | ----------------------------------------------------------------------- |
+| 1     | High reliance on opaque or weakly supported third-party components.     |
+| 2     | Significant external dependency exposure with material governance risk. |
+| 3     | Moderate dependency exposure with manageable controls.                  |
+| 4     | Limited dependency risk with mature, well-supported components.         |
+| 5     | Minimal dependency risk with transparent and well-governed components.  |
 
 ## Appendix B. Figures, tables, and visualisations.
 
@@ -8281,10 +8319,10 @@ Macro-F1 for the same model/hyperparameter combinations trained on 1%, 10% and 1
 
 ### B20. Correlation between population sizes
 
-| Comparison | Pearson (scores) | Spearman (ranks) |
-|---|---|---|
-| 1% vs 100% | 0.9707 | 0.9364 |
-| 10% vs 100% | 0.9980 | 0.9273 |
+| Comparison  | Pearson (scores) | Spearman (ranks) |
+| ----------- | ---------------- | ---------------- |
+| 1% vs 100%  | 0.9707           | 0.9364           |
+| 10% vs 100% | 0.9980           | 0.9273           |
 
 Differences in ranking between the 1%/10% and 100% populations were 0–3 places, and every model that was not significantly worse at 1% under a paired t-test was also not significantly worse at 100%. This is the justification for filtering candidates on smaller populations. Source A3.3; supports section 7.1.
 
@@ -8461,6 +8499,93 @@ Weighted score by metric:
 | SEC-BERT | 2.34 | 2.96 | 0.59 | 0.60 | 1.17 | 0.00 | 0.00 | 0.00 | 5.56 | 2.00 | 2.22 | 3.33 | 0.91 | 2.73 | 5.45 |
 
 SEC-BERT wins on every raw performance metric, but the differences are small and the confidence intervals overlap, so once interpretability, cost, dependency risk and lifecycle are weighted in, LinearSVC scores highest overall. Source A6.1 (`build_decision_matrix`); supports section 7.5.
+
+### B35. End-to-end system architecture
+
+```mermaid
+flowchart TB
+    S3[("AWS S3<br/>raw iXBRL documents")]
+    ODC["On-demand compute<br/>starts per job, shuts down on completion"]
+    EC2["EC2 instance, CPU only<br/>running POSIT"]
+
+    GET["aws.s3<br/>retrieve documents"]
+    EXT["rvest / xml2<br/>HTML and iXBRL extraction"]
+    STR["bespoke R code<br/>structure to long format"]
+
+    CAN["reticulate to Python<br/>pre-process features"]
+    PIPE["scikit-learn Pipeline<br/>TfidfVectorizer then LinearSVC"]
+
+    ORA[("Oracle database<br/>long format, any taxonomy")]
+    USE["Analysts<br/>SQL queries, dashboards, profiling"]
+
+    S3 --> ODC
+    ODC --> EC2
+    EC2 --> GET
+    GET --> EXT
+    EXT --> STR
+    STR --> CAN
+    CAN --> PIPE
+    PIPE --> ORA
+    ORA --> USE
+```
+
+On-demand compute allocates a CPU-only EC2 instance per job rather than maintaining a permanently running machine, which was both cheaper and more available than GPU instances. The long-format Oracle schema removes the column-limit constraint that drove the annual schema rebuild. Supports section 7.6.
+
+### B36. Data and ML pipeline
+
+```mermaid
+flowchart TB
+    RAW["Raw description and label<br/>from iXBRL document"]
+    CLEAN["Normalise<br/>lowercase, special characters to spaces"]
+    CANON["Canonicalise<br/>dates, company and individual names,<br/>postcodes and numbers to placeholders"]
+    LABEL["Label engineering<br/>standalone placeholders grouped"]
+    FILTER["Filter<br/>drop under 2 characters, over 16 words,<br/>missing and low quality"]
+    SPLIT["Stratified split 80/10/10<br/>train, test, holdout"]
+    TFIDF["TfidfVectorizer<br/>1-3 word n-grams, min_df 1, norm l2"]
+    SVC["LinearSVC<br/>penalty l1, C 2.8, class_weight balanced"]
+    OUT["Predicted XBRL concept"]
+
+    RAW --> CLEAN
+    CLEAN --> CANON
+    CANON --> LABEL
+    LABEL --> FILTER
+    FILTER --> SPLIT
+    SPLIT --> TFIDF
+    TFIDF --> SVC
+    SVC --> OUT
+```
+
+Preprocessing reduced unique descriptions from 266,178 to 7,795 and labels from 956 to 826 while retaining 86% of rows. Canonicalisation serves both model performance and data minimisation. Supports sections 5.3 and 7.2.
+
+### B37. Model selection funnel
+
+```mermaid
+flowchart TB
+    A["10,000 candidate model and<br/>hyperparameter combinations"]
+    B["HalvingRandomSearchCV on 1% sample<br/>DummyClassifier floor"]
+    C["Stratified CV, paired t-tests at 5% level<br/>train time as tie-break"]
+    D["Refine hyperparameter ranges<br/>on 10% sample"]
+    E["Leading candidates trained<br/>on 10% square-root weighted data"]
+    F1["LinearSVC"]
+    F2["CNN"]
+    F3["SEC-BERT"]
+    G["Decision matrix<br/>15 weighted measures<br/>0.35 confidence factor on overlapping CIs"]
+    H["LinearSVC selected<br/>2.3pp macro-F1 traded for<br/>interpretability, speed, deployment simplicity"]
+
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F1
+    E --> F2
+    E --> F3
+    F1 --> G
+    F2 --> G
+    F3 --> G
+    G --> H
+```
+
+Population size validation (Appendix B19, B20) established that 1% and 10% samples correlated at 0.971 and 0.998 with the full population, making the early filtering stages reliable. Supports sections 7.1, 7.2 and 7.5.
 
 ## Appendix C. Statistical rigour: uncertainty, bias, and error estimates where appropriate.
 
