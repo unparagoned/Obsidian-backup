@@ -64,7 +64,7 @@ I used SQL for setting up and managing the Oracle database and tables.
 
 I used the scientific method: hypothesis formulation and testing; comparisons against baseline; and statistical testing rather than simply comparing raw values, so the choices were evidenced-back rather than assumed. 
 
-While working with others to review the code base, we discussed the scope, coverage and implementation of unit, integration and system testing. Constraints included that tests should not contain any customer data, so we used synthetic or anonymised fixtures instead. While we were not using formal test driven development (Beck, 2003), I explained to the team where it can be useful and instructed them to create tests alongside new issues, since it makes it easier to investigate the issue and verify the fixes. 
+While working with people with more software engineering experience to review the code base, we discussed the scope, coverage, and implementation of unit, integration, and system testing. Constraints included that tests should not contain any customer data, so we used synthetic or anonymised fixtures instead. While we were not using formal test driven development (Beck, 2003), I explained to the team where it can be useful and instructed them to create tests alongside new issues, since it makes it easier to investigate the issue and verify the fixes. 
 
 # 4. The scope of the project (including key performance indicators).
 
@@ -208,6 +208,8 @@ The overall system is shown at Appendix B35
  
 The scope of the project meant that others were working on non-machine learning aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
 
+The pipeline now runs automatically daily, so that analysts don't need to run it them selves and just need to query the database. 
+
 Governance is built into the design. Documentation and guidance explain whether an item was tagged by the customer or is a machine learning prediction. Analysts know that the machine learning category can be wrong, that it should never be used in automated decisions, and that there should always be a human in the loop. Per-class performance is available in a dashboard so analysts can check before anything is relied upon. 
 
 # 8. Results.
@@ -234,6 +236,7 @@ Since SEC-BERT is not created by a well-established provider, even if it was the
 
 The short domain-specific descriptions lend themselves well to TF-IDF (1-3 n-grams) with domain-specific vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without impacting other users of the platform.
 
+I worked autonomously on the modelling itself, where I could focus on the coding myself, but sometimes on the analysis side I would use Teams to get input from DevOps for system advice and tax professionals for accountancy related questions.
 My communication approach evolved based on how stakeholders reacted to early explanations, and methods were tailored for the use case and audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. I communicated residual analysis through confusion matrices with examples of errors, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary. I used a simple example to illustrate the difference between weighted and macro scores rather than going into depth on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
 
 I got repeated questions about the machine learning, so I created an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, where it would be good, where it would make mistakes and the kind of mistake they should expect. The dashboard was more user friendly than just having a large dataset they would have to filter and process manually. The dashboard showed the top-5, but some of those were very poor matches, confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding of how the machine learning worked improved, their use increased.
