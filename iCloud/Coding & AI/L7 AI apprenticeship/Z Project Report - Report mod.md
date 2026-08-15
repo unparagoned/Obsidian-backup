@@ -160,7 +160,7 @@ The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearS
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
-I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2, B29 and B30). 
+I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions, dense dimension size and number of layers (Appendix A4.3 and B37). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2, B29 and B30). 
 
 ## 7.4 Class imbalance
 
@@ -173,7 +173,7 @@ A smaller modified training dataset improved neural net performance whereas Line
 
 ## 7.5 Model selection
 
-To compare the model architectures a decision matrix was used (Appendix A6), covering various objective and subjective measures (Saaty, 2008).
+To compare the model architectures a decision matrix was used (Appendix A6 and B37), covering various objective and subjective measures (Saaty, 2008).
 
 - Accuracy
 - Macro-F1
@@ -8533,73 +8533,21 @@ SEC-BERT wins on every raw performance metric, but the differences are small and
 
 ### B35. End-to-end system architecture
 
-```mermaid
-flowchart TB
-    S3[("AWS S3<br/>raw iXBRL documents")]
-    ODC["On-demand compute<br/>starts per job, shuts down on completion"]
-    EC2["EC2 instance, CPU only<br/>running POSIT"]
+![[B35 production system architecture.svg]]
 
-    GET["aws.s3<br/>retrieve documents"]
-    EXT["rvest / xml2<br/>HTML and iXBRL extraction"]
-    STR["bespoke R code<br/>structure to long format"]
-
-    CAN["reticulate to Python<br/>pre-process features"]
-    PIPE["scikit-learn Pipeline<br/>TfidfVectorizer then LinearSVC"]
-
-    ORA[("Oracle database<br/>long format, any taxonomy")]
-    USE["Analysts<br/>SQL queries, dashboards, profiling"]
-
-    S3 --> ODC
-    ODC --> EC2
-    EC2 --> GET
-    GET --> EXT
-    EXT --> STR
-    STR --> CAN
-    CAN --> PIPE
-    PIPE --> ORA
-    ORA --> USE
-```
-
-On-demand-compute allocates a CPU-only EC2 instance per job rather than maintaining a permanently running machine, which was both cheaper and more available than GPU instances. The long-format Oracle schema removes the column-limit constraint that drove the annual schema rebuild. Supports section 7.6.
+Generated diagram: On-demand-compute allocates a CPU-only EC2 instance per job rather than maintaining a permanently running machine, which was both cheaper and more available than GPU instances. Extraction runs in R and classification in Python through `reticulate`, so each language is used where it is strongest within a single job. The long-format Oracle schema removes the column-limit constraint that drove the annual schema rebuild. Supports section 7.6.
 
 ### B36. Data and ML pipeline
 
-[[28b389ae1e43974939e97cf42730a476_MD5.jpg|Open: Pasted image 20260815170713.png]]
-![[28b389ae1e43974939e97cf42730a476_MD5.jpg]]
+![[B36 data and ml pipeline.svg]]
 
-The modelling workflow, as opposed to the production pipeline at Appendix B35. The description is pre-processed and vectorised while the XBRL concept is encoded as the label, and training iterates through hyperparameter optimisation and model selection before evaluation. Supports section 7.6.
-
-
+Generated diagram: The modelling workflow, as opposed to the production pipeline at Appendix B35. The description is pre-processed as the feature while the XBRL concept is encoded as the label, and the data is split and sampled into the populations and square-root weighting used in sections 7.1 and 7.4. The vectoriser is fitted on training data only, so no test information leaks into the features. Training then iterates through hyperparameter optimisation and model selection, and the loop was repeated for each model family, producing the three champions compared in the decision matrix (Appendix B37). Supports section 7.
 
 ### B37. Model selection funnel
 
-```mermaid
-flowchart TB
-    A["10,000 candidate model and<br/>hyperparameter combinations"]
-    B["HalvingRandomSearchCV on 1% sample<br/>DummyClassifier floor"]
-    C["Stratified CV, paired t-tests at 5% level<br/>train time as tie-break"]
-    D["Refine hyperparameter ranges<br/>on 10% sample"]
-    E["Leading candidates trained<br/>on 10% square-root weighted data"]
-    F1["LinearSVC"]
-    F2["CNN"]
-    F3["SEC-BERT"]
-    G["Decision matrix<br/>15 weighted measures<br/>0.35 confidence factor on overlapping CIs"]
-    H["LinearSVC selected<br/>2.3pp macro-F1 traded for<br/>interpretability, speed, deployment simplicity"]
+![[B37 model selection funnel.svg]]
 
-    A --> B
-    B --> C
-    C --> D
-    D --> E
-    E --> F1
-    E --> F2
-    E --> F3
-    F1 --> G
-    F2 --> G
-    F3 --> G
-    G --> H
-```
-
-Population size validation (Appendix B19, B20) established that 1% and 10% samples correlated at 0.971 and 0.998 with the full population, making the early filtering stages reliable. Supports sections 7.1, 7.2 and 7.5.
+Generated diagram: Each model family was narrowed by its own search, HalvingRandomSearchCV for the traditional models and separate Optuna studies for the neural networks and transformers, so the search method matched the training cost of each family. The three champions were then compared under common conditions using the decision matrix (Appendix B31 to B34). Population size validation (Appendix B19 and B20) showed the 1% and 10% samples correlated at 0.971 and 0.998 with the full population, so filtering on samples was reliable. Supports sections 7.2, 7.3 and 7.5.
 
 ### B38. Final model performance — LinearSVC trained on the 100% train population
 
