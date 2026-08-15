@@ -7,7 +7,7 @@ Previous workflows allowed us to reliably extract, structure and analyse fully t
 
 The business priorities were to be able to make all the key data items usable from an analytical perspective promptly after receipt. 
 
-Hubble is a tool I developed that extracts both tagged and untagged items from iXBRL documents and classifies them. I initially worked on Hubble myself, writing the vast majority of the code and doing all the ML elements myself, but as the project became bigger and more important to HMRC I arranged for more resource and lead a virtual team working on the project.
+Hubble is a tool I developed that extracts both tagged and untagged items from iXBRL documents and classifies them. I initially worked on Hubble myself, writing the vast majority of the code and doing all the machine learning elements myself, but as the project became bigger and more important to HMRC I arranged for more resource and lead a virtual team working on the project.
 
 # 2. Outline of the issue or opportunity and the business problem to be solved.
 
@@ -15,7 +15,7 @@ Initial analysis showed that some document types only have approximately 30% of 
 
 Initial requirements just included extracting the raw data such as descriptions, but items can be described in lots of different ways with no fixed taxonomy. Analysis of the descriptions showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and subject matter experts (tax professionals) highlighted that many are domain-specific technical terms that not all analysts would be familiar with. Graphs and statistics showed a very long tail, beyond anything that could be comprehensively reviewed. Existing ad-hoc approaches took on average an hour or two for an analyst and subject matter expert to properly explore a single concept with some projects having hundreds of potential concepts, which was not feasible, limiting quality of analysis. 
 
-While 70% of items are untagged, 30% of items are tagged, and they are tagged by software or accountants so were expected to be reasonable quality training data for supervised learning that could then be applied to the 70%. I recommended creating a supervised multi-class text classification ML model to classify the items. This would save significant analyst and subject matter expert time; reduce errors; and improve analysis quality. 
+While 70% of items are untagged, 30% of items are tagged, and they are tagged by software or accountants so were expected to be reasonable quality training data for supervised learning that could then be applied to the 70%. I recommended creating a supervised multi-class text classification machine learning model to classify the items. This would save significant analyst and subject matter expert time; reduce errors; and improve analysis quality. 
 
 # 3. Methods used and justification
 
@@ -25,7 +25,7 @@ I selected an agile approach for the overall project (Beck et al., 2001). I did 
 
 ## 3.2 CRISP-DM
 
-I used CRISP-DM since it accommodates the cyclical nature of ML and provides a clear intuitive structure (Chapman et al., 2000). I worked on the ML aspect myself, so CRISP-DM is more appropriate than larger more complex methodologies like TDSP (Microsoft, 2023). Each stage produced documented artefacts, allowing evidence backed decisions in other steps. 
+I used CRISP-DM since it accommodates the cyclical nature of machine learning and provides a clear intuitive structure (Chapman et al., 2000). I worked on the machine learning aspect myself, so CRISP-DM is more appropriate than larger more complex methodologies like TDSP (Microsoft, 2023). Each stage produced documented artefacts, allowing evidence backed decisions in other steps. 
 
 ## 3.3 Version control and documentation
 
@@ -49,9 +49,9 @@ I used R due to its relevant packages and because it is the default coding langu
 - `dbplyr` allowed Oracle database access using tidyverse syntax analysts are familiar with.
 - `testthat` for testing
 
-I used Python for the ML aspects since the classification packages are more mature and have more support. The `reticulate` package in R allows importing Python functions into R, which allowed the Python ML to be integrated into the R based workflow, at the cost of some added setup and coding complexity.
+I used Python for the machine learning aspects since the classification packages are more mature and have more support. The `reticulate` package in R allows importing Python functions into R, which allowed the Python machine learning to be integrated into the R based workflow, at the cost of some added setup and coding complexity.
 - `mlflow` to track data version, model version, performance and various other metrics
-- `scikit-learn` for traditional ML models (Pedregosa et al., 2011) 
+- `scikit-learn` for traditional machine learning models (Pedregosa et al., 2011) 
 - `tensorflow`/`keras` to build and train NN
 - HuggingFace `transformers` to utilise pre-trained transformer based models (Wolf et al., 2020)
 - `optuna` to fine tune parameters and hyperparameters (Akiba et al., 2019). 
@@ -68,7 +68,7 @@ While working with others to review the code base, we discussed the scope, cover
 
 # 4. The scope of the project (including key performance indicators).
 
-The scope covered, extraction of features such as descriptions, headings, table names, values, structural data (table number, row number, column number) and iXBRL data (concept, dimensional data), ML to classify features, and an automated pipeline extracting to Oracle database. Out of scope was any analytical work based on the data, any automated decision making based on the ML category or human labelling. The scope evolved iteratively over time(Section 9).
+The scope covered, extraction of features such as descriptions, headings, table names, values, structural data (table number, row number, column number) and iXBRL data (concept, dimensional data), machine learning to classify features, and an automated pipeline extracting to Oracle database. Out of scope was any analytical work based on the data, any automated decision making based on the machine learning category or human labelling. The scope evolved iteratively over time(Section 9).
 
 Working with stakeholders, I established success criteria. 
 - Macro-F1 > 0.6, primary performance metric, weighting all classes equally, so common classes do not dominate (Sokolova and Lapalme, 2009).
@@ -112,7 +112,7 @@ Subject matter experts advised that where there was a placeholder by itself, the
 
 I implemented data quality controls aligned with HMRC expectations and broadly in line with DAMA UK's quality dimensions (DAMA UK, 2013; Government Data Quality Hub, 2020).
 - Completeness improved since untagged data was now extracted. 
-- Consistency because the untagged data and iXBRL tagged data were structured and formatted in similar ways on the same tables; and had consistent ML categories.
+- Consistency because the untagged data and iXBRL tagged data were structured and formatted in similar ways on the same tables; and had consistent machine learning categories.
 - Timeliness. The system architecture and long-format data structure handles any taxonomy and without hitting database column limits, allowing extraction within days of receipt. 
 - Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 16 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, Appendix A2.3). 
 
@@ -127,11 +127,11 @@ I considered ways to systemise a rule-based system, using regular expressions wh
 
 While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But initial analysis using cosine similarity highlighted that the great variety in descriptions for some concepts meant that it was not feasible. So I focused on supervised learning models. 
 
-Traditional ML models can perform well with classifying short text, since there is a high signal to noise ratio. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
+Traditional machine learning models can perform well with classifying short text, since there is a high signal to noise ratio. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
 
-There were two main methods used to embed the descriptions for the traditional ML models, sparse vectorisation (TF, TFIDF) and dense vector embeddings (MPNet, E5) (Song et al., 2020; Wang et al., 2022). TFIDF over character and word n-grams (Sparck Jones, 1972; Cavnar and Trenkle, 1994) can perform well since it captures domain-specific terminology and phrasing well and works with a variety of models, with good speed and performance. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
+There were two main methods used to embed the descriptions for the traditional machine learning models, sparse vectorisation (TF, TFIDF) and dense vector embeddings (MPNet, E5) (Song et al., 2020; Wang et al., 2022). TFIDF over character and word n-grams (Sparck Jones, 1972; Cavnar and Trenkle, 1994) can perform well since it captures domain-specific terminology and phrasing well and works with a variety of models, with good speed and performance. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
 
-A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in traditional ML. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
+A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in traditional machine learning. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
 
 Transformer based models are a more advanced architecture with better semantic understanding of text, and often outperforms other neural network architectures (Vaswani et al., 2017). Pre-trained models are trained over large amounts of text so have a lot of semantic understanding built in (Devlin et al., 2019). Various transformer based models were tested: RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures, and training data (Appendix A5.1 and A5.2). SEC-BERT is a model that was trained on SEC filings (US financial filings), so should have better semantic understanding of accountancy terms and concepts.
 
@@ -143,7 +143,7 @@ It is expected that a frontier LLM, such as ChatGPT, would have better semantic 
 
 Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller samples were representative (Appendix A3.3). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively (Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
 
-## 7.2 Traditional ML algorithms
+## 7.2 Traditional machine learning algorithms
 
 To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-tests to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
 
@@ -206,26 +206,26 @@ The overall system is shown at Appendix B35
 - Embedded and classified by scikit-learn's `Pipeline` with `TfidfVectorizer` and `LinearSVC`
 - Output saved to an Oracle database using `dbplyr` 
  
-The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
+The scope of the project meant that others were working on non-machine learning aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
 
 # 8. Results.
 
-LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788) and beating KPIs of 0.7 and 0.6 respectively (Appendix A3.7.3 and B38).  Also beating a stratified DummyClassifier baseline of 0.007 by a significant amount. The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable ML model. 
+LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 (Appendix A3.7.3 and B38).  The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable machine learning model. 
 
 Residual analysis helped identify which classes performed poorly and summaries were created for analysts (Appendix A3.10). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples (Appendix B24). 
 
-Subject matter experts also provided input explaining that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This relates to the large difference in accuracy and macro-f1, the model does well on the main commonly used concepts, but the long tail has lots of concepts that that have too much specificity to be accurately predicted by the features. This highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
+Subject matter experts also provided input explaining that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This relates to the large difference in accuracy and macro-f1, showing that the model does well on the main commonly used concepts, but the long tail has lots of concepts that have too much specificity to be accurately predicted by the features. This highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
 
 Sensitivity analysis and model robustness were tested over various categories, abbreviations, adversarial (phrased to be misleading), scenario planning, command (attempts to inject LLM instructions), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8, A5.3.5 and B25). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was surprising since I would have expected the domain-specific training and theoretically better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by computers, rather than people typing every description. 
 
-Bias was investigated both against size of companies and software provider (Mehrabi et al., 2021). Large companies had a macro-F1 score of 0.934 vs 0.790 for small companies, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. On residual analysis while there were some real misclassifications often the misclassifications were for very similar classes and sometimes there was not enough information to differentiate between them. This suggests that the specificity of the model and evaluation is in too fine-grained. Different software providers do tag things differently, but it is a training proxy, and such issues would not apply to untagged items, or if we had human labelled classes this issue would not show up. But it's still a real issue that needs to be resolved, working with providers to make tagging more consistent, especially since tagged concepts would be considered more reliable than a ML category. 
+Bias was investigated both against size of companies and software provider (Mehrabi et al., 2021). Large companies had a macro-F1 score of 0.934 vs 0.790 for small companies, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. On residual analysis while there were some real misclassifications often the misclassifications were for very similar classes and sometimes there was not enough information to differentiate between them. This suggests that the specificity of the model and evaluation is too fine-grained. Different software providers do tag things differently, but it is a training proxy, and such issues would not apply to untagged items, or if we had human labelled classes this issue would not show up. But it is still a real issue that needs to be resolved, working with providers to make tagging more consistent, especially since tagged concepts would be considered more reliable than a machine learning category. 
 
 # 9. Discussion and conclusions/recommendations.
 
-An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, ML categories, improved architectures and database, with each step evaluated for feasibility, benefits, risk, proving the approach and provided business value. Regular meetings and a workshop helped get feedback such as the issues dealing with raw descriptions; validate business understanding and planned approaches. The customer requirements at the beginning would not have foreseen the way the project developed, highlighting the benefit of an agile approach opposed to a more fixed waterfall approach. The iterative approach improved macro-F1 from under 0.50 to 0.785 on the evaluation dataset and adding additional features: table name and heading, improving macro-F1 by 9.8pp over the production dataset. 
+An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, machine learning categories, improved architectures and database, with each step evaluated for feasibility, benefits, risk, proving the approach and provided business value. Regular meetings and a workshop helped get feedback such as the issues dealing with raw descriptions; validate business understanding and planned approaches. The customer requirements at the beginning would not have foreseen the way the project developed, highlighting the benefit of an agile approach opposed to a more fixed waterfall approach. The iterative approach improved macro-F1 from under 0.50 to 0.785 on the evaluation dataset and adding additional features: table name and heading, improving macro-F1 by 9.8pp on the production dataset. 
 
 
-While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using method like decision matrixes. But some factors like interpretability and security are core requirements that could override a raw score. 
+While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using method like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score. 
 
 The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, that was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example the phrase "cost of" has no coefficient of its own in the example but LIME and SHAP show it still drives the prediction by suppressing competing classes (Appendix A3.9.3 and B23). 
 
@@ -233,11 +233,11 @@ Since SEC-BERT is not created by a well established provider, even if it was the
 
 The short domain-specific descriptions led itself well to TF-IDF (1-3 n-grams) with domain-specific vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without impacting other users of the platform.
 
-My communication approach evolved based on how stakeholders reacted to early explanations, and methods tailored for the use case and audience, such as powerpoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. So communicating residual analysis through confusion matrixes with the examples of error, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary. I used a simple example to helped illustrate the difference between weighted and macro scores rather than going into depth on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
+My communication approach evolved based on how stakeholders reacted to early explanations, and methods tailored for the use case and audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. So communicating residual analysis through confusion matrices with the examples of error, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary. I used a simple example to illustrate the difference between weighted and macro scores rather than going into depth on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
 
-I got similar questions about the ML, so I also created an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, where it would be good, where it would make mistakes and the kind of mistake they should expect. The dashboard was more user friendly than just having a large dataset they would have to filter/process manually. The dashboard showed the top-5, but some of those were very poor matches confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding of how the ML worked improved, their use increased.
+I got similar questions about the machine learning, so I created an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, where it would be good, where it would make mistakes and the kind of mistake they should expect. The dashboard was more user friendly than just having a large dataset they would have to filter and process manually. The dashboard showed the top-5, but some of those were very poor matches confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding of how the machine learning worked improved, their use increased.
 
-With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, funding, blockers timeframes, and the benefits of more people working on the project, which resulted in additional people to help with development. I created a memos with a cost benefit analysis highlighting both improved timeliness and also extracting new untagged data, resulting in additional funding for infrastructure. 
+With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, funding, blockers timeframes, and the benefits of more people working on the project, which resulted in additional people to help with development. I created memos with a cost benefit analysis highlighting both improved timeliness and also extracting new untagged data, resulting in additional funding for infrastructure. 
 
 With user acceptance testing, it highlighted that users might prefer numeric primary keys for joining rather than natural keys for join performance reasons. They also suggested structuring data in a way they are more familiar with. 
 
@@ -252,7 +252,7 @@ Recommendations:
 - Monitor drift (Gama et al., 2014)
 	- Monitoring drift of inputs, check if there are new taxonomies. 
 	- Drift on outputs to be detected for both accuracy and f1-macro, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
-- Standard structure for ML communications, should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details (Mitchell et al., 2019).
+- Standard structure for machine learning communications, should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details (Mitchell et al., 2019).
 - Moving tests to a CI pipeline will add more assurance and reliability. 
 - Human evaluation of tagging
 - Establish the performance ceiling beforehand so the appropriate time and effort can be used to improve pre-processing data and improving the model. The same description can be associated with different concepts, so there is a limit to even the best model. Looking at the most common concept per description would allow me to calculate a hard upper bound of performance. 
@@ -268,7 +268,7 @@ The biggest factors were actually pre-processing which increased macro-F1 by 20p
 
 # 11. Implications.
 
-Hubble helped us meet our quality standards. The ML category reduce the manual regex style work previously done, improved consistency and reliability of the analysis. 
+Hubble helped us meet our quality standards. The machine learning category reduce the manual regex style work previously done, improved consistency and reliability of the analysis. 
 
 Hubble being widely used in by multiple teams, with data being integrated into various dashboards and across multiple tax heads.
 
@@ -282,7 +282,7 @@ The model and evaluation were all based on tagged data. But the main use case wo
 
 Traditional machine learning model comparisons used 5-fold cross validation, was a reasonable choice for the initial filtering due computations cost, but overlapping training data sets can understate variance. Later stages should have used something stronger like 5x2 CV, which uses disjoint training sets within each replication, which limits Type I error (Dietterich, 1998). 
 
-Analysts were educated that the ML category can be wrong, so to use the dashboard to identify how well the concept performs. As an AI safeguard, The ML category should not be used for automated decisions, and that there should always be a human in the loop before any action on it happens (Information Commissioner's Office, no date a). 
+Analysts were educated that the machine learning category can be wrong, so to use the dashboard to identify how well the concept performs. As an AI safeguard, The machine learning category should not be used for automated decisions, and that there should always be a human in the loop before any action on it happens (Information Commissioner's Office, no date a). 
 
 LinearSVC has very good train times on smaller dataset sizes but does not scale as well on larger datasets, so it is not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in f1-macro, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
 
