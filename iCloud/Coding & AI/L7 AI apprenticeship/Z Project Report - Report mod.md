@@ -116,12 +116,12 @@ I implemented data quality controls aligned with HMRC expectations and broadly i
 - Timeliness. The system architecture and long-format data structure handles any taxonomy and without hitting database column limits, allowing extraction within days of receipt. 
 - Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 16 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, Appendix A2.3). 
 
-This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826, while keeping 86% of the rows of data (Appendix B15). The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure such as restricting systems and data access to specific users, this ensured I complied with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
+ This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 956(Appendix B15). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure such as restricting systems and data access to specific users, this ensured I complied with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
 
 Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
 
-This is multi-class text classification with 826 nominal classes and strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context, then evaluated the leading candidates (Sebastiani, 2002).
+This is multi-class text classification with 141 nominal classes and strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context, then evaluated the leading candidates (Sebastiani, 2002).
 
 I considered ways to systemise a rule-based system, using regular expressions which could have some successes but it would use too much subject matter expert time, and would not cover the long tail. It was not a feasible business solution, so I investigated alternatives. 
 
@@ -194,7 +194,7 @@ For fair comparison, and because of memory/time constraints, all models were tra
 
 While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintain, is more explainable (feature coefficients), runs 220x faster, deploys on existing CPU-based infrastructure, scales cost effectively, and relies on well-established, regularly updated packages (Appendix B32, B33 and B34).
 
-## 7.6 Wider system
+## 7.6 Production system and governance
 
 Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper and more available. 
 
@@ -208,13 +208,15 @@ The overall system is shown at Appendix B35
  
 The scope of the project meant that others were working on non-machine learning aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
 
+Governance is built into the design. Documentation and guidance explain whether an item was tagged by the customer or is a machine learning prediction. Analysts know that the machine learning category can be wrong, that it should never be used in automated decisions, and that there should always be a human in the loop. Per-class performance is available in a dashboard so analysts can check before anything is relied upon. 
+
 # 8. Results.
 
-LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 (Appendix A3.7.3 and B38).  The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable machine learning model. 
+LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 (Appendix A3.7.3 and B38). The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable machine learning model. 
 
-Residual analysis helped identify which classes performed poorly and summaries were created for analysts (Appendix A3.10). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples (Appendix B24). 
+Residual analysis identified which classes performed poorly and summaries were created for analysts (Appendix A3.10). Per-class results were varied, with a median per-class F1 of 0.966, but 27 of the 141 modelled concepts scored below 0.5 and eight scored zero, pulling down the macro-F1 score. By volume the exposure is smaller, with 94% of holdout records falling in concepts scoring above 0.9 (Appendix B40). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples (Appendix B24), and the dashboard let them check a concept's reliability before using it.
 
-Subject matter experts also provided input explaining that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This relates to the large difference in accuracy and macro-f1, showing that the model does well on the main commonly used concepts, but the long tail has lots of concepts that have too much specificity to be accurately predicted by the features. This highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
+Subject matter experts also provided input explaining that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This highlights that a simplified list of categories could be beneficial, especially for evaluation. 
 
 Sensitivity analysis and model robustness were tested over various categories, abbreviations, adversarial (phrased to be misleading), scenario planning, command (attempts to inject LLM instructions), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8, A5.3.5 and B25). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was surprising since I would have expected the domain-specific training and theoretically better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by computers, rather than people typing every description. 
 
@@ -251,11 +253,13 @@ Recommendations:
 - Monitor drift (Gama et al., 2014).
 	- Monitoring drift of inputs, check if there are new taxonomies. 
 	- Drift on outputs to be detected for both accuracy and macro-F1, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
+	- Automated drift can only check tagged items, there should also be occasional manual check of untagged items. 
 - Standard structure for machine learning communications, should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details (Mitchell et al., 2019).
 - Moving tests to a CI pipeline will add more assurance and reliability. 
 - Human evaluation of tagging.
 - Establish the performance ceiling beforehand so the appropriate time and effort can be used to improve pre-processing data and improving the model. The same description can be associated with different concepts, so there is a limit to even the best model. Looking at the most common concept per description would allow me to calculate a hard upper bound of performance. 
 - Consider implementing a simplified taxonomy of concepts. Grouping together similar concepts would be more user friendly for analysts.
+- Record model version on the outputs/database, with the version registered in MLflow, so predictions can be traced back to the exact model and training dataset.
 
 # 10. Summary of findings.
 
@@ -279,115 +283,113 @@ The data has been used to better identify companies to investigate, and the esti
 
 The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different than the tagged data. e.g. An item might have been left untagged since there are not any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged, but it would require a large number of tax-trained experts spending a long time to label the data, which is not feasible. But the experts will be feeding into a manual evaluation stage. Further evaluation between tagged and untagged descriptions would be useful going forwards.
 
-Traditional machine learning model comparisons used 5-fold cross validation, was a reasonable choice for the initial filtering due computations cost, but overlapping training data sets can understate variance. Later stages should have used something stronger like 5x2 CV, which uses disjoint training sets within each replication, which limits Type I error (Dietterich, 1998). 
-
-Analysts were educated that the machine learning category can be wrong, so to use the dashboard to identify how well the concept performs. As an AI safeguard, The machine learning category should not be used for automated decisions, and that there should always be a human in the loop before any action on it happens (Information Commissioner's Office, no date a). 
+Traditional machine learning model comparisons used 5-fold cross validation, was a reasonable choice for the initial filtering due computations cost, but overlapping training data sets can understate variance. Later stages should have used something stronger like 5x2 CV, which uses disjoint training sets within each replication, which limits Type I error (Dietterich, 1998). Al
 
 LinearSVC has very good train times on smaller dataset sizes but does not scale as well on larger datasets, so it is not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in f1-macro, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
 
-Increasing data set size while keeping an absolute threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
+Increasing data set size while keeping an the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
 
 The integration of R and Python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
 
 # 13. Reference list.
 
-Akiba, T., et al. (2019) 'Optuna: a next-generation hyperparameter optimization framework', Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. Anchorage, 4-8 August. pp. 2623-2631. Available at: https://doi.org/10.1145/3292500.3330701 (Accessed: 14 August 2026)
+Akiba, T., et al. (2019) 'Optuna: a next-generation hyperparameter optimization framework', *Proceedings of the 25th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*. Anchorage, 4-8 August. pp. 2623-2631. Available at: https://doi.org/10.1145/3292500.3330701 (Accessed: 14 August 2026)
 
-Atlassian (no date) What is Agile? Available at: https://www.atlassian.com/agile (Accessed: 14 August 2026)
+Atlassian (no date) *What is Agile?* Available at: https://www.atlassian.com/agile (Accessed: 14 August 2026)
 
-Beck, K., et al. (2001) Principles behind the Agile Manifesto. Available at: https://agilemanifesto.org/principles.html (Accessed: 14 August 2026)
+Beck, K., et al. (2001) *Principles behind the Agile Manifesto*. Available at: https://agilemanifesto.org/principles.html (Accessed: 14 August 2026)
 
-Beck, K. (2003) Test-driven development: by example. Boston, MA: Addison-Wesley.
+Beck, K. (2003) *Test-driven development: by example*. Boston, MA: Addison-Wesley.
 
-Bergstra, J. and Bengio, Y. (2012) 'Random search for hyper-parameter optimization', Journal of Machine Learning Research, 13, pp. 281-305. Available at: https://jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf (Accessed: 14 August 2026)
+Bergstra, J. and Bengio, Y. (2012) 'Random search for hyper-parameter optimization', *Journal of Machine Learning Research*, 13, pp. 281-305. Available at: https://jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf (Accessed: 14 August 2026)
 
-Cavnar, W. and Trenkle, J. (1994) 'N-gram-based text categorization', Proceedings of the Third Annual Symposium on Document Analysis and Information Retrieval (SDAIR-94). Las Vegas, 11-13 April. pp. 161-175. Available at: https://www.researchgate.net/publication/2375544_N-Gram-Based_Text_Categorization (Accessed: 14 August 2026)
+Cavnar, W. and Trenkle, J. (1994) 'N-gram-based text categorization', *Proceedings of the Third Annual Symposium on Document Analysis and Information Retrieval (SDAIR-94)*. Las Vegas, 11-13 April. pp. 161-175. Available at: https://www.researchgate.net/publication/2375544_N-Gram-Based_Text_Categorization (Accessed: 14 August 2026)
 
-Chapman, P., et al. (2000) CRISP-DM 1.0: step-by-step data mining guide. Chicago, IL: SPSS Inc. Available at: https://www.kde.cs.uni-kassel.de/wp-content/uploads/lehre/ws2012-13/kdd/files/CRISPWP-0800.pdf (Accessed: 14 August 2026)
+Chapman, P., et al. (2000) *CRISP-DM 1.0: step-by-step data mining guide*. Chicago, IL: SPSS Inc. Available at: https://www.kde.cs.uni-kassel.de/wp-content/uploads/lehre/ws2012-13/kdd/files/CRISPWP-0800.pdf (Accessed: 14 August 2026)
 
-Clauset, A., Shalizi, C. and Newman, M. (2009) 'Power-law distributions in empirical data', SIAM Review, 51(4), pp. 661-703. Available at: https://doi.org/10.1137/070710111 (Accessed: 14 August 2026)
+Clauset, A., Shalizi, C. and Newman, M. (2009) 'Power-law distributions in empirical data', *SIAM Review*, 51(4), pp. 661-703. Available at: https://doi.org/10.1137/070710111 (Accessed: 14 August 2026)
 
-Companies House (2026) Free accounts data product. Available at: https://download.companieshouse.gov.uk/en_accountsdata.html (Accessed: 14 August 2026)
+Companies House (2026) *Free accounts data product*. Available at: https://download.companieshouse.gov.uk/en_accountsdata.html (Accessed: 14 August 2026)
 
-DAMA UK (2013) The six primary dimensions for data quality assessment. Available at: https://www.dama-uk.org/resources/the-six-primary-dimensions-for-data-quality-assessment (Accessed: 14 August 2026)
+DAMA UK (2013) *The six primary dimensions for data quality assessment*. Available at: https://www.dama-uk.org/resources/the-six-primary-dimensions-for-data-quality-assessment (Accessed: 14 August 2026)
 
-Data Protection Act 2018, c. 12. Available at: https://www.legislation.gov.uk/ukpga/2018/12/contents (Accessed: 14 August 2026)
+*Data Protection Act 2018, c. 12*. Available at: https://www.legislation.gov.uk/ukpga/2018/12/contents (Accessed: 14 August 2026)
 
-Devlin, J., et al. (2019) 'BERT: pre-training of deep bidirectional transformers for language understanding', Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies. Minneapolis, 2-7 June. pp. 4171-4186. Available at: https://doi.org/10.18653/v1/N19-1423 (Accessed: 14 August 2026)
+Devlin, J., et al. (2019) 'BERT: pre-training of deep bidirectional transformers for language understanding', *Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies*. Minneapolis, 2-7 June. pp. 4171-4186. Available at: https://doi.org/10.18653/v1/N19-1423 (Accessed: 14 August 2026)
 
-Dietterich, T. (1998) 'Approximate statistical tests for comparing supervised classification learning algorithms', Neural Computation, 10(7), pp. 1895-1923. Available at: https://doi.org/10.1162/089976698300017197 (Accessed: 14 August 2026)
+Dietterich, T. (1998) 'Approximate statistical tests for comparing supervised classification learning algorithms', *Neural Computation*, 10(7), pp. 1895-1923. Available at: https://doi.org/10.1162/089976698300017197 (Accessed: 14 August 2026)
 
-Gama, J., et al. (2014) 'A survey on concept drift adaptation', ACM Computing Surveys, 46(4), pp. 1-37. Available at: https://doi.org/10.1145/2523813 (Accessed: 14 August 2026)
+Gama, J., et al. (2014) 'A survey on concept drift adaptation', *ACM Computing Surveys*, 46(4), pp. 1-37. Available at: https://doi.org/10.1145/2523813 (Accessed: 14 August 2026)
 
-Government Data Quality Hub (2020) The Government Data Quality Framework. Available at: https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework (Accessed: 14 August 2026)
+Government Data Quality Hub (2020) *The Government Data Quality Framework*. Available at: https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework (Accessed: 14 August 2026)
 
-He, H. and Garcia, E. (2009) 'Learning from imbalanced data', IEEE Transactions on Knowledge and Data Engineering, 21(9), pp. 1263-1284. Available at: https://doi.org/10.1109/TKDE.2008.239 (Accessed: 14 August 2026)
+He, H. and Garcia, E. (2009) 'Learning from imbalanced data', *IEEE Transactions on Knowledge and Data Engineering*, 21(9), pp. 1263-1284. Available at: https://doi.org/10.1109/TKDE.2008.239 (Accessed: 14 August 2026)
 
-HM Revenue and Customs (2024) Company Tax Returns. Available at: https://www.gov.uk/company-tax-returns (Accessed: 14 August 2026)
+HM Revenue and Customs (2024) *Company Tax Returns*. Available at: https://www.gov.uk/company-tax-returns (Accessed: 14 August 2026)
 
-Information Commissioner's Office (no date a) Automated decision-making and profiling. Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/automated-decision-making-and-profiling/ (Accessed: 14 August 2026)
+Information Commissioner's Office (no date a) *Automated decision-making and profiling*. Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/automated-decision-making-and-profiling/ (Accessed: 14 August 2026)
 
-Information Commissioner's Office (no date b) Data protection impact assessments (DPIAs). Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/ (Accessed: 15 August 2026)
+Information Commissioner's Office (no date b) *Data protection impact assessments (DPIAs)*. Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/ (Accessed: 15 August 2026)
 
-Joachims, T. (1998) 'Text categorization with support vector machines: learning with many relevant features', in Nedellec, C. and Rouveirol, C. (eds.) Machine learning: ECML-98. Berlin: Springer, pp. 137-142.
+Joachims, T. (1998) 'Text categorization with support vector machines: learning with many relevant features', in Nedellec, C. and Rouveirol, C. (eds.) *Machine learning: ECML-98*. Berlin: Springer, pp. 137-142.
 
-Kim, Y. (2014) 'Convolutional neural networks for sentence classification', Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP). Doha, 25-29 October. pp. 1746-1751. Available at: https://doi.org/10.3115/v1/D14-1181 (Accessed: 14 August 2026)
+Kim, Y. (2014) 'Convolutional neural networks for sentence classification', *Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP)*. Doha, 25-29 October. pp. 1746-1751. Available at: https://doi.org/10.3115/v1/D14-1181 (Accessed: 14 August 2026)
 
-Kohavi, R. (1995) 'A study of cross-validation and bootstrap for accuracy estimation and model selection', Proceedings of the 14th International Joint Conference on Artificial Intelligence (IJCAI). Montreal, 20-25 August. pp. 1137-1143.
+Kohavi, R. (1995) 'A study of cross-validation and bootstrap for accuracy estimation and model selection', *Proceedings of the 14th International Joint Conference on Artificial Intelligence (IJCAI)*. Montreal, 20-25 August. pp. 1137-1143.
 
-Li, L., et al. (2018) 'Hyperband: a novel bandit-based approach to hyperparameter optimization', Journal of Machine Learning Research, 18(185), pp. 1-52.
+Li, L., et al. (2018) 'Hyperband: a novel bandit-based approach to hyperparameter optimization', *Journal of Machine Learning Research*, 18(185), pp. 1-52.
 
-Liu, Y., et al. (2019) RoBERTa: a robustly optimized BERT pretraining approach. Available at: https://arxiv.org/abs/1907.11692 (Accessed: 14 August 2026)
+Liu, Y., et al. (2019) *RoBERTa: a robustly optimized BERT pretraining approach*. Available at: https://arxiv.org/abs/1907.11692 (Accessed: 14 August 2026)
 
-Loukas, L., et al. (2022) 'FiNER: financial numeric entity recognition for XBRL tagging', Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics. Dublin, 22-27 May. pp. 4419-4431. Available at: https://doi.org/10.18653/v1/2022.acl-long.303 (Accessed: 14 August 2026)
+Loukas, L., et al. (2022) 'FiNER: financial numeric entity recognition for XBRL tagging', *Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics*. Dublin, 22-27 May. pp. 4419-4431. Available at: https://doi.org/10.18653/v1/2022.acl-long.303 (Accessed: 14 August 2026)
 
-Lundberg, S. and Lee, S. (2017) 'A unified approach to interpreting model predictions', Advances in Neural Information Processing Systems 30. Long Beach, 4-9 December. pp. 4765-4774. Available at: https://arxiv.org/pdf/1705.07874  (Accessed: 14 August 2026)
+Lundberg, S. and Lee, S. (2017) 'A unified approach to interpreting model predictions', *Advances in Neural Information Processing Systems 30*. Long Beach, 4-9 December. pp. 4765-4774. Available at: https://arxiv.org/pdf/1705.07874  (Accessed: 14 August 2026)
 
-Mehrabi, N., et al. (2021) 'A survey on bias and fairness in machine learning', ACM Computing Surveys, 54(6), pp. 1-35. Available at: https://doi.org/10.1145/3457607 (Accessed: 14 August 2026)
+Mehrabi, N., et al. (2021) 'A survey on bias and fairness in machine learning', *ACM Computing Surveys*, 54(6), pp. 1-35. Available at: https://doi.org/10.1145/3457607 (Accessed: 14 August 2026)
 
-Microsoft (2023) Microsoft-TDSP: repository for Microsoft Team Data Science Process. Available at: https://github.com/Azure/Microsoft-TDSP (Accessed: 14 August 2026)
+Microsoft (2023) *Microsoft-TDSP: repository for Microsoft Team Data Science Process*. Available at: https://github.com/Azure/Microsoft-TDSP (Accessed: 14 August 2026)
 
-Mitchell, M., et al. (2019) 'Model cards for model reporting', Proceedings of the Conference on Fairness, Accountability, and Transparency. Atlanta, 29-31 January. pp. 220-229. Available at: https://doi.org/10.1145/3287560.3287596 (Accessed: 14 August 2026)
+Mitchell, M., et al. (2019) 'Model cards for model reporting', *Proceedings of the Conference on Fairness, Accountability, and Transparency*. Atlanta, 29-31 January. pp. 220-229. Available at: https://doi.org/10.1145/3287560.3287596 (Accessed: 14 August 2026)
 
-National Cyber Security Centre (2023) Guidelines for secure AI system development. Available at: https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development (Accessed: 14 August 2026)
+National Cyber Security Centre (2023) *Guidelines for secure AI system development*. Available at: https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development (Accessed: 14 August 2026)
 
-Pedregosa, F., et al. (2011) 'Scikit-learn: machine learning in Python', Journal of Machine Learning Research, 12, pp. 2825-2830. Available at: https://www.researchgate.net/publication/51969319_Scikit-learn_Machine_Learning_in_Python (Accessed: 14 August 2026)
+Pedregosa, F., et al. (2011) 'Scikit-learn: machine learning in Python', *Journal of Machine Learning Research*, 12, pp. 2825-2830. Available at: https://www.researchgate.net/publication/51969319_Scikit-learn_Machine_Learning_in_Python (Accessed: 14 August 2026)
 
-Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data (UK GDPR). Available at: https://www.legislation.gov.uk/eur/2016/679/contents (Accessed: 15 August 2026)
+*Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data (UK GDPR)*. Available at: https://www.legislation.gov.uk/eur/2016/679/contents (Accessed: 15 August 2026)
 
-Reimers, N. and Gurevych, I. (2019) 'Sentence-BERT: sentence embeddings using Siamese BERT-networks', Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing. Hong Kong, 3-7 November. pp. 3982-3992. Available at: https://doi.org/10.18653/v1/D19-1410 (Accessed: 14 August 2026)
+Reimers, N. and Gurevych, I. (2019) 'Sentence-BERT: sentence embeddings using Siamese BERT-networks', *Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing*. Hong Kong, 3-7 November. pp. 3982-3992. Available at: https://doi.org/10.18653/v1/D19-1410 (Accessed: 14 August 2026)
 
-Ribeiro, M., Singh, S. and Guestrin, C. (2016) '"Why should I trust you?": explaining the predictions of any classifier', Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. San Francisco, 13-17 August. pp. 1135-1144. Available at: https://doi.org/10.1145/2939672.2939778 (Accessed: 14 August 2026)
+Ribeiro, M., Singh, S. and Guestrin, C. (2016) '"Why should I trust you?": explaining the predictions of any classifier', *Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining*. San Francisco, 13-17 August. pp. 1135-1144. Available at: https://doi.org/10.1145/2939672.2939778 (Accessed: 14 August 2026)
 
-Ribeiro, M., et al. (2020) 'Beyond accuracy: behavioral testing of NLP models with CheckList', Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics. 5-10 July. pp. 4902-4912. Available at: https://doi.org/10.18653/v1/2020.acl-main.442 (Accessed: 14 August 2026)
+Ribeiro, M., et al. (2020) 'Beyond accuracy: behavioral testing of NLP models with CheckList', *Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics*. 5-10 July. pp. 4902-4912. Available at: https://doi.org/10.18653/v1/2020.acl-main.442 (Accessed: 14 August 2026)
 
-Rousseeuw, P. (1987) 'Silhouettes: a graphical aid to the interpretation and validation of cluster analysis', Journal of Computational and Applied Mathematics, 20, pp. 53-65. Available at: https://doi.org/10.1016/0377-0427(87)90125-7 (Accessed: 14 August 2026)
+Rousseeuw, P. (1987) 'Silhouettes: a graphical aid to the interpretation and validation of cluster analysis', *Journal of Computational and Applied Mathematics*, 20, pp. 53-65. Available at: https://doi.org/10.1016/0377-0427(87)90125-7 (Accessed: 14 August 2026)
 
-Rudin, C. (2019) 'Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead', Nature Machine Intelligence, 1(5), pp. 206-215. Available at: https://doi.org/10.1038/s42256-019-0048-x (Accessed: 14 August 2026)
+Rudin, C. (2019) 'Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead', *Nature Machine Intelligence*, 1(5), pp. 206-215. Available at: https://doi.org/10.1038/s42256-019-0048-x (Accessed: 14 August 2026)
 
-Saaty, T. (2008) 'Decision making with the analytic hierarchy process', International Journal of Services Sciences, 1(1), pp. 83-98. Available at: https://doi.org/10.1504/IJSSCI.2008.017590 (Accessed: 14 August 2026)
+Saaty, T. (2008) 'Decision making with the analytic hierarchy process', *International Journal of Services Sciences*, 1(1), pp. 83-98. Available at: https://doi.org/10.1504/IJSSCI.2008.017590 (Accessed: 14 August 2026)
 
-Sculley, D., et al. (2015) 'Hidden technical debt in machine learning systems', Advances in Neural Information Processing Systems 28. Montreal, 7-12 December. pp. 2503-2511.
+Sculley, D., et al. (2015) 'Hidden technical debt in machine learning systems', *Advances in Neural Information Processing Systems 28*. Montreal, 7-12 December. pp. 2503-2511.
 
-Sebastiani, F. (2002) 'Machine learning in automated text categorization', ACM Computing Surveys, 34(1), pp. 1-47. Available at: https://doi.org/10.1145/505282.505283 (Accessed: 14 August 2026)
+Sebastiani, F. (2002) 'Machine learning in automated text categorization', *ACM Computing Surveys*, 34(1), pp. 1-47. Available at: https://doi.org/10.1145/505282.505283 (Accessed: 14 August 2026)
 
-Sokolova, M. and Lapalme, G. (2009) 'A systematic analysis of performance measures for classification tasks', Information Processing and Management, 45(4), pp. 427-437. Available at:  https://www.researchgate.net/publication/222674734_A_systematic_analysis_of_performance_measures_for_classification_tasks (Accessed: 14 August 2026)
+Sokolova, M. and Lapalme, G. (2009) 'A systematic analysis of performance measures for classification tasks', *Information Processing and Management*, 45(4), pp. 427-437. Available at:  https://www.researchgate.net/publication/222674734_A_systematic_analysis_of_performance_measures_for_classification_tasks (Accessed: 14 August 2026)
 
-Song, K., et al. (2020) 'MPNet: masked and permuted pre-training for language understanding', Advances in Neural Information Processing Systems 33. 6-12 December. pp. 16857-16867. Available at: https://arxiv.org/abs/2004.09297 (Accessed: 14 August 2026)
+Song, K., et al. (2020) 'MPNet: masked and permuted pre-training for language understanding', *Advances in Neural Information Processing Systems 33*. 6-12 December. pp. 16857-16867. Available at: https://arxiv.org/abs/2004.09297 (Accessed: 14 August 2026)
 
-Sparck Jones, K. (1972) 'A statistical interpretation of term specificity and its application in retrieval', Journal of Documentation, 28(1), pp. 11-21. Available at: https://doi.org/10.1108/eb026526 (Accessed: 14 August 2026)
+Sparck Jones, K. (1972) 'A statistical interpretation of term specificity and its application in retrieval', *Journal of Documentation*, 28(1), pp. 11-21. Available at: https://doi.org/10.1108/eb026526 (Accessed: 14 August 2026)
 
-Srivastava, N., et al. (2014) 'Dropout: a simple way to prevent neural networks from overfitting', Journal of Machine Learning Research, 15, pp. 1929-1958. Available at: https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf (Accessed: 14 August 2026)
+Srivastava, N., et al. (2014) 'Dropout: a simple way to prevent neural networks from overfitting', *Journal of Machine Learning Research*, 15, pp. 1929-1958. Available at: https://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf (Accessed: 14 August 2026)
 
-Vaswani, A., et al. (2017) 'Attention is all you need', Advances in Neural Information Processing Systems 30. Long Beach, 4-9 December. pp. 5998-6008. Available at: https://arxiv.org/abs/1706.03762 (Accessed: 14 August 2026)
+Vaswani, A., et al. (2017) 'Attention is all you need', *Advances in Neural Information Processing Systems 30*. Long Beach, 4-9 December. pp. 5998-6008. Available at: https://arxiv.org/abs/1706.03762 (Accessed: 14 August 2026)
 
-Wang, L., et al. (2022) Text embeddings by weakly-supervised contrastive pre-training. Available at: https://arxiv.org/abs/2212.03533 (Accessed: 14 August 2026)
+Wang, L., et al. (2022) *Text embeddings by weakly-supervised contrastive pre-training*. Available at: https://arxiv.org/abs/2212.03533 (Accessed: 14 August 2026)
 
-Wang, W., et al. (2020) 'MiniLM: deep self-attention distillation for task-agnostic compression of pre-trained transformers', Advances in Neural Information Processing Systems 33. 6-12 December. pp. 5776-5788. Available at: https://arxiv.org/abs/2002.10957  (Accessed: 14 August 2026)
+Wang, W., et al. (2020) 'MiniLM: deep self-attention distillation for task-agnostic compression of pre-trained transformers', *Advances in Neural Information Processing Systems 33*. 6-12 December. pp. 5776-5788. Available at: https://arxiv.org/abs/2002.10957  (Accessed: 14 August 2026)
 
-Wolf, T., et al. (2020) 'Transformers: state-of-the-art natural language processing', Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations. 16-20 November. pp. 38-45. Available at: https://doi.org/10.18653/v1/2020.emnlp-demos.6 (Accessed: 14 August 2026)
+Wolf, T., et al. (2020) 'Transformers: state-of-the-art natural language processing', *Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations*. 16-20 November. pp. 38-45. Available at: https://doi.org/10.18653/v1/2020.emnlp-demos.6 (Accessed: 14 August 2026)
 
-XBRL International (no date) iXBRL. Available at: https://www.xbrl.org/the-standard/what/ixbrl/ (Accessed: 14 August 2026)
+XBRL International (no date) *iXBRL*. Available at: https://www.xbrl.org/the-standard/what/ixbrl/ (Accessed: 14 August 2026)
 
 # 14. Appendices.
 
@@ -8266,7 +8268,7 @@ The rough bell shape has gone: empty descriptions are removed and many multi-wor
 
 ![Pareto chart, processed data](report_figures/B13-pareto-processed.png)
 
-95% of the data is now covered by the top 50 labels out of 826. Source A2.4.5; supports section 5.3.
+95% of the data is now covered by the top 50 labels out of 141. Source A2.4.5; supports section 5.3.
 
 ### B14. Distribution fit after preprocessing
 
@@ -8290,7 +8292,18 @@ Slightly weaker correlation with lognormal after preprocessing. Source A2.4.6; s
 | Max description length (words) | 1,762 | 15 |
 | Descriptions with no letters or digits | 19,814 | 0 |
 
-The max length of 1,762 words in the raw extract confirmed that long descriptions were extraction errors rather than valid data. The notebook commentary in A2.4.1 quotes 10,591 unique descriptions, which is the figure from an earlier iteration of the preprocessing pipeline. Source A2.2.1 and A2.4.1; supports section 5.3.
+The max length of 1,762 words in the raw extract confirmed that long descriptions were extraction errors rather than valid data. The notebook commentary in A2.4.1 quotes 10,591 unique descriptions, which is the figure from an earlier iteration of the preprocessing pipeline.
+
+A minimum of 350 examples per concept (`MIN_EXAMPLES`, Appendix A2) was then applied, chosen so that even the 1% training sample would retain enough examples per class for cross validation. This left **141 concepts and 2,439,901 rows** for modelling, 85% of the raw extract. The 685 concepts falling below the threshold account for 26,151 rows and are marked `excluded` in the split, so they appear in no training, test or holdout set. The model therefore has no output for those concepts, which is the trade made to keep every modelled class large enough to learn and evaluate reliably.
+
+| Split | Rows |
+|---|---|
+| Train | 1,951,920 |
+| Test | 243,990 |
+| Holdout | 243,991 |
+| Excluded (below 350 examples) | 26,151 |
+
+Source A2.2.1, A2.4.1 and A2.6; supports sections 5.3 and 6.
 
 ### B16. Silhouette scores by embedding (50,000 row sample)
 
@@ -8612,15 +8625,15 @@ All intervals are bootstrap estimates over 1,000 resamples at the 95% level. The
 
 Coefficients for every n-gram present in the example description, across the three competing classes. Class intercepts: CostSales −1.000, RawMaterialsConsumablesUsed −1.190, TurnoverRevenue −1.156.
 
-| n-gram | CostSales | RawMaterialsConsumablesUsed | TurnoverRevenue |
-|---|---|---|---|
-| `cost of` | 0.099 | 0.493 | −0.463 |
-| `cost` | 0.000 | 0.442 | −0.074 |
-| `turnover` | 0.000 | 0.000 | 2.156 |
-| `goods` | 0.000 | 0.000 | 0.000 |
-| `of` | 0.000 | 0.000 | 0.000 |
-| `of goods` | 0.000 | 0.000 | 0.000 |
-| `sold` | 0.000 | 0.000 | 0.000 |
+| n-gram     | CostSales | RawMaterialsConsumablesUsed | TurnoverRevenue |
+| ---------- | --------- | --------------------------- | --------------- |
+| `cost of`  | 0.099     | 0.493                       | −0.463          |
+| `cost`     | 0.000     | 0.442                       | −0.074          |
+| `turnover` | 0.000     | 0.000                       | 2.156           |
+| `goods`    | 0.000     | 0.000                       | 0.000           |
+| `of`       | 0.000     | 0.000                       | 0.000           |
+| `of goods` | 0.000     | 0.000                       | 0.000           |
+| `sold`     | 0.000     | 0.000                       | 0.000           |
 
 Highest weighted features for each class, for context:
 
@@ -8633,6 +8646,73 @@ Highest weighted features for each class, for context:
 `cost of` sits near the bottom of the positive features for CostSales (0.099, second smallest of eleven) but carries a substantial negative weight for TurnoverRevenue (−0.463). It therefore contributes mainly by suppressing the competing class rather than by supporting the predicted one, which reading the top coefficients per class alone would not reveal, and which the LIME and SHAP attributions at Appendix A3.9.2, A3.9.3 and B23 surface directly. `goods`, `of`, `of goods` and `sold` carry no weight in any of the three classes.
 
 TurnoverRevenue draws on far more features (50 positive, 41 negative) than the two cost classes, reflecting the wider variety of descriptions mapping to it noted in section 5.2. The negative features also include `deffered income`, a common misspelling learned from the source documents, which supports the robustness findings in section 8. Source `03_ixbrl_experiment_models.ipynb` section 9.1; supports section 9.
+
+### B40. Per-class performance and residual analysis
+
+A full per-class table would not be readable, so this appendix reports the distribution, the classes that fail, the band needing analyst judgement, and the diagnosis for each failure. Figures are from `classification_report` over the full holdout of 243,991 rows, covering the 141 concepts the model is trained to predict.
+
+**Distribution of per-class F1.** The macro-F1 of 0.785 is a mean across classes, and the mean sits far below the median:
+
+| Measure | Value |
+|---|---|
+| Median per-class F1 | 0.966 |
+| Mean per-class F1 (macro-F1) | 0.785 |
+| Classes scoring 0.9 or above | 88 of 141 (62.4%) |
+| Classes scoring below 0.7 | 36 of 141 (25.5%) |
+| Classes scoring below 0.5 | 27 of 141 (19.1%) |
+| Classes scoring 0.0 | 8 of 141 |
+
+The gap between median and mean is the important figure. A minority of poorly performing concepts pulls the macro average down, while the typical concept is classified at 0.966. Weighting by how much data each concept actually carries makes the practical position clearer still:
+
+| Share of holdout rows | Falling in classes scoring |
+|---|---|
+| 94.1% | 0.9 or above |
+| 1.8% | below 0.5 |
+
+So under 2% of records fall into the concepts an analyst would need to treat cautiously, which is why aggregate accuracy is 0.975 while macro-F1 is 0.785. Macro-F1 remains the primary metric precisely because it refuses to let that 94% mask the concepts that fail.
+
+**Classes scoring zero.** These are not simply rare concepts — several carry substantial support:
+
+| Concept | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| AccruedLiabilities | 0.000 | 0.000 | 0.000 | 292 |
+| CalledUpShareCapitalNotPaid | 0.000 | 0.000 | 0.000 | 142 |
+| TotalAdditionsIncludingFromBusinessCombinationsIntangibleAssets | 0.000 | 0.000 | 0.000 | 73 |
+| Investments | 0.000 | 0.000 | 0.000 | 50 |
+| OtherOperatingIncome | 0.000 | 0.000 | 0.000 | 45 |
+| DisposalsIntangibleAssets | 0.000 | 0.000 | 0.000 | 44 |
+| DisposalsDecreaseInAmortisationImpairmentIntangibleAssets | 0.000 | 0.000 | 0.000 | 40 |
+| IntangibleAssetsGrossCost | 0.000 | 0.000 | 0.000 | 35 |
+| AdditionsOtherThanThroughBusinessCombinationsPropertyPlantEquipment | 1.000 | 0.001 | 0.003 | 751 |
+| InvestmentPropertyFairValueModel | 1.000 | 0.014 | 0.029 | 69 |
+
+The last two are informative: precision is perfect but recall is near zero, so the model almost never predicts these concepts, and is right when it does. The instances are being absorbed by a competing sibling concept rather than misread.
+
+**Classes requiring analyst judgement (F1 between 0.5 and 0.7).** These are usable but should not be relied on without checking:
+
+| Concept | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| AmountsOwedToGroupUndertakingsParticipatingInterests | 0.529 | 0.500 | 0.514 | 54 |
+| TaxationSocialSecurityPayable | 0.400 | 0.960 | 0.565 | 500 |
+| FurtherItemDebtorsComponentTotalDebtors | 0.549 | 0.619 | 0.582 | 63 |
+| FurtherItemCreditorsComponentTotalCreditors | 0.531 | 0.654 | 0.586 | 159 |
+| DisposalsDecreaseInDepreciationImpairmentPropertyPlantEquipment | 0.880 | 0.469 | 0.612 | 471 |
+| OtherTaxationSocialSecurityPayable | 0.965 | 0.456 | 0.619 | 1,252 |
+| OtherTaxationPayable | 0.909 | 0.471 | 0.620 | 85 |
+| CashOnHand | 0.717 | 0.611 | 0.660 | 54 |
+| TotalAdditionsIncludingFromBusinessCombinationsPropertyPlantEquipment | 0.507 | 1.000 | 0.673 | 969 |
+
+The precision–recall asymmetry is the pattern to note. `TaxationSocialSecurityPayable` recalls 96% of its instances but is only right 40% of the time, while `OtherTaxationSocialSecurityPayable` is the mirror image at 97% precision and 46% recall. The model is systematically routing items between two near-identical concepts rather than failing to understand the text.
+
+**Residual diagnosis.** Examining the failures individually shows they are label collisions, not comprehension failures:
+
+- **AccruedLiabilities** — the description "accruals" is predicted as `AccruedLiabilitiesDeferredIncome`, which is the concept the source data uses for that wording more often. The prediction reflects the dominant tagging convention rather than an error.
+- **CashOnHand** and **CashBankOnHand** — "cash at bank and in hand" and "cash and cash equivalents" are each predicted as the other. The two concepts cannot be separated from the information present in the accounts.
+- **IntangibleAssetsGrossCost** — the failing instances reduce to "hubble_date and hubble_date". Two dates joined by "and" escaped the date canonicalisation, and a description containing only dates carries nothing to classify on.
+
+**What this means for analyst use.** Failures concentrate between semantically adjacent concepts where the description alone does not determine which applies, and this is a property of the data rather than a defect in the model. Heading and table name recovered some of it, but not all. Analysts should check a concept's performance in the dashboard before relying on the ML category for it, and treat the zero-scoring and 0.5–0.7 concepts above as requiring the underlying description to be read. It also supports the case for a simplified concept set, since several of these pairs would merge.
+
+Source `03_ixbrl_experiment_models.ipynb` section 10; supports section 8.
 
 ## Appendix C. Statistical rigour: uncertainty, bias, and error estimates where appropriate.
 

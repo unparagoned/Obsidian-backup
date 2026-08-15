@@ -266,3 +266,129 @@ Verification by HMRC that this project report is a true reflection of Jesse Kara
 8. **Canonicalisation statistics** (266,178 → 10,591 unique descriptions; 956 → 826 labels; 86% of rows retained) come from the notebook review, not your report. They are good evidence — **confirm they still hold** for the current pipeline.
 9. **Extraction edge cases.** The earlier "~15% of documents use non-standard HTML" figure sits awkwardly beside a >95% coverage KPI. §12 now describes it without the percentage. The PII edge-case limitation was dropped, since your updated report no longer carries it — restore if it is still true.
 10. Consider whether the 12 million annual returns figure can be sourced; currently generalised to "millions".
+
+---
+
+# KSB and requirements gap check against `Z Project Report - Report mod`
+
+*Checked 15 August 2026 against the signed-off mapping document and the QA Harvard guide. Each item names the section of Report mod it needs to go into.*
+
+## A. EPAO written feedback — these were explicitly requested and must be visibly answered
+
+### A1. Class-level results are not shown — goes in §8, plus a new Appendix B entry
+
+EPAO wrote: *"final report should show the class-level results clearly, especially where minority classes perform less well and need analyst review."*
+
+Report mod currently carries one sentence in §8: "Residual analysis identified which classes performed poorly, and summaries with confusion matrices for good and poor quality classes were produced for analysts (Appendix A3.10 and B24)." The words "per-class" and "minority" do not appear anywhere in the body, and there is no per-class F1 table in Appendix B — B24 holds confusion matrices for a handful of individual classes only.
+
+Needed:
+- **§8** — a short paragraph giving the shape of the per-class distribution: how many of the 826 classes fall below, say, 0.5 macro-F1, what the median per-class F1 is, and what an analyst should do when a concept they need falls in that group. This is the single highest-value addition left in the report, because it was asked for in writing.
+- **New Appendix B entry** — per-class F1 breakdown, or at minimum the distribution (histogram or decile table) plus the worst-performing named concepts. The data is in notebook `03_ixbrl_experiment_models.ipynb` section 10 (residual analysis) and section 7.3.
+
+### A2. ML governance is described as a caveat, not as practice — goes in §7.6
+
+EPAO wrote: *"final report should make clear how the ML category is governed in practice, particularly that it supports analyst review rather than automated decisions."*
+
+The human-in-the-loop statement currently sits only in §12 Caveats and limitations. Placed there it reads as a limitation of the model; the EPAO asked how the category is *governed in practice*, which is a design statement and belongs with the production system.
+
+Needed:
+- **§7.6 Wider system** — two or three sentences stating the control as implemented: the ML category is stored alongside the tagged value rather than replacing it, is attributed as a prediction, is never an input to an automated decision, and is accompanied by per-class performance documentation and the dashboard so an analyst can check reliability before relying on it. MLflow lineage means any output traces back to the model that produced it.
+- Keep the §12 statement as well — it is legitimate there, but it should not be the only place.
+
+## B. Assessment criteria with no clear evidence in the body
+
+### B1. Autonomous versus collaborative working — goes in §9
+
+Pass criterion (theme 5): *"Explains how to work autonomously and collaboratively with multidisciplinary teams indicating when each would be appropriate."* Also underpins **B2** (reliable, objective, capable of independent and team working).
+
+"Autonomous" appears zero times in the body; there is a single mention of collaboration in §7.6. This criterion asks specifically for the *judgement about when each is appropriate*, which is not stated anywhere.
+
+The signed-off mapping already has the material. Needed in **§9**, roughly:
+- Worked autonomously where deep focus was required — core modelling, building and evaluating models — then demonstrated the approach and took feedback in review meetings.
+- Worked collaboratively with SMEs on evaluation, where their taxonomy knowledge was the binding constraint; with DevOps on infrastructure, where they held the expertise and the access; and on other team members' tasks to share knowledge and upskill them.
+
+### B2. Working with software engineers on testing *and* documentation — goes in §3.5
+
+Pass criterion (theme 5): *"Explains how to work with software engineers to ensure suitable testing and documentation processes are implemented."*
+
+§3.5 says "While working with others to review the code base, we discussed the scope, coverage and implementation of unit, integration and system testing." It does not name software engineers or developers, and the documentation half of the criterion is handled separately in §3.3 with no link between them.
+
+Needed in **§3.5** — name who the review was with, and connect it to the documentation practices in §3.3 so the two halves of the criterion read as one process rather than two unrelated paragraphs.
+
+### B3. Truthful presentation of data and conclusions — goes in §8
+
+**B6** requires *"Presents data and conclusions in a truthful and appropriate manner."* The report demonstrates this repeatedly but never claims it, and one relevant disclosure is missing.
+
+You have strong evidence already: §8 quotes the full-holdout macro-F1 of 0.785, which is the **lowest** of the four evaluation sets (test 5% 0.791, test full 0.789, holdout 10k 0.817, holdout full 0.785 — see Appendix B38); §8 reports a bias spread of 0.184 to 0.913 that does not flatter the model; and §8 reports the SEC-BERT robustness result that contradicted your stated expectation.
+
+Needed:
+- **§8** — one sentence stating that the most conservative evaluation figure is the one reported, and why.
+- **§12** — an omission worth closing: the final LinearSVC fit on the 100% training population logged repeated `ConvergenceWarning: Liblinear failed to converge` at `max_iter=10,000` (notebook cell 131). Cross-validation scores were stable across folds (0.782–0.792), so it did not affect the result, but it is not mentioned anywhere in the report and is a fair question. Disclosing it costs a sentence and supports B6 directly.
+
+### B4. Maintaining the service, not only building it — goes in §7.6 or §9
+
+**S15** is *"Identify, develop, build and maintain the services and platforms that deliver AI and data science."* §7.6 covers identify, develop and build well. Maintenance in operation — who runs it now, what the retraining trigger is in practice, what monitoring exists today as opposed to what is recommended — is not stated. Drift monitoring appears only as a recommendation in §9.
+
+Needed in **§7.6** — one or two sentences distinguishing what is operating now from what is recommended, so the reader can tell which is which.
+
+### B5. Lower priority, already largely covered
+
+These are met but thin; only worth touching if words allow:
+- **S5** (manage expectations, present findings to stakeholders) — §9's dashboard paragraph and the analyst education on model error cover this; the word "expectations" is not used, which is fine.
+- **S18** (tools that visualise data systems and structures for monitoring and performance) — the dashboard in §9 is the evidence. Making explicit that it visualises per-concept performance would strengthen it, and overlaps with A1 above.
+
+## C. Appendix D is empty
+
+`## Appendix D. Mapping of the project report to AM1 KSBs.` is a heading with no content beneath it. Appendix D needs the actual mapping table.
+
+The definitive KSB list, taken from the signed-off document's "underpinning assessment criteria" rows, is **25 KSBs**:
+
+- **K1, K3, K5, K6, K13, K14, K23, K26, K28**
+- **S2, S3, S4, S5, S9, S10, S11, S15, S17, S18, S22, S24, S25, S27**
+- **B2, B6**
+
+Note: the Appendix D list earlier in this draft includes **S7**, which does not appear anywhere in the signed-off mapping document. Either it came from another source or it is an error — worth checking before it goes into the submitted appendix.
+
+Suggested format: one row per KSB, with the report section and the appendix reference that evidences it. Appendices are excluded from the word count, so this costs nothing against the 5,500.
+
+## D. Harvard referencing compliance (QA Cite Them Right 11th edition)
+
+Checked the 49 entries in §13 against the guide.
+
+**Compliant:** alphabetical order; `no date` used for undated sources; `et al.` for four or more authors; multiple citations ordered earliest to latest and separated by semicolons; full clickable URLs with access dates; article titles in single quotation marks; `Data Protection Act 2018` italicised in-text with no brackets, as the guide requires for Acts.
+
+**Not compliant — affects all 49 entries:** no italics are used anywhere in the reference list. Cite Them Right requires italics on:
+- book, report and webpage **titles** — e.g. `Beck, K. (2003) *Test-driven development: by example*. Boston, MA: Addison-Wesley.`
+- **journal and conference proceedings names** — e.g. `... 'Optuna: a next-generation hyperparameter optimization framework', *Proceedings of the 25th ACM SIGKDD ...*`
+- the title of an Act in its reference list entry
+
+Article titles stay in single quotes, which you already do correctly. This is a mechanical pass over §13 and does not affect the word count.
+
+**One thing to confirm rather than fix:** the QA guide requires generative AI content to be acknowledged and states that work submitted for assessment must be your own. Check QA's position on AI assistance for the EPA project report specifically, and whether any acknowledgement is expected. This is a question for your provider, not something to guess at.
+
+## E. Criteria that are already well evidenced — no action needed
+
+Recorded so these are not redone:
+
+- **K13, K14** (trade-offs, business value) — §2 quantifies the problem and the value; §7.5 states the 2.3pp trade against interpretability, speed and dependency risk; §11 carries realised benefit.
+- **K23** (performance and accuracy metrics) — §4 KPIs, §7, §8, Appendix B38.
+- **S3** (critically evaluate arguments and incomplete data) — §6 rejections, §8 bias reading, §12.
+- **S17** (data curation and quality controls) — §5.3 DAMA dimensions, DPIA, DPA 2018/UK GDPR.
+- **S2, S9, S10, S22, S25** — §5, §6, §7.1, §7.2.
+- **K6, S24** (methodology and project management) — §3.1, §3.2, §3.3.
+- **K28, S4, S27** (communication, SME questioning) — §5.1, §5.3, §9.
+- **K1, K3, K5, K26, S11** (methods, statistics, scientific method) — §3.5, §7.1, §7.2, Appendix C.
+- **Distinction descriptors** — commercial trade-offs (§7.5), critical evaluation of alternatives (§6), audience-appropriate communication (§9), evidenced organisational impact (§11).
+
+## F. Ordered by value if word budget is tight
+
+Body is currently ~6,236 words against 5,500, so everything below has to be traded against something else.
+
+1. **A1 class-level results (§8)** — asked for in writing by the EPAO. Do this even if something else has to go.
+2. **A2 governance in practice (§7.6)** — also asked for in writing.
+3. **Appendix D KSB mapping** — free, appendices are not counted.
+4. **§13 italics** — free, formatting only.
+5. **B1 autonomous/collaborative (§9)** — a whole pass criterion with no evidence; roughly 40 words.
+6. **B3 convergence disclosure (§12)** — one sentence, supports B6.
+7. **B2 software engineers (§3.5)** — rewording rather than addition.
+8. **B4 maintenance (§7.6)** — one sentence.
