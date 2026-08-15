@@ -121,22 +121,23 @@ This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 t
 Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
 
-This is multi-class text classification with over 826 nominal classes with strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context then and then evaluated the leading candidates. 
+This is multi-class text classification with 826 nominal classes and with strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context, then evaluated the leading candidates (Sebastiani, 2002).
 
- I considered ways to systemise a rule-based system, using regular expressions which could have some successes but it would be too resource intensive of the subject matter experts time, and would not cover the long tail (Sebastiani, 2002). It was not a feasible business solution, so I investigated alternatives. 
+I considered ways to systemise a rule-based system, using regular expressions which could have some successes but it would use too much subject matter expert's time, and would not cover the long tail. It was not a feasible business solution, so I investigated alternatives. 
+
+The raw data is a multi-class, but it could be transformed into a multi-label problem. While this could be useful from a technical sense, it would add unnecessary complexity for analysts when using the data.  
 
 While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But initial analysis using cosine similarity highlighted that the great variety in descriptions for some concepts meant that it was not feasible. So I focused on supervised learning models. 
 
-Traditional ML models can perform well with classifying short simple text, especially since descriptions in the accounts will normally have less variety and more domain-specific terminology than generic free text (Joachims, 1998). {Isn't this more about TFIDF than traditional ML algorithms}. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAgressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
+Traditional ML models can perform well with classifying short simple text, especially since descriptions in the accounts will normally have less variety and more domain-specific terminology than generic free text (Joachims, 1998). {Isn't this more about TFIDF than traditional ML algorithms}. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
 
-There were two main methods used to embed the descriptions for the traditional ML models, sparse vectorisation (TF, TFIDF) and dense vector embeddings (MPNet, E5) (Song et al., 2020; Wang et al., 2022). TFIDF over character and word n-grams (Sparck Jones, 1972; Cavnar and Trenkle, 1994) can perform well since it captures domain specific terminology and phrasing well and works well with a variety of models with good speeds and performance. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
+There were two main methods used to embed the descriptions for the traditional ML models, sparse vectorisation (TF, TFIDF) and dense vector embeddings (MPNet, E5) (Song et al., 2020; Wang et al., 2022). TFIDF over character and word n-grams (Sparck Jones, 1972; Cavnar and Trenkle, 1994) can perform well since it captures domain-specific terminology and phrasing well and works with a variety of models, good speed and performance. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions (Appendix A2.5 and A3.5.2).  {seems some overlap or even duplication with the bit in the last section around embeddings}
 
-A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in transitional ML. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BI, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
+A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in traditional ML. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
 
-Transformer based models are a more advanced architecture that results in better semantic understanding of text that often outperforms other neural network architectures (Vaswani et al., 2017). Pre-trained models are trained over large amounts of text so have a lot of semantic understanding baked in (Devlin et al., 2019). Various transformer based models were tested, RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures and training data (Appendix A5.1 and A5.2). SEC-BERT is a model that was trained on SEC filing (financial filings), so should have better semantic understanding of accountancy terms and concepts.
+Transformer based models are a more advanced architecture with better semantic understanding of text that often outperforms other neural network architectures (Vaswani et al., 2017). Pre-trained models are trained over large amounts of text so have a lot of semantic understanding built in (Devlin et al., 2019). Various transformer based models were tested: RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures and training data (Appendix A5.1 and A5.2). SEC-BERT is a model that was trained on SEC filings (US financial filings), so should have better semantic understanding of accountancy terms and concepts.
 
-It is expected that a frontier LLM, such as Chat GPT would have better semantic understanding of text, but it is likely to be excessive for this use case. A LLM would be good at understanding lots of text, but we just have short phrases. There are additional technical, data security and governance issues around using an API, which made this approach unfeasible from a business perspective. 
-
+It is expected that a frontier LLM, such as ChatGPT would have better semantic understanding of text, but it is likely to be excessive for this use case. An LLM would be good at understanding lots of text, but we just have short phrases. At the time it was not possible to send taxpayer data to an external API under the HMRC data security and governance requirements, making this approach unfeasible. 
 
 # 7. Implementation - performance metrics.
 
@@ -294,7 +295,7 @@ Beck, K. (2003) Test-driven development: by example. Boston, MA: Addison-Wesley.
 
 Bergstra, J. and Bengio, Y. (2012) 'Random search for hyper-parameter optimization', Journal of Machine Learning Research, 13, pp. 281-305.
 
-Cavnar, W. and Trenkle, J. (1994) 'N-gram-based text categorization', Proceedings of the Third Annual Symposium on Document Analysis and Information Retrieval (SDAIR-94). Las Vegas, 11-13 April. pp. 161-175.
+Cavnar, W. and Trenkle, J. (1994) 'N-gram-based text categorization', Proceedings of the Third Annual Symposium on Document Analysis and Information Retrieval (SDAIR-94). Las Vegas, 11-13 April. pp. 161-175. Available at: https://www.researchgate.net/publication/2375544_N-Gram-Based_Text_Categorization (Accessed: 14 August 2026)
 
 Chapman, P., et al. (2000) CRISP-DM 1.0: step-by-step data mining guide. Chicago, IL: SPSS Inc. Available at: https://www.kde.cs.uni-kassel.de/wp-content/uploads/lehre/ws2012-13/kdd/files/CRISPWP-0800.pdf (Accessed: 14 August 2026)
 
@@ -376,11 +377,11 @@ Srivastava, N., et al. (2014) 'Dropout: a simple way to prevent neural networks 
 
 Tsoumakas, G. and Katakis, I. (2007) 'Multi-label classification: an overview', International Journal of Data Warehousing and Mining, 3(3), pp. 1-13. Available at: https://doi.org/10.4018/jdwm.2007070101 (Accessed: 14 August 2026)
 
-Vaswani, A., et al. (2017) 'Attention is all you need', Advances in Neural Information Processing Systems 30. Long Beach, 4-9 December. pp. 5998-6008.
+Vaswani, A., et al. (2017) 'Attention is all you need', Advances in Neural Information Processing Systems 30. Long Beach, 4-9 December. pp. 5998-6008. Available at: https://arxiv.org/abs/1706.03762 (Accessed: 14 August 2026)
 
 Wang, L., et al. (2022) Text embeddings by weakly-supervised contrastive pre-training. Available at: https://arxiv.org/abs/2212.03533 (Accessed: 14 August 2026)
 
-Wang, W., et al. (2020) 'MiniLM: deep self-attention distillation for task-agnostic compression of pre-trained transformers', Advances in Neural Information Processing Systems 33. 6-12 December. pp. 5776-5788.
+Wang, W., et al. (2020) 'MiniLM: deep self-attention distillation for task-agnostic compression of pre-trained transformers', Advances in Neural Information Processing Systems 33. 6-12 December. pp. 5776-5788. Available at: https://arxiv.org/abs/2002.10957  (Accessed: 14 August 2026)
 
 Wolf, T., et al. (2020) 'Transformers: state-of-the-art natural language processing', Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations. 16-20 November. pp. 38-45. Available at: https://doi.org/10.18653/v1/2020.emnlp-demos.6 (Accessed: 14 August 2026)
 
