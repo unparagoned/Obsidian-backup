@@ -584,6 +584,12 @@ Depressive symptoms are treated by sunlight exosure
 >BLT alleviates depressive symptoms and changes the CC dFC variability in StD, and pre-treatment dFC variability of the CC could be used as a biomarker for improved BLT treatment in StD. Furthermore, dFC changes with specific neurotransmitter systems after BLT may underline the antidepressant mechanisms of BLT.
 [https://www.sciencedirect.com/science/article/abs/pii/S0165032725000473](https://www.sciencedirect.com/science/article/abs/pii/S0165032725000473)
 
+## Breathing
+
+Breating techniques reduce acute stress
+
+ >Both PE and BOX breathing attenuated post-stressor increases in HR, SAI, and sAA compared to NB, indicating that brief breathing practice can buffer acute physiological stress responses.
+https://www.sciencedirect.com/science/article/pii/S266649762600024X?via%3Dihub
 # Bespoke 
 
 >Personalized brain circuit scores identify clinically distinct biotypes in depression and anxiety.... The six biotypes showed consistency with our theoretical taxonomy and were distinguished by symptoms, behavioral performance on general and emotional cognitive computerized tests, and response to pharmacotherapy as well as behavioral therapy.

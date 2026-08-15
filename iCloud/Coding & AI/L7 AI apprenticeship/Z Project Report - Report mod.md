@@ -21,28 +21,24 @@ While 70% of items are untagged, 30% of items are tagged, and they are tagged by
 
 ## 3.1. Project management
 
-I selected an agile approach for the overall project (Beck et al., 2001). I didn't strictly adhere to a specific framework, selecting features that were appropriate ("Teams tailor Agile practices to their needs, blending frameworks like Scrum and Kanban for optimal results" (Atlassian, no date)), with it being more Kanban focused since the project team was small and the overhead of SCRUM wouldn't be appropriate. The competing business demands on the team meant that fixed sprints weren't appropriate but regular Kanban updates ensured progress on this project while other business needs were accommodated. 
-
-
+I selected an agile approach for the overall project (Beck et al., 2001). I didn't strictly adhere to a specific framework, selecting practices that were appropriate (Atlassian, no date). It was more Kanban focused since the project team was small and the overhead of SCRUM wouldn't be appropriate. The competing business demands on the team meant that fixed sprints weren't appropriate but regular Kanban updates ensured progress on this project while other business needs were met. 
 
 ## 3.2 CRISP-DM
 
 I used CRISP-DM since it accommodates the cyclical nature of ML and provides a clear intuitive structure (Chapman et al., 2000). I working on the ML aspect myself, so CRISP-DM is more appropriate than larger more complex methodologies like TDSP (Microsoft, 2023). Each stage produced documented artefacts, allowing evidence backed decisions in other steps. 
-
 ## 3.3 Languages and Tools
 
 ### 3.3.1 Gitlab
 
-While using GitLab to manage project isn't common in HMRC, I decided that the advantages of transparency, audibility and documentation outweighed the costs of learning a new tool. 
+While using GitLab to manage projects is not common in HMRC(bespoke spreadsheets normally used), I decided that the advantages of transparency, auditability and documentation outweighed the costs of learning a new tool. 
 - Documentation 
-	- {Readme stuff?}
 	- Data structures and types, 
 	- Guide to setup Oracle tables/credentials, 
 	- Details of key decisions and the reason why they were made. 
-- The issues board worked well as the Kanban board helping us track issues and tasks. 
-- The epics were useful for working with management who were focused on longer term timelines. 
-- I created templates for issues, tasks and PR, which ensured they were completed to a consistent level by all team members. Covering details such as details of every step required to recreate the issue, expected vs actual and proposed fixes.
-- Team members were encouraged to document issues in detail on GitLab, to update project markdown documents, and guided that code comments should be why code does what it does rather than just describing what it does. 
+- The issues board worked well as the Kanban board tracking work. 
+- The epics were useful for working with management who are focused on longer term timelines. 
+- I created templates for issues, tasks and PR, which ensured they were completed to a consistent level by all team members, covering every step required to recreate the issue, expected vs actual, and proposed fixes.
+- I encouraged team members to document issues in detail on GitLab, to update project markdown documents, and write code comments should be why code does what it does rather than just describing what it does. 
 - Version control, branches and independent review of PR helped ensure changes were of sufficient quality and limit issues. This required training the team how to use branches, which I videoed for reference. 
 
 ### 3.3.2 Languages and packages
@@ -51,11 +47,11 @@ I used R due to its relevant packages and because it is the default coding langu
 - `aws.s3` to access iXBRL documents from AWS S3 buckets. 
 - `rvest` and `xml2` for html extraction.
 - `parallel` to allow processing hundreds of documents at the same time.
-- `dbplyr` allowed Oracle database access using familiar tidyverse syntax analysts are used to.
+- `dbplyr` allowed Oracle database access using tidyverse syntax analysts are familiar with.
 - `testthat` for testing
 
-I used python for the ML aspects since the classification packages are more mature and have more support. The reticulate package in R allows importing python function into a R workflow, which made integrating it work well. 
-- `mlflow` to track tracks data version, model version, performance and various other metrics
+I used Python for the ML aspects since the classification packages are more mature and have more support. The `reticulate` package in R allows importing Python function into R, which made integrating the Python ML into the R based workflow work well, but there was added setup and coding complexity.
+- `mlflow` to track data version, model version, performance and various other metrics
 - `scikit-learn` for traditional ML models (Pedregosa et al., 2011) 
 - `tensorflow`/`keras` to build and train NN
 - HuggingFace `transformers` to utilise pre-trained transformer based models (Wolf et al., 2020)
@@ -67,11 +63,11 @@ SQL was also used for setting up and managing the Oracle database and tables.
 
 ## 3.4 Testing
 
-While working with others to review the code base, we discussed the scope, coverage and implementation of unit, integration and system testing. Constraints such as that the tests shouldn’t contain any customer data, so to use synthetic or anonymised fixtures instead. While we weren't using formal test driven development (Beck, 2003), I did explain to the team how in some situations it can be useful and instructed them to create a tests alongside new issues, since it makes it easier to investigate and verify the fixes. 
+While working with others to review the code base, we discussed the scope, coverage and implementation of unit, integration and system testing. Constraints included that tests should not contain any customer data, so to use synthetic or anonymised fixtures instead. While we weren't using formal test driven development (Beck, 2003), I explain where it can be useful and instructed them to create tests alongside new issues, since it makes it easier to investigate and verify the fixes. 
 
 ## 3.5 Scientific method and statistical analysis
 
-I used hypothesis formulation; controlled experimentation including DummyClassifier baselines; stratified cross validation with paired t-tests at the 95% confidence level (Dietterich, 1998) to determine if models were statistically different from the top model (`compare_to_top` and `add_confidence_interval`, Appendix A3.2). Challenges included class imbalance which required using score like macro-F1 which gives equal weighting to each class. On the modelling side different approaches were tested such as balanced weights and/or square-root weighted training samples.
+I used the scientific method: hypothesis formulation and testing; comparisons against baseline; and statistical testing rather than simply comparing raw values, so the choices were evidenced back. 
 
 # 4. The scope of the project (including key performance indicators).
 
@@ -211,7 +207,7 @@ While SEC-BERT had the best macro-F1 score I chose LinearSVC (final scores at Ap
 
 Scaling needed additional infrastructure, so I worked with DevOps to setup on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished, and is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
 
-The overall system consisted of the raw iXBRL documents in AWS S3, with ODC creating a dedicated EC2 instance running POSIT, where iXBRL documents are accessed using `aws.s3`, then extracted using `rvest`/`xml2` and structured using bespoke R code. Then `reticulate` allows the running of python function to canonicalise the features and use scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features, with the output saved to an Oracle database via `dbplyr`. The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and also up-skill them.
+The overall system consisted of the raw iXBRL documents in AWS S3, with ODC creating a dedicated EC2 instance running POSIT, where iXBRL documents are accessed using `aws.s3`, then extracted using `rvest`/`xml2` and structured using bespoke R code. Then `reticulate` allows the running of Python function to canonicalise the features and use scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features, with the output saved to an Oracle database via `dbplyr`. The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and also up-skill them.
 
 # 8. Results.
 
@@ -288,7 +284,7 @@ LinearSVC has very good train times on smaller dataset sizes but doesn't scale a
 
 Increasing data set size while keeping an absolute threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. 
 
-The integration of R and python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like python has more support for the ETL. With higher python use in HMRC now, it might be worth considering porting in the future. 
+The integration of R and Python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
 
 # 13. Reference list.
 
@@ -304,7 +300,7 @@ Bergstra, J. and Bengio, Y. (2012) 'Random search for hyper-parameter optimizati
 
 Cavnar, W. and Trenkle, J. (1994) 'N-gram-based text categorization', Proceedings of the Third Annual Symposium on Document Analysis and Information Retrieval (SDAIR-94). Las Vegas, 11-13 April. pp. 161-175.
 
-Chapman, P., et al. (2000) CRISP-DM 1.0: step-by-step data mining guide. Chicago, IL: SPSS Inc.
+Chapman, P., et al. (2000) CRISP-DM 1.0: step-by-step data mining guide. Chicago, IL: SPSS Inc. Available at: https://www.kde.cs.uni-kassel.de/wp-content/uploads/lehre/ws2012-13/kdd/files/CRISPWP-0800.pdf (Accessed: 14 August 2026)
 
 Clauset, A., Shalizi, C. and Newman, M. (2009) 'Power-law distributions in empirical data', SIAM Review, 51(4), pp. 661-703. Available at: https://doi.org/10.1137/070710111 (Accessed: 14 August 2026)
 
@@ -315,8 +311,6 @@ DAMA UK (2013) The six primary dimensions for data quality assessment. Available
 Data Protection Act 2018, c. 12. Available at: https://www.legislation.gov.uk/ukpga/2018/12/contents (Accessed: 14 August 2026)
 
 Devlin, J., et al. (2019) 'BERT: pre-training of deep bidirectional transformers for language understanding', Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies. Minneapolis, 2-7 June. pp. 4171-4186. Available at: https://doi.org/10.18653/v1/N19-1423 (Accessed: 14 August 2026)
-
-Dietterich, T. (1998) 'Approximate statistical tests for comparing supervised classification learning algorithms', Neural Computation, 10(7), pp. 1895-1923. Available at: https://doi.org/10.1162/089976698300017197 (Accessed: 14 August 2026)
 
 Efron, B. and Tibshirani, R. (1993) An introduction to the bootstrap. New York: Chapman and Hall.
 
@@ -352,7 +346,7 @@ Mitchell, M., et al. (2019) 'Model cards for model reporting', Proceedings of th
 
 National Cyber Security Centre (2023) Guidelines for secure AI system development. Available at: https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development (Accessed: 14 August 2026)
 
-Pedregosa, F., et al. (2011) 'Scikit-learn: machine learning in Python', Journal of Machine Learning Research, 12, pp. 2825-2830.
+Pedregosa, F., et al. (2011) 'Scikit-learn: machine learning in Python', Journal of Machine Learning Research, 12, pp. 2825-2830. Available at: https://www.researchgate.net/publication/51969319_Scikit-learn_Machine_Learning_in_Python (Accessed: 14 August 2026)
 
 Reimers, N. and Gurevych, I. (2019) 'Sentence-BERT: sentence embeddings using Siamese BERT-networks', Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing. Hong Kong, 3-7 November. pp. 3982-3992. Available at: https://doi.org/10.18653/v1/D19-1410 (Accessed: 14 August 2026)
 
