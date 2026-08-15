@@ -222,59 +222,58 @@ Bias was investigated both against size of companies and software provider (Mehr
 
 # 9. Discussion and conclusions/recommendations.
 
-An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, machine learning categories, improved architectures and database, with each step evaluated for feasibility, benefits, risk, proving the approach and provided business value. Regular meetings and a workshop helped get feedback such as the issues dealing with raw descriptions; validate business understanding and planned approaches. The customer requirements at the beginning would not have foreseen the way the project developed, highlighting the benefit of an agile approach opposed to a more fixed waterfall approach. The iterative approach improved macro-F1 from under 0.50 to 0.785 on the evaluation dataset and adding additional features: table name and heading, improving macro-F1 by 9.8pp on the production dataset. 
+An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, machine learning categories, improved architectures and database, with each step evaluated for feasibility, benefits, risk, proving the approach and providing business value. Regular meetings and a workshop helped get feedback such as the issues dealing with raw descriptions, and validate business understanding and planned approaches. The customer requirements at the beginning would not have foreseen the way the project developed, highlighting the benefit of an agile approach as opposed to a more fixed waterfall approach. The iterative approach improved macro-F1 from under 0.50 to 0.785 on the evaluation dataset and adding additional features: table name and heading, improving macro-F1 by 9.8pp on the production dataset. 
 
+While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using methods like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score. 
 
-While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using method like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score. 
+The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example, the phrase "cost of" appears near the bottom of the positive coefficients for CostSales(0.099), but carries a large negative coefficient for TurnoverRevenue (-0.463), so it can act by suppressing competing classes rather than only supporting the predicting one, but LIME and SHAP can show that more directly(Appendix A3.9.3, B23 and B39). 
 
-The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, that was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example the phrase "cost of" has no coefficient of its own in the example but LIME and SHAP show it still drives the prediction by suppressing competing classes (Appendix A3.9.3 and B23). 
+Since SEC-BERT is not created by a well-established provider, even if it was the winner of the decision matrix, security aspects may prevent use (Sculley et al., 2015; National Cyber Security Centre, 2023). If it was materially superior then it might be that we would need to invest in training our own BERT based model. 
 
-Since SEC-BERT is not created by a well established provider, even if it was the winner of the decision matrix, security aspects may prevent use (Sculley et al., 2015; National Cyber Security Centre, 2023). If it was materially superior then it might be that we would need to invest in training our own BERT based model. 
+The short domain-specific descriptions lend themselves well to TF-IDF (1-3 n-grams) with domain-specific vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without impacting other users of the platform.
 
-The short domain-specific descriptions led itself well to TF-IDF (1-3 n-grams) with domain-specific vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without impacting other users of the platform.
+My communication approach evolved based on how stakeholders reacted to early explanations, and methods were tailored for the use case and audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. I communicated residual analysis through confusion matrices with examples of errors, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary. I used a simple example to illustrate the difference between weighted and macro scores rather than going into depth on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
 
-My communication approach evolved based on how stakeholders reacted to early explanations, and methods tailored for the use case and audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. So communicating residual analysis through confusion matrices with the examples of error, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary. I used a simple example to illustrate the difference between weighted and macro scores rather than going into depth on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
+I got repeated questions about the machine learning, so I created an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, where it would be good, where it would make mistakes and the kind of mistake they should expect. The dashboard was more user friendly than just having a large dataset they would have to filter and process manually. The dashboard showed the top-5, but some of those were very poor matches, confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding of how the machine learning worked improved, their use increased.
 
-I got similar questions about the machine learning, so I created an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, where it would be good, where it would make mistakes and the kind of mistake they should expect. The dashboard was more user friendly than just having a large dataset they would have to filter and process manually. The dashboard showed the top-5, but some of those were very poor matches confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding of how the machine learning worked improved, their use increased.
+With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, funding, blockers, timeframes, and the benefits of more people working on the project, which resulted in additional people to help with development. I created memos with a cost-benefit analysis highlighting both improved timeliness and also extracting new untagged data, resulting in additional funding for infrastructure. 
 
-With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, funding, blockers timeframes, and the benefits of more people working on the project, which resulted in additional people to help with development. I created memos with a cost benefit analysis highlighting both improved timeliness and also extracting new untagged data, resulting in additional funding for infrastructure. 
+User acceptance testing highlighted that users might prefer numeric primary keys for joining rather than natural keys for join performance reasons. They also suggested structuring data in a way they are more familiar with. 
 
-With user acceptance testing, it highlighted that users might prefer numeric primary keys for joining rather than natural keys for join performance reasons. They also suggested structuring data in a way they are more familiar with. 
+The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to set up the tool. This means many analysts are now running the tool, allowing me to focus on development. But further developments resulted in a centralised approach extracting the full population and storing the data in an Oracle database streamlining the process with users just needing to do a database query rather than running the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. 
 
-The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to setup the tool. This means many analysts are now running the tool allowing me to focus on development. But further developments resulted in a centralised approach extracting the full population and storing the data in an Oracle database streamlining the process with users just needing to do a database query rather than running the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. 
-
-I discovered Optuna while working with neural networks, and found that its built in visualisations and ability to automatically tune the hyperparameters, could have replaced a lot of the manual work and code used with scikit-learn. So going forwards I would use Optuna with scikit-learn and more widely in the future. Initial versions also had manual code to store information and results from different runs, before I found MLFlow. So going forwards I plan to do wider research on existing packages and functions to solve a problem rather than just jumping straight into coding a solution.
+I discovered Optuna while working with neural networks, and found that its built-in visualisations and ability to automatically tune the hyperparameters could have replaced a lot of the manual work and code used with scikit-learn. So going forwards I would use Optuna with scikit-learn and more widely in the future. Initial versions also had manual code to store information and results from different runs, before I found MLflow. So going forwards I plan to do wider research on existing packages and functions to solve a problem rather than just jumping straight into coding a solution.
 
 Recommendations:
 - Increase coverage to 100%, to be able to replace existing systems.
 - Enhance system robustness, more robust scheduling system, move to a fully supported Oracle server.
 - Data contracts for data sources and other systems that will use this data.
-- Monitor drift (Gama et al., 2014)
+- Monitor drift (Gama et al., 2014).
 	- Monitoring drift of inputs, check if there are new taxonomies. 
-	- Drift on outputs to be detected for both accuracy and f1-macro, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
+	- Drift on outputs to be detected for both accuracy and macro-F1, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
 - Standard structure for machine learning communications, should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details (Mitchell et al., 2019).
 - Moving tests to a CI pipeline will add more assurance and reliability. 
-- Human evaluation of tagging
+- Human evaluation of tagging.
 - Establish the performance ceiling beforehand so the appropriate time and effort can be used to improve pre-processing data and improving the model. The same description can be associated with different concepts, so there is a limit to even the best model. Looking at the most common concept per description would allow me to calculate a hard upper bound of performance. 
-- Consider implementing simplified taxonomy of concepts. Grouping together similar concepts would be more user friendly for analysts.
+- Consider implementing a simplified taxonomy of concepts. Grouping together similar concepts would be more user friendly for analysts.
 
 # 10. Summary of findings.
 
-I developed a supervised classifier, multi-class, to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT being compared using a decision matrix. While SEC-BERT lead on macro-F1 it was rejected because it was not as good on interpretability, deployment simplicity and dependency risk. 
+I developed a supervised, multi-class classifier to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT, being compared using a decision matrix. While SEC-BERT led on macro-F1 it was rejected because it was not as good on interpretability, deployment simplicity and dependency risk. 
 
 The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC.
 
-The biggest factors were actually pre-processing which increased macro-F1 by 20pp, and adding additional features by 9.8pp. And going forwards I expect the main improvements would come from pre-processing or from simplifying the taxonomy used rather than changing the architectures or tweaking the hyperparameters. 
+The biggest factors were actually pre-processing, which increased macro-F1 by 20pp, and adding additional features by 9.8pp. Going forwards I expect the main improvements would come from pre-processing or from simplifying the taxonomy used rather than changing the architectures or tweaking the hyperparameters. 
 
 # 11. Implications.
 
-Hubble helped us meet our quality standards. The machine learning category reduce the manual regex style work previously done, improved consistency and reliability of the analysis. 
+Hubble helped us meet our quality standards. The machine learning categories reduced the manual regex-style work previously done, improved consistency and reliability of the analysis. 
 
-Hubble being widely used in by multiple teams, with data being integrated into various dashboards and across multiple tax heads.
+Hubble is widely used by multiple teams, with data being integrated into various dashboards and across multiple tax heads.
 
 With untagged data now being extracted and classified, we have been able to perform data analysis previously not possible, which has been fed into improving departmental/government policy. 
 
-The data has been used to better identify companies to investigate, and the estimated benefits stored on a spreadsheet is in the tens of millions, but completion of the spreadsheet is incomplete so I arranged for the central management system to have built in functionality to monitor benefits.
+The data has been used to better identify companies to investigate, and the estimated benefits stored on a spreadsheet are in the tens of millions, but the spreadsheet is incomplete so I arranged for the central management system to have built-in functionality to monitor benefits.
 
 # 12. Caveats and limitations.
 
@@ -342,7 +341,7 @@ Liu, Y., et al. (2019) RoBERTa: a robustly optimized BERT pretraining approach. 
 
 Loukas, L., et al. (2022) 'FiNER: financial numeric entity recognition for XBRL tagging', Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics. Dublin, 22-27 May. pp. 4419-4431. Available at: https://doi.org/10.18653/v1/2022.acl-long.303 (Accessed: 14 August 2026)
 
-Lundberg, S. and Lee, S. (2017) 'A unified approach to interpreting model predictions', Advances in Neural Information Processing Systems 30. Long Beach, 4-9 December. pp. 4765-4774.
+Lundberg, S. and Lee, S. (2017) 'A unified approach to interpreting model predictions', Advances in Neural Information Processing Systems 30. Long Beach, 4-9 December. pp. 4765-4774. Available at: https://arxiv.org/pdf/1705.07874  (Accessed: 14 August 2026)
 
 Mehrabi, N., et al. (2021) 'A survey on bias and fairness in machine learning', ACM Computing Surveys, 54(6), pp. 1-35. Available at: https://doi.org/10.1145/3457607 (Accessed: 14 August 2026)
 
@@ -8357,7 +8356,7 @@ Differences in ranking between the 1%/10% and 100% populations were 0–3 places
 
 ![SHAP, RawMaterialsConsumablesUsed](report_figures/B23c-shap-rawmaterials.png)
 
-SHAP values for the three competing classes. "cost of" carries no coefficient of its own but still drives the outcome by suppressing competing classes, which the raw coefficients alone do not show. Source A3.9.3; supports section 8 and 9.
+SHAP values for the three competing classes. Source A3.9.3; supports section 8 and 9.
 
 ### B24. Confusion matrices for individual classes (LinearSVC, holdout)
 
@@ -8608,6 +8607,32 @@ Extended metrics, available for the sampled evaluation sets:
 | Weighted-recall | 0.975 (0.973–0.978) | 0.977 (0.974–0.980) |
 
 All intervals are bootstrap estimates over 1,000 resamples at the 95% level. The full holdout is the most conservative of the four evaluation sets and is the figure quoted in section 8; the smaller samples score higher on macro-F1 because rare classes are unevenly represented, and their intervals are correspondingly wider. These figures differ from Appendix B32, where every model was trained on 10% square-root weighted data and evaluated on a common holdout subset so that architectures could be compared on equal terms. Source `03_ixbrl_experiment_models.ipynb` section 7.3 (`bootstrap_ci`, `test_model_over_populations`); supports section 8.
+
+### B39. LinearSVC coefficients for "cost of goods sold turnover"
+
+Coefficients for every n-gram present in the example description, across the three competing classes. Class intercepts: CostSales −1.000, RawMaterialsConsumablesUsed −1.190, TurnoverRevenue −1.156.
+
+| n-gram | CostSales | RawMaterialsConsumablesUsed | TurnoverRevenue |
+|---|---|---|---|
+| `cost of` | 0.099 | 0.493 | −0.463 |
+| `cost` | 0.000 | 0.442 | −0.074 |
+| `turnover` | 0.000 | 0.000 | 2.156 |
+| `goods` | 0.000 | 0.000 | 0.000 |
+| `of` | 0.000 | 0.000 | 0.000 |
+| `of goods` | 0.000 | 0.000 | 0.000 |
+| `sold` | 0.000 | 0.000 | 0.000 |
+
+Highest weighted features for each class, for context:
+
+| Class | Top positive features | Strongest negative features | Non-zero features |
+|---|---|---|---|
+| CostSales | expenditure on charitable 4.467; service charge expenditure 3.895; cost of sales 3.178; management costs 2.725; purchases 1.937 | hire purchases −1.690; materials −0.093 | 11 positive, 2 negative |
+| RawMaterialsConsumablesUsed | of materials 2.762; of raw materials 2.582; raw materials consumables 2.071; of raw 1.945; raw 1.459 | stock of materials −1.026; of sales −0.376; consumables −0.042 | 12 positive, 3 negative |
+| TurnoverRevenue | sale of goods 3.986; service charges ground 3.546; rest of 3.046; united 2.991; and related income 2.785 | other −1.390; accrued income −1.367; deferred income −1.293; cost of sales −1.240 | 50 positive, 41 negative |
+
+`cost of` sits near the bottom of the positive features for CostSales (0.099, second smallest of eleven) but carries a substantial negative weight for TurnoverRevenue (−0.463). It therefore contributes mainly by suppressing the competing class rather than by supporting the predicted one, which reading the top coefficients per class alone would not reveal, and which the LIME and SHAP attributions at Appendix A3.9.2, A3.9.3 and B23 surface directly. `goods`, `of`, `of goods` and `sold` carry no weight in any of the three classes.
+
+TurnoverRevenue draws on far more features (50 positive, 41 negative) than the two cost classes, reflecting the wider variety of descriptions mapping to it noted in section 5.2. The negative features also include `deffered income`, a common misspelling learned from the source documents, which supports the robustness findings in section 8. Source `03_ixbrl_experiment_models.ipynb` section 9.1; supports section 9.
 
 ## Appendix C. Statistical rigour: uncertainty, bias, and error estimates where appropriate.
 
