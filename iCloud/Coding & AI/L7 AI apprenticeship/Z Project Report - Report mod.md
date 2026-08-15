@@ -116,7 +116,7 @@ I implemented data quality controls aligned with HMRC expectations and broadly i
 - Timeliness. The system architecture and long-format data structure handles any taxonomy and without hitting database column limits, allowing extraction within days of receipt. 
 - Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 16 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, Appendix A2.3). 
 
- This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 956(Appendix B15). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure such as restricting systems and data access to specific users, this ensured I complied with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
+ This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 (Appendix B15). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure such as restricting systems and data access to specific users, this ensured I complied with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
 
 Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
@@ -153,7 +153,10 @@ After fine tuning the hyperparameters and training on the full train dataset, Li
 
 I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to use a simpler TFIDF word-only embedding, which is faster, easier to maintain and easier to interpret. 
 
+LinearSVC didn't fully converge but there was no significant difference in score for max_iter from 5,000 to 20,000, so I selected max_iter of 10,000, since 20,000 was slower for no real gain (Appendix A3.6).
+
 The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
+
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
@@ -293,6 +296,8 @@ LinearSVC has very good train times on smaller dataset sizes but does not scale 
 Increasing data set size while keeping an the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
 
 The integration of R and Python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
+
+
 
 # 13. Reference list.
 
