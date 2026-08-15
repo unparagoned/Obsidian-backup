@@ -84,44 +84,41 @@ Secondary KPIs used were precision, recall, train time, inference time, interpre
 
 ## 5.1 Data selection
 
-HMRC's central systems are locked down, without any readily available GPU access making it difficult to do exploratory work with complex models, so exploratory work was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026). It was a a month of data making it more representative, although subject matter experts explained that many companies select specific dates like 31 December or 31 March, so the data might not be completely representative but that should not have any material impact for my analysis. This resulted in 2.8m lines of data with 956 concepts (labels) (extraction code Appendix A1; dataset characteristics Appendix B15). For latter phases company accounts and tax computations submitted to HMRC were used. 
+HMRC's central systems are locked down, without any readily available GPU access, making it difficult to do exploratory work with complex models, so this was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. It was a month of data making it a sufficiently large dataset to cover account styles, although subject matter experts explained that many companies select specific dates like 31 December or 31 March, so the data might not be completely representative but is unlikely to have any material impact on my analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) (extraction code Appendix A1; dataset characteristics Appendix B15). For the production phase, company accounts and tax computations submitted to HMRC were used. 
 
-The source iXBRL documents were complex with inconsistent HTML structures, iXBRL data and multiple taxonomies. Appendix B1 shows how tagged and untagged values sit in the document, Appendix B2 and B3 the two structural variants (with and without HTML table nodes, ~85%/~15% of documents), and Appendix B4 the table name and headings that later became additional features. I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different, they explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so it was recommended to train only using the main taxonomy giving consistent categories.
+The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies (Appendix B1, B2, B3). In some situation table names and headings are also important features(B4). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different. They explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
 
 ## 5.2 Exploratory Data Analysis (EDA)
 
-Rank frequency plots of both description and concept had a long tail (Appendix B5). With a Pareto chart showing that the 75 most common concepts cover 95% of items (Appendix B8); with a distribution closer to a lognormal fit than power-law (Appendix B9) (Clauset, Shalizi and Newman, 2009). Motivating the use of macro-F1 over accuracy so that common classes do not dominate the metrics. {I say this lots of times all over the place, maybe just say it here}
+Rank frequency plots of both description and concept had a long tail (Appendix B5); with a Pareto chart showing that the 75 most common concepts cover 95% of items (Appendix B8); and a distribution closer to a lognormal fit than power-law (Appendix B9) (Clauset, Shalizi and Newman, 2009). This motivated the use of macro-F1 as the primary metric over accuracy so that common classes do not dominate. 
 
 The main feature is a description that has various types, from nominal text, dates (temporal), names (nominal) and numeric figures (numeric ratio). Most descriptions are 1-9 words with a mode of 2 (Appendix B6), and the five most common concepts all have interquartile ranges of 2-7 words (Appendix B7). 
 
-The xbrl concept (label) is a categorical nominal label from a fixed taxonomy. It is a single CammelCase word, but splitting into words make it human readable with similar concepts normally having similar wording. 
+The XBRL concept (label) is a categorical nominal label from a fixed taxonomy. It is a single CamelCase word, but splitting into words makes it human readable with similar concepts normally having similar wording. 
 
-The descriptions and concepts are many-to-many (Appendix A2.2.7 and A2.2.8), with cosine similarity analysis identifying situations where some descriptions like "Taxation and social security costs" were used for very similar concepts, but other descriptions such as "total" were used for lots of different concepts. It also highlighted that taxonomy goes into a great deal of specificity, beyond what is generally required or could be predicted based on the human readable data in the accounts. Creating a real upper limit to any model. {Isn't this said elsewhere?}
+The descriptions and concepts are many-to-many (Appendix A2.2.7 and A2.2.8), with cosine similarity analysis identifying situations where some descriptions like "Taxation and social security costs" were used for similar concepts, but other descriptions such as "total" were used for dissimilar concepts. It also highlighted that taxonomy goes into a great deal of specificity, beyond what is generally required or could be predicted based on the human readable data in the accounts. This creates a real upper limit on any model. 
 
-Initially I did some classifier independent analysis, which showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987) suggesting it is able to capture meaning of the different descriptions better than plain TFIDF (0.41) (Appendix A2.5, full scores at Appendix B16). 
+Initially I did some classifier-independent analysis, which showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987) suggesting it is able to capture meaning better than plain TFIDF (0.41) (Appendix A2.5, full scores at Appendix B16). But this might not carry over to categorisation performance. 
+
 ## 5.3 Preprocessing
 
 The text features like description were normalised, lowercasing and replacing special characters with spaces. Not all preprocessing was effective, for example replacing forward slashes with spaces actually reduced performance, so it was dropped (`clean_field`, Appendix A2.3). 
 
-I canonicalised the description, so most dates were replaced by a placeholder "hubble_date", except for 31 March 1982, which subject matter experts explained has a special meaning for tax so that was replaced with "hubble_date_1982_03_31" (`canonicalize_field`, Appendix A2.3). 
+I canonicalised the description, so most dates were replaced by a placeholder `hubble_date`, except for 31 March 1982, which subject matter experts explained has a special meaning for tax so that was replaced with `hubble_date_1982_03_31` (`canonicalize_field`, Appendix A2.3). 
 
-Similarly company names, individual names, postcodes and numbers were identified using regular expressions and labels replaced by placeholders. This helps avoid overfitting and makes the model more generalisable; improves model performance since it reduces a lot of the noise; preserves privacy; and enhances data security through data minimisation. It is more ethical since it would treat less common ethnic names the same as more commonly used names. 
+Similarly company names, individual names, postcodes and numbers were identified using regular expressions and labels replaced by placeholders. This helps avoid overfitting and makes the model more generalisable; improves model performance since it reduces a lot of the noise; preserves privacy; and enhances data security through data minimisation. It is more ethical since it treats less common ethnic names the same as more commonly used names. 
 
-Subject matter experts advised that where there was a placeholder by itself, then that would not be enough information to categorise, so we agreed to do label engineering and changing them to similar placeholders like HubbleName (`target_engineer` and `standardise_names`, Appendix A2.3; effect on the label distribution at Appendix B12). So while we ca not predict the actual concept the placeholder is related to, knowing it is a name can be useful in analysis. 
+Subject matter experts advised that where there was a placeholder by itself, then that would not be enough information to categorise, so I decided to do label engineering and change them to placeholders like `HubbleName` (`target_engineer` and `standardise_names`, Appendix A2.3; effect on the label distribution at Appendix B12). So while we cannot predict the actual concept the placeholder is related to, knowing it is a name can be useful in analysis. 
 
-I implemented data quality controls aligned with HMRC expectation and broadly in line with DAMA UK's quality dimensions (DAMA UK, 2013; Government Data Quality Hub, 2020).
+I implemented data quality controls aligned with HMRC expectations and broadly in line with DAMA UK's quality dimensions (DAMA UK, 2013; Government Data Quality Hub, 2020).
 - Completeness improved since untagged data was now extracted. 
-- Consistency because the untagged data and iXBRL tagged data was structured and formatted in similar ways on the same tables. 
-- Timeliness, the system architecture and structuring the data in a long format allows it to deal with any taxonomy, allowing extraction within days of receipt. 
-- Validity and accuracy were addressed by removing descriptions less than 2 characters, missing; low-quality; or longer than 16 words which analysis showed were not valid descriptions (`filter_data` and `filter_out_labels`, Appendix A2.3). 
+- Consistency because the untagged data and iXBRL tagged data were structured and formatted in similar ways on the same tables; and had consistent ML categories.
+- Timeliness. The system architecture and long-format data structure handles any taxonomy and without hitting database column limits, allowing extraction within days of receipt. 
+- Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 16 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, Appendix A2.3). 
 
+This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826, while keeping 86% of the rows of data (Appendix B15). The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure such as restricting systems and data access to specific users, this ensured I complied with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
 
-
-This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826, while keeping 86% of the rows of data (Appendix B15). The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure like restricting access to systems and data to specific users ensured I was complying with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR. 
-
-Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, test, train, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6) (Kohavi, 1995). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
-
-
+Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
 
 This is multi-class text classification with over 826 nominal classes with strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context then and then evaluated the leading candidates. 
@@ -196,7 +193,7 @@ To compare the model architectures a decision matrix was used (Appendix A6), cov
 
 Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (rubric at Appendix A6.2.5, scored assessments at Appendix B31). 
 
-To make comparison fair and due to memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 5% confidence intervals were created using the bootstrap method (Efron and Tibshirani, 1993) over using cross validation due to complexity and computational cost (measured values at Appendix B32). 
+To make comparison fair and due to memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 5% confidence intervals were created using the bootstrap method over using cross validation due to complexity and computational cost (Efron and Tibshirani, 1993; Kohavi, 1995) (measured values at Appendix B32). 
 
 While SEC-BERT had the best macro-F1 score I chose LinearSVC (final scores at Appendix B34), trading marginal performance (2.3pp) for a solution that is simpler to maintainable, more explainable (feature coefficients), runs 220x faster, runs on existing CPU based infrastructure,  scales cost effectively, relies on well-established and regularly updated packages.
 
@@ -277,11 +274,11 @@ The model and evaluation were all based on tagged data. But the main use case wo
 
 Traditional machine learning model comparisons used 5-fold cross validation, was a reasonable choice for the initial filtering due computations cost, but overlapping training data sets can understate variance. Later stages should have used something stronger like 5x2 CV, which uses disjoint training sets within each replication, which limits Type I error (Dietterich, 1998). 
 
-Analysts were educated that the ML category can be wrong, so to use the dashboard to identify how well the concept performs. As an AI safeguard, The ML category should not be used for automated decisions, and that there should always be a human in the loop before any action on it happens (Information Commissioner's Office, no date). 
+Analysts were educated that the ML category can be wrong, so to use the dashboard to identify how well the concept performs. As an AI safeguard, The ML category should not be used for automated decisions, and that there should always be a human in the loop before any action on it happens (Information Commissioner's Office, no date a). 
 
 LinearSVC has very good train times on smaller dataset sizes but does not scale as well on larger datasets, so it is not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in f1-macro, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
 
-Increasing data set size while keeping an absolute threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. 
+Increasing data set size while keeping an absolute threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
 
 The integration of R and Python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
 
@@ -323,7 +320,9 @@ He, H. and Garcia, E. (2009) 'Learning from imbalanced data', IEEE Transactions 
 
 HM Revenue and Customs (2024) Company Tax Returns. Available at: https://www.gov.uk/company-tax-returns (Accessed: 14 August 2026)
 
-Information Commissioner's Office (no date) Automated decision-making and profiling. Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/automated-decision-making-and-profiling/ (Accessed: 14 August 2026)
+Information Commissioner's Office (no date a) Automated decision-making and profiling. Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/automated-decision-making-and-profiling/ (Accessed: 14 August 2026)
+
+Information Commissioner's Office (no date b) Data protection impact assessments (DPIAs). Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/ (Accessed: 15 August 2026)
 
 Joachims, T. (1998) 'Text categorization with support vector machines: learning with many relevant features', in Nedellec, C. and Rouveirol, C. (eds.) Machine learning: ECML-98. Berlin: Springer, pp. 137-142.
 
@@ -349,6 +348,8 @@ National Cyber Security Centre (2023) Guidelines for secure AI system developmen
 
 Pedregosa, F., et al. (2011) 'Scikit-learn: machine learning in Python', Journal of Machine Learning Research, 12, pp. 2825-2830. Available at: https://www.researchgate.net/publication/51969319_Scikit-learn_Machine_Learning_in_Python (Accessed: 14 August 2026)
 
+Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data (UK GDPR). Available at: https://www.legislation.gov.uk/eur/2016/679/contents (Accessed: 15 August 2026)
+
 Reimers, N. and Gurevych, I. (2019) 'Sentence-BERT: sentence embeddings using Siamese BERT-networks', Proceedings of the 2019 Conference on Empirical Methods in Natural Language Processing and the 9th International Joint Conference on Natural Language Processing. Hong Kong, 3-7 November. pp. 3982-3992. Available at: https://doi.org/10.18653/v1/D19-1410 (Accessed: 14 August 2026)
 
 Ribeiro, M., Singh, S. and Guestrin, C. (2016) '"Why should I trust you?": explaining the predictions of any classifier', Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. San Francisco, 13-17 August. pp. 1135-1144. Available at: https://doi.org/10.1145/2939672.2939778 (Accessed: 14 August 2026)
@@ -367,7 +368,7 @@ Sebastiani, F. (2002) 'Machine learning in automated text categorization', ACM C
 
 Sokolova, M. and Lapalme, G. (2009) 'A systematic analysis of performance measures for classification tasks', Information Processing and Management, 45(4), pp. 427-437. Available at:  https://www.researchgate.net/publication/222674734_A_systematic_analysis_of_performance_measures_for_classification_tasks (Accessed: 14 August 2026)
 
-Song, K., et al. (2020) 'MPNet: masked and permuted pre-training for language understanding', Advances in Neural Information Processing Systems 33. 6-12 December. pp. 16857-16867.
+Song, K., et al. (2020) 'MPNet: masked and permuted pre-training for language understanding', Advances in Neural Information Processing Systems 33. 6-12 December. pp. 16857-16867. Available at: https://arxiv.org/abs/2004.09297 (Accessed: 14 August 2026)
 
 Sparck Jones, K. (1972) 'A statistical interpretation of term specificity and its application in retrieval', Journal of Documentation, 28(1), pp. 11-21. Available at: https://doi.org/10.1108/eb026526 (Accessed: 14 August 2026)
 
