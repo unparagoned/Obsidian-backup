@@ -111,3 +111,5 @@ LinearSVC is the obvious production candidate — small model, fast inference, i
 - [x] **Add deployment architecture discussion** — even a brief section on how LinearSVC would run operationally, retraining triggers, monitoring approach.
 - [x] **Explain `MAX_WORDS = 15`** — add a comment or markdown cell showing where this value comes from.
 - [x] **Explain table index 0 skip** in notebook 00 — add a comment explaining why iteration starts at index 1.
+
+ Sort out diagrams for section 7
