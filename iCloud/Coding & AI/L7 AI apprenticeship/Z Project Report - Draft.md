@@ -392,3 +392,57 @@ Body is currently ~6,236 words against 5,500, so everything below has to be trad
 6. **B3 convergence disclosure (§12)** — one sentence, supports B6.
 7. **B2 software engineers (§3.5)** — rewording rather than addition.
 8. **B4 maintenance (§7.6)** — one sentence.
+
+---
+
+# State and decisions — handover note, 15 August 2026
+
+*Written so a fresh session can pick up without re-litigating settled questions. Everything above in this gap check is now closed except Appendix D.*
+
+## Where things stand
+
+Body is **6,456 words against the 5,500 limit — 956 over**. Per section:
+
+| § | Words | | § | Words |
+|---|---|---|---|---|
+| 1 | 186 | | 7 | 1,103 |
+| 2 | 298 | | 8 | 508 |
+| 3 | 678 | | 9 | **1,247** |
+| 4 | 217 | | 10 | 111 |
+| 5 | **1,016** | | 11 | 116 |
+| 6 | 560 | | 12 | 339 |
+
+Cutting targets are **§9, §7 and §5**, which are 52% of the body between them. §9 has never had a density pass and has grown by ~250 words this session. §10 and §11 are already lean at ~110 each, so the §8–11 deduplication once mapped is worth far less than first estimated.
+
+## Open items
+
+1. **Appendix D** — still an empty heading. The KSB mapping table. Deliberately left until last. Appendices are not word-counted, so it costs nothing. Definitive list is the 25 KSBs in section C above; note **S7 is not in the signed-off mapping** despite appearing in the older Appendix D list in this draft.
+2. **`{which was?}`** in §12 — the only editorial note left in the document. Asks what the performance variation on HMRC data actually was. That figure is not in the public notebooks, so it needs to come from HMRC-side results or the sentence should be cut.
+3. **~956 words to cut.**
+
+## Settled — do not re-suggest
+
+- **The 9-month / 12-month enquiry window detail** was deliberately cut as too much detail. Consequence accepted: §4's one-week KPI has no stated rationale on the page.
+- **The person-hours total** in §2 (2 people × ~2 hours × hundreds of concepts) was declined on word budget.
+- **A "most conservative figure" sentence in §8** and **a maintenance sentence in §7.6** were both considered and dropped, given the overage. B38 already carries the four evaluation sets, so the conservative-reporting point is evidenced without the sentence.
+- **Em dashes, `however`/`thus`/`moreover`, colon-elaborations and short punchy sentences** are not the author's voice. See the `epa-report-voice` skill.
+- **Cross-references use `(Section 11)` and `(Appendix B24)`**, never `§` or bare `(B24)`.
+- **Corrections should be minimal** — `from → to` with a plain reason, not rewritten paragraphs.
+
+## Verified figures — recomputed from the model, not taken on trust
+
+Loading `grid_search.joblib` and scoring the holdout reproduces **accuracy 0.9754 / macro-F1 0.7849**, matching the report. From the same run:
+
+- Median per-class F1 **0.966** against a mean (macro-F1) of 0.785 — this gap is what explains the accuracy/macro-F1 difference
+- **141** of 826 labels reach training, because `MIN_EXAMPLES = 350`; the 685 excluded carry 26,151 rows
+- 27 of 141 concepts score below 0.5, eight score zero; 94.1% of holdout rows sit in concepts scoring above 0.9
+- `max_iter` was searched over 5,000 / 10,000 / 20,000 with no significant difference, so the convergence warning is a documented non-issue
+
+## Hygiene before submission
+
+Regressions appear every editing round. Re-run both just before submitting — they are at `~/.claude/skills/epa-report-voice/scripts/`:
+
+- `formalise.pl` — expands contractions, normalises curly apostrophes, skips `{...}` notes
+- `fixparens.pl` — adds the missing space before `(`, skips inline code
+
+Both take a line range for sections 1–12 and print counts for verification. Also check for stray `{...}` notes outside code fences, and that the reference list italics survive whatever export route is used, since they are Markdown asterisks rather than real formatting.

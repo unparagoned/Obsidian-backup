@@ -141,11 +141,11 @@ It is expected that a frontier LLM, such as ChatGPT, would have better semantic 
 
 ## 7.1 Population size validation
 
-Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller samples were representative (Appendix A3.3). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively (Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
+Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller samples were representative (Appendix A3.3, B17 and B18). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively (Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
 
 ## 7.2 Traditional machine learning algorithms
 
-To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-tests to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
+To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1, A3.4.2, B21 and B37) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-tests to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
 
 To get a better handle on the hyperparameters I plotted them against scores, narrowing down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores than min_df 2, which was surprising on the speed aspect (Appendix B22). 
 
@@ -153,14 +153,14 @@ After fine tuning the hyperparameters and training on the full train dataset, Li
 
 I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to use a simpler TFIDF word-only embedding, which is faster, easier to maintain and easier to interpret. 
 
-LinearSVC didn't fully converge but there was no significant difference in score for max_iter from 5,000 to 20,000, so I selected max_iter of 10,000, since 20,000 was slower for no real gain (Appendix A3.6).
+LinearSVC did not fully converge but there was no significant difference in score for max_iter from 5,000 to 20,000, so I selected max_iter of 10,000, since 20,000 was slower for no real gain (Appendix A3.6).
 
 The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
 
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
-I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2 and B29). 
+I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2, B29 and B30). 
 
 ## 7.4 Class imbalance
 
@@ -201,7 +201,7 @@ While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal p
 
 Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper and more available. 
 
-The overall system is shown at Appendix B35 
+The overall system is shown at Appendix B35 and B36 
 - Raw iXBRL documents retrieved from AWS S3
 - Extracted using `rvest`/`xml2` 
 - Structured into long format using R 
@@ -211,7 +211,7 @@ The overall system is shown at Appendix B35
  
 The scope of the project meant that others were working on non-machine learning aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
 
-The pipeline now runs automatically daily, so that analysts don't need to run it them selves and just need to query the database. 
+The pipeline now runs automatically daily, so that analysts do not need to run it themselves and just need to query the database7 a. 
 
 Governance is built into the design. Documentation and guidance explain whether an item was tagged by the customer or is a machine learning prediction. Analysts know that the machine learning category can be wrong, that it should never be used in automated decisions, and that there should always be a human in the loop. Per-class performance is available in a dashboard so analysts can check before anything is relied upon. 
 
@@ -233,7 +233,7 @@ An Agile approach worked well with CRISP-DM. Iterating delivered usable products
 
 While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using methods like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score. 
 
-The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example, the phrase "cost of" appears near the bottom of the positive coefficients for CostSales(0.099), but carries a large negative coefficient for TurnoverRevenue (-0.463), so it can act by suppressing competing classes rather than only supporting the predicting one, but LIME and SHAP can show that more directly(Appendix A3.9.3, B23 and B39). 
+The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example, the phrase "cost of" appears near the bottom of the positive coefficients for CostSales (0.099), but carries a large negative coefficient for TurnoverRevenue (-0.463), so it can act by suppressing competing classes rather than only supporting the predicting one, but LIME and SHAP can show that more directly (Appendix A3.9.3, B23 and B39). 
 
 Since SEC-BERT is not created by a well-established provider, even if it was the winner of the decision matrix, security aspects may prevent use (Sculley et al., 2015; National Cyber Security Centre, 2023). If it was materially superior then it might be that we would need to invest in training our own BERT based model. 
 
@@ -293,7 +293,7 @@ Traditional machine learning model comparisons used 5-fold cross validation, was
 
 LinearSVC has very good train times on smaller dataset sizes but does not scale as well on larger datasets, so it is not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in f1-macro, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
 
-Increasing data set size while keeping an the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
+Increasing data set size while keeping the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
 
 The integration of R and Python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
 
@@ -8258,7 +8258,7 @@ CCDF of the concept counts against fitted distributions. The distribution is clo
 
 ![Rank frequency plot, processed data](report_figures/B10-rank-frequency-processed.png)
 
-Source A2.4.2; supports section 5.3.
+The description tail is much shorter than in the raw data (Appendix B5), falling to a frequency of 2 by rank 2,250 where the raw data was still at 14. This follows from canonicalisation reducing the unique descriptions from 266,178 to 7,795. Source A2.4.2; supports section 5.3.
 
 ### B11. Word-count distribution after canonicalisation
 
@@ -8439,7 +8439,7 @@ Best Optuna trial from the 200-trial architecture search. Source A4.3.1.1; suppo
 
 ![CNN validation macro-F1 vs training time](report_figures/B27-cnn-val-f1-by-train-time.png)
 
-Source A4.3.1.1; supports section 7.3 and 7.5.
+Most of the score arrives in the first 25 seconds of training, reaching 0.69, with the remaining 155 seconds adding under 6pp. Source A4.3.1.1; supports section 7.3 and 7.5.
 
 ### B28. SEC-BERT token contributions (SHAP) for "cost of goods sold turnover"
 
@@ -8451,7 +8451,7 @@ Contribution of each token to the predicted class (`CostSales`). "cost" and "sol
 
 ![SEC-BERT loss by epoch](report_figures/B29-secbert-loss-by-epoch.png)
 
-Source A5.5; supports section 7.3.
+Training loss falls from 6.0 to around 0.25 within the first epoch, and the evaluation loss tracks it closely down to 0.1 over the remaining five epochs without diverging, so there is no sign of overfitting. Source A5.5; supports section 7.3.
 
 ### B30. SEC-BERT confusion matrices for individual classes
 
@@ -8566,6 +8566,8 @@ On-demand-compute allocates a CPU-only EC2 instance per job rather than maintain
 
 [[28b389ae1e43974939e97cf42730a476_MD5.jpg|Open: Pasted image 20260815170713.png]]
 ![[28b389ae1e43974939e97cf42730a476_MD5.jpg]]
+
+The modelling workflow, as opposed to the production pipeline at Appendix B35. The description is pre-processed and vectorised while the XBRL concept is encoded as the label, and training iterates through hyperparameter optimisation and model selection before evaluation. Supports section 7.6.
 
 
 
