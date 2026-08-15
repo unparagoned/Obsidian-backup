@@ -149,7 +149,7 @@ To narrow down the initial models and hyperparameters I used HalvingRandomSearch
 
 To get a better handle on the hyperparameters I plotted them against scores, narrowing down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores than min_df 2, which was surprising on the speed aspect (Appendix B22). 
 
-After fine tuning the hyperparameters and training on the full train dataset, LinearSVC was the best performing model beating out the alternatives at a 5% confidence level (Appendix A3.4.3 and A3.4.4). 
+After fine tuning the hyperparameters and training on the full train dataset, LinearSVC was the best performing model beating out the alternatives at a 5% significance level (Appendix A3.4.3 and A3.4.4). 
 
 I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to use a simpler TFIDF word-only embedding, which is faster, easier to maintain and easier to interpret. 
 
@@ -157,7 +157,7 @@ The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearS
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
-I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embeddings dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2 and B29). 
+I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2 and B29). 
 
 ## 7.4 Class imbalance
 
@@ -166,7 +166,7 @@ To deal with the class imbalance (He and Garcia, 2009) and reduce systematic bia
 - Square-root weighted training data over various models provided good increases in macro-F1 but sometimes with very small decreases in accuracy, e.g. 1.3pp macro-F1 increase vs 0.0573pp accuracy decrease (Appendix A3.7.7).
 - Random oversampling actually reduced performance on the transformer based models (Appendix A5.3.9). 
 
-A smaller but modified training dataset improved NN performance whereas LinearSVC performed best on the full train dataset with a weighted model. 
+A smaller modified training dataset improved neural net performance whereas LinearSVC performed best on the full train dataset with a weighted model. 
 
 ## 7.5 Model selection
 
@@ -190,21 +190,21 @@ To compare the model architectures a decision matrix was used (Appendix A6), cov
 
 Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (Appendix A6.2.5 and B31). 
 
-To make comparison fair and due to memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 95% confidence intervals were created using the bootstrap method rather than cross validation due to complexity and computational cost (Kohavi, 1995) (Appendix B32). 
+For fair comparison, and because of memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 95% confidence intervals were created using the bootstrap method rather than cross validation due to complexity and computational cost (Kohavi, 1995) (Appendix B32). 
 
-While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintain, more explainable (feature coefficients), runs 220x faster, deploys on existing CPU based infrastructure,  scales cost effectively, relies on well-established and regularly updated packages(Appendix B32, B33 and B34)
+While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintain, is more explainable (feature coefficients), runs 220x faster, deploys on existing CPU-based infrastructure, scales cost effectively, and relies on well-established, regularly updated packages (Appendix B32, B33 and B34).
 
 ## 7.6 Wider system
 
-Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
+Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper and more available. 
 
-The overall system consisted of(Appendix B35) 
-- The raw iXBRL documents retrieved from AWS S3
+The overall system is shown at Appendix B35 
+- Raw iXBRL documents retrieved from AWS S3
 - Extracted using `rvest`/`xml2` 
-- Structured R 
+- Structured into long format using R 
 - Features are pre-processed using Python function using `reticulate` 
-- Scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features
-- Output saved to an Oracle database via `dbplyr` 
+- Embedded and classified by scikit-learn's `Pipeline` with `TfidfVectorizer` and `LinearSVC`
+- Output saved to an Oracle database using `dbplyr` 
  
 The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
 
