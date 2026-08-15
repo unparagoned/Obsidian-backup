@@ -84,9 +84,9 @@ Secondary KPIs used were precision, recall, train time, inference time, interpre
 
 ## 5.1 Data selection
 
-HMRC's central systems are locked down, without any readily available GPU access, making it difficult to do exploratory work with complex models, so this was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. It was a month of data making it a sufficiently large dataset to cover account styles, although subject matter experts explained that many companies select specific dates like 31 December or 31 March, so the data might not be completely representative but is unlikely to have any material impact on my analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) (extraction code Appendix A1; dataset characteristics Appendix B15). For the production phase, company accounts and tax computations submitted to HMRC were used. 
+HMRC's central systems are locked down, without any readily available GPU access, making it difficult to do exploratory work with complex models, so this was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. It was a month of data making it a sufficiently large dataset to cover account styles, although subject matter experts explained that many companies select specific dates like 31 December or 31 March, so the data might not be completely representative but is unlikely to have any material impact on my analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) (Appendix A1 and B15). For the production phase, company accounts and tax computations submitted to HMRC were used. 
 
-The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies (Appendix B1, B2, B3). In some situation table names and headings are also important features(B4). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different. They explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
+The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies (Appendix B1, B2, B3). In some situation table names and headings are also important features (Appendix B4). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different. They explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
 
 ## 5.2 Exploratory Data Analysis (EDA)
 
@@ -98,7 +98,7 @@ The XBRL concept (label) is a categorical nominal label from a fixed taxonomy. I
 
 The descriptions and concepts are many-to-many (Appendix A2.2.7 and A2.2.8), with cosine similarity analysis identifying situations where some descriptions like "Taxation and social security costs" were used for similar concepts, but other descriptions such as "total" were used for dissimilar concepts. It also highlighted that taxonomy goes into a great deal of specificity, beyond what is generally required or could be predicted based on the human readable data in the accounts. This creates a real upper limit on any model. 
 
-Initially I did some classifier-independent analysis, which showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987) suggesting it is able to capture meaning better than plain TFIDF (0.41) (Appendix A2.5, full scores at Appendix B16). But this might not carry over to categorisation performance. 
+Initially I did some classifier-independent analysis, which showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987) suggesting it is able to capture meaning better than plain TFIDF (0.41) (Appendix A2.5 and B16). But this might not carry over to categorisation performance. 
 
 ## 5.3 Preprocessing
 
@@ -108,7 +108,7 @@ I canonicalised the description, so most dates were replaced by a placeholder `h
 
 Similarly company names, individual names, postcodes and numbers were identified using regular expressions and labels replaced by placeholders. This helps avoid overfitting and makes the model more generalisable; improves model performance since it reduces a lot of the noise; preserves privacy; and enhances data security through data minimisation. It is more ethical since it treats less common ethnic names the same as more commonly used names. 
 
-Subject matter experts advised that where there was a placeholder by itself, then that would not be enough information to categorise, so I decided to do label engineering and change them to placeholders like `HubbleName` (`target_engineer` and `standardise_names`, Appendix A2.3; effect on the label distribution at Appendix B12). So while we cannot predict the actual concept the placeholder is related to, knowing it is a name can be useful in analysis. 
+Subject matter experts advised that where there was a placeholder by itself, then that would not be enough information to categorise, so I decided to do label engineering and change them to placeholders like `HubbleName` (`target_engineer`, `standardise_names`, Appendix A2.3 and B12). So while we cannot predict the actual concept the placeholder is related to, knowing it is a name can be useful in analysis. 
 
 I implemented data quality controls aligned with HMRC expectations and broadly in line with DAMA UK's quality dimensions (DAMA UK, 2013; Government Data Quality Hub, 2020).
 - Completeness improved since untagged data was now extracted. 
@@ -145,19 +145,19 @@ Comparing every model and hyperparameter over the full train dataset was not pos
 
 ## 7.2 Traditional ML algorithms
 
-To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-test to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
+To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1 and A3.4.2) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-tests to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
 
-To get a better handle of the hyperparameters I plotted them against scores, narrowing down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores over min_df 2, which was surprising on the speed aspect (Appendix B22). 
+To get a better handle on the hyperparameters I plotted them against scores, narrowing down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores than min_df 2, which was surprising on the speed aspect (Appendix B22). 
 
 After fine tuning the hyperparameters and training on the full train dataset, LinearSVC was the best performing model beating out the alternatives at a 5% confidence level (Appendix A3.4.3 and A3.4.4). 
 
-I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to stick with a simpler TFIDF word only embedding, which is faster, easier to maintain and easier to interpret. 
+I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to use a simpler TFIDF word-only embedding, which is faster, easier to maintain and easier to interpret. 
 
-The final pipelines used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
+The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
-I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embeddings dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, demonstrating that the domain based pre-training was beneficial (Appendix A5.2, with macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM; loss curves at Appendix B29). 
+I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embeddings dimensions, dense dimension size and number of layers (Appendix A4.3). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2 and B29). 
 
 ## 7.4 Class imbalance
 
@@ -166,7 +166,7 @@ To deal with the class imbalance (He and Garcia, 2009) and reduce systematic bia
 - Square-root weighted training data over various models provided good increases in macro-F1 but sometimes with very small decreases in accuracy, e.g. 1.3pp macro-F1 increase vs 0.0573pp accuracy decrease (Appendix A3.7.7).
 - Random oversampling actually reduced performance on the transformer based models (Appendix A5.3.9). 
 
-A smaller but modified training dataset improved NN performance but LinearSVC performed best on the full train dataset with a weighted model. 
+A smaller but modified training dataset improved NN performance whereas LinearSVC performed best on the full train dataset with a weighted model. 
 
 ## 7.5 Model selection
 
@@ -188,17 +188,25 @@ To compare the model architectures a decision matrix was used (Appendix A6), cov
 - Dependency risk
 - Cost
 
-Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (rubric at Appendix A6.2.5, scored assessments at Appendix B31). 
+Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (Appendix A6.2.5 and B31). 
 
-To make comparison fair and due to memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 5% confidence intervals were created using the bootstrap method over using cross validation due to complexity and computational cost (Kohavi, 1995) (measured values at Appendix B32). 
+To make comparison fair and due to memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 95% confidence intervals were created using the bootstrap method rather than cross validation due to complexity and computational cost (Kohavi, 1995) (Appendix B32). 
 
-While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintainable, more explainable (feature coefficients), runs 220x faster, runs on existing CPU based infrastructure,  scales cost effectively, relies on well-established and regularly updated packages(B32, B33, B34)
+While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintain, more explainable (feature coefficients), runs 220x faster, deploys on existing CPU based infrastructure,  scales cost effectively, relies on well-established and regularly updated packages(Appendix B32, B33 and B34)
 
 ## 7.6 Wider system
 
-Scaling needed additional infrastructure, so I worked with DevOps to setup on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
+Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also have better availability. 
 
-The overall system consisted of the raw iXBRL documents in AWS S3, that are accessed using `aws.s3`, then extracted using `rvest`/`xml2` and structured using bespoke R code. Then `reticulate` allows the running of Python function to canonicalise the features and use scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features, with the output saved to an Oracle database via `dbplyr`. The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
+The overall system consisted of(Appendix B35) 
+- The raw iXBRL documents retrieved from AWS S3
+- Extracted using `rvest`/`xml2` 
+- Structured R 
+- Features are pre-processed using Python function using `reticulate` 
+- Scikit-learn's `Pipeline` with `TfidfVectorizer` to embed the text features and `LinearSVC` to classify the features
+- Output saved to an Oracle database via `dbplyr` 
+ 
+The scope of the project meant that others were working on non-ML aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
 
 # 8. Results.
 
@@ -208,7 +216,7 @@ Residual analysis helped identify which classes performed poorly and summaries w
 
 Subject matter experts also provided input explaining how that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This highlights that maybe a simplified list of categories could actually be beneficial, especially on the evaluation aspect. 
 
-Sensitivity analysis and model robustness was tested over various categories, abbreviations, adversarial (So phrased to be misleading), scenario planning, command (command to inject LLM), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8 and A5.3.5; results by category at Appendix B25) (Ribeiro et al., 2020). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was unexpected since I would have expected the domain-specific training and theoretical better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by computers, rather than people typing every description. 
+Sensitivity analysis and model robustness was tested over various categories, abbreviations, adversarial (So phrased to be misleading), scenario planning, command (command to inject LLM), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8, A5.3.5 and B25) (Ribeiro et al., 2020). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was unexpected since I would have expected the domain-specific training and theoretical better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by computers, rather than people typing every description. 
 
 Bias was investigated both against size of companies and software provider (Mehrabi et al., 2021). So large companies had a macro-F1 score of 0.9343 vs 0.789835 for small companies. Which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184061 vs 0.913292. On residual analysis often the misclassifications were for very similar classes and there was not enough information to differentiate between them. This highlights an issues one that maybe the specificity of the model and testing to too high. Also it is highlighting just how different software tags items, but it is a training proxy, and such issues would not apply to untagged items, or if we had human labelled classes this issue would not show up. 
 
@@ -219,7 +227,7 @@ An Agile approach worked well with CRISP-DM. Iterating delivered usable products
 
 While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using method like decision matrixes. But some factors like interpretability and security are core requirements that could override a raw score. 
 
-The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, that was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2 and A3.9.3, with SHAP output at Appendix B23 for LinearSVC and Appendix B28 for SEC-BERT). For example the phrase "cost of" has no coefficient of its own in the example but LIME and SHAP show it still drives the prediction by suppressing competing classes (Appendix A3.9.3 and B23). 
+The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, that was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example the phrase "cost of" has no coefficient of its own in the example but LIME and SHAP show it still drives the prediction by suppressing competing classes (Appendix A3.9.3 and B23). 
 
 Since SEC-BERT is not created by a well established provider, even if it was the winner of the decision matrix, security aspects may prevent use (Sculley et al., 2015; National Cyber Security Centre, 2023). If it was materially superior then it might be that we would need to invest in training our own BERT based model. 
 
@@ -8529,33 +8537,14 @@ flowchart TB
     ORA --> USE
 ```
 
-On-demand compute allocates a CPU-only EC2 instance per job rather than maintaining a permanently running machine, which was both cheaper and more available than GPU instances. The long-format Oracle schema removes the column-limit constraint that drove the annual schema rebuild. Supports section 7.6.
+On-demand-compute allocates a CPU-only EC2 instance per job rather than maintaining a permanently running machine, which was both cheaper and more available than GPU instances. The long-format Oracle schema removes the column-limit constraint that drove the annual schema rebuild. Supports section 7.6.
 
 ### B36. Data and ML pipeline
 
-```mermaid
-flowchart TB
-    RAW["Raw description and label<br/>from iXBRL document"]
-    CLEAN["Normalise<br/>lowercase, special characters to spaces"]
-    CANON["Canonicalise<br/>dates, company and individual names,<br/>postcodes and numbers to placeholders"]
-    LABEL["Label engineering<br/>standalone placeholders grouped"]
-    FILTER["Filter<br/>drop under 2 characters, over 16 words,<br/>missing and low quality"]
-    SPLIT["Stratified split 80/10/10<br/>train, test, holdout"]
-    TFIDF["TfidfVectorizer<br/>1-3 word n-grams, min_df 1, norm l2"]
-    SVC["LinearSVC<br/>penalty l1, C 2.8, class_weight balanced"]
-    OUT["Predicted XBRL concept"]
+[[28b389ae1e43974939e97cf42730a476_MD5.jpg|Open: Pasted image 20260815170713.png]]
+![[28b389ae1e43974939e97cf42730a476_MD5.jpg]]
 
-    RAW --> CLEAN
-    CLEAN --> CANON
-    CANON --> LABEL
-    LABEL --> FILTER
-    FILTER --> SPLIT
-    SPLIT --> TFIDF
-    TFIDF --> SVC
-    SVC --> OUT
-```
 
-Preprocessing reduced unique descriptions from 266,178 to 7,795 and labels from 956 to 826 while retaining 86% of rows. Canonicalisation serves both model performance and data minimisation. Supports sections 5.3 and 7.2.
 
 ### B37. Model selection funnel
 
