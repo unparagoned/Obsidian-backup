@@ -81,13 +81,13 @@ Secondary KPIs used were precision; recall; train and inference time; maintainab
 
 ## 5.1 Data selection
 
-HMRC's central systems are locked down, without any readily available GPU access, so exploratory work was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. A month of data is sufficiently large to cover account styles, although subject matter experts explained many companies select specific dates like 31 December or 31 March, so it might not be completely representative, but this is unlikely to have any material impact on the analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) ([[#A1. Data extraction — Code/00_ixbrl_data_extraction.ipynb|A1]] and [[#B15. Dataset description before and after preprocessing|B15]]). For the production phase, company accounts and tax computations submitted to HMRC were used. 
+HMRC's central systems are locked down, without any readily available GPU access, so exploratory work was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. A month of data is sufficiently large to cover account styles, although subject matter experts explained many companies select specific dates like 31 December or 31 March, so it might not be completely representative, but this is unlikely to have any material impact on the analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) ([[#A1. Data extraction: Code/00_ixbrl_data_extraction.ipynb|A1]] and [[#B15. Dataset description before and after preprocessing|B15]]). For the production phase, company accounts and tax computations submitted to HMRC were used. 
 
 The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies ([[#B1. iXBRL document structure|B1]], [[#B2. Accounts that use HTML table nodes|B2]], [[#B3. Accounts that do not use HTML table nodes|B3]]). In some situations table names and headings are also important features ([[#B4. Features available around a value|B4]]). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different. They explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
 
 ## 5.2 Exploratory Data Analysis (EDA)
 
-Rank frequency plots of both description and concept had a long tail ([[#B5. Rank–frequency of descriptions and concepts (raw data)|B5]]); with a Pareto chart showing that the 75 most common concepts cover 95% of items ([[#B8. Pareto chart of concepts (raw data)|B8]]); and a distribution closer to a lognormal fit than power-law ([[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) (Clauset, Shalizi and Newman, 2009). This motivated using macro-F1 as the primary metric over accuracy. 
+Rank frequency plots of both description and concept had a long tail ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]); with a Pareto chart showing that the 75 most common concepts cover 95% of items ([[#B8. Pareto chart of concepts (raw data)|B8]]); and a distribution closer to a lognormal fit than power-law ([[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) (Clauset, Shalizi and Newman, 2009). This motivated using macro-F1 as the primary metric over accuracy. 
 
 The main feature is a description that has various types, from nominal text, dates (temporal), names (nominal) and numeric figures (numeric ratio). Most descriptions are 1-9 words with a mode of 2 ([[#B6. Word-count distribution of descriptions (raw data)|B6]] and [[#B7. Word count by the five most common concepts (raw data)|B7]]). 
 
@@ -113,7 +113,7 @@ I implemented data quality controls aligned with HMRC expectations and DAMA UK's
 - Timeliness. The system architecture and using a long-format structure handles any taxonomy without hitting database column limits, allowing extraction within days of receipt. 
 - Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 15 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, [[#A2.3 Canonicalization and label engineering|A2.3]]). 
 
- This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 ([[#B15. Dataset description before and after preprocessing|B15]]). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing ([[#B5. Rank–frequency of descriptions and concepts (raw data)|B5]]-[[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]] against [[#B10. Rank–frequency after canonicalisation and label engineering|B10]]-[[#B14. Distribution fit after preprocessing|B14]]). Along with measures such as restricting access to specific users, this ensured compliance with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
+ This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 ([[#B15. Dataset description before and after preprocessing|B15]]). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]-[[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]] against [[#B10. Rank-frequency after canonicalisation and label engineering|B10]]-[[#B14. Distribution fit after preprocessing|B14]]). Along with measures such as restricting access to specific users, this ensured compliance with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
 
 Because the data was used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, [[#A2.6 Split and save data|A2.6]]). The holdout ensures the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
@@ -169,7 +169,7 @@ A smaller modified training dataset improved neural net performance whereas Line
 
 ## 7.5 Model selection
 
-To compare the model architectures I used a decision matrix ([[#A6. Model comparison decision matrix — Code/06_compare_models.ipynb|A6]] and [[#B37. Model selection funnel|B37]]), covering various objective and subjective measures.
+To compare the model architectures I used a decision matrix ([[#A6. Model comparison decision matrix: Code/06_compare_models.ipynb|A6]] and [[#B37. Model selection funnel|B37]]), covering various objective and subjective measures.
 
 - Accuracy
 - Macro-F1
@@ -187,11 +187,11 @@ To compare the model architectures I used a decision matrix ([[#A6. Model compar
 - Dependency risk
 - Cost
 
-Each measure was weighted, with a confidence factor of 0.35 for overlapping confidence intervals ([[#B33. Decision matrix — weighting|B33]]). A rubric set the standard for the subjective scores with an accompanying narrative ([[#A6.2.5 Rubric|A6.2.5]] and [[#B31. Decision matrix — subjective assessments|B31]]). 
+Each measure was weighted, with a confidence factor of 0.35 for overlapping confidence intervals ([[#B33. Decision matrix: weighting|B33]]). A rubric set the standard for the subjective scores with an accompanying narrative ([[#A6.2.5 Rubric|A6.2.5]] and [[#B31. Decision matrix: subjective assessments|B31]]). 
 
-For fair comparison, and because of memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 95% confidence intervals were created using the bootstrap method rather than cross validation due to complexity and computational cost (Kohavi, 1995) ([[#B32. Decision matrix — measured values|B32]]). 
+For fair comparison, and because of memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 95% confidence intervals were created using the bootstrap method rather than cross validation due to complexity and computational cost (Kohavi, 1995) ([[#B32. Decision matrix: measured values|B32]]). 
 
-While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintain, is more explainable (feature coefficients), runs 220x faster, deploys on existing CPU-based infrastructure, scales cost effectively, and relies on well-established, regularly updated packages ([[#B32. Decision matrix — measured values|B32]], [[#B33. Decision matrix — weighting|B33]] and [[#B34. Decision matrix — final scores|B34]]).
+While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintain, is more explainable (feature coefficients), runs 220x faster, deploys on existing CPU-based infrastructure, scales cost effectively, and relies on well-established, regularly updated packages ([[#B32. Decision matrix: measured values|B32]], [[#B33. Decision matrix: weighting|B33]] and [[#B34. Decision matrix: final scores|B34]]).
 
 ## 7.6 Production system and governance
 
@@ -213,11 +213,11 @@ Governance is built into the design. Documentation and guidance explain whether 
 
 # 8. Results.
 
-LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 ([[#A3.7.3 100% train population|A3.7.3]] and [[#B38. Final model performance — LinearSVC trained on the 100% train population|B38]]). The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable model. 
+LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 ([[#A3.7.3 100% train population|A3.7.3]] and [[#B38. Final model performance: LinearSVC trained on the 100% train population|B38]]). The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable model. 
 
 Residual analysis identified which classes performed poorly and summaries were created for analysts ([[#A3.10 Residual analysis|A3.10]]). Per-class results were varied, with a median per-class F1 of 0.966, but 27 of the 141 modelled concepts scored below 0.5 and eight scored zero, pulling down the macro-F1 score. By volume the exposure is smaller, with 94% of holdout records falling in concepts scoring above 0.9 ([[#B40. Per-class performance and residual analysis|B40]]). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]]), and the dashboard let them check a concept's reliability before using it.
 
-Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts CashBankOnHand 5,670 times and CashOnHand 21 times, so the minority tagging would show as errors ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]]).
+Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts CashBankOnHand 5,670 times and CashOnHand 21 times, so the minority tagging would show as errors ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]] and  [[#B24.1 Worked example CashBankOnHand against CashOnHand.|B24.1]]).
 
 Sensitivity analysis and model robustness were tested over various categories, abbreviations, adversarial (phrased to be misleading), command (attempts to inject LLM instructions), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Ribeiro et al., 2020) ([[#A3.8 Test model robustness|A3.8]], [[#A5.3.5 10% sqrt weight training population|A5.3.5]] and [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25]]). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was surprising since the domain-specific training and better theoretical semantic understanding should have favoured SEC-BERT. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by software. 
 
@@ -287,11 +287,9 @@ Traditional machine learning model comparisons used 5-fold cross validation, whi
 
 LinearSVC has not scaled well on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in macro-F1, so much larger datasets are unlikely to increase performance much ([[#A3.7.7 Compare results|A3.7.7]]). 
 
-Increasing data set size while keeping the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
+Increasing dataset size while keeping the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data, accuracy 0.853 and macro-F1 0.741.
 
 The integration of R and Python, while working well, does add setup  and coding complexity and other teams have had issues with the `reticulate` package. With the long term move to a lakehouse, higher Python use, greater Python ETL support porting should be considered. 
-
-
 
 # 13. Reference list.
 
@@ -385,11 +383,13 @@ XBRL International (no date) *iXBRL*. Available at: https://www.xbrl.org/the-sta
 
 # 14. Appendices.
 
-Appendix A reproduces the code and notebook commentary I wrote for the project. Appendix B reproduces the output tables and figures those notebooks produced. Sections are numbered so they can be referenced from the report, for example Appendix A3.4.2 is section 4.2 of the traditional ML notebook and Appendix B8 is the Pareto chart of concept frequency.
+Appendix A reproduces the code and notebooks for the project. Appendix B reproduces some of the output tables and figures those notebooks produced. 
 
 ## Appendix A. Code and documentation used for the project.
 
-### A1. Data extraction — `Code/00_ixbrl_data_extraction.ipynb`
+### A1. Data extraction: `Code/00_ixbrl_data_extraction.ipynb`
+
+This is the python extraction code used for the exploratory work. The production R code is too extensive to display here.
 
 ```python
 import os
@@ -474,7 +474,7 @@ table_extracted_df = pd.concat(table_extracted_lst, ignore_index=True)
 table_extracted_df.to_parquet('data/table_extracted_df_v5.parquet')
 ```
 
-### A2. Exploratory data analysis and preprocessing — `Code/01_ixbrl_eda_preprocessing.ipynb`
+### A2. Exploratory data analysis and preprocessing: `Code/01_ixbrl_eda_preprocessing.ipynb`
 
 ```python
 # Standard library
@@ -1727,7 +1727,7 @@ dataset_encoded_pl = dataset_sample_split_pl.with_columns(pl.Series("label", lab
 dataset_encoded_pl.write_parquet("data/canonicalized_split_v16.parquet")
 ```
 
-### A3. Traditional ML experiments (scikit-learn) — `Code/03_ixbrl_experiment_models.ipynb`
+### A3. Traditional ML experiments (scikit-learn): `Code/03_ixbrl_experiment_models.ipynb`
 
 ```python
 # Standard library
@@ -4674,7 +4674,7 @@ plot_confusion_matrix_heatmap(holdout_pl, target_class="TurnoverRevenue", normal
 plot_confusion_matrix_heatmap(holdout_pl, target_class="OtherTaxationPayable", normalize=False)
 ```
 
-### A4. Neural network experiments (Keras/Optuna) — `Code/04_ixbrl_nn.ipynb`
+### A4. Neural network experiments (Keras/Optuna): `Code/04_ixbrl_nn.ipynb`
 
 ```python
 # Standard library
@@ -5984,7 +5984,7 @@ display(exp_pl["accuracy"].sum())
 test_cases_pl
 ```
 
-### A5. Transformer experiments (HuggingFace/Optuna) — `Code/05_xbrl_transformers.ipynb`
+### A5. Transformer experiments (HuggingFace/Optuna): `Code/05_xbrl_transformers.ipynb`
 
 ```python
 # Standard library
@@ -7530,7 +7530,7 @@ plot_confusion_matrix_heatmap(y_true, y_pred, 73)
 plot_confusion_matrix_heatmap(y_true, y_pred, 149)
 ```
 
-### A6. Model comparison decision matrix — `Code/06_compare_models.ipynb`
+### A6. Model comparison decision matrix: `Code/06_compare_models.ipynb`
 
 ```python
 from __future__ import annotations
@@ -8178,11 +8178,11 @@ display_wide(final_scores_table)
 | 4     | Limited dependency risk with mature, well-supported components.         |
 | 5     | Minimal dependency risk with transparent and well-governed components.  |
 
-### A7. Shared Python module — `Code/ixbrl_ai/`
+### A7. Shared Python module: `Code/ixbrl_ai/`
 
-The preprocessing, sampling and evaluation functions developed in the notebooks above were consolidated into a shared Python module, `ixbrl_ai`, so the notebooks import one implementation rather than carrying copies of the same code. It contains the cleaning, canonicalisation, label engineering and splitting functions referenced in section 5.3 (`data_prep.py`); the sample definitions and split selection used across the experiments (`sample.py` and `data.py`); the robustness test cases, bootstrap confidence intervals and MLflow logging helpers used for the evaluation in sections 7 and 8 (`test.py`); and notebook display helpers (`display.py`). Supports sections [[#3.4 Languages and packages|3.4]], [[#5.3 Preprocessing|5.3]], [[#7. Implementation - performance metrics.|7]] and [[#8. Results.|8]].
+Common functions and features are in a module. Supports sections [[#3.4 Languages and packages|3.4]], [[#5.3 Preprocessing|5.3]], [[#7. Implementation - performance metrics.|7]] and [[#8. Results.|8]].
 
-#### A7.1 `data_prep.py` — cleaning, canonicalisation, label engineering and splits
+#### A7.1 `data_prep.py`: cleaning, canonicalisation, label engineering and splits
 
 ```python
 from ixbrl_ai.sample import DataSample
@@ -8602,7 +8602,7 @@ def addLabels(dataset_sample_split_pl: pl.DataFrame) -> pl.DataFrame:
 # dataset_encoded_pl.write_parquet("data/canonicalized_split_v13.parquet")
 ```
 
-#### A7.2 `sample.py` and `data.py` — sample definitions and split selection
+#### A7.2 `sample.py` and `data.py`: sample definitions and split selection
 
 ```python
 from enum import Enum
@@ -8649,7 +8649,7 @@ def get_split(dataset_pl: pl.DataFrame, subset: DataSample) -> Tuple[pl.DataFram
     )
 ```
 
-#### A7.3 `test.py` — robustness test cases, bootstrap confidence intervals and MLflow logging
+#### A7.3 `test.py`: robustness test cases, bootstrap confidence intervals and MLflow logging
 
 ```python
 import json
@@ -9259,7 +9259,7 @@ def test_model_over_populations_nn(model: SupportsPredict, dataset: DatasetDict)
     return results
 ```
 
-#### A7.4 `display.py` — notebook display helpers
+#### A7.4 `display.py`: notebook display helpers
 
 ```python
 from IPython.display import display, Markdown
@@ -9279,113 +9279,135 @@ def display_wide(x, rows: int=20) -> None:
 
 ## Appendix B. Figures, tables, and visualisations.
 
-Outputs are taken from the notebooks in Appendix A, run over the 298,461 publicly available Companies House accounts used for the exploratory work. Image files are stored in `report_figures/`. Each item states the notebook section it was produced by and the report section it supports.
-
-Only the outputs that are referenced in the report are reproduced here. The hyperparameter sweeps in A3.4.2.1, A3.5.1.1.1 and A3.6 produce a further ~200 scatter plots (one per hyperparameter per model family) which are retained in the notebooks rather than reproduced here.
+Subset of outputs are from the notebooks in Appendix A. 
 
 ### B1. iXBRL document structure
 
+Example iXBRL document opened in the Graffiti viewer (www.stechanalytics.com) with the underlying HTML on the right.
+
 ![iXBRL document with tagged and untagged values](report_figures/B01-ixbrl-document-structure.png)
 
-Example iXBRL document opened in the Graffiti viewer (www.stechanalytics.com) with the underlying HTML on the right. Tagged items sit in an `ix:nonfraction` node with a named element (the XBRL concept); untagged items sit in ordinary HTML nodes such as `span`. Source [[#A2.1 HTML Accounts|A2.1]]; supports section [[#1. Introduction and background.|1]] and [[#2. Outline of the issue or opportunity and the business problem to be solved.|2]].
+Source [[#A2.1 HTML Accounts|A2.1]]; supports section [[#1. Introduction and background.|1]] and [[#2. Outline of the issue or opportunity and the business problem to be solved.|2]].
 
 ### B2. Accounts that use HTML table nodes
 
+Around 85% of accounts in the sample of 1,000 use HTML `table` nodes, so both the tagged values and the untagged descriptions can be recovered by parsing the table.
+
 ![Account using HTML table nodes](report_figures/B02-accounts-with-table-nodes.png)
 
-Around 85% of accounts in the sample of 1,000 use HTML `table` nodes, so both the tagged values and the untagged descriptions can be recovered by parsing the table. Source [[#A2.1.2 HTML table nodes|A2.1.2]]; supports section [[#5.1 Data selection|5.1]].
+Source [[#A2.1.2 HTML table nodes|A2.1.2]]; supports section [[#5.1 Data selection|5.1]].
 
 ### B3. Accounts that do not use HTML table nodes
 
+Around 15% of accounts do not use table nodes.
+
 ![Account without HTML table nodes](report_figures/B03-accounts-without-table-nodes.png)
 
-Around 15% of accounts do not use table nodes. The iXBRL data is still easy to extract, but recreating the table from node positions requires bespoke code. These documents are excluded from the notebooks (they are handled by the internal R code). Source [[#A2.1.3 No table nodes|A2.1.3]]; supports section [[#5.1 Data selection|5.1]] and section [[#12. Caveats and limitations.|12]].
+Source [[#A2.1.3 No table nodes|A2.1.3]]; supports section [[#5.1 Data selection|5.1]] and section [[#12. Caveats and limitations.|12]].
 
 ### B4. Features available around a value
 
+The description alone ("Total") does not identify the value; the table name ("Employees") and the column headings carry the rest of the meaning.
+
 ![Table name, description and headings](report_figures/B04-features-table-name-heading.png)
 
-The description alone ("Total") does not identify the value; the table name ("Employees") and the column headings carry the rest of the meaning. This drove the later addition of table name and heading as features. Source [[#A2.1.4 Structure of data and features|A2.1.4]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]] and section [[#9. Discussion and conclusions/recommendations.|9]].
+Source [[#A2.1.4 Structure of data and features|A2.1.4]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]] and section [[#9. Discussion and conclusions/recommendations.|9]].
 
-### B5. Rank–frequency of descriptions and concepts (raw data)
+### B5. Rank-frequency of descriptions and concepts (raw data)
+
+Both distributions have a long tail on a log frequency scale, with descriptions much longer-tailed than concepts.
 
 ![Rank frequency plot, raw data](report_figures/B05-rank-frequency-raw.png)
 
-Both distributions have a long tail on a log frequency scale, with descriptions much longer-tailed than concepts. Source [[#A2.2.2 Frequency rank plot|A2.2.2]]; supports section [[#2. Outline of the issue or opportunity and the business problem to be solved.|2]] and section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
+Source [[#A2.2.2 Frequency rank plot|A2.2.2]]; supports section [[#2. Outline of the issue or opportunity and the business problem to be solved.|2]] and section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
 
 ### B6. Word-count distribution of descriptions (raw data)
 
+Roughly bell-shaped with a long right tail; most descriptions are 1-9 words with a mode of 2.
+
 ![Word count distribution, raw data](report_figures/B06-word-count-raw.png)
 
-Roughly bell-shaped with a long right tail; most descriptions are 1–9 words with a mode of 2. Source [[#A2.2.3 Word count of descriptions distribution|A2.2.3]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]] and [[#5.3 Preprocessing|5.3]].
+Source [[#A2.2.3 Word count of descriptions distribution|A2.2.3]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]] and [[#5.3 Preprocessing|5.3]].
 
 ### B7. Word count by the five most common concepts (raw data)
 
+Interquartile ranges of 2-7 words across the five most common concepts.
+
 ![Word count boxplot by concept, raw data](report_figures/B07-word-count-by-concept-raw.png)
 
-Interquartile ranges of 2–7 words across the five most common concepts. Source [[#A2.2.3 Word count of descriptions distribution|A2.2.3]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
+Source [[#A2.2.3 Word count of descriptions distribution|A2.2.3]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
 
 ### B8. Pareto chart of concepts (raw data)
 
+The 75 most common concepts cover 95% of items, out of 956 concepts.
+
 ![Pareto chart, raw data](report_figures/B08-pareto-raw.png)
 
-The 75 most common concepts cover 95% of items, out of 956 concepts. This is the evidence for using macro-F1 rather than accuracy as the primary metric. Source [[#A2.2.5 Pareto plot|A2.2.5]]; supports section [[#4. The scope of the project (including key performance indicators).|4]] and [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
+Source [[#A2.2.5 Pareto plot|A2.2.5]]; supports section [[#4. The scope of the project (including key performance indicators).|4]] and [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
 
 ### B9. Concept frequency against power-law, lognormal and exponential fits (raw data)
 
+CCDF of the concept counts against fitted distributions.
+
 ![CCDF plot, raw data](report_figures/B09-ccdf-raw.png)
 
-CCDF of the concept counts against fitted distributions. The distribution is closer to lognormal than to power-law or exponential. Source [[#A2.2.6 Powerlaw, Exponential, Lognormal|A2.2.6]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
+Source [[#A2.2.6 Powerlaw, Exponential, Lognormal|A2.2.6]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
 
-### B10. Rank–frequency after canonicalisation and label engineering
+### B10. Rank-frequency after canonicalisation and label engineering
+
+The description tail is much shorter than in the raw data ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]), falling to a frequency of 2 by rank 2,250 where the raw data was still at 14.
 
 ![Rank frequency plot, processed data](report_figures/B10-rank-frequency-processed.png)
 
-The description tail is much shorter than in the raw data ([[#B5. Rank–frequency of descriptions and concepts (raw data)|B5]]), falling to a frequency of 2 by rank 2,250 where the raw data was still at 14. This follows from canonicalisation reducing the unique descriptions from 266,178 to 7,795. Source [[#A2.4.2 Frequency rank plot|A2.4.2]]; supports section [[#5.3 Preprocessing|5.3]].
+Source [[#A2.4.2 Frequency rank plot|A2.4.2]]; supports section [[#5.3 Preprocessing|5.3]].
 
 ### B11. Word-count distribution after canonicalisation
 
+The rough bell shape has gone: empty descriptions are removed and many multi-word values (dates, names, numbers) collapse into a single canonical token.
+
 ![Word count distribution, processed data](report_figures/B11-word-count-processed.png)
 
-The rough bell shape has gone: empty descriptions are removed and many multi-word values (dates, names, numbers) collapse into a single canonical token. Source [[#A2.4.3 Word Count of Descriptions Distribution|A2.4.3]]; supports section [[#5.3 Preprocessing|5.3]].
+Source [[#A2.4.3 Word Count of Descriptions Distribution|A2.4.3]]; supports section [[#5.3 Preprocessing|5.3]].
 
 ### B12. Word count by most common concepts after canonicalisation
 
+`HubbleDate` and `HubbleName` are now among the most common labels, created by the label engineering step.
+
 ![Word count boxplot by concept, processed data](report_figures/B12-word-count-by-concept-processed.png)
 
-`HubbleDate` and `HubbleName` are now among the most common labels, created by the label engineering step. Source [[#A2.4.3 Word Count of Descriptions Distribution|A2.4.3]]; supports section [[#5.3 Preprocessing|5.3]].
+Source [[#A2.4.3 Word Count of Descriptions Distribution|A2.4.3]]; supports section [[#5.3 Preprocessing|5.3]].
 
 ### B13. Pareto chart of concepts after preprocessing
 
+95% of the data is now covered by the top 50 labels out of 141.
+
 ![Pareto chart, processed data](report_figures/B13-pareto-processed.png)
 
-95% of the data is now covered by the top 50 labels out of 141. Source [[#A2.4.5 Pareto Chart|A2.4.5]]; supports section [[#5.3 Preprocessing|5.3]].
+Source [[#A2.4.5 Pareto Chart|A2.4.5]]; supports section [[#5.3 Preprocessing|5.3]].
 
 ### B14. Distribution fit after preprocessing
 
+Slightly weaker correlation with lognormal after preprocessing.
+
 ![CCDF plot, processed data](report_figures/B14-ccdf-processed.png)
 
-Slightly weaker correlation with lognormal after preprocessing. Source [[#A2.4.6 Powerlaw, Exponential, Lognormal|A2.4.6]]; supports section [[#5.3 Preprocessing|5.3]].
+Source [[#A2.4.6 Powerlaw, Exponential, Lognormal|A2.4.6]]; supports section [[#5.3 Preprocessing|5.3]].
 
 ### B15. Dataset description before and after preprocessing
 
-| Measure | Raw extract | After canonicalisation and filtering |
-|---|---|---|
-| Rows | 2,857,703 | 2,466,052 |
-| Labels (concepts) | 956 | 826 |
-| Unique descriptions | 266,178 | 7,795 |
-| Unique description/label pairs | 282,515 | 9,492 |
-| Missing descriptions | 0 | 0 |
-| Missing concepts | 0 | 0 |
-| Mean description length (words) | 7.77 | 3.07 |
-| Mode description length (words) | 2 | 1 |
-| Min description length (words) | 0 | 1 |
-| Max description length (words) | 1,762 | 15 |
-| Descriptions with no letters or digits | 19,814 | 0 |
-
-The max length of 1,762 words in the raw extract confirmed that long descriptions were extraction errors rather than valid data. The notebook commentary in A2.4.1 quotes 10,591 unique descriptions, which is the figure from an earlier iteration of the preprocessing pipeline.
-
-A minimum of 350 examples per concept (`MIN_EXAMPLES`, Appendix A2) was then applied, chosen so that even the 1% training sample would retain enough examples per class for cross validation. This left **141 concepts and 2,439,901 rows** for modelling, 85% of the raw extract. The 685 concepts falling below the threshold account for 26,151 rows and are marked `excluded` in the split, so they appear in no training, test or holdout set. The model therefore has no output for those concepts, which is the trade made to keep every modelled class large enough to learn and evaluate reliably.
+| Measure                                | Raw extract | After canonicalisation and filtering | After 350 example minimum |
+| -------------------------------------- | ----------- | ------------------------------------ | ------------------------- |
+| Rows                                   | 2,857,703   | 2,466,052                            | 2,439,901                 |
+| Labels (concepts)                      | 956         | 826                                  | 141                       |
+| Unique descriptions                    | 266,178     | 7,795                                | 5,506                     |
+| Unique description/label pairs         | 282,515     | 9,492                                | 6,344                     |
+| Missing descriptions                   | 0           | 0                                    | 0                         |
+| Missing concepts                       | 0           | 0                                    | 0                         |
+| Mean description length (words)        | 7.77        | 3.07                                 | 3.06                      |
+| Mode description length (words)        | 2           | 1                                    | 1                         |
+| Min description length (words)         | 0           | 1                                    | 1                         |
+| Max description length (words)         | 1,762       | 15                                   | 15                        |
+| Descriptions with no letters or digits | 19,814      | 0                                    | 0                         |
 
 | Split | Rows |
 |---|---|
@@ -9398,38 +9420,44 @@ Source [[#A2.2.1 Describe Dataset|A2.2.1]], [[#A2.4.1 Describe Dataset|A2.4.1]] 
 
 ### B16. Silhouette scores by embedding (50,000 row sample)
 
+Classifier-independent comparison of embeddings.
+
 | Embedding | Silhouette score |
 |---|---|
-| TFIDF, 1–3 word n-grams | 0.4186 |
-| TF, 1–3 word n-grams | 0.4186 |
-| TF, 1–3 word n-grams + 3–5 character n-grams | 0.4361 |
+| TFIDF, 1-3 word n-grams | 0.4186 |
+| TF, 1-3 word n-grams | 0.4186 |
+| TF, 1-3 word n-grams + 3-5 character n-grams | 0.4361 |
 | MiniLM (`all-MiniLM-L6-v2`) | 0.4409 |
 | E5 (`intfloat/e5-base-v2`) | 0.4328 |
 | MPNet (`all-mpnet-base-v2`) | 0.4672 |
 
-Classifier-independent comparison of embeddings. MPNet separates the classes best, but the spread is narrow (0.419–0.467). Source [[#A2.5 Embeddings|A2.5]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
+Source [[#A2.5 Embeddings|A2.5]]; supports section [[#5.2 Exploratory Data Analysis (EDA)|5.2]].
 
 ### B17. Macro-F1 by model type (1% training population)
 
+Initial screen of nine model families against a `DummyClassifier` floor.
+
 ![Macro-F1 by model](report_figures/B17-f1-by-model-1pct.png)
 
-Initial screen of nine model families against a `DummyClassifier` floor. Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]].
+Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]].
 
 ### B18. Macro-F1 against training time (1% training population)
 
+Slower models generally scored better, but several models were both quick and accurate.
+
 ![Macro-F1 vs training time](report_figures/B18-f1-vs-train-time-1pct.png)
 
-Slower models generally scored better, but several models were both quick and accurate. Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]] and [[#7.2 Traditional machine learning algorithms|7.2]].
+Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]] and [[#7.2 Traditional machine learning algorithms|7.2]].
 
 ### B19. Score agreement between training population sizes
 
+Macro-F1 for the same model/hyperparameter combinations trained on 1%, 10% and 100% of the training data.
+
 ![1% vs 10%](report_figures/B19a-scores-1pct-vs-10pct.png)
-
 ![1% vs 100%](report_figures/B19b-scores-1pct-vs-100pct.png)
-
 ![10% vs 100%](report_figures/B19c-scores-10pct-vs-100pct.png)
 
-Macro-F1 for the same model/hyperparameter combinations trained on 1%, 10% and 100% of the training data. Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]].
+Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]].
 
 ### B20. Correlation between population sizes
 
@@ -9438,31 +9466,41 @@ Macro-F1 for the same model/hyperparameter combinations trained on 1%, 10% and 1
 | 1% vs 100%  | 0.9707           | 0.9364           |
 | 10% vs 100% | 0.9980           | 0.9273           |
 
-Differences in ranking between the 1%/10% and 100% populations were 0–3 places, and every model that was not significantly worse at 1% under a paired t-test was also not significantly worse at 100%. This is the justification for filtering candidates on smaller populations. Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]].
+Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]].
 
 ### B21. Macro-F1 against training time, refined halving search
 
+300 candidates over 5-fold stratified cross validation.
+
 ![Macro-F1 vs training time, refined search](report_figures/B21-f1-vs-train-time-refined.png)
 
-300 candidates over 5-fold stratified cross validation. The top three models were LinearSVC, SVC (linear kernel) and PassiveAggressiveClassifier. Source [[#A3.4.2 Refined HalvingRandomSearchCV|A3.4.2]]; supports section [[#7.2 Traditional machine learning algorithms|7.2]].
+Source [[#A3.4.2 Refined HalvingRandomSearchCV|A3.4.2]]; supports section [[#7.2 Traditional machine learning algorithms|7.2]].
 
 ### B22. Fit time and score split by `min_df`
 
+`min_df` of 1 produced clusters both faster and better scoring than `min_df` of 2.
+
 ![min_df clusters](report_figures/B22-min-df-clusters.png)
 
-`min_df` of 1 produced two clearly separated clusters that were both faster and better scoring than `min_df` of 2 — the additional rare features make the problem easier to fit rather than harder. Source [[#A3.6 Final candidate and tfidf testing|A3.6]]; supports section [[#7.2 Traditional machine learning algorithms|7.2]].
+Source [[#A3.6 Final candidate and tfidf testing|A3.6]]; supports section [[#7.2 Traditional machine learning algorithms|7.2]].
 
 ### B23. LinearSVC feature attribution (SHAP) for "cost of goods sold turnover"
 
+SHAP values for the three competing classes.
+#### TurnoverRevenue
 ![SHAP, TurnoverRevenue](report_figures/B23a-shap-turnoverrevenue.png)
 
+#### CostSales
 ![SHAP, CostSales](report_figures/B23b-shap-costsales.png)
 
+#### RawMaterialsConsumablesUsed
 ![SHAP, RawMaterialsConsumablesUsed](report_figures/B23c-shap-rawmaterials.png)
 
-SHAP values for the three competing classes. Source [[#A3.9.3 SHAP|A3.9.3]]; supports section [[#8. Results.|8]] and [[#9. Discussion and conclusions/recommendations.|9]].
+Source [[#A3.9.3 SHAP|A3.9.3]]; supports section [[#8. Results.|8]] and [[#9. Discussion and conclusions/recommendations.|9]].
 
 ### B24. Confusion matrices for individual classes (LinearSVC, holdout)
+
+One-vs-rest confusion matrices used in the residual analysis and in explanations given to analysts.
 
 ![CashOnHand](report_figures/B24a-cm-cashonhand.png)
 
@@ -9472,9 +9510,8 @@ SHAP values for the three competing classes. Source [[#A3.9.3 SHAP|A3.9.3]]; sup
 
 ![TurnoverRevenue](report_figures/B24d-cm-turnoverrevenue.png)
 
-One-vs-rest confusion matrices used in the residual analysis and in the explanations given to analysts. `CashOnHand` and `CashBankOnHand` show the characteristic failure: "cash at bank and in hand" and "cash and cash equivalents" are assigned to whichever of the two near-identical concepts dominates the training data. Eight further matrices are produced by [[#A3.10 Residual analysis|A3.10]]. Source [[#A3.10 Residual analysis|A3.10]]; supports section [[#8. Results.|8]].
 
-**Worked example: CashBankOnHand against CashOnHand.** Counts are over the full holdout and show the collision directly.
+#### B24.1 Worked example: CashBankOnHand against CashOnHand.
 
 | | CashBankOnHand (support 7,791) | CashOnHand (support 54) |
 |---|---|---|
@@ -9482,7 +9519,7 @@ One-vs-rest confusion matrices used in the residual analysis and in the explanat
 | Missed (false negatives) | 16 | 21 |
 | Wrongly attracted (false positives) | 21 | 13 |
 
-The most common correct descriptions for `CashBankOnHand` are "cash at bank and in hand" (5,670), "cash at bank" (1,796), "cash at bank and on hand" (170) and "cash in hand" (115); for `CashOnHand` they are "cash and cash equivalents" (23) and "cash on hand" (10). The errors are the same wordings on the other side of the boundary: all 21 of the descriptions `CashOnHand` misses are "cash at bank and in hand", predicted as `CashBankOnHand`, while 13 of the 16 `CashBankOnHand` misses are "cash and cash equivalents", predicted as `CashOnHand`. So the identical description appears under both concepts in the source data, tagged one way 5,670 times and the other way 21 times, and the model necessarily routes every instance to the dominant concept. No classifier could separate these from the description alone, which is why the errors are a property of the data rather than the model, and why a simplified concept set would merge such pairs.
+Source [[#A3.10 Residual analysis|A3.10]]; supports section [[#8. Results.|8]].
 
 ### B25. Robustness testing, LinearSVC against SEC-BERT
 
@@ -9501,7 +9538,6 @@ By perturbation category:
 | typo | 13 | 4 | 0.308 | 4 | 0.308 |
 | unicode | 13 | 1 | 0.077 | 2 | 0.154 |
 | variation | 13 | 9 | 0.692 | 7 | 0.538 |
-
 By expected concept:
 
 | Expected concept | Cases | LinearSVC accuracy | SEC-BERT accuracy |
@@ -9520,93 +9556,120 @@ By expected concept:
 | ProfitLoss | 10 | 0.5 | 0.4 |
 | TurnoverRevenue | 11 | 0.545 | 0.455 |
 
-LinearSVC scored equal or better in nine of the eleven categories. Both models handled the canonical and command cases perfectly and both were weak on abbreviations, typos and unicode substitution. Source [[#A3.8 Test model robustness|A3.8]] and [[#A5.3.5 10% sqrt weight training population|A5.3.5]] (test cases defined in `ixbrl_ai.test.IXBRL_TEXT_CLASSIFICATION_TEST_CASES`); supports section [[#8. Results.|8]].
+Source [[#A3.8 Test model robustness|A3.8]] and [[#A5.3.5 10% sqrt weight training population|A5.3.5]] (test cases defined in `ixbrl_ai.test.IXBRL_TEXT_CLASSIFICATION_TEST_CASES`); supports section [[#8. Results.|8]].
 
 ### B26. CNN validation macro-F1 by epoch
 
+Best Optuna trial from the 200-trial architecture search.
+
 ![CNN validation macro-F1 by epoch](report_figures/B26-cnn-val-f1-by-epoch.png)
 
-Best Optuna trial from the 200-trial architecture search. Source [[#A4.3.1.1 Analyse impact of hyperparameters|A4.3.1.1]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]].
+Source [[#A4.3.1.1 Analyse impact of hyperparameters|A4.3.1.1]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]].
 
 ### B27. CNN validation macro-F1 against cumulative training time
 
+Most of the score arrives in the first 25 seconds of training, reaching 0.69, with the remaining 155 seconds adding under 6pp.
+
 ![CNN validation macro-F1 vs training time](report_figures/B27-cnn-val-f1-by-train-time.png)
 
-Most of the score arrives in the first 25 seconds of training, reaching 0.69, with the remaining 155 seconds adding under 6pp. Source [[#A4.3.1.1 Analyse impact of hyperparameters|A4.3.1.1]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]] and [[#7.5 Model selection|7.5]].
+Source [[#A4.3.1.1 Analyse impact of hyperparameters|A4.3.1.1]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]] and [[#7.5 Model selection|7.5]].
 
 ### B28. SEC-BERT token contributions (SHAP) for "cost of goods sold turnover"
 
+Contribution of each token to the predicted class (`CostSales`).
+
 ![SEC-BERT SHAP token contributions](report_figures/B28-secbert-shap-tokens.png)
 
-Contribution of each token to the predicted class (`CostSales`). "cost" and "sold" push towards the prediction and "turnover" pulls away from it, which is the expected behaviour. Source [[#A5.4 Explainability|A5.4]]; supports section [[#9. Discussion and conclusions/recommendations.|9]].
+Source [[#A5.4 Explainability|A5.4]]; supports section [[#9. Discussion and conclusions/recommendations.|9]].
 
 ### B29. SEC-BERT training and evaluation loss by epoch
 
+Training loss falls from 6.0 to around 0.25 within the first epoch, and the evaluation loss tracks it closely down to 0.1 over the remaining five epochs without diverging, so there is no sign of overfitting.
+
 ![SEC-BERT loss by epoch](report_figures/B29-secbert-loss-by-epoch.png)
 
-Training loss falls from 6.0 to around 0.25 within the first epoch, and the evaluation loss tracks it closely down to 0.1 over the remaining five epochs without diverging, so there is no sign of overfitting. Source [[#A5.5 Loss over epochs|A5.5]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]].
+Source [[#A5.5 Loss over epochs|A5.5]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]].
 
 ### B30. SEC-BERT confusion matrices for individual classes
+
+One-vs-rest confusion matrices over the 5% test population for two classes selected as having enough support to be informative.
 
 ![SEC-BERT, Debtors](report_figures/B30a-secbert-cm-debtors.png)
 
 ![SEC-BERT, second class](report_figures/B30b-secbert-cm-class149.png)
 
-One-vs-rest confusion matrices over the 5% test population for two classes selected as having enough support to be informative. Source [[#A5.6 Investigate good and bad classification|A5.6]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]].
+Source [[#A5.6 Investigate good and bad classification|A5.6]]; supports section [[#7.3 Conventional and Transformer based Neural Networks|7.3]].
 
-### B31. Decision matrix — subjective assessments
+### B31. Decision matrix: subjective assessments
 
-| Model | Interpretability | Deployment simplicity | Maintenance burden | Domain fit | Model lifecycle | Dependency risk | Cost |
-|---|---|---|---|---|---|---|---|
-| LinearSVC | High interpretability; coefficients and feature weights can be inspected directly for most predictions. | Simple to deploy; standard libraries and low resource requirements. | Limited maintenance; requires monitoring, and is easy to retrain and update. | Good fit for text based classification. TFIDF captures the domain specific terminology well, but may miss semantic nuances. | Low risk; mature packages with long-term support; low risk of obsolescence. | Minimal dependency risk; model can be trained using well established opensource packages. | Lowest cost option; fast to train, cheap to run on CPU, and lightweight to store and serve. |
-| CNN | Lower native interpretability than linear models; useful explanations are possible with post-hoc methods such as SHAP or LIME. | Moderate deployment complexity; requires GPU for optimal performance. | Moderate maintenance; requires monitoring and retraining. | Good fit for text classification where local token patterns matter; may miss some long-range semantic relationships. | Low risk; mature packages with long-term support; low risk of obsolescence. | Low dependency risk; model can be trained using well established opensource packages but the software stack is more complicated than traditional approaches. | Higher cost option; training and inference are more resource intensive than LinearSVC and benefit from GPU acceleration. |
-| SEC-BERT | Lower native interpretability; explanations are possible with post-hoc analysis and attention diagnostics. | Complex deployment; requires significant resources, expertise and requires GPU for optimal performance. | Moderate-to-high maintenance; requires monitoring, and retraining can be resource intensive on current infrastructure. | Strong theoretical fit for semantic financial language, but robustness was weaker here; likely affected by US SEC pretraining vs UK accounts domain shift. | Higher lifecycle risk in this setup: public SEC-BERT releases show limited recent maintenance, increasing uncertainty around long-term support. | High dependency risk; reliance on unverified external third-party pre-trained models. | Higher cost option; transformer training, storage, and inference are expensive relative to classical models and typically need GPU support. |
+Scored against the rubric in [[#A6.2.5 Rubric|A6.2.5]], defined in the `subjective_inputs` block.
 
-Scored against the rubric in [[#A6.2.5 Rubric|A6.2.5]], defined in the `subjective_inputs` block. Source [[#A6.1 Load metrics|A6.1]]; supports section [[#7.5 Model selection|7.5]].
+| Criterion | LinearSVC | CNN | SEC-BERT |
+|---|---|---|---|
+| Interpretability | High interpretability; coefficients and feature weights can be inspected directly for most predictions. | Lower native interpretability than linear models; useful explanations are possible with post-hoc methods such as SHAP or LIME. | Lower native interpretability; explanations are possible with post-hoc analysis and attention diagnostics. |
+| Deployment simplicity | Simple to deploy; standard libraries and low resource requirements. | Moderate deployment complexity; requires GPU for optimal performance. | Complex deployment; requires significant resources, expertise and requires GPU for optimal performance. |
+| Maintenance burden | Limited maintenance; requires monitoring, and is easy to retrain and update. | Moderate maintenance; requires monitoring and retraining. | Moderate-to-high maintenance; requires monitoring, and retraining can be resource intensive on current infrastructure. |
+| Domain fit | Good fit for text based classification. TFIDF captures the domain specific terminology well, but may miss semantic nuances. | Good fit for text classification where local token patterns matter; may miss some long-range semantic relationships. | Strong theoretical fit for semantic financial language, but robustness was weaker here; likely affected by US SEC pretraining vs UK accounts domain shift. |
+| Model lifecycle | Low risk; mature packages with long-term support; low risk of obsolescence. | Low risk; mature packages with long-term support; low risk of obsolescence. | Higher lifecycle risk in this setup: public SEC-BERT releases show limited recent maintenance, increasing uncertainty around long-term support. |
+| Dependency risk | Minimal dependency risk; model can be trained using well established opensource packages. | Low dependency risk; model can be trained using well established opensource packages but the software stack is more complicated than traditional approaches. | High dependency risk; reliance on unverified external third-party pre-trained models. |
+| Cost | Lowest cost option; fast to train, cheap to run on CPU, and lightweight to store and serve. | Higher cost option; training and inference are more resource intensive than LinearSVC and benefit from GPU acceleration. | Higher cost option; transformer training, storage, and inference are expensive relative to classical models and typically need GPU support. |
 
-### B32. Decision matrix — measured values
+Source [[#A6.1 Load metrics|A6.1]]; supports section [[#7.5 Model selection|7.5]].
+
+### B32. Decision matrix: measured values
 
 All three models trained on the 10% square-root weighted training population and evaluated on the same holdout subset, with 95% bootstrap confidence intervals.
 
-| Model | Accuracy | Macro-F1 | Macro-recall | Macro-precision | Weighted-F1 | Train time (s) | Inference time (s) | Model size (bytes) |
-|---|---|---|---|---|---|---|---|---|
-| LinearSVC | 0.975 (CI 0.972–0.978) | 0.800 (CI 0.781–0.829) | 0.821 (CI 0.806–0.856) | 0.823 (CI 0.792–0.847) | 0.971 (CI 0.967–0.974) | 144 | 0.64 | 8,126,919 |
-| CNN | 0.977 (CI 0.974–0.980) | 0.808 (CI 0.788–0.840) | 0.825 (CI 0.810–0.863) | 0.829 (CI 0.799–0.856) | 0.972 (CI 0.969–0.976) | 2,640 | 23.87 | 29,723,312 |
-| SEC-BERT | 0.977 (CI 0.974–0.980) | 0.823 (CI 0.798–0.850) | 0.834 (CI 0.817–0.867) | 0.855 (CI 0.814–0.873) | 0.973 (CI 0.969–0.976) | 4,023 | 143.11 | 1,756,868,591 |
+| Metric | LinearSVC | CNN | SEC-BERT |
+|---|---|---|---|
+| Accuracy | 0.975 (0.972-0.978) | 0.977 (0.974-0.980) | 0.977 (0.974-0.980) |
+| Macro-F1 | 0.800 (0.781-0.829) | 0.808 (0.788-0.840) | 0.823 (0.798-0.850) |
+| Macro-recall | 0.821 (0.806-0.856) | 0.825 (0.810-0.863) | 0.834 (0.817-0.867) |
+| Macro-precision | 0.823 (0.792-0.847) | 0.829 (0.799-0.856) | 0.855 (0.814-0.873) |
+| Weighted-F1 | 0.971 (0.967-0.974) | 0.972 (0.969-0.976) | 0.973 (0.969-0.976) |
+| Train time (s) | 144 | 2,640 | 4,023 |
+| Inference time (s) | 0.64 | 23.87 | 143.11 |
+| Model size (bytes) | 8,126,919 | 29,723,312 | 1,756,868,591 |
 
-Subjective scores (1–5, higher is better) alongside the measured values:
-
-| Model | Interpretability | Deployment simplicity | Maintenance burden | Domain fit | Model lifecycle | Dependency risk | Cost |
-|---|---|---|---|---|---|---|---|
-| LinearSVC | 5 | 5 | 4 | 3 | 5 | 5 | 5 |
-| CNN | 2 | 3 | 3 | 3 | 5 | 4 | 3 |
-| SEC-BERT | 2 | 2 | 2 | 3 | 1 | 2 | 3 |
+| Criterion | LinearSVC | CNN | SEC-BERT |
+|---|---|---|---|
+| Interpretability | 5 | 2 | 2 |
+| Deployment simplicity | 5 | 3 | 2 |
+| Maintenance burden | 4 | 3 | 2 |
+| Domain fit | 3 | 3 | 3 |
+| Model lifecycle | 5 | 5 | 1 |
+| Dependency risk | 5 | 4 | 2 |
+| Cost | 5 | 3 | 3 |
 
 Source [[#A6.1 Load metrics|A6.1]]; supports section [[#7.5 Model selection|7.5]] and section [[#8. Results.|8]].
 
-### B33. Decision matrix — weighting
+### B33. Decision matrix: weighting
 
-| Metric | Weight | Direction | Source | Weight % | Description |
-|---|---|---|---|---|---|
-| f1_macro | 25 | higher | objective | 12.8 | Macro F1; important for class imbalance. |
-| interpretability | 25 | higher | subjective | 12.8 | Ease of explaining model behaviour. |
-| accuracy | 20 | higher | objective | 10.3 | Overall accuracy; intuitive but can be misleading with imbalance. |
-| cost | 20 | higher | subjective | 10.3 | Relative implementation and operating cost (higher score = lower cost). |
-| dependency_risk | 15 | higher | subjective | 7.7 | Dependency risk (higher score = lower external risk). |
-| f1_weighted | 10 | higher | objective | 5.1 | Weighted F1; reflects population-level performance. |
-| train_time | 10 | lower | objective | 5.1 | Training time in seconds. |
-| inference_time | 10 | lower | objective | 5.1 | Inference time per sample in seconds. |
-| model_size | 10 | lower | objective | 5.1 | Model size in bytes. |
-| deployment_simplicity | 10 | higher | subjective | 5.1 | Ease of deployment and operationalisation. |
-| maintenance_burden | 10 | higher | subjective | 5.1 | Ease of maintaining the model over time. |
-| domain_fit | 10 | higher | subjective | 5.1 | Fit for domain-specific requirements. |
-| model_lifecycle | 10 | higher | subjective | 5.1 | Expected longevity and support for the model. |
-| recall_macro | 5 | higher | objective | 2.6 | Macro recall; penalises false negatives across classes. |
-| precision_macro | 5 | higher | objective | 2.6 | Macro precision; penalises false positives across classes. |
+Where a model's confidence interval overlapped that of the best model, its score for that metric was reduced by a confidence factor of 0.35 so that statistically indistinguishable results could not decide the outcome.
 
-Where a model's confidence interval overlapped that of the best model, its score for that metric was reduced by a confidence factor of 0.35 so that statistically indistinguishable results could not decide the outcome. Source [[#A6.1 Load metrics|A6.1]] (`metric_config`); supports section [[#7.5 Model selection|7.5]].
+| Metric | Weight (%) | Direction | Source | Description |
+|---|---|---|---|---|
+| Macro F1 | 25 (12.8) | higher | objective | Macro F1; important for class imbalance. |
+| Interpretability | 25 (12.8) | higher | subjective | Ease of explaining model behaviour. |
+| Accuracy | 20 (10.3) | higher | objective | Overall accuracy; intuitive but can be misleading with imbalance. |
+| Cost | 20 (10.3) | higher | subjective | Relative implementation and operating cost (higher score = lower cost). |
+| Dependency risk | 15 (7.7) | higher | subjective | Dependency risk (higher score = lower external risk). |
+| Weighted F1 | 10 (5.1) | higher | objective | Weighted F1; reflects population-level performance. |
+| Train time | 10 (5.1) | lower | objective | Training time in seconds. |
+| Inference time | 10 (5.1) | lower | objective | Inference time per sample in seconds. |
+| Model size | 10 (5.1) | lower | objective | Model size in bytes. |
+| Deployment simplicity | 10 (5.1) | higher | subjective | Ease of deployment and operationalisation. |
+| Maintenance burden | 10 (5.1) | higher | subjective | Ease of maintaining the model over time. |
+| Domain fit | 10 (5.1) | higher | subjective | Fit for domain-specific requirements. |
+| Model lifecycle | 10 (5.1) | higher | subjective | Expected longevity and support for the model. |
+| Macro recall | 5 (2.6) | higher | objective | Macro recall; penalises false negatives across classes. |
+| Macro precision | 5 (2.6) | higher | objective | Macro precision; penalises false positives across classes. |
 
-### B34. Decision matrix — final scores
+Source [[#A6.1 Load metrics|A6.1]] (`metric_config`); supports section [[#7.5 Model selection|7.5]].
+
+### B34. Decision matrix: final scores
+
+SEC-BERT wins on every raw performance metric, but once interpretability, cost, dependency risk and lifecycle are weighted in, LinearSVC scores highest overall.
 
 | Model | Decision score | Decision score % |
 |---|---|---|
@@ -9616,93 +9679,108 @@ Where a model's confidence interval overlapped that of the best model, its score
 
 Weighted score by metric:
 
-| Model | accuracy | f1_macro | recall_macro | precision_macro | f1_weighted | train_time | inference_time | model_size | interpretability | deployment_simplicity | maintenance_burden | domain_fit | model_lifecycle | dependency_risk | cost |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| LinearSVC | 2.33 | 2.88 | 0.58 | 0.57 | 1.17 | 7.37 | 5.44 | 5.03 | 13.89 | 5.00 | 4.44 | 3.33 | 4.55 | 6.82 | 9.09 |
-| CNN | 2.33 | 2.91 | 0.58 | 0.58 | 1.17 | 2.63 | 4.56 | 4.97 | 5.56 | 3.00 | 3.33 | 3.33 | 4.55 | 5.45 | 5.45 |
-| SEC-BERT | 2.34 | 2.96 | 0.59 | 0.60 | 1.17 | 0.00 | 0.00 | 0.00 | 5.56 | 2.00 | 2.22 | 3.33 | 0.91 | 2.73 | 5.45 |
+| Metric | LinearSVC | CNN | SEC-BERT |
+|---|---|---|---|
+| Accuracy | 2.33 | 2.33 | 2.34 |
+| Macro F1 | 2.88 | 2.91 | 2.96 |
+| Macro recall | 0.58 | 0.58 | 0.59 |
+| Macro precision | 0.57 | 0.58 | 0.60 |
+| Weighted F1 | 1.17 | 1.17 | 1.17 |
+| Train time | 7.37 | 2.63 | 0.00 |
+| Inference time | 5.44 | 4.56 | 0.00 |
+| Model size | 5.03 | 4.97 | 0.00 |
+| Interpretability | 13.89 | 5.56 | 5.56 |
+| Deployment simplicity | 5.00 | 3.00 | 2.00 |
+| Maintenance burden | 4.44 | 3.33 | 2.22 |
+| Domain fit | 3.33 | 3.33 | 3.33 |
+| Model lifecycle | 4.55 | 4.55 | 0.91 |
+| Dependency risk | 6.82 | 5.45 | 2.73 |
+| Cost | 9.09 | 5.45 | 5.45 |
 
-SEC-BERT wins on every raw performance metric, but the differences are small and the confidence intervals overlap, so once interpretability, cost, dependency risk and lifecycle are weighted in, LinearSVC scores highest overall. Source [[#A6.1 Load metrics|A6.1]] (`build_decision_matrix`); supports section [[#7.5 Model selection|7.5]].
+Source [[#A6.1 Load metrics|A6.1]] (`build_decision_matrix`); supports section [[#7.5 Model selection|7.5]].
 
 ### B35. End-to-end system architecture
 
+On-demand-compute allocates a CPU-only EC2 instance per job and shuts it down when finished.
+
 ![[B35 production system architecture.svg]]
 
-Generated diagram: On-demand-compute allocates a CPU-only EC2 instance per job rather than maintaining a permanently running machine, which was both cheaper and more available than GPU instances. Extraction runs in R and classification in Python through `reticulate`, so each language is used where it is strongest within a single job. The long-format Oracle schema removes the column-limit constraint that drove the annual schema rebuild. Supports section [[#7.6 Production system and governance|7.6]].
+Supports section [[#7.6 Production system and governance|7.6]].
 
 ### B36. Data and ML pipeline
 
+The modelling workflow, as opposed to the production pipeline at [[#B35. End-to-end system architecture|B35]].
+
 ![[B36 data and ml pipeline.svg]]
 
-Generated diagram: The modelling workflow, as opposed to the production pipeline at [[#B35. End-to-end system architecture|B35]]. The description is pre-processed as the feature while the XBRL concept is encoded as the label, and the data is split and sampled into the populations and square-root weighting used in sections 7.1 and 7.4. The vectoriser is fitted on training data only, so no test information leaks into the features. Training then iterates through hyperparameter optimisation and model selection, and the loop was repeated for each model family, producing the three champions compared in the decision matrix ([[#B37. Model selection funnel|B37]]). Supports section [[#7. Implementation - performance metrics.|7]].
+Supports section [[#7. Implementation - performance metrics.|7]].
 
 ### B37. Model selection funnel
 
+Each model family was narrowed by its own search, with the three champions compared in the decision matrix ([[#B31. Decision matrix: subjective assessments|B31]] to [[#B34. Decision matrix: final scores|B34]]).
+
 ![[B37 model selection funnel.svg]]
 
-Generated diagram: Each model family was narrowed by its own search, HalvingRandomSearchCV for the traditional models and separate Optuna studies for the neural networks and transformers, so the search method matched the training cost of each family. The three champions were then compared under common conditions using the decision matrix ([[#B31. Decision matrix — subjective assessments|B31]] to [[#B34. Decision matrix — final scores|B34]]). Population size validation ([[#B19. Score agreement between training population sizes|B19]] and [[#B20. Correlation between population sizes|B20]]) showed the 1% and 10% samples correlated at 0.971 and 0.998 with the full population, so filtering on samples was reliable. Supports sections [[#7.2 Traditional machine learning algorithms|7.2]], [[#7.3 Conventional and Transformer based Neural Networks|7.3]] and [[#7.5 Model selection|7.5]].
+Supports sections [[#7.2 Traditional machine learning algorithms|7.2]], [[#7.3 Conventional and Transformer based Neural Networks|7.3]] and [[#7.5 Model selection|7.5]].
 
-### B38. Final model performance — LinearSVC trained on the 100% train population
+### B38. Final model performance: LinearSVC trained on the 100% train population
 
 Headline result, full holdout:
 
 | Metric | Value | 95% CI | KPI | Met |
 |---|---|---|---|---|
-| Accuracy | 0.975 | 0.975–0.976 | > 0.7 | Yes |
-| Macro-F1 | 0.785 | 0.780–0.788 | > 0.6 | Yes |
-
+| Accuracy | 0.975 | 0.975-0.976 | > 0.7 | Yes |
+| Macro-F1 | 0.785 | 0.780-0.788 | > 0.6 | Yes |
 By evaluation set:
 
 | Evaluation set | Accuracy | 95% CI | Macro-F1 | 95% CI |
 |---|---|---|---|---|
-| Test, 5% sample | 0.975 | 0.973–0.978 | 0.791 | 0.764–0.810 |
-| Test, full | 0.976 | 0.975–0.976 | 0.789 | 0.785–0.793 |
-| Holdout, 10k sample | 0.977 | 0.974–0.980 | 0.817 | 0.798–0.847 |
-| **Holdout, full** | **0.975** | **0.975–0.976** | **0.785** | **0.780–0.788** |
-
+| Test, 5% sample | 0.975 | 0.973-0.978 | 0.791 | 0.764-0.810 |
+| Test, full | 0.976 | 0.975-0.976 | 0.789 | 0.785-0.793 |
+| Holdout, 10k sample | 0.977 | 0.974-0.980 | 0.817 | 0.798-0.847 |
+| **Holdout, full** | **0.975** | **0.975-0.976** | **0.785** | **0.780-0.788** |
 Extended metrics, available for the sampled evaluation sets:
 
 | Metric | Test, 5% sample | Holdout, 10k sample |
 |---|---|---|
-| Macro-precision | 0.812 (0.773–0.826) | 0.838 (0.807–0.863) |
-| Macro-recall | 0.808 (0.788–0.830) | 0.832 (0.818–0.867) |
-| Weighted-F1 | 0.970 (0.967–0.973) | 0.972 (0.969–0.976) |
-| Weighted-precision | 0.972 (0.969–0.976) | 0.976 (0.971–0.979) |
-| Weighted-recall | 0.975 (0.973–0.978) | 0.977 (0.974–0.980) |
+| Macro-precision | 0.812 (0.773-0.826) | 0.838 (0.807-0.863) |
+| Macro-recall | 0.808 (0.788-0.830) | 0.832 (0.818-0.867) |
+| Weighted-F1 | 0.970 (0.967-0.973) | 0.972 (0.969-0.976) |
+| Weighted-precision | 0.972 (0.969-0.976) | 0.976 (0.971-0.979) |
+| Weighted-recall | 0.975 (0.973-0.978) | 0.977 (0.974-0.980) |
 
-All intervals are bootstrap estimates over 1,000 resamples at the 95% level. The full holdout is the most conservative of the four evaluation sets and is the figure quoted in section 8; the smaller samples score higher on macro-F1 because rare classes are unevenly represented, and their intervals are correspondingly wider. These figures differ from [[#B32. Decision matrix — measured values|B32]], where every model was trained on 10% square-root weighted data and evaluated on a common holdout subset so that architectures could be compared on equal terms. Source `03_ixbrl_experiment_models.ipynb` section 7.3 (`bootstrap_ci`, `test_model_over_populations`); supports section [[#8. Results.|8]].
+All intervals are bootstrap estimates over 1,000 resamples at the 95% level. The full holdout is the most conservative of the four evaluation sets and is the figure quoted in section 8.
+
+Source `03_ixbrl_experiment_models.ipynb` section 7.3 (`bootstrap_ci`, `test_model_over_populations`); supports section [[#8. Results.|8]].
 
 ### B39. LinearSVC coefficients for "cost of goods sold turnover"
 
-Coefficients for every n-gram present in the example description, across the three competing classes. Class intercepts: CostSales −1.000, RawMaterialsConsumablesUsed −1.190, TurnoverRevenue −1.156.
+Coefficients for every n-gram in the example description, across the three competing classes. Class intercepts: CostSales -1.000, RawMaterialsConsumablesUsed -1.190, TurnoverRevenue -1.156.
 
 | n-gram     | CostSales | RawMaterialsConsumablesUsed | TurnoverRevenue |
 | ---------- | --------- | --------------------------- | --------------- |
-| `cost of`  | 0.099     | 0.493                       | −0.463          |
-| `cost`     | 0.000     | 0.442                       | −0.074          |
+| `cost of`  | 0.099     | 0.493                       | -0.463          |
+| `cost`     | 0.000     | 0.442                       | -0.074          |
 | `turnover` | 0.000     | 0.000                       | 2.156           |
 | `goods`    | 0.000     | 0.000                       | 0.000           |
 | `of`       | 0.000     | 0.000                       | 0.000           |
 | `of goods` | 0.000     | 0.000                       | 0.000           |
 | `sold`     | 0.000     | 0.000                       | 0.000           |
-
 Highest weighted features for each class, for context:
 
 | Class | Top positive features | Strongest negative features | Non-zero features |
 |---|---|---|---|
-| CostSales | expenditure on charitable 4.467; service charge expenditure 3.895; cost of sales 3.178; management costs 2.725; purchases 1.937 | hire purchases −1.690; materials −0.093 | 11 positive, 2 negative |
-| RawMaterialsConsumablesUsed | of materials 2.762; of raw materials 2.582; raw materials consumables 2.071; of raw 1.945; raw 1.459 | stock of materials −1.026; of sales −0.376; consumables −0.042 | 12 positive, 3 negative |
-| TurnoverRevenue | sale of goods 3.986; service charges ground 3.546; rest of 3.046; united 2.991; and related income 2.785 | other −1.390; accrued income −1.367; deferred income −1.293; cost of sales −1.240 | 50 positive, 41 negative |
+| CostSales | expenditure on charitable 4.467; service charge expenditure 3.895; cost of sales 3.178; management costs 2.725; purchases 1.937 | hire purchases -1.690; materials -0.093 | 11 positive, 2 negative |
+| RawMaterialsConsumablesUsed | of materials 2.762; of raw materials 2.582; raw materials consumables 2.071; of raw 1.945; raw 1.459 | stock of materials -1.026; of sales -0.376; consumables -0.042 | 12 positive, 3 negative |
+| TurnoverRevenue | sale of goods 3.986; service charges ground 3.546; rest of 3.046; united 2.991; and related income 2.785 | other -1.390; accrued income -1.367; deferred income -1.293; cost of sales -1.240 | 50 positive, 41 negative |
 
-`cost of` sits near the bottom of the positive features for CostSales (0.099, second smallest of eleven) but carries a substantial negative weight for TurnoverRevenue (−0.463). It therefore contributes mainly by suppressing the competing class rather than by supporting the predicted one, which reading the top coefficients per class alone would not reveal, and which the LIME and SHAP attributions at Appendix A3.9.2, A3.9.3 and B23 surface directly. `goods`, `of`, `of goods` and `sold` carry no weight in any of the three classes.
-
-TurnoverRevenue draws on far more features (50 positive, 41 negative) than the two cost classes, reflecting the wider variety of descriptions mapping to it noted in section 5.2. The negative features also include `deffered income`, a common misspelling learned from the source documents, which supports the robustness findings in section 8. Source `03_ixbrl_experiment_models.ipynb` section 9.1; supports section [[#9. Discussion and conclusions/recommendations.|9]].
+Source `03_ixbrl_experiment_models.ipynb` section 9.1; supports section [[#9. Discussion and conclusions/recommendations.|9]].
 
 ### B40. Per-class performance and residual analysis
 
-This appendix reports the distribution, the classes that fail, the band needing analyst judgement, the diagnosis for each failure, and the full per-class results for all 141 concepts. Figures are from `classification_report` over the full holdout of 243,991 rows, covering the 141 concepts the model is trained to predict.
+Figures are from `classification_report` over the full holdout of 243,991 rows, covering the 141 modelled concepts. Long concept names are shortened with two dots so the figures stay visible.
 
-**Distribution of per-class F1.** The macro-F1 of 0.785 is a mean across classes, and the mean sits far below the median:
+**Distribution of per-class F1.**
 
 | Measure | Value |
 |---|---|
@@ -9713,201 +9791,190 @@ This appendix reports the distribution, the classes that fail, the band needing 
 | Classes scoring below 0.5 | 27 of 141 (19.1%) |
 | Classes scoring 0.0 | 8 of 141 |
 
-The gap between median and mean is the important figure. A minority of poorly performing concepts pulls the macro average down, while the typical concept is classified at 0.966. Weighting by how much data each concept actually carries makes the practical position clearer still:
-
 | Share of holdout rows | Falling in classes scoring |
 |---|---|
 | 94.1% | 0.9 or above |
 | 1.8% | below 0.5 |
 
-So under 2% of records fall into the concepts an analyst would need to treat cautiously, which is why aggregate accuracy is 0.975 while macro-F1 is 0.785. Macro-F1 remains the primary metric precisely because it refuses to let that 94% mask the concepts that fail.
-
-**Classes scoring zero.** These are not simply rare concepts — several carry substantial support:
+**Classes scoring zero.**
 
 | Concept | Precision | Recall | F1 | Support |
 |---|---|---|---|---|
 | AccruedLiabilities | 0.000 | 0.000 | 0.000 | 292 |
 | CalledUpShareCapitalNotPaid | 0.000 | 0.000 | 0.000 | 142 |
-| TotalAdditionsIncludingFromBusinessCombinationsIntangibleAssets | 0.000 | 0.000 | 0.000 | 73 |
+| TotalAdditions..IntangibleAssets | 0.000 | 0.000 | 0.000 | 73 |
 | Investments | 0.000 | 0.000 | 0.000 | 50 |
 | OtherOperatingIncome | 0.000 | 0.000 | 0.000 | 45 |
 | DisposalsIntangibleAssets | 0.000 | 0.000 | 0.000 | 44 |
-| DisposalsDecreaseInAmortisationImpairmentIntangibleAssets | 0.000 | 0.000 | 0.000 | 40 |
+| DisposalsDecrease..IntangibleAssets | 0.000 | 0.000 | 0.000 | 40 |
 | IntangibleAssetsGrossCost | 0.000 | 0.000 | 0.000 | 35 |
-| AdditionsOtherThanThroughBusinessCombinationsPropertyPlantEquipment | 1.000 | 0.001 | 0.003 | 751 |
+| AdditionsOtherThan..PlantEquipment | 1.000 | 0.001 | 0.003 | 751 |
 | InvestmentPropertyFairValueModel | 1.000 | 0.014 | 0.029 | 69 |
 
-The last two are informative: precision is perfect but recall is near zero, so the model almost never predicts these concepts, and is right when it does. The instances are being absorbed by a competing sibling concept rather than misread.
-
-**Classes requiring analyst judgement (F1 between 0.5 and 0.7).** These are usable but should not be relied on without checking:
+**Classes requiring analyst judgement (F1 between 0.5 and 0.7).**
 
 | Concept | Precision | Recall | F1 | Support |
 |---|---|---|---|---|
-| AmountsOwedToGroupUndertakingsParticipatingInterests | 0.529 | 0.500 | 0.514 | 54 |
+| AmountsOwedToGroup..Interests | 0.529 | 0.500 | 0.514 | 54 |
 | TaxationSocialSecurityPayable | 0.400 | 0.960 | 0.565 | 500 |
-| FurtherItemDebtorsComponentTotalDebtors | 0.549 | 0.619 | 0.582 | 63 |
-| FurtherItemCreditorsComponentTotalCreditors | 0.531 | 0.654 | 0.586 | 159 |
-| DisposalsDecreaseInDepreciationImpairmentPropertyPlantEquipment | 0.880 | 0.469 | 0.612 | 471 |
+| FurtherItemDebtors..TotalDebtors | 0.549 | 0.619 | 0.582 | 63 |
+| FurtherItemCreditors..TotalCreditors | 0.531 | 0.654 | 0.586 | 159 |
+| DisposalsDecreaseIn..PlantEquipment | 0.880 | 0.469 | 0.612 | 471 |
 | OtherTaxationSocialSecurityPayable | 0.965 | 0.456 | 0.619 | 1,252 |
 | OtherTaxationPayable | 0.909 | 0.471 | 0.620 | 85 |
 | CashOnHand | 0.717 | 0.611 | 0.660 | 54 |
-| TotalAdditionsIncludingFromBusinessCombinationsPropertyPlantEquipment | 0.507 | 1.000 | 0.673 | 969 |
+| TotalAdditions..PlantEquipment | 0.507 | 1.000 | 0.673 | 969 |
 
-The precision–recall asymmetry is the pattern to note. `TaxationSocialSecurityPayable` recalls 96% of its instances but is only right 40% of the time, while `OtherTaxationSocialSecurityPayable` is the mirror image at 97% precision and 46% recall. The model is systematically routing items between two near-identical concepts rather than failing to understand the text.
+**Residual diagnosis.**
+- **AccruedLiabilities**: the description "accruals" is predicted as `AccruedLiabilitiesDeferredIncome`, which is the concept the source data uses for that wording more often.
+- **CashOnHand** and **CashBankOnHand**: "cash at bank and in hand" and "cash and cash equivalents" are each predicted as the other.
+- **IntangibleAssetsGrossCost**: the failing instances reduce to "hubble_date and hubble_date".
 
-**Residual diagnosis.** Examining the failures individually shows they are label collisions, not comprehension failures:
+**Full per-class results.** All 141 concepts, sorted by F1 ascending.
 
-- **AccruedLiabilities** — the description "accruals" is predicted as `AccruedLiabilitiesDeferredIncome`, which is the concept the source data uses for that wording more often. The prediction reflects the dominant tagging convention rather than an error.
-- **CashOnHand** and **CashBankOnHand** — "cash at bank and in hand" and "cash and cash equivalents" are each predicted as the other. The two concepts cannot be separated from the information present in the accounts.
-- **IntangibleAssetsGrossCost** — the failing instances reduce to "hubble_date and hubble_date". Two dates joined by "and" escaped the date canonicalisation, and a description containing only dates carries nothing to classify on.
-
-**What this means for analyst use.** Failures concentrate between semantically adjacent concepts where the description alone does not determine which applies, and this is a property of the data rather than a defect in the model. Heading and table name recovered some of it, but not all. Analysts should check a concept's performance in the dashboard before relying on the ML category for it, and treat the zero-scoring and 0.5–0.7 concepts above as requiring the underlying description to be read. It also supports the case for a simplified concept set, since several of these pairs would merge.
-
-**Full per-class results.** Precision, recall, F1 and holdout support for all 141 modelled concepts, sorted by F1 ascending so the concepts needing analyst caution appear first.
-
-| Concept                                                                        | Precision | Recall | F1    | Support |
-| ------------------------------------------------------------------------------ | --------- | ------ | ----- | ------- |
-| AccruedLiabilities                                                             | 0.000     | 0.000  | 0.000 | 292     |
-| CalledUpShareCapitalNotPaid                                                    | 0.000     | 0.000  | 0.000 | 142     |
-| TotalAdditionsIncludingFromBusinessCombinationsIntangibleAssets                | 0.000     | 0.000  | 0.000 | 73      |
-| Investments                                                                    | 0.000     | 0.000  | 0.000 | 50      |
-| OtherOperatingIncome                                                           | 0.000     | 0.000  | 0.000 | 45      |
-| DisposalsIntangibleAssets                                                      | 0.000     | 0.000  | 0.000 | 44      |
-| DisposalsDecreaseInAmortisationImpairmentIntangibleAssets                      | 0.000     | 0.000  | 0.000 | 40      |
-| IntangibleAssetsGrossCost                                                      | 0.000     | 0.000  | 0.000 | 35      |
-| AdditionsOtherThanThroughBusinessCombinationsPropertyPlantEquipment            | 1.000     | 0.001  | 0.003 | 751     |
-| InvestmentPropertyFairValueModel                                               | 1.000     | 0.014  | 0.029 | 69      |
-| AdditionsOtherThanThroughBusinessCombinationsInvestmentPropertyFairValueModel  | 1.000     | 0.016  | 0.031 | 63      |
-| StartDateForPeriodCoveredByReport                                              | 0.333     | 0.032  | 0.058 | 63      |
-| AmountsOwedByDirectors                                                         | 0.714     | 0.033  | 0.063 | 151     |
-| OtherInvestmentsOtherThanLoans                                                 | 1.000     | 0.055  | 0.104 | 73      |
-| RecoverableValue-addedTax                                                      | 0.812     | 0.094  | 0.168 | 139     |
-| CurrentAssetInvestments                                                        | 0.955     | 0.095  | 0.174 | 220     |
-| PrepaymentsAccruedIncome                                                       | 0.976     | 0.111  | 0.200 | 360     |
-| DepreciationRateUsedForPropertyPlantEquipment                                  | 0.452     | 0.175  | 0.252 | 80      |
-| AccruedLiabilitiesDeferredIncome                                               | 0.838     | 0.167  | 0.279 | 987     |
-| IncreaseFromAmortisationChargeForYearIntangibleAssets                          | 1.000     | 0.185  | 0.312 | 238     |
-| UsefulLifePropertyPlantEquipmentYears                                          | 0.354     | 0.366  | 0.360 | 93      |
-| FutureMinimumLeasePaymentsUnderNon-cancellableOperatingLeases                  | 0.368     | 0.390  | 0.379 | 154     |
-| PropertyPlantEquipmentGrossCost                                                | 0.241     | 0.988  | 0.388 | 83      |
-| OtherProvisionsBalanceSheetSubtotal                                            | 1.000     | 0.270  | 0.426 | 37      |
-| AmountsOwedToRelatedParties                                                    | 0.810     | 0.304  | 0.442 | 56      |
-| LoansOwedByRelatedParties                                                      | 0.471     | 0.421  | 0.444 | 38      |
-| LoansOwedToRelatedParties                                                      | 0.463     | 0.514  | 0.487 | 37      |
-| AmountsOwedToGroupUndertakingsParticipatingInterests                           | 0.529     | 0.500  | 0.514 | 54      |
-| TaxationSocialSecurityPayable                                                  | 0.400     | 0.960  | 0.565 | 500     |
-| FurtherItemCreditorsComponentTotalCreditors                                    | 0.530     | 0.660  | 0.588 | 159     |
-| FurtherItemDebtorsComponentTotalDebtors                                        | 0.565     | 0.619  | 0.591 | 63      |
-| DisposalsDecreaseInDepreciationImpairmentPropertyPlantEquipment                | 0.880     | 0.469  | 0.612 | 471     |
-| OtherTaxationSocialSecurityPayable                                             | 0.965     | 0.456  | 0.619 | 1,252   |
-| OtherTaxationPayable                                                           | 0.909     | 0.471  | 0.620 | 85      |
-| CashOnHand                                                                     | 0.717     | 0.611  | 0.660 | 54      |
-| TotalAdditionsIncludingFromBusinessCombinationsPropertyPlantEquipment          | 0.507     | 1.000  | 0.673 | 969     |
-| OtherOperatingIncomeFormat1                                                    | 0.554     | 0.982  | 0.709 | 57      |
-| NumberSharesIssuedFullyPaid                                                    | 0.594     | 0.981  | 0.740 | 216     |
-| AmountsOwedToGroupUndertakings                                                 | 0.627     | 0.970  | 0.762 | 66      |
-| DisposalsPropertyPlantEquipment                                                | 0.617     | 1.000  | 0.763 | 529     |
-| AmountsOwedByRelatedParties                                                    | 0.955     | 0.689  | 0.800 | 61      |
-| AccruedLiabilitiesNotExpressedWithinCreditorsSubtotal                          | 0.669     | 1.000  | 0.801 | 2,200   |
-| AccumulatedAmortisationImpairmentIntangibleAssets                              | 1.000     | 0.692  | 0.818 | 65      |
-| AdvancesCreditsDirectors                                                       | 0.913     | 0.750  | 0.824 | 56      |
-| AmountsOwedByGroupUndertakingsParticipatingInterests                           | 0.731     | 0.980  | 0.838 | 50      |
-| InvestmentsInSubsidiaries                                                      | 0.970     | 0.739  | 0.839 | 88      |
-| FinanceLeasePaymentsOwingMinimumGross                                          | 0.745     | 0.960  | 0.839 | 299     |
-| Value-addedTaxPayable                                                          | 0.745     | 0.997  | 0.853 | 374     |
-| CorporationTaxRecoverable                                                      | 0.963     | 0.800  | 0.874 | 65      |
-| AmountsOwedToDirectors                                                         | 0.784     | 0.998  | 0.878 | 617     |
-| NumberSharesAllotted                                                           | 0.998     | 0.786  | 0.880 | 641     |
-| DescriptionSpecificAdvanceOrCreditItsConditionsIndicativeInterestRateDirectors | 0.869     | 0.897  | 0.883 | 185     |
-| InvestmentsFixedAssets                                                         | 0.799     | 0.991  | 0.885 | 811     |
-| TotalIncreaseDecreaseFromRevaluationsPropertyPlantEquipment                    | 0.812     | 1.000  | 0.896 | 108     |
-| PrepaymentsAccruedIncomeNotExpressedWithinCurrentAssetSubtotal                 | 0.822     | 1.000  | 0.902 | 1,440   |
-| AccountsType                                                                   | 0.827     | 0.993  | 0.903 | 140     |
-| Prepayments                                                                    | 0.883     | 0.935  | 0.908 | 185     |
-| OtherInventories                                                               | 0.913     | 0.932  | 0.922 | 337     |
-| OtherRemainingBorrowings                                                       | 0.932     | 0.916  | 0.924 | 238     |
-| CalledUpShareCapitalNotPaidNotExpressedAsCurrentAsset                          | 0.868     | 1.000  | 0.929 | 931     |
-| WorkInProgress                                                                 | 0.884     | 0.991  | 0.934 | 115     |
-| BankOverdrafts                                                                 | 0.902     | 0.974  | 0.937 | 114     |
-| RawMaterials                                                                   | 0.982     | 0.903  | 0.941 | 62      |
-| DeferredTaxLiabilities                                                         | 0.935     | 0.956  | 0.945 | 45      |
-| NetDeferredTaxLiabilityAsset                                                   | 0.957     | 0.936  | 0.946 | 47      |
-| DescriptionAmortisationMethodForIntangibleAssets                               | 0.950     | 0.974  | 0.962 | 78      |
-| OtherIncreaseDecreaseInDepreciationImpairmentPropertyPlantEquipment            | 0.930     | 1.000  | 0.964 | 66      |
-| IncreaseFromDepreciationChargeForYearPropertyPlantEquipment                    | 0.932     | 1.000  | 0.964 | 2,645   |
-| TotalBorrowings                                                                | 0.984     | 0.946  | 0.965 | 332     |
-| ReportTitle                                                                    | 0.998     | 0.935  | 0.965 | 447     |
-| FinishedGoods                                                                  | 0.986     | 0.947  | 0.966 | 76      |
-| BalanceSheetDate                                                               | 0.956     | 1.000  | 0.977 | 868     |
-| OtherCreditors                                                                 | 0.986     | 0.971  | 0.978 | 1,399   |
-| AmountsOwedToAssociatesJointVenturesParticipatingInterests                     | 1.000     | 0.959  | 0.979 | 49      |
-| OtherDebtors                                                                   | 0.973     | 0.986  | 0.980 | 1,021   |
-| DividendsPaid                                                                  | 0.987     | 0.975  | 0.981 | 161     |
-| DescriptionDepreciationMethodForPropertyPlantEquipment                         | 0.978     | 0.985  | 0.981 | 4,821   |
-| ComprehensiveIncomeExpense                                                     | 0.967     | 0.997  | 0.982 | 327     |
-| TotalInventories                                                               | 0.990     | 0.975  | 0.983 | 2,315   |
-| BankBorrowingsOverdrafts                                                       | 0.986     | 0.980  | 0.983 | 1,329   |
-| CharityFunds                                                                   | 0.976     | 0.992  | 0.984 | 121     |
-| AdministrationSupportAverageNumberEmployees                                    | 0.980     | 0.993  | 0.987 | 149     |
-| Debtors                                                                        | 0.999     | 0.975  | 0.987 | 6,733   |
-| DescriptionShareType                                                           | 0.991     | 0.984  | 0.987 | 435     |
-| DividendPerShareInterim                                                        | 0.978     | 1.000  | 0.989 | 45      |
-| CorporationTaxPayable                                                          | 0.989     | 0.993  | 0.991 | 821     |
-| BankBorrowings                                                                 | 0.988     | 0.994  | 0.991 | 166     |
-| DepreciationExpensePropertyPlantEquipment                                      | 0.984     | 1.000  | 0.992 | 60      |
-| ProfitLoss                                                                     | 0.995     | 0.989  | 0.992 | 874     |
-| InvestmentProperty                                                             | 0.987     | 1.000  | 0.994 | 546     |
-| Creditors                                                                      | 0.992     | 0.995  | 0.994 | 18,930  |
-| EntityTradingStatus                                                            | 0.988     | 1.000  | 0.994 | 83      |
-| ProvisionsForLiabilitiesBalanceSheetSubtotal                                   | 0.988     | 1.000  | 0.994 | 2,430   |
-| FinanceLeaseLiabilitiesPresentValueTotal                                       | 0.996     | 0.992  | 0.994 | 522     |
-| TaxTaxCreditOnProfitOrLossOnOrdinaryActivities                                 | 0.990     | 1.000  | 0.995 | 474     |
-| ProfitLossOnOrdinaryActivitiesBeforeTax                                        | 1.000     | 0.991  | 0.995 | 319     |
-| FixedAssets                                                                    | 0.991     | 1.000  | 0.995 | 4,273   |
-| UKCompaniesHouseRegisteredNumber                                               | 1.000     | 0.992  | 0.996 | 5,010   |
-| TurnoverRevenue                                                                | 1.000     | 0.992  | 0.996 | 644     |
-| PropertyPlantEquipment                                                         | 1.000     | 0.994  | 0.997 | 6,946   |
-| EndDateForPeriodCoveredByReport                                                | 1.000     | 0.994  | 0.997 | 1,030   |
-| TradeDebtorsTradeReceivables                                                   | 0.996     | 0.999  | 0.998 | 1,410   |
-| OtherOperatingIncomeFormat2                                                    | 0.995     | 1.000  | 0.998 | 209     |
-| DepreciationAmortisationImpairmentExpense                                      | 0.995     | 1.000  | 0.998 | 210     |
-| CashBankOnHand                                                                 | 0.997     | 0.998  | 0.998 | 7,791   |
-| IntangibleAssets                                                               | 0.999     | 0.997  | 0.998 | 913     |
-| CostSales                                                                      | 0.996     | 1.000  | 0.998 | 230     |
-| RawMaterialsConsumablesUsed                                                    | 1.000     | 0.996  | 0.998 | 284     |
-| GrossProfitLoss                                                                | 0.997     | 1.000  | 0.998 | 287     |
-| AdministrativeExpenses                                                         | 1.000     | 0.997  | 0.998 | 292     |
-| OtherOperatingExpensesFormat2                                                  | 1.000     | 0.997  | 0.998 | 319     |
-| Equity                                                                         | 1.000     | 0.998  | 0.999 | 28,976  |
-| TaxationIncludingDeferredTaxationBalanceSheetSubtotal                          | 0.998     | 1.000  | 0.999 | 550     |
-| AverageNumberEmployeesDuringPeriod                                             | 1.000     | 0.999  | 0.999 | 6,409   |
-| TradeCreditorsTradePayables                                                    | 0.999     | 1.000  | 1.000 | 1,648   |
-| CurrentAssets                                                                  | 1.000     | 1.000  | 1.000 | 6,100   |
-| DateAuthorisationFinancialStatementsForIssue                                   | 1.000     | 1.000  | 1.000 | 2,105   |
-| NetAssetsLiabilities                                                           | 1.000     | 1.000  | 1.000 | 11,399  |
-| NetCurrentAssetsLiabilities                                                    | 1.000     | 1.000  | 1.000 | 13,660  |
-| HubbleNumber                                                                   | 1.000     | 1.000  | 1.000 | 13,000  |
-| HubbleDate                                                                     | 1.000     | 1.000  | 1.000 | 27,261  |
-| HubbleName                                                                     | 1.000     | 1.000  | 1.000 | 15,542  |
-| TotalAssetsLessCurrentLiabilities                                              | 1.000     | 1.000  | 1.000 | 13,415  |
-| HubbleCompanyName                                                              | 1.000     | 1.000  | 1.000 | 5,511   |
-| OperatingProfitLoss                                                            | 1.000     | 1.000  | 1.000 | 283     |
-| StaffCostsEmployeeBenefitsExpense                                              | 1.000     | 1.000  | 1.000 | 271     |
-| InterestPayableSimilarChargesFinanceCosts                                      | 1.000     | 1.000  | 1.000 | 149     |
-| OtherInterestReceivableSimilarIncomeFinanceIncome                              | 1.000     | 1.000  | 1.000 | 135     |
-| ProfitLossOnOrdinaryActivitiesAfterTax                                         | 1.000     | 1.000  | 1.000 | 107     |
-| DistributionCosts                                                              | 1.000     | 1.000  | 1.000 | 94      |
-| AccountingStandardsApplied                                                     | 1.000     | 1.000  | 1.000 | 82      |
-| AccountsStatusAuditedOrUnaudited                                               | 1.000     | 1.000  | 1.000 | 82      |
-| EntityDormantTruefalse                                                         | 1.000     | 1.000  | 1.000 | 82      |
-| LegalFormEntity                                                                | 1.000     | 1.000  | 1.000 | 82      |
-| HubblePostcode                                                                 | 1.000     | 1.000  | 1.000 | 75      |
-| IncomeExpenseRecognisedDirectlyInEquity                                        | 1.000     | 1.000  | 1.000 | 74      |
-| IncreaseDecreaseDueToTransfersBetweenClassesPropertyPlantEquipment             | 1.000     | 1.000  | 1.000 | 65      |
-| DirectorRemuneration                                                           | 1.000     | 1.000  | 1.000 | 54      |
-| FinalDividendsPaid                                                             | 1.000     | 1.000  | 1.000 | 47      |
-| WagesSalaries                                                                  | 1.000     | 1.000  | 1.000 | 46      |
-| NetCashFlowsFromUsedInOperatingActivities                                      | 1.000     | 1.000  | 1.000 | 35      |
+|  |  | Recall | F1 | Support |
+|---|---|---|---|---|
+| AccruedLiabilities | 0.000 | 0.000 | 0.000 | 292 |
+| CalledUpShareCapitalNotPaid | 0.000 | 0.000 | 0.000 | 142 |
+| TotalAdditions..IntangibleAssets | 0.000 | 0.000 | 0.000 | 73 |
+| Investments | 0.000 | 0.000 | 0.000 | 50 |
+| OtherOperatingIncome | 0.000 | 0.000 | 0.000 | 45 |
+| DisposalsIntangibleAssets | 0.000 | 0.000 | 0.000 | 44 |
+| DisposalsDecrease..IntangibleAssets | 0.000 | 0.000 | 0.000 | 40 |
+| IntangibleAssetsGrossCost | 0.000 | 0.000 | 0.000 | 35 |
+| AdditionsOtherThan..PlantEquipment | 1.000 | 0.001 | 0.003 | 751 |
+| InvestmentPropertyFairValueModel | 1.000 | 0.014 | 0.029 | 69 |
+| AdditionsOtherThan..FairValueModel | 1.000 | 0.016 | 0.031 | 63 |
+| StartDateForPeriodCoveredByReport | 0.333 | 0.032 | 0.058 | 63 |
+| AmountsOwedByDirectors | 0.714 | 0.033 | 0.063 | 151 |
+| OtherInvestmentsOtherThanLoans | 1.000 | 0.055 | 0.104 | 73 |
+| RecoverableValue-addedTax | 0.812 | 0.094 | 0.168 | 139 |
+| CurrentAssetInvestments | 0.955 | 0.095 | 0.174 | 220 |
+| PrepaymentsAccruedIncome | 0.976 | 0.111 | 0.200 | 360 |
+| DepreciationRateUsed..PlantEquipment | 0.452 | 0.175 | 0.252 | 80 |
+| AccruedLiabilitiesDeferredIncome | 0.838 | 0.167 | 0.279 | 987 |
+| IncreaseFrom..IntangibleAssets | 1.000 | 0.185 | 0.312 | 238 |
+| UsefulLifeProperty..EquipmentYears | 0.354 | 0.366 | 0.360 | 93 |
+| FutureMinimumLease..OperatingLeases | 0.368 | 0.390 | 0.379 | 154 |
+| PropertyPlantEquipmentGrossCost | 0.241 | 0.988 | 0.388 | 83 |
+| OtherProvisionsBalanceSheetSubtotal | 1.000 | 0.270 | 0.426 | 37 |
+| AmountsOwedToRelatedParties | 0.810 | 0.304 | 0.442 | 56 |
+| LoansOwedByRelatedParties | 0.471 | 0.421 | 0.444 | 38 |
+| LoansOwedToRelatedParties | 0.463 | 0.514 | 0.487 | 37 |
+| AmountsOwedToGroup..Interests | 0.529 | 0.500 | 0.514 | 54 |
+| TaxationSocialSecurityPayable | 0.400 | 0.960 | 0.565 | 500 |
+| FurtherItemCreditors..TotalCreditors | 0.530 | 0.660 | 0.588 | 159 |
+| FurtherItemDebtors..TotalDebtors | 0.565 | 0.619 | 0.591 | 63 |
+| DisposalsDecreaseIn..PlantEquipment | 0.880 | 0.469 | 0.612 | 471 |
+| OtherTaxationSocialSecurityPayable | 0.965 | 0.456 | 0.619 | 1,252 |
+| OtherTaxationPayable | 0.909 | 0.471 | 0.620 | 85 |
+| CashOnHand | 0.717 | 0.611 | 0.660 | 54 |
+| TotalAdditions..PlantEquipment | 0.507 | 1.000 | 0.673 | 969 |
+| OtherOperatingIncomeFormat1 | 0.554 | 0.982 | 0.709 | 57 |
+| NumberSharesIssuedFullyPaid | 0.594 | 0.981 | 0.740 | 216 |
+| AmountsOwedToGroupUndertakings | 0.627 | 0.970 | 0.762 | 66 |
+| DisposalsPropertyPlantEquipment | 0.617 | 1.000 | 0.763 | 529 |
+| AmountsOwedByRelatedParties | 0.955 | 0.689 | 0.800 | 61 |
+| AccruedLiabilitiesNot..Subtotal | 0.669 | 1.000 | 0.801 | 2,200 |
+| Accumulated..IntangibleAssets | 1.000 | 0.692 | 0.818 | 65 |
+| AdvancesCreditsDirectors | 0.913 | 0.750 | 0.824 | 56 |
+| AmountsOwedByGroup..Interests | 0.731 | 0.980 | 0.838 | 50 |
+| InvestmentsInSubsidiaries | 0.970 | 0.739 | 0.839 | 88 |
+| FinanceLeasePayments..MinimumGross | 0.745 | 0.960 | 0.839 | 299 |
+| Value-addedTaxPayable | 0.745 | 0.997 | 0.853 | 374 |
+| CorporationTaxRecoverable | 0.963 | 0.800 | 0.874 | 65 |
+| AmountsOwedToDirectors | 0.784 | 0.998 | 0.878 | 617 |
+| NumberSharesAllotted | 0.998 | 0.786 | 0.880 | 641 |
+| DescriptionSpecific..RateDirectors | 0.869 | 0.897 | 0.883 | 185 |
+| InvestmentsFixedAssets | 0.799 | 0.991 | 0.885 | 811 |
+| TotalIncrease..PlantEquipment | 0.812 | 1.000 | 0.896 | 108 |
+| PrepaymentsAccrued..AssetSubtotal | 0.822 | 1.000 | 0.902 | 1,440 |
+| AccountsType | 0.827 | 0.993 | 0.903 | 140 |
+| Prepayments | 0.883 | 0.935 | 0.908 | 185 |
+| OtherInventories | 0.913 | 0.932 | 0.922 | 337 |
+| OtherRemainingBorrowings | 0.932 | 0.916 | 0.924 | 238 |
+| CalledUpShareCapital..AsCurrentAsset | 0.868 | 1.000 | 0.929 | 931 |
+| WorkInProgress | 0.884 | 0.991 | 0.934 | 115 |
+| BankOverdrafts | 0.902 | 0.974 | 0.937 | 114 |
+| RawMaterials | 0.982 | 0.903 | 0.941 | 62 |
+| DeferredTaxLiabilities | 0.935 | 0.956 | 0.945 | 45 |
+| NetDeferredTaxLiabilityAsset | 0.957 | 0.936 | 0.946 | 47 |
+| Description..IntangibleAssets | 0.950 | 0.974 | 0.962 | 78 |
+| OtherIncrease..PlantEquipment | 0.930 | 1.000 | 0.964 | 66 |
+| IncreaseFrom..PlantEquipment | 0.932 | 1.000 | 0.964 | 2,645 |
+| TotalBorrowings | 0.984 | 0.946 | 0.965 | 332 |
+| ReportTitle | 0.998 | 0.935 | 0.965 | 447 |
+| FinishedGoods | 0.986 | 0.947 | 0.966 | 76 |
+| BalanceSheetDate | 0.956 | 1.000 | 0.977 | 868 |
+| OtherCreditors | 0.986 | 0.971 | 0.978 | 1,399 |
+| AmountsOwedToAssociates..Interests | 1.000 | 0.959 | 0.979 | 49 |
+| OtherDebtors | 0.973 | 0.986 | 0.980 | 1,021 |
+| DividendsPaid | 0.987 | 0.975 | 0.981 | 161 |
+| Description..PlantEquipment | 0.978 | 0.985 | 0.981 | 4,821 |
+| ComprehensiveIncomeExpense | 0.967 | 0.997 | 0.982 | 327 |
+| TotalInventories | 0.990 | 0.975 | 0.983 | 2,315 |
+| BankBorrowingsOverdrafts | 0.986 | 0.980 | 0.983 | 1,329 |
+| CharityFunds | 0.976 | 0.992 | 0.984 | 121 |
+| Administration..NumberEmployees | 0.980 | 0.993 | 0.987 | 149 |
+| Debtors | 0.999 | 0.975 | 0.987 | 6,733 |
+| DescriptionShareType | 0.991 | 0.984 | 0.987 | 435 |
+| DividendPerShareInterim | 0.978 | 1.000 | 0.989 | 45 |
+| CorporationTaxPayable | 0.989 | 0.993 | 0.991 | 821 |
+| BankBorrowings | 0.988 | 0.994 | 0.991 | 166 |
+| DepreciationExpense..PlantEquipment | 0.984 | 1.000 | 0.992 | 60 |
+| ProfitLoss | 0.995 | 0.989 | 0.992 | 874 |
+| InvestmentProperty | 0.987 | 1.000 | 0.994 | 546 |
+| Creditors | 0.992 | 0.995 | 0.994 | 18,930 |
+| EntityTradingStatus | 0.988 | 1.000 | 0.994 | 83 |
+| ProvisionsFor..SheetSubtotal | 0.988 | 1.000 | 0.994 | 2,430 |
+| FinanceLeaseLiabilities..ValueTotal | 0.996 | 0.992 | 0.994 | 522 |
+| TaxTaxCreditOnProfitOr..Activities | 0.990 | 1.000 | 0.995 | 474 |
+| ProfitLossOnOrdinary..BeforeTax | 1.000 | 0.991 | 0.995 | 319 |
+| FixedAssets | 0.991 | 1.000 | 0.995 | 4,273 |
+| UKCompaniesHouseRegisteredNumber | 1.000 | 0.992 | 0.996 | 5,010 |
+| TurnoverRevenue | 1.000 | 0.992 | 0.996 | 644 |
+| PropertyPlantEquipment | 1.000 | 0.994 | 0.997 | 6,946 |
+| EndDateForPeriodCoveredByReport | 1.000 | 0.994 | 0.997 | 1,030 |
+| TradeDebtorsTradeReceivables | 0.996 | 0.999 | 0.998 | 1,410 |
+| OtherOperatingIncomeFormat2 | 0.995 | 1.000 | 0.998 | 209 |
+| DepreciationAmortisation..Expense | 0.995 | 1.000 | 0.998 | 210 |
+| CashBankOnHand | 0.997 | 0.998 | 0.998 | 7,791 |
+| IntangibleAssets | 0.999 | 0.997 | 0.998 | 913 |
+| CostSales | 0.996 | 1.000 | 0.998 | 230 |
+| RawMaterialsConsumablesUsed | 1.000 | 0.996 | 0.998 | 284 |
+| GrossProfitLoss | 0.997 | 1.000 | 0.998 | 287 |
+| AdministrativeExpenses | 1.000 | 0.997 | 0.998 | 292 |
+| OtherOperatingExpensesFormat2 | 1.000 | 0.997 | 0.998 | 319 |
+| Equity | 1.000 | 0.998 | 0.999 | 28,976 |
+| TaxationIncluding..SheetSubtotal | 0.998 | 1.000 | 0.999 | 550 |
+| AverageNumberEmployeesDuringPeriod | 1.000 | 0.999 | 0.999 | 6,409 |
+| TradeCreditorsTradePayables | 0.999 | 1.000 | 1.000 | 1,648 |
+| CurrentAssets | 1.000 | 1.000 | 1.000 | 6,100 |
+| DateAuthorisationFinancial..ForIssue | 1.000 | 1.000 | 1.000 | 2,105 |
+| NetAssetsLiabilities | 1.000 | 1.000 | 1.000 | 11,399 |
+| NetCurrentAssetsLiabilities | 1.000 | 1.000 | 1.000 | 13,660 |
+| HubbleNumber | 1.000 | 1.000 | 1.000 | 13,000 |
+| HubbleDate | 1.000 | 1.000 | 1.000 | 27,261 |
+| HubbleName | 1.000 | 1.000 | 1.000 | 15,542 |
+| TotalAssetsLessCurrentLiabilities | 1.000 | 1.000 | 1.000 | 13,415 |
+| HubbleCompanyName | 1.000 | 1.000 | 1.000 | 5,511 |
+| OperatingProfitLoss | 1.000 | 1.000 | 1.000 | 283 |
+| StaffCostsEmployeeBenefitsExpense | 1.000 | 1.000 | 1.000 | 271 |
+| InterestPayableSimilar..FinanceCosts | 1.000 | 1.000 | 1.000 | 149 |
+| OtherInterest..FinanceIncome | 1.000 | 1.000 | 1.000 | 135 |
+| ProfitLossOnOrdinary..AfterTax | 1.000 | 1.000 | 1.000 | 107 |
+| DistributionCosts | 1.000 | 1.000 | 1.000 | 94 |
+| AccountingStandardsApplied | 1.000 | 1.000 | 1.000 | 82 |
+| AccountsStatusAuditedOrUnaudited | 1.000 | 1.000 | 1.000 | 82 |
+| EntityDormantTruefalse | 1.000 | 1.000 | 1.000 | 82 |
+| LegalFormEntity | 1.000 | 1.000 | 1.000 | 82 |
+| HubblePostcode | 1.000 | 1.000 | 1.000 | 75 |
+| IncomeExpense..DirectlyInEquity | 1.000 | 1.000 | 1.000 | 74 |
+| IncreaseDecreaseDue..PlantEquipment | 1.000 | 1.000 | 1.000 | 65 |
+| DirectorRemuneration | 1.000 | 1.000 | 1.000 | 54 |
+| FinalDividendsPaid | 1.000 | 1.000 | 1.000 | 47 |
+| WagesSalaries | 1.000 | 1.000 | 1.000 | 46 |
+| NetCashFlowsFromUsedIn..Activities | 1.000 | 1.000 | 1.000 | 35 |
 
 Source `03_ixbrl_experiment_models.ipynb` section 10; supports section [[#8. Results.|8]].
 
