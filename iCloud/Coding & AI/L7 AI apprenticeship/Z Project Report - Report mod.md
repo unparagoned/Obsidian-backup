@@ -34,7 +34,7 @@ While using GitLab to manage projects is not common in HMRC (bespoke spreadsheet
 	- Oracle tables/credentials setup. 
 	- Key decisions and the reason. 
 - The issues board worked well as the Kanban board. 
-- The epics useful for management and longterm timelines.
+- The epics were useful for management and long-term timelines.
 - I created templates for issues, tasks and PR, which ensured they were completed to a consistent level by all team members, covering every step required to recreate the issue, expected vs actual, and proposed fixes.
 - I encouraged team members to document issues on GitLab, to update project documents, and add comments on why rather than what. 
 - Version control, branches and independent review of PR helped ensure changes were of sufficient quality and limit issues. This required training the team to use branches, which I videoed for reference. 
@@ -53,7 +53,7 @@ I used Python for machine learning since the machine learning packages are more 
 - `scikit-learn` for traditional machine learning models (Pedregosa et al., 2011) 
 - `tensorflow`/`keras` to build and train NN
 - HuggingFace `transformers` for pre-trained models (Wolf et al., 2020)
-- `optuna` for hyperparameters tuning (Akiba et al., 2019)
+- `optuna` for hyperparameter tuning (Akiba et al., 2019)
 
 I used Jupyter notebooks for exploratory work, allowing detailed narrative alongside the code, and SQL for setting up and managing the Oracle database and tables.
 
@@ -61,7 +61,7 @@ I used Jupyter notebooks for exploratory work, allowing detailed narrative along
 
 I used the scientific method: hypothesis formulation and testing; comparisons against baseline; and statistical testing rather than simply comparing raw values, so the choices were evidence-backed rather than assumed. 
 
-While working with people with more software engineering experience to review the code base, we discussed the scope, coverage, and implementation of unit, integration, and system testing. Constraints included that tests should not contain any customer data, so we used synthetic or anonymised fixtures instead. While we were not using formal test driven development (Beck, 2003), I instructed them to create tests alongside new issues, since it makes it easier to investigate issues and verify fixes. 
+In a code-base review with experienced software engineers, we agreed documentation standards and the scope, coverage and implementation of unit, integration and system testing. Constraints included that tests should not contain any customer data, so we used synthetic or anonymised fixtures instead. While we were not using formal test driven development (Beck, 2003), I instructed them to create tests alongside new issues, since it makes it easier to investigate issues and verify fixes.
 
 # 4. The scope of the project (including key performance indicators).
 
@@ -165,7 +165,7 @@ To deal with the class imbalance (He and Garcia, 2009) and reduce systematic bia
 - Square-root weighted training gave good macro-F1 but sometimes with very small decreases in accuracy, e.g. 1.3pp increase vs 0.0573pp decrease ([[#A3.7.7 Compare results|A3.7.7]]).
 - Random oversampling actually reduced performance on the transformer based models ([[#A5.3.9 Random Oversampling|A5.3.9]]). 
 
-A smaller modified training dataset improved neural net performance whereas LinearSVC performed best on the full train dataset with a weighted model. 
+A smaller modified training dataset improved neural-network performance whereas LinearSVC performed best on the full train dataset with a weighted model.
 
 ## 7.5 Model selection
 
@@ -217,7 +217,7 @@ LinearSVC trained on the full dataset and tested over the full holdout has an ac
 
 Residual analysis identified which classes performed poorly and summaries were created for analysts ([[#A3.10 Residual analysis|A3.10]]). Per-class results were varied, with a median per-class F1 of 0.966, but 27 of the 141 modelled concepts scored below 0.5 and eight scored zero, pulling down the macro-F1 score. By volume the exposure is smaller, with 94% of holdout records falling in concepts scoring above 0.9 ([[#B40. Per-class performance and residual analysis|B40]]). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]]), and the dashboard let them check a concept's reliability before using it.
 
-Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts CashBankOnHand 5,670 times and CashOnHand 21 times, so the minority tagging would show as errors ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]] and  [[#B24.1 Worked example CashBankOnHand against CashOnHand.|B24.1]]).
+Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts CashBankOnHand 5,670 times and CashOnHand 21 times, so the minority tagging would show as errors ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]] and [[#B24.1 Worked example: CashBankOnHand against CashOnHand.|B24.1]]).
 
 Sensitivity analysis and model robustness were tested over various categories, abbreviations, adversarial (phrased to be misleading), command (attempts to inject LLM instructions), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Ribeiro et al., 2020) ([[#A3.8 Test model robustness|A3.8]], [[#A5.3.5 10% sqrt weight training population|A5.3.5]] and [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25]]). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was surprising since the domain-specific training and better theoretical semantic understanding should have favoured SEC-BERT. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by software. 
 
@@ -231,7 +231,7 @@ While using metrics like macro-F1 works well for comparing similar classes of mo
 
 The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks ([[#A3.9.1 Coefficients|A3.9.1]]) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable ([[#A3.9.2 Lime|A3.9.2]], [[#A3.9.3 SHAP|A3.9.3]], [[#B23. LinearSVC feature attribution (SHAP) for "cost of goods sold turnover"|B23]], [[#B28. SEC-BERT token contributions (SHAP) for "cost of goods sold turnover"|B28]] and [[#B39. LinearSVC coefficients for "cost of goods sold turnover"|B39]]). 
 
-Since SEC-BERT is not created by a well-established provider, security aspects may prevent use even if it won the decision matrix. If it was materially superior then we might need to train our own BERT based model. 
+Since SEC-BERT has limited developer providence, security aspects may prevent use even if it won the decision matrix. If it was materially superior then we might need to train our own BERT based model. 
 
 TF-IDF creates high dimensional sparse matrices, that capture the short domain-specific descriptions, that work well with LinearSVC, especially with the sparse coefficients from L1 regularisation and dual false (Joachims, 1998). This allowed me to develop the model using existing infrastructure without impacting other users of the platform. 
 
@@ -245,7 +245,7 @@ With managers I focused on business level aspects, benefits, outcomes, funding, 
 
 The project readme utilises markdown to provide clear headings, instructions, links, and code blocks, letting multiple teams use the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. Further developments resulted in a centralised approach extracting the full population to an Oracle database, so analysts just need to do a database query.
 
-I discovered Optuna while working with neural networks, and fthe built-in visualisations and  hyperparameters search could have replaced a lot of the manual work and code I previously did. So I plan to do wider research on existing packages and functions to solve a problem rather than just jumping straight into coding my own solution.
+I discovered Optuna while working with neural networks, and the built-in visualisations and hyperparameter search could have replaced a lot of the manual work and code I previously did. So I plan to do wider research on existing packages and functions to solve a problem rather than just jumping straight into coding my own solution.
 
 Recommendations:
 - Increase coverage to 100%, to be able to replace existing systems.
@@ -289,7 +289,7 @@ LinearSVC has not scaled well on larger datasets. But going from the 10% train d
 
 Increasing dataset size while keeping the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data, accuracy 0.853 and macro-F1 0.741.
 
-The integration of R and Python, while working well, does add setup  and coding complexity and other teams have had issues with the `reticulate` package. With the long term move to a lakehouse, higher Python use, greater Python ETL support porting should be considered. 
+The integration of R and Python, while working well, does add setup and coding complexity, and other teams have had issues with the `reticulate` package. With the long-term move to a lakehouse, higher Python use and greater Python ETL support, porting should be considered.
 
 # 13. Reference list.
 
@@ -9812,7 +9812,7 @@ Figures are from `classification_report` over the full holdout of 243,991 rows, 
 
 **Full per-class results.** All 141 concepts, sorted by F1 ascending.
 
-|  |  | Recall | F1 | Support |
+| Concept | Precision | Recall | F1 | Support |
 |---|---|---|---|---|
 | AccruedLiabilities | 0.000 | 0.000 | 0.000 | 292 |
 | CalledUpShareCapitalNotPaid | 0.000 | 0.000 | 0.000 | 142 |
@@ -9971,7 +9971,7 @@ The quantitative evidence for this section sits in Appendices A and B:
 
 ## Appendix D. Mapping of the project report to AM1 KSBs.
 
-The 25 KSBs assigned to Assessment Method 1 in the signed-off project mapping are evidenced as follows, grouped under the six grading themes used in that document. The criterion wording is taken verbatim from the signed-off mapping.
+The 26 KSBs assigned to Assessment Method 1 are evidenced as follows, grouped under the six grading themes used in the signed-off mapping. The signed-off mapping omitted S7, but the published assessment plan assigns it to this method.
 
 **Awareness of the opportunities of AI and data science to create business value and growth**
 
@@ -10012,6 +10012,7 @@ The 25 KSBs assigned to Assessment Method 1 in the signed-off project mapping ar
 | K28 | How to communicate concepts and present in a manner appropriate to diverse audiences, adapting communication techniques accordingly. | Communication methods tailored per audience and adapted when early explanations were too detailed; visual and example-based explanations (Section 9). |
 | S4 | Communicate concepts and present in a manner appropriate to diverse audiences, adapting communication techniques accordingly. | Confusion matrices and worked examples with analysts, benchmarks and costs with DevOps, business-level memos with managers (Section 9). Appendix B24. |
 | S5 | Manage expectations and present user research insight, proposed solutions and/or test findings to clients and stakeholders. | Analysts educated on where the model can be trusted and the kind of mistake to expect, with the dashboard letting them check reliability before use (Sections 8 and 9). |
+| S7 | Work autonomously and interact effectively within wide, multidisciplinary teams. | Autonomous coding and modelling where deep focus was needed, with collaborative work involving tax professionals, analysts, ML experts, DevOps and managers where their specialist knowledge or decisions were required (Sections 7.6 and 9). |
 | S27 | Analyse information, frame questions and conduct discussions with subject matter experts and assess existing data to scope new AI and data science requirements. | SME questioning on taxonomy naming differences shaping the single-taxonomy decision (Section 5.1); SME advice on dates, names and placeholders shaping preprocessing and label engineering (Section 5.3); SME input on items with too little information to classify (Section 8). |
 | B2 | Reliable, objective and capable of independent and team working. | Autonomous core modelling with demos and feedback in review meetings; collaborative work with SMEs, DevOps and on other team members' tasks to share knowledge and upskill them (Sections 7.6 and 9); consistent documented practices across the team (Section 3.3). |
 | B6 | Is comfortable and confident interacting with people from technical and non-technical backgrounds. Presents data and conclusions in a truthful and appropriate manner. | Working across analysts, SMEs, DevOps and managers (Section 9); reporting the unexpected robustness result, the bias spread and per-class weaknesses rather than only headline scores (Section 8). Appendix B38. |

@@ -906,3 +906,158 @@ The full sentence after change 3:
 Recommendation: take all three, landing on 5,499 with every claim quantified and the phantom test category gone.
 
 **Note on figures:** my re-scoring gives macro-F1 0.784 against the published 0.785 (accuracy 0.9751 vs 0.9754) — inside the published confidence intervals, and the per-class rows match B40's existing tables exactly, so nothing in the body needs changing. The tiny headline difference is presumably a split-version or library-version artefact.
+
+---
+
+# Detailed final audit of `Z Project Report - Report mod` — 16 August 2026
+
+## Bottom line
+
+The report is strong and now appears to cover every **pass descriptor** in the written narrative. It also contains credible evidence for most **distinction descriptors**. It follows the required report structure, remains aligned with the approved project, and visibly answers both items of written EPAO feedback.
+
+It is **not yet submission-ready**, for two reasons:
+
+1. Appendix E is empty; employer verification is a mandatory report component.
+2. Some operational, business-value and HMRC-production figures are not evidenced in the submitted report appendices and need compact supporting artefacts or clearly labelled internal evidence.
+
+The report can reasonably be described as **pass-ready in coverage but not yet pass-safe as a submission package**. A distinction is plausible, but continuity/maintenance evidence and the mandatory sign-off still need resolving to make that claim robust.
+
+## Material reviewed
+
+- `Z Project Report - Report mod.md`, including the complete body, references and Appendices A-E.
+- `Z Project Report - Jesse Karadia - Project Approved.md`, including all EPAO comments.
+- `Z Overall - st0763_artificial-intelligence-ai-data-specialist_l7_ap-for-publication_qm.md`, including the report format, grading descriptors and formal AM1 KSB mapping.
+- `Z Project Report - EPA_Prep_-_Project_Report.md` and the BCS AM1 project/presentation guidance.
+- Every other markdown document whose name begins `Z Project Report`, including earlier drafts, notes, the project brief, report-writing guidance, review notes, presentation questions and the Harvard referencing guide.
+- The implementation claims and appendix extracts included in the report. The files under `Code/` were not included in this audit, in accordance with the instruction not to check or touch the actual code.
+
+## Mandatory format and gateway checks
+
+| Requirement                           | Status                        | Finding/action                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Real pre-gateway work-based project   | Met                           | The report consistently identifies Hubble as workplace work and distinguishes my contribution from team input.                                                                                                                                                                                                             |
+| Approved title and project scope      | Met                           | The subject, stages, selected solution, production architecture and stakeholder groups remain aligned with the approved brief.                                                                                                                                                                                             |
+| Required 12 body sections             | Met                           | All required headings are present in the prescribed order. The reference list is sensibly separate.                                                                                                                                                                                                                        |
+| Code/documentation appendix           | Met, but needs packaging work | Appendix A is extensive and the body points into it. See reproducibility and privacy points below.                                                                                                                                                                                                                         |
+| Statistical-rigour appendix           | Met                           | Appendix C points to confidence intervals, significance tests, population validation, imbalance, error, robustness and bias evidence.                                                                                                                                                                                      |
+| Figures/tables/visualisation appendix | Met                           | Appendix B is extensive and all referenced raster files currently exist. The three SVG architecture figures also exist.                                                                                                                                                                                                    |
+| KSB mapping appendix                  | Corrected                     | The report previously mapped 25 KSBs because the signed-off document omitted S7. The published assessment plan assigns **26** KSBs to AM1, including S7. Appendix D now includes S7 and explains the discrepancy.                                                                                                          |
+| Employer verification                 | **Not met**                   | Appendix E is only a heading. Add the employer's name, role, verification wording, signature/approved electronic confirmation and date in the format accepted by BCS/QA. Do not submit without it.                                                                                                                         |
+| 5,000 words ±10%                      | Amber                         | A Markdown-visible-text estimate after the edits is about 5,406 words, while the earlier conservative counting method produced 5,499/5,500. Hidden Obsidian link targets explain much of the variation. Check the final exported Word/PDF count because that is the submission figure; retain a safety margin if possible. |
+| Content to be assessed is in the body | Mostly met                    | Core findings are in the body and appendices support them. A few internal production claims still rely on evidence not included in the package; see below.                                                                                                                                                                 |
+
+## Written EPAO feedback
+
+Both explicit requests in the approved-project feedback have been answered.
+
+### Class-level results
+
+**Met.** Section 8 states the median per-class F1, the number of concepts below 0.5, the number scoring zero and the volume exposure. Appendix B40 gives the complete 141-class table, and B24/B24.1 provide confusion-matrix and worked ambiguity evidence. This directly answers the request to show where minority classes perform less well.
+
+### Governance in practice
+
+**Met.** Section 7.6 distinguishes customer-supplied tags from predictions, states that predictions can be wrong, prohibits automated decisions, requires a human in the loop and points users to per-class performance. This directly answers the request to show that the ML category supports analyst review rather than automated decision-making.
+
+## Pass descriptor audit
+
+“Met” below means the report contains direct narrative evidence. It does not override the technical-validity and employer-verification issues later in this audit.
+
+| Pass descriptor | Status | Main evidence | Remaining strengthening point |
+|---|---|---|---|
+| Solution addresses a business need, quality standards and timescales; value, constraints and trade-offs considered | Met | Sections 1, 2, 4, 7.5, 8 and 11 | Add/retain evidence for the >99%, three-day and financial-benefit claims. “Quality standards” should name the relevant HMRC control or acceptance evidence where disclosure permits. |
+| Critically evaluates model performance and mitigates error/bias | Met | Sections 7.1-7.5 and 8; B24, B25, B32, B38 and B40 | Retain the strong class-level evidence and the distinction between headline and minority-class performance. |
+| Selects principles, techniques and solutions to enhance robust decisions | Met | Stratification, cross-validation, baselines, significance tests, bootstrap CIs, robustness cases and decision matrix | Keep the stated limits of each evaluation method clear and avoid presenting the test cases as comprehensive proof of robustness. |
+| Critically evaluates arguments, assumptions, concepts and data for business recommendations | Met | Sections 5, 6, 8, 9 and 12 | The tagged-to-untagged assumption is correctly identified as the largest limitation. |
+| Contributes to identifying the optimal solution from alternatives | Met | Sections 6 and 7.5; B31-B34 and B37 | Make clear that “optimal” means optimal against the declared business-weighted rubric, not universally best. |
+| Implements curation and quality controls in line with organisational/regulatory requirements | Met in the report | Section 5.3 and A2/A7 | Confirm that the final submitted evidence pack follows the stated minimisation, access-control and DPIA requirements. |
+| Selects datasets, languages, tools and scientific methods with justification | Met | Sections 3.2-3.5, 5.1 and 6 | Add a dependency/environment manifest to make the selection reproducible. |
+| Evaluates test data and proposed solutions against current/future needs | Met | Sections 7.1, 7.5, 7.6, 8, 9 and 12 | Correctly covers scale, CPU/GPU availability, cost, maintainability and drift. |
+| Manipulates/analyses complex or incomplete data to enable recommendations | Met | Sections 5, 7 and 8; A2/A3 and B5-B25 | Strong evidence. The incomplete-label and taxonomy limitations are not hidden. |
+| Applies development, research and project-management methods to engage customers and solve the problem | Met | Sections 3.1-3.3 and 9 | Timescale management is less explicit than technical method selection; one concrete milestone/deadline example would strengthen this if words can be exchanged rather than added. |
+| Works with technical/non-technical stakeholders and adapts approach | Met | Section 9 | Clear analyst, SME, DevOps and manager examples with changed communication methods and outcomes. |
+| Explains autonomous/collaborative multidisciplinary work and when each is appropriate | Met | Sections 7.6 and 9; Appendix D S7/B2 | S7 was absent from the signed-off mapping but is present in the formal assessment plan; this audit corrected Appendix D. |
+| Uses questioning/discussion with SMEs to scope requirements | Met | Sections 5.1, 5.3 and 8 | Strong causal examples: taxonomy choice, date handling, names and irreducible ambiguity. |
+| Clear written/verbal communication appropriate to audience | Met in the written evidence | Section 9 and the report itself | Verbal competence will still be tested in the presentation/questioning. |
+| Works with software engineers to ensure testing and documentation | Met after minor edit | Sections 3.3 and 3.5 | Section 3.5 now explicitly links software-engineer review to both documentation standards and testing scope. Retain supporting GitLab/PR/test artefacts if available. |
+| Applies scientific and technological methods to deliver business outcomes, including successes/challenges | Met | Sections 3.5, 5-9 and 12 | Strong overall; the report openly discusses ambiguity, class imbalance, generalisation and deployment constraints. |
+
+## Distinction descriptor audit
+
+| Distinction descriptor                                                                                   | Status         | Finding/action                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| -------------------------------------------------------------------------------------------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Commercial awareness and practical trade-offs shape the solution to optimise outcomes                    | Met            | The LinearSVC/SEC-BERT trade-off, CPU infrastructure, on-demand compute, taxonomy usability, security and maintainability form a coherent business argument. Support any numerical cost/value claims.                                                                                                                                                                                                                                                                                                            |
+| Critically evaluates/adapts practice and recommends how to communicate technical methodology             | Met            | Section 9 explains the move from overly technical explanations to Problem-Solution-Outcome, examples and visualisations, and recommends a standard communication structure.                                                                                                                                                                                                                                                                                                                                      |
+| Technical communication influences decisions or working practices positively                             | Met            | Dashboard changes altered user understanding/use; cost-benefit communications secured people and infrastructure funding; documentation enabled wider self-service. These are outcome-based examples.                                                                                                                                                                                                                                                                                                             |
+| Suitable methods/tools selected with impact on working practice and continuity risks if not used         | **Partly met** | Impact is clear: GitLab improves traceability, MLflow improves experiment tracking and documentation enables handover. The report does not explicitly state the continuity failure modes if these are absent. Add a short replacement sentence, not extra words: “Without GitLab, shared documentation and MLflow, decisions and model lineage would remain in individual notebooks or memory, making handover, incident investigation and reproducible retraining unreliable.” Only use this if factually true. |
+| Adapts approach across technical/non-technical stakeholders and situations for the best business outcome | Met            | Section 9 supplies several audience-specific examples and resulting business changes.                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Evaluates solutions and explains risks/implications of requirements, alternatives and mitigations        | Met            | Sections 6, 7.5, 7.6, 9 and 12 cover rule-based, unsupervised, classical, neural, transformer and frontier-LLM options, with operational and governance mitigations.                                                                                                                                                                                                                                                                                                                                             |
+| Rationale for technical solutions includes scientific benefit and suitability for working practices      | Met            | The TF-IDF/LinearSVC choice is connected to sparse short text, regularisation, measured performance, inference speed, CPU availability and maintainability.                                                                                                                                                                                                                                                                                                                                                      |
+| Appraises AI/data solutions and risks/implications of the process, alternatives and ways to address them | Met            | Strong appraisal across data, model, security, operational, ethical and lifecycle issues. The technical evaluation concerns below must be handled openly.                                                                                                                                                                                                                                                                                                                                                        |
+
+## Claims requiring additional supporting evidence
+
+The following may be entirely correct, but their supporting evidence is not included in the report appendices. Provide a compact redacted table, screenshot, log extract, decision record or employer confirmation for each group. Do not add large new narrative to the word-counted body.
+
+| Claim                                                                     | Current location                   | Evidence needed                                                                                                                                         |
+| ------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| >99% automated extraction coverage and completion within three days       | Section 8                          | Dated production KPI extract showing numerator/denominator, measurement window and definition of failure.                                               |
+| Production-data accuracy 0.853 and macro-F1 0.741                         | Section 12                         | Dataset definition, sample size, date/version, evaluation method and confidence intervals if available.                                                 |
+| 9.8pp gain from heading/table-name features                               | Sections 9/10                      | Controlled before/after result on the same split and model, with feature definitions.                                                                   |
+| Preprocessing raised macro-F1 by about 20pp/from under 0.50 to above 0.70 | Sections 9/10 and approved mapping | Experiment/run IDs or a small ablation table using the same evaluation population.                                                                      |
+| Company-size macro-F1 0.934 vs 0.790 and provider range 0.184-0.913       | Section 8                          | Group definitions, support per group, uncertainty and a redacted result table. Treat “cheaper software” as a hypothesis unless tested.                  |
+| Benefits in the tens of millions and funding/resource outcomes            | Sections 2, 9 and 11               | Employer-verified benefit methodology/date and a caveat that estimates/recording are incomplete. Avoid “at least” unless the lower bound is defensible. |
+| Multiple teams/wide adoption and daily production use                     | Sections 7.6 and 11                | Redacted usage/run evidence or employer verification.                                                                                                   |
+
+## Maintenance and continuity evidence still needed
+
+S15 includes maintaining the services/platforms, and one distinction descriptor asks about continuity risks. The report is much stronger on development and planned monitoring than on maintenance already performed.
+
+If true, replace lower-value wording with one concrete operational example covering:
+
+- who owns failed daily jobs and how failures are alerted/triaged;
+- dependency/taxonomy update and retraining responsibility;
+- rollback/model-version procedure;
+- how issues, runbooks and user guidance are kept current;
+- a real incident, schema/taxonomy change or user-reported error that was diagnosed and fixed.
+
+The recommendations describe future CI, drift and scheduling, so they must not be presented as controls already implemented.
+
+## Report wording and editorial points
+
+### Minor corrections already applied directly to `Report mod`
+
+- Corrected “fthe”, “hyperparameters tuning”, spacing and several hyphenation/grammar errors.
+- Reworded Section 3.5 so the software-engineer collaboration explicitly covers documentation standards as well as unit, integration and system testing.
+- Corrected the B24.1 internal heading link.
+- Restored the missing `Concept` and `Precision` headings in B40's full per-class table.
+- Corrected Appendix D from 25 to 26 AM1 KSBs and added the formally required S7 row.
+
+### Changes still recommended, subject to the word budget and factual confirmation
+
+1. **Continuity:** add the concise “Without GitLab...” sentence proposed in the distinction table above, exchanging it for less valuable wording.
+2. **Robustness wording:** describe the listed tests as behavioural and edge-case checks unless wider sensitivity analysis is supported by the submitted evidence.
+3. **Business value:** change “limiting compliance yield HMRC can bring in by at least tens of millions” to a formulation tied to recorded estimated benefits, because Section 11 says the spreadsheet is incomplete.
+4. **Bias interpretation:** present the cheaper-software explanation explicitly as a plausible hypothesis requiring investigation, not the explanation for the observed gap.
+5. **Model security:** “SEC-BERT is not created by a well-established provider” is too absolute. Prefer: “Use of the third-party SEC-BERT checkpoint would require dependency provenance, maintenance and security review; the available support path was weaker than for the scikit-learn stack.”
+6. **Optimality:** where possible say “best against the business-weighted decision criteria” rather than simply “optimal”.
+7. **Production metric provenance:** distinguish public Companies House evaluation from internal HMRC production evaluation every time figures change population.
+
+## References and export checks
+
+- The reference list is substantially improved and every author-date citation appears to have a corresponding entry.
+- Perform one final Cite Them Right pass for punctuation, italicisation, author-list rules, DOI/URL preference and access dates. Li et al. (2018) currently has no URL/access date while most comparable online sources do.
+- Prefer publisher/DOI or official project pages over ResearchGate copies where available.
+- Confirm the legal naming of UK GDPR in the reference entry; the retained UK regime should not be described only as the original EU Regulation without context.
+- Obsidian wiki links and embeds may not survive a Word/PDF conversion. Export the final file and manually click/check every body-to-appendix reference, especially headings containing code formatting such as `min_df` and notebook filenames.
+- Confirm the three SVG embeds B35-B37 render in the actual submission format; the PNG links use a different Markdown form.
+- Add a title page with the approved title, apprentice, employer, standard/version, submission date and declared body word count if the EPAO template expects one.
+- Check QA/BCS rules for acknowledging generative-AI assistance and comply with them. Employer verification cannot substitute for authorship requirements.
+
+## Ordered action list
+
+1. Obtain and complete employer verification in Appendix E.
+2. Add redacted evidence for production KPIs, internal performance/bias results and benefit claims.
+3. Add one concrete maintenance/continuity example and the risks if traceability tools are not used.
+4. Make the narrow wording changes above without exceeding 5,500 words; verify the count in the final exported format.
+5. Render the final submission and check figures, tables, cross-references, page breaks and Appendix E.
+6. Rehearse the limitations, evidence provenance and distinction examples for questioning. A candid account of what was measured, what remains uncertain and how risks are controlled is stronger Level 7 evidence than claiming the evaluation was flawless.
