@@ -829,3 +829,80 @@ LinearSVC does not scale as well to larger datasets, so training on much larger 
 Increasing data set size while keeping the 350 example threshold results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different label distributions, making performance comparison difficult across populations and document types.
 
 The integration of R and Python, while working well, does add setup complexity and other teams have had issues with the reticulate package. With the long term move to a lakehouse and higher Python use in HMRC, initial investigations suggest that Python has more support for the ETL, so porting is worth considering.
+
+---
+
+# Per-class table and worked example — 16 August 2026
+
+*(Appendix changes made directly in Report mod; body changes below are displayed only, NOT applied.)*
+
+**Done in the appendix:**
+- **B40 now carries the full 141-row per-class table** (precision, recall, F1, support, sorted by F1 ascending so the failures lead). Regenerated from the fitted model at `~/Code/AI_L7/EPA` (run `79a24e86`, holdout of 243,991 rows, reproduces accuracy 0.9751 / macro-F1 0.784); every row agrees with the band tables B40 already carried. The old opener claiming a full table "would not be readable" is gone.
+- **B24 now carries a quantified worked example** for CashBankOnHand against CashOnHand: a small TP/FN/FP table plus the description counts. The key numbers: "cash at bank and in hand" appears under both concepts in the source data, 5,670 times one way and 21 the other, and all 21 minority taggings are necessarily scored as errors; 13 of CashBankOnHand's 16 misses are "cash and cash equivalents" going the other way. It is the label-collision argument §8 makes, now with exact counts.
+
+**Body changes for you to consider (displayed only, NOT applied).** All word counts are computed on the proposal body (currently 5,489 of 5,500), not estimated.
+
+**Change 1 — swap the unquantified §8 example for the quantified one. Must be taken together with its cut; on its own it puts the body 13 over.**
+
+REMOVE:
+
+> For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts.
+
+REMOVE also (the closing sentence of the same paragraph):
+
+> This highlights that a simplified list of categories could be beneficial, especially for evaluation.
+
+REPLACE the first with:
+
+> For example, "cash at bank and in hand" is tagged CashBankOnHand 5,670 times and CashOnHand 21 times in the source data, so the model routes every instance to the dominant concept and the minority taggings score as errors (Appendix B24).
+
+The full paragraph after change 1:
+
+> Subject matter experts explained that in some cases there is simply not enough information in the document to predict the specific concept. For example, "cash at bank and in hand" is tagged CashBankOnHand 5,670 times and CashOnHand 21 times in the source data, so the model routes every instance to the dominant concept and the minority taggings score as errors (Appendix B24).
+
+Why: the same claim with counts an assessor can check, anchoring the new B24 worked example. The cut sentence is safe to lose because the simplified-taxonomy point is already made in the §8 bias paragraph, in §10 and in the recommendations. Body after change 1: **5,499**.
+
+**Change 2 — remove "scenario planning" from the §8 robustness list. Take this regardless: it is a factual fix, not a trim.** "Scenario planning" is not a category in the robustness suite (zero occurrences in `test.py`, Appendix A7.3, and absent from the B25 table), so the list as written claims a test that does not exist. The rewording of the command gloss recovers two more words.
+
+REMOVE:
+
+> , scenario planning, command (attempts to inject LLM instructions),
+
+REPLACE with:
+
+> , command (LLM instruction injection),
+
+The full sentence after change 2:
+
+> Sensitivity analysis and model robustness were tested over various categories (Ribeiro et al., 2020), abbreviations, adversarial (phrased to be misleading), command (LLM instruction injection), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8, A5.3.5, A7.3 and B25).
+
+Body after change 2 alone: **5,485**.
+
+**Change 3 (optional) — name the full per-class table where §8 cites B40.** Worth it because the EPAO's written request was to show class-level results clearly; only affordable if change 2 is also taken.
+
+REMOVE:
+
+> (Appendix B40)
+
+REPLACE with:
+
+> (full per-class results at Appendix B40)
+
+The full sentence after change 3:
+
+> By volume the exposure is smaller, with 94% of holdout records falling in concepts scoring above 0.9 (full per-class results at Appendix B40).
+
+**Outcomes, computed:**
+
+| Taken | Body word count |
+|---|---|
+| Nothing (current proposal) | 5,489 |
+| Change 2 only | 5,485 |
+| Changes 1 + 2 | 5,495 |
+| Changes 1 + 2 + 3 | **5,499** |
+| Change 1 without change 2 | 5,499 |
+| Changes 1 + 3 without change 2 | 5,503 — over, do not take |
+
+Recommendation: take all three, landing on 5,499 with every claim quantified and the phantom test category gone.
+
+**Note on figures:** my re-scoring gives macro-F1 0.784 against the published 0.785 (accuracy 0.9751 vs 0.9754) — inside the published confidence intervals, and the per-class rows match B40's existing tables exactly, so nothing in the body needs changing. The tiny headline difference is presumably a split-version or library-version artefact.

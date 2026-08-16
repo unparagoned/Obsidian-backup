@@ -1,6 +1,3 @@
-
-
-
 # 1. Introduction and background.
 
 HMRC receives millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for departmental/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies (XBRL International, no date). 
@@ -98,7 +95,7 @@ The XBRL concept (label) is a categorical nominal label from a fixed taxonomy, a
 
 The descriptions and concepts are many-to-many (Appendix A2.2.7 and A2.2.8), with cosine similarity analysis identifying situations where some descriptions like "Taxation and social security costs" were used for similar concepts, but other descriptions such as "total" were used for dissimilar concepts. It also highlighted that taxonomy can be specified beyond what could be predicted from the human readable data, which creates a real upper limit on any model. 
 
-Initially I did some classifier-independent analysis, which showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987) suggesting it is able to capture meaning better than plain TFIDF (0.41) (Appendix A2.5 and B16). But this might not carry over to categorisation performance. 
+Initially I did some classifier-independent analysis, which showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987) suggesting it is able to capture meaning better than plain TF-IDF (0.41) (Appendix A2.5 and B16). But this might not carry over to categorisation performance. 
 
 ## 5.3 Preprocessing
 
@@ -129,7 +126,7 @@ While the data was tagged, often the specificity was beyond what was required, s
 
 Traditional machine learning models can perform well with classifying short text, since the feature spaces tend to be linearly separable. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
 
-There were two main methods used to embed the descriptions, sparse vectorisation (TF, TFIDF over character and word n-grams) and dense vector embeddings (MPNet, E5) (Sparck Jones, 1972; Cavnar and Trenkle, 1994; Song et al., 2020; Wang et al., 2022). TFIDF  captures domain-specific terminology and phrasing well, and works with a variety of models and is fast. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning, so should recognise phrases with similar meaning even if the words are different, especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
+There were two main methods used to embed the descriptions, sparse vectorisation (TF, TF-IDF over character and word n-grams) and dense vector embeddings (MPNet, E5) (Sparck Jones, 1972; Cavnar and Trenkle, 1994; Song et al., 2020; Wang et al., 2022). TF-IDF  captures domain-specific terminology and phrasing well, and works with a variety of models and is fast. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning, so should recognise phrases with similar meaning even if the words are different, especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
 
 A deep neural network has the advantage learning patterns beyond a fixed algorithm used in traditional machine learning. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
 
@@ -151,11 +148,11 @@ I plotted hyperparameters against scores to help narrow down the ranges to use f
 
 After fine tuning and training on the full train dataset, LinearSVC beat out the alternatives at a 5% significance level (Appendix A3.4.3 and A3.4.4). 
 
-I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to use a simpler TFIDF word-only embedding, which is faster, easier to maintain and easier to interpret. 
+I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TF-IDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to use a simpler TF-IDF word-only embedding, which is faster, easier to maintain and easier to interpret. 
 
 LinearSVC did not fully converge but there was no significant difference in score for max_iter from 5,000 to 20,000, so I selected max_iter of 10,000, since 20,000 was slower for no real gain (Appendix A3.6).
 
-The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10,000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
+The final pipeline used TF-IDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10,000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
@@ -216,53 +213,51 @@ Governance is built into the design. Documentation and guidance explain whether 
 
 # 8. Results.
 
-LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 (Appendix A3.7.3 and B38). The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable machine learning model. 
+LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 (Appendix A3.7.3 and B38). The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable model. 
 
 Residual analysis identified which classes performed poorly and summaries were created for analysts (Appendix A3.10). Per-class results were varied, with a median per-class F1 of 0.966, but 27 of the 141 modelled concepts scored below 0.5 and eight scored zero, pulling down the macro-F1 score. By volume the exposure is smaller, with 94% of holdout records falling in concepts scoring above 0.9 (Appendix B40). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples (Appendix B24), and the dashboard let them check a concept's reliability before using it.
 
-Subject matter experts also provided input explaining that in some cases there simply is not enough information at all in the document to predict the specific concept used. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This highlights that a simplified list of categories could be beneficial, especially for evaluation. 
+Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts CashBankOnHand 5,670 times and CashOnHand 21 times, so the minority tagging would show as errors (Appendix B24).
 
-Sensitivity analysis and model robustness were tested over various categories, abbreviations, adversarial (phrased to be misleading), scenario planning, command (attempts to inject LLM instructions), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8, A5.3.5 and B25). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was surprising since I would have expected the domain-specific training and theoretically better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by computers, rather than people typing every description. 
+Sensitivity analysis and model robustness were tested over various categories, abbreviations, adversarial (phrased to be misleading), command (attempts to inject LLM instructions), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8, A5.3.5 and B25). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was surprising since I would have expected the domain-specific training and theoretically better semantic understanding would have SEC-BERT doing better overall. Also the areas where LinearSVC did worse like typos and variations would be rare over real data, since accountancy documents are primarily generated by software. 
 
-Bias was investigated both against size of companies and software provider (Mehrabi et al., 2021). Large companies had a macro-F1 score of 0.934 vs 0.790 for small companies, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. On residual analysis while there were some real misclassifications often the misclassifications were for very similar classes and sometimes there was not enough information to differentiate between them. This suggests that the specificity of the model and evaluation is too fine-grained. Different software providers do tag things differently, but it is a training proxy, and such issues would not apply to untagged items, or if we had human labelled classes this issue would not show up. But it is still a real issue that needs to be resolved, working with providers to make tagging more consistent, especially since tagged concepts would be considered more reliable than a machine learning category. 
+Bias was investigated both against size of companies and software provider (Mehrabi et al., 2021). Large companies had a macro-F1 score of 0.934 vs 0.790 for small companies, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. Residual analysis while there were some real misclassifications, often they were between very similar classes without enough information to differentiate between them. This suggests that the specificity of the evaluation was too fine-grained. Different software providers do tag things differently, but it is a training proxy, and such issues would not apply to untagged items, or if we had human labelled classes this issue would not show up. But it is still a real issue that needs to be resolved, working with providers to make tagging more consistent, especially since tagged concepts would be considered more reliable than a machine learning category. 
 
 # 9. Discussion and conclusions/recommendations.
 
-An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, machine learning categories, improved architectures and database, with each step evaluated for feasibility, benefits, risk, proving the approach and providing business value. Regular meetings and a workshop helped get feedback such as the issues dealing with raw descriptions, and validate business understanding and planned approaches. The customer requirements at the beginning would not have foreseen the way the project developed, highlighting the benefit of an agile approach as opposed to a more fixed waterfall approach. The iterative approach improved macro-F1 from under 0.50 to 0.785 on the evaluation dataset and adding additional features: table name and heading, improving macro-F1 by 9.8pp on the production dataset. 
+An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, machine learning categories, improved architectures and database, with each step evaluated for feasibility, benefits, risk, proving the approach and providing business value. Regular meetings and a workshop helped validate business understanding and get feedback such as the issues dealing with raw descriptions. The iterative approach improved macro-F1 from under 0.50 to 0.785 on the evaluation dataset and adding additional features: table name and heading, improving macro-F1 by 9.8pp on the production dataset. 
 
 While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using methods like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score. 
 
-The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example, the phrase "cost of" appears near the bottom of the positive coefficients for CostSales (0.099), but carries a large negative coefficient for TurnoverRevenue (-0.463), so it can act by suppressing competing classes rather than only supporting the predicted one, but LIME and SHAP can show that more directly (Appendix A3.9.3, B23 and B39). 
+The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable (Appendix A3.9.2, A3.9.3, B23, B28 and B39). 
 
-Since SEC-BERT is not created by a well-established provider, even if it was the winner of the decision matrix, security aspects may prevent use (Sculley et al., 2015; National Cyber Security Centre, 2023). If it was materially superior then it might be that we would need to invest in training our own BERT based model. 
+Since SEC-BERT is not created by a well-established provider, even if it was the winner of the decision matrix, security aspects may prevent use. If it was materially superior then it might be that we would need to invest in training our own BERT based model. 
 
-The short domain-specific descriptions lend themselves well to TF-IDF (1-3 n-grams) with domain-specific vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, allowing inner products to be done very efficiently (Joachims, 1998). This allowed me to test and develop the model using existing infrastructure without impacting other users of the platform. 
+TF-IDF creates high dimensional sparse matrices, that capture the short domain-specific descriptions, that work well with LinearSVC, especially with the sparse coefficients from L1 regularisation and dual false (Joachims, 1998). This allowed me develop the model using existing infrastructure without impacting other users of the platform. 
 
-I worked autonomously on the modelling itself, where I could focus on the coding myself, but sometimes on the analysis side I would use Teams to get input from DevOps for system advice and tax professionals for accountancy related questions.
-My communication approach evolved based on how stakeholders reacted to early explanations, and methods were tailored for the use case and audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. I communicated residual analysis through confusion matrices with examples of errors, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary. I used a simple example to illustrate the difference between weighted and macro scores rather than going into depth on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
+I worked autonomously where deep focus was required, such as on the coding and modelling, and I would collaboratively with tax professionals for taxonomy/accountancy advice.
 
-I got repeated questions about the machine learning, so I created an interactive dashboard where users can test the model and also see details on how well it performs with certain concepts, where it would be good, where it would make mistakes and the kind of mistake they should expect. The dashboard was more user friendly than just having a large dataset they would have to filter and process manually. The dashboard showed the top-5, but some of those were very poor matches, confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding of how the machine learning worked improved, their use increased.
+My communication approach evolved based on how stakeholders reacted to early explanations, and methods were tailored for the audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. I used and a graphed SVM 2D decision boundary; I communicated residual analysis through confusion matrices with examples of errors; and a simple example to illustrate the difference between weighted and macro scores rather than relying on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
 
-With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, funding, blockers, timeframes, and the benefits of more people working on the project, which resulted in additional people to help with development. I created memos with a cost-benefit analysis highlighting both improved timeliness and also extracting new untagged data, resulting in additional funding for infrastructure. 
+I got repeated questions about the machine learning, so I created an interactive dashboard where users can test the model and see per concept performance, including where it would be reliable and where it would perform poorly. The dashboard showed the top-5, but some of those were very poor matches, confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding of how the machine learning worked improved, their use increased. User acceptance testing highlighted that users might prefer numeric primary keys rather than natural keys for join performance reasons.
 
-User acceptance testing highlighted that users might prefer numeric primary keys rather than natural keys for join performance reasons. They also suggested structuring data in a way they are more familiar with. 
+With managers I focused on business level aspects, benefits, outcomes, funding, blockers, and timeframes. In discussions and memos did cost-benefit analysis covering better timeliness and data coverage analysis resulting in addition people to help out on the development and getting funding for infrastructure.  
 
-The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to set up the tool. This means many analysts are now running the tool, allowing me to focus on development. But further developments resulted in a centralised approach extracting the full population and storing the data in an Oracle database streamlining the process with users just needing to do a database query rather than running the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. 
+The project readme utilises markdown to provide clear headings, instructions, links, and code blocks, letting multiple teams to use the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. Further developments resulted in a centralised approach extracting the full population to an Oracle database, so analysts just need to do a database query.
 
-I discovered Optuna while working with neural networks, and found that its built-in visualisations and ability to automatically tune the hyperparameters could have replaced a lot of the manual work and code used with scikit-learn. So going forwards I would use Optuna with scikit-learn and more widely in the future. Initial versions also had manual code to store information and results from different runs, before I found MLflow. So going forwards I plan to do wider research on existing packages and functions to solve a problem rather than just jumping straight into coding a solution.
+I discovered Optuna while working with neural networks, and found that its built-in visualisations and ability to automatically tune the hyperparameters could have replaced a lot of the manual work and code used with scikit-learn. So going forwards I plan to do wider research on existing packages and functions to solve a problem rather than just jumping straight into coding my own solution.
 
 Recommendations:
 - Increase coverage to 100%, to be able to replace existing systems.
-- Enhance system robustness, more robust scheduling system, move to a fully supported Oracle server.
-- Data contracts for data sources and other systems that will use this data.
+- Enhance system robustness, tests moved to a CI pipeline, more reliable scheduling system, move to a fully supported Oracle server.
+- Data contracts for data sources and downstream.
 - Monitor drift (Gama et al., 2014).
 	- Monitoring drift of inputs, check if there are new taxonomies. 
 	- Drift on outputs to be detected for both accuracy and macro-F1, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
 	- Automated drift can only check tagged items, there should also be occasional manual check of untagged items. 
-- Standard structure for machine learning communications, should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details (Mitchell et al., 2019).
-- Moving tests to a CI pipeline will add more assurance and reliability. 
+- Standard structure for machine learning communications, should have the headline figures and results, with a section that explains any technical terms with illustrations and examples, and an appendix with the technical details.
 - Human evaluation of tagging.
-- Establish the performance ceiling beforehand so the appropriate time and effort can be used to improve pre-processing data and improving the model. The same description can be associated with different concepts, so there is a limit to even the best model. Looking at the most common concept per description would allow me to calculate a hard upper bound of performance. 
+- Establish the performance ceiling beforehand so the appropriate time and effort can be budgeted. The same description can be associated with different concepts, so there is a limit. Looking at the most common concept per description would allow me to calculate a hard upper bound of performance. 
 - Consider implementing a simplified taxonomy of concepts. Grouping together similar concepts would be more user friendly for analysts.
 - Record model version on the outputs/database, with the version registered in MLflow, so predictions can be traced back to the exact model and training dataset.
 
@@ -278,7 +273,7 @@ The biggest factors were actually pre-processing, which increased macro-F1 by 20
 
 Hubble helped us meet our quality standards. The machine learning categories reduced the manual regex-style work previously done, improved consistency and reliability of the analysis. 
 
-Hubble is widely used by multiple teams, with data being integrated into various dashboards and across multiple tax heads.
+Hubble is widely used by multiple teams, with data being integrated into various dashboards.
 
 With untagged data now being extracted and classified, we have been able to perform data analysis previously not possible, which has been fed into improving departmental/government policy. 
 
@@ -286,15 +281,15 @@ The data has been used to better identify companies to investigate, and the esti
 
 # 12. Caveats and limitations.
 
-The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different from the tagged data. For example, an item might have been left untagged since there are not any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged, but it would require a large number of tax-trained experts spending a long time to label the data, which is not feasible. But the experts will be feeding into a manual evaluation stage. Further evaluation between tagged and untagged descriptions would be useful going forwards.
+The model and evaluation were all based on tagged data, but the main use case is on untagged data, and there is a risk that the untagged data could be different from the tagged data. For example, an item might have been left untagged since there may not be a relevant taxonomy concept. Ideally untagged data would be human tagged, but it would require too much subject matter expert time, which is not feasible, but they will  be feeding into a manual evaluation stage. Further evaluation between tagged and untagged descriptions would be useful.
 
 Traditional machine learning model comparisons used 5-fold cross validation, which was a reasonable choice for the initial filtering due to computational cost, but overlapping training data sets can understate variance. Later stages should have used something stronger like 5x2 CV, which uses disjoint training sets within each replication, which limits Type I error (Dietterich, 1998).
 
-LinearSVC has very good train times on smaller dataset sizes but does not scale as well on larger datasets, so it is not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in macro-F1, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
+LinearSVC has not scaled well on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in macro-F1, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
 
 Increasing data set size while keeping the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
 
-The integration of R and Python, while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest that Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
+The integration of R and Python, while working well, does add more complexity to setting up the project and other teams have had issues with the `reticulate` package. With the long term move to a lakehouse, initial investigations suggest that Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
 
 
 
@@ -354,10 +349,6 @@ Mehrabi, N., et al. (2021) 'A survey on bias and fairness in machine learning', 
 
 Microsoft (2023) *Microsoft-TDSP: repository for Microsoft Team Data Science Process*. Available at: https://github.com/Azure/Microsoft-TDSP (Accessed: 14 August 2026)
 
-Mitchell, M., et al. (2019) 'Model cards for model reporting', *Proceedings of the Conference on Fairness, Accountability, and Transparency*. Atlanta, 29-31 January. pp. 220-229. Available at: https://doi.org/10.1145/3287560.3287596 (Accessed: 14 August 2026)
-
-National Cyber Security Centre (2023) *Guidelines for secure AI system development*. Available at: https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development (Accessed: 14 August 2026)
-
 Pedregosa, F., et al. (2011) 'Scikit-learn: machine learning in Python', *Journal of Machine Learning Research*, 12, pp. 2825-2830. Available at: https://www.researchgate.net/publication/51969319_Scikit-learn_Machine_Learning_in_Python (Accessed: 14 August 2026)
 
 *Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 on the protection of natural persons with regard to the processing of personal data (UK GDPR)*. Available at: https://www.legislation.gov.uk/eur/2016/679/contents (Accessed: 15 August 2026)
@@ -371,8 +362,6 @@ Ribeiro, M., et al. (2020) 'Beyond accuracy: behavioral testing of NLP models wi
 Rousseeuw, P. (1987) 'Silhouettes: a graphical aid to the interpretation and validation of cluster analysis', *Journal of Computational and Applied Mathematics*, 20, pp. 53-65. Available at: https://doi.org/10.1016/0377-0427(87)90125-7 (Accessed: 14 August 2026)
 
 Rudin, C. (2019) 'Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead', *Nature Machine Intelligence*, 1(5), pp. 206-215. Available at: https://doi.org/10.1038/s42256-019-0048-x (Accessed: 14 August 2026)
-
-Sculley, D., et al. (2015) 'Hidden technical debt in machine learning systems', *Advances in Neural Information Processing Systems 28*. Montreal, 7-12 December. pp. 2503-2511.
 
 Sebastiani, F. (2002) 'Machine learning in automated text categorization', *ACM Computing Surveys*, 34(1), pp. 1-47. Available at: https://doi.org/10.1145/505282.505283 (Accessed: 14 August 2026)
 
@@ -9485,6 +9474,16 @@ SHAP values for the three competing classes. Source A3.9.3; supports section 8 a
 
 One-vs-rest confusion matrices used in the residual analysis and in the explanations given to analysts. `CashOnHand` and `CashBankOnHand` show the characteristic failure: "cash at bank and in hand" and "cash and cash equivalents" are assigned to whichever of the two near-identical concepts dominates the training data. Eight further matrices are produced by A3.10. Source A3.10; supports section 8.
 
+**Worked example: CashBankOnHand against CashOnHand.** Counts are over the full holdout and show the collision directly.
+
+| | CashBankOnHand (support 7,791) | CashOnHand (support 54) |
+|---|---|---|
+| Correctly classified | 7,775 | 33 |
+| Missed (false negatives) | 16 | 21 |
+| Wrongly attracted (false positives) | 21 | 13 |
+
+The most common correct descriptions for `CashBankOnHand` are "cash at bank and in hand" (5,670), "cash at bank" (1,796), "cash at bank and on hand" (170) and "cash in hand" (115); for `CashOnHand` they are "cash and cash equivalents" (23) and "cash on hand" (10). The errors are the same wordings on the other side of the boundary: all 21 of the descriptions `CashOnHand` misses are "cash at bank and in hand", predicted as `CashBankOnHand`, while 13 of the 16 `CashBankOnHand` misses are "cash and cash equivalents", predicted as `CashOnHand`. So the identical description appears under both concepts in the source data, tagged one way 5,670 times and the other way 21 times, and the model necessarily routes every instance to the dominant concept. No classifier could separate these from the description alone, which is why the errors are a property of the data rather than the model, and why a simplified concept set would merge such pairs.
+
 ### B25. Robustness testing, LinearSVC against SEC-BERT
 
 By perturbation category:
@@ -9701,7 +9700,7 @@ TurnoverRevenue draws on far more features (50 positive, 41 negative) than the t
 
 ### B40. Per-class performance and residual analysis
 
-A full per-class table would not be readable, so this appendix reports the distribution, the classes that fail, the band needing analyst judgement, and the diagnosis for each failure. Figures are from `classification_report` over the full holdout of 243,991 rows, covering the 141 concepts the model is trained to predict.
+This appendix reports the distribution, the classes that fail, the band needing analyst judgement, the diagnosis for each failure, and the full per-class results for all 141 concepts. Figures are from `classification_report` over the full holdout of 243,991 rows, covering the 141 concepts the model is trained to predict.
 
 **Distribution of per-class F1.** The macro-F1 of 0.785 is a mean across classes, and the mean sits far below the median:
 
@@ -9763,6 +9762,152 @@ The precision–recall asymmetry is the pattern to note. `TaxationSocialSecurity
 - **IntangibleAssetsGrossCost** — the failing instances reduce to "hubble_date and hubble_date". Two dates joined by "and" escaped the date canonicalisation, and a description containing only dates carries nothing to classify on.
 
 **What this means for analyst use.** Failures concentrate between semantically adjacent concepts where the description alone does not determine which applies, and this is a property of the data rather than a defect in the model. Heading and table name recovered some of it, but not all. Analysts should check a concept's performance in the dashboard before relying on the ML category for it, and treat the zero-scoring and 0.5–0.7 concepts above as requiring the underlying description to be read. It also supports the case for a simplified concept set, since several of these pairs would merge.
+
+**Full per-class results.** Precision, recall, F1 and holdout support for all 141 modelled concepts, sorted by F1 ascending so the concepts needing analyst caution appear first.
+
+| Concept                                                                        | Precision | Recall | F1    | Support |
+| ------------------------------------------------------------------------------ | --------- | ------ | ----- | ------- |
+| AccruedLiabilities                                                             | 0.000     | 0.000  | 0.000 | 292     |
+| CalledUpShareCapitalNotPaid                                                    | 0.000     | 0.000  | 0.000 | 142     |
+| TotalAdditionsIncludingFromBusinessCombinationsIntangibleAssets                | 0.000     | 0.000  | 0.000 | 73      |
+| Investments                                                                    | 0.000     | 0.000  | 0.000 | 50      |
+| OtherOperatingIncome                                                           | 0.000     | 0.000  | 0.000 | 45      |
+| DisposalsIntangibleAssets                                                      | 0.000     | 0.000  | 0.000 | 44      |
+| DisposalsDecreaseInAmortisationImpairmentIntangibleAssets                      | 0.000     | 0.000  | 0.000 | 40      |
+| IntangibleAssetsGrossCost                                                      | 0.000     | 0.000  | 0.000 | 35      |
+| AdditionsOtherThanThroughBusinessCombinationsPropertyPlantEquipment            | 1.000     | 0.001  | 0.003 | 751     |
+| InvestmentPropertyFairValueModel                                               | 1.000     | 0.014  | 0.029 | 69      |
+| AdditionsOtherThanThroughBusinessCombinationsInvestmentPropertyFairValueModel  | 1.000     | 0.016  | 0.031 | 63      |
+| StartDateForPeriodCoveredByReport                                              | 0.333     | 0.032  | 0.058 | 63      |
+| AmountsOwedByDirectors                                                         | 0.714     | 0.033  | 0.063 | 151     |
+| OtherInvestmentsOtherThanLoans                                                 | 1.000     | 0.055  | 0.104 | 73      |
+| RecoverableValue-addedTax                                                      | 0.812     | 0.094  | 0.168 | 139     |
+| CurrentAssetInvestments                                                        | 0.955     | 0.095  | 0.174 | 220     |
+| PrepaymentsAccruedIncome                                                       | 0.976     | 0.111  | 0.200 | 360     |
+| DepreciationRateUsedForPropertyPlantEquipment                                  | 0.452     | 0.175  | 0.252 | 80      |
+| AccruedLiabilitiesDeferredIncome                                               | 0.838     | 0.167  | 0.279 | 987     |
+| IncreaseFromAmortisationChargeForYearIntangibleAssets                          | 1.000     | 0.185  | 0.312 | 238     |
+| UsefulLifePropertyPlantEquipmentYears                                          | 0.354     | 0.366  | 0.360 | 93      |
+| FutureMinimumLeasePaymentsUnderNon-cancellableOperatingLeases                  | 0.368     | 0.390  | 0.379 | 154     |
+| PropertyPlantEquipmentGrossCost                                                | 0.241     | 0.988  | 0.388 | 83      |
+| OtherProvisionsBalanceSheetSubtotal                                            | 1.000     | 0.270  | 0.426 | 37      |
+| AmountsOwedToRelatedParties                                                    | 0.810     | 0.304  | 0.442 | 56      |
+| LoansOwedByRelatedParties                                                      | 0.471     | 0.421  | 0.444 | 38      |
+| LoansOwedToRelatedParties                                                      | 0.463     | 0.514  | 0.487 | 37      |
+| AmountsOwedToGroupUndertakingsParticipatingInterests                           | 0.529     | 0.500  | 0.514 | 54      |
+| TaxationSocialSecurityPayable                                                  | 0.400     | 0.960  | 0.565 | 500     |
+| FurtherItemCreditorsComponentTotalCreditors                                    | 0.530     | 0.660  | 0.588 | 159     |
+| FurtherItemDebtorsComponentTotalDebtors                                        | 0.565     | 0.619  | 0.591 | 63      |
+| DisposalsDecreaseInDepreciationImpairmentPropertyPlantEquipment                | 0.880     | 0.469  | 0.612 | 471     |
+| OtherTaxationSocialSecurityPayable                                             | 0.965     | 0.456  | 0.619 | 1,252   |
+| OtherTaxationPayable                                                           | 0.909     | 0.471  | 0.620 | 85      |
+| CashOnHand                                                                     | 0.717     | 0.611  | 0.660 | 54      |
+| TotalAdditionsIncludingFromBusinessCombinationsPropertyPlantEquipment          | 0.507     | 1.000  | 0.673 | 969     |
+| OtherOperatingIncomeFormat1                                                    | 0.554     | 0.982  | 0.709 | 57      |
+| NumberSharesIssuedFullyPaid                                                    | 0.594     | 0.981  | 0.740 | 216     |
+| AmountsOwedToGroupUndertakings                                                 | 0.627     | 0.970  | 0.762 | 66      |
+| DisposalsPropertyPlantEquipment                                                | 0.617     | 1.000  | 0.763 | 529     |
+| AmountsOwedByRelatedParties                                                    | 0.955     | 0.689  | 0.800 | 61      |
+| AccruedLiabilitiesNotExpressedWithinCreditorsSubtotal                          | 0.669     | 1.000  | 0.801 | 2,200   |
+| AccumulatedAmortisationImpairmentIntangibleAssets                              | 1.000     | 0.692  | 0.818 | 65      |
+| AdvancesCreditsDirectors                                                       | 0.913     | 0.750  | 0.824 | 56      |
+| AmountsOwedByGroupUndertakingsParticipatingInterests                           | 0.731     | 0.980  | 0.838 | 50      |
+| InvestmentsInSubsidiaries                                                      | 0.970     | 0.739  | 0.839 | 88      |
+| FinanceLeasePaymentsOwingMinimumGross                                          | 0.745     | 0.960  | 0.839 | 299     |
+| Value-addedTaxPayable                                                          | 0.745     | 0.997  | 0.853 | 374     |
+| CorporationTaxRecoverable                                                      | 0.963     | 0.800  | 0.874 | 65      |
+| AmountsOwedToDirectors                                                         | 0.784     | 0.998  | 0.878 | 617     |
+| NumberSharesAllotted                                                           | 0.998     | 0.786  | 0.880 | 641     |
+| DescriptionSpecificAdvanceOrCreditItsConditionsIndicativeInterestRateDirectors | 0.869     | 0.897  | 0.883 | 185     |
+| InvestmentsFixedAssets                                                         | 0.799     | 0.991  | 0.885 | 811     |
+| TotalIncreaseDecreaseFromRevaluationsPropertyPlantEquipment                    | 0.812     | 1.000  | 0.896 | 108     |
+| PrepaymentsAccruedIncomeNotExpressedWithinCurrentAssetSubtotal                 | 0.822     | 1.000  | 0.902 | 1,440   |
+| AccountsType                                                                   | 0.827     | 0.993  | 0.903 | 140     |
+| Prepayments                                                                    | 0.883     | 0.935  | 0.908 | 185     |
+| OtherInventories                                                               | 0.913     | 0.932  | 0.922 | 337     |
+| OtherRemainingBorrowings                                                       | 0.932     | 0.916  | 0.924 | 238     |
+| CalledUpShareCapitalNotPaidNotExpressedAsCurrentAsset                          | 0.868     | 1.000  | 0.929 | 931     |
+| WorkInProgress                                                                 | 0.884     | 0.991  | 0.934 | 115     |
+| BankOverdrafts                                                                 | 0.902     | 0.974  | 0.937 | 114     |
+| RawMaterials                                                                   | 0.982     | 0.903  | 0.941 | 62      |
+| DeferredTaxLiabilities                                                         | 0.935     | 0.956  | 0.945 | 45      |
+| NetDeferredTaxLiabilityAsset                                                   | 0.957     | 0.936  | 0.946 | 47      |
+| DescriptionAmortisationMethodForIntangibleAssets                               | 0.950     | 0.974  | 0.962 | 78      |
+| OtherIncreaseDecreaseInDepreciationImpairmentPropertyPlantEquipment            | 0.930     | 1.000  | 0.964 | 66      |
+| IncreaseFromDepreciationChargeForYearPropertyPlantEquipment                    | 0.932     | 1.000  | 0.964 | 2,645   |
+| TotalBorrowings                                                                | 0.984     | 0.946  | 0.965 | 332     |
+| ReportTitle                                                                    | 0.998     | 0.935  | 0.965 | 447     |
+| FinishedGoods                                                                  | 0.986     | 0.947  | 0.966 | 76      |
+| BalanceSheetDate                                                               | 0.956     | 1.000  | 0.977 | 868     |
+| OtherCreditors                                                                 | 0.986     | 0.971  | 0.978 | 1,399   |
+| AmountsOwedToAssociatesJointVenturesParticipatingInterests                     | 1.000     | 0.959  | 0.979 | 49      |
+| OtherDebtors                                                                   | 0.973     | 0.986  | 0.980 | 1,021   |
+| DividendsPaid                                                                  | 0.987     | 0.975  | 0.981 | 161     |
+| DescriptionDepreciationMethodForPropertyPlantEquipment                         | 0.978     | 0.985  | 0.981 | 4,821   |
+| ComprehensiveIncomeExpense                                                     | 0.967     | 0.997  | 0.982 | 327     |
+| TotalInventories                                                               | 0.990     | 0.975  | 0.983 | 2,315   |
+| BankBorrowingsOverdrafts                                                       | 0.986     | 0.980  | 0.983 | 1,329   |
+| CharityFunds                                                                   | 0.976     | 0.992  | 0.984 | 121     |
+| AdministrationSupportAverageNumberEmployees                                    | 0.980     | 0.993  | 0.987 | 149     |
+| Debtors                                                                        | 0.999     | 0.975  | 0.987 | 6,733   |
+| DescriptionShareType                                                           | 0.991     | 0.984  | 0.987 | 435     |
+| DividendPerShareInterim                                                        | 0.978     | 1.000  | 0.989 | 45      |
+| CorporationTaxPayable                                                          | 0.989     | 0.993  | 0.991 | 821     |
+| BankBorrowings                                                                 | 0.988     | 0.994  | 0.991 | 166     |
+| DepreciationExpensePropertyPlantEquipment                                      | 0.984     | 1.000  | 0.992 | 60      |
+| ProfitLoss                                                                     | 0.995     | 0.989  | 0.992 | 874     |
+| InvestmentProperty                                                             | 0.987     | 1.000  | 0.994 | 546     |
+| Creditors                                                                      | 0.992     | 0.995  | 0.994 | 18,930  |
+| EntityTradingStatus                                                            | 0.988     | 1.000  | 0.994 | 83      |
+| ProvisionsForLiabilitiesBalanceSheetSubtotal                                   | 0.988     | 1.000  | 0.994 | 2,430   |
+| FinanceLeaseLiabilitiesPresentValueTotal                                       | 0.996     | 0.992  | 0.994 | 522     |
+| TaxTaxCreditOnProfitOrLossOnOrdinaryActivities                                 | 0.990     | 1.000  | 0.995 | 474     |
+| ProfitLossOnOrdinaryActivitiesBeforeTax                                        | 1.000     | 0.991  | 0.995 | 319     |
+| FixedAssets                                                                    | 0.991     | 1.000  | 0.995 | 4,273   |
+| UKCompaniesHouseRegisteredNumber                                               | 1.000     | 0.992  | 0.996 | 5,010   |
+| TurnoverRevenue                                                                | 1.000     | 0.992  | 0.996 | 644     |
+| PropertyPlantEquipment                                                         | 1.000     | 0.994  | 0.997 | 6,946   |
+| EndDateForPeriodCoveredByReport                                                | 1.000     | 0.994  | 0.997 | 1,030   |
+| TradeDebtorsTradeReceivables                                                   | 0.996     | 0.999  | 0.998 | 1,410   |
+| OtherOperatingIncomeFormat2                                                    | 0.995     | 1.000  | 0.998 | 209     |
+| DepreciationAmortisationImpairmentExpense                                      | 0.995     | 1.000  | 0.998 | 210     |
+| CashBankOnHand                                                                 | 0.997     | 0.998  | 0.998 | 7,791   |
+| IntangibleAssets                                                               | 0.999     | 0.997  | 0.998 | 913     |
+| CostSales                                                                      | 0.996     | 1.000  | 0.998 | 230     |
+| RawMaterialsConsumablesUsed                                                    | 1.000     | 0.996  | 0.998 | 284     |
+| GrossProfitLoss                                                                | 0.997     | 1.000  | 0.998 | 287     |
+| AdministrativeExpenses                                                         | 1.000     | 0.997  | 0.998 | 292     |
+| OtherOperatingExpensesFormat2                                                  | 1.000     | 0.997  | 0.998 | 319     |
+| Equity                                                                         | 1.000     | 0.998  | 0.999 | 28,976  |
+| TaxationIncludingDeferredTaxationBalanceSheetSubtotal                          | 0.998     | 1.000  | 0.999 | 550     |
+| AverageNumberEmployeesDuringPeriod                                             | 1.000     | 0.999  | 0.999 | 6,409   |
+| TradeCreditorsTradePayables                                                    | 0.999     | 1.000  | 1.000 | 1,648   |
+| CurrentAssets                                                                  | 1.000     | 1.000  | 1.000 | 6,100   |
+| DateAuthorisationFinancialStatementsForIssue                                   | 1.000     | 1.000  | 1.000 | 2,105   |
+| NetAssetsLiabilities                                                           | 1.000     | 1.000  | 1.000 | 11,399  |
+| NetCurrentAssetsLiabilities                                                    | 1.000     | 1.000  | 1.000 | 13,660  |
+| HubbleNumber                                                                   | 1.000     | 1.000  | 1.000 | 13,000  |
+| HubbleDate                                                                     | 1.000     | 1.000  | 1.000 | 27,261  |
+| HubbleName                                                                     | 1.000     | 1.000  | 1.000 | 15,542  |
+| TotalAssetsLessCurrentLiabilities                                              | 1.000     | 1.000  | 1.000 | 13,415  |
+| HubbleCompanyName                                                              | 1.000     | 1.000  | 1.000 | 5,511   |
+| OperatingProfitLoss                                                            | 1.000     | 1.000  | 1.000 | 283     |
+| StaffCostsEmployeeBenefitsExpense                                              | 1.000     | 1.000  | 1.000 | 271     |
+| InterestPayableSimilarChargesFinanceCosts                                      | 1.000     | 1.000  | 1.000 | 149     |
+| OtherInterestReceivableSimilarIncomeFinanceIncome                              | 1.000     | 1.000  | 1.000 | 135     |
+| ProfitLossOnOrdinaryActivitiesAfterTax                                         | 1.000     | 1.000  | 1.000 | 107     |
+| DistributionCosts                                                              | 1.000     | 1.000  | 1.000 | 94      |
+| AccountingStandardsApplied                                                     | 1.000     | 1.000  | 1.000 | 82      |
+| AccountsStatusAuditedOrUnaudited                                               | 1.000     | 1.000  | 1.000 | 82      |
+| EntityDormantTruefalse                                                         | 1.000     | 1.000  | 1.000 | 82      |
+| LegalFormEntity                                                                | 1.000     | 1.000  | 1.000 | 82      |
+| HubblePostcode                                                                 | 1.000     | 1.000  | 1.000 | 75      |
+| IncomeExpenseRecognisedDirectlyInEquity                                        | 1.000     | 1.000  | 1.000 | 74      |
+| IncreaseDecreaseDueToTransfersBetweenClassesPropertyPlantEquipment             | 1.000     | 1.000  | 1.000 | 65      |
+| DirectorRemuneration                                                           | 1.000     | 1.000  | 1.000 | 54      |
+| FinalDividendsPaid                                                             | 1.000     | 1.000  | 1.000 | 47      |
+| WagesSalaries                                                                  | 1.000     | 1.000  | 1.000 | 46      |
+| NetCashFlowsFromUsedInOperatingActivities                                      | 1.000     | 1.000  | 1.000 | 35      |
 
 Source `03_ixbrl_experiment_models.ipynb` section 10; supports section 8.
 
