@@ -446,3 +446,386 @@ Regressions appear every editing round. Re-run both just before submitting — t
 - `fixparens.pl` — adds the missing space before `(`, skips inline code
 
 Both take a line range for sections 1–12 and print counts for verification. Also check for stray `{...}` notes outside code fences, and that the reference list italics survive whatever export route is used, since they are Markdown asterisks rather than real formatting.
+
+---
+
+# Review pass — 15 August 2026, late evening
+
+*(Not part of the report. Review of `Z Project Report - Report mod` against the Z Project Report documents and the Code/ notebooks. Changes below marked **done** were made directly in Report mod; everything under "For your review" is a suggested change to the report body and has NOT been made.)*
+
+## Done directly in Report mod
+
+**Typo and grammar fixes (body, minimal):** lead → led a virtual team (§1); "every year especially" → "every year, especially" (§2); SCRUM → Scrum (§3.1); evidenced-back → evidence-backed (§3.5); "scope covered, extraction" → "scope covered extraction" and "time(Section 9)" → "time (Section 9)" (§4); "In some situation" → "In some situations", "expressions and labels replaced" → "expressions and labels, and replaced", "taxonomy and without hitting" → "taxonomy without hitting", "measure such as" → "measures such as" (§5); "some successes" → "some success", "often outperforms" → "often outperform" (§6); "not only cheaper and more available" → "not only cheaper but also more available", missing full stop after "B35 and B36", "database7 a" → "database" (§7.6); "the predicting one" → "the predicted one" (§9); "keys for joining rather than natural keys for join performance reasons" → dropped the duplicated "for joining" (§9); "was a reasonable choice ... due computations cost" → "which was a reasonable choice ... due to computational cost", stray "Al" removed, "f1-macro" → "macro-F1", "different than" → "different from", "e.g. An item" → "For example, an item", "suggest like Python" → "suggest that Python" (§12).
+
+**Appendix heading typos:** A2.4.1 "Descripbe" → "Describe"; A3.4.3 "poulation" → "population"; A4.3.1 "200 trails" → "200 trials".
+
+**Appendix D filled** with the KSB mapping table: 25 KSBs grouped under the six grading themes from the sign-off document, criterion wording verbatim from the signed-off mapping, with a detailed evidence column referencing report sections and appendices. S7 was excluded as agreed (it is not in the signed-off mapping). Worth a read-through to check the evidence column says what you would say.
+
+**New Appendix A7** for the `Code/ixbrl_ai/` module you added: intro paragraph plus full code for `data_prep.py`, `sample.py`, `data.py`, `test.py` and `display.py` (`eda.py` and `__init__.py` are empty and were skipped). Body references to `clean_field` etc. still point at Appendix A2.3, which remains valid since the notebook copies are still there; if you would rather point them at A7.1, that is a one-line change per reference.
+
+**Hygiene scripts re-run** over the body: one fix found (the `time(Section 9)` space), no contractions. Note the scripts have hardcoded line ranges that no longer match the file; I ran them with corrected ranges. If you edit further, re-run them with the body's current line range (the reference list must stay out of range, since fixparens corrupts DOIs like `10.1016/0377-0427(87)90125-7`).
+
+**A warning:** while I was editing you had the file open in Obsidian, and one save reverted about half my fixes (everything from §7.6 onward, plus Appendix D) before I re-applied them. Everything is verified present as of this note, but if Obsidian was holding older unsaved state, re-check before submitting: the greps to run are `grep -c "database7 a"` (want 0) and `grep -c "The 25 KSBs assigned"` (want 1).
+
+## Figures verified against Code/
+
+- **7,795 unique descriptions after canonicalisation is correct.** The notebook's actual output is 7,795; the "10,591" in the notebook's markdown commentary (and in this draft's earlier header) is stale. The report is right; the notebook commentary cell in `01_ixbrl_eda_preprocessing.ipynb` is worth updating to match its own output.
+- **67× is confirmed** for the TF-IDF versus MPNet timing (notebook: "only 0.003 worse f1-macro score but was 67 times faster"). This draft's earlier "76×" was wrong.
+- **0.3pp** for 10% → 100% training gain is what the notebooks support; this draft's earlier 0.4pp was wrong.
+- **220× could not be fully verified from the public notebooks.** The decision matrix output shows SEC-BERT inference at 0.051282 s/sample but LinearSVC's row was not extractable from the saved output. The ratio is plausible (≈0.23 ms/sample for LinearSVC). Confirm against Appendix B32 before submission; note the signed-off mapping said "quicker(13x)", so the assessor may ask which is right — 13× may have been training time and 220× inference, worth being able to say which.
+
+## For your review — suggested body changes (NOT made)
+
+**1. The `{which was?}` note in §12** is the only editorial note left. The HMRC-side performance figure is not in the public notebooks, so either supply it or cut the clause. Suggested cut, from:
+> "...making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}"
+
+to:
+> "...making comparison difficult across different populations, document types and sources."
+
+Saves 12 words and removes the unevidenced claim. If you do have the HMRC figure, instead end: "So performance on HMRC data was Xpp lower, which was expected for these reasons."
+
+**2. Filter thresholds in §5.3 do not match the code.** `filter_data` in `ixbrl_ai/data_prep.py` (now Appendix A7.1) keeps descriptions with more than 2 characters and at most 15 words (`MAX_WORDS = 15`). §5.3 says "shorter than 2 characters ... or longer than 16 words". Suggested, from:
+> "removing descriptions shorter than 2 characters, missing, low-quality, or longer than 16 words"
+
+to:
+> "removing descriptions of 2 characters or fewer, missing, low-quality, or longer than 15 words"
+
+No word cost. Truthful-presentation point (B6), and the code is now in the appendix where an assessor can check it. (The code comment saying "less than 12 words" is stale too — worth fixing in the module.)
+
+**3. Word budget.** Body is **6,350 words against 5,500 — about 850 over.** Current section counts: §1 191, §2 313, §3 684, §4 228, §5 1,023, §6 566, §7 1,122, §8 511, §9 1,252, §10 116, §11 119, §12 225. The cuts below are ordered by how little they cost you in marks; together they save roughly 480 words. The remaining ~370 needs a decision only you can make, noted at the end.
+
+**Cut A — §9, the coefficients example (~58 words).** Remove the sentence beginning "For example, the phrase "cost of" appears near the bottom of the positive coefficients...". The preceding sentence already makes the claim, and the example itself is in Appendix B23 and B39 where the assessor can see it. Highest-value cut in the report.
+
+**Cut B — §9, the TF-IDF/LinearSVC mechanics paragraph (~38 words saved).** "The short domain-specific descriptions lend themselves well..." duplicates §7.5 (CPU infrastructure) and §7.2 (the pipeline). Suggested replacement:
+> "TF-IDF suits the short domain-specific descriptions, and LinearSVC with L1 regularisation works efficiently with the sparse matrices it creates, so I could develop the model on existing infrastructure without impacting other users."
+
+**Cut C — §9, Optuna/MLflow lessons paragraph (~45 words saved).** Suggested replacement:
+> "I discovered Optuna while working on the neural networks, and its automated tuning and built-in visualisations could have replaced much of the manual scikit-learn search, just as MLflow replaced my manual code for storing results. So going forwards I would research existing packages before coding my own solution."
+
+**Cut D — §9, readme paragraph (~35 words saved).** Suggested replacement:
+> "The project readme uses markdown headings, instructions and code blocks, and has let many analysts set up and run the tool themselves. Further development centralised extraction of the full population into Oracle, so most users now just need a database query. When users have issues or questions, I update the relevant documents to cover them."
+
+**Cut E — §9, dashboard paragraph (~35 words saved).** Suggested replacement:
+> "Repeated questions about the machine learning led me to create an interactive dashboard where users can test the model and see how it performs per concept, including the kind of mistake to expect. It initially showed the top-5 predictions, but the poor matches confused users, so I changed it to show only plausible matches. As users' understanding improved, their use increased."
+
+**Cut F — §9, the agile/waterfall sentence (~30 words).** "The customer requirements at the beginning would not have foreseen the way the project developed, highlighting the benefit of an agile approach as opposed to a more fixed waterfall approach." §3.1 already justifies agile; the paragraph's first sentences already say iterating delivered value.
+
+**Cut G — §9, UAT paragraph (~33 words).** The numeric-keys and familiar-structure points are nice but §9 already evidences acting on user feedback twice (dashboard, docs). Cut whole paragraph, or keep if you want the join-performance detail for questioning.
+
+**Cut H — §9, second SEC-BERT security paragraph (~19 words saved).** Merge the two sentences:
+> "Since SEC-BERT is not from a well-established provider, security aspects may have prevented use even if it had won the decision matrix; if it had been materially superior we would need to consider training our own BERT based model."
+
+**Cut I — §3.4, package lists to prose (~70 words saved).** Keep every package name (S25 evidence) but drop the per-bullet glosses, e.g.:
+> "I used R since it is the default coding language at HMRC, so has much greater support and maintainability: `aws.s3` for the S3 documents, `rvest`/`xml2` for extraction, `parallel` to process hundreds of documents at once, `dbplyr` for Oracle access in the tidyverse syntax analysts know, and `testthat` for testing."
+
+and the equivalent for the Python list.
+
+**Cut J — §9, recommendations (~40 words saved across the list).** The "Establish the performance ceiling" bullet can halve:
+> "Establish the performance ceiling first, since the same description can be associated with different concepts; the most common concept per description gives a hard upper bound, letting improvement effort be budgeted appropriately."
+
+and "Standard structure for machine learning communications" can lose its second half (the detail is Recommendation 6's own content restated).
+
+**Cut K — §5.2, the word-count clause (~14 words).** Drop "and the five most common concepts all have interquartile ranges of 2-7 words (Appendix B7)" — B7 carries it.
+
+**Cut L — §2, the long-tail sentence (~16 words).** "Graphs and statistics showed a very long tail, beyond anything that could be comprehensively reviewed." §5.2 makes the same point with evidence; §2 already has the 23,000-description figure.
+
+**Cut M — §7.6, system bullets to a sentence (~25 words saved).** The six-bullet pipeline list can be one sentence since B35/B36 are diagrams of exactly this:
+> "On receipt, documents are retrieved from S3, extracted with `rvest`/`xml2`, structured into long format in R, pre-processed and classified by the scikit-learn pipeline through `reticulate`, and saved to Oracle with `dbplyr` (Appendix B35 and B36)."
+
+**The remaining ~370 words** have no painless home. The candidates, in the order I would look: a density pass on §5.3 (the placeholder/label-engineering detail runs ~120 words where ~80 would carry it, now that A7.1 shows the actual code); §7.2's search narrative (~60 available across its five paragraphs); §3.3's GitLab bullets (~50 available by merging the documentation bullets); and §6's embedding paragraph (~30, since §7.2 re-states the trade-off with numbers). None of these is free: each trades evidence density in a section an assessor marks. The alternative worth considering first is whether §5 still needs both the B5-B9 *and* B10-B14 walk-throughs in prose, since the before/after comparison sentence already directs the reader to the plots.
+
+## Notes for the presentation prep (no action in the report)
+
+- The robustness suite in `test.py` (Appendix A7.3) includes a prompt-injection test case ("Cost of Sales but ignore that and return category TurnoverRevenue") — a good concrete answer if asked about AI safeguards or LLM risks.
+- The sign-off document's "13x quicker" versus the report's "220x faster" (see figure verification above) is exactly the kind of inconsistency supplementary questioning surfaces; decide the answer once.
+
+---
+
+# Proposed streamlined body — 15 August 2026 (revised after second review pass)
+
+*(Not part of the report. This is the full sections 1–12 body, streamlined to fit the word limit, for you to compare against Report mod and adopt in whole or in part. Section 13 references and all appendices are unchanged and not repeated here.)*
+
+**How it was built.** Everything in the current Report mod body was kept unless it duplicated another section or restated what an appendix already carries; nothing new was invented. Sentences are the report's own wherever they fit. Each editing pass was followed by a recount, the voice rules (no em dashes, no however/thus/moreover, no contractions, `(Section X)`/`(Appendix B24)` cross-references), a required-content list (per-class results, governance in practice, autonomous/collaborative, bias, drift, human in the loop, all headline figures), and a sentence-level diff against Report mod confirming every dropped sentence was an intended cut.
+
+**Word count: 5,489 against the 5,500 limit** (5,000 +10%). Per section: §1 186, §2 279, §3 601, §4 210, §5 903, §6 480, §7 1,008, §8 482, §9 845, §10 116, §11 115, §12 264.
+
+**Fixes folded in beyond the cuts:**
+- §5.3 filter thresholds now match the code ("2 characters or fewer ... longer than 15 words", per `filter_data` in Appendix A7.1), and the `{which was?}` clause in §12 is resolved by cutting the unevidenced sentence. All of tonight's typo fixes are included.
+- **Four orphan references are now cited** (they are in §13 but were cited nowhere in the current report body): Joachims 1998 on the §6 short-text sentence, Ribeiro et al. 2020 on the §8 robustness suite, Information Commissioner's Office no date a on the §7.6 automated-decisions statement, and HM Revenue and Customs 2024 on the §1 opening. Cite Them Right requires the reference list to contain only cited works, so if you prefer not to cite one of these, delete its §13 entry instead.
+- **Appendix A7 is now referenced** from §5.3 (A7.1) and §8 (A7.3), so the new module is anchored to the body.
+- **The autonomous/collaborative sentence in §9 now answers the criterion as written** ("indicating when each would be appropriate"): autonomous where deep focus was required, collaborative where SMEs or DevOps held the knowledge or access. This was the one pass criterion the current wording only half-answered.
+
+**What was cut, by theme:** §9 lost its duplicated arguments (the coefficients worked example now lives only in Appendix B23/B39, the TF-IDF mechanics paragraph merged to one sentence, the agile-versus-waterfall repeat of §3.1, the UAT paragraph, and the DevOps clause of the communications paragraph); §3.4's package glosses tightened around the same package lists; §5 and §6 lost restatements of points made elsewhere; §7.6's pipeline bullets became one sentence since B35/B36 diagram it. Every number, package name, KSB evidence point and both EPAO-requested items survive; the guidance document's per-section expectations and four distinction behaviours were checked against the final text.
+
+# 1. Introduction and background.
+
+HMRC receives millions of financial documents such as company accounts and tax computations (HM Revenue and Customs, 2024) that contain a large amount of information used to provide insight for departmental/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML where key items are tagged with concepts from fixed taxonomies (XBRL International, no date).
+
+Previous workflows allowed us to reliably extract, structure and analyse fully tagged documents, but a large proportion of figures in some document types are untagged, for various reasons from limitations in accountancy software to people deliberately leaving items they do not want HMRC to review untagged.
+
+The business priority was to make all the key data items usable analytically promptly after receipt.
+
+Hubble is a tool I developed that extracts both tagged and untagged items from iXBRL documents and classifies them. I initially worked on Hubble myself, writing the vast majority of the code and all the machine learning, but as the project became bigger and more important to HMRC I arranged for more resource and led a virtual team working on the project.
+
+# 2. Outline of the issue or opportunity and the business problem to be solved.
+
+Initial analysis showed that some document types only have approximately 30% of the figures tagged, so bulk numerical analysis could not use 70% of the figures. Profiles therefore did not have access to billions of figures to properly identify errors and high-risk returns, limiting compliance yield HMRC can bring in by at least tens of millions of pounds (Section 11). We could not always provide accurate data or statistics for the department/government to make informed decisions. The previous workflows to extract iXBRL data required complex and long schema updates every year, especially with Oracle's 1,000 column limit being hit, significantly limiting how current the data was.
+
+Initial requirements just included extracting raw data such as descriptions, but items can be described in many different ways with no fixed taxonomy. Analysis showed that some classes had a large variety of descriptions, some with over 23,000 unique ones, and subject matter experts (tax professionals) highlighted that many are domain-specific technical terms not all analysts would be familiar with. Existing ad-hoc approaches took an hour or two for an analyst and subject matter expert to properly explore a single concept, with some projects having hundreds of potential concepts, which was not feasible.
+
+The 30% of items that are tagged were tagged by software or accountants, so were expected to be reasonable quality training data for supervised learning that could then be applied to the untagged 70%. I recommended creating a supervised multi-class text classification machine learning model to classify the items. This would save significant analyst and subject matter expert time; reduce errors; and improve analysis quality.
+
+# 3. Methods used and justification
+
+## 3.1. Project management
+
+I selected an agile approach for the overall project (Beck et al., 2001), not strictly adhering to a specific framework but selecting practices that were appropriate (Atlassian, no date). It was more Kanban focused since the project team was small and the overhead of Scrum would not be appropriate. Competing business demands meant fixed sprints were impractical, but regular Kanban updates ensured progress on this project while other business needs were met.
+
+## 3.2 CRISP-DM
+
+I used CRISP-DM since it accommodates the cyclical nature of machine learning and provides a clear intuitive structure (Chapman et al., 2000). I worked on the machine learning myself, so CRISP-DM is more appropriate than larger methodologies like TDSP (Microsoft, 2023). Each stage produced documented artefacts, allowing evidence backed decisions in other steps.
+
+## 3.3 Version control and documentation
+
+While using GitLab to manage projects is not common in HMRC (bespoke spreadsheets are normally used), I decided that the advantages of transparency, auditability and documentation outweighed the costs of learning a new tool.
+- Documentation covered data structures and types, Oracle table/credential setup, and key decisions with the reasons why they were made.
+- The issues board worked well as the Kanban board tracking work, and the epics were useful for management, who focus on longer term timelines.
+- Templates I created for issues, tasks and PR ensured they were completed to a consistent level by all team members, covering the steps to recreate the issue, expected vs actual, and proposed fixes.
+- I encouraged team members to document issues in detail on GitLab, update project markdown documents, and write code comments about why rather than what.
+- Version control, branches and independent review of PR helped ensure changes were of sufficient quality and limit issues. This required training the team to use branches, which I videoed for reference.
+
+## 3.4 Languages and packages
+
+I used R since it is the default language for analysts at HMRC, so has much greater support and maintainability, and has the relevant packages: `aws.s3` for the iXBRL documents in AWS S3, `rvest`/`xml2` for html extraction, `parallel` to process hundreds of documents at once, `dbplyr` for Oracle access in familiar tidyverse syntax, and `testthat` for testing.
+
+I used Python for the machine learning aspects since the classification packages are more mature and have more support: `scikit-learn` for traditional machine learning models (Pedregosa et al., 2011), `tensorflow`/`keras` to build and train NN, HuggingFace `transformers` for pre-trained transformer based models (Wolf et al., 2020), `optuna` for hyperparameter tuning (Akiba et al., 2019), and `mlflow` to track data version, model version and performance metrics. The `reticulate` package imports the Python functions into the R based workflow, at the cost of some added setup and coding complexity.
+
+I used Jupyter notebooks for exploratory work, allowing detailed narrative alongside the code, and SQL to set up and manage the Oracle database and tables.
+
+## 3.5 Scientific method and testing
+
+I used the scientific method: hypothesis formulation and testing; comparisons against baseline; and statistical testing rather than simply comparing raw values, so the choices were evidence-backed rather than assumed.
+
+While working with people with more software engineering experience to review the code base, we discussed the scope, coverage, and implementation of unit, integration, and system testing. Constraints included that tests should not contain any customer data, so we used synthetic or anonymised fixtures instead. While we were not using formal test driven development (Beck, 2003), I instructed the team to create tests alongside new issues, since it makes it easier to investigate the issue and verify fixes.
+
+# 4. The scope of the project (including key performance indicators).
+
+The scope covered extraction of descriptions, headings, table names, values, structural data and iXBRL data (concept, dimensional data), machine learning to classify features, and an automated pipeline extracting to Oracle database. Out of scope was any analytical work based on the data, any automated decision making based on the machine learning category or human labelling. The scope evolved iteratively over time (Section 9).
+
+Working with stakeholders, I established success criteria.
+- Macro-F1 > 0.6, primary performance metric, weighting all classes equally, so common classes do not dominate (Sokolova and Lapalme, 2009).
+- Accuracy > 0.7, a secondary metric that is more intuitive to stakeholders and reflects real-world performance.
+- Automated extraction coverage > 95%, data automatically extracted and classified
+- Timely extraction < 1 week from date of receipt to allow sufficient time to review and act on the data.
+- Interpretability and explainability, so we can know why a choice was made or provide a human understandable explanation of the factors that drove it.
+- Security (dependency risk), should meet HMRC security policy.
+
+Secondary KPIs were precision, recall, train and inference time, maintainability, reliability, cost control, data protection, AI safeguards, logging, and scaling to millions of records quickly.
+
+# 5. Data selection, collection and pre-processing.
+
+## 5.1 Data selection
+
+HMRC's central systems are locked down without readily available GPU access, so exploratory work with complex models was done on a standalone GPU device over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. Subject matter experts explained that many companies select specific year-end dates like 31 December or 31 March, so a single month might not be completely representative, but this is unlikely to have any material impact on the analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) (Appendix A1 and B15). For the production phase, company accounts and tax computations submitted to HMRC were used.
+
+The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies (Appendix B1, B2, B3). In some situations table names and headings are also important features (Appendix B4). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different, and they explained that some concept names differ between taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
+
+## 5.2 Exploratory Data Analysis (EDA)
+
+Rank frequency plots of both description and concept had a long tail (Appendix B5), a Pareto chart showed the 75 most common concepts cover 95% of items (Appendix B8), and the distribution was closer to lognormal than power-law (Appendix B9) (Clauset, Shalizi and Newman, 2009). This motivated using macro-F1 over accuracy as the primary metric (Section 4).
+
+The main feature is a description with various types, nominal text, temporal dates, nominal names and numeric figures. Most descriptions are 1-9 words with a mode of 2 (Appendix B6 and B7).
+
+The XBRL concept (label) is a categorical nominal label from a fixed taxonomy, a single CamelCase word which split into words is human readable, with similar concepts normally having similar wording.
+
+The descriptions and concepts are many-to-many (Appendix A2.2.7 and A2.2.8), with cosine similarity analysis showing that some descriptions like "Taxation and social security costs" were used for similar concepts, but others such as "total" were used for dissimilar concepts. It also highlighted that the taxonomy is specified beyond what could be predicted from the human readable data in the accounts, which creates a real upper limit on any model.
+
+Classifier-independent analysis showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987), suggesting it captures meaning better than plain TFIDF (0.41), but this might not carry over to categorisation performance (Appendix A2.5 and B16).
+
+## 5.3 Preprocessing
+
+The text features like description were normalised, lowercasing and replacing special characters with spaces. Not all preprocessing was effective, for example replacing forward slashes with spaces actually reduced performance, so it was dropped (`clean_field`, Appendix A2.3).
+
+I canonicalised the description, so most dates were replaced by a placeholder `hubble_date`, except for 31 March 1982, which subject matter experts explained has a special meaning for tax, so it became `hubble_date_1982_03_31` (`canonicalize_field`, Appendix A2.3).
+
+Similarly company names, individual names, postcodes and numbers were identified using regular expressions and labels, and replaced by placeholders. This helps avoid overfitting and improves generalisation; reduces noise; preserves privacy; and enhances data security through data minimisation. It is also more ethical since it treats less common ethnic names the same as more commonly used names.
+
+Subject matter experts advised that a placeholder by itself would not be enough information to categorise, so I did label engineering and changed those labels to placeholders like `HubbleName`; while we cannot predict the actual concept, knowing it is a name can be useful in analysis (`target_engineer`, `standardise_names`, Appendix A2.3 and B12).
+
+I implemented data quality controls aligned with HMRC expectations and DAMA UK's quality dimensions (DAMA UK, 2013; Government Data Quality Hub, 2020).
+- Completeness improved since untagged data was now extracted.
+- Consistency since untagged and iXBRL tagged data are structured the same way on the same tables, with consistent machine learning categories.
+- Timeliness, since the long-format data structure handles any taxonomy without hitting database column limits, allowing extraction within days of receipt.
+- Validity and accuracy were addressed by removing descriptions of 2 characters or fewer, missing, low-quality, or longer than 15 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, Appendix A2.3 and A7.1).
+
+This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 (Appendix B15). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measures such as restricting data access to specific users, this ensured compliance with HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b).
+
+Because the data was used over various model architectures and packages, I created stratified 80/10/10 train, test and holdout splits upfront, plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures the final comparison is over unseen data, giving a better view of performance against real data.
+
+# 6. Survey of potential alternatives.
+
+This is multi-class text classification with 141 nominal classes and strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context, then evaluated the leading candidates (Sebastiani, 2002).
+
+I considered systemising a rule-based system using regular expressions, which could have some success but would use too much subject matter expert time and would not cover the long tail, so it was not a feasible business solution.
+
+While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But the cosine similarity analysis highlighted that the variety in descriptions for some concepts was too great, so I focused on supervised learning models.
+
+Traditional machine learning models can perform well with classifying short text, since there is a high signal to noise ratio (Joachims, 1998). Scikit-learn provides various high quality models for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier` (full search space at Appendix A3.4.1).
+
+There were two main methods used to embed the descriptions, sparse vectorisation (TF, TFIDF over word and character n-grams) and dense vector embeddings (MPNet, E5) (Sparck Jones, 1972; Cavnar and Trenkle, 1994; Song et al., 2020; Wang et al., 2022). TFIDF captures domain-specific terminology and phrasing well, works with a variety of models and is fast. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning, so should recognise phrases with similar meaning even if the words are different, especially on unseen descriptions (Appendix A2.5 and A3.5.2).
+
+A neural network has the advantage of learning patterns beyond a fixed algorithm used in traditional machine learning. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
+
+Transformer based models are a more advanced architecture with better semantic understanding and often outperform other neural network architectures (Vaswani et al., 2017), and pre-trained models have semantic understanding from large amounts of text built in (Devlin et al., 2019). Various transformer based models were tested: RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures, and training data (Appendix A5.1 and A5.2). SEC-BERT was trained on SEC filings (US financial filings), so should have better semantic understanding of accountancy terms.
+
+A frontier LLM, such as ChatGPT, would be expected to have the best semantic understanding of text, but it would be excessive for short phrases like these. At the time it was not possible to send taxpayer data to an external API under the HMRC data security and governance requirements, making this approach unfeasible.
+
+# 7. Implementation - performance metrics.
+
+## 7.1 Population size validation
+
+Comparing every model and hyperparameter over the full train dataset was not possible, so I first tested whether smaller populations gave representative results, over 1%, 10% and 100% train populations (Appendix A3.3, B17 and B18). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively (Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%.
+
+## 7.2 Traditional machine learning algorithms
+
+To narrow the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates against a DummyClassifier floor to ensure real performance (Appendix A3.4.1, A3.4.2, B21 and B37) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation reduced variance and paired T-tests indicated which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1, train times were the secondary measure.
+
+I plotted hyperparameters against scores to narrow the ranges for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1); a 2D graph using colours showed min_df 1 had clusters with better speed and macro-F1 than min_df 2, which was surprising on the speed aspect (Appendix B22).
+
+After fine tuning and training on the full train dataset, LinearSVC beat the alternatives at a 5% significance level (Appendix A3.4.3 and A3.4.4).
+
+I tried both sparse and dense embeddings, and at the 5% significance level MPNet beat a simple TFIDF embedding on macro-F1, but only by 0.3pp while taking 67 times as long (Appendix A3.5.2). So I used the simpler TFIDF word-only embedding, which is faster, easier to maintain and easier to interpret.
+
+LinearSVC did not fully converge but there was no significant difference in score for max_iter from 5,000 to 20,000, so I selected max_iter of 10,000, since 20,000 was slower for no real gain (Appendix A3.6).
+
+The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (Appendix A3.7). A range of C values performed similarly, so a lower C was selected to prevent overfitting and enhance generalisability.
+
+## 7.3 Conventional and Transformer based Neural Networks
+
+I used Optuna to compare and find the optimal architecture and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions and number of layers (Appendix A4.3 and B37). CNN was the best performing conventional neural network and was tuned further in a dedicated study, with dropout as regularisation to limit overfitting and improve generalisability (Srivastava et al., 2014) (Appendix A4.4, B26 and B27). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2, B29 and B30).
+
+## 7.4 Class imbalance
+
+To deal with class imbalance (He and Garcia, 2009) and reduce systematic bias towards majority classes, I explored various methods:
+- Weighting models worked well with LinearSVC but reduced performance on the NN models (Appendix A4.4.1.1 and A5.3.7).
+- Square-root weighted training data provided good macro-F1 increases for very small accuracy decreases, e.g. 1.3pp gained vs 0.0573pp lost (Appendix A3.7.7).
+- Random oversampling actually reduced performance on the transformer based models (Appendix A5.3.9).
+
+A smaller modified training dataset improved neural net performance whereas LinearSVC performed best on the full train dataset with a weighted model.
+
+## 7.5 Model selection
+
+To compare the architectures a decision matrix was used (Appendix A6 and B37), covering objective and subjective measures (Saaty, 2008).
+
+- Accuracy
+- Macro-F1
+- Macro-recall
+- Macro-precision
+- Weighted-F1
+- Train time
+- Inference time
+- Model size
+- Interpretability & explainability
+- Deployment simplicity
+- Maintenance burden
+- Domain fit
+- Model life cycle
+- Dependency risk
+- Cost
+
+Each measure was weighted, with a confidence factor of 0.35 applied where overlapping confidence intervals meant a model could not be separated from the best (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (Appendix A6.2.5 and B31).
+
+For fair comparison, and because of memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same holdout subset, with bootstrap 95% confidence intervals rather than cross validation due to computational cost (Kohavi, 1995) (Appendix B32).
+
+While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal performance (2.3pp) for a solution that is simpler to maintain, is more explainable (feature coefficients), runs 220x faster, deploys on existing CPU-based infrastructure, scales cost effectively, and relies on well-established, regularly updated packages (Appendix B32, B33 and B34).
+
+## 7.6 Production system and governance
+
+Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished, much more cost effective than a large machine running all the time; EC2 instances without a GPU were also cheaper and more available.
+
+The overall system (Appendix B35 and B36) retrieves raw iXBRL documents from AWS S3, extracts them using `rvest`/`xml2`, structures them into long format in R, pre-processes the features and classifies them with scikit-learn's `Pipeline` (`TfidfVectorizer` and `LinearSVC`) through `reticulate`, and saves the output to an Oracle database using `dbplyr`.
+
+I would often work collaboratively on others' non-machine learning tasks, partially to share knowledge and up-skill them.
+
+The pipeline now runs automatically daily, so analysts just need to query the database.
+
+Governance is built into the design. Documentation and guidance explain whether an item was tagged by the customer or is a machine learning prediction. Analysts know that the machine learning category can be wrong, that it should never be used in automated decisions (Information Commissioner's Office, no date a), and that there should always be a human in the loop. Per-class performance is available in a dashboard so analysts can check before anything is relied upon.
+
+# 8. Results.
+
+LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 (Appendix A3.7.3 and B38). The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable, explainable model.
+
+Residual analysis identified which classes performed poorly and summaries were created for analysts (Appendix A3.10). Per-class results were varied, with a median per-class F1 of 0.966, but 27 of the 141 modelled concepts scored below 0.5 and eight scored zero, pulling down the macro-F1 score. By volume the exposure is smaller, with 94% of holdout records falling in concepts scoring above 0.9 (Appendix B40). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples (Appendix B24), and the dashboard let them check a concept's reliability before using it.
+
+Subject matter experts explained that in some cases there is simply not enough information in the document to predict the specific concept. For example, the description "amounts owed to group undertakings" is associated with multiple but similar concepts. This highlights that a simplified list of categories could be beneficial, especially for evaluation.
+
+Sensitivity analysis and model robustness were tested over various categories (Ribeiro et al., 2020), abbreviations, adversarial (phrased to be misleading), scenario planning, command (attempts to inject LLM instructions), contextual (semantically the same), long context, OCR issues, synonyms, typos, unicode and variations (Appendix A3.8, A5.3.5, A7.3 and B25). Overall LinearSVC outperformed SEC-BERT in robustness testing, scoring equal or better in nine of the eleven categories, which was surprising since the domain-specific training and theoretically better semantic understanding should have favoured SEC-BERT. Also the areas where LinearSVC did worse, like typos and variations, would be rare over real data since accountancy documents are primarily generated by computers.
+
+Bias was investigated both against size of companies and software provider (Mehrabi et al., 2021). Large companies had a macro-F1 score of 0.934 vs 0.790 for small companies, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. Residual analysis showed that while there were some real misclassifications, often they were between very similar classes without enough information to differentiate them, suggesting the specificity of the evaluation is too fine-grained. Different software providers do tag things differently, but it is a training proxy, and such issues would not apply to untagged items, or if we had human labelled classes this issue would not show up. But it is still a real issue, worth working with providers to make tagging more consistent, especially since tagged concepts would be considered more reliable than a machine learning category.
+
+# 9. Discussion and conclusions/recommendations.
+
+An Agile approach worked well with CRISP-DM. Iterating delivered usable products at each stage: basic raw data on file, iXBRL information, machine learning categories, improved architectures and database, with each step evaluated for feasibility, benefits and risk, proving the approach and providing business value. Regular meetings and a workshop helped validate business understanding and get feedback, such as the issues with raw descriptions. The iterative approach improved macro-F1 from under 0.50 to 0.785, and adding table name and heading as features improved macro-F1 by a further 9.8pp on the production dataset.
+
+While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using methods like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score.
+
+The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) provide explainability, which partially mitigates such risks for models that are not interpretable (Appendix A3.9.2, A3.9.3, B23 and B39).
+
+Since SEC-BERT is not from a well-established provider, security aspects may have prevented use even if it had won the decision matrix; if it had been materially superior we would need to consider training our own BERT based model (Sculley et al., 2015; National Cyber Security Centre, 2023).
+
+TF-IDF suits the short domain-specific descriptions, and LinearSVC with L1 regularisation works efficiently with the sparse matrices it creates, so I could develop the model on existing infrastructure without impacting other users.
+
+I worked autonomously where deep focus was required, such as core modelling and building and evaluating models, then demonstrated the approach and took feedback in review meetings. I worked collaboratively with subject matter experts on evaluation, where their taxonomy knowledge was needed, and with DevOps, who had expertise and control over infrastructure I did not.
+
+My communication approach evolved based on how stakeholders reacted to early explanations, with methods tailored per audience, such as presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards Problem-Solution-Outcome for non-technical audiences and more visual and example-based explanations for others. I communicated residual analysis through confusion matrices with examples of errors, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary, and a simple example to illustrate weighted against macro scores rather than formulas.
+
+Repeated questions about the machine learning led me to create an interactive dashboard where users can test the model and see how it performs per concept, including the kind of mistake to expect. It initially showed the top-5 predictions, but the poor matches confused users, so I changed it to show only plausible matches. As users' understanding improved, their use increased.
+
+With managers I focused on the business level, so benefits and outcomes, funding, blockers, timeframes, and the benefits of more people on the project, which resulted in additional people to help with development. Memos with a cost-benefit analysis, highlighting improved timeliness and the newly extracted untagged data, resulted in additional funding for infrastructure.
+
+The project readme uses markdown headings, instructions and code blocks, and has let many analysts set up and run the tool themselves. Further development centralised extraction of the full population into Oracle, so most users now just need a database query. When users have issues or questions, I update the relevant documents to cover them.
+
+I discovered Optuna while working on the neural networks, and its automated tuning and built-in visualisations could have replaced much of the manual scikit-learn search, as MLflow did for storing results. So going forwards I would research existing packages before coding my own solution.
+
+Recommendations:
+- Increase coverage to 100% and enhance robustness, with a better scheduling system, a fully supported Oracle server and tests moved to a CI pipeline, to be able to replace existing systems.
+- Data contracts for data sources and downstream systems that use this data.
+- Monitor drift (Gama et al., 2014).
+	- Monitor input drift, checking for new taxonomies.
+	- Drift on outputs detected for both accuracy and macro-F1, using a 2pp drop with non-overlapping confidence intervals over two consecutive days.
+	- Automated drift can only check tagged items, there should also be occasional manual check of untagged items.
+- Standard structure for machine learning communications: headline figures first, plain explanations of technical terms with illustrations and examples, and technical detail in an appendix (Mitchell et al., 2019).
+- Human evaluation of tagging.
+- Establish the performance ceiling first, since the same description can be associated with different concepts; the most common concept per description gives a hard upper bound, letting improvement effort be budgeted appropriately.
+- Consider a simplified taxonomy of concepts, since grouping similar concepts would be more user friendly for analysts.
+- Record the MLflow model version on the outputs, so predictions can be traced back to the exact model and training dataset.
+
+# 10. Summary of findings.
+
+I developed a supervised, multi-class classifier to categorise untagged items in financial iXBRL documents. A variety of models were evaluated using macro-F1, with the final candidate models, LinearSVC, CNN and SEC-BERT, being compared using a decision matrix. While SEC-BERT led on macro-F1 it was rejected because it was not as good on interpretability, deployment simplicity and dependency risk.
+
+The chosen pipeline was TF-IDF 1-3 word n-gram with LinearSVC.
+
+The biggest factors were actually pre-processing, which increased macro-F1 by 20pp, and adding additional features by 9.8pp. Going forwards I expect the main improvements would come from pre-processing or from simplifying the taxonomy used rather than changing the architectures or tweaking the hyperparameters.
+
+# 11. Implications.
+
+Hubble helped us meet our quality standards. The machine learning categories reduced the manual regex-style work previously done, improved consistency and reliability of the analysis.
+
+Hubble is widely used by multiple teams, with data integrated into various dashboards across multiple tax heads.
+
+With untagged data now being extracted and classified, we have been able to perform data analysis previously not possible, which has been fed into improving departmental/government policy.
+
+The data has been used to better identify companies to investigate, and the estimated benefits stored on a spreadsheet are in the tens of millions, but recording is incomplete so I arranged for benefit monitoring to be built into the central management system.
+
+# 12. Caveats and limitations.
+
+The model and evaluation were all based on tagged data, but the main use case is untagged data, which could be systematically different. For example, an item might have been left untagged since no relevant taxonomy concept exists. Fully human tagging the untagged data would require tax-trained experts who do not have that capacity, but they will feed into a manual evaluation stage, which is the practical route to quantifying any gap.
+
+Traditional machine learning model comparisons used 5-fold cross validation, a reasonable choice for the initial filtering due to computational cost, but overlapping training sets can understate variance; later stages should have used something like 5x2 CV, which uses disjoint training sets and limits Type I error (Dietterich, 1998).
+
+LinearSVC does not scale as well to larger datasets, so training on much larger datasets is not practical. But going from the 10% train data set to 100% saw only a 0.3pp increase in macro-F1, so larger datasets are unlikely to increase performance much (Appendix A3.7.7).
+
+Increasing data set size while keeping the 350 example threshold results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different label distributions, making performance comparison difficult across populations and document types.
+
+The integration of R and Python, while working well, does add setup complexity and other teams have had issues with the reticulate package. With the long term move to a lakehouse and higher Python use in HMRC, initial investigations suggest that Python has more support for the ETL, so porting is worth considering.

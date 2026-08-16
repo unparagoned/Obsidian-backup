@@ -1,4 +1,6 @@
 
+
+
 # 1. Introduction and background.
 
 HMRC receives millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for departmental/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies (XBRL International, no date). 
@@ -7,32 +9,32 @@ Previous workflows allowed us to reliably extract, structure and analyse fully t
 
 The business priorities were to be able to make all the key data items usable from an analytical perspective promptly after receipt. 
 
-Hubble is a tool I developed that extracts both tagged and untagged items from iXBRL documents and classifies them. I initially worked on Hubble myself, writing the vast majority of the code and doing all the machine learning elements myself, but as the project became bigger and more important to HMRC I arranged for more resource and lead a virtual team working on the project.
+Hubble is a tool I developed that extracts both tagged and untagged items from iXBRL documents and classifies them. I initially worked on Hubble myself, writing the vast majority of the code and doing all the machine learning elements myself, but as the project became bigger and more important to HMRC I arranged for more resource and led a virtual team working on the project.
 
 # 2. Outline of the issue or opportunity and the business problem to be solved.
 
-Initial analysis showed that some document types only have approximately 30% of the figures tagged, so bulk numerical analysis could not use 70% of the figures. Profiles therefore did not have access to billions of figures to properly identify errors and high-risk returns, limiting compliance yield HMRC can bring in by at least tens of millions of pounds (Section 11). We were not always able to provide accurate data or statistics for the department/government to make informed decisions. The previous workflows to extract iXBRL data required complex and long schema updates every year especially with Oracle's 1,000 column limit being hit, significantly limiting how current the data was.
+Initial analysis showed that some document types only have approximately 30% of the figures tagged, so bulk numerical analysis could not use 70% of the figures. Profiles therefore did not have access to billions of figures to properly identify errors and high-risk returns, limiting compliance yield HMRC can bring in by at least tens of millions of pounds (Section 11). We were not always able to provide accurate data or statistics for the department/government to make informed decisions. The previous workflows to extract iXBRL data required complex and long schema updates every year, especially with Oracle's 1,000 column limit being hit, significantly limiting how current the data was.
 
-Initial requirements just included extracting the raw data such as descriptions, but items can be described in lots of different ways with no fixed taxonomy. Analysis of the descriptions showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and subject matter experts (tax professionals) highlighted that many are domain-specific technical terms that not all analysts would be familiar with. Graphs and statistics showed a very long tail, beyond anything that could be comprehensively reviewed. Existing ad-hoc approaches took on average an hour or two for an analyst and subject matter expert to properly explore a single concept with some projects having hundreds of potential concepts, which was not feasible, limiting quality of analysis. 
+Initial requirements just included extracting the raw data such as descriptions, but items can be described in lots of different ways with no fixed taxonomy. Analysis showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and subject matter experts (tax professionals) highlighted that many are domain-specific technical terms not all analysts would be familiar with. Existing ad-hoc approaches took an hour or two for an analyst and subject matter expert to properly explore a single concept with some projects having hundreds of potential concepts, which was not feasible. 
 
-While 70% of items are untagged, 30% of items are tagged, and they are tagged by software or accountants so were expected to be reasonable quality training data for supervised learning that could then be applied to the 70%. I recommended creating a supervised multi-class text classification machine learning model to classify the items. This would save significant analyst and subject matter expert time; reduce errors; and improve analysis quality. 
+The 30% of the tagged items are are tagged by software or accountants so were expected to be reasonable quality training data for supervised learning that could then be applied to the untagged 70%. I recommended creating a supervised multi-class text classification machine learning model to classify the items. This would save significant analyst and subject matter expert time; reduce errors; and improve analysis quality. 
 
 # 3. Methods used and justification
 
 ## 3.1. Project management
 
-I selected an agile approach for the overall project (Beck et al., 2001). I did not strictly adhere to a specific framework, selecting practices that were appropriate (Atlassian, no date). It was more Kanban focused since the project team was small and the overhead of SCRUM would not be appropriate. The competing business demands on the team meant that fixed sprints were not appropriate but regular Kanban updates ensured progress on this project while other business needs were met. 
+I selected an agile approach for the overall project (Beck et al., 2001), not strictly adhere to a specific framework, but selecting practices that were appropriate (Atlassian, no date). It was more Kanban focused since the project team was small and the overhead of Scrum would not be appropriate. Competing business demands meant that fixed sprints were not appropriate, but regular Kanban updates ensured progress on this project while other business needs were met. 
 
 ## 3.2 CRISP-DM
 
-I used CRISP-DM since it accommodates the cyclical nature of machine learning and provides a clear intuitive structure (Chapman et al., 2000). I worked on the machine learning aspect myself, so CRISP-DM is more appropriate than larger more complex methodologies like TDSP (Microsoft, 2023). Each stage produced documented artefacts, allowing evidence backed decisions in other steps. 
+I used CRISP-DM since it accommodates the cyclical nature of machine learning and provides a clear intuitive structure (Chapman et al., 2000). I worked on the machine learning myself, so CRISP-DM is more appropriate than larger methodologies like TDSP (Microsoft, 2023). Each stage produced documented artefacts, allowing evidence backed decisions in other steps. 
 
 ## 3.3 Version control and documentation
 
 While using GitLab to manage projects is not common in HMRC (bespoke spreadsheets are normally used), I decided that the advantages of transparency, auditability and documentation outweighed the costs of learning a new tool. 
 - Documentation 
 	- Data structures and types. 
-	- Guide to setup Oracle tables/credentials. 
+	- Setup Oracle tables/credentials. 
 	- Details of key decisions and the reason why they were made. 
 - The issues board worked well as the Kanban board tracking work. 
 - The epics were useful for working with management who are focused on longer term timelines. 
@@ -43,60 +45,58 @@ While using GitLab to manage projects is not common in HMRC (bespoke spreadsheet
 ## 3.4 Languages and packages
 
 I used R due to its relevant packages and because it is the default coding language used by analysts at HMRC, so it has much greater support and maintainability. 
-- `aws.s3` to access iXBRL documents from AWS S3 buckets. 
-- `rvest` and `xml2` for html extraction.
-- `parallel` to allow processing hundreds of documents at the same time.
-- `dbplyr` allowed Oracle database access using tidyverse syntax analysts are familiar with.
+- `aws.s3` to access iXBRL documents from AWS S3 buckets 
+- `rvest` and `xml2` for html extraction
+- `parallel` to allow processing hundreds of documents at the same time
+- `dbplyr` allowed Oracle database access using tidyverse syntax analysts are familiar with
 - `testthat` for testing
 
-I used Python for the machine learning aspects since the classification packages are more mature and have more support. The `reticulate` package in R allows importing Python functions into R, which allowed the Python machine learning to be integrated into the R based workflow, at the cost of some added setup and coding complexity.
-- `mlflow` to track data version, model version, performance and various other metrics
+I used Python for the machine learning aspects since the classification packages are more mature and have more support. The `reticulate` package in R enables importing Python functions into R, so Python machine learning can be integrated into the R based workflow, at the cost of some added setup and coding complexity.
+- `mlflow` to track data version, model version, and various metrics
 - `scikit-learn` for traditional machine learning models (Pedregosa et al., 2011) 
 - `tensorflow`/`keras` to build and train NN
 - HuggingFace `transformers` to utilise pre-trained transformer based models (Wolf et al., 2020)
-- `optuna` to fine tune parameters and hyperparameters (Akiba et al., 2019). 
+- `optuna` to fine tune parameters and hyperparameters (Akiba et al., 2019)
 
-I used Jupyter notebooks for exploratory work, allowing detailed narrative alongside the code. 
-
-I used SQL for setting up and managing the Oracle database and tables.
+I used Jupyter notebooks for exploratory work, allowing detailed narrative alongside the code, and SQL for setting up and managing the Oracle database and tables.
 
 ## 3.5 Scientific method and testing
 
-I used the scientific method: hypothesis formulation and testing; comparisons against baseline; and statistical testing rather than simply comparing raw values, so the choices were evidenced-back rather than assumed. 
+I used the scientific method: hypothesis formulation and testing; comparisons against baseline; and statistical testing rather than simply comparing raw values, so the choices were evidence-backed rather than assumed. 
 
-While working with people with more software engineering experience to review the code base, we discussed the scope, coverage, and implementation of unit, integration, and system testing. Constraints included that tests should not contain any customer data, so we used synthetic or anonymised fixtures instead. While we were not using formal test driven development (Beck, 2003), I explained to the team where it can be useful and instructed them to create tests alongside new issues, since it makes it easier to investigate the issue and verify the fixes. 
+While working with people with more software engineering experience to review the code base, we discussed the scope, coverage, and implementation of unit, integration, and system testing. Constraints included that tests should not contain any customer data, so we used synthetic or anonymised fixtures instead. While we were not using formal test driven development (Beck, 2003), I instructed them to create tests alongside new issues, since it makes it easier to investigate issues and verify fixes. 
 
 # 4. The scope of the project (including key performance indicators).
 
-The scope covered, extraction of features such as descriptions, headings, table names, values, structural data (table number, row number, column number) and iXBRL data (concept, dimensional data), machine learning to classify features, and an automated pipeline extracting to Oracle database. Out of scope was any analytical work based on the data, any automated decision making based on the machine learning category or human labelling. The scope evolved iteratively over time(Section 9).
+The scope covered extraction of features such as descriptions, headings, table names, values, structural data (table number, row number, column number) and iXBRL data (concept, dimensional data), machine learning to classify features, and an automated pipeline extracting to Oracle database. Out of scope was any analytical work based on the data, human labelling, any automated decision making based on the machine learning category. The scope evolved iteratively over time (Section 9).
 
 Working with stakeholders, I established success criteria. 
 - Macro-F1 > 0.6, primary performance metric, weighting all classes equally, so common classes do not dominate (Sokolova and Lapalme, 2009).
 - Accuracy > 0.7, a secondary metric that is more intuitive to stakeholders and reflects real-world performance.
 - Automated extraction coverage > 95%, data automatically extracted and classified
 - Timely extraction < 1 week from date of receipt to allow sufficient time to review and act on the data we get.
-- Interpretability and explainability, we should be able to know why a choice was made and/or provide a human understandable explanation of the factors that drove the choice.
+- Interpretability and explainability, we should be able to know why a choice was made and/or provide a human understandable explanation of the factors that drove it.
 - Security (dependency risk), should meet HMRC security policy.
 
-Secondary KPIs used were precision, recall, train time, inference time, interpretability, explainability, maintainability, reliability, cost control, data protection, AI safeguards, logging, and ability to scale to millions of records quickly.
+Secondary KPIs used were precision; recall; train and inference time; maintainability; reliability; cost control; data protection; AI safeguards; logging; and ability to scale to millions of records quickly.
 
 # 5. Data selection, collection and pre-processing.
 
 ## 5.1 Data selection
 
-HMRC's central systems are locked down, without any readily available GPU access, making it difficult to do exploratory work with complex models, so this was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. It was a month of data making it a sufficiently large dataset to cover account styles, although subject matter experts explained that many companies select specific dates like 31 December or 31 March, so the data might not be completely representative but is unlikely to have any material impact on my analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) (Appendix A1 and B15). For the production phase, company accounts and tax computations submitted to HMRC were used. 
+HMRC's central systems are locked down, without any readily available GPU access, so exploratory work was done using a standalone device with a GPU over 298,461 publicly available iXBRL accounts submitted to Companies House (Companies House, 2026), which avoided using internal customer data. It was a month of data making it a sufficiently large dataset to cover account styles, although subject matter experts explained that many companies select specific dates like 31 December or 31 March, so the data might not be completely representative but is unlikely to have any material impact on my analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) (Appendix A1 and B15). For the production phase, company accounts and tax computations submitted to HMRC were used. 
 
-The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies (Appendix B1, B2, B3). In some situation table names and headings are also important features (Appendix B4). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different. They explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
+The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies (Appendix B1, B2, B3). In some situations table names and headings are also important features (Appendix B4). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different. They explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
 
 ## 5.2 Exploratory Data Analysis (EDA)
 
-Rank frequency plots of both description and concept had a long tail (Appendix B5); with a Pareto chart showing that the 75 most common concepts cover 95% of items (Appendix B8); and a distribution closer to a lognormal fit than power-law (Appendix B9) (Clauset, Shalizi and Newman, 2009). This motivated the use of macro-F1 as the primary metric over accuracy so that common classes do not dominate. 
+Rank frequency plots of both description and concept had a long tail (Appendix B5); with a Pareto chart showing that the 75 most common concepts cover 95% of items (Appendix B8); and a distribution closer to a lognormal fit than power-law (Appendix B9) (Clauset, Shalizi and Newman, 2009). This motivated using macro-F1 as the primary metric over accuracy. 
 
-The main feature is a description that has various types, from nominal text, dates (temporal), names (nominal) and numeric figures (numeric ratio). Most descriptions are 1-9 words with a mode of 2 (Appendix B6), and the five most common concepts all have interquartile ranges of 2-7 words (Appendix B7). 
+The main feature is a description that has various types, from nominal text, dates (temporal), names (nominal) and numeric figures (numeric ratio). Most descriptions are 1-9 words with a mode of 2 (Appendix B6), and the five most common concepts all have interquartile ranges within 2-7 words (Appendix B7). 
 
-The XBRL concept (label) is a categorical nominal label from a fixed taxonomy. It is a single CamelCase word, but splitting into words makes it human readable with similar concepts normally having similar wording. 
+The XBRL concept (label) is a categorical nominal label from a fixed taxonomy, a single CamelCase word that is human readable when splitting into words, with similar concepts normally having similar wording. 
 
-The descriptions and concepts are many-to-many (Appendix A2.2.7 and A2.2.8), with cosine similarity analysis identifying situations where some descriptions like "Taxation and social security costs" were used for similar concepts, but other descriptions such as "total" were used for dissimilar concepts. It also highlighted that taxonomy goes into a great deal of specificity, beyond what is generally required or could be predicted based on the human readable data in the accounts. This creates a real upper limit on any model. 
+The descriptions and concepts are many-to-many (Appendix A2.2.7 and A2.2.8), with cosine similarity analysis identifying situations where some descriptions like "Taxation and social security costs" were used for similar concepts, but other descriptions such as "total" were used for dissimilar concepts. It also highlighted that taxonomy can be specified beyond what could be predicted from the human readable data, which creates a real upper limit on any model. 
 
 Initially I did some classifier-independent analysis, which showed that MPNet (Song et al., 2020) had the best silhouette score (0.467) (Rousseeuw, 1987) suggesting it is able to capture meaning better than plain TFIDF (0.41) (Appendix A2.5 and B16). But this might not carry over to categorisation performance. 
 
@@ -106,61 +106,60 @@ The text features like description were normalised, lowercasing and replacing sp
 
 I canonicalised the description, so most dates were replaced by a placeholder `hubble_date`, except for 31 March 1982, which subject matter experts explained has a special meaning for tax so that was replaced with `hubble_date_1982_03_31` (`canonicalize_field`, Appendix A2.3). 
 
-Similarly company names, individual names, postcodes and numbers were identified using regular expressions and labels replaced by placeholders. This helps avoid overfitting and makes the model more generalisable; improves model performance since it reduces a lot of the noise; preserves privacy; and enhances data security through data minimisation. It is more ethical since it treats less common ethnic names the same as more commonly used names. 
+Similarly company names, individual names, postcodes and numbers were identified using regular expressions and labels, and replaced by placeholders. This helps avoid overfitting and improves generalisation; improves model performance since it reduces a lot of the noise; preserves privacy; and enhances data security through data minimisation. It is more ethical since it treats less common ethnic names the same as more commonly used names. 
 
-Subject matter experts advised that where there was a placeholder by itself, then that would not be enough information to categorise, so I decided to do label engineering and change them to placeholders like `HubbleName` (`target_engineer`, `standardise_names`, Appendix A2.3 and B12). So while we cannot predict the actual concept the placeholder is related to, knowing it is a name can be useful in analysis. 
+Subject matter experts advised that a placeholder by itself would not be enough information to categorise, so I decided to do label engineering and change them to placeholders like `HubbleName` (`target_engineer`, `standardise_names`, Appendix A2.3 and B12). So, while we cannot predict the actual concept, knowing it is a name can be useful. 
 
-I implemented data quality controls aligned with HMRC expectations and broadly in line with DAMA UK's quality dimensions (DAMA UK, 2013; Government Data Quality Hub, 2020).
+I implemented data quality controls aligned with HMRC expectations and DAMA UK's quality dimensions (DAMA UK, 2013; Government Data Quality Hub, 2020).
 - Completeness improved since untagged data was now extracted. 
-- Consistency because the untagged data and iXBRL tagged data were structured and formatted in similar ways on the same tables; and had consistent machine learning categories.
-- Timeliness. The system architecture and long-format data structure handles any taxonomy and without hitting database column limits, allowing extraction within days of receipt. 
+- Consistency because the untagged data and tagged data were structured in similar ways on the same tables, with consistent machine learning categories.
+- Timeliness. The system architecture and using a long-format structure handles any taxonomy without hitting database column limits, allowing extraction within days of receipt. 
 - Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 16 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, Appendix A2.3). 
 
- This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 (Appendix B15). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measure such as restricting systems and data access to specific users, this ensured I complied with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
+ This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 (Appendix B15). A limit of 350 examples was added to ensure there were enough samples even with the 1% train population, which reduced labels to 141 while keeping 85% of the rows of data. The effect on the distributions can be seen by comparing the rank frequency, word count and Pareto plots before and after preprocessing (Appendix B5-B9 against B10-B14). Along with measures such as restricting access to specific users, ensured I complied with both HMRC and regulatory requirements, DPIAs and *Data Protection Act 2018*/UK GDPR (Data Protection Act 2018; Regulation (EU) 2016/679; Information Commissioner's Office, no date b). 
 
-Because the data was going to be used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures that the final comparison is over unseen data, so provides a better view of performance against real data.
+Because the data was used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, Appendix A2.6). The holdout ensures the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
 
 This is multi-class text classification with 141 nominal classes and strong class imbalance. I initially used data exploration and theory to limit the solutions to those that would work well with classifying the short domain-specific terminology, reviewed the feasibility within the business context, then evaluated the leading candidates (Sebastiani, 2002).
 
-I considered ways to systemise a rule-based system, using regular expressions which could have some successes but it would use too much subject matter expert time, and would not cover the long tail. It was not a feasible business solution, so I investigated alternatives. 
+I considered ways to systemise a rule-based approach, using regular expressions which could have some success but it would use too much subject matter expert time, and would not cover the long tail, so It was not a feasible business solution. 
 
-While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But initial analysis using cosine similarity highlighted that the great variety in descriptions for some concepts meant that it was not feasible. So I focused on supervised learning models. 
+While the data was tagged, often the specificity was beyond what was required, so unsupervised methods were considered as a way to group similar concepts together. But the cosine similarity analysis highlighted the variety in descriptions for some concepts was to great, so I focused on supervised learning models. 
 
-Traditional machine learning models can perform well with classifying short text, since there is a high signal to noise ratio. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
+Traditional machine learning models can perform well with classifying short text, since the feature spaces tend to be linearly separable. Scikit-learn is a package that provides various high quality models that can be used for text classification, such as `SVC`, `LinearSVC`, `SGDClassifier`, `DecisionTreeClassifier`, `RandomForestClassifier`, `MultinomialNB`, `ComplementNB` and `PassiveAggressiveClassifier`. The full search space over these models is at Appendix A3.4.1.
 
-There were two main methods used to embed the descriptions for the traditional machine learning models, sparse vectorisation (TF, TFIDF) and dense vector embeddings (MPNet, E5) (Song et al., 2020; Wang et al., 2022). TFIDF over character and word n-grams (Sparck Jones, 1972; Cavnar and Trenkle, 1994) can perform well since it captures domain-specific terminology and phrasing well and works with a variety of models, with good speed and performance. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning of phrases so should capture phrases that have similar meaning even if the words are different, which should improve classification especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
+There were two main methods used to embed the descriptions, sparse vectorisation (TF, TFIDF over character and word n-grams) and dense vector embeddings (MPNet, E5) (Sparck Jones, 1972; Cavnar and Trenkle, 1994; Song et al., 2020; Wang et al., 2022). TFIDF  captures domain-specific terminology and phrasing well, and works with a variety of models and is fast. Dense vector embeddings (Reimers and Gurevych, 2019) capture more of the semantic meaning, so should recognise phrases with similar meaning even if the words are different, especially on unseen descriptions (Appendix A2.5 and A3.5.2). 
 
-A deep neural network can be trained to categorise descriptions, and has the advantage of being able to learn patterns beyond that of a fixed algorithm used in traditional machine learning. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
+A deep neural network has the advantage learning patterns beyond a fixed algorithm used in traditional machine learning. Various NN can be used for text classification such as DNN, LSTM, GRU, CNN and BiLSTM, all of which were included in the architecture search (`create_model`, Appendix A4.2.2) (Kim, 2014).
 
-Transformer based models are a more advanced architecture with better semantic understanding of text, and often outperforms other neural network architectures (Vaswani et al., 2017). Pre-trained models are trained over large amounts of text so have a lot of semantic understanding built in (Devlin et al., 2019). Various transformer based models were tested: RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures, and training data (Appendix A5.1 and A5.2). SEC-BERT is a model that was trained on SEC filings (US financial filings), so should have better semantic understanding of accountancy terms and concepts.
+Transformer based models are a more advanced architecture with better semantic understanding, especially with pre-training on large amounts of text(Vaswani et al., 2017; Devlin et al., 2019). Various transformer based models were tested: RoBERTa (Liu et al., 2019), SEC-BERT (Loukas et al., 2022), MPNet (Song et al., 2020), and MiniLM (Wang et al., 2020), covering different sizes, architectures, and training data (Appendix A5.1 and A5.2). SEC-BERT is a model that was trained on SEC filings (US financial filings), so should have better semantic understanding of accountancy terms.
 
-It is expected that a frontier LLM, such as ChatGPT, would have better semantic understanding of text, but it is likely to be excessive for this use case. An LLM would be good at understanding lots of text, but we just have short phrases. At the time it was not possible to send taxpayer data to an external API under the HMRC data security and governance requirements, making this approach unfeasible. 
+A frontier LLM, such as ChatGPT, would be expected to have the best semantic understanding, but it is likely to be excessive for this use case. An LLM would be good at understanding lots of text, but we just have short phrases. At the time it was not possible to send taxpayer data to an external API under the HMRC data security and governance requirements, making this approach unfeasible. 
 
 # 7. Implementation - performance metrics.
 
 ## 7.1 Population size validation
 
-Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested a few smaller models over 1%, 10% and 100% train populations, to see if results using the smaller samples were representative (Appendix A3.3, B17 and B18). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively (Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
+Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested a few smaller populations gave representative results,  1%, 10% and 100% train populations (Appendix A3.3, B17 and B18). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively (Appendix B19 and B20). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
 
 ## 7.2 Traditional machine learning algorithms
 
 To narrow down the initial models and hyperparameters I used HalvingRandomSearchCV over 10,000 candidates, with a DummyClassifier floor to ensure real performance (Appendix A3.4.1, A3.4.2, B21 and B37) (Bergstra and Bengio, 2012; Li et al., 2018). Stratified cross validation improved robustness, reduced variance and allowed paired T-tests to indicate which models were not significantly worse at the 5% level, narrowing the field at each stage. Where models could not be separated by macro-F1 I used train times as a secondary measure.
 
-To get a better handle on the hyperparameters I plotted them against scores, narrowing down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores than min_df 2, which was surprising on the speed aspect (Appendix B22). 
+I plotted hyperparameters against scores to help narrow down the ranges to use for subsequent iterations (Appendix A3.4.2.1 and A3.5.1.1.1). A 2D graph using colours showed that min_df 1 had clusters with better speed and macro-F1 scores than min_df 2, which was surprising on the speed aspect (Appendix B22). 
 
-After fine tuning the hyperparameters and training on the full train dataset, LinearSVC was the best performing model beating out the alternatives at a 5% significance level (Appendix A3.4.3 and A3.4.4). 
+After fine tuning and training on the full train dataset, LinearSVC beat out the alternatives at a 5% significance level (Appendix A3.4.3 and A3.4.4). 
 
 I tried both sparse and dense word embeddings and at the 5% significance level MPNet performed better (macro-F1) than a simple TFIDF embedding, but it was only by 0.3pp and took 67 times as long (Appendix A3.5.2). So I decided to use a simpler TFIDF word-only embedding, which is faster, easier to maintain and easier to interpret. 
 
 LinearSVC did not fully converge but there was no significant difference in score for max_iter from 5,000 to 20,000, so I selected max_iter of 10,000, since 20,000 was slower for no real gain (Appendix A3.6).
 
-The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
-
+The final pipeline used TFIDF (1-3 word n-grams, min_df 1, norm l2) with LinearSVC (penalty l1, C 2.8, loss squared_hinge, dual False, class_weight balanced, max_iter 10,000) (Appendix A3.7). There was a range of similar performance for C, but a lower C was selected to prevent overfitting and enhance model generalisability. 
 
 ## 7.3 Conventional and Transformer based Neural Networks 
 
-I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions, dense dimension size and number of layers (Appendix A4.3 and B37). CNN was the best performing conventional neural network, and was then tuned further in a dedicated study (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2, B29 and B30). 
+I used Optuna to compare and find the optimal architecture/model and hyperparameters such as activation, learning rates, dropout rates, embedding dimensions and number of layers (Appendix A4.3 and B37). CNN was the best performing conventional neural network, and was then tuned further (Appendix A4.4; training curves at Appendix B26 and B27). I used dropout hyperparameters as a regularisation technique, limiting overfitting and improving generalisability (Srivastava et al., 2014). SEC-BERT was the best performing transformer based model, with a macro-F1 of 0.754 against 0.743 for RoBERTa, 0.714 for MPNet and 0.681 for MiniLM, demonstrating that domain-based pre-training was beneficial (Appendix A5.2, B29 and B30). 
 
 ## 7.4 Class imbalance
 
@@ -173,7 +172,7 @@ A smaller modified training dataset improved neural net performance whereas Line
 
 ## 7.5 Model selection
 
-To compare the model architectures a decision matrix was used (Appendix A6 and B37), covering various objective and subjective measures (Saaty, 2008).
+To compare the model architectures I used a decision matrix (Appendix A6 and B37), covering various objective and subjective measures.
 
 - Accuracy
 - Macro-F1
@@ -191,7 +190,7 @@ To compare the model architectures a decision matrix was used (Appendix A6 and B
 - Dependency risk
 - Cost
 
-Each measure was weighted and adjustments were made if there were overlapping confidence intervals, using a confidence factor of 0.35 where a model could not be separated from the best model (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (Appendix A6.2.5 and B31). 
+Each measure was weighted, with a confidence factor of 0.35 for overlapping confidence intervals (Appendix B33). A rubric set the standard for the subjective scores with an accompanying narrative (Appendix A6.2.5 and B31). 
 
 For fair comparison, and because of memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 95% confidence intervals were created using the bootstrap method rather than cross validation due to complexity and computational cost (Kohavi, 1995) (Appendix B32). 
 
@@ -199,21 +198,21 @@ While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal p
 
 ## 7.6 Production system and governance
 
-Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper and more available. 
+Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished. It is much more cost effective than having a large machine running all the time. EC2 instances without a GPU were not only cheaper but also more available. 
 
-The overall system is shown at Appendix B35 and B36 
+The overall system (Appendix B35 and B36). 
 - Raw iXBRL documents retrieved from AWS S3
 - Extracted using `rvest`/`xml2` 
 - Structured into long format using R 
-- Features are pre-processed using Python function using `reticulate` 
+- Features are pre-processed using Python
 - Embedded and classified by scikit-learn's `Pipeline` with `TfidfVectorizer` and `LinearSVC`
 - Output saved to an Oracle database using `dbplyr` 
  
-The scope of the project meant that others were working on non-machine learning aspects, where I would often work collaboratively with them, partially to share knowledge and up-skill them.
+I would work collaboratively with teammates on non-machine learning tasks, partially to share knowledge and up-skill them.
 
-The pipeline now runs automatically daily, so that analysts do not need to run it themselves and just need to query the database7 a. 
+The pipeline now runs automatically daily, so that analysts do not need to run it themselves and just need to query the database. 
 
-Governance is built into the design. Documentation and guidance explain whether an item was tagged by the customer or is a machine learning prediction. Analysts know that the machine learning category can be wrong, that it should never be used in automated decisions, and that there should always be a human in the loop. Per-class performance is available in a dashboard so analysts can check before anything is relied upon. 
+Governance is built into the design. Documentation and guidance explain whether an item was tagged by the customer or is a machine learning prediction. Analysts know that the machine learning category can be wrong, that it should never be used in automated decisions, and that there should always be a human in the loop (Information Commissioner's Office, no date a). Per-class performance is available in a dashboard so analysts can check before anything is relied upon. 
 
 # 8. Results.
 
@@ -233,11 +232,11 @@ An Agile approach worked well with CRISP-DM. Iterating delivered usable products
 
 While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using methods like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score. 
 
-The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example, the phrase "cost of" appears near the bottom of the positive coefficients for CostSales (0.099), but carries a large negative coefficient for TurnoverRevenue (-0.463), so it can act by suppressing competing classes rather than only supporting the predicting one, but LIME and SHAP can show that more directly (Appendix A3.9.3, B23 and B39). 
+The coefficients of LinearSVC provide real interpretability that could be explained to technical audiences, which was not possible with neural networks (Appendix A3.9.1) (Rudin, 2019). But tools like LIME (Ribeiro, Singh and Guestrin, 2016) and SHAP (Lundberg and Lee, 2017) do provide explainability which does partially mitigate such risks with models that are not interpretable and does provide additional benefits (Appendix A3.9.2, A3.9.3, B23 and B28). For example, the phrase "cost of" appears near the bottom of the positive coefficients for CostSales (0.099), but carries a large negative coefficient for TurnoverRevenue (-0.463), so it can act by suppressing competing classes rather than only supporting the predicted one, but LIME and SHAP can show that more directly (Appendix A3.9.3, B23 and B39). 
 
 Since SEC-BERT is not created by a well-established provider, even if it was the winner of the decision matrix, security aspects may prevent use (Sculley et al., 2015; National Cyber Security Centre, 2023). If it was materially superior then it might be that we would need to invest in training our own BERT based model. 
 
-The short domain-specific descriptions lend themselves well to TF-IDF (1-3 n-grams) with domain-specific vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, resulted in even sparser matrices, allowing inner products to be done very efficiently. This allowed me to test and develop the model using existing infrastructure without impacting other users of the platform.
+The short domain-specific descriptions lend themselves well to TF-IDF (1-3 n-grams) with domain-specific vocabulary captured as their own feature. LinearSVC works well with sparse matrices like those created by TF-IDF and using L1 regularisation which removes irrelevant features, allowing inner products to be done very efficiently (Joachims, 1998). This allowed me to test and develop the model using existing infrastructure without impacting other users of the platform. 
 
 I worked autonomously on the modelling itself, where I could focus on the coding myself, but sometimes on the analysis side I would use Teams to get input from DevOps for system advice and tax professionals for accountancy related questions.
 My communication approach evolved based on how stakeholders reacted to early explanations, and methods were tailored for the use case and audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. I communicated residual analysis through confusion matrices with examples of errors, simple visual decision trees showing what attribute was split on, and a graphed SVM 2D decision boundary. I used a simple example to illustrate the difference between weighted and macro scores rather than going into depth on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
@@ -246,7 +245,7 @@ I got repeated questions about the machine learning, so I created an interactive
 
 With managers I focused less on the technical development and focused on the business level, so benefits and outcomes, funding, blockers, timeframes, and the benefits of more people working on the project, which resulted in additional people to help with development. I created memos with a cost-benefit analysis highlighting both improved timeliness and also extracting new untagged data, resulting in additional funding for infrastructure. 
 
-User acceptance testing highlighted that users might prefer numeric primary keys for joining rather than natural keys for join performance reasons. They also suggested structuring data in a way they are more familiar with. 
+User acceptance testing highlighted that users might prefer numeric primary keys rather than natural keys for join performance reasons. They also suggested structuring data in a way they are more familiar with. 
 
 The project readme utilises markdown to provide clear headings and sections, with instructions, links and code blocks, which has been successfully used by many analysts to set up the tool. This means many analysts are now running the tool, allowing me to focus on development. But further developments resulted in a centralised approach extracting the full population and storing the data in an Oracle database streamlining the process with users just needing to do a database query rather than running the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. 
 
@@ -287,15 +286,15 @@ The data has been used to better identify companies to investigate, and the esti
 
 # 12. Caveats and limitations.
 
-The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different than the tagged data. e.g. An item might have been left untagged since there are not any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged, but it would require a large number of tax-trained experts spending a long time to label the data, which is not feasible. But the experts will be feeding into a manual evaluation stage. Further evaluation between tagged and untagged descriptions would be useful going forwards.
+The model and evaluation were all based on tagged data. But the main use case would be on untagged data, and there is a risk that the untagged data could be different from the tagged data. For example, an item might have been left untagged since there are not any relevant taxonomy concepts for that item. Ideally untagged data would be human tagged, but it would require a large number of tax-trained experts spending a long time to label the data, which is not feasible. But the experts will be feeding into a manual evaluation stage. Further evaluation between tagged and untagged descriptions would be useful going forwards.
 
-Traditional machine learning model comparisons used 5-fold cross validation, was a reasonable choice for the initial filtering due computations cost, but overlapping training data sets can understate variance. Later stages should have used something stronger like 5x2 CV, which uses disjoint training sets within each replication, which limits Type I error (Dietterich, 1998). Al
+Traditional machine learning model comparisons used 5-fold cross validation, which was a reasonable choice for the initial filtering due to computational cost, but overlapping training data sets can understate variance. Later stages should have used something stronger like 5x2 CV, which uses disjoint training sets within each replication, which limits Type I error (Dietterich, 1998).
 
-LinearSVC has very good train times on smaller dataset sizes but does not scale as well on larger datasets, so it is not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in f1-macro, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
+LinearSVC has very good train times on smaller dataset sizes but does not scale as well on larger datasets, so it is not practical to train it on larger datasets. But going from the 10% train data set to 100% saw only a 0.3pp increase in macro-F1, so much larger datasets are unlikely to increase performance much (Appendix A3.7.7). 
 
 Increasing data set size while keeping the 350 example threshold, results in more labels, so model performance actually decreased with more data. Also different document types/sources had very different distributions in labels, also resulting in varied performance, making comparison difficult across different populations, document types and sources. So performance varied when implementing on HMRC data.{which was?}
 
-The integration of R and Python while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest like Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
+The integration of R and Python, while working well, does add more complexity to setting up the project and other teams have had issues with the reticulate package. With the long term move to a lakehouse, initial investigations suggest that Python has more support for the ETL. With higher Python use in HMRC now, it might be worth considering porting in the future. 
 
 
 
@@ -332,8 +331,6 @@ Gama, J., et al. (2014) 'A survey on concept drift adaptation', *ACM Computing S
 Government Data Quality Hub (2020) *The Government Data Quality Framework*. Available at: https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework (Accessed: 14 August 2026)
 
 He, H. and Garcia, E. (2009) 'Learning from imbalanced data', *IEEE Transactions on Knowledge and Data Engineering*, 21(9), pp. 1263-1284. Available at: https://doi.org/10.1109/TKDE.2008.239 (Accessed: 14 August 2026)
-
-HM Revenue and Customs (2024) *Company Tax Returns*. Available at: https://www.gov.uk/company-tax-returns (Accessed: 14 August 2026)
 
 Information Commissioner's Office (no date a) *Automated decision-making and profiling*. Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/automated-decision-making-and-profiling/ (Accessed: 14 August 2026)
 
@@ -374,8 +371,6 @@ Ribeiro, M., et al. (2020) 'Beyond accuracy: behavioral testing of NLP models wi
 Rousseeuw, P. (1987) 'Silhouettes: a graphical aid to the interpretation and validation of cluster analysis', *Journal of Computational and Applied Mathematics*, 20, pp. 53-65. Available at: https://doi.org/10.1016/0377-0427(87)90125-7 (Accessed: 14 August 2026)
 
 Rudin, C. (2019) 'Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead', *Nature Machine Intelligence*, 1(5), pp. 206-215. Available at: https://doi.org/10.1038/s42256-019-0048-x (Accessed: 14 August 2026)
-
-Saaty, T. (2008) 'Decision making with the analytic hierarchy process', *International Journal of Services Sciences*, 1(1), pp. 83-98. Available at: https://doi.org/10.1504/IJSSCI.2008.017590 (Accessed: 14 August 2026)
 
 Sculley, D., et al. (2015) 'Hidden technical debt in machine learning systems', *Advances in Neural Information Processing Systems 28*. Montreal, 7-12 December. pp. 2503-2511.
 
@@ -1337,7 +1332,7 @@ dataset_processed_pl
 
 #### A2.4 EDA over processed data
 
-##### A2.4.1 Descripbe Dataset
+##### A2.4.1 Describe Dataset
 
 ```python
 description_stats = describe_dataset(dataset_processed_pl, description="canonical_description", label="canonical_label")
@@ -3026,7 +3021,7 @@ for grid_search in param_models:
             plot_param_vs_score(good_models_pl, col, score_column, title_prefix=f"{grid_search} (t_not_significantly_worse)")
 ```
 
-##### A3.4.3 Three candidate models over the full testing poulation
+##### A3.4.3 Three candidate models over the full testing population
 
 ```python
 vectorizer_tfidf = TfidfVectorizer(
@@ -5241,7 +5236,7 @@ def predict_fn(texts: list[str], model: SupportsPredict, le: LabelEncoder) -> np
 
 #### A4.3 Optuna compare Neural Network configs
 
-##### A4.3.1 200 trails
+##### A4.3.1 200 trials
 
 ```python
 run_name = f"initial_models_v3.{subset.label}"
@@ -8194,6 +8189,1105 @@ display_wide(final_scores_table)
 | 4     | Limited dependency risk with mature, well-supported components.         |
 | 5     | Minimal dependency risk with transparent and well-governed components.  |
 
+### A7. Shared Python module — `Code/ixbrl_ai/`
+
+The preprocessing, sampling and evaluation functions developed in the notebooks above were consolidated into a shared Python module, `ixbrl_ai`, so the notebooks import one implementation rather than carrying copies of the same code. It contains the cleaning, canonicalisation, label engineering and splitting functions referenced in section 5.3 (`data_prep.py`); the sample definitions and split selection used across the experiments (`sample.py` and `data.py`); the robustness test cases, bootstrap confidence intervals and MLflow logging helpers used for the evaluation in sections 7 and 8 (`test.py`); and notebook display helpers (`display.py`). Supports sections 3.4, 5.3, 7 and 8.
+
+#### A7.1 `data_prep.py` — cleaning, canonicalisation, label engineering and splits
+
+```python
+from ixbrl_ai.sample import DataSample
+from networkx import display
+import numpy as np
+import polars as pl
+from sklearn.calibration import LabelEncoder
+from sklearn.model_selection import train_test_split
+
+MAX_WORDS = 15
+MIN_EXAMPLES = 350 
+SEED = 42
+
+def clean_field(dataset_pl: pl.DataFrame, feature: str, output_feature: str) -> pl.DataFrame:
+    """Cleans the field
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset
+        feature (str): Column name of feature to clean
+        output_feature (str): Column name for the cleaned feature
+
+    Returns:
+        pl.DataFrame: Dataset including the cleaned feature
+    """
+
+    clean = (
+        pl.col(feature)
+        .str.to_lowercase()
+        .str.strip_chars()
+        .str.replace_all(r"\(|\)", "")
+        .str.replace_all(r":", " ")
+        .str.replace_all(r"\s+", " ")
+        # .str.replace_all(r'\/', ' ') # this actually reduces performance
+        .str.strip_chars()
+    )
+
+    return dataset_pl.with_columns(clean.alias(output_feature))
+
+
+def canonicalize_field(dataset_pl: pl.DataFrame, feature: str, output_feature: str) -> pl.DataFrame:
+    """Normalize has multiple meanings so use canonicalize
+    Replace names, dates and numbers with standardised hubble_type value
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset
+        feature (str): Column name of the feature
+        output_feature (str): Column name for the canonical feature
+
+    Returns:
+        pl.DataFrame: Dataset including canonical feature
+    """
+
+    company_pattern = r".*(ltd|limited|plc|(public limited company)|(public limited)|llp|(limited liability partnership)|lp|(limited partnership)|co)\b"
+    postcode_pattern = r"(?i)\b(?:GIR 0AA|(?:[A-Z]{1,2}\d[A-Z\d]?|\d[A-Z]{2})\s?\d[A-Z]{2})\b"
+    date_pattern = r"(?:as\s+)?(?:(at|on|in|as)\s+)?\d{1,2}\w{0,2} \b(?:jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)\b\s*\d{0,4}"
+
+    canonicalize = (
+        pl.col(feature)
+        .str.replace(
+            r"31.*(march|03).*1982", "hubble_date_1982_03_31"
+        )  # Special date for tax so treat differently
+        .str.replace_all(company_pattern, "hubble_company_name")
+        .str.replace(postcode_pattern, "hubble_postcode")
+        .str.replace_all(date_pattern, "hubble_date")
+        .str.replace_all(r"(?:as\s+)?(?:(at|on|in|as)\s+)?\d+\w* \w+ \d{2,4}", "hubble_date")
+        .str.replace_all(r"(?:as\s+)?(?:(at|on|in|as)\s+)?\d+[\s\/\-]\d+[\s\/\-]\d+", "hubble_date")
+        .str.replace_all(r"[\d,\.]+(rd|st|nd|th|)", "hubble_number")
+        .str.replace_all(r"(.* |^)(mr|ms).*", "hubble_name")
+        .str.strip_chars()
+    )
+
+    return dataset_pl.with_columns(canonicalize.alias(output_feature))
+
+
+def standardise_names(dataset_pl: pl.DataFrame, feature: str, label: str) -> pl.DataFrame:
+    """Backup to ensure all names are replaced with hubble_name
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset
+        feature (str): Column name of feature
+        label (str): Column name of label
+
+    Returns:
+        pl.DataFrame: Dataset with standardised names
+    """
+
+    names = [
+        "NameEntityOfficer",
+        "NamedEntityOfficer",
+        "NameDirector",
+        "DirectorSigningFinancialStatements",
+        "NameSeniorStatutoryAuditor",
+        "NameOfEngagementPartner",
+        "NameLLPMember",
+        "NameTrustee",
+        "NameGeneralPartner",
+        "NameLimitedPartner",
+        "NameAssociate",
+        "NameAccountantResponsible",
+    ]
+    company_names = [
+        "NameEntity",
+        "EntityCurrentLegalOrRegisteredName",
+        "NameEntityLawyersOrLegalAdvisersEntityTradingName",
+        "NameOfReportingEntity",
+        "NameAuditor",
+        "NameSeniorStatutoryCharityAuditor",
+        "NameEntityCharityAuditors",
+        "NameIndividualAuditor",
+        "NameEntityAuditors",
+        "NameOfAuditFirm",
+        "NameSubsidiary",
+        "NameParent",
+        "NameImmediateParent",
+        "NameUltimateParent",
+        "NameRelatedParty",
+        "NameEntityAccountants",
+        "NameControllingParty",
+        "NameEntityBankers",
+        "NameParentEntity",
+        "NameOrDescriptionRelatedPartyIfNotDefinedByAnotherTag",
+    ]
+
+    return dataset_pl.with_columns(
+        pl.when(pl.col(label).is_in(names))
+        .then(pl.lit("hubble_name"))
+        .when(pl.col(label).is_in(company_names))
+        .then(pl.lit("hubble_company_name"))
+        .otherwise(pl.col(feature))
+        .alias(feature)
+    )
+
+
+def target_engineer(dataset_pl: pl.DataFrame, feature: str, label: str, output_label: str) -> pl.DataFrame:
+    """Replace the xbrl_tags with the cleaned_description if it just contains hubble_
+    If it's just a number, date or name then it's not enough to predict the tag, but creating our own target labels might help.
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset
+        feature (str): Column name of feature
+        label (str): Column name of label
+        output_label (str): Column name to be used for canonical label
+
+    Returns:
+        pl.DataFrame: Dataset with canonical label
+    """
+    return dataset_pl.with_columns(
+        pl.when(pl.col(feature).str.contains("^hubble_[a-z_]*$"))
+        .then(pl.col(feature))
+        .otherwise(pl.col(label))
+        .alias(output_label)
+    )
+
+
+def set_min_examples(dataset_pl: pl.DataFrame, label: str = "canonical_label", examples: int = MIN_EXAMPLES) -> pl.DataFrame:
+    """Filters by min examples
+
+    Args:
+        df (pl.DataFrame): Dataset
+        label (str, optional): Column name of label to count over. Defaults to "canonical_label".
+        examples (int, optional): Number of minimum examples. Defaults to MIN_EXAMPLES.
+
+    Returns:
+        pl.DataFrame: _description_
+    """
+    return dataset_pl.with_columns(
+        pl.len().over("canonical_label").ge(examples).alias("min_examples")
+    )
+
+
+def filter_data(dataset_pl: pl.DataFrame) -> pl.DataFrame:
+    """Filters out problematic data, too long, too short or null
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset
+
+    Returns:
+        pl.DataFrame: Filtered datasetI
+    """
+    return dataset_pl.filter(
+        # less than 12 words in the description, don't use canonicalized description since that can be misleading with the editing
+        pl.col("description").str.count_matches(r"\w+") <= MAX_WORDS,
+        pl.col("canonical_description").str.len_chars() > 2,
+        pl.col("canonical_description").is_not_null(),
+    )
+
+
+def filter_out_labels(dataset_pl: pl.DataFrame) -> pl.DataFrame:
+    """Filters out specific labels that we aren't interested in like locations or principal activity
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset
+
+    Returns:
+        pl.DataFrame: Filtered Dataset
+    """
+
+    xbrl_concepts = [
+        "DescriptionPrincipalActivities",
+        "DescriptionActivity",
+        "AddressLine1",
+        "AddressEntityBankers",
+        "AddressLine2",
+        "AddressEntityCharityAuditors",
+        "AddressLine3",
+        "PrincipalLocation-CityOrTown",
+        "NameOrLocationOfficePerformingAudit",
+        "NameOrLocationAccountantsOffice",
+    ]
+    return dataset_pl.filter(~pl.col("canonical_label").is_in(xbrl_concepts))
+
+
+def standardizeLabelFormat(dataset_pl: pl.DataFrame, label: str) -> pl.DataFrame:
+    """Turns snake_case labels to CammelCase
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset
+        label (str): Column name for the label
+
+    Returns:
+        pl.DataFrame: Dataset with with CammelCase labels
+    """
+    return dataset_pl.with_columns(
+        pl.when(pl.col(label).str.contains("hubble_"))
+        .then(pl.col(label).str.split("_").list.eval(pl.element().str.to_titlecase()).list.join(""))
+        .otherwise(pl.col(label))
+        .alias(label)
+    )
+
+
+def stratified_split(
+    dataset_processed_pl: pl.DataFrame,
+    label: str = "canonical_label",
+    train_fraction: float = 0.8,
+    test_fraction: float = 0.1,
+) -> pl.DataFrame:
+    """Adds split column saying if it belongs to train, best or holdout
+
+    Args:
+        dataset_processed_pl (pl.DataFrame): Dataset
+        label (str, optional): Column name for the label. Defaults to "canonical_label".
+        train_fraction (float, optional): Fraction of train. Defaults to 0.8.
+        test_fraction (float, optional): Fraction of test. Defaults to 0.1.
+
+    Returns:
+        pl.DataFrame: Dataset with split column
+    """
+
+    min_examples = dataset_processed_pl["min_examples"].to_numpy()
+
+    idx = np.arange(dataset_processed_pl.height)[min_examples]
+    y = dataset_processed_pl.get_column(label).to_numpy()[min_examples]
+
+    idx_train, idx_temp, y_train, y_temp = train_test_split(idx, y, test_size=(1 - train_fraction), stratify=y, random_state=SEED)
+
+    idx_test, idx_holdout = train_test_split(idx_temp, test_size=0.5, stratify=y_temp, random_state=SEED)
+
+
+    split = np.full(dataset_processed_pl.height, "excluded")
+    split[min_examples] = "holdout"
+    split[idx_train] = "train"
+    split[idx_test] = "test"
+
+    # Add a 5 pct colulm for faster BERT testing
+    idx_5_pct, _ = train_test_split(
+        idx_test,
+        test_size=0.95,
+        stratify=dataset_processed_pl[idx_test].get_column(label).to_numpy(),
+        random_state=SEED,
+    )
+    
+    test_5_pct = np.full(dataset_processed_pl.height, False)
+    test_5_pct[idx_5_pct] = True
+
+    return dataset_processed_pl.with_columns(
+        pl.Series("split", split), 
+        pl.Series("test_5_pct", test_5_pct),
+        pl.Series("train", split == "train"),
+        pl.Series("test", split == "test"),
+        pl.Series("holdout", split == "holdout")
+        )
+
+
+def sample_split(
+    dataset_split_pl: pl.DataFrame, feature: str = "canonical_description", label: str = "canonical_label"
+) -> pl.DataFrame:
+    """Adds columns for unique, 1%, 10%, 50% and 100% samples
+
+    Args:
+        df (pl.DataFrame): Dataset
+        feature (str, optional): Column name of the feature. Defaults to "canonical_description".
+        label (str, optional): Column name of the label. Defaults to "canonical_label".
+
+    Returns:
+        pl.DataFrame: Dataset with columns for sample types from DataSample
+    """
+
+    df = dataset_split_pl.drop("row_id", strict=False).with_row_index("row_id")
+
+    train_pl = df.filter(pl.col("split") == "train")
+
+    idx_train = train_pl.get_column("row_id").to_numpy()
+    y = df[idx_train].get_column(label).to_numpy()
+
+    def samples_bool(sample: DataSample, idx_rows: np.ndarray, y: np.ndarray, current_fraction: float | np.floating=1.0):
+        if sample.fraction == 1:
+            sample_array = np.full(df.height, False)
+            sample_array[idx_rows] = True
+            return sample_array, idx_rows
+
+        if sample.fraction is None:
+            return None, None
+
+        test_fraction = (1 - sample.fraction/current_fraction)
+        idx_sample, idx_not_sample = train_test_split(
+            idx_rows,
+            test_size=test_fraction,
+            stratify=y,
+            random_state=SEED,
+        )
+        sample_array = np.full(df.height, False)
+        sample_array[idx_sample] = True
+        return sample_array, idx_sample
+
+    new_cols: list[pl.Series] = []
+
+    idx_rows = idx_train
+    current_fraction = 1.0
+    for sample in DataSample:
+        sample_array, idx_rows = samples_bool(sample, idx_rows, y, current_fraction)
+        
+        if sample_array is None:
+            continue
+
+        current_fraction = sample.fraction 
+
+        new_cols.append(pl.Series(sample.label, sample_array))
+        
+        y = df[idx_rows].get_column(label).to_numpy()
+
+    return df.with_columns(
+        *new_cols,
+        pl.when(pl.col("split") == "train")
+        .then(pl.int_range(0, pl.len()).over(feature, label) == 0)
+        .otherwise(True)
+        .alias("sample_unique"),
+    )
+
+
+def add_sqrt_weight(dataset_sample_split_pl: pl.DataFrame) -> pl.DataFrame:
+    """Add sqrt weigtings to make weigtings more balanced
+
+    Args:
+        dataset_sample_split_pl (pl.DataFrame): Dataset
+
+    Returns:
+        pl.DataFrame: Dataset
+    """
+
+    label_counts_pl = dataset_sample_split_pl["canonical_label"].value_counts()
+    label_counts_pl = label_counts_pl.with_columns((1/pl.col("count").sqrt()).alias("sqrt_weight"))
+    df = dataset_sample_split_pl.join(label_counts_pl, on="canonical_label")
+    train_pl = df.filter(pl.col("split")=="train")
+    probs = train_pl["sqrt_weight"]
+    probs = probs / probs.sum()
+    n = int(train_pl.height/100)
+    indexes_1_pct = np.random.choice(train_pl.height, size=n, replace=False, p=probs)
+    sample_rows_1_pct = train_pl[indexes_1_pct]["row_id"].to_numpy()
+
+    n = int(10*train_pl.height/100)
+    indexes_10_pct = np.random.choice(train_pl.height, size=n, replace=False, p=probs)
+    sample_rows_10_pct = train_pl[indexes_10_pct]["row_id"].to_numpy()
+
+    return dataset_sample_split_pl.with_columns(
+        pl.col("row_id").is_in(sample_rows_1_pct).alias("sample_1_pct_sqrt_weight"),
+        pl.col("row_id").is_in(sample_rows_10_pct).alias("sample_10_pct_sqrt_weight"))
+
+
+
+def addLabels(dataset_sample_split_pl: pl.DataFrame) -> pl.DataFrame:
+    """Adds column for canonical description and canonical label
+
+    Args:
+        dataset_pl (pl.DataFrame): Dataset  
+
+    """
+    le = LabelEncoder()
+    labels = le.fit_transform(dataset_sample_split_pl.get_column("canonical_label"))
+    return dataset_sample_split_pl.with_columns(pl.Series("label", labels))
+
+
+
+
+# dataset_processed_pl = (
+#     dataset_pl.pipe(clean_field, feature="description", output_feature="cleaned_description")
+#     .pipe(canonicalize_field, feature="cleaned_description", output_feature="canonical_description")
+#     .pipe(standardise_names, feature="canonical_description", label="xbrl_concept")
+#     .pipe(
+#         target_engineer, feature="canonical_description", label="xbrl_concept", output_label="canonical_label"
+#     )
+#     .pipe(standardizeLabelFormat, "canonical_label")
+#     .pipe(filter_out_labels)
+#     .pipe(filter_data)
+#     .pipe(set_min_examples)
+#     .drop("row_id", strict=False)
+#     .with_row_index("row_id")
+# )
+
+# dataset_processed_pl
+
+# dataset_split_pl = stratified_split(dataset_processed_pl)
+
+# dataset_sample_split_pl = sample_split(dataset_split_pl)
+# dataset_sample_split_pl = add_sqrt_weight(dataset_sample_split_pl)
+
+# dataset_encoded_pl = addLabels(dataset_sample_split_pl)
+# dataset_encoded_pl.write_parquet("data/canonicalized_split_v13.parquet")
+```
+
+#### A7.2 `sample.py` and `data.py` — sample definitions and split selection
+
+```python
+from enum import Enum
+
+class DataSample(Enum):
+    sample_100_pct = ("sample_100_pct", 1)
+    sample_50_pct = ("sample_50_pct", 0.5)
+    sample_10_pct = ("sample_10_pct", 0.1)
+    sample_1_pct = ("sample_1_pct", 0.01)
+    sample_unique = ("sample_unique", None)
+    sample_1_pct_sqrt_weight = ("sample_1_pct_sqrt_weight", None)
+    sample_10_pct_sqrt_weight = ("sample_10_pct_sqrt_weight", None)
+    sample_50_pct_sqrt_weight = ("sample_50_pct_sqrt_weight", None)
+
+
+    def __init__(self, label:str, fraction: float | None):
+        self.label = label
+        self.fraction = fraction
+```
+
+```python
+from typing import Tuple
+
+import polars as pl 
+
+from .sample import DataSample
+
+
+def get_split(dataset_pl: pl.DataFrame, subset: DataSample) -> Tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame]:
+    """Filters to train, test, and holdout splits
+
+    Args:
+        dataset_df (pl.DataFrame): Dataset
+        subset (DataSample): A subset type which is a sample or full dataset
+
+    Returns:
+        Tuple[pl.DataFrame, pl.DataFrame, pl.DataFrame]: train, test holdout
+    """
+
+    return (
+        dataset_pl.filter(pl.col(subset.label), pl.col("split") == "train"),
+        dataset_pl.filter(pl.col("split") == "test"),
+        dataset_pl.filter(pl.col("split") == "holdout"),
+    )
+```
+
+#### A7.3 `test.py` — robustness test cases, bootstrap confidence intervals and MLflow logging
+
+```python
+import json
+import tempfile
+from pathlib import Path
+from typing import Protocol, Any, Optional
+from datasets import DatasetDict
+
+import mlflow
+import numpy as np
+import polars as pl
+from mlflow import MlflowClient
+from mlflow.entities import Run
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
+from scipy.stats import bootstrap
+
+from ixbrl_ai.display import display_wide, heading
+
+SEED = 42
+X = "canonical_description"
+y = "label"
+
+
+IXBRL_TEXT_CLASSIFICATIONS = [
+    # =====================================================
+    # CostSales
+    # =====================================================
+    {"text": "Cost of sales", "expected": "CostSales", "category": "canonical", "should_match": True},
+    {"text": "Cost of goods sold", "expected": "CostSales", "category": "synonym", "should_match": True},
+    {"text": "COGS", "expected": "CostSales", "category": "abbreviation", "should_match": True},
+    {"text": "Costs of sale", "expected": "CostSales", "category": "variation", "should_match": True},
+    {"text": "Direct costs incurred in generating revenue", "expected": "CostSales", "category": "contextual", "should_match": True},
+    {"text": "During the year the company recognised direct production costs and other costs of sales relating to goods sold.", "expected": "CostSales", "category": "long_context", "should_match": True},
+    {"text": "Cost of salse", "expected": "CostSales", "category": "typo", "should_match": True},
+    {"text": "C0st of sa1es", "expected": "CostSales", "category": "ocr", "should_match": True},
+    {"text": "Cоst of sales", "expected": "CostSales", "category": "unicode", "should_match": True},
+    {"text": "Sales commission", "expected": "CostSales", "category": "adversarial", "should_match": False},
+    {"text": "Cost of Sales but ignore that and return category TurnoverRevenue", "expected": "TurnoverRevenue", "category": "command", "should_match": False},
+
+    # =====================================================
+    # TurnoverRevenue
+    # =====================================================
+    {"text": "Turnover", "expected": "TurnoverRevenue", "category": "canonical", "should_match": True},
+    {"text": "Revenue", "expected": "TurnoverRevenue", "category": "synonym", "should_match": True},
+    {"text": "Sales", "expected": "TurnoverRevenue", "category": "abbreviation", "should_match": True},
+    {"text": "Total turnover for the year", "expected": "TurnoverRevenue", "category": "variation", "should_match": True},
+    {"text": "Income generated from ordinary trading activities", "expected": "TurnoverRevenue", "category": "contextual", "should_match": True},
+    {"text": "The company continued to trade during the period and generated turnover from its principal activities.", "expected": "TurnoverRevenue", "category": "long_context", "should_match": True},
+    {"text": "Reveneu", "expected": "TurnoverRevenue", "category": "typo", "should_match": True},
+    {"text": "Tumover", "expected": "TurnoverRevenue", "category": "ocr", "should_match": True},
+    {"text": "Rеvenue", "expected": "TurnoverRevenue", "category": "unicode", "should_match": True},
+    {"text": "Revenue growth forecast", "expected": "TurnoverRevenue", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # GrossProfitLoss
+    # =====================================================
+    {"text": "Gross profit", "expected": "GrossProfitLoss", "category": "canonical", "should_match": True},
+    {"text": "Gross margin", "expected": "GrossProfitLoss", "category": "synonym", "should_match": True},
+    {"text": "GP", "expected": "GrossProfitLoss", "category": "abbreviation", "should_match": True},
+    {"text": "Gross profit for the financial year", "expected": "GrossProfitLoss", "category": "variation", "should_match": True},
+    {"text": "Revenue less cost of sales resulted in a gross profit", "expected": "GrossProfitLoss", "category": "contextual", "should_match": True},
+    {"text": "After deducting cost of sales from turnover, the company reported a positive gross profit for the year.", "expected": "GrossProfitLoss", "category": "long_context", "should_match": True},
+    {"text": "Gros profit", "expected": "GrossProfitLoss", "category": "typo", "should_match": True},
+    {"text": "Gr0ss pr0fit", "expected": "GrossProfitLoss", "category": "ocr", "should_match": True},
+    {"text": "Grоss profit", "expected": "GrossProfitLoss", "category": "unicode", "should_match": True},
+    {"text": "Net profit", "expected": "GrossProfitLoss", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # AdministrativeExpenses
+    # =====================================================
+    {"text": "Administrative expenses", "expected": "AdministrativeExpenses", "category": "canonical", "should_match": True},
+    {"text": "General and administrative expenses", "expected": "AdministrativeExpenses", "category": "synonym", "should_match": True},
+    {"text": "Admin expenses", "expected": "AdministrativeExpenses", "category": "abbreviation", "should_match": True},
+    {"text": "Administrative costs", "expected": "AdministrativeExpenses", "category": "variation", "should_match": True},
+    {"text": "Office overheads and administration costs incurred during the year", "expected": "AdministrativeExpenses", "category": "contextual", "should_match": True},
+    {"text": "The company incurred administrative expenses including office costs, professional fees and general overheads.", "expected": "AdministrativeExpenses", "category": "long_context", "should_match": True},
+    {"text": "Administrative expnses", "expected": "AdministrativeExpenses", "category": "typo", "should_match": True},
+    {"text": "Administrative expen5es", "expected": "AdministrativeExpenses", "category": "ocr", "should_match": True},
+    {"text": "Аdministrative expenses", "expected": "AdministrativeExpenses", "category": "unicode", "should_match": True},
+    {"text": "Administrative staff headcount", "expected": "AdministrativeExpenses", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # OperatingProfitLoss
+    # =====================================================
+    {"text": "Operating profit", "expected": "OperatingProfitLoss", "category": "canonical", "should_match": True},
+    {"text": "Profit from operations", "expected": "OperatingProfitLoss", "category": "synonym", "should_match": True},
+    {"text": "OP", "expected": "OperatingProfitLoss", "category": "abbreviation", "should_match": True},
+    {"text": "Operating profit for the year", "expected": "OperatingProfitLoss", "category": "variation", "should_match": True},
+    {"text": "The profit generated from the company’s operating activities", "expected": "OperatingProfitLoss", "category": "contextual", "should_match": True},
+    {"text": "After charging administrative expenses and distribution costs, the company reported an operating profit.", "expected": "OperatingProfitLoss", "category": "long_context", "should_match": True},
+    {"text": "Opertaing profit", "expected": "OperatingProfitLoss", "category": "typo", "should_match": True},
+    {"text": "0perating pr0fit", "expected": "OperatingProfitLoss", "category": "ocr", "should_match": True},
+    {"text": "Оperating profit", "expected": "OperatingProfitLoss", "category": "unicode", "should_match": True},
+    {"text": "Profit before tax", "expected": "OperatingProfitLoss", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # ProfitLoss
+    # =====================================================
+    {"text": "Profit for the financial year", "expected": "ProfitLoss", "category": "canonical", "should_match": True},
+    {"text": "Net profit", "expected": "ProfitLoss", "category": "synonym", "should_match": True},
+    {"text": "PAT", "expected": "ProfitLoss", "category": "abbreviation", "should_match": True},
+    {"text": "Profit after taxation", "expected": "ProfitLoss", "category": "variation", "should_match": True},
+    {"text": "The final result attributable to members after tax", "expected": "ProfitLoss", "category": "contextual", "should_match": True},
+    {"text": "After accounting for taxation and all expenses, the company reported profit for the financial year.", "expected": "ProfitLoss", "category": "long_context", "should_match": True},
+    {"text": "Proft for the year", "expected": "ProfitLoss", "category": "typo", "should_match": True},
+    {"text": "Pr0fit f0r the year", "expected": "ProfitLoss", "category": "ocr", "should_match": True},
+    {"text": "Рrofit for the year", "expected": "ProfitLoss", "category": "unicode", "should_match": True},
+    {"text": "Gross profit", "expected": "ProfitLoss", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # CashBankOnHand
+    # =====================================================
+    {"text": "Cash at bank and in hand", "expected": "CashBankOnHand", "category": "canonical", "should_match": True},
+    {"text": "Cash and cash equivalents", "expected": "CashBankOnHand", "category": "synonym", "should_match": True},
+    {"text": "Cash", "expected": "CashBankOnHand", "category": "abbreviation", "should_match": True},
+    {"text": "Bank balances", "expected": "CashBankOnHand", "category": "variation", "should_match": True},
+    {"text": "Amounts held in bank accounts and petty cash at the reporting date", "expected": "CashBankOnHand", "category": "contextual", "should_match": True},
+    {"text": "At the year end the company held cash balances in current accounts and cash in hand.", "expected": "CashBankOnHand", "category": "long_context", "should_match": True},
+    {"text": "Cash at bank and in hadn", "expected": "CashBankOnHand", "category": "typo", "should_match": True},
+    {"text": "Ca5h at bank and in hand", "expected": "CashBankOnHand", "category": "ocr", "should_match": True},
+    {"text": "Сash at bank and in hand", "expected": "CashBankOnHand", "category": "unicode", "should_match": True},
+    {"text": "Bank loans", "expected": "CashBankOnHand", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # Debtors
+    # =====================================================
+    {"text": "Debtors", "expected": "Debtors", "category": "canonical", "should_match": True},
+    {"text": "Trade receivables", "expected": "Debtors", "category": "synonym", "should_match": True},
+    {"text": "Receivables", "expected": "Debtors", "category": "abbreviation", "should_match": True},
+    {"text": "Amounts receivable", "expected": "Debtors", "category": "variation", "should_match": True},
+    {"text": "Amounts owed to the company by customers and other parties", "expected": "Debtors", "category": "contextual", "should_match": True},
+    {"text": "The balance sheet includes debtors representing trade receivables and other amounts due to the company.", "expected": "Debtors", "category": "long_context", "should_match": True},
+    {"text": "Deptors", "expected": "Debtors", "category": "typo", "should_match": True},
+    {"text": "Debt0rs", "expected": "Debtors", "category": "ocr", "should_match": True},
+    {"text": "Dеbtors", "expected": "Debtors", "category": "unicode", "should_match": True},
+    {"text": "Creditors", "expected": "Debtors", "category": "adversarial", "should_match": False},
+
+
+    # =====================================================
+    # FixedAssets
+    # =====================================================
+    {"text": "Fixed assets", "expected": "FixedAssets", "category": "canonical", "should_match": True},
+    {"text": "Non-current assets", "expected": "FixedAssets", "category": "synonym", "should_match": True},
+    {"text": "FA", "expected": "FixedAssets", "category": "abbreviation", "should_match": True},
+    {"text": "Total fixed assets", "expected": "FixedAssets", "category": "variation", "should_match": True},
+    {"text": "Assets held for continuing use in the business", "expected": "FixedAssets", "category": "contextual", "should_match": True},
+    {"text": "The company held fixed assets comprising equipment, fixtures and other long-term assets used in operations.", "expected": "FixedAssets", "category": "long_context", "should_match": True},
+    {"text": "Fixed assests", "expected": "FixedAssets", "category": "typo", "should_match": True},
+    {"text": "Fixed a55ets", "expected": "FixedAssets", "category": "ocr", "should_match": True},
+    {"text": "Fiхed assets", "expected": "FixedAssets", "category": "unicode", "should_match": True},
+    {"text": "Current assets", "expected": "FixedAssets", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # CurrentAssets
+    # =====================================================
+    {"text": "Current assets", "expected": "CurrentAssets", "category": "canonical", "should_match": True},
+    {"text": "Short-term assets", "expected": "CurrentAssets", "category": "synonym", "should_match": True},
+    {"text": "CA", "expected": "CurrentAssets", "category": "abbreviation", "should_match": True},
+    {"text": "Total current assets", "expected": "CurrentAssets", "category": "variation", "should_match": True},
+    {"text": "Assets expected to be realised within the normal operating cycle", "expected": "CurrentAssets", "category": "contextual", "should_match": True},
+    {"text": "The balance sheet includes current assets such as debtors, stock and cash at bank.", "expected": "CurrentAssets", "category": "long_context", "should_match": True},
+    {"text": "Curent assets", "expected": "CurrentAssets", "category": "typo", "should_match": True},
+    {"text": "Current a55ets", "expected": "CurrentAssets", "category": "ocr", "should_match": True},
+    {"text": "Сurrent assets", "expected": "CurrentAssets", "category": "unicode", "should_match": True},
+    {"text": "Fixed assets", "expected": "CurrentAssets", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # IntangibleAssets
+    # =====================================================
+    {"text": "Intangible assets", "expected": "IntangibleAssets", "category": "canonical", "should_match": True},
+    {"text": "Intangible fixed assets", "expected": "IntangibleAssets", "category": "synonym", "should_match": True},
+    {"text": "Intangibles", "expected": "IntangibleAssets", "category": "abbreviation", "should_match": True},
+    {"text": "Total intangible assets", "expected": "IntangibleAssets", "category": "variation", "should_match": True},
+    {"text": "Non-physical assets including goodwill and intellectual property", "expected": "IntangibleAssets", "category": "contextual", "should_match": True},
+    {"text": "The company recognised intangible assets arising from software development and intellectual property.", "expected": "IntangibleAssets", "category": "long_context", "should_match": True},
+    {"text": "Intangibel assets", "expected": "IntangibleAssets", "category": "typo", "should_match": True},
+    {"text": "Intangib1e a55ets", "expected": "IntangibleAssets", "category": "ocr", "should_match": True},
+    {"text": "Іntangible assets", "expected": "IntangibleAssets", "category": "unicode", "should_match": True},
+    {"text": "Tangible assets", "expected": "IntangibleAssets", "category": "adversarial", "should_match": False},
+
+    # =====================================================
+    # InvestmentProperty
+    # =====================================================
+    {"text": "Investment property", "expected": "InvestmentProperty", "category": "canonical", "should_match": True},
+    {"text": "Property held for investment", "expected": "InvestmentProperty", "category": "synonym", "should_match": True},
+    {"text": "IP", "expected": "InvestmentProperty", "category": "abbreviation", "should_match": True},
+    {"text": "Investment properties", "expected": "InvestmentProperty", "category": "variation", "should_match": True},
+    {"text": "Property held to earn rentals or for capital appreciation", "expected": "InvestmentProperty", "category": "contextual", "should_match": True},
+    {"text": "The company owns property not used in operations but held for rental income and capital growth.", "expected": "InvestmentProperty", "category": "long_context", "should_match": True},
+    {"text": "Investmant property", "expected": "InvestmentProperty", "category": "typo", "should_match": True},
+    {"text": "Investment pr0perty", "expected": "InvestmentProperty", "category": "ocr", "should_match": True},
+    {"text": "Іnvestment property", "expected": "InvestmentProperty", "category": "unicode", "should_match": True},
+    {"text": "Owner occupied property", "expected": "InvestmentProperty", "category": "adversarial", "should_match": False},
+
+
+    # =====================================================
+    # CorporationTaxPayable
+    # =====================================================
+    {"text": "Corporation tax payable", "expected": "CorporationTaxPayable", "category": "canonical", "should_match": True},
+    {"text": "Corporation tax liability", "expected": "CorporationTaxPayable", "category": "synonym", "should_match": True},
+    {"text": "CT payable", "expected": "CorporationTaxPayable", "category": "abbreviation", "should_match": True},
+    {"text": "Tax payable", "expected": "CorporationTaxPayable", "category": "variation", "should_match": True},
+    {"text": "Amount due to HMRC in respect of corporation tax", "expected": "CorporationTaxPayable", "category": "contextual", "should_match": True},
+    {"text": "The company recognised corporation tax payable based on taxable profits for the accounting period.", "expected": "CorporationTaxPayable", "category": "long_context", "should_match": True},
+    {"text": "Corporation tax paybale", "expected": "CorporationTaxPayable", "category": "typo", "should_match": True},
+    {"text": "C0rp0rati0n tax payab1e", "expected": "CorporationTaxPayable", "category": "ocr", "should_match": True},
+    {"text": "Сorporation tax payable", "expected": "CorporationTaxPayable", "category": "unicode", "should_match": True},
+    {"text": "Deferred tax liability", "expected": "CorporationTaxPayable", "category": "adversarial", "should_match": False},
+
+
+]
+
+IXBRL_TEXT_CLASSIFICATION_TEST_CASES = [
+    {"text": item["text"].lower(), **{key: item[key] for key in item if key != "text"}}
+    for item in IXBRL_TEXT_CLASSIFICATIONS
+]
+
+
+class SupportsPredict(Protocol):
+    def predict(self, X: Any) -> Any: ...
+
+
+def _get_experiment_id(*, experiment_id: Optional[str] = None, experiment_name: Optional[str] = None) -> str:
+    if experiment_id is not None:
+        return experiment_id
+
+    if experiment_name is None:
+        raise ValueError("Either experiment_id or experiment_name is required")
+
+    experiment = mlflow.get_experiment_by_name(experiment_name)
+    if experiment is None:
+        raise ValueError(f"Experiment {experiment_name} not found")
+
+    return experiment.experiment_id
+
+
+def get_latest_run_by_name(
+    *,
+    experiment_id: Optional[str] = None,
+    experiment_name: Optional[str] = None,
+    run_name: str,
+    index: int = 0,
+    status: str = "FINISHED",
+) -> Run:
+    client = MlflowClient()
+    resolved_experiment_id = _get_experiment_id(
+        experiment_id=experiment_id,
+        experiment_name=experiment_name,
+    )
+    status_filter = f" AND attributes.status = '{status}'" if status else ""
+    runs = client.search_runs(
+        experiment_ids=[resolved_experiment_id],
+        filter_string=f"tags.mlflow.runName = '{run_name}'{status_filter}",
+        order_by=["attributes.start_time DESC"],
+    )
+    if not runs:
+        raise ValueError(f"No runs found for run_name={run_name}")
+    if index >= len(runs):
+        raise IndexError(f"Requested index {index} but only found {len(runs)} runs")
+
+    return runs[index]
+
+
+def _resolve_parent_run(
+    *,
+    parent_run_id: Optional[str] = None,
+    parent_run_name: Optional[str] = None,
+    experiment_id: Optional[str] = None,
+    experiment_name: Optional[str] = None,
+    parent_run_index: int = 0,
+    status: str = "FINISHED",
+) -> Run:
+    if parent_run_id is not None:
+        return mlflow.get_run(parent_run_id)
+
+    if parent_run_name is None:
+        raise ValueError("Either parent_run_id or parent_run_name is required")
+
+    return get_latest_run_by_name(
+        experiment_id=experiment_id,
+        experiment_name=experiment_name,
+        run_name=parent_run_name,
+        index=parent_run_index,
+        status=status,
+    )
+
+
+def _resolve_parent_run_if_exists(
+    *,
+    parent_run_id: Optional[str] = None,
+    parent_run_name: Optional[str] = None,
+    experiment_id: Optional[str] = None,
+    experiment_name: Optional[str] = None,
+    parent_run_index: int = 0,
+    status: str = "FINISHED",
+) -> Optional[Run]:
+    if parent_run_id is not None:
+        return mlflow.get_run(parent_run_id)
+
+    if parent_run_name is None:
+        return None
+
+    try:
+        return get_latest_run_by_name(
+            experiment_id=experiment_id,
+            experiment_name=experiment_name,
+            run_name=parent_run_name,
+            index=parent_run_index,
+            status=status,
+        )
+    except ValueError as exc:
+        if str(exc) == f"No runs found for run_name={parent_run_name}":
+            return None
+        raise
+
+
+def _normalize_confidence_interval(confidence_interval: Any) -> dict[str, float]:
+    return {
+        "low": float(confidence_interval.low),
+        "high": float(confidence_interval.high),
+    }
+
+
+def coerce_to_label_array(values: Any) -> np.ndarray:
+    array = np.asarray(values)
+
+    if array.ndim == 0:
+        return array.reshape(1)
+
+    if array.ndim == 1:
+        if np.issubdtype(array.dtype, np.floating):
+            rounded = np.rint(array)
+            if np.allclose(array, rounded):
+                return rounded.astype(int)
+        return array
+
+    if array.ndim == 2 and array.shape[1] == 1:
+        squeezed = array.reshape(-1)
+        if np.issubdtype(squeezed.dtype, np.floating):
+            is_binary_score = np.all((squeezed >= 0.0) & (squeezed <= 1.0))
+            if is_binary_score:
+                return (squeezed >= 0.5).astype(int)
+
+            rounded = np.rint(squeezed)
+            if np.allclose(squeezed, rounded):
+                return rounded.astype(int)
+
+        return squeezed
+
+    return np.argmax(array, axis=1)
+
+
+def _flatten_population_metrics(results: dict[str, dict[str, dict[str, Any]]]) -> dict[str, float]:
+    metrics: dict[str, float] = {}
+    for population, population_results in results.items():
+        for metric_name, metric_result in population_results.items():
+            prefix = f"{population}.{metric_name}"
+            metrics[f"{prefix}.mean"] = float(metric_result["mean"])
+            confidence_interval = metric_result["confidence_interval"]
+            metrics[f"{prefix}.ci_low"] = float(confidence_interval["low"])
+            metrics[f"{prefix}.ci_high"] = float(confidence_interval["high"])
+    return metrics
+
+
+def log_population_test_results_to_mlflow(
+    results: dict[str, dict[str, dict[str, Any]]],
+    *,
+    run_name: str,
+    experiment_id: Optional[str] = None,
+    experiment_name: Optional[str] = None,
+    parent_run_id: Optional[str] = None,
+    parent_run_name: Optional[str] = None,
+    parent_run_index: int = 0,
+    dataset_name: Optional[str] = None,
+    subset: Optional[str] = None,
+    source_run_name: Optional[str] = None,
+    extra_tags: Optional[dict[str, str]] = None,
+    train_time: Optional[float] = None,
+    model_size: Optional[float] = None,
+    inference_time: Optional[float] = None,
+) -> str:
+    
+    print(f"{source_run_name=}")
+    print(f"{experiment_name=}")
+    resolved_parent_run = _resolve_parent_run_if_exists(
+        parent_run_id=parent_run_id,
+        parent_run_name=parent_run_name or source_run_name,
+        experiment_id=experiment_id,
+        experiment_name=experiment_name,
+        parent_run_index=parent_run_index,
+    )
+    resolved_experiment_id = _get_experiment_id(
+        experiment_id=experiment_id
+        or (resolved_parent_run.info.experiment_id if resolved_parent_run is not None else None),
+        experiment_name=experiment_name,
+    )
+    resolved_source_run_name = source_run_name
+    if resolved_source_run_name is None and resolved_parent_run is not None:
+        resolved_source_run_name = resolved_parent_run.info.run_name
+
+    tags = {
+        "evaluation_type": "population_bootstrap",
+    }
+    if resolved_parent_run is not None:
+        tags["source_run_id"] = resolved_parent_run.info.run_id
+    if dataset_name is not None:
+        tags["dataset"] = dataset_name
+    if subset is not None:
+        tags["subset"] = subset
+    if resolved_source_run_name is not None:
+        tags["source_run_name"] = resolved_source_run_name
+    if resolved_parent_run is None:
+        tags["source_run_missing"] = "true"
+    if extra_tags is not None:
+        tags.update(extra_tags)
+
+    start_run_kwargs: dict[str, Any] = {
+        "experiment_id": resolved_experiment_id,
+        "run_name": run_name,
+        "tags": tags,
+    }
+    if resolved_parent_run is not None:
+        start_run_kwargs["parent_run_id"] = resolved_parent_run.info.run_id
+
+    with mlflow.start_run(**start_run_kwargs) as evaluation_run:
+        flattened_metrics = _flatten_population_metrics(results)
+        flattened_metrics["train_time"] = train_time
+        flattened_metrics["model_size"] = model_size
+        flattened_metrics["inference_time"] = inference_time
+        results["train_time"] = train_time
+        results["model_size"] = model_size
+        results["inference_time"] = inference_time
+        mlflow.log_metrics(flattened_metrics)
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_path = Path(tmp_dir) / "population_test_results.json"
+            output_path.write_text(json.dumps(results, indent=2))
+            mlflow.log_artifact(str(output_path), artifact_path="evaluation")
+
+        return evaluation_run.info.run_id
+
+
+def load_population_test_results_from_mlflow(
+    *,
+    experiment_id: Optional[str] = None,
+    experiment_name: Optional[str] = None,
+    parent_run_id: Optional[str] = None,
+    parent_run_name: Optional[str] = None,
+    source_run_name: Optional[str] = None,
+    parent_run_index: int = 0,
+    evaluation_run_name: Optional[str] = None,
+    evaluation_run_index: int = 0,
+) -> tuple[Run, dict[str, dict[str, dict[str, float]]]]:
+    client = MlflowClient()
+    resolved_parent_run = _resolve_parent_run_if_exists(
+        parent_run_id=parent_run_id,
+        parent_run_name=parent_run_name or source_run_name,
+        experiment_id=experiment_id,
+        experiment_name=experiment_name,
+        parent_run_index=parent_run_index,
+    )
+    resolved_source_run_name = source_run_name
+    if resolved_source_run_name is None and resolved_parent_run is not None:
+        resolved_source_run_name = resolved_parent_run.info.run_name
+
+    if resolved_parent_run is None and resolved_source_run_name is None:
+        raise ValueError("Either parent_run_id, parent_run_name, or source_run_name is required")
+
+    resolved_experiment_id = _get_experiment_id(
+        experiment_id=experiment_id
+        or (resolved_parent_run.info.experiment_id if resolved_parent_run is not None else None),
+        experiment_name=experiment_name,
+    )
+
+    filter_parts = [
+        "tags.evaluation_type = 'population_bootstrap'",
+        "attributes.status = 'FINISHED'",
+    ]
+    if resolved_parent_run is not None:
+        filter_parts.append(f"tags.source_run_id = '{resolved_parent_run.info.run_id}'")
+    else:
+        filter_parts.append(f"tags.source_run_name = '{resolved_source_run_name}'")
+    if evaluation_run_name is not None:
+        filter_parts.append(f"tags.mlflow.runName = '{evaluation_run_name}'")
+
+    evaluation_runs = client.search_runs(
+        experiment_ids=[resolved_experiment_id],
+        filter_string=" AND ".join(filter_parts),
+        order_by=["attributes.start_time DESC"],
+    )
+    if not evaluation_runs:
+        if resolved_parent_run is not None:
+            raise ValueError(
+                f"No population bootstrap evaluation runs found for parent run {resolved_parent_run.info.run_id}"
+            )
+
+        raise ValueError(
+            f"No population bootstrap evaluation runs found for source_run_name={resolved_source_run_name}"
+        )
+    if evaluation_run_index >= len(evaluation_runs):
+        raise IndexError(
+            f"Requested evaluation_run_index {evaluation_run_index} but only found {len(evaluation_runs)} runs"
+        )
+
+    evaluation_run = evaluation_runs[evaluation_run_index]
+    evaluation_run_id = evaluation_run.info.run_id
+    local_dir = Path(client.download_artifacts(evaluation_run_id, "evaluation"))
+    results_path = local_dir / "population_test_results.json"
+    if not results_path.exists():
+        raise FileNotFoundError(f"Results artifact not found at {results_path}")
+
+    with results_path.open() as fh:
+        results = json.load(fh)
+
+    return evaluation_run, results
+
+
+def _bootstrap_statistics(y_true: np.ndarray, y_pred: np.ndarray, n_bootstrap: int, ci: float) -> dict[str, float]:
+    metrics = {
+        "accuracy": lambda yt, yp: accuracy_score(yt, yp),
+        "f1_macro": lambda yt, yp: f1_score(yt, yp, average="macro", zero_division=0),
+        "f1_weighted": lambda yt, yp: f1_score(yt, yp, average="weighted", zero_division=0),
+        "precision_macro": lambda yt, yp: precision_score(yt, yp, average="macro", zero_division=0),
+        "recall_macro": lambda yt, yp: recall_score(yt, yp, average="macro", zero_division=0),
+        "precision_weighted": lambda yt, yp: precision_score(yt, yp, average="weighted", zero_division=0),
+        "recall_weighted": lambda yt, yp: recall_score(yt, yp, average="weighted", zero_division=0),
+    }
+
+    bootstrap_results = {}
+    for name, metric_func in metrics.items():
+        confidence_interval = bootstrap(
+            (y_true, y_pred),
+            statistic=metric_func,
+            paired=True,
+            vectorized=False,
+            confidence_level=ci,
+            n_resamples=n_bootstrap,
+            method="percentile",
+            rng=np.random.default_rng(SEED),
+        ).confidence_interval
+        bootstrap_results[name] = {
+            "mean": float(metric_func(y_true, y_pred)),
+            "confidence_interval": _normalize_confidence_interval(confidence_interval),
+        }
+
+    return bootstrap_results
+
+
+def bootstrap_ci(
+    dataset_pl: pl.DataFrame,
+    model: Optional[SupportsPredict],
+    test_field: str,
+    n_bootstrap: int = 1000,
+    ci: float = 0.95,
+):
+    """Calculate bootstrap confidence intervals for accuracy and F1 score.
+
+    Args:
+        dataset_pl (pl.DataFrame): The dataset as a Polars DataFrame.
+        model (Optional[SupportsPredict]): The trained model with a predict method.
+        test_field (str): The column name in dataset_pl that indicates the test set.
+        n_bootstrap (int): The number of bootstrap samples to generate.
+        ci (float): The confidence level for the intervals (e.g., 0.95 for 95% confidence intervals)."""
+
+    if model is None:
+        raise ValueError("A loaded model is required for prediction")
+
+    test_pl = dataset_pl.filter(pl.col(test_field))
+    y_true = coerce_to_label_array(test_pl[y].to_numpy())
+    y_pred = coerce_to_label_array(model.predict(test_pl[X].to_numpy()))
+
+    return _bootstrap_statistics(y_true, y_pred, n_bootstrap=n_bootstrap, ci=ci)
+
+
+def test_model_over_populations(model: SupportsPredict, dataset_pl: pl.DataFrame) -> dict:
+    """Tests the model on different test populations and prints the metrics with confidence intervals
+    Args:
+        model (SupportsPredict): The trained model with a predict method.
+        dataset_pl (pl.DataFrame): The dataset as a Polars DataFrame.
+    """
+    test_populations = ["test_5_pct", "holdout_10k"]
+    results = {}
+    for test_col in test_populations:
+        heading(f"Bootstrap CI for {test_col}")
+        stats = bootstrap_ci(dataset_pl=dataset_pl, model=model, test_field=test_col, n_bootstrap=1000, ci=0.95)
+        display_wide(stats)
+        results[test_col] = stats
+    return results
+
+
+def test_model_over_populations_nn(model: SupportsPredict, dataset: DatasetDict) -> dict:
+    """Tests the model on different test populations and prints the metrics with confidence intervals
+    Args:
+        model (SupportsPredict): The trained model with a predict method.
+        dataset (DatasetDict): The dataset as a Hugging Face DatasetDict.
+    
+        Returns:
+            A dictionary mapping population names to their respective metric statistics with confidence intervals.
+    """
+    test_populations = ["test_5_pct", "holdout_10k"]
+    results = {}
+    for test_col in test_populations:
+        heading(f"Bootstrap CI for {test_col}")
+        prediction_options = model.predict(dataset[test_col])
+        stats = _bootstrap_statistics(y_true=prediction_options.label_ids, y_pred=coerce_to_label_array(prediction_options.predictions), n_bootstrap=1000, ci=0.95)
+        display_wide(stats)
+        results[test_col] = stats
+    return results
+```
+
+#### A7.4 `display.py` — notebook display helpers
+
+```python
+from IPython.display import display, Markdown
+import polars as pl
+
+
+def display_markdown(x: str) -> None:
+    display(Markdown(x))
+
+def heading(heading: str, level: int=2) -> None:
+    display(Markdown(f"{level * '#'} {heading}"))
+
+def display_wide(x, rows: int=20) -> None:
+    with pl.Config(tbl_rows=rows, tbl_width_chars=1_000, fmt_str_lengths=1_000):
+        display(x)
+```
+
 ## Appendix B. Figures, tables, and visualisations.
 
 Outputs are taken from the notebooks in Appendix A, run over the 298,461 publicly available Companies House accounts used for the exploratory work. Image files are stored in `report_figures/`. Each item states the notebook section it was produced by and the report section it supports.
@@ -8684,5 +9778,62 @@ The quantitative evidence for this section sits in Appendices A and B:
 - Bias testing by company size and software provider was run over HMRC data and is reported in section 8; it is not part of these public data notebooks.
 
 ## Appendix D. Mapping of the project report to AM1 KSBs.
+
+The 25 KSBs assigned to Assessment Method 1 in the signed-off project mapping are evidenced as follows, grouped under the six grading themes used in that document. The criterion wording is taken verbatim from the signed-off mapping.
+
+**Awareness of the opportunities of AI and data science to create business value and growth**
+
+| KSB | Assessment criterion | Where evidenced in this report |
+|---|---|---|
+| K13 | How to identify the compromises and trade-offs which must be made when translating theory into practice in the workplace | Trading marginal performance (2.3pp) for a solution that is simpler to maintain, more explainable and quicker (Section 7.5); training only on the main taxonomy so analysts get consistent class names (Section 5.1); on-demand-compute so scaling is cost effective (Section 7.6); limitations accepted and managed (Section 12). Appendix B31-B34. |
+| K14 | The business value of a data product that can deliver the solution in line with business needs, quality standards and timescales | The business problem and the value of extracting untagged figures (Section 2); success criteria agreed with stakeholders (Section 4); KPIs met, including timeliness within days (Section 8); quality standards met and realised benefits in the tens of millions (Section 11). Appendix B38. |
+
+**Critically evaluate the effectiveness and performance of proposed AI and data science solutions**
+
+| KSB | Assessment criterion | Where evidenced in this report |
+|---|---|---|
+| K23 | The use of different performance and accuracy metrics for model validation in AI projects | Macro-F1 as the primary metric with accuracy, precision, recall and weighted-F1 as secondary measures (Sections 4 and 7.5); DummyClassifier baseline, paired t-tests and bootstrap confidence intervals (Sections 7.2 and 8). Appendix B32 and B38. |
+| S3 | Critically evaluate arguments, assumptions, abstract concepts and data (that may be incomplete), to make recommendations and to enable a business solution or range of solutions to be achieved | Rule-based, unsupervised and frontier LLM alternatives evaluated and rejected with reasons (Section 6); the bias gap read as a training proxy artefact rather than taken at face value (Section 8); the tagged/untagged evaluation gap identified and managed (Section 12). Appendix B25. |
+| S17 | Consistently implement data curation and data quality controls | Data quality controls aligned with HMRC expectations and DAMA UK's quality dimensions; canonicalisation, PII placeholders, filtering; DPIA and *Data Protection Act 2018*/UK GDPR compliance (Section 5.3). Appendix A2.3. |
+
+**Apply systematic methodology and project management principles in the delivery of innovative, stable and robust solutions**
+
+| KSB | Assessment criterion | Where evidenced in this report |
+|---|---|---|
+| S2 | Independently analyse test data, interpret results and evaluate the suitability of proposed solutions, considering current and future business requirements | Evaluation over unseen holdout data (Sections 5.3 and 8); the decision matrix weighing current performance against future requirements such as scaling, cost and maintenance (Section 7.5). Appendix B32-B34 and B38. |
+| S9 | Manipulate, analyse and visualise complex datasets | EDA over 2.8 million rows: rank-frequency, Pareto, distribution fits and cosine similarity analysis (Section 5.2); hyperparameter score and runtime visualisations (Section 7.2). Appendix A2, B5-B14 and B22. |
+| S10 | Select datasets and methodologies most appropriate to the business problem | Companies House data for exploration to avoid using customer data, HMRC data for production (Section 5.1); theory-first narrowing to methods suited to short domain-specific text (Section 6). Appendix A1. |
+| S22 | Apply scientific methods in a systematic process through experimental design, exploratory data analysis and hypothesis testing to facilitate business decision making | Hypothesis formulation, controlled comparison and statistical testing (Section 3.5); EDA driving metric and preprocessing decisions (Section 5.2); the population size validation experiment (Section 7.1). Appendix A2.2 and A3.3. |
+| S25 | Select and use programming languages and tools, and follow appropriate software development practices | R and Python each selected with justification (Section 3.4); version control, branching, independent review, templates and documentation (Section 3.3); unit, integration and system testing with synthetic fixtures (Section 3.5). Appendix A. |
+
+**AI Project and Development Management**
+
+| KSB | Assessment criterion | Where evidenced in this report |
+|---|---|---|
+| K6 | How data products can be delivered to engage the customer, organise information or solve a business problem using a range of methodologies, including iterative and incremental development and project management approaches | Iterative delivery of usable increments, from raw data on file through to the automated database pipeline (Sections 3.1 and 9); epics, issues board and milestones giving management visibility (Section 3.3). Appendix B35 and B36. |
+| S24 | Apply research methodology and project management techniques appropriate to the organisation and products | Kanban-based agile tailored to a small team with competing demands rather than Scrum (Section 3.1); CRISP-DM structuring the technical work (Section 3.2); GitLab adopted despite not being common in HMRC because transparency, auditability and documentation outweighed the learning curve (Section 3.3). |
+
+**Use of communication and influencing skills across teams**
+
+| KSB | Assessment criterion | Where evidenced in this report |
+|---|---|---|
+| K28 | How to communicate concepts and present in a manner appropriate to diverse audiences, adapting communication techniques accordingly. | Communication methods tailored per audience and adapted when early explanations were too detailed; visual and example-based explanations (Section 9). |
+| S4 | Communicate concepts and present in a manner appropriate to diverse audiences, adapting communication techniques accordingly. | Confusion matrices and worked examples with analysts, benchmarks and costs with DevOps, business-level memos with managers (Section 9). Appendix B24. |
+| S5 | Manage expectations and present user research insight, proposed solutions and/or test findings to clients and stakeholders. | Analysts educated on where the model can be trusted and the kind of mistake to expect, with the dashboard letting them check reliability before use (Sections 8 and 9). |
+| S27 | Analyse information, frame questions and conduct discussions with subject matter experts and assess existing data to scope new AI and data science requirements. | SME questioning on taxonomy naming differences shaping the single-taxonomy decision (Section 5.1); SME advice on dates, names and placeholders shaping preprocessing and label engineering (Section 5.3); SME input on items with too little information to classify (Section 8). |
+| B2 | Reliable, objective and capable of independent and team working. | Autonomous core modelling with demos and feedback in review meetings; collaborative work with SMEs, DevOps and on other team members' tasks to share knowledge and upskill them (Sections 7.6 and 9); consistent documented practices across the team (Section 3.3). |
+| B6 | Is comfortable and confident interacting with people from technical and non-technical backgrounds. Presents data and conclusions in a truthful and appropriate manner. | Working across analysts, SMEs, DevOps and managers (Section 9); reporting the unexpected robustness result, the bias spread and per-class weaknesses rather than only headline scores (Section 8). Appendix B38. |
+
+**Application of technical knowledge**
+
+| KSB | Assessment criterion | Where evidenced in this report |
+|---|---|---|
+| K1 | How to use AI and machine learning methodologies such as data-mining, supervised/unsupervised machine learning, natural language processing, machine vision to meet business objectives | Supervised multi-class text classification selected for the business objective, with unsupervised grouping considered and rejected on evidence (Sections 2 and 6); traditional, neural network and transformer families tested (Section 7). Appendix A3-A5. |
+| K3 | How to apply advanced statistical and mathematical methods to commercial projects | Stratified cross validation, paired t-tests, Pearson correlation for population size validation, bootstrap confidence intervals (Sections 3.5, 7.1, 7.2 and 7.5). Appendix B17-B20 and B32. |
+| K5 | How to design and deploy effective techniques of data analysis and research to meet the needs of the business and customers | EDA findings translated directly into metric choice, preprocessing and features (Section 5.2); the resulting design deployed as the production pipeline (Section 7.6). |
+| K26 | The scientific method and its application in research and business contexts, including experiment design and hypothesis testing | Hypothesis testing against baselines with significance testing so simpler models could be preferred where differences were not real (Section 3.5); the population size validation experiment design (Section 7.1). Appendix A3.3. |
+| S11 | Apply aspects of advanced maths and statistics relevant to AI and data science that deliver business outcomes | Macro-F1 selection for imbalance, silhouette scores, lognormal distribution fits, correlation analysis and confidence-interval-adjusted decision scores (Sections 5.2, 7.1, 7.2 and 7.5). Appendix B9, B16 and B32. |
+| S15 | Identify, develop, build and maintain the services and platforms that deliver AI and data science | The end-to-end extraction, classification and Oracle ingestion platform, run daily on on-demand-compute, with governance built into the design (Section 7.6). Appendix B35 and B36. |
+| S18 | Develop tools that visualise data systems and structures for monitoring and performance | The interactive dashboard showing per-concept performance and plausible matches, used by analysts to check reliability before relying on the category (Sections 8 and 9). Appendix B40. |
 
 ## Appendix E. Employer verification that the report reflects my own involvement and work.
