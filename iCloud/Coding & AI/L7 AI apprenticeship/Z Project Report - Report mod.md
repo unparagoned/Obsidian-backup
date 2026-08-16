@@ -259,7 +259,7 @@ Recommendations:
 - Human evaluation of tagging.
 - Establish the performance ceiling beforehand so time and effort can be budgeted; the most common concept per description gives a hard upper bound, since the same description can be associated with different concepts. 
 - Consider a simplified taxonomy, grouping together similar concepts would be more user friendly for analysts.
-- Record MLflow version on ouputs, so predictions can be traced back to the exact model and training dataset.
+- Record MLflow version on outputs, so predictions can be traced back to the exact model and training dataset.
 
 # 10. Summary of findings.
 
