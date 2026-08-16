@@ -9971,7 +9971,7 @@ The quantitative evidence for this section sits in Appendices A and B:
 
 ## Appendix D. Mapping of the project report to AM1 KSBs.
 
-The 26 KSBs assigned to Assessment Method 1 are evidenced as follows, grouped under the six grading themes used in the signed-off mapping. The signed-off mapping omitted S7, but the published assessment plan assigns it to this method.
+The 26 KSBs assigned to Assessment Method 1 are evidenced as follows, grouped under the six grading themes used in the signed-off mapping. 
 
 **Awareness of the opportunities of AI and data science to create business value and growth**
 
