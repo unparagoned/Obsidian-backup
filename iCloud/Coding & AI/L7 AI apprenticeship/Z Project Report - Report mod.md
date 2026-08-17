@@ -1,6 +1,6 @@
 # 1. Introduction and background.
 
-HMRC receives millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for departmental/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies (XBRL International, no date). 
+HMRC receives millions of financial documents such as company accounts and tax computations that contain a large amount of information used to provide insight for departmental/government policy and to identify tax risk. They are iXBRL documents; semi-structured (x)HTML documents where key items are tagged with concepts from fixed taxonomies ([[#B14. Distribution fit after preprocessing|B1]]) (XBRL International, no date). 
 
 Previous workflows allowed us to reliably extract, structure and analyse fully tagged documents, but a large proportion of figures in some document types are untagged, for various reasons from limitations in accountancy software to people deliberately leaving items they do not want HMRC to review untagged. 
 
@@ -12,7 +12,7 @@ Hubble is a tool I developed that extracts both tagged and untagged items from i
 
 Initial analysis showed that some document types only have approximately 30% of the figures tagged, so bulk numerical analysis could not use 70% of the figures. Profiles therefore did not have access to billions of figures to properly identify errors and high-risk returns, limiting potential compliance yield HMRC can bring as described in Section 11. We were not always able to provide accurate data or statistics for the department/government to make informed decisions. The previous workflows to extract iXBRL data required complex and long schema updates every year, especially with Oracle's 1,000 column limit being hit, significantly limiting how current the data was.
 
-Initial requirements just included extracting the raw data such as descriptions, but items can be described in lots of different ways with no fixed taxonomy. Analysis showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and subject matter experts (tax professionals) highlighted that many are domain-specific technical terms not all analysts would be familiar with. Existing ad-hoc approaches would take too much subject matter expert time to properly scale.
+Initial requirements just included extracting the raw data such as descriptions([[#B41. Example of description and XBRL Concepts|B41]]), but items can be described in lots of different ways with no fixed taxonomy. Analysis showed that some classes had a large variety of descriptions, some with over 23,000 unique descriptions, and subject matter experts (tax professionals) highlighted that many are domain-specific technical terms not all analysts would be familiar with. Existing ad-hoc approaches would take too much subject matter expert time to properly scale.
 
 The 30% of tagged items are tagged by software or accountants so were expected to be reasonable quality training data for supervised learning that could then be applied to the untagged 70%. I recommended creating a supervised multi-class text classification machine learning model to classify the items. This would save significant analyst and subject matter expert time; reduce errors; and improve analysis quality. 
 
@@ -195,7 +195,7 @@ While SEC-BERT had the best macro-F1 score I chose LinearSVC, trading marginal p
 
 ## 7.6 Production system and governance
 
-Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished, much more cost effective than a large machine running all the time. EC2 instances without a GPU were not only cheaper but also more available. 
+Scaling needed additional infrastructure, so I worked with DevOps to set up on-demand-compute, which starts up an EC2 instance running POSIT just for a job and shuts it down when finished, much more cost effective than a large machine running all the time. EC2 instances without a GPU were not only cheaper but also more available. on-demand-compute with 128 cores lead to a 20x speed-up.
 
 The overall system ([[#B35. End-to-end system architecture|B35]] and [[#B36. Data and ML pipeline|B36]]): 
 - Raw iXBRL documents retrieved from AWS S3
@@ -215,7 +215,7 @@ Governance is built into the design. Documentation and guidance explain whether 
 
 LinearSVC trained on the full dataset and tested over the full holdout has an accuracy of 0.975 (CI 0.975-0.976) and macro-F1 of 0.785 (CI 0.780-0.788), beating KPIs of 0.7 and 0.6 respectively and a stratified DummyClassifier baseline of 0.007 ([[#A3.7.3 100% train population|A3.7.3]] and [[#B38. Final model performance: LinearSVC trained on the 100% train population|B38]]). The production system also meets the remaining KPIs: extracting over 99% of records automatically against a target of 95%; within 3 days against a target of one week; and an interpretable and explainable model. 
 
-Residual analysis identified which classes performed poorly and summaries were created for analysts ([[#A3.10 Residual analysis|A3.10]]). Per-class results were varied, with a median per-class F1 of 0.966, but 27 of the 141 modelled concepts scored below 0.5 and eight scored zero, pulling down the macro-F1 score. By volume the exposure is smaller, with 94% of holdout records falling in concepts scoring above 0.9 ([[#B40. Per-class performance and residual analysis|B40]]). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]]), and the dashboard let them check a concept's reliability before using it.
+Residual analysis identified which classes performed poorly and summaries were created for analysts ([[#A3.10 Residual analysis|A3.10]]). Per-class results were varied, with a median per-class F1 of 0.966, but 27 of the 141 modelled concepts scored below 0.5 and eight scored zero, pulling down the macro-F1.  94% of concepts scored above 0.9 ([[#B40. Per-class performance and residual analysis|B40]]). When I worked with analysts I focused on outcomes, showing confusion matrices for good and poor quality classes and looking at examples ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]]), and the dashboard let them check a concept's reliability before using it.
 
 Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts CashBankOnHand 5,670 times and CashOnHand 21 times, so the minority tagging would show as errors ([[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]] and [[#B24.1 Worked example: CashBankOnHand against CashOnHand.|B24.1]]).
 
@@ -237,7 +237,7 @@ TF-IDF creates high dimensional sparse matrices, that capture the short domain-s
 
 I worked autonomously where deep focus was required, such as on the coding and modelling, and I would work collaboratively with tax professionals for taxonomy/accountancy advice.
 
-My communication approach evolved based on how stakeholders reacted to early explanations, and methods were tailored for the audience, such as PowerPoint presentations, markdown guides, meetings and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. I used a graphed SVM 2D decision boundary; confusion matrices with examples of errors for residual analysis; and a simple example to illustrate the difference between weighted and macro scores rather than relying on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
+My communication approach evolved based on how stakeholders reacted to early explanations, and methods were tailored for the audience, such as PowerPoint presentations, markdown guides, meetings, and workshops. Initial technical descriptions were too detailed for some audiences, so I shifted towards using Problem-Solution-Outcome for non-technical audiences and increased visual and example-based explanations for others. I used a graphed SVM 2D decision boundary([[#B42. Simple SVM decision boundary visual|B42]]); confusion matrices with examples of errors for residual analysis; and a simple example to illustrate the difference between weighted and macro scores rather than relying on formulas. With DevOps I focused on benchmarks, memory usage and future requirements, cost/benefit of specific EC2 instances. 
 
 Repeated questions led me to create an interactive dashboard where users can test the model and see per-concept performance, including where it would be reliable and where it would perform poorly. The dashboard showed the top-5, but some of those were very poor matches, confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding increased so did their use. 
 
@@ -9958,6 +9958,28 @@ Figures are from `classification_report` over the full holdout of 243,991 rows, 
 
 Source `03_ixbrl_experiment_models.ipynb` section 10; supports section [[#8. Results.|8]].
 
+### B41. Example of description and XBRL Concepts
+
+| Description                                             | XBRL Concepts                                          |
+| ------------------------------------------------------- | ------------------------------------------------------ |
+| Tangible Assets                                         | PropertyPlantEquipment                                 |
+| Stocks                                                  | TotalInventories                                       |
+| Debtors                                                 | Debtors                                                |
+| Cash at bank and in hand                                | CashBankOnHand                                         |
+| Creditors: Amounts Falling Due Within One Year          | Creditors                                              |
+| NET CURRENT ASSETS (LIABILITIES)                        | NetCurrentAssetsLiabilities                            |
+| TOTAL ASSETS LESS CURRENT LIABILITIES                   | TotalAssetsLessCurrentLiabilities                      |
+| Creditors: Amounts Falling Due After More Than One Year | Creditors                                              |
+| NET ASSETS                                              | NetAssetsLiabilities                                   |
+| Called up share capital                                 | Equity                                                 |
+| Profit and Loss Account                                 | Equity                                                 |
+| 9th April 2025                                          | DateAuthorisationFinancialStatementsForIssue           |
+| Plant & Machinery                                       | DescriptionDepreciationMethodForPropertyPlantEquipment |
+
+### B42. Simple SVM decision boundary visual
+
+[[29acc785bbe459b41661f55daaa21050_MD5.jpg|Open: Pasted image 20260817091853.png]]
+![[29acc785bbe459b41661f55daaa21050_MD5.jpg]]
 ## Appendix C. Statistical rigour: uncertainty, bias, and error estimates where appropriate.
 
 The quantitative evidence for this section sits in Appendices A and B:
