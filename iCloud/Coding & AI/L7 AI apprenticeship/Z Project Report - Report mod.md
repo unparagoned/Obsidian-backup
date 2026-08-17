@@ -388,7 +388,7 @@ Appendix A reproduces the code and notebooks for the project. Appendix B reprodu
 
 ### A1. Data extraction: `Code/00_ixbrl_data_extraction.ipynb`
 
-This is the python extraction code used for the exploratory work. The production R code is too extensive to display here.
+This is the python extraction code used for the exploratory work. The production R code is too extensive to reproduce here.
 
 ```python
 import os
@@ -9278,7 +9278,7 @@ def display_wide(x, rows: int=20) -> None:
 
 ## Appendix B. Figures, tables, and visualisations.
 
-Subset of outputs are from the notebooks in Appendix A. 
+Subset of images, text and outputs are from the notebooks in Appendix A. 
 
 ### B1. iXBRL document structure
 
@@ -9354,7 +9354,7 @@ Source [[#A2.2.6 Powerlaw, Exponential, Lognormal|A2.2.6]]; supports sections [[
 
 ### B10. Rank-frequency after canonicalisation and label engineering
 
-The description tail is much shorter than in the raw data ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]), falling to a frequency of 2 by rank 2,250 where the raw data was still at 14.
+The description tail is much shorter than in the raw data ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]])
 
 ![Rank frequency plot, processed data](report_figures/B10-rank-frequency-processed.png)
 
@@ -9451,7 +9451,9 @@ Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7
 Macro-F1 for the same model/hyperparameter combinations trained on 1%, 10% and 100% of the training data.
 
 ![1% vs 10%](report_figures/B19a-scores-1pct-vs-10pct.png)
+
 ![1% vs 100%](report_figures/B19b-scores-1pct-vs-100pct.png)
+
 ![10% vs 100%](report_figures/B19c-scores-10pct-vs-100pct.png)
 
 Source [[#A3.3 Compare different population sizes.|A3.3]]; supports section [[#7.1 Population size validation|7.1]].
@@ -10009,10 +10011,8 @@ Source: saved output cells from [[#A2.2.7 Multiple XBRL Concepts per Description
 
 ### B44. Concepts with the most unique raw descriptions
 
-The saved exploratory-analysis output ranks each XBRL concept by the number of unique values in the raw description field. Several concepts exceed the 23,000 figure quoted in section 2:
-
-| XBRL concept                       | Unique raw descriptions |
-| ---------------------------------- | ----------------------: |
+| XBRL concept                         | Unique raw descriptions |
+| ------------------------------------ | ----------------------: |
 | `NameEntityOfficer`                  |                  76,843 |
 | `DirectorSigningFinancialStatements` |                  38,725 |
 | `EntityCurrentLegalOrRegisteredName` |                  24,457 |
@@ -10023,14 +10023,14 @@ Source: saved output from [[#A2.2.8 Multiple Descriptions per XBRL Concept|A2.2.
 
 ## Appendix C. Statistical rigour: uncertainty, bias, and error estimates where appropriate.
 
-The quantitative evidence for this section sits in Appendices A and B:
+The quantitative evidence for this section sits in Appendices [[#Appendix A. Code and documentation used for the project.|A]] and [[#Appendix B. Figures, tables, and visualisations.|B]]:
 
-- Cross validated scores with 95% margins of error, and paired t-tests against the top model, are produced by `add_confidence_interval` and `compare_to_top`(Appendix A3.2) and applied at every search stage in A3.3 to A3.7.
-- Bootstrap 95% confidence intervals over the test and holdout populations are at Appendix A3.7 and reported for all three candidate architectures at Appendix B32.
-- The population size validation, showing that filtering candidates on a 1% or 10% sample is defensible, is at Appendix B19 and B20.
-- Class imbalance and its effect on macro versus weighted metrics is evidenced by Appendix B8 and B13, with the weighting experiments at Appendix A3.7.7, A4.4.1.1 and A5.3.7 to A5.3.9.
-- Error analysis, including which classes fail and why, is at Appendix A3.10, Appendix B24 and Appendix B43, with robustness under perturbation at Appendix B25.
-- The 9.8pp feature uplift, production accuracy and macro-F1, operational KPIs, and bias analysis by company size and software provider were measured using restricted internal HMRC data. These results are reported in Sections 8-12 but cannot be reproduced in this public evidence appendix because the underlying data and operational records cannot be included in the submission.
+- Cross validated scores with 95% margins of error, and paired t-tests against the top model, are produced by `add_confidence_interval` and `compare_to_top` ([[#A3.2 Define Functions|Appendix A3.2]]) and applied at every search stage in [[#A3.3 Compare different population sizes.|A3.3]]–[[#A3.7 Final candidate model test scores|A3.7]].
+- Bootstrap 95% confidence intervals over the test and holdout populations are at [[#A3.7 Final candidate model test scores|Appendix A3.7]] and reported for all three candidate architectures at [[#B32. Decision matrix: measured values|Appendix B32]].
+- The population size validation, showing that filtering candidates on a 1% or 10% sample is defensible, is at Appendices [[#B19. Score agreement between training population sizes|B19]] and [[#B20. Correlation between population sizes|B20]].
+- Class imbalance and its effect on macro versus weighted metrics is evidenced by Appendices [[#B8. Pareto chart of concepts (raw data)|B8]] and [[#B13. Pareto chart of concepts after preprocessing|B13]], with the weighting experiments at [[#A3.7.7 Compare results|Appendix A3.7.7]], [[#A4.4.1.1 1% sqrt weighted train population|A4.4.1.1]] and [[#A5.3.7 Test Weighted model|A5.3.7]]–[[#A5.3.9 Random Oversampling|A5.3.9]].
+- Error analysis, including which classes fail and why, is at [[#A3.10 Residual analysis|Appendix A3.10]] and Appendices [[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24]] and [[#B43. Worked examples of ambiguous descriptions and apparent model errors|B43]], with robustness under perturbation at [[#B25. Robustness testing, LinearSVC against SEC-BERT|Appendix B25]].
+- The 9.8pp feature uplift, production accuracy and macro-F1, operational KPIs, and bias analysis by company size and software provider were measured using restricted internal HMRC data. These results are reported in Sections [[#8. Results.|8]], [[#9. Discussion and conclusions/recommendations.|9]], [[#10. Summary of findings.|10]], [[#11. Implications.|11]] and [[#12. Caveats and limitations.|12]], but cannot be reproduced in this public evidence appendix because the underlying data and operational records cannot be included in the submission.
 
 ## Appendix D. Mapping of the project report to Assessment Method 1 (AM1) knowledge, skills and behaviours (KSBs).
 
