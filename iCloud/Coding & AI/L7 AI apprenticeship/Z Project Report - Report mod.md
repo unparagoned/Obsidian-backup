@@ -1,3 +1,52 @@
+
+**Apprentice Details**
+
+| **Name**              | Jesse Karadia |
+| --------------------- | ------------- |
+| **ULN**               | 3591334404    |
+| **Training Provider** | QA            |
+| **Employer**          | HMRC          |
+
+# Extracting and categorising data in company accounts
+
+# Contents
+
+- [[#1. Introduction and background.|1. Introduction and background]]
+- [[#2. Outline of the issue or opportunity and the business problem to be solved.|2. Issue, opportunity and business problem]]
+- [[#3. Methods used and justification|3. Methods used and justification]]
+  - [[#3.1. Project management|3.1 Project management]]
+  - [[#3.2 Cross-Industry Standard Process for Data Mining (CRISP-DM)|3.2 CRISP-DM]]
+  - [[#3.3 Version control and documentation|3.3 Version control and documentation]]
+  - [[#3.4 Languages and packages|3.4 Languages and packages]]
+  - [[#3.5 Scientific method and testing|3.5 Scientific method and testing]]
+- [[#4. The scope of the project, including key performance indicators (KPIs).|4. Scope and key performance indicators]]
+- [[#5. Data selection, collection and pre-processing.|5. Data selection, collection and preprocessing]]
+  - [[#5.1 Data selection|5.1 Data selection]]
+  - [[#5.2 Exploratory Data Analysis (EDA)|5.2 Exploratory data analysis]]
+  - [[#5.3 Preprocessing|5.3 Preprocessing]]
+- [[#6. Survey of potential alternatives.|6. Survey of potential alternatives]]
+- [[#7. Implementation - performance metrics.|7. Implementation and performance metrics]]
+  - [[#7.1 Population size validation|7.1 Population size validation]]
+  - [[#7.2 Traditional machine learning algorithms|7.2 Traditional machine-learning algorithms]]
+  - [[#7.3 Conventional and Transformer based Neural Networks|7.3 Conventional and transformer-based neural networks]]
+  - [[#7.4 Class imbalance|7.4 Class imbalance]]
+  - [[#7.5 Model selection|7.5 Model selection]]
+  - [[#7.6 Production system and governance|7.6 Production system and governance]]
+- [[#8. Results.|8. Results]]
+- [[#9. Discussion and conclusions/recommendations.|9. Discussion, conclusions and recommendations]]
+- [[#10. Summary of findings.|10. Summary of findings]]
+- [[#11. Implications.|11. Implications]]
+- [[#12. Caveats and limitations.|12. Caveats and limitations]]
+- [[#13. Reference list.|13. Reference list]]
+- [[#14. Appendices.|14. Appendices]]
+  - [[#Appendix A. Code and documentation used for the project.|Appendix A. Code and documentation]]
+  - [[#Appendix B. Figures, tables, and visualisations.|Appendix B. Figures, tables and visualisations]]
+  - [[#Appendix C. Statistical rigour: uncertainty, bias, and error estimates where appropriate.|Appendix C. Statistical rigour]]
+  - [[#Appendix D. Mapping of the project report to Assessment Method 1 (AM1) knowledge, skills and behaviours (KSBs).|Appendix D. AM1 KSB mapping]]
+  - [[#Appendix E. Employer verification that the report reflects my own involvement and work.|Appendix E. Employer verification]]
+  - [[#Appendix F. Glossary and abbreviations.|Appendix F. Glossary and abbreviations]]
+
+
 # 1. Introduction and background.
 
 His Majesty's Revenue and Customs (HMRC) receives millions of financial documents such as company accounts and tax computations that contain information used for departmental/government policy and identifying tax risk. They are Inline eXtensible Business Reporting Language (iXBRL) documents: semi-structured Hypertext Markup Language (HTML) documents where key items are tagged with concepts from fixed taxonomies ([[#B1. iXBRL document structure|B1]]) ([[#^ref-xbrl-international-no-date|XBRL International, no date]]).
@@ -10093,6 +10142,8 @@ The 26 KSBs assigned to Assessment Method 1 are evidenced as follows, grouped un
 | S18 | Develop tools that visualise data systems and structures for monitoring and performance                                                                                                 | I developed an interactive dashboard that shows plausible alternative matches for each concept. Analysts can use it to distinguish reliable categories from those that need additional checking before using the classifications ([[#8. Results.\|Section 8]] and [[#9. Discussion and conclusions/recommendations.\|Section 9]]). Separate confusion matrices, coefficient plots expose common errors. Together these turn aggregate model evaluation into information that can be used for operational monitoring and support the recommended future drift thresholds. An example of the per-class and residual analysis is provided in [[#B40. Per-class performance and residual analysis\|Appendix B40]].                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ## Appendix E. Employer verification that the report reflects my own involvement and work.
+
+
 
 ## Appendix F. Glossary and abbreviations.
 
