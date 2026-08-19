@@ -40,7 +40,58 @@
 - [[#13. Reference list.|13. Reference list]]
 - [[#14. Appendices.|14. Appendices]]
   - [[#Appendix A. Code and documentation used for the project.|Appendix A. Code and documentation]]
+    - [[#A1. Data extraction: Code/00_ixbrl_data_extraction.ipynb|A1. Data extraction]]
+    - [[#A2. Exploratory data analysis and preprocessing: Code/01_ixbrl_eda_preprocessing.ipynb|A2. Exploratory data analysis and preprocessing]]
+    - [[#A3. Traditional ML experiments (scikit-learn): Code/03_ixbrl_experiment_models.ipynb|A3. Traditional ML experiments (scikit-learn)]]
+    - [[#A4. Neural network experiments (Keras/Optuna): Code/04_ixbrl_nn.ipynb|A4. Neural network experiments (Keras/Optuna)]]
+    - [[#A5. Transformer experiments (HuggingFace/Optuna): Code/05_xbrl_transformers.ipynb|A5. Transformer experiments (HuggingFace/Optuna)]]
+    - [[#A6. Model comparison decision matrix: Code/06_compare_models.ipynb|A6. Model comparison decision matrix]]
+    - [[#A7. Shared Python module: Code/ixbrl_ai/|A7. Shared Python module]]
   - [[#Appendix B. Figures, tables, and visualisations.|Appendix B. Figures, tables and visualisations]]
+    - [[#B1. iXBRL document structure|B1. iXBRL document structure]]
+    - [[#B2. Accounts that use HTML table nodes|B2. Accounts that use HTML table nodes]]
+    - [[#B3. Accounts that do not use HTML table nodes|B3. Accounts that do not use HTML table nodes]]
+    - [[#B4. Features available around a value|B4. Features available around a value]]
+    - [[#B5. Rank-frequency of descriptions and concepts (raw data)|B5. Rank-frequency of descriptions and concepts (raw data)]]
+    - [[#B6. Word-count distribution of descriptions (raw data)|B6. Word-count distribution of descriptions (raw data)]]
+    - [[#B7. Word count by the five most common concepts (raw data)|B7. Word count by the five most common concepts (raw data)]]
+    - [[#B8. Pareto chart of concepts (raw data)|B8. Pareto chart of concepts (raw data)]]
+    - [[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9. Concept frequency against power-law, lognormal and exponential fits (raw data)]]
+    - [[#B10. Rank-frequency after canonicalisation and label engineering|B10. Rank-frequency after canonicalisation and label engineering]]
+    - [[#B11. Word-count distribution after canonicalisation|B11. Word-count distribution after canonicalisation]]
+    - [[#B12. Word count by most common concepts after canonicalisation|B12. Word count by most common concepts after canonicalisation]]
+    - [[#B13. Pareto chart of concepts after preprocessing|B13. Pareto chart of concepts after preprocessing]]
+    - [[#B14. Distribution fit after preprocessing|B14. Distribution fit after preprocessing]]
+    - [[#B15. Dataset description before and after preprocessing|B15. Dataset description before and after preprocessing]]
+    - [[#B16. Silhouette scores by embedding (50,000 row sample)|B16. Silhouette scores by embedding (50,000 row sample)]]
+    - [[#B17. Macro-F1 by model type (1% training population)|B17. Macro-F1 by model type (1% training population)]]
+    - [[#B18. Macro-F1 against training time (1% training population)|B18. Macro-F1 against training time (1% training population)]]
+    - [[#B19. Score agreement between training population sizes|B19. Score agreement between training population sizes]]
+    - [[#B20. Correlation between population sizes|B20. Correlation between population sizes]]
+    - [[#B21. Macro-F1 against training time, refined halving search|B21. Macro-F1 against training time, refined halving search]]
+    - [[#B22. Fit time and score split by min_df|B22. Fit time and score split by min_df]]
+    - [[#B23. LinearSVC feature attribution (SHAP) for "cost of goods sold turnover"|B23. LinearSVC feature attribution (SHAP) for "cost of goods sold turnover"]]
+    - [[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24. Confusion matrices for individual classes (LinearSVC, holdout)]]
+    - [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25. Robustness testing, LinearSVC against SEC-BERT]]
+    - [[#B26. CNN validation macro-F1 by epoch|B26. CNN validation macro-F1 by epoch]]
+    - [[#B27. CNN validation macro-F1 against cumulative training time|B27. CNN validation macro-F1 against cumulative training time]]
+    - [[#B28. SEC-BERT token contributions (SHAP) for "cost of goods sold turnover"|B28. SEC-BERT token contributions (SHAP) for "cost of goods sold turnover"]]
+    - [[#B29. SEC-BERT training and evaluation loss by epoch|B29. SEC-BERT training and evaluation loss by epoch]]
+    - [[#B30. SEC-BERT confusion matrices for individual classes|B30. SEC-BERT confusion matrices for individual classes]]
+    - [[#B31. Decision matrix: subjective assessments|B31. Decision matrix: subjective assessments]]
+    - [[#B32. Decision matrix: measured values|B32. Decision matrix: measured values]]
+    - [[#B33. Decision matrix: weighting|B33. Decision matrix: weighting]]
+    - [[#B34. Decision matrix: final scores|B34. Decision matrix: final scores]]
+    - [[#B35. End-to-end system architecture|B35. End-to-end system architecture]]
+    - [[#B36. Data and ML pipeline|B36. Data and ML pipeline]]
+    - [[#B37. Model selection funnel|B37. Model selection funnel]]
+    - [[#B38. Final model performance: LinearSVC trained on the 100% train population|B38. Final model performance: LinearSVC trained on the 100% train population]]
+    - [[#B39. LinearSVC coefficients for "cost of goods sold turnover"|B39. LinearSVC coefficients for "cost of goods sold turnover"]]
+    - [[#B40. Per-class performance and residual analysis|B40. Per-class performance and residual analysis]]
+    - [[#B41. Example of description and XBRL Concepts|B41. Example of description and XBRL Concepts]]
+    - [[#B42. Simple SVM decision boundary visual|B42. Simple SVM decision boundary visual]]
+    - [[#B43. Worked examples of ambiguous descriptions and apparent model errors|B43. Worked examples of ambiguous descriptions and apparent model errors]]
+    - [[#B44. Concepts with the most unique raw descriptions|B44. Concepts with the most unique raw descriptions]]
   - [[#Appendix C. Statistical rigour: uncertainty, bias, and error estimates where appropriate.|Appendix C. Statistical rigour]]
   - [[#Appendix D. Mapping of the project report to Assessment Method 1 (AM1) knowledge, skills and behaviours (KSBs).|Appendix D. AM1 KSB mapping]]
   - [[#Appendix E. Employer verification that the report reflects my own involvement and work.|Appendix E. Employer verification]]
@@ -8168,7 +8219,7 @@ display_wide(final_scores_table)
 
 ##### A6.2.5 Rubric
 
-### Interpretability
+###### Interpretability
 
 | Score | Definition                                                                              |
 | ----- | --------------------------------------------------------------------------------------- |
@@ -8177,7 +8228,7 @@ display_wide(final_scores_table)
 | 3     | Partial explanation is feasible for many cases, but not consistently for edge cases.    |
 | 4     | Explanations are reliable for most predictions with moderate analyst effort.            |
 | 5     | Explanations are clear, reproducible, and directly linked to prediction drivers.        |
-### Deployment Simplicity
+###### Deployment Simplicity
 
 | Score | Definition                                                                               |
 | ----- | ---------------------------------------------------------------------------------------- |
@@ -8186,7 +8237,7 @@ display_wide(final_scores_table)
 | 3     | Deployable with moderate complexity and some specialised setup.                          |
 | 4     | Straightforward deployment using common tooling and infrastructure.                      |
 | 5     | Lightweight deployment with minimal additional infrastructure.                           |
-### Maintenance Burden
+###### Maintenance Burden
 
 | Score | Definition                                                                                      |
 | ----- | ----------------------------------------------------------------------------------------------- |
@@ -8196,7 +8247,7 @@ display_wide(final_scores_table)
 | 4     | Maintenance is predictable and manageable with standard team skills.                            |
 | 5     | Maintenance overhead is low and operational runbooks are stable.                                |
 
-### Domain Fit
+###### Domain Fit
 
 | Score | Definition                                                                     |
 | ----- | ------------------------------------------------------------------------------ |
@@ -8206,7 +8257,7 @@ display_wide(final_scores_table)
 | 4     | Strong alignment with domain terminology and decision requirements.            |
 | 5     | Excellent alignment across common and difficult domain-specific cases.         |
 
-### Model Lifecycle & Sustainability
+###### Model Lifecycle & Sustainability
 
 | Score | Definition                                                                  |
 | ----- | --------------------------------------------------------------------------- |
@@ -8216,7 +8267,7 @@ display_wide(final_scores_table)
 | 4     | Actively maintained with a clear upgrade and replacement path.              |
 | 5     | Strong long-term support and broad ecosystem resilience.                    |
 
-### Dependency Risk
+###### Dependency Risk
 
 | Score | Definition                                                              |
 | ----- | ----------------------------------------------------------------------- |
