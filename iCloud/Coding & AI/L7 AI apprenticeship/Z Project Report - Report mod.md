@@ -7,7 +7,7 @@
 | **Training Provider** | QA            |
 | **Employer**          | HMRC          |
 
-# Extracting and categorising data in company accounts
+# Categorising data in financial documents
 
 # Contents
 
@@ -9384,7 +9384,8 @@ Subset of images, text and outputs are from the notebooks in Appendix A.
 
 Example iXBRL document opened in the Graffiti viewer (www.stechanalytics.com) with the underlying HTML on the right.
 
-![iXBRL document with tagged and untagged values](report_figures/B01-ixbrl-document-structure.png)
+[[55e397c30ebcec2bb4e5d36d3d6b9155_MD5.jpg|Open: Pasted image 20260819130443.png]]
+![[55e397c30ebcec2bb4e5d36d3d6b9155_MD5.jpg]]
 
 Supports sections [[#1. Introduction and background.|1]] and [[#5.1 Data selection|5.1]].
 
@@ -9637,23 +9638,6 @@ By perturbation category:
 | typo | 13 | 4 | 0.308 | 4 | 0.308 |
 | unicode | 13 | 1 | 0.077 | 2 | 0.154 |
 | variation | 13 | 9 | 0.692 | 7 | 0.538 |
-By expected concept:
-
-| Expected concept | Cases | `LinearSVC` accuracy | SEC-BERT accuracy |
-|---|---|---|---|
-| `AdministrativeExpenses` | 10 | 0.6 | 0.6 |
-| `CashBankOnHand` | 10 | 0.7 | 0.7 |
-| `CorporationTaxPayable` | 10 | 0.6 | 0.5 |
-| `CostSales` | 10 | 0.3 | 0.3 |
-| `CurrentAssets` | 10 | 0.4 | 0.3 |
-| `Debtors` | 10 | 0.4 | 0.3 |
-| `FixedAssets` | 10 | 0.6 | 0.5 |
-| `GrossProfitLoss` | 10 | 0.6 | 0.3 |
-| `IntangibleAssets` | 10 | 0.4 | 0.5 |
-| `InvestmentProperty` | 10 | 0.4 | 0.4 |
-| `OperatingProfitLoss` | 10 | 0.4 | 0.3 |
-| `ProfitLoss` | 10 | 0.5 | 0.4 |
-| `TurnoverRevenue` | 11 | 0.545 | 0.455 |
 
 Source [[#A3.8 Test model robustness|A3.8]] and [[#A5.3.5 10% sqrt weight training population|A5.3.5]] (test cases defined in `ixbrl_ai.test.IXBRL_TEXT_CLASSIFICATION_TEST_CASES`); supports section [[#8. Results.|8]].
 
@@ -9911,149 +9895,149 @@ Figures are from `classification_report` over the full holdout of 243,991 rows, 
 
 **Full per-class results.** All 141 concepts, sorted by F1 ascending.
 
-| Concept | Precision | Recall | F1 | Support |
-|---|---|---|---|---|
-| `AccruedLiabilities` | 0.000 | 0.000 | 0.000 | 292 |
-| `CalledUpShareCapitalNotPaid` | 0.000 | 0.000 | 0.000 | 142 |
-| `TotalAdditions..IntangibleAssets` | 0.000 | 0.000 | 0.000 | 73 |
-| `Investments` | 0.000 | 0.000 | 0.000 | 50 |
-| `OtherOperatingIncome` | 0.000 | 0.000 | 0.000 | 45 |
-| `DisposalsIntangibleAssets` | 0.000 | 0.000 | 0.000 | 44 |
-| `DisposalsDecrease..IntangibleAssets` | 0.000 | 0.000 | 0.000 | 40 |
-| `IntangibleAssetsGrossCost` | 0.000 | 0.000 | 0.000 | 35 |
-| `AdditionsOtherThan..PlantEquipment` | 1.000 | 0.001 | 0.003 | 751 |
-| `InvestmentPropertyFairValueModel` | 1.000 | 0.014 | 0.029 | 69 |
-| `AdditionsOtherThan..FairValueModel` | 1.000 | 0.016 | 0.031 | 63 |
-| `StartDateForPeriodCoveredByReport` | 0.333 | 0.032 | 0.058 | 63 |
-| `AmountsOwedByDirectors` | 0.714 | 0.033 | 0.063 | 151 |
-| `OtherInvestmentsOtherThanLoans` | 1.000 | 0.055 | 0.104 | 73 |
-| `RecoverableValue-addedTax` | 0.812 | 0.094 | 0.168 | 139 |
-| `CurrentAssetInvestments` | 0.955 | 0.095 | 0.174 | 220 |
-| `PrepaymentsAccruedIncome` | 0.976 | 0.111 | 0.200 | 360 |
-| `DepreciationRateUsed..PlantEquipment` | 0.452 | 0.175 | 0.252 | 80 |
-| `AccruedLiabilitiesDeferredIncome` | 0.838 | 0.167 | 0.279 | 987 |
-| `IncreaseFrom..IntangibleAssets` | 1.000 | 0.185 | 0.312 | 238 |
-| `UsefulLifeProperty..EquipmentYears` | 0.354 | 0.366 | 0.360 | 93 |
-| `FutureMinimumLease..OperatingLeases` | 0.368 | 0.390 | 0.379 | 154 |
-| `PropertyPlantEquipmentGrossCost` | 0.241 | 0.988 | 0.388 | 83 |
-| `OtherProvisionsBalanceSheetSubtotal` | 1.000 | 0.270 | 0.426 | 37 |
-| `AmountsOwedToRelatedParties` | 0.810 | 0.304 | 0.442 | 56 |
-| `LoansOwedByRelatedParties` | 0.471 | 0.421 | 0.444 | 38 |
-| `LoansOwedToRelatedParties` | 0.463 | 0.514 | 0.487 | 37 |
-| `AmountsOwedToGroup..Interests` | 0.529 | 0.500 | 0.514 | 54 |
-| `TaxationSocialSecurityPayable` | 0.400 | 0.960 | 0.565 | 500 |
-| `FurtherItemCreditors..TotalCreditors` | 0.530 | 0.660 | 0.588 | 159 |
-| `FurtherItemDebtors..TotalDebtors` | 0.565 | 0.619 | 0.591 | 63 |
-| `DisposalsDecreaseIn..PlantEquipment` | 0.880 | 0.469 | 0.612 | 471 |
-| `OtherTaxationSocialSecurityPayable` | 0.965 | 0.456 | 0.619 | 1,252 |
-| `OtherTaxationPayable` | 0.909 | 0.471 | 0.620 | 85 |
-| `CashOnHand` | 0.717 | 0.611 | 0.660 | 54 |
-| `TotalAdditions..PlantEquipment` | 0.507 | 1.000 | 0.673 | 969 |
-| `OtherOperatingIncomeFormat1` | 0.554 | 0.982 | 0.709 | 57 |
-| `NumberSharesIssuedFullyPaid` | 0.594 | 0.981 | 0.740 | 216 |
-| `AmountsOwedToGroupUndertakings` | 0.627 | 0.970 | 0.762 | 66 |
-| `DisposalsPropertyPlantEquipment` | 0.617 | 1.000 | 0.763 | 529 |
-| `AmountsOwedByRelatedParties` | 0.955 | 0.689 | 0.800 | 61 |
-| `AccruedLiabilitiesNot..Subtotal` | 0.669 | 1.000 | 0.801 | 2,200 |
-| `Accumulated..IntangibleAssets` | 1.000 | 0.692 | 0.818 | 65 |
-| `AdvancesCreditsDirectors` | 0.913 | 0.750 | 0.824 | 56 |
-| `AmountsOwedByGroup..Interests` | 0.731 | 0.980 | 0.838 | 50 |
-| `InvestmentsInSubsidiaries` | 0.970 | 0.739 | 0.839 | 88 |
-| `FinanceLeasePayments..MinimumGross` | 0.745 | 0.960 | 0.839 | 299 |
-| `Value-addedTaxPayable` | 0.745 | 0.997 | 0.853 | 374 |
-| `CorporationTaxRecoverable` | 0.963 | 0.800 | 0.874 | 65 |
-| `AmountsOwedToDirectors` | 0.784 | 0.998 | 0.878 | 617 |
-| `NumberSharesAllotted` | 0.998 | 0.786 | 0.880 | 641 |
-| `DescriptionSpecific..RateDirectors` | 0.869 | 0.897 | 0.883 | 185 |
-| `InvestmentsFixedAssets` | 0.799 | 0.991 | 0.885 | 811 |
-| `TotalIncrease..PlantEquipment` | 0.812 | 1.000 | 0.896 | 108 |
-| `PrepaymentsAccrued..AssetSubtotal` | 0.822 | 1.000 | 0.902 | 1,440 |
-| `AccountsType` | 0.827 | 0.993 | 0.903 | 140 |
-| `Prepayments` | 0.883 | 0.935 | 0.908 | 185 |
-| `OtherInventories` | 0.913 | 0.932 | 0.922 | 337 |
-| `OtherRemainingBorrowings` | 0.932 | 0.916 | 0.924 | 238 |
-| `CalledUpShareCapital..AsCurrentAsset` | 0.868 | 1.000 | 0.929 | 931 |
-| `WorkInProgress` | 0.884 | 0.991 | 0.934 | 115 |
-| `BankOverdrafts` | 0.902 | 0.974 | 0.937 | 114 |
-| `RawMaterials` | 0.982 | 0.903 | 0.941 | 62 |
-| `DeferredTaxLiabilities` | 0.935 | 0.956 | 0.945 | 45 |
-| `NetDeferredTaxLiabilityAsset` | 0.957 | 0.936 | 0.946 | 47 |
-| `Description..IntangibleAssets` | 0.950 | 0.974 | 0.962 | 78 |
-| `OtherIncrease..PlantEquipment` | 0.930 | 1.000 | 0.964 | 66 |
-| `IncreaseFrom..PlantEquipment` | 0.932 | 1.000 | 0.964 | 2,645 |
-| `TotalBorrowings` | 0.984 | 0.946 | 0.965 | 332 |
-| `ReportTitle` | 0.998 | 0.935 | 0.965 | 447 |
-| `FinishedGoods` | 0.986 | 0.947 | 0.966 | 76 |
-| `BalanceSheetDate` | 0.956 | 1.000 | 0.977 | 868 |
-| `OtherCreditors` | 0.986 | 0.971 | 0.978 | 1,399 |
-| `AmountsOwedToAssociates..Interests` | 1.000 | 0.959 | 0.979 | 49 |
-| `OtherDebtors` | 0.973 | 0.986 | 0.980 | 1,021 |
-| `DividendsPaid` | 0.987 | 0.975 | 0.981 | 161 |
-| `Description..PlantEquipment` | 0.978 | 0.985 | 0.981 | 4,821 |
-| `ComprehensiveIncomeExpense` | 0.967 | 0.997 | 0.982 | 327 |
-| `TotalInventories` | 0.990 | 0.975 | 0.983 | 2,315 |
-| `BankBorrowingsOverdrafts` | 0.986 | 0.980 | 0.983 | 1,329 |
-| `CharityFunds` | 0.976 | 0.992 | 0.984 | 121 |
-| `Administration..NumberEmployees` | 0.980 | 0.993 | 0.987 | 149 |
-| `Debtors` | 0.999 | 0.975 | 0.987 | 6,733 |
-| `DescriptionShareType` | 0.991 | 0.984 | 0.987 | 435 |
-| `DividendPerShareInterim` | 0.978 | 1.000 | 0.989 | 45 |
-| `CorporationTaxPayable` | 0.989 | 0.993 | 0.991 | 821 |
-| `BankBorrowings` | 0.988 | 0.994 | 0.991 | 166 |
-| `DepreciationExpense..PlantEquipment` | 0.984 | 1.000 | 0.992 | 60 |
-| `ProfitLoss` | 0.995 | 0.989 | 0.992 | 874 |
-| `InvestmentProperty` | 0.987 | 1.000 | 0.994 | 546 |
-| `Creditors` | 0.992 | 0.995 | 0.994 | 18,930 |
-| `EntityTradingStatus` | 0.988 | 1.000 | 0.994 | 83 |
-| `ProvisionsFor..SheetSubtotal` | 0.988 | 1.000 | 0.994 | 2,430 |
-| `FinanceLeaseLiabilities..ValueTotal` | 0.996 | 0.992 | 0.994 | 522 |
-| `TaxTaxCreditOnProfitOr..Activities` | 0.990 | 1.000 | 0.995 | 474 |
-| `ProfitLossOnOrdinary..BeforeTax` | 1.000 | 0.991 | 0.995 | 319 |
-| `FixedAssets` | 0.991 | 1.000 | 0.995 | 4,273 |
-| `UKCompaniesHouseRegisteredNumber` | 1.000 | 0.992 | 0.996 | 5,010 |
-| `TurnoverRevenue` | 1.000 | 0.992 | 0.996 | 644 |
-| `PropertyPlantEquipment` | 1.000 | 0.994 | 0.997 | 6,946 |
-| `EndDateForPeriodCoveredByReport` | 1.000 | 0.994 | 0.997 | 1,030 |
-| `TradeDebtorsTradeReceivables` | 0.996 | 0.999 | 0.998 | 1,410 |
-| `OtherOperatingIncomeFormat2` | 0.995 | 1.000 | 0.998 | 209 |
-| `DepreciationAmortisation..Expense` | 0.995 | 1.000 | 0.998 | 210 |
-| `CashBankOnHand` | 0.997 | 0.998 | 0.998 | 7,791 |
-| `IntangibleAssets` | 0.999 | 0.997 | 0.998 | 913 |
-| `CostSales` | 0.996 | 1.000 | 0.998 | 230 |
-| `RawMaterialsConsumablesUsed` | 1.000 | 0.996 | 0.998 | 284 |
-| `GrossProfitLoss` | 0.997 | 1.000 | 0.998 | 287 |
-| `AdministrativeExpenses` | 1.000 | 0.997 | 0.998 | 292 |
-| `OtherOperatingExpensesFormat2` | 1.000 | 0.997 | 0.998 | 319 |
-| `Equity` | 1.000 | 0.998 | 0.999 | 28,976 |
-| `TaxationIncluding..SheetSubtotal` | 0.998 | 1.000 | 0.999 | 550 |
-| `AverageNumberEmployeesDuringPeriod` | 1.000 | 0.999 | 0.999 | 6,409 |
-| `TradeCreditorsTradePayables` | 0.999 | 1.000 | 1.000 | 1,648 |
-| `CurrentAssets` | 1.000 | 1.000 | 1.000 | 6,100 |
-| `DateAuthorisationFinancial..ForIssue` | 1.000 | 1.000 | 1.000 | 2,105 |
-| `NetAssetsLiabilities` | 1.000 | 1.000 | 1.000 | 11,399 |
-| `NetCurrentAssetsLiabilities` | 1.000 | 1.000 | 1.000 | 13,660 |
-| `HubbleNumber` | 1.000 | 1.000 | 1.000 | 13,000 |
-| `HubbleDate` | 1.000 | 1.000 | 1.000 | 27,261 |
-| `HubbleName` | 1.000 | 1.000 | 1.000 | 15,542 |
-| `TotalAssetsLessCurrentLiabilities` | 1.000 | 1.000 | 1.000 | 13,415 |
-| `HubbleCompanyName` | 1.000 | 1.000 | 1.000 | 5,511 |
-| `OperatingProfitLoss` | 1.000 | 1.000 | 1.000 | 283 |
-| `StaffCostsEmployeeBenefitsExpense` | 1.000 | 1.000 | 1.000 | 271 |
-| `InterestPayableSimilar..FinanceCosts` | 1.000 | 1.000 | 1.000 | 149 |
-| `OtherInterest..FinanceIncome` | 1.000 | 1.000 | 1.000 | 135 |
-| `ProfitLossOnOrdinary..AfterTax` | 1.000 | 1.000 | 1.000 | 107 |
-| `DistributionCosts` | 1.000 | 1.000 | 1.000 | 94 |
-| `AccountingStandardsApplied` | 1.000 | 1.000 | 1.000 | 82 |
-| `AccountsStatusAuditedOrUnaudited` | 1.000 | 1.000 | 1.000 | 82 |
-| `EntityDormantTruefalse` | 1.000 | 1.000 | 1.000 | 82 |
-| `LegalFormEntity` | 1.000 | 1.000 | 1.000 | 82 |
-| `HubblePostcode` | 1.000 | 1.000 | 1.000 | 75 |
-| `IncomeExpense..DirectlyInEquity` | 1.000 | 1.000 | 1.000 | 74 |
-| `IncreaseDecreaseDue..PlantEquipment` | 1.000 | 1.000 | 1.000 | 65 |
-| `DirectorRemuneration` | 1.000 | 1.000 | 1.000 | 54 |
-| `FinalDividendsPaid` | 1.000 | 1.000 | 1.000 | 47 |
-| `WagesSalaries` | 1.000 | 1.000 | 1.000 | 46 |
-| `NetCashFlowsFromUsedIn..Activities` | 1.000 | 1.000 | 1.000 | 35 |
+| Concept                                | Precision | Recall | F1    | Support |
+| -------------------------------------- | --------- | ------ | ----- | ------- |
+| `AccruedLiabilities`                   | 0.000     | 0.000  | 0.000 | 292     |
+| `CalledUpShareCapitalNotPaid`          | 0.000     | 0.000  | 0.000 | 142     |
+| `TotalAdditions..IntangibleAssets`     | 0.000     | 0.000  | 0.000 | 73      |
+| `Investments`                          | 0.000     | 0.000  | 0.000 | 50      |
+| `OtherOperatingIncome`                 | 0.000     | 0.000  | 0.000 | 45      |
+| `DisposalsIntangibleAssets`            | 0.000     | 0.000  | 0.000 | 44      |
+| `DisposalsDecrease..IntangibleAssets`  | 0.000     | 0.000  | 0.000 | 40      |
+| `IntangibleAssetsGrossCost`            | 0.000     | 0.000  | 0.000 | 35      |
+| `AdditionsOtherThan..PlantEquipment`   | 1.000     | 0.001  | 0.003 | 751     |
+| `InvestmentPropertyFairValueModel`     | 1.000     | 0.014  | 0.029 | 69      |
+| `AdditionsOtherThan..FairValueModel`   | 1.000     | 0.016  | 0.031 | 63      |
+| `StartDateForPeriodCoveredByReport`    | 0.333     | 0.032  | 0.058 | 63      |
+| `AmountsOwedByDirectors`               | 0.714     | 0.033  | 0.063 | 151     |
+| `OtherInvestmentsOtherThanLoans`       | 1.000     | 0.055  | 0.104 | 73      |
+| `RecoverableValue-addedTax`            | 0.812     | 0.094  | 0.168 | 139     |
+| `CurrentAssetInvestments`              | 0.955     | 0.095  | 0.174 | 220     |
+| `PrepaymentsAccruedIncome`             | 0.976     | 0.111  | 0.200 | 360     |
+| `DepreciationRateUsed..PlantEquipment` | 0.452     | 0.175  | 0.252 | 80      |
+| `AccruedLiabilitiesDeferredIncome`     | 0.838     | 0.167  | 0.279 | 987     |
+| `IncreaseFrom..IntangibleAssets`       | 1.000     | 0.185  | 0.312 | 238     |
+| `UsefulLifeProperty..EquipmentYears`   | 0.354     | 0.366  | 0.360 | 93      |
+| `FutureMinimumLease..OperatingLeases`  | 0.368     | 0.390  | 0.379 | 154     |
+| `PropertyPlantEquipmentGrossCost`      | 0.241     | 0.988  | 0.388 | 83      |
+| `OtherProvisionsBalanceSheetSubtotal`  | 1.000     | 0.270  | 0.426 | 37      |
+| `AmountsOwedToRelatedParties`          | 0.810     | 0.304  | 0.442 | 56      |
+| `LoansOwedByRelatedParties`            | 0.471     | 0.421  | 0.444 | 38      |
+| `LoansOwedToRelatedParties`            | 0.463     | 0.514  | 0.487 | 37      |
+| `AmountsOwedToGroup..Interests`        | 0.529     | 0.500  | 0.514 | 54      |
+| `TaxationSocialSecurityPayable`        | 0.400     | 0.960  | 0.565 | 500     |
+| `FurtherItemCreditors..TotalCreditors` | 0.530     | 0.660  | 0.588 | 159     |
+| `FurtherItemDebtors..TotalDebtors`     | 0.565     | 0.619  | 0.591 | 63      |
+| `DisposalsDecreaseIn..PlantEquipment`  | 0.880     | 0.469  | 0.612 | 471     |
+| `OtherTaxationSocialSecurityPayable`   | 0.965     | 0.456  | 0.619 | 1,252   |
+| `OtherTaxationPayable`                 | 0.909     | 0.471  | 0.620 | 85      |
+| `CashOnHand`                           | 0.717     | 0.611  | 0.660 | 54      |
+| `TotalAdditions..PlantEquipment`       | 0.507     | 1.000  | 0.673 | 969     |
+| `OtherOperatingIncomeFormat1`          | 0.554     | 0.982  | 0.709 | 57      |
+| `NumberSharesIssuedFullyPaid`          | 0.594     | 0.981  | 0.740 | 216     |
+| `AmountsOwedToGroupUndertakings`       | 0.627     | 0.970  | 0.762 | 66      |
+| `DisposalsPropertyPlantEquipment`      | 0.617     | 1.000  | 0.763 | 529     |
+| `AmountsOwedByRelatedParties`          | 0.955     | 0.689  | 0.800 | 61      |
+| `AccruedLiabilitiesNot..Subtotal`      | 0.669     | 1.000  | 0.801 | 2,200   |
+| `Accumulated..IntangibleAssets`        | 1.000     | 0.692  | 0.818 | 65      |
+| `AdvancesCreditsDirectors`             | 0.913     | 0.750  | 0.824 | 56      |
+| `AmountsOwedByGroup..Interests`        | 0.731     | 0.980  | 0.838 | 50      |
+| `InvestmentsInSubsidiaries`            | 0.970     | 0.739  | 0.839 | 88      |
+| `FinanceLeasePayments..MinimumGross`   | 0.745     | 0.960  | 0.839 | 299     |
+| `Value-addedTaxPayable`                | 0.745     | 0.997  | 0.853 | 374     |
+| `CorporationTaxRecoverable`            | 0.963     | 0.800  | 0.874 | 65      |
+| `AmountsOwedToDirectors`               | 0.784     | 0.998  | 0.878 | 617     |
+| `NumberSharesAllotted`                 | 0.998     | 0.786  | 0.880 | 641     |
+| `DescriptionSpecific..RateDirectors`   | 0.869     | 0.897  | 0.883 | 185     |
+| `InvestmentsFixedAssets`               | 0.799     | 0.991  | 0.885 | 811     |
+| `TotalIncrease..PlantEquipment`        | 0.812     | 1.000  | 0.896 | 108     |
+| `PrepaymentsAccrued..AssetSubtotal`    | 0.822     | 1.000  | 0.902 | 1,440   |
+| `AccountsType`                         | 0.827     | 0.993  | 0.903 | 140     |
+| `Prepayments`                          | 0.883     | 0.935  | 0.908 | 185     |
+| `OtherInventories`                     | 0.913     | 0.932  | 0.922 | 337     |
+| `OtherRemainingBorrowings`             | 0.932     | 0.916  | 0.924 | 238     |
+| `CalledUpShareCapital..AsCurrentAsset` | 0.868     | 1.000  | 0.929 | 931     |
+| `WorkInProgress`                       | 0.884     | 0.991  | 0.934 | 115     |
+| `BankOverdrafts`                       | 0.902     | 0.974  | 0.937 | 114     |
+| `RawMaterials`                         | 0.982     | 0.903  | 0.941 | 62      |
+| `DeferredTaxLiabilities`               | 0.935     | 0.956  | 0.945 | 45      |
+| `NetDeferredTaxLiabilityAsset`         | 0.957     | 0.936  | 0.946 | 47      |
+| `Description..IntangibleAssets`        | 0.950     | 0.974  | 0.962 | 78      |
+| `OtherIncrease..PlantEquipment`        | 0.930     | 1.000  | 0.964 | 66      |
+| `IncreaseFrom..PlantEquipment`         | 0.932     | 1.000  | 0.964 | 2,645   |
+| `TotalBorrowings`                      | 0.984     | 0.946  | 0.965 | 332     |
+| `ReportTitle`                          | 0.998     | 0.935  | 0.965 | 447     |
+| `FinishedGoods`                        | 0.986     | 0.947  | 0.966 | 76      |
+| `BalanceSheetDate`                     | 0.956     | 1.000  | 0.977 | 868     |
+| `OtherCreditors`                       | 0.986     | 0.971  | 0.978 | 1,399   |
+| `AmountsOwedToAssociates..Interests`   | 1.000     | 0.959  | 0.979 | 49      |
+| `OtherDebtors`                         | 0.973     | 0.986  | 0.980 | 1,021   |
+| `DividendsPaid`                        | 0.987     | 0.975  | 0.981 | 161     |
+| `Description..PlantEquipment`          | 0.978     | 0.985  | 0.981 | 4,821   |
+| `ComprehensiveIncomeExpense`           | 0.967     | 0.997  | 0.982 | 327     |
+| `TotalInventories`                     | 0.990     | 0.975  | 0.983 | 2,315   |
+| `BankBorrowingsOverdrafts`             | 0.986     | 0.980  | 0.983 | 1,329   |
+| `CharityFunds`                         | 0.976     | 0.992  | 0.984 | 121     |
+| `Administration..NumberEmployees`      | 0.980     | 0.993  | 0.987 | 149     |
+| `Debtors`                              | 0.999     | 0.975  | 0.987 | 6,733   |
+| `DescriptionShareType`                 | 0.991     | 0.984  | 0.987 | 435     |
+| `DividendPerShareInterim`              | 0.978     | 1.000  | 0.989 | 45      |
+| `CorporationTaxPayable`                | 0.989     | 0.993  | 0.991 | 821     |
+| `BankBorrowings`                       | 0.988     | 0.994  | 0.991 | 166     |
+| `DepreciationExpense..PlantEquipment`  | 0.984     | 1.000  | 0.992 | 60      |
+| `ProfitLoss`                           | 0.995     | 0.989  | 0.992 | 874     |
+| `InvestmentProperty`                   | 0.987     | 1.000  | 0.994 | 546     |
+| `Creditors`                            | 0.992     | 0.995  | 0.994 | 18,930  |
+| `EntityTradingStatus`                  | 0.988     | 1.000  | 0.994 | 83      |
+| `ProvisionsFor..SheetSubtotal`         | 0.988     | 1.000  | 0.994 | 2,430   |
+| `FinanceLeaseLiabilities..ValueTotal`  | 0.996     | 0.992  | 0.994 | 522     |
+| `TaxTaxCreditOnProfitOr..Activities`   | 0.990     | 1.000  | 0.995 | 474     |
+| `ProfitLossOnOrdinary..BeforeTax`      | 1.000     | 0.991  | 0.995 | 319     |
+| `FixedAssets`                          | 0.991     | 1.000  | 0.995 | 4,273   |
+| `UKCompaniesHouseRegisteredNumber`     | 1.000     | 0.992  | 0.996 | 5,010   |
+| `TurnoverRevenue`                      | 1.000     | 0.992  | 0.996 | 644     |
+| `PropertyPlantEquipment`               | 1.000     | 0.994  | 0.997 | 6,946   |
+| `EndDateForPeriodCoveredByReport`      | 1.000     | 0.994  | 0.997 | 1,030   |
+| `TradeDebtorsTradeReceivables`         | 0.996     | 0.999  | 0.998 | 1,410   |
+| `OtherOperatingIncomeFormat2`          | 0.995     | 1.000  | 0.998 | 209     |
+| `DepreciationAmortisation..Expense`    | 0.995     | 1.000  | 0.998 | 210     |
+| `CashBankOnHand`                       | 0.997     | 0.998  | 0.998 | 7,791   |
+| `IntangibleAssets`                     | 0.999     | 0.997  | 0.998 | 913     |
+| `CostSales`                            | 0.996     | 1.000  | 0.998 | 230     |
+| `RawMaterialsConsumablesUsed`          | 1.000     | 0.996  | 0.998 | 284     |
+| `GrossProfitLoss`                      | 0.997     | 1.000  | 0.998 | 287     |
+| `AdministrativeExpenses`               | 1.000     | 0.997  | 0.998 | 292     |
+| `OtherOperatingExpensesFormat2`        | 1.000     | 0.997  | 0.998 | 319     |
+| `Equity`                               | 1.000     | 0.998  | 0.999 | 28,976  |
+| `TaxationIncluding..SheetSubtotal`     | 0.998     | 1.000  | 0.999 | 550     |
+| `AverageNumberEmployeesDuringPeriod`   | 1.000     | 0.999  | 0.999 | 6,409   |
+| `TradeCreditorsTradePayables`          | 0.999     | 1.000  | 1.000 | 1,648   |
+| `CurrentAssets`                        | 1.000     | 1.000  | 1.000 | 6,100   |
+| `DateAuthorisationFinancial..ForIssue` | 1.000     | 1.000  | 1.000 | 2,105   |
+| `NetAssetsLiabilities`                 | 1.000     | 1.000  | 1.000 | 11,399  |
+| `NetCurrentAssetsLiabilities`          | 1.000     | 1.000  | 1.000 | 13,660  |
+| `HubbleNumber`                         | 1.000     | 1.000  | 1.000 | 13,000  |
+| `HubbleDate`                           | 1.000     | 1.000  | 1.000 | 27,261  |
+| `HubbleName`                           | 1.000     | 1.000  | 1.000 | 15,542  |
+| `TotalAssetsLessCurrentLiabilities`    | 1.000     | 1.000  | 1.000 | 13,415  |
+| `HubbleCompanyName`                    | 1.000     | 1.000  | 1.000 | 5,511   |
+| `OperatingProfitLoss`                  | 1.000     | 1.000  | 1.000 | 283     |
+| `StaffCostsEmployeeBenefitsExpense`    | 1.000     | 1.000  | 1.000 | 271     |
+| `InterestPayableSimilar..FinanceCosts` | 1.000     | 1.000  | 1.000 | 149     |
+| `OtherInterest..FinanceIncome`         | 1.000     | 1.000  | 1.000 | 135     |
+| `ProfitLossOnOrdinary..AfterTax`       | 1.000     | 1.000  | 1.000 | 107     |
+| `DistributionCosts`                    | 1.000     | 1.000  | 1.000 | 94      |
+| `AccountingStandardsApplied`           | 1.000     | 1.000  | 1.000 | 82      |
+| `AccountsStatusAuditedOrUnaudited`     | 1.000     | 1.000  | 1.000 | 82      |
+| `EntityDormantTruefalse`               | 1.000     | 1.000  | 1.000 | 82      |
+| `LegalFormEntity`                      | 1.000     | 1.000  | 1.000 | 82      |
+| `HubblePostcode`                       | 1.000     | 1.000  | 1.000 | 75      |
+| `IncomeExpense..DirectlyInEquity`      | 1.000     | 1.000  | 1.000 | 74      |
+| `IncreaseDecreaseDue..PlantEquipment`  | 1.000     | 1.000  | 1.000 | 65      |
+| `DirectorRemuneration`                 | 1.000     | 1.000  | 1.000 | 54      |
+| `FinalDividendsPaid`                   | 1.000     | 1.000  | 1.000 | 47      |
+| `WagesSalaries`                        | 1.000     | 1.000  | 1.000 | 46      |
+| `NetCashFlowsFromUsedIn..Activities`   | 1.000     | 1.000  | 1.000 | 35      |
 
 Source `03_ixbrl_experiment_models.ipynb` section 10; supports section [[#8. Results.|8]].
 
