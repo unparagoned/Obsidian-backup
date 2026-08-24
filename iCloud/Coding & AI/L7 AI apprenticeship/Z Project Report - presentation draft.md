@@ -38,7 +38,7 @@ I developed Hubble to make financial data that HMRC could not previously analyse
 - **Problem:** in some document types only approximately 30% of figures were tagged, leaving 70% unavailable to bulk analysis
 - **Approach:** use the tagged items as supervised training data and classify the untagged items
 - **Solution:** TF-IDF word n-grams with `LinearSVC`, embedded in a daily extraction-to-Oracle service
-- **Outcome:** over 99% extraction coverage, data available within 3 days, and a full public holdout macro-F1 of 0.7850:
+- **Outcome:** over 99% extraction coverage, data available within 3 days, and a full public holdout macro-F1 of 0.785
 - **Business use:** multiple teams now use the data for dashboards, policy analysis and identifying companies for investigation
 
 **Suggested visual**
@@ -66,14 +66,13 @@ Be precise: the 30% figure applies to some document types, not every document. T
 ### Business need
 
 - Billions of figures were unavailable for consistent analysis
-- Annual schema changes took months and Oracle’s 1,000-column limit was being reached
+- Complex, lengthy annual schema updates, with Oracle’s 1,000-column limit being reached
 - Raw descriptions had no fixed vocabulary; `CurrentAssets` alone had 23,803 unique descriptions
 
 ### Scope and KPIs
 
-| In scope | Out of scope |
-|---|---|
-| Extraction, contextual features, classification and automated Oracle pipeline | Downstream analysis, human labelling and automated decision-making |
+- **In scope:** extraction, contextual features, classification and the automated Oracle pipeline
+- **Out of scope:** downstream analysis, human labelling and automated decision-making
 
 | KPI | Target |
 |---|---:|
@@ -106,24 +105,24 @@ This was not simply a modelling exercise. The business needed current, queryable
 
 **On slide**
 
-- Public exploration: 298,461 Companies House accounts, 2.8 million rows and 956 raw concepts
-- A long-tailed distribution: 75 concepts covered 95% of items
-- Descriptions and concepts were many-to-many; identical wording could carry different labels
-- Descriptions mixed text, dates, names, postcodes and numbers
+298,461 Companies House accounts · 2.8 million rows · 956 raw concepts
 
-### Therefore
+### Key EDA findings
 
-- Macro-F1 became the primary metric, with accuracy retained for stakeholder accessibility
-- Contextual features such as table name and heading were included
-- A realistic performance ceiling and per-class reporting became necessary
+- Long tail: the 75 most common concepts covered 95% of items
+- Descriptions were short mixed-type text, mostly 1-9 words spanning free text, dates, names, postcodes and numbers
+- Descriptions and concepts were many-to-many; "Total" alone was tagged with 12 dissimilar concepts
+- Some source tags were more specific than the visible text could support
 
 **Suggested visual**
 
 ![](report_figures/B08-pareto-raw.png)
 
+The chart shows the long-tail finding directly; the remaining findings stay as short bullets.
+
 **Speaker notes**
 
-The EDA was decision-making research, not decoration. Accuracy would be dominated by common concepts, so I selected macro-F1 to give every class equal influence. The many-to-many relationship also showed that no description-only classifier can always reproduce very specific source tags. That finding later shaped the residual analysis, analyst guidance and recommendation to simplify the taxonomy.
+The EDA was decision-making research, not decoration. Speak the consequences rather than listing them on the slide. The long tail meant accuracy would be dominated by common concepts, so I selected macro-F1 as the primary metric and kept accuracy for stakeholder accessibility. The short mixed-type descriptions motivated the canonicalisation covered on the next slide. The many-to-many relationship and over-specific tags showed that no description-only classifier can always reproduce the source labels, so I included contextual features such as table name and heading, which later improved production macro-F1 by 9.8pp, reported per-class performance and treated the performance ceiling as real. That finding later shaped the residual analysis, analyst guidance and the recommendation to simplify the taxonomy.
 
 Public Companies House data allowed broad exploration without taking HMRC customer data onto the standalone GPU device. Production evaluation used controlled HMRC data because it represented the real operating environment.
 
@@ -137,11 +136,8 @@ Public Companies House data allowed broad exploration without taking HMRC custom
 
 **On slide**
 
-- Canonicalised dates, numbers, names and postcodes into typed placeholders
-- Preserved the tax-significant date 31 March 1982 following subject matter expert advice
-- Relabelled placeholder-only descriptions where the type itself remained useful
-- Removed missing, very short, low-quality and excessively long descriptions
-- Reduced 266,178 unique descriptions to 7,795; retained 85% of rows across 141 modelled concepts after minimum-support filtering
+- Canonicalised dates, numbers, names and postcodes into typed placeholders, reducing 266,178 unique descriptions to 7,795
+- Minimum-support filtering kept 141 modelled concepts while retaining 99% of rows
 - Preprocessing improved macro-F1 by approximately 20 percentage points on the evaluation data
 
 **Suggested visual**
@@ -151,6 +147,8 @@ Public Companies House data allowed broad exploration without taking HMRC custom
 **Speaker notes**
 
 This is one of the project’s most important findings. Normalisation was tested rather than assumed—replacing forward slashes with spaces reduced performance, so I removed that step. Canonicalisation improved generalisation and data minimisation. Replacing uncommon personal names with the same typed placeholder also prevented the model from treating a rare ethnic name differently from a common one.
+
+Detail to say, not show: the tax-significant date 31 March 1982 was preserved on subject matter expert advice; placeholder-only descriptions were relabelled where the type itself remained useful; missing, very short, low-quality and excessively long descriptions were removed (13.7% of the raw extract); the 350-example minimum then removed only 26,151 rows, retaining 99% of the remaining data, with 85% of the raw extract surviving preprocessing overall.
 
 I aligned quality controls with DAMA UK dimensions and HMRC expectations: completeness, consistency, timeliness, validity and accuracy. Controlled access, a DPIA, the Data Protection Act 2018 and UK GDPR formed the wider governance context.
 
@@ -192,7 +190,7 @@ This slide demonstrates critical evaluation. Every rejection has a reason based 
 **On slide**
 
 - Fixed stratified 80/10/10 train, test and holdout splits before comparing architectures
-- Model-ranking correlation with the full population: 0.971 at 1% and 0.998 at 10%
+- Pearson score correlation with the full population: 0.971 at 1% and 0.998 at 10%
 - Used small samples to eliminate weak candidates, then confirmed finalists at larger scale
 - `HalvingRandomSearchCV` searched 10,000 traditional-ML candidates; Optuna searched neural and transformer configurations
 - Compared against a stratified `DummyClassifier`; used paired tests and 95% confidence intervals
@@ -270,11 +268,10 @@ This is the central trade-off story: I accepted a small apparent performance red
 | Automated extraction coverage | >99% | >95% |
 | Availability after receipt | Within 3 days | <1 week |
 
-### Production HMRC data
+### One score is not the whole truth
 
-- Accuracy 0.853 and macro-F1 0.741 across a different population and label distribution
-- 94.1% of public holdout rows belonged to concepts with per-class F1 ≥0.9
-- However, 27 of 141 concepts scored below 0.5 and eight scored zero
+- Production HMRC data: accuracy 0.853 and macro-F1 0.741 on a different population
+- 27 of 141 concepts scored below 0.5; eight scored zero
 
 **Suggested visual**
 
@@ -282,7 +279,7 @@ Use a compact KPI scorecard plus the per-class F1 distribution from Appendix B40
 
 **Speaker notes**
 
-All agreed KPIs were met, but presenting only 97.5% accuracy would be misleading. The mean per-class F1 was 0.785 while the median was 0.966, showing a minority of poorly performing concepts. Production performance was lower because HMRC document types and label distributions differed from the public exploration data. I reported that difference rather than treating the public holdout as a universal performance claim.
+All agreed KPIs were met, but presenting only 97.5% accuracy would be misleading. The mean per-class F1 was 0.785 while the median was 0.966, showing a minority of poorly performing concepts; 94.1% of public holdout rows belonged to concepts with per-class F1 of at least 0.9. Production performance was lower because HMRC document types and label distributions differed from the public exploration data. I reported that difference rather than treating the public holdout as a universal performance claim.
 
 - **Evidence:** report Sections 8 and 12; Appendices B38 and B40.
 - **BCS coverage:** implications; practical application.
@@ -305,7 +302,6 @@ The same words carry two labels, so a description-only model cannot distinguish 
 
 ### Robustness and group checks
 
-- `LinearSVC` equalled or beat SEC-BERT in 9 of 11 robustness categories; it was weaker on typos and variations
 - Macro-F1 by company size: 0.934 for large companies vs 0.790 for small companies
 - Software-provider performance ranged from 0.184 to 0.913
 
@@ -314,6 +310,8 @@ The same words carry two labels, so a description-only model cannot distinguish 
 The model was trained and evaluated on tagged items, but its main use is untagged items. Tagged labels are a proxy, not ground truth for the target population.
 
 **Suggested visual**
+
+Combine the two confusion-matrix excerpts into a single side-by-side graphic rather than two separate images:
 
 ![](report_figures/B24c-cm-cashbankonhand.png)
 
@@ -325,6 +323,8 @@ The company-size and software-provider gaps are evidence of representation and l
 
 Mitigations already in place are per-class performance reporting, attributed machine-learning predictions and a human in the loop. Further mitigation requires manual expert evaluation of untagged items, provider engagement and possibly a simpler concept taxonomy.
 
+Robustness detail for questioning: `LinearSVC` equalled or beat SEC-BERT in 10 of 11 robustness categories and was weaker only on deliberate unicode manipulation, which is expected to be rare.
+
 - **Evidence:** report Sections 8 and 12; Appendices B24, B25 and B43.
 - **BCS coverage:** research undertaken; implications; practical application.
 - **KSB focus:** S3, S17, S5, B6, K23.
@@ -335,12 +335,8 @@ Mitigations already in place are per-class performance reporting, attributed mac
 
 **On slide**
 
-- Source documents retrieved from Amazon S3
-- R extracts iXBRL and structures it in long format
-- Python canonicalises features and applies TF-IDF + `LinearSVC`
-- Results are written to Oracle for analysts to query
-- On-demand CPU EC2 starts for each job and shuts down afterwards; 128 cores produced a >20x speed-up
-- The pipeline runs automatically each day
+- Automated daily pipeline: S3 → R iXBRL extraction → Python canonicalisation and TF-IDF + `LinearSVC` → Oracle for analysts to query
+- On-demand CPU EC2 per job; 128 cores produced a >20x speed-up
 
 ### Governance in operation
 
@@ -355,7 +351,7 @@ Mitigations already in place are per-class performance reporting, attributed mac
 
 **Speaker notes**
 
-The product is the end-to-end service, not just the classifier. Long-format storage removed the annual wide-schema bottleneck. On-demand compute met the processing need without paying for a permanently large machine, and CPU availability reinforced the `LinearSVC` decision.
+The product is the end-to-end service, not just the classifier. Walk the architecture diagram rather than narrating a list: R structures the extracted iXBRL in long format, and each on-demand instance shuts down when its job completes. Long-format storage removed the annual wide-schema bottleneck. On-demand compute met the processing need without paying for a permanently large machine, and CPU availability reinforced the `LinearSVC` decision.
 
 MLflow currently tracks model and data versions during development. Writing the MLflow model version into Oracle for prediction-level traceability is a recommendation, not a control I should claim is already complete.
 
@@ -600,3 +596,4 @@ Keep these in notes or backup slides, not in the timed presentation unless the a
 - A simplified KPI scorecard for Slide 9 that clearly labels public holdout and production results.
 - A screenshot of the interactive dashboard for Slide 12, using synthetic or public data only.
 - A simplified three-model decision graphic for Slide 8; avoid showing the full 15-row decision matrix in the timed deck.
+- A single side-by-side confusion-matrix graphic for Slide 10 combining the CashBankOnHand and CashOnHand excerpts.

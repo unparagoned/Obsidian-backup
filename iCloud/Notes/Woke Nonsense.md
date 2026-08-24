@@ -13,3 +13,4 @@ https://www.bbc.co.uk/news/articles/c17zwde51vlo.amp
 https://www.bmj.com/content/391/bmj.r2061
 
 Suggesting that we need more drug addicts in leadership positions and that it's unfair stimga that keeps them out.
+

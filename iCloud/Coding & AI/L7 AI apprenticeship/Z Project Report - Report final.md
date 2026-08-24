@@ -214,7 +214,7 @@ I implemented data quality controls aligned with HMRC expectations and Data Mana
 - Timeliness. The system architecture and using a long-format structure handles any taxonomy without hitting database column limits, allowing extraction within days of receipt. 
 - Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 15 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, [[#A2.3 Canonicalization and label engineering|A2.3]]). 
 
- This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 ([[#B15. Dataset description before and after preprocessing|B15]]). A limit of 350 examples ensured enough samples even with the 1% train population, reducing labels to 141 while retaining 85% of rows. The distribution effects are shown by the rank-frequency, word-count and Pareto plots before preprocessing ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]-[[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) and after it ([[#B10. Rank-frequency after canonicalisation and label engineering|B10]]-[[#B14. Distribution fit after preprocessing|B14]]). Along with restricted user access, this supported HMRC and regulatory requirements, data protection impact assessments (DPIAs), the *Data Protection Act 2018* and UK General Data Protection Regulation (UK GDPR) ([[#^ref-data-protection-act-2018|Data Protection Act 2018]]; [[#^ref-regulation-eu-2016-679|Regulation (EU) 2016/679]]; [[#^ref-ico-no-date|Information Commissioner's Office, no date]]). 
+ This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 ([[#B15. Dataset description before and after preprocessing|B15]]). A limit of 350 examples ensured enough samples even with the 1% train population, reducing labels to 141 while retaining 99% of rows. The distribution effects are shown by the rank-frequency, word-count and Pareto plots before preprocessing ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]-[[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) and after it ([[#B10. Rank-frequency after canonicalisation and label engineering|B10]]-[[#B14. Distribution fit after preprocessing|B14]]). Along with restricted user access, this supported HMRC and regulatory requirements, data protection impact assessments (DPIAs), the *Data Protection Act 2018* and UK General Data Protection Regulation (UK GDPR) ([[#^ref-data-protection-act-2018|Data Protection Act 2018]]; [[#^ref-regulation-eu-2016-679|Regulation (EU) 2016/679]]; [[#^ref-ico-no-date|Information Commissioner's Office, no date]]). 
 
 Because the data was used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, [[#A2.6 Split and save data|A2.6]]). The holdout ensures the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
@@ -231,7 +231,7 @@ I used two embedding approaches: sparse vectorisation (term frequency (TF) and T
 
 Deep neural networks can learn patterns beyond fixed algorithms. I included deep neural networks (DNNs), long short-term memory networks (LSTMs), gated recurrent units (GRUs), convolutional neural networks (CNNs) and bidirectional LSTMs (BiLSTMs) in the architecture search (`create_model`, [[#A4.2.2 Functions|A4.2.2]]).
 
-Transformer-based models offer better semantic understanding, partially due to pre-training on large text collections ([[#^ref-vaswani-et-al-2017|Vaswani et al., 2017]]; [[#^ref-devlin-et-al-2019|Devlin et al., 2019]]). I tested several Bidirectional Encoder Representations from Transformers (BERT) variants: Robustly Optimized BERT Pretraining Approach (RoBERTa) ([[#^ref-liu-et-al-2019|Liu et al., 2019]]), SEC-BERT trained on United States Securities and Exchange Commission (SEC) filings ([[#^ref-loukas-et-al-2022|Loukas et al., 2022]]), MPNet ([[#^ref-song-et-al-2020|Song et al., 2020]]) and MiniLM ([[#^ref-wang-et-al-2020|Wang et al., 2020]]), covering different sizes, architectures and training data ([[#A5.1 Config, setup mlflow, load data|A5.1]] and [[#A5.2 Optuna compare different models and hyperparameters|A5.2]]).
+Transformer based models offer better semantic understanding, partially due to pre-training on large text collections ([[#^ref-vaswani-et-al-2017|Vaswani et al., 2017]]; [[#^ref-devlin-et-al-2019|Devlin et al., 2019]]). I tested several Bidirectional Encoder Representations from Transformers (BERT) variants: Robustly Optimized BERT Pretraining Approach (RoBERTa) ([[#^ref-liu-et-al-2019|Liu et al., 2019]]), SEC-BERT trained on United States Securities and Exchange Commission (SEC) filings ([[#^ref-loukas-et-al-2022|Loukas et al., 2022]]), MPNet ([[#^ref-song-et-al-2020|Song et al., 2020]]) and MiniLM ([[#^ref-wang-et-al-2020|Wang et al., 2020]]), covering different sizes, architectures and training data ([[#A5.1 Config, setup mlflow, load data|A5.1]] and [[#A5.2 Optuna compare different models and hyperparameters|A5.2]]).
 
 A frontier large language model (LLM), such as ChatGPT, would be excessive for short phrases. HMRC security and governance requirements also prevented sending taxpayer data through an external application programming interface (API), making this approach unfeasible. 
 
@@ -322,7 +322,7 @@ Residual analysis identified which classes performed poorly and summaries were c
 
 Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts `CashBankOnHand` 5,670 times and `CashOnHand` 21 times, so the minority tagging would show as errors ([[#B43. Worked examples of ambiguous descriptions and apparent model errors|B43]] and [[#B24.1 Worked example: CashBankOnHand against CashOnHand.|B24.1]]).
 
-I tested sensitivity and robustness  ([[#^ref-ribeiro-et-al-2020|Ribeiro et al. (2020)]]), by testing over abbreviations, adversarial (phrased to mislead), command (attempted LLM instruction injection), contextual (semantically equivalent), long context, optical character recognition issues, synonyms, typos, unicode and variations ([[#A3.8 Test model robustness|A3.8]], [[#A5.3.5 10% sqrt weight training population|A5.3.5]] and [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25]]). `LinearSVC` equalled or outperformed SEC-BERT in nine of eleven categories, surprising because SEC-BERT's domain-specific training and theoretical semantic understanding should have favoured it. `LinearSVC` performed worse on typos and variations, which should be rare because software primarily generates accountancy documents. 
+I tested sensitivity and robustness  ([[#^ref-ribeiro-et-al-2020|Ribeiro et al. (2020)]]), by testing over abbreviations, adversarial (phrased to mislead), command (attempted LLM instruction injection), contextual (semantically equivalent), long context, optical character recognition issues, synonyms, typos, unicode and variations ([[#A3.8 Test model robustness|A3.8]], [[#A5.3.5 10% sqrt weight training population|A5.3.5]] and [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25]]). `LinearSVC` equalled or outperformed SEC-BERT in ten of eleven categories, surprising because SEC-BERT's domain-specific training and theoretical semantic understanding should have favoured it. `LinearSVC` performed worse on deliberate unicode manipulation but that is expected to be rare.
 
 To review bias and fairness ([[#^ref-mehrabi-et-al-2021|Mehrabi et al. (2021)]]), I investigated production performance by company size and software provider. Large and small companies had a macro-F1 score of 0.934 and 0.790 respectively, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. Residual analysis showed that while there were some real misclassifications, often the differences were between very similar concepts without enough information to differentiate between them. This suggests that the specificity of the evaluation was too fine-grained. Different software providers do tag things differently, but labels are a training proxy, so such issues would not apply to untagged items or human labels. But it is still a real issue, worth working with providers to make tagging more consistent, since tagged concepts would be considered more reliable than a machine learning category. 
 
@@ -440,7 +440,7 @@ Liu, Y., et al. (2019) *RoBERTa: a robustly optimized BERT pretraining approach*
 
 Loukas, L., et al. (2022) 'FiNER: financial numeric entity recognition for XBRL tagging', *Proceedings of the 60th Annual Meeting of the Association for Computational Linguistics*. Dublin, 22-27 May. pp. 4419-4431. Available at: https://doi.org/10.18653/v1/2022.acl-long.303 (Accessed: 14 August 2026) ^ref-loukas-et-al-2022
 
-Lundberg, S. and Lee, S. (2017) 'A unified approach to interpreting model predictions', *Advances in Neural Information Processing Systems 30*. Long Beach, 4-9 December. pp. 4765-4774. Available at: https://arxiv.org/pdf/1705.07874  (Accessed: 14 August 2026) ^ref-lundberg-lee-2017
+Lundberg, S. and Lee, S. (2017) 'A unified approach to interpreting model predictions', *Advances in Neural Information Processing Systems 30*. Long Beach, 4-9 December. pp. 4765-4774. Available at: https://arxiv.org/abs/1705.07874 (Accessed: 14 August 2026) ^ref-lundberg-lee-2017
 
 Mehrabi, N., et al. (2021) 'A survey on bias and fairness in machine learning', *ACM Computing Surveys*, 54(6), pp. 1-35. Available at: https://doi.org/10.1145/3457607 (Accessed: 14 August 2026) ^ref-mehrabi-et-al-2021
 
@@ -474,7 +474,7 @@ Vaswani, A., et al. (2017) 'Attention is all you need', *Advances in Neural Info
 
 Wang, L., et al. (2022) *Text embeddings by weakly-supervised contrastive pre-training*. Available at: https://arxiv.org/abs/2212.03533 (Accessed: 14 August 2026) ^ref-wang-et-al-2022
 
-Wang, W., et al. (2020) 'MiniLM: deep self-attention distillation for task-agnostic compression of pre-trained transformers', *Advances in Neural Information Processing Systems 33*. 6-12 December. pp. 5776-5788. Available at: https://arxiv.org/abs/2002.10957  (Accessed: 14 August 2026) ^ref-wang-et-al-2020
+Wang, W., et al. (2020) 'MiniLM: deep self-attention distillation for task-agnostic compression of pre-trained transformers', *Advances in Neural Information Processing Systems 33*. 6-12 December. pp. 5776-5788. Available at: https://arxiv.org/abs/2002.10957 (Accessed: 14 August 2026) ^ref-wang-et-al-2020
 
 Wolf, T., et al. (2020) 'Transformers: state-of-the-art natural language processing', *Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations*. 16-20 November. pp. 38-45. Available at: https://doi.org/10.18653/v1/2020.emnlp-demos.6 (Accessed: 14 August 2026) ^ref-wolf-et-al-2020
 
@@ -9625,19 +9625,19 @@ Source [[#A3.10 Residual analysis|A3.10]]; supports section [[#8. Results.|8]].
 
 By perturbation category:
 
-| Category | Cases | `LinearSVC` correct | `LinearSVC` accuracy | SEC-BERT correct | SEC-BERT accuracy |
-|---|---|---|---|---|---|
-| abbreviation | 13 | 3 | 0.231 | 3 | 0.231 |
-| adversarial | 13 | 12 | 0.923 | 11 | 0.846 |
-| canonical | 13 | 13 | 1.000 | 13 | 1.000 |
-| command | 1 | 1 | 1.000 | 1 | 1.000 |
-| contextual | 13 | 3 | 0.231 | 1 | 0.077 |
-| long_context | 13 | 6 | 0.462 | 5 | 0.385 |
-| ocr | 13 | 5 | 0.385 | 1 | 0.077 |
-| synonym | 13 | 8 | 0.615 | 8 | 0.615 |
-| typo | 13 | 4 | 0.308 | 4 | 0.308 |
-| unicode | 13 | 1 | 0.077 | 2 | 0.154 |
-| variation | 13 | 9 | 0.692 | 7 | 0.538 |
+| Category     | Cases | `LinearSVC` correct | `LinearSVC` accuracy | SEC-BERT correct | SEC-BERT accuracy |
+| ------------ | ----- | ------------------- | -------------------- | ---------------- | ----------------- |
+| abbreviation | 13    | 3                   | 0.231                | 3                | 0.231             |
+| adversarial  | 13    | 12                  | 0.923                | 11               | 0.846             |
+| canonical    | 13    | 13                  | 1.000                | 13               | 1.000             |
+| command      | 1     | 1                   | 1.000                | 1                | 1.000             |
+| contextual   | 13    | 3                   | 0.231                | 1                | 0.077             |
+| long_context | 13    | 6                   | 0.462                | 5                | 0.385             |
+| ocr          | 13    | 5                   | 0.385                | 1                | 0.077             |
+| synonym      | 13    | 8                   | 0.615                | 8                | 0.615             |
+| typo         | 13    | 4                   | 0.308                | 4                | 0.308             |
+| unicode      | 13    | 1                   | 0.077                | 2                | 0.154             |
+| variation    | 13    | 9                   | 0.692                | 7                | 0.538             |
 
 Source [[#A3.8 Test model robustness|A3.8]] and [[#A5.3.5 10% sqrt weight training population|A5.3.5]] (test cases defined in `ixbrl_ai.test.IXBRL_TEXT_CLASSIFICATION_TEST_CASES`); supports section [[#8. Results.|8]].
 
