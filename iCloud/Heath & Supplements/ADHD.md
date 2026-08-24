@@ -85,3 +85,20 @@ https://pmc.ncbi.nlm.nih.gov/articles/PMC11868292/
 No science that caffeine impact on someone means that have sdhd
 No evidence that caffeine helps with adhd and it’s been treated allot
 https://vm.tiktok.com/ZN8dHKSA3/
+
+
+# Biology
+
+>Despite the large number of studies and variety of techniques used, no promising biomarkers have been identified so far.
+https://pubmed.ncbi.nlm.nih.gov/38506617/
+
+# Outcomes
+
+You have studies which suggest the drugs improve behaviour but not actual results.
+
+>Acute effects of OROS-MPH on daily academic seatwork productivity and classroom behavior did not translate into improved learning of new academic material taught via small-group, evidence-based instruction.
+>https://pubmed.ncbi.nlm.nih.gov/35604744/
+# Quotes
+
+>people who (allegedly) have adhd &/or autism stop pathologizing universal human experiences challenge (impossible)
+https://www.reddit.com/r/NonPoliticalTwitter/comments/1vv5962/comment/p56g0pq/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button

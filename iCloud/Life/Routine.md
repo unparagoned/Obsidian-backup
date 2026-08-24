@@ -47,3 +47,6 @@ Cook lunch
 - Alcohol(only when socialising with others)
 - Pre and stuff
 
+# miss
+
+Put reading last, that way if you aren’t tired it’s not an hour of TikTok but reading instead

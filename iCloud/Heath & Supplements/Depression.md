@@ -373,8 +373,10 @@ https://www.sciencedirect.com/science/article/pii/S0165032725023079?via%3Dihub
 ## SSRIs
 
 ### Effectiveness
-Metas show that SSRI barely even have any positive impact
 
+Almost all the studies are short term, they barely beat placebo and that's probably mostly drug effect rather than actually helping.  
+
+Metas show that SSRI barely even have any positive impact
 
 >The evidence does not support definitive conclusions regarding the benefits of antidepressants for depression in adults. It is unclear whether antidepressants are more efficacious than placebo.
 https://pubmed.ncbi.nlm.nih.gov/31248914/
@@ -400,7 +402,7 @@ Some even think that antidepressants long term make depression even worse.
 >The possibility that antidepressant drugs may worsen the course of depression needs to be tested, even though its scientific exploration is likely to encounter considerable methodological and ideological difficulties.
 >https://pubmed.ncbi.nlm.nih.gov/12633120/
 
-Or the studies take people off SSRI quickly, so it's not a relapse but withdrawal effect form the drug.
+Also studies take people off SSRI quickly, so it's not a relapse but withdrawal effect from the drug.
 
 Study 329, Paxil, GSK did a study that showed there were no benefits in adolescents but caused suicidal behaviour, so wasn't suitable for adolescents. But they got a PR firm to ghostwrite the study and lied about it, resulting in the one of the largest fines ever $3bn. 
 
@@ -495,6 +497,8 @@ https://www.reddit.com/r/science/comments/1sq83r3/comment/oh6zqyp/?utm_source=sh
 
 ### What would doctors or psychiatrists do and think?
 
+While psychiatrists would recommend antidepressant as the first port of call most wouldn't take it themselves. 
+
 >79% of psychiatrists recommend immediate treatment with an antidepressant to an outpatient with depression, but only 39% of psychiatrists would immediately take an antidepressant if they personally had depression
 [https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/what-would-you-do-if-you-were-me-doctor-randomised-trial-of-psychiatrists-personal-v-professional-perspectives-on-treatment-recommendations/C306AD64D2B6D28AA413556F9239F7C5](https://www.cambridge.org/core/journals/the-british-journal-of-psychiatry/article/what-would-you-do-if-you-were-me-doctor-randomised-trial-of-psychiatrists-personal-v-professional-perspectives-on-treatment-recommendations/C306AD64D2B6D28AA413556F9239F7C5)
 
@@ -505,12 +509,15 @@ https://www.reddit.com/r/science/comments/1sq83r3/comment/oh6zqyp/?utm_source=sh
 >Of the 752 GPs who took part in our research, 442 said they believed that over-diagnosis is a concern. 
 >https://www.bbc.co.uk/news/articles/cx2pvxdn9v4o
 
+And then you have more objective studies suggesting it's overused as well.
 
 >"Researchers at the Rand Corp. in 2002 surveyed close to 700 adults who had received a prescription for an antidepressant. Of those who reported receiving the [medication](https://www.psychologytoday.com/intl/basics/psychopharmacology) for [depression](https://www.psychologytoday.com/intl/basics/depression), just 20% tested positive when screened for the disease. Fewer than 30% of those receiving the medication had any depressive symptoms at all."
 Put another way, more than 70% of patients in the survey presented no medical need for antidepressant treatment, and a further 10% fell into a significant gray area, with an insufficient number of symptoms to warrant a [DSM](https://www.psychologytoday.com/intl/basics/dsm) diagnosis.
 [https://www.psychologytoday.com/intl/blog/side-effects/200905/overprescribing-antidepressants](https://www.psychologytoday.com/intl/blog/side-effects/200905/overprescribing-antidepressants)
 
 ### Effects and withdrawal effects 
+
+On the fda label
 
 >SUICIDAL THOUGHTS AND BEHAVIORS
 violent behaviors

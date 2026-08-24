@@ -1,3 +1,11 @@
+
+
+# Mental health
+
+I spoke to the director of a mental health clinic and asked them how they know if someone is crazy or not.   
+They said they would fill a bathtub and then give the person a spoon, a cup and a bucket and ask them to empty the bathtub.... No a sane person would pull the plug. 
+
+
 # dark
 >I was tired of living so I found the tallest building downtown and jumped off of it. 
 I closed my eyes as I fell, and kept falling until a man caught me and announced, “It’s a boy!”

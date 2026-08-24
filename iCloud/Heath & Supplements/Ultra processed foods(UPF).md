@@ -40,3 +40,8 @@ https://onlinelibrary.wiley.com/doi/10.1111/all.15825
 >Common dietary emulsifiers promote metabolic disorders and intestinal microbiota dysbiosis in mice
 Dietary emulsifiers are linked to various diseases.
 https://www.nature.com/articles/s42003-024-06224-3
+
+# Colouring
+
+>Food-grade titanium dioxide (E171) has been removed from the European food market due to concerns about its potential genotoxicity
+https://onlinelibrary.wiley.com/doi/full/10.1002/mnfr.70583?campaign=woletoc
