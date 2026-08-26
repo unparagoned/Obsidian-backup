@@ -1,0 +1,1 @@
+Almost none of this stuff on tiktok is actually backed up by evidence, sounds like he's just lying and making it all up

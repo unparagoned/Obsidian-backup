@@ -1,0 +1,21 @@
+#bigpharma
+
+# Dengue treatment abandoned
+
+>Two years ago, the pharmaceutical company Johnson & Johnson (J&J) announced some rare good news about dengue, a crippling viral infection that threatens half of the world’s population. A clinical trial had shown an antiviral compound could prevent the disease in people deliberately exposed to the virus. “The development of a dengue antiviral is critically important to global health,” [the company said in a press release at the time](https://www.jnj.com/media-center/press-releases/janssen-announces-promising-antiviral-activity-against-dengue-in-a-phase-2a-human-challenge-model)
+...
+ But that trial [was halted in October 2024](https://www.jnj.com/media-center/press-releases/johnson-johnson-to-discontinue-phase-2-field-study-evaluating-investigational-antiviral-for-the-prevention-of-dengue), when J&J decided to pull out of the infectious diseases market
+ https://www.science.org/content/article/antiviral-drug-abandoned-pharma-shows-promise-against-dengue
+
+.
+>In a controlled human infection model, a high daily dose of oral mosnodenvir led to a significantly lower DENV-3 RNA load than placebo. Mosnodenvir did not result in any serious adverse events.
+>https://www.nejm.org/doi/full/10.1056/NEJMoa2500179
+
+Study 329, Paxil, GSK did a study that showed there were no benefits in adolescents but caused suicidal behaviour, so wasn't suitable for adolescents. But they got a PR firm to ghostwrite the study and lied about it, resulting in the one of the largest fines ever $3bn. 
+
+>Published in July 2001 in the _[Journal of the American Academy of Child and Adolescent Psychiatry](https://en.wikipedia.org/wiki/Journal_of_the_American_Academy_of_Child_and_Adolescent_Psychiatry "Journal of the American Academy of Child and Adolescent Psychiatry")_ (_JAACAP_), which listed Keller and 21 other researchers as co-authors, study 329 became controversial when it was discovered that the article had been [ghostwritten](https://en.wikipedia.org/wiki/Medical_ghostwriter "Medical ghostwriter")by a PR firm hired by SmithKline Beecham, had made false claims about the drug's efficacy, and had downplayed safety concerns.[[8]](https://en.wikipedia.org/wiki/Study_329#cite_note-8)[[9]](https://en.wikipedia.org/wiki/Study_329#cite_note-Godlee17Sept2015-9)[[3]](https://en.wikipedia.org/wiki/Study_329#cite_note-Doshi16Sept2015-3) The controversy led to several lawsuits and strengthened calls for drug companies to disclose all their clinical research data. _[New Scientist](https://en.wikipedia.org/wiki/New_Scientist "New Scientist")_ wrote in 2015: "You may never have heard of it, but Study 329 changed medicine."[[10]](https://en.wikipedia.org/wiki/Study_329#cite_note-10)
+>...
+>SmithKline Beecham acknowledged internally in 1998, that the study had failed to show efficacy for paroxetine in adolescent depression.[[a]](https://en.wikipedia.org/wiki/Study_329#cite_note-positionpiece-14) In addition, more patients in the group taking paroxetine had experienced [suicidal thinking](https://en.wikipedia.org/wiki/Suicidal_ideation "Suicidal ideation") and behaviour.[[b]](https://en.wikipedia.org/wiki/Study_329#cite_note-Kondroquote-15) Although the _JAACAP_ article included these negative results, it did not account for them in its conclusion; on the contrary, it concluded that paroxetine was "generally well tolerated and effective for major depression in adolescents".[[14]](https://en.wikipedia.org/wiki/Study_329#cite_note-Keller2001p770-16)[[15]](https://en.wikipedia.org/wiki/Study_329#cite_note-Kondro2004-17) The company relied on the _JAACAP_ article to promote paroxetine for [off-label use](https://en.wikipedia.org/wiki/Off-label_use "Off-label use") in teenagers.[[c]](https://en.wikipedia.org/wiki/Study_329#cite_note-19)
+>...
+>GSK pleaded guilty in 2012 and paid a $3 billion settlement, including a criminal fine of $1 billion. The fine included an amount for "preparing, publishing and distributing a misleading medical journal article that misreported that a clinical trial of Paxil demonstrated efficacy in the treatment of depression in patients under age 18, when the study failed to demonstrate efficacy".[[23]](https://en.wikipedia.org/wiki/Study_329#cite_note-DOJ2012-27)[[j]](https://en.wikipedia.org/wiki/Study_329#cite_note-100)
+>https://en.wikipedia.org/wiki/Study_329

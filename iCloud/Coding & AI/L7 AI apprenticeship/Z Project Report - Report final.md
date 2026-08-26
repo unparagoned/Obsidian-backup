@@ -9623,8 +9623,6 @@ Source [[#A3.10 Residual analysis|A3.10]]; supports section [[#8. Results.|8]].
 
 ### B25. Robustness testing, `LinearSVC` against SEC-BERT
 
-By perturbation category:
-
 | Category     | Cases | `LinearSVC` correct | `LinearSVC` accuracy | SEC-BERT correct | SEC-BERT accuracy |
 | ------------ | ----- | ------------------- | -------------------- | ---------------- | ----------------- |
 | abbreviation | 13    | 3                   | 0.231                | 3                | 0.231             |
@@ -9754,12 +9752,6 @@ Source [[#A6.1 Load metrics|A6.1]] (`metric_config`); supports section [[#7.5 Mo
 
 SEC-BERT wins on every raw performance metric, but once interpretability, cost, dependency risk and lifecycle are weighted in, `LinearSVC` scores highest overall.
 
-| Model | Decision score | Decision score % |
-|---|---|---|
-| `LinearSVC` | 0.3718 | 37.2 |
-| CNN | 0.2585 | 25.8 |
-| SEC-BERT | 0.1531 | 15.3 |
-
 Weighted score by metric:
 
 | Metric | `LinearSVC` | CNN | SEC-BERT |
@@ -9779,6 +9771,9 @@ Weighted score by metric:
 | Model lifecycle | 4.55 | 4.55 | 0.91 |
 | Dependency risk | 6.82 | 5.45 | 2.73 |
 | Cost | 9.09 | 5.45 | 5.45 |
+| **Total (decision score)** | **72.49 (37.2%)** | **50.40 (25.8%)** | **29.86 (15.3%)** |
+
+The percentage expresses each total against the 195 total weight available. Weighted scores are calculated from the unrounded metric values, so models that appear tied at the precision shown in [[#B32. Decision matrix: measured values|B32]] can differ slightly here.
 
 Source [[#A6.1 Load metrics|A6.1]] (`build_decision_matrix`); supports section [[#7.5 Model selection|7.5]].
 

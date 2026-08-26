@@ -1,0 +1,2 @@
+
+One examples I think cosmic skeptic said. Is there an objective best color? We'd say no. But what if say in the past our evolutionary tree something happened that meant all humans like the colour red. Would that make "red" objectively the best colour? 

@@ -323,7 +323,9 @@ The company-size and software-provider gaps are evidence of representation and l
 
 Mitigations already in place are per-class performance reporting, attributed machine-learning predictions and a human in the loop. Further mitigation requires manual expert evaluation of untagged items, provider engagement and possibly a simpler concept taxonomy.
 
-Robustness detail for questioning: `LinearSVC` equalled or beat SEC-BERT in 10 of 11 robustness categories and was weaker only on deliberate unicode manipulation, which is expected to be rare.
+Pocket answer on the 16 `CashBankOnHand` false negatives: 13 were "cash and cash equivalents" predicted as the sibling `CashOnHand`, two were described "debtors" and one "investment", where the source tag looks wrong and the model's prediction looks right. So all 16 reflect sibling ambiguity or label-proxy errors rather than new failure modes.
+
+Robustness detail for questioning: `LinearSVC` equalled or beat SEC-BERT in 10 of 11 robustness categories and was weaker only on deliberate unicode manipulation, which is pexpected to be rare.
 
 - **Evidence:** report Sections 8 and 12; Appendices B24, B25 and B43.
 - **BCS coverage:** research undertaken; implications; practical application.

@@ -1,0 +1,1 @@
+Maloghurst was in control of most stuff under Horus. He was seeing things. The devionites had an unborn do this, they tried to get him to come to them and have the neverbor take him over. But he realised and sm killed then all
