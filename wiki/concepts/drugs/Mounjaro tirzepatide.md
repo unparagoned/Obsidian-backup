@@ -19,14 +19,14 @@ author: user
 
 **Evidence:** *Strong evidence* for weight loss and glycaemic control; *Some evidence* for addiction (alcohol, nicotine: one RCT of semaglutide); *None in humans* for dementia (preclinical only). Dose: user takes 2.5mg roughly every 5-7 days, well below the standard 2.5mg weekly starter with monthly escalation.
 
-Related: [[Metformin]] · [[Antipsychotics]] · [[Sleep]] · [[Depression]] · [[Dementia alzheimer#Drugs]] · [[Alcohol]] · [[Essential Amino Acids(EAA)]] · [[Gut microbiome]] · [[Reddit]] · [[Pharmaceutical industry]]
+Related: [[Metformin]] · [[Antipsychotics]] · [[wiki/concepts/drugs/Olanzapine|Olanzapine]] · [[Sleep]] · [[Depression]] · [[Dementia alzheimer#Drugs]] · [[Alcohol]] · [[Essential Amino Acids(EAA)]] · [[Gut microbiome]] · [[Reddit]] · [[Pharmaceutical industry]]
 
 ## Practical notes
 - Take in the morning to limit effects on sleep.
 - Don't mix with metformin - don't need it yet still not eating enough
 - Avoid eating too close to bed, stop at like 5pm.
 - Only have up to one cup of coffee before 11
-- Olanzapine might counter the effects. Olanzapine might add to drink and food desire.
+- Olanzapine might counter the effects. Olanzapine might add to drink and food desire. (Source is a Reddit thread; the H1/M3/D2 appetite mechanism on [[wiki/concepts/drugs/Olanzapine#Weight gain and metabolic effects|Olanzapine]] is a plausible basis but not the same claim.)
 - Use one needle to extract 5th dose and switch before injecting, the surface must be quite hard and damages the needle when extracting dose, especially with multiple insertions.
 - Took on Friday, felt like peak was on Monday. So that's roughly 3 days to reach peak in blood.
 

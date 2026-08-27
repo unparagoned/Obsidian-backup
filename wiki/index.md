@@ -53,6 +53,7 @@ Catalog of wiki pages. Keep useful, not exhaustive. Pages marked *(user)* are th
 - [[Metformin]] *(user)* — Blunts exercise adaptations, depletes B12; not for healthy people.
 - [[Paracetamol]] *(user)* — Prenatal use and autism/ADHD: sibling cohorts null vs 2025 meta-analysis; contradiction recorded.
 - [[Antipsychotics]] *(user)* — Thin: brain-volume claim from YouTube; olanzapine and tirzepatide.
+- [[wiki/concepts/drugs/Olanzapine|Olanzapine]] *(agent)* — Zyprexa: indications, the weight/metabolic problem, Lybalvi, interactions, the Eli Lilly litigation. Source's long-term weight figures corrected.
 
 ### exercise/
 - [[Exercise]] *(user)* — Vigorous activity gives outsized returns; Norwegian 4×4; executive function; resistance training and brain ageing.
@@ -71,6 +72,7 @@ Catalog of wiki pages. Keep useful, not exhaustive. Pages marked *(user)* are th
 ### philosophy/
 - [[Free will]] *(user)* — Compatibilist case: lay intuitions, philosophers and criminal law all use compatibilist free will; Libet critiqued; belief-weakening studies.
 - [[Consciousness]] *(user)* — Hard problem, p-zombies, Mary's room, Kastrup's idealism and panpsychism, all pressed with the brain-simulation argument.
+- [[Basal cognition]] *(agent)* — Intelligence without neurons; the maze-solving debunk and what survives it.
 - [[Physicalism]] *(user)* — Short: the rubber-hand illusion as an objection to idealism.
 - [[Simulation hypothesis]] *(user)* — "Simulation religion"; physics oddities read as computational shortcuts. No sources.
 - [[Reality]] *(user)* — Stub: physics gives models, but so does perceiving a person.
@@ -163,7 +165,7 @@ Assessments are the user's own verdicts on how far to trust each source.
 - [[Ivette Fuentes]] *(user)* — Tests Penrose's objective collapse.
 - [[Dialect]] *(user)* — Channel; length contraction from Maxwell. Checked and sound.
 - [[Donald Hoffman]] *(user)* — "Cranky" over DMT entities.
-- [[Michael Levin]] *(user)* — Dismissed over slime-mould cognition and "physicalism is dead".
+- [[Michael Levin]] *(user + sources)* — Dismissed over slime-mould cognition and "physicalism is dead"; the slime-mould half now checked against the literature.
 - [[Robert Lawrence Kuhn]] *(user)* — *Closer to Truth*; dualist leanings.
 - [[Sam Harris]], [[Robert Sapolsky]], [[Frank Jackson]] — pointer pages for the figures argued with on [[Free will]] and [[Consciousness]].
 - [[Essentia Foundation]] *(user)* — Idealism outfit; Kastrup in a key position.
@@ -204,7 +206,18 @@ Procedures, tools and how-to notes — no evidence grading applies.
 - [[Claude Code]] *(user)* — Settings and a self-review prompt.
 - [[AI tools and learning sources]] *(user)* — Local model serving, scraping, notebooks, practice sites, courses. Merged from six one-line notes.
 - [[Agentic Design Patterns]] *(user)* — Reading tracker for Gulli's book.
-- [[Cooking techniques]] *(user)* — Steak, salmon, veg, air-fryer timings and more. Merged from eleven notes.
+- [[Cooking techniques]] *(user)* — hub for the technique pages below; one line each.
+  - [[wiki/reference/food/techniques/Steak|Steak]] — sous-vide-then-sear, plus Fallow's myth-tested pan method in full.
+  - [[wiki/reference/food/techniques/Salmon|Salmon]] — pan method and which type to buy.
+  - [[wiki/reference/food/techniques/Tuna steak|Tuna steak]] — yellowfin, sweet chilli marinade, 30-45s a side.
+  - [[Vegetables]] — carrots, sprouts, cauliflower, beetroot, kale.
+  - [[Roasted shallots]] — fry, oven, caramelise, baste in stock.
+  - [[wiki/reference/food/techniques/Roast potatoes|Roast potatoes]] — bicarb, rough up, flour.
+  - [[wiki/reference/food/techniques/Tofu|Tofu]] — one attempt, judged too plain.
+  - [[Air fryer chicken]] — Birds Eye, pan crust and Kiev timings with measured temps.
+  - [[Fish fingers]] — ghee, 4 min, turn, 3 min.
+  - [[Poached eggs]] — simmer, 3min 30s.
+  - [[wiki/reference/food/techniques/Bolognese|Bolognese]] — stub; bookmarked video only.
 - [[Ingredients, brands and tools]] *(user)* — Butter, mayo, canned fish and tomatoes, fish to avoid, meal-planning app. Merged from seven notes.
 - [[Eating out and tasting notes]] *(user)* — Wagamama, Munch Box, whisky scores.
 - [[Pans]] — Five "titanium" pans tested against plain stainless: Viking PureGlide Pro and Hestan NanoBond win; Our Place releases a dry egg; Taima warps. One YouTube review, affiliate-linked.
@@ -221,6 +234,8 @@ Procedures, tools and how-to notes — no evidence grading applies.
 
 ## Sources
 - [[setup-obsidian-wiki]] — ChatGPT conversation on setting up this wiki.
+- [[michael-levin-on-slime-mould-intelligence]] — ChatGPT conversation on Levin and slime mould; claims checked against its four cited links, one framing error found.
+- [[olanzapine-wikipedia]] — Wikipedia article on olanzapine; three passages wrong or unreferenced, corrections recorded.
 
 ## Syntheses
 - (none yet)
