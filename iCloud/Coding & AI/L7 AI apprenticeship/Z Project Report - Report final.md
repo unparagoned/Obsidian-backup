@@ -7,7 +7,7 @@
 | **Training Provider** | QA                                                  |
 | **Employer**          | HMRC                                                |
 | Apprenticeship        | BCS Level 7 Artificial Intelligence Data Specialist |
-| Assessment            | AME1 Project Report                                 |
+| Assessment            | AM1 Project Report                                  |
 
 # Categorising data in financial documents
 
@@ -184,13 +184,13 @@ Secondary KPIs were precision; recall; train and inference time; maintainability
 
 ## 5.1 Data selection
 
-HMRC's central systems are locked down, without readily available graphics processing unit (GPU) access, so exploratory work used a standalone device with a GPU and 298,461 publicly available iXBRL accounts submitted to Companies House ([[#^ref-companies-house-2026|Companies House, 2026]]), allowing free exploration without exposing internal customer data. A month of data is sufficiently large to cover account styles, although subject matter experts explained many companies select dates such as 31 December or 31 March, so it might not be completely representative, but it is unlikely to materially affect the analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) ([[#A1. Data extraction: Code/00_ixbrl_data_extraction.ipynb|A1]] and [[#B15. Dataset description before and after preprocessing|B15]]). Production used company accounts and tax computations submitted to HMRC. 
+HMRC's central systems are locked down, without readily available graphics processing unit (GPU) access. So, exploratory work used a standalone device with a GPU and 298,461 publicly available iXBRL accounts submitted to Companies House ([[#^ref-companies-house-2026|Companies House, 2026]]), allowing free exploration without exposing internal customer data. A month of data is sufficiently large to cover account styles, although subject matter experts explained many companies select dates such as 31 December or 31 March, so it might not be completely representative, but it is unlikely to materially affect the analysis. This resulted in 2.8 million lines of data with 956 concepts (labels) ([[#A1. Data extraction: Code/00_ixbrl_data_extraction.ipynb|A1]] and [[#B15. Dataset description before and after preprocessing|B15]]). Production used company accounts and tax computations submitted to HMRC. 
 
 The source iXBRL documents are complex with inconsistent HTML structures, iXBRL data and multiple taxonomies ([[#B1. iXBRL document structure|B1]], [[#B2. Accounts that use HTML table nodes|B2]], [[#B3. Accounts that do not use HTML table nodes|B3]]). In some situations table names and headings are also important features ([[#B4. Features available around a value|B4]]). I asked subject matter experts about errors where the predicted class was what I expected but the iXBRL concept was slightly different. They explained that some concept names differ between the different taxonomies. A bespoke model for each taxonomy would give the best raw scores, but it would be confusing for analysts, so I recommended training only on the main taxonomy, giving consistent categories.
 
 ## 5.2 Exploratory Data Analysis (EDA)
 
-Rank frequency plots of both description and concept had a long tail ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]); a Pareto chart showed that the 75 most common concepts cover 95% of items ([[#B8. Pareto chart of concepts (raw data)|B8]]); and the fitted distribution was closer to lognormal than power-law ([[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) ([[#^ref-clauset-shalizi-newman-2009|Clauset, Shalizi and Newman (2009)]]). This motivated using macro-F1 as the primary metric over accuracy. 
+Rank frequency plots of both description and concept had a long tail ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]). A Pareto chart showed that the 75 most common concepts cover 95% of items ([[#B8. Pareto chart of concepts (raw data)|B8]]). The fitted distribution was closer to lognormal than power-law ([[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) ([[#^ref-clauset-shalizi-newman-2009|Clauset, Shalizi and Newman (2009)]]). This motivated using macro-F1 as the primary metric over accuracy. 
 
 The main feature is a description that has various types, from nominal text, dates (temporal), names (nominal) and numeric figures (numeric ratio). Most descriptions are 1-9 words with a mode of 2 ([[#B6. Word-count distribution of descriptions (raw data)|B6]] and [[#B7. Word count by the five most common concepts (raw data)|B7]]). 
 
@@ -216,7 +216,9 @@ I implemented data quality controls aligned with HMRC expectations and Data Mana
 - Timeliness. The system architecture and using a long-format structure handles any taxonomy without hitting database column limits, allowing extraction within days of receipt. 
 - Validity and accuracy were addressed by removing descriptions shorter than 2 characters, missing, low-quality, or longer than 15 words, which analysis showed were not valid (`filter_data` and `filter_out_labels`, [[#A2.3 Canonicalization and label engineering|A2.3]]). 
 
- This reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 ([[#B15. Dataset description before and after preprocessing|B15]]). A limit of 350 examples ensured enough samples even with the 1% train population, reducing labels to 141 while retaining 99% of rows. The distribution effects are shown by the rank-frequency, word-count and Pareto plots before preprocessing ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]-[[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) and after it ([[#B10. Rank-frequency after canonicalisation and label engineering|B10]]-[[#B14. Distribution fit after preprocessing|B14]]). Along with restricted user access, this supported HMRC and regulatory requirements, data protection impact assessments (DPIAs), the *Data Protection Act 2018* and UK General Data Protection Regulation (UK GDPR) ([[#^ref-data-protection-act-2018|Data Protection Act 2018]]; [[#^ref-regulation-eu-2016-679|Regulation (EU) 2016/679]]; [[#^ref-ico-no-date|Information Commissioner's Office, no date]]). 
+Along with restricted user access, this supported HMRC and regulatory requirements, data protection impact assessments (DPIAs), the *Data Protection Act 2018* and UK General Data Protection Regulation (UK GDPR) ([[#^ref-data-protection-act-2018|Data Protection Act 2018]]; [[#^ref-regulation-eu-2016-679|Regulation (EU) 2016/679]]; [[#^ref-ico-no-date|Information Commissioner's Office, no date]]). 
+
+This preprocessing reduced the unique descriptions from 266,178 to 7,795 and labels from 956 to 826 ([[#B15. Dataset description before and after preprocessing|B15]]). A limit of 350 examples ensured enough samples even with the 1% train population, reducing labels to 141 while retaining 99% of rows. The distribution effects are shown by the rank-frequency, word-count and Pareto plots before preprocessing ([[#B5. Rank-frequency of descriptions and concepts (raw data)|B5]]-[[#B9. Concept frequency against power-law, lognormal and exponential fits (raw data)|B9]]) and after it ([[#B10. Rank-frequency after canonicalisation and label engineering|B10]]-[[#B14. Distribution fit after preprocessing|B14]]). 
 
 Because the data was used over various model architectures and packages, I created stratified splits upfront, 80/10/10, train, test, holdout plus sub splits and square-root weighted splits (`stratified_split`, `sample_split` and `add_sqrt_weight`, [[#A2.6 Split and save data|A2.6]]). The holdout ensures the final comparison is over unseen data, so provides a better view of performance against real data.
 # 6. Survey of potential alternatives.
@@ -241,7 +243,7 @@ A frontier large language model (LLM), such as ChatGPT, would be excessive for s
 
 ## 7.1 Population size validation
 
-Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested whether smaller populations gave representative results, over 1%, 10% and 100% train populations ([[#A3.3 Compare different population sizes.|A3.3]], [[#B17. Macro-F1 by model type (1% training population)|B17]] and [[#B18. Macro-F1 against training time (1% training population)|B18]]). The Pearson correlation to the full population for the 1% and 10% samples was 0.971 and 0.998 respectively ([[#B19. Score agreement between training population sizes|B19]] and [[#B20. Correlation between population sizes|B20]]). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
+Comparing every model and hyperparameter over the full train dataset was not possible, so I initially tested whether smaller populations gave representative results, over 1%, 10% and 100% train populations ([[#A3.3 Compare different population sizes.|A3.3]], [[#B17. Macro-F1 by model type (1% training population)|B17]] and [[#B18. Macro-F1 against training time (1% training population)|B18]]). The Pearson correlation to the full population for the 1% and 10% samples were 0.971 and 0.998 respectively ([[#B19. Score agreement between training population sizes|B19]] and [[#B20. Correlation between population sizes|B20]]). Paired T-tests showed that models that were not significantly worse over the 1% were also not significantly worse at 100%, so I could filter out models and hyperparameters using a smaller sample, and have reliable results from the 10%. 
 
 ## 7.2 Traditional machine learning algorithms
 
@@ -312,7 +314,7 @@ The overall system ([[#B35. End-to-end system architecture|B35]] and [[#B36. Dat
  
 I would work collaboratively with teammates on non-machine learning tasks, partially to share knowledge and up-skill them.
 
-The pipeline now runs automatically daily, so that analysts do not need to run it themselves and just need to query the database. 
+The pipeline now runs automatically daily, so that analysts do not need to run Hubble themselves and just need to query the database. 
 
 Governance is built into the design. Documentation and guidance explain whether an item was tagged by the customer or is a machine learning prediction. Analysts know that the machine learning category can be wrong and must not use it for automated decisions, keeping a human in the loop ([[#^ref-ico-2026|Information Commissioner's Office, 2026]]). Per-class performance is available in a dashboard so analysts can check before anything is relied upon. 
 
@@ -324,9 +326,9 @@ Residual analysis identified which classes performed poorly and summaries were c
 
 Subject matter experts explained that in some cases there is not enough information in the document to predict the specific concept. For example, the description "cash at bank and in hand" is associated with similar concepts `CashBankOnHand` 5,670 times and `CashOnHand` 21 times, so the minority tagging would show as errors ([[#B43. Worked examples of ambiguous descriptions and apparent model errors|B43]] and [[#B24.1 Worked example: CashBankOnHand against CashOnHand.|B24.1]]).
 
-I tested sensitivity and robustness  ([[#^ref-ribeiro-et-al-2020|Ribeiro et al. (2020)]]), by testing over abbreviations, adversarial (phrased to mislead), command (attempted LLM instruction injection), contextual (semantically equivalent), long context, optical character recognition issues, synonyms, typos, unicode and variations ([[#A3.8 Test model robustness|A3.8]], [[#A5.3.5 10% sqrt weight training population|A5.3.5]] and [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25]]). `LinearSVC` equalled or outperformed SEC-BERT in ten of eleven categories, surprising because SEC-BERT's domain-specific training and theoretical semantic understanding should have favoured it. `LinearSVC` performed worse on deliberate unicode manipulation but that is expected to be rare.
+I tested sensitivity and robustness ([[#^ref-ribeiro-et-al-2020|Ribeiro et al., 2020]]) by testing over abbreviations, adversarial (phrased to mislead), command (attempted LLM instruction injection), contextual (semantically equivalent), long context, optical character recognition issues, synonyms, typos, unicode and variations ([[#A3.8 Test model robustness|A3.8]], [[#A5.3.5 10% sqrt weight training population|A5.3.5]] and [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25]]). `LinearSVC` equalled or outperformed SEC-BERT in ten of eleven categories, surprising because SEC-BERT's domain-specific training and theoretical semantic understanding should have favoured it. `LinearSVC` performed worse on deliberate unicode manipulation but that is expected to be rare.
 
-To review bias and fairness ([[#^ref-mehrabi-et-al-2021|Mehrabi et al. (2021)]]), I investigated production performance by company size and software provider. Large and small companies had a macro-F1 score of 0.934 and 0.790 respectively, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. Residual analysis showed that while there were some real misclassifications, often the differences were between very similar concepts without enough information to differentiate between them. This suggests that the specificity of the evaluation was too fine-grained. Different software providers do tag things differently, but labels are a training proxy, so such issues would not apply to untagged items or human labels. But it is still a real issue, worth working with providers to make tagging more consistent, since tagged concepts would be considered more reliable than a machine learning category. 
+To review bias and fairness ([[#^ref-mehrabi-et-al-2021|Mehrabi et al., 2021]]), I investigated production performance by company size and software provider. Large and small companies had a macro-F1 score of 0.934 and 0.790 respectively, which could be explained by smaller companies using cheaper software, with some software providers having a score of 0.184 vs 0.913. Residual analysis showed that while there were some real misclassifications, often the differences were between very similar concepts without enough information to differentiate between them. This suggests that the specificity of the evaluation was too fine-grained. Different software providers do tag things differently, but labels are a training proxy, so such issues would not apply to untagged items or human labels. But it is still a real issue, worth working with providers to make tagging more consistent, since tagged concepts would be considered more reliable than a machine learning category. 
 
 # 9. Discussion and conclusions/recommendations.
 
@@ -346,7 +348,7 @@ My communication approach evolved based on stakeholders' reactions, using PowerP
 
 Repeated questions led me to create an interactive dashboard where users can test the model and see per-concept performance, including where it would be reliable and where it would perform poorly. The dashboard showed the top-5, but some of those were very poor matches, confusing users, so I changed the dashboard to just show the plausible matches. As users' understanding increased so did their use. 
 
-With managers I focused on business level aspects, benefits, outcomes, funding, blockers, and timeframes. In discussions and memos I did cost-benefit analysis covering better timeliness and data coverage, resulting in additional people on the development and funding for infrastructure.  
+With managers I focused on business level aspects, benefits, outcomes, funding, blockers, and timeframes. In discussions and memos I used cost-benefit analysis covering faster ingestion and better data coverage, resulting in additional developers and increased funding for infrastructure.  
 
 The project readme utilises markdown to provide clear headings, instructions, links, and code blocks, letting multiple teams use the tool themselves. When users have issues or questions, I updated the relevant documents to be clearer or cover such issues. Further developments resulted in a centralised approach extracting the full population to an Oracle database, so analysts just need to do a database query.
 
@@ -354,17 +356,17 @@ I discovered Optuna while working with neural networks, and the built-in visuali
 
 Recommendations:
 - Increase extraction coverage to 99.999%, to be able to replace existing systems.
-- Enhance system robustness by moving tests to a continuous integration (CI) pipeline, improving scheduling and using a fully supported by DevOps.
+- Enhance system robustness by moving tests to a continuous integration (CI) pipeline, robust scheduling and being fully supported by DevOps.
 - Data contracts for data sources and downstream.
 - Monitor drift ([[#^ref-gama-et-al-2014|Gama et al., 2014]]).
 	- Monitoring drift of inputs, check if there are new taxonomies. 
 	- Drift on outputs to be detected for both accuracy and macro-F1, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
-	- Automated drift can only check tagged items
+	- Automated drift can only check tagged items.
 - Standard structure for machine learning communications: headline figures first, illustrations, and examples, and an appendix with the technical details.
 - Human evaluation of classification.
 - Establish the performance ceiling beforehand so time and effort can be budgeted, since the same description can be associated with multiple concepts, the most common concept per description gives a hard upper bound.
 - Consider a simplified taxonomy, grouping together similar concepts would be more user friendly for analysts.
-- Record MLflow version in Oracle, so predictions can be traced back to the exact model and training dataset.
+- Record MLflow version in Oracle, so outputs can be traced back to the exact model and training dataset.
 - Make data more widely available through Denodo virtualisation
 
 # 10. Summary of findings.
@@ -387,7 +389,7 @@ The data has been used to better identify companies to investigate, and the esti
 
 The model and evaluation were all based on tagged data, but the main use case is on untagged data, and there is a risk that the untagged data could be different from the tagged data. For example, an item might have been left untagged since there may not be a relevant taxonomy concept. Ideally untagged data would be human tagged, but it would require too much subject matter expert time, so instead experts will feed into a manual evaluation stage. Further evaluation between tagged and untagged descriptions would be useful.
 
-Robustness was based on theoretical perturbations but might not realistically represent real issues.
+Robustness was based on theoretical perturbations but might not realistically represent real examples.
 
 Traditional model comparisons used five-fold cross-validation, a reasonable initial filter given computational cost, but overlapping training sets can understate variance. Later stages should have used five repetitions of two-fold cross-validation to improve variance estimates ([[#^ref-dietterich-1998|Dietterich, 1998]]).
 
