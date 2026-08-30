@@ -13,7 +13,7 @@ author: user
 
 **Summary:** The user's argument against non-physicalist accounts of consciousness. Chalmers' hard problem and p-zombies are answered by pointing out how much of a human is already unconscious; Mary's room is answered by inducing the neural state inside the room; idealism and panpsychism are pressed with the simulation argument — a physics simulation of a brain would talk about its experience, so either the experience is substrate-independent computation or you have a genuine zombie.
 
-Related: [[Physicalism]] · [[Reality]] · [[Simulation hypothesis]] · [[Free will]] · [[Quantum Mechanics]] · [[Meditation]]
+Related: [[Physicalism]] · [[Reality]] · [[Simulation hypothesis]] · [[Free will]] · [[Quantum Mechanics]] · [[Meditation]] · [[Basal cognition]]
 
 Chalmers defines the hard problem as being unexplainable by materialism.
 

@@ -2,6 +2,12 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Ownership
+
+The vault-level `AGENTS.md` tells the agent to leave `iCloud/` alone. That applies to **wiki work only**: ingest, maintenance, cleanup passes and link audits. This folder is deliberately excluded from the wiki and should stay that way.
+
+Work the user asks for directly in this folder is in scope and does not need that rule re-checked: editing the project report, drafting presentation material, generating figures, and similar. Normal care still applies, so confirm before overwriting and check edits landed on disk.
+
 ## Repository Overview
 
 This is an **Obsidian knowledge vault** containing study materials for a Level 7 AI Data Specialist Apprenticeship (UK IfATE standard st0763), delivered via QA Learning. It contains ~96 markdown files covering learning notes, assignments, workshop exercises, and EPA (End-Point Assessment) preparation. There is no build, test, or lint infrastructure.

@@ -9,7 +9,7 @@ author: user
 
 **Summary:** Sharpening angles and pressure notes.
 
-Related: [[Cooking techniques#Steak]] · [[Cooking techniques#Vegetables]]
+Related: [[Cooking techniques]] · [[wiki/reference/food/techniques/Steak|Steak]] · [[Vegetables]]
 
 The Wüsthof Classic 8-inch chef's knife is sharpened to about **14.5 degrees per side**. A cheap knife would be better at 20 degrees.
 

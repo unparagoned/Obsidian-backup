@@ -6,8 +6,10 @@ This vault is a persistent, AI-maintained knowledge base.
 
 - `raw/` contains immutable source material. Never edit or delete it.
 - `wiki/` is maintained by the agent.
+- `iCloud/` is the user's own live working copy. Never edit it as part of wiki work: no ingest, no maintenance, no cleanup passes, no link audits. If a coverage check flags it as missing, say it is excluded by the user's instruction rather than offering to ingest it. Work the user asks for directly in one of those files is a different matter and is in scope. `iCloud/Coding & AI/L7 AI apprenticeship/` has its own `CLAUDE.md` covering that work.
 - The user chooses sources, reviews conclusions and directs research.
 - Never present an inference as a sourced fact.
+- Obsidian may be open with files buffered, and can save a stale buffer over an edit. After changing an existing file, grep it to confirm the change is on disk; re-apply once if it is missing, and say so.
 
 ## Page types
 
@@ -25,13 +27,14 @@ When asked to ingest a source:
 1. Read the source from `raw/`.
 2. Create or update its page under `wiki/sources/`.
 3. Extract important claims, evidence, caveats and open questions, using the claim/quote/link format and evidence grading from Writing style.
-4. Search existing wiki pages before creating new pages.
-5. Update relevant concept and entity pages.
-6. Add meaningful `[[wikilinks]]` in both directions.
-7. Record disagreements or contradictions explicitly.
-8. Update `wiki/index.md`.
-9. Append an entry to `wiki/log.md`.
-10. Report which files changed and anything requiring human review.
+4. Fetch the links the source cites and check its claims against them rather than trusting its framing. Where a source misattributes, overstates or garbles something, record the correction on the page instead of repeating it. Say which claims you could not verify.
+5. Search existing wiki pages before creating new pages.
+6. Update relevant concept and entity pages.
+7. Add meaningful `[[wikilinks]]` in both directions.
+8. Record disagreements or contradictions explicitly.
+9. Update `wiki/index.md`.
+10. Append an entry to `wiki/log.md`.
+11. Report which files changed and anything requiring human review.
 
 Never invent missing metadata or conclusions.
 
@@ -83,4 +86,5 @@ Pages should read like the user's existing notes (see `iCloud/Heath & Supplement
 - **Organise pages by what to do**: causes/determinants, then treatments/interventions, aids/supplements, drugs, mechanisms, and finally notes/TODO. Mechanisms go near the bottom.
 - **Terse.** Short sentences, no filler, no hedging boilerplate. A section can be a heading, one line and one quote.
 - **Links and tags.** Use `[[Page#Heading]]` links to specific sections. Put `#tags` inline at the section they apply to, not just in frontmatter. End pages with a `# TODO` listing things to research next.
+- **Ambiguous links.** Many page names also exist as files in `iCloud/` and `raw/`. Obsidian resolves a bare `[[Steak]]` by shortest path, which lands on the copy outside `wiki/`. When a name collides, write the link path-qualified with an alias: `[[wiki/path/to/Page|Page]]`.
 - **Hygiene.** Strip tracking parameters from URLs. Deduplicate quotes that appear in multiple sections (link to the first instead). Fix mangled markdown links.

@@ -546,9 +546,41 @@ Available on the NHS (YouTube source).
 https://www.youtube.com/watch?v=P5PWr4Xi1d0
 
 #### Antipsychotics - major tranquillisers - mood stabilisers 
-#seroquel #olanzapine 
+#seroquel #olanzapine #quetiapine 
 
 Major tranquillizers like quetiapine and olanzapine are typically used to treat conditions like schizophrenia and will knock you out(maybe not in the right way). It is thought that in low doses, they act as anti-histamines making you drowsy. Doctors probably shouldn’t be prescribing these for insomnia. The drug companies behind them have been fined billions for pushing off-label use to treat insomnia(and hundreds of millions more related to the dangers of the side effects).
+
+The user's view above is broadly supported. Detail and sources on [[wiki/concepts/drugs/Olanzapine#Sleep and insomnia|Olanzapine#Sleep and insomnia]]. Quetiapine — the one actually prescribed for sleep — has its own page: [[wiki/concepts/drugs/Quetiapine|Quetiapine]].
+
+*No real evidence* for olanzapine or quetiapine in primary insomnia; there is no randomised placebo-controlled trial of either for it. Guidelines advise against the class.
+
+> weak recommendation against using antipsychotic drugs, including quetiapine, for the treatment of chronic insomnia disorder
+
+— VA/DoD 2025
+
+> does not recommend quetiapine and other antipsychotics for the treatment of insomnia
+
+— European insomnia guideline 2023
+https://www.ncbi.nlm.nih.gov/books/NBK619998/
+
+The two drugs are not equivalent, and the difference cuts against quetiapine. Quetiapine has been tested in primary insomnia — one RCT, 13 completers, 25mg, and it was **null** on every primary outcome, with the placebo arm gaining 72 minutes of sleep on its own. In healthy volunteers quetiapine adds stage 2 light sleep and leaves slow-wave sleep unchanged (Cohrs et al. 2004, n=14), and in depression it did not improve sleep continuity at all. It is also the one being handed out: 58% of British Columbia's ~1 million annual quetiapine prescriptions were for the 25mg tablet, against a licensed range of 150-800mg/day. AstraZeneca's $520m settlement in 2010 was specifically for promoting Seroquel for sleeplessness. See [[wiki/concepts/drugs/Quetiapine|Quetiapine]].
+
+One qualification to "maybe not in the right way": on the acute data olanzapine looks better than most sedatives on sleep architecture, not worse. Sharpley et al. 2000 (placebo-controlled, double-blind, cross-over, n=9 healthy males, single 5mg and 10mg evening doses) found it *deepened* sleep rather than flattening it — the opposite of what antihistamines and Z-drugs do.
+
+> Olanzapine (5 mg and 10 mg) produced substantial (59.1% and 83.3%) and highly significant dose-related increases in SWS in humans probably via blockade of brain 5-HT2C receptors.
+https://pubmed.ncbi.nlm.nih.gov/10704958/
+
+That result did not replicate in patients. In the only placebo-controlled polysomnography trial (Lazowski et al. 2014, *BMC Psychiatry*, n=25, depression, 28-31 days, mean 6.67mg), slow-wave sleep was the primary outcome and it was null; sleep continuity improved.
+
+> Olanzapine augmentation treatment generally did not improve SWS but did improve sleep continuity and depression.
+https://pmc.ncbi.nlm.nih.gov/articles/PMC4223523/
+
+The 10mg dose suppressed REM in the healthy-volunteer study, so the antihistamine criticism at [[wiki/concepts/sleep/Sleep#Antihistamines|Antihistamines]] applies here too.
+
+The reason not to take it for sleep is not the architecture — it is the cost. Olanzapine causes more weight gain than any other antipsychotic in common use (~11 kg beyond 13 weeks), carries a black box for increased death in elderly dementia patients, and can itself cause restless legs and periodic limb movements. See [[wiki/concepts/drugs/Olanzapine#Why it is a bad trade for sleep specifically|Olanzapine#Why it is a bad trade for sleep specifically]].
+
+Note the specific fines the user refers to. Eli Lilly pleaded guilty in January 2009 to a federal criminal misdemeanour for off-label promotion of Zyprexa and paid $1.415bn — but that admitted marketing was for **dementia** in the elderly, not insomnia. See [[wiki/concepts/drugs/Olanzapine#Eli Lilly litigation|Olanzapine#Eli Lilly litigation]]. AstraZeneca's $520m Seroquel settlement in April 2010 **does** name sleeplessness: between January 2001 and December 2006 it promoted the drug for unapproved uses including sleeplessness, targeting primary care physicians, geriatricians, paediatricians, long-term care homes and prisons.
+https://www.justice.gov/archives/opa/pr/pharmaceutical-giant-astrazeneca-pay-520-million-label-drug-marketing
 
 
 ### Cannabis

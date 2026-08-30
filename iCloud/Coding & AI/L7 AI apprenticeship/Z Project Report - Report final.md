@@ -1,11 +1,13 @@
 
 **Apprentice Details**
 
-| **Name**              | Jesse Karadia |
-| --------------------- | ------------- |
-| **ULN**               | 3591334404    |
-| **Training Provider** | QA            |
-| **Employer**          | HMRC          |
+| **Name**              | Jesse Karadia                                       |
+| --------------------- | --------------------------------------------------- |
+| **ULN**               | 3591334404                                          |
+| **Training Provider** | QA                                                  |
+| **Employer**          | HMRC                                                |
+| Apprenticeship        | BCS Level 7 Artificial Intelligence Data Specialist |
+| Assessment            | AME1 Project Report                                 |
 
 # Categorising data in financial documents
 
@@ -70,7 +72,7 @@
     - [[#B20. Correlation between population sizes|B20. Correlation between population sizes]]
     - [[#B21. Macro-F1 against training time, refined halving search|B21. Macro-F1 against training time, refined halving search]]
     - [[#B22. Fit time and score split by min_df|B22. Fit time and score split by min_df]]
-    - [[#B23. LinearSVC feature attribution (SHAP) for "cost of goods sold turnover"|B23. LinearSVC feature attribution (SHAP) for "cost of goods sold turnover"]]
+    - [[#B23. LinearSVC feature attribution for "cost of goods sold turnover"|B23. LinearSVC feature attribution for "cost of goods sold turnover"]]
     - [[#B24. Confusion matrices for individual classes (LinearSVC, holdout)|B24. Confusion matrices for individual classes (LinearSVC, holdout)]]
     - [[#B25. Robustness testing, LinearSVC against SEC-BERT|B25. Robustness testing, LinearSVC against SEC-BERT]]
     - [[#B26. CNN validation macro-F1 by epoch|B26. CNN validation macro-F1 by epoch]]
@@ -166,7 +168,7 @@ In a code-base review with experienced software engineers, we agreed documentati
 
 # 4. The scope of the project, including key performance indicators (KPIs).
 
-The scope covered extraction of features such as descriptions, headings, table names, values, structural data (table number, row number, column number) and iXBRL data (concept, dimensional data), machine learning to classify features, and an automated pipeline extracting to Oracle database. Out of scope was any analytical work based on the data, human labelling, and any automated decision making based on the machine learning category. The scope evolved iteratively over time ([[#9. Discussion and conclusions/recommendations.|Section 9]] ).
+The scope covered extraction of features such as descriptions, headings, table names, values, structural data (table number, row number, column number) and iXBRL data (concept, dimensional data), machine learning to classify features, and an automated pipeline extracting to Oracle database. Out of scope for the project was any profiling work based on the data, human labelling, and any automated decision making based on the machine learning category. The scope evolved iteratively over time ([[#9. Discussion and conclusions/recommendations.|Section 9]] ).
 
 Working with stakeholders, I established success criteria. 
 - Macro-averaged F1 score (macro-F1) > 0.6, the primary performance metric, weighting all classes equally so common classes do not dominate ([[#^ref-sokolova-lapalme-2009|Sokolova and Lapalme, 2009]]).
@@ -294,7 +296,7 @@ Each measure was weighted, with a confidence factor of 0.35 for overlapping conf
 
 For fair comparison, and because of memory/time constraints, all models were trained on 10% square-root weighted data and evaluated on the same subset of the holdout data. The 95% confidence intervals used bootstrap resampling rather than cross validation because of complexity and computational cost ([[#^ref-kohavi-1995|Kohavi, 1995]]) ([[#B32. Decision matrix: measured values|B32]]). 
 
-While SEC-BERT had the best macro-F1 score I chose `LinearSVC`, trading marginal performance (2.3pp) for simpler maintenance, feature-coefficient explainability, 220x faster operation, deployment on existing processor-based infrastructure, cost-effective scaling and well-established packages ([[#B32. Decision matrix: measured values|B32]], [[#B33. Decision matrix: weighting|B33]] and [[#B34. Decision matrix: final scores|B34]]).
+While SEC-BERT had the best macro-F1 score I chose `LinearSVC`, trading marginal performance (2.3pp) for simpler maintenance, feature-coefficient explainability, 28x faster training, 220x faster inference, deployment on existing processor-based infrastructure, cost-effective scaling and well-established packages ([[#B32. Decision matrix: measured values|B32]], [[#B33. Decision matrix: weighting|B33]] and [[#B34. Decision matrix: final scores|B34]]).
 
 ## 7.6 Production system and governance
 
@@ -332,7 +334,7 @@ An Agile approach worked well with CRISP-DM. Iterating delivered usable products
 
 While using metrics like macro-F1 works well for comparing similar classes of models, it is important to consider all the business requirements using methods like decision matrices. But some factors like interpretability and security are core requirements that could override a raw score. 
 
-`LinearSVC` coefficients provide direct interpretability for technical audiences ([[#A3.9.1 Coefficients|A3.9.1]]), whereas the neural networks required post-hoc explanation ([[#^ref-rudin-2019|Rudin, 2019]]). Local Interpretable Model-agnostic Explanations (LIME) ([[#^ref-ribeiro-singh-guestrin-2016|Ribeiro, Singh and Guestrin, 2016]]) and Shapley additive explanations (SHAP) ([[#^ref-lundberg-lee-2017|Lundberg and Lee, 2017]]) provide explainability that partially mitigates risks from non-interpretable models ([[#A3.9.2 Lime|A3.9.2]], [[#A3.9.3 SHAP|A3.9.3]], [[#B23. LinearSVC feature attribution (SHAP) for "cost of goods sold turnover"|B23]], [[#B28. SEC-BERT token contributions (SHAP) for "cost of goods sold turnover"|B28]] and [[#B39. LinearSVC coefficients for "cost of goods sold turnover"|B39]]). 
+`LinearSVC` coefficients provide direct interpretability for technical audiences ([[#A3.9.1 Coefficients|A3.9.1]]), whereas the neural networks required post-hoc explanation ([[#^ref-rudin-2019|Rudin, 2019]]). Local Interpretable Model-agnostic Explanations (LIME) ([[#^ref-ribeiro-singh-guestrin-2016|Ribeiro, Singh and Guestrin, 2016]]) and Shapley additive explanations (SHAP) ([[#^ref-lundberg-lee-2017|Lundberg and Lee, 2017]]) provide explainability that partially mitigates risks from non-interpretable models ([[#A3.9.2 Lime|A3.9.2]], [[#A3.9.3 SHAP|A3.9.3]], [[#B23. LinearSVC feature attribution for "cost of goods sold turnover"|B23]], [[#B28. SEC-BERT token contributions (SHAP) for "cost of goods sold turnover"|B28]] and [[#B39. LinearSVC coefficients for "cost of goods sold turnover"|B39]]). 
 
 Since SEC-BERT has limited developer provenance, security aspects may prevent use even if it won the decision matrix. If it was materially superior then we might need to train our own BERT based model. 
 
@@ -351,18 +353,19 @@ The project readme utilises markdown to provide clear headings, instructions, li
 I discovered Optuna while working with neural networks, and the built-in visualisations and hyperparameter search could have replaced a lot of the manual work and code I previously did. So going forward I plan to do wider research on existing packages and functions to solve a problem rather than just jumping straight into coding my own solution.
 
 Recommendations:
-- Increase extraction coverage to 100%, to be able to replace existing systems.
-- Enhance system robustness by moving tests to a continuous integration (CI) pipeline, improving scheduling and using a fully supported Oracle server.
+- Increase extraction coverage to 99.999%, to be able to replace existing systems.
+- Enhance system robustness by moving tests to a continuous integration (CI) pipeline, improving scheduling and using a fully supported by DevOps.
 - Data contracts for data sources and downstream.
 - Monitor drift ([[#^ref-gama-et-al-2014|Gama et al., 2014]]).
 	- Monitoring drift of inputs, check if there are new taxonomies. 
 	- Drift on outputs to be detected for both accuracy and macro-F1, using a 2pp drop and for there to be non-overlapping confidence intervals, over two consecutive days. 
 	- Automated drift can only check tagged items
-- Standard structure for machine learning communications: headline figures first, illustrations and examples, and an appendix with the technical details.
+- Standard structure for machine learning communications: headline figures first, illustrations, and examples, and an appendix with the technical details.
 - Human evaluation of classification.
 - Establish the performance ceiling beforehand so time and effort can be budgeted, since the same description can be associated with multiple concepts, the most common concept per description gives a hard upper bound.
 - Consider a simplified taxonomy, grouping together similar concepts would be more user friendly for analysts.
 - Record MLflow version in Oracle, so predictions can be traced back to the exact model and training dataset.
+- Make data more widely available through Denodo virtualisation
 
 # 10. Summary of findings.
 
@@ -384,7 +387,11 @@ The data has been used to better identify companies to investigate, and the esti
 
 The model and evaluation were all based on tagged data, but the main use case is on untagged data, and there is a risk that the untagged data could be different from the tagged data. For example, an item might have been left untagged since there may not be a relevant taxonomy concept. Ideally untagged data would be human tagged, but it would require too much subject matter expert time, so instead experts will feed into a manual evaluation stage. Further evaluation between tagged and untagged descriptions would be useful.
 
-Traditional model comparisons used five-fold cross validation, a reasonable initial filter given computational cost, but overlapping training sets can understate variance. Later stages should have used five repetitions of two-fold cross-validation, the disjoint training sets within each replication would limit Type I error ([[#^ref-dietterich-1998|Dietterich, 1998]]).
+Robustness was based on theoretical perturbations but might not realistically represent real issues.
+
+Traditional model comparisons used five-fold cross-validation, a reasonable initial filter given computational cost, but overlapping training sets can understate variance. Later stages should have used five repetitions of two-fold cross-validation to improve variance estimates ([[#^ref-dietterich-1998|Dietterich, 1998]]).
+
+The decision matrix did not normalise all criteria on a consistent basis, for metrics where lower is better the inversion anchored the scale at the worst-performing model. Using a reciprocal would have kept every criterion on a common ratio scale. A discount factor was used when CI overlapped, but using paired differences by bootstrap resampling would have been more appropriate.
 
 `LinearSVC` has not scaled well on larger datasets/more categories. But going from the 10% train data set to 100% saw only a 0.3pp increase in macro-F1, so much larger datasets are unlikely to increase performance much ([[#A3.7.7 Compare results|A3.7.7]]). 
 
@@ -431,8 +438,6 @@ Information Commissioner's Office (2026) *Automated decision-making, including p
 Information Commissioner's Office (no date) *Data protection impact assessments (DPIAs)*. Available at: https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/accountability-and-governance/data-protection-impact-assessments-dpias/ (Accessed: 15 August 2026) ^ref-ico-no-date
 
 Joachims, T. (1998) 'Text categorization with support vector machines: learning with many relevant features', in Nedellec, C. and Rouveirol, C. (eds.) *Machine learning: ECML-98*. Berlin: Springer, pp. 137-142. Available at: https://doi.org/10.1007/BFb0026683 (Accessed: 17 August 2026) ^ref-joachims-1998
-
-Kim, Y. (2014) 'Convolutional neural networks for sentence classification', *Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP)*. Doha, 25-29 October. pp. 1746-1751. Available at: https://doi.org/10.3115/v1/D14-1181 (Accessed: 14 August 2026) ^ref-kim-2014
 
 Kohavi, R. (1995) 'A study of cross-validation and bootstrap for accuracy estimation and model selection', *Proceedings of the 14th International Joint Conference on Artificial Intelligence (IJCAI)*. Montreal, 20-25 August. pp. 1137-1143. Available at: https://ijcai.org/Proceedings/95-2/Papers/016.pdf (Accessed: 17 August 2026) ^ref-kohavi-1995
 
@@ -8217,6 +8222,8 @@ heading("2.4 Final Scores", level=2)
 display_wide(final_scores_table)
 ```
 
+Note: Inference time is total time over common 243,990 workload not per sample
+
 ##### A6.2.5 Rubric
 
 ###### Interpretability
@@ -8276,6 +8283,18 @@ display_wide(final_scores_table)
 | 3     | Moderate dependency exposure with manageable controls.                  |
 | 4     | Limited dependency risk with mature, well-supported components.         |
 | 5     | Minimal dependency risk with transparent and well-governed components.  |
+
+###### Cost
+
+Relative implementation and operating cost; a higher score means a lower cost.
+
+| Score | Definition                                                                                          |
+| ----- | --------------------------------------------------------------------------------------------------- |
+| 1     | High cost; requires dedicated GPU infrastructure for training and serving, with large storage and specialist effort. |
+| 2     | Substantial cost; GPU needed for practical training, expensive to serve at population scale.         |
+| 3     | Moderate cost; trainable on shared or occasional GPU, serving is feasible but resource intensive.    |
+| 4     | Low cost; trains and serves on standard CPU infrastructure with modest resource use.                 |
+| 5     | Minimal cost; fast to train, cheap to run on CPU, and lightweight to store and serve.                |
 
 ### A7. Shared Python module: `Code/ixbrl_ai/`
 
@@ -9584,7 +9603,7 @@ Source [[#A3.4.2 Refined HalvingRandomSearchCV|A3.4.2]]; supports section [[#7.2
 
 Source [[#A3.6 Final candidate and tfidf testing|A3.6]]; supports section [[#7.2 Traditional machine learning algorithms|7.2]].
 
-### B23. `LinearSVC` feature attribution (SHAP) for "cost of goods sold turnover"
+### B23. `LinearSVC` feature attribution for "cost of goods sold turnover"
 
 SHAP values for the three competing classes.
 #### `TurnoverRevenue`
@@ -9596,7 +9615,12 @@ SHAP values for the three competing classes.
 #### `RawMaterialsConsumablesUsed`
 ![SHAP, RawMaterialsConsumablesUsed](report_figures/B23c-shap-rawmaterials.png)
 
-Source [[#A3.9.3 SHAP|A3.9.3]]; supports section [[#9. Discussion and conclusions/recommendations.|9]].
+#### B23.1 LIME explanation for the same description
+
+
+![LIME explanation, cost of goods sold turnover](report_figures/B23d-lime-explanation.png)
+
+Source [[#A3.9.2 Lime|A3.9.2]] and [[#A3.9.3 SHAP|A3.9.3]]; supports section [[#9. Discussion and conclusions/recommendations.|9]].
 
 ### B24. Confusion matrices for individual classes (`LinearSVC`, holdout)
 
@@ -9748,6 +9772,8 @@ Where a model's confidence interval overlapped that of the best model, its score
 
 Source [[#A6.1 Load metrics|A6.1]] (`metric_config`); supports section [[#7.5 Model selection|7.5]].
 
+Note: Inference time is total time over common 243,990 workload not per sample
+
 ### B34. Decision matrix: final scores
 
 SEC-BERT wins on every raw performance metric, but once interpretability, cost, dependency risk and lifecycle are weighted in, `LinearSVC` scores highest overall.
@@ -9781,7 +9807,7 @@ Source [[#A6.1 Load metrics|A6.1]] (`build_decision_matrix`); supports section [
 
 On-demand-compute allocates a CPU-only EC2 instance per job and shuts it down when finished.
 
-![[B35 production system architecture.svg]]
+![End-to-end production system architecture](report_figures/B35-production-system-architecture.png)
 
 Supports section [[#7.6 Production system and governance|7.6]].
 
@@ -9789,7 +9815,7 @@ Supports section [[#7.6 Production system and governance|7.6]].
 
 The modelling workflow, as opposed to the production pipeline at [[#B35. End-to-end system architecture|B35]].
 
-![[B36 data and ml pipeline.svg]]
+![Data and machine learning pipeline](report_figures/B36-data-and-ml-pipeline.png)
 
 Supports section [[#7.6 Production system and governance|7.6]].
 
@@ -9797,7 +9823,7 @@ Supports section [[#7.6 Production system and governance|7.6]].
 
 Each model family was narrowed by its own search, with the three champions compared in the decision matrix ([[#B31. Decision matrix: subjective assessments|B31]] to [[#B34. Decision matrix: final scores|B34]]).
 
-![[B37 model selection funnel.svg]]
+![Model selection funnel](report_figures/B37-model-selection-funnel.png)
 
 Supports sections [[#7.2 Traditional machine learning algorithms|7.2]], [[#7.3 Conventional and Transformer based Neural Networks|7.3]] and [[#7.5 Model selection|7.5]].
 
@@ -9820,14 +9846,14 @@ Source `03_ixbrl_experiment_models.ipynb` section 7.3 (`bootstrap_ci`); supports
 Coefficients for every n-gram in the example description, across the three competing classes. Class intercepts: `CostSales` -1.000, `RawMaterialsConsumablesUsed` -1.190, `TurnoverRevenue` -1.156.
 
 | n-gram     | `CostSales` | `RawMaterialsConsumablesUsed` | `TurnoverRevenue` |
-| ---------- | --------- | --------------------------- | --------------- |
-| `cost of`  | 0.099     | 0.493                       | -0.463          |
-| `cost`     | 0.000     | 0.442                       | -0.074          |
-| `turnover` | 0.000     | 0.000                       | 2.156           |
-| `goods`    | 0.000     | 0.000                       | 0.000           |
-| `of`       | 0.000     | 0.000                       | 0.000           |
-| `of goods` | 0.000     | 0.000                       | 0.000           |
-| `sold`     | 0.000     | 0.000                       | 0.000           |
+| ---------- | ----------- | ----------------------------- | ----------------- |
+| `cost of`  | 0.099       | 0.493                         | -0.463            |
+| `cost`     | 0.000       | 0.442                         | -0.074            |
+| `turnover` | 0.000       | 0.000                         | 2.156             |
+| `goods`    | 0.000       | 0.000                         | 0.000             |
+| `of`       | 0.000       | 0.000                         | 0.000             |
+| `of goods` | 0.000       | 0.000                         | 0.000             |
+| `sold`     | 0.000       | 0.000                         | 0.000             |
 
 #### B39.1 Highest weighted features for each class, for context:
 
@@ -10117,10 +10143,10 @@ The 26 KSBs assigned to Assessment Method 1 are evidenced as follows, grouped un
 
 **Awareness of the opportunities of AI and data science to create business value and growth**
 
-| KSB | Assessment criterion                                                                                                             | Where evidenced in this report                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| --- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| K13 | How to identify the compromises and trade-offs which must be made when translating theory into practice in the workplace         | I assessed trade-offs against HMRC's practical priorities rather than choosing a model on macro-F1 alone. I selected `LinearSVC` over SEC-BERT, accepting 2.3 percentage points lower macro-F1 in return for better explainability, 220 times faster inference, a much smaller model, simpler CPU deployment and lower dependency and lifecycle risk ([[#7.5 Model selection\|Section 7.5]]). I trained only on the main taxonomy so that analysts received consistent class names, although taxonomy-specific models might have achieved higher scores ([[#5.1 Data selection\|Section 5.1]]). I used on-demand-compute so that the service could scale without paying for permanently available infrastructure ([[#7.6 Production system and governance\|Section 7.6]]). The evidence behind the model trade-off is recorded in Appendices [[#B31. Decision matrix: subjective assessments\|B31]], [[#B32. Decision matrix: measured values\|B32]], [[#B33. Decision matrix: weighting\|B33]] and [[#B34. Decision matrix: final scores\|B34]]. |
-| K14 | The business value of a data product that can deliver the solution in line with business needs, quality standards and timescales | Hubble converts figures that could not previously be used because they lacked usable tags into structured, classified data, reducing manual effort and increasing the data available for analysis ([[#2. Outline of the issue or opportunity and the business problem to be solved.\|Section 2]]). I agreed measurable performance, coverage and timeliness criteria with stakeholders so that technical success was connected to the business need ([[#4. The scope of the project, including key performance indicators (KPIs).\|Section 4]]). The final evaluation showed that the service met the agreed quality measures and could process new accounts within days ([[#8. Results.\|Section 8]] and [[#B38. Final model performance: LinearSVC trained on the 100% train population\|Appendix B38]]). This supports more complete statistics, policy and risk analysis, and contributes to benefits valued in the tens of millions of pounds ([[#11. Implications.\|Section 11]]).                                                          |
+| KSB | Assessment criterion                                                                                                             | Where evidenced in this report                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| --- | -------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| K13 | How to identify the compromises and trade-offs which must be made when translating theory into practice in the workplace         | I assessed trade-offs against HMRC's practical priorities rather than choosing a model on macro-F1 alone. I selected `LinearSVC` over SEC-BERT, accepting 2.3 percentage points lower macro-F1 in return for better explainability, 28x faster traian, 220x faster inference, a much smaller model, simpler CPU deployment and lower dependency and lifecycle risk ([[#7.5 Model selection\|Section 7.5]]). I trained only on the main taxonomy so that analysts received consistent class names, although taxonomy-specific models might have achieved higher scores ([[#5.1 Data selection\|Section 5.1]]). I used on-demand-compute so that the service could scale without paying for permanently available infrastructure ([[#7.6 Production system and governance\|Section 7.6]]). The evidence behind the model trade-off is recorded in Appendices [[#B31. Decision matrix: subjective assessments\|B31]], [[#B32. Decision matrix: measured values\|B32]], [[#B33. Decision matrix: weighting\|B33]] and [[#B34. Decision matrix: final scores\|B34]]. |
+| K14 | The business value of a data product that can deliver the solution in line with business needs, quality standards and timescales | Hubble converts figures that could not previously be used because they lacked usable tags into structured, classified data, reducing manual effort and increasing the data available for analysis ([[#2. Outline of the issue or opportunity and the business problem to be solved.\|Section 2]]). I agreed measurable performance, coverage and timeliness criteria with stakeholders so that technical success was connected to the business need ([[#4. The scope of the project, including key performance indicators (KPIs).\|Section 4]]). The final evaluation showed that the service met the agreed quality measures and could process new accounts within days ([[#8. Results.\|Section 8]] and [[#B38. Final model performance: LinearSVC trained on the 100% train population\|Appendix B38]]). This supports more complete statistics, policy and risk analysis, and contributes to benefits valued in the tens of millions of pounds ([[#11. Implications.\|Section 11]]).                                                                        |
 
 **Critically evaluate the effectiveness and performance of proposed AI and data science solutions**
 

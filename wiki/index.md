@@ -53,7 +53,8 @@ Catalog of wiki pages. Keep useful, not exhaustive. Pages marked *(user)* are th
 - [[Metformin]] *(user)* — Blunts exercise adaptations, depletes B12; not for healthy people.
 - [[Paracetamol]] *(user)* — Prenatal use and autism/ADHD: sibling cohorts null vs 2025 meta-analysis; contradiction recorded.
 - [[Antipsychotics]] *(user)* — Thin: brain-volume claim from YouTube; olanzapine and tirzepatide.
-- [[wiki/concepts/drugs/Olanzapine|Olanzapine]] *(agent)* — Zyprexa: indications, the weight/metabolic problem, Lybalvi, interactions, the Eli Lilly litigation. Source's long-term weight figures corrected.
+- [[wiki/concepts/drugs/Olanzapine|Olanzapine]] *(agent)* — Zyprexa: indications, sleep and insomnia (no evidence in primary insomnia; guidelines against), the weight/metabolic problem, Lybalvi, interactions, the Eli Lilly litigation. Source's long-term weight figures corrected.
+- [[wiki/concepts/drugs/Quetiapine|Quetiapine]] *(agent)* — Seroquel and sleep: the only RCT in primary insomnia was null, it adds light sleep rather than deep sleep, and AstraZeneca paid $520m over marketing it for sleeplessness. Sleep question only.
 
 ### exercise/
 - [[Exercise]] *(user)* — Vigorous activity gives outsized returns; Norwegian 4×4; executive function; resistance training and brain ageing.
