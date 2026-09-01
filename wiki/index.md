@@ -59,7 +59,8 @@ Catalog of wiki pages. Keep useful, not exhaustive. Pages marked *(user)* are th
 ### exercise/
 - [[Exercise]] *(user)* — Vigorous activity gives outsized returns; Norwegian 4×4; executive function; resistance training and brain ageing.
 - [[Cold exposure]] *(user)* — Mood benefit; avoid straight after resistance training.
-- [[Gym]] *(user)* — Four-session rotation.
+- [[Gym]] *(user)* — Four-session rotation with heavy/light split: lunge, bench, shoulder press and pull-through alternate heavy; rows and isolation light or myo-reps.
+- [[High-rep training]] *(agent)* — 1-2 all-out sets of 12-25 reps: equal size to heavy loads above ~30% 1RM, less strength, failure mandatory, warm-up and injury evidence thin.
 - [[Abs]] *(user)*, [[Lunges]] *(user)* — Technique notes from videos.
 
 ### health/
@@ -182,7 +183,7 @@ Assessments are the user's own verdicts on how far to trust each source.
 
 ### Media and politics
 - [[Donald Trump]] *(user)* — Iran strike; counterterrorism director's resignation.
-- [[Elon Musk]] *(user)* — DOGE and Social Security data, per court filings.
+- [[Elon Musk]] *(user)* — DOGE and Social Security data, per court filings; Grok CLI upload incident and deletion promise.
 - [[Tucker Carlson]] *(user)* — Three inconsistencies from one video.
 - [[Eric Weinstein]] *(user)* — Guru marker.
 - [[Brian Keating]] *(user)* — Platforms Weinstein; PragerU.
@@ -237,6 +238,7 @@ Procedures, tools and how-to notes — no evidence grading applies.
 - [[setup-obsidian-wiki]] — ChatGPT conversation on setting up this wiki.
 - [[michael-levin-on-slime-mould-intelligence]] — ChatGPT conversation on Levin and slime mould; claims checked against its four cited links, one framing error found.
 - [[olanzapine-wikipedia]] — Wikipedia article on olanzapine; three passages wrong or unreferenced, corrections recorded.
+- [[grok-cli-uploaded-home-directory]] — YouTube Short on Grok CLI uploading whole repos/home dirs to GCS (July 2026); checked against the researcher's gist, the comparison with Claude Code/Codex/Gemini, and Musk's deletion promise.
 
 ## Syntheses
 - (none yet)

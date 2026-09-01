@@ -7,9 +7,9 @@ source: raw/notes/people/Elon Musk.md
 author: user
 ---
 
-**Summary:** One recorded claim: DOGE's Social Security work involved contact with an election-overturning advocacy group, per court filings reported by Politico.
+**Summary:** Two recorded items: DOGE's Social Security work involved contact with an election-overturning advocacy group, per court filings reported by Politico; and in July 2026 xAI's Grok CLI was caught uploading users' whole repos and home directories, which Musk answered with a deletion promise.
 
-Related: [[Donald Trump]] · [[Social media]]
+Related: [[Donald Trump]] · [[Social media]] · [[grok-cli-uploaded-home-directory]]
 
 The user's view: DOGE was misusing the data not cutting real costs.
 
@@ -23,6 +23,14 @@ Court filing referenced: https://storage.courtlistener.com/recap/gov.uscourts.md
 Also saved: https://x.com/elonmusk/status/2009171282030653877
 
 ![[Pasted image 20260109183853.png]]
+
+# Grok CLI upload incident (July 2026) #ai #privacy
+
+xAI's Grok Build CLI uploaded entire repos and, for one user, a whole home directory (SSH keys, password manager) to a GCS bucket regardless of the opt-out. Musk's response after the server-side switch-off; full detail in [[grok-cli-uploaded-home-directory]].
+
+> As a precautionary measure, all user data that was uploaded to SpaceXAI before now will be completely and utterly deleted.
+
+https://simonwillison.net/2026/Jul/15/grok-build/
 
 # TODO
 

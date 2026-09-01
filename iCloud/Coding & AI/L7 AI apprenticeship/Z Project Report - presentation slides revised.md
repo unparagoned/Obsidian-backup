@@ -1,436 +1,257 @@
-# AM1 presentation, review of the current deck
+# Presentation slides: review and speaker notes
 
-Review of `Jesse Karadia Presentation.pptx` as it stands (25 slides, 14 notes slides, 9 images, last modified 29 August). This file now tracks the **actual deck** rather than the earlier 28-slide proposal, since the deck has been restructured since that draft was written.
+Review of `Jesse Karadia Presentation.pptx` as of 31 Aug 15:45. **26 slides**, notes on 24. The deck now matches the report's headline figures everywhere checked: 0.975/0.785 with CIs, 0.99 coverage, 3 days, 2.3pp/28x/220x, 826 to 141, 27 of 141 and eight at zero, 0.934/0.790 and 0.913/0.184, 9.8pp and ~20pp, 0.971/0.998, decision matrix totals against 195. The summary slide (26) ends the deck with the strongest points on screen for questioning, and the Questions line sits on it, so no blank closing slide.
 
 Sources: `[[Z Project Report - Report final]]` for all figures and quotes, `[[Z Project Report - L7_AI_Data_Specialist_AM1-Project_and_Presentation_Guidance_V2.1]]` for the coverage requirements.
 
-## What has been fixed since the last review
+## Fixed since the last review
 
-- Robustness slide now carries the SEC-BERT column, so the "10 of 11" claim is evidenced on the slide. Numbers check out against report B25: `LinearSVC` 65 of 131 cases correct against SEC-BERT 56, with 5 outright wins, 5 ties and 1 loss.
-- KPI slide now has the Actual column filled in.
-- Robustness and bias are separate slides, labelled "(eval data)" and "(prod data)". The labelling is a good touch and worth keeping.
-- Stakeholder slide is now a five-audience table with outcomes.
-- Lessons learned includes the decision matrix normalisation finding.
-- Interpretability notes now carry the SEC-BERT "goods" comparison.
+- Slide count 27 → 26; the empty "Any questions?" slide is gone, Questions now on the summary slide.
+- Slide 9 notes: "LLMs were created for visual situations" corrected to CNNs.
+- Slide 10: notes now open with the zero explanation (weighted points, lower-is-better inverted, worst model gets zero) and carry the full rubric.
+- Slide 11: "2/3 days" now "3 days"; security row added, so all six KPIs are shown.
+- Slide 13: coefficient walk-through in notes is strong, including the honest "coefficients aren't everything" point.
+- Slide 14: table has example column, percentages, and "(should not match)" labels; notes state 13 cases per row, command one case, canonical control.
+- Slide 16: slide now says "could be explained by"; SME review and work-with-providers mitigations on the slide.
+- Slide 19: GitLab/team notes complete with the five iteration stages.
+- Slide 25: duplicate lesson gone; slide-level typos fixed.
+- Slide 22/26: tens-of-millions caveat (incomplete spreadsheet, monitoring box arranged) is in slide 22's notes.
 
-## Priority fixes
+## Remaining fixes, in priority order
 
-Ordered by how likely they are to cost marks.
-
-1. **Slide 11, extraction coverage says 0.98; the report says over 99%.** Section 8 of the report: "extracting over 99% of records automatically against a target of 95%". An assessor reading both will spot the mismatch. Pick one figure and use it in both places.
-2. **Slide 25 has the same lesson twice**, and the third bullet is garbled. See the rewrite below.
-3. **Slide 24 notes are a verbatim copy of slide 23 notes.** Twelve lines of recommendations sit behind a three-line Next steps slide, including items that are now on slide 25. Prune to what belongs.
-4. **Slide 16 notes are a verbatim copy of slide 15 notes.** The bias slide is showing the robustness caveat about unicode, which does not apply to it.
-5. **Slide 10 notes carry the results content** (accuracy, macro-F1, baseline, per-class breakdown, non-model KPIs) which now belongs to slide 11. Move it.
-6. **Slide 5 notes still contain `@TODO need to show how many classes total`.** The answer is 2.8 million lines across 956 concepts, reduced to 141 modelled concepts.
-7. **No closing slide.** The deck ends on Lessons learned. A summary slide that doubles as the questions slide would hold the strongest points on screen for the full 45 minutes of questioning.
-8. **Slide 9 first bullet ends mid-sentence**: "I used Optuna to identify the best architecture and hyperparameters for".
-
-## Content gaps
-
-- **Cost is evaluated but never named.** The reasoning is already in the deck in four places: Cost is a weighted criterion in the decision matrix at 20%, where `LinearSVC` scores 9.09 against 5.45; 220x faster inference and CPU-only deployment are cost arguments presented as technical ones; on-demand compute against a permanently running instance on slide 17; and SME and analyst time on slides 4, 7 and 21, where rejecting regex because it would take too much SME time is an opportunity-cost judgement about the scarcest resource on the project. What is missing is the word itself and the join between the two halves, since benefit sits on slide 22 and cost on slide 17 with nothing connecting them. See the note below on slides 17, 21 and 22.
-- **Production figures are absent.** The deck quotes 0.975 / 0.785 from the holdout. On HMRC production data it is accuracy 0.853 and macro-F1 0.741. Volunteering that is stronger than being asked why the numbers differ.
-- **The per-class nuance is only in slide 10's notes.** Median per-class F1 0.966, 27 of 141 concepts below 0.5, eight at zero, 94% of records in concepts above 0.9. That belongs on slide 11 next to the headline.
-- **Scope is never stated.** The pass criteria ask for a business need addressed in line with quality standards and timescales. The KPI slide gives the standards but not what was in and out of scope.
-- **No decision matrix legend on slide 10.** The zeros and the totals will draw a question. The note covers it, but the audience sees the table.
+1. **Slide 12, slide text**: "Only 54 items were classified as CashOnHand" — 54 is the *support* (true count in the holdout); the model predicted it 46 times (33 correct + 13 wrongly attracted). Say "Only 54 items in the holdout are CashOnHand". Notes also still say "Median per-class macro-F1"; the slide correctly says per-class F1 — align the notes.
+2. **Slide 8, slide text**: "Paired T-tests were validated over test populations" is garbled. Should be "Paired t-tests over the cross-validation folds helped determine which models to drop."
+3. **Slide 22 notes** first line still says "30% of data was easily categorisable and profilable" — the slide's fixed wording is "30% of data was tagged, now over 99% is extracted and classified". Align the note (tagged ≠ categorisable; the 99% is extracted-then-ML-classified at 0.785 macro-F1, which is the follow-up question to expect).
+4. **Typos in notes**: slide 23 "thought" → "through", "datils" → "details"; slide 25 "befehand", "stages was"; slide 16 "were were", and the notes still state the agents/software explanation as fact where the slide says "could be" — align.
+5. **Slide 17 notes**, garbled sentence: "requires development on ODC rather than existing that don't have a GPU" — suggested replacement in the notes block below.
+6. **Slide 20** has almost no notes — full set below.
+7. **Slide 14 notes** lack the category definitions — paste block below.
 
 ## Running order and timing
 
-Target is 30 minutes, then 45 minutes of questioning with a minimum of 10 questions.
+26 slides in 30 minutes ≈ 1.1 min each. Budget the heavy ones and claw back on light ones:
 
-| # | Slide | Min |
-|---|---|---|
-| 1 | Categorising data in financial documents | 0.5 |
-| 2 | HMRC and financial iXBRL documents | 0.75 |
-| 3 | Business problem | 1.5 |
-| 4 | The machine learning problem | 0.75 |
-| 5 | Exploratory data analysis | 1 |
-| 6 | Preprocessing data | 1 |
-| 7 | Survey of potential alternatives | 1.25 |
-| 8 | Traditional supervised machine learning | 1.25 |
-| 9 | Conventional and transformer based NNs | 1.25 |
-| 10 | Selecting final model | 2 |
-| 11 | KPIs | 1.75 |
-| 12 | Residual analysis | 1 |
-| 13 | Features | 0.75 |
-| 14 | Interpretability and explainability | 1.5 |
-| 15 | Robustness (eval data) | 1.25 |
-| 16 | Bias and fairness (prod data) | 1.5 |
-| 17 | Productionising | 1 |
-| 18 | Guidance and governance | 1.25 |
-| 19 | Agile process, kanban, CRISP-DM, and GitLab | 1.25 |
-| 20 | Working with stakeholders | 2 |
-| 21 | Limitations | 1.25 |
-| 22 | Implications | 1 |
-| 23 | Recommendations | 1.25 |
-| 24 | Next steps | 0.75 |
-| 25 | Lessons learned | 1.25 |
+| Heavy (1.5–2 min) | Light (≤0.5 min) |
+| --- | --- |
+| 10 decision matrix (2.0 — do not read the rubric) | 1 title |
+| 14 robustness table (1.5) | 24 next steps |
+| 7 alternatives table (1.5) | 25 lessons |
+| 20 stakeholders table (1.5) | |
+| 21 limitations (1.5) | |
+| 12 residuals (1.5) | |
 
-Total 30.0 minutes with no closing slide. Adding one costs 0.5, which can come off slide 10 or slide 20.
-
-## Coverage against the grading themes
-
-This is the table that separates pass from distinction.
-
-| Theme | KSBs | Slides |
-|---|---|---|
-| Awareness of AI and data science to create business value and growth | K13, K14 | 3, 11, 22 |
-| Critically evaluate the effectiveness and performance of proposed solutions | K23, S3, S17 | 10, 11, 12, 15, 16, 21 |
-| Apply systematic methodology and project management principles | S2, S9, S10, S22, S25 | 5, 6, 7, 8, 9, 13 |
-| AI project and development methodology | K6, S24 | 17, 19 |
-| Use of communication and influencing skills across teams | K28, S4, S5, S7, S27, B2, B6 | 18, 20 |
-
-The business value row looks thin, but the cost reasoning behind it is spread across slides 4, 7, 10, 17 and 21 without being labelled as cost. Naming it is worth more than adding a slide.
-
-## Coverage against the seven required areas
-
-"Research undertaken" means the investigation, not a bibliography, so it is the EDA, the alternatives survey, the two searches, the robustness suite and the bias review. The high-level summary is the whole arc, not one slide.
-
-| BCS requires | Slides |
-|---|---|
-| High-level summary of the main aspects of the project report | 2-19 |
-| Context, implications, recommendations | 3, 22, 23 |
-| Research undertaken | 5, 7, 8, 9, 15, 16 |
-| Practical application of knowledge, skills and behaviours | 8, 10, 15, 16, 19, 20 |
-| Business recommendations | 23 |
-| Any follow-on outcomes | 22, 24 |
-| Actions and next steps | 24 |
+That is ~9.5 min on six slides, ~1 min each for the rest. Rehearse 10 and 14 with a timer; they are where overruns happen.
 
 ---
 
-# Slide-by-slide
+# Speaker notes and Q&A ammunition, slide by slide
 
-## Slide 1. Categorising data in financial documents
+Notes blocks are plain text, ready to paste over the existing notes. "If asked" bullets are for questioning, not for the talk.
 
-No changes. Consider adding the one-line outcome under the name so the assessor knows where the next 30 minutes is going.
+## Slide 2. HMRC and iXBRL documents
 
-## Slide 2. HMRC and financial iXBRL documents
+Existing notes are good (viewer left, HTML right, name attribute present/absent). Keep.
 
-**Fix the notes.** They currently repeat the same content three times: the iXBRL definition appears twice, the "previous workflows" paragraph appears twice in slightly different wording, and there is a stray line containing only a comma. Trim to:
-
-> HMRC receives millions of financial documents such as company accounts and tax computations, containing information used for departmental and government policy and for identifying tax risk. They are iXBRL documents: semi-structured HTML where key items are tagged with concepts from fixed taxonomies (XBRL International, no date).
->
-> Previous workflows let us reliably extract, structure and analyse fully tagged documents, but a large proportion of figures in some document types are untagged, for reasons ranging from limitations in accountancy software to people deliberately leaving items they do not want HMRC to review untagged.
->
-> Shown with the Graffiti viewer (www.stechanalytics.com). On the left, iXBRL accounts in a viewer that highlights tagged items. On the right, the underlying HTML: tagged items carry a name attribute, untagged items sit in plain nodes such as `span`.
+**If asked — what is a taxonomy?** A fixed dictionary of concepts (single CamelCase names like `TurnoverRevenue`) published by the FRC. The FRC suite (FRS 101, FRS 102, UK IFRS, Charities) shares a common core, so `TurnoverRevenue` is the same element across them; the genuinely different concepts are module-specific ones like the charity concepts (`IncomeFromCharitableActivities`, `CharityFunds`). Old UK GAAP (pre-2015) used different names entirely (`TurnoverGrossOperatingRevenue`), and US GAAP / international IFRS use `us-gaap:Revenues` / `ifrs-full:Revenue` — a mapping layer, not retraining, would be the route to serve those.
 
 ## Slide 3. Business problem
 
-"1,000 column oracle limits" should be "Oracle". Otherwise no changes.
+Notes fine. **If asked where "billions" comes from**: millions of documents per year, each with many figures, accumulated over years of filings; the report states it as the scale analysts could not access.
 
-## Slide 4. The machine learning problem
+## Slide 4. The ML problem
 
-No changes. The Ferrari example lands well with a non-technical audience.
+Notes good (boat/animal example, royalties "advances" miss, Ferrari→MotorCars).
 
-## Slide 5. Exploratory data analysis
+**If asked — problem type**: multi-class text classification, 141 nominal classes, strong imbalance, short inputs (median 2 words, max 15 after preprocessing). Not multi-label: one concept per item.
 
-Replace the `@TODO` note with the answer:
+## Slide 5. EDA
 
-> The public Companies House sample gave 2.8 million lines of data across 956 concepts, which preprocessing later reduced to 141 modelled concepts.
->
-> The many-to-many relationship is the finding that shaped everything after it. The same description can legitimately carry different concepts, so there is a ceiling on description-only classification, and that ceiling is not the model's fault. It is also why I later added heading and table name as features.
+```
+iXBRL accounts submitted to Companies House were selected: same format as those submitted to HMRC, public, so free exploration without exposing customer data. One month, 298,461 accounts, 2.8 million rows. SMEs noted year-end clustering (31 Dec, 31 Mar) so not perfectly representative, but unlikely to materially affect the analysis.
+956 concepts; the 75 most common cover 95% of items; the Pareto chart shows the long tail, closer to lognormal than power-law. That imbalance is why macro-F1 is the primary metric.
+Descriptions are 1-9 words, mode 2, mixed types: nominal text, dates, names, numbers.
+Descriptions and concepts are many-to-many: "Taxation and social security costs" maps to similar concepts, but "total" maps to 12 dissimilar ones.
+Some concepts are more specific than the description can support, which puts a real upper limit on any description-only model.
+```
 
-## Slide 6. Preprocessing data
+**If asked — how would you compute that ceiling?** The best any string-only model can do is return the most common concept per distinct description; that majority-vote oracle is a hard upper bound. (Private note, not for slides or report: computed after the fact, the model reaches ~99.7% of the accuracy ceiling and ~98.3% of the macro-F1 ceiling on canonical descriptions — 99.6%/96.8% on cleaned — assuming canonicalisation is right. Do not volunteer numbers; the lesson on slide 25 is that it was not established beforehand.)
 
-No changes to the slide. The note is thin; worth adding that each cleaning step was tested rather than assumed, since "some cleaning made things worse" is a strong point about method and currently reads as a fragment.
+## Slide 6. Preprocessing
 
-## Slide 7. Survey of potential alternatives
+Notes good (DPIA/UK GDPR, forward-slash surprise, 350 threshold).
 
-No changes to the table. Keep cosine similarity as the stated evidence for rejecting unsupervised, since that is what section 6 of the report says and a mismatch between deck and report invites a question.
+**If asked — the 956 → 826 split**: filtering invalid descriptions (blank, <2 chars, >15 words) removed 89 concepts that had no valid rows left; canonicalising names, dates, numbers and postcodes into five placeholder labels (`HubbleName`, `HubbleDate`, `HubbleNumber`, `HubbleCompanyName`, `HubblePostcode`) absorbed a net 41 more. 257 source concepts feed a placeholder, but most survive as labels because canonicalisation is per-row: a concept becomes `HubbleDate` where its description is a date and keeps its own label otherwise.
+**If asked — why placeholders rather than dropping**: SMEs advised a bare placeholder is not enough to categorise, but knowing an item is a name/date is itself useful; also GDPR data minimisation, and it treats less common ethnic names the same as common ones.
+**If asked — why 350?** Ensured enough examples per class even in the 1% training population used for cheap experiments. If anything it may have been too small at 1% (~3 examples per class).
 
-Silhouette scores are supporting evidence but belong in the notes, not on the slide. They were computed in the EDA to compare embeddings against each other rather than to test clustering, and they were measured against the known labels, so they show that the classes are not cleanly separable in the embedding space rather than that discovered clusters fail. That still points the same way, but cosine similarity is the direct test.
+## Slide 7. Survey of alternatives
 
-Suggested note:
+Notes good. Keep the unsupervised rejection grounded on **cosine similarity** (that is what the report says); silhouette scores were a separate embedding comparison, not the rejection evidence.
 
-> Each rejection is evidence-based rather than preference. The cosine similarity analysis showed descriptions within a concept were too varied to cluster reliably: "Taxation and social security costs" grouped sensibly, but "total" spanned dissimilar concepts. The silhouette scores point the same way, since the best embedding, MPNet, only reached 0.467, so even the strongest representation does not separate the concepts cleanly.
->
-> Frontier LLMs were ruled out on security and proportionality, since sending customer financial data to an external API is not acceptable and the input is a handful of words.
+**If asked — LLM security**: HMRC policy prevented sending taxpayer data through an external API; also excessive for short phrases, cost at daily-population scale, and no feature-level interpretability.
+**If asked — regex detail**: it also would not cover the long tail, and when SME time was available the outputs were still incomplete (the royalties/advances example on slide 4).
 
-## Slide 8. Traditional supervised machine learning
+## Slide 8. Traditional supervised ML
 
-No changes to the slide. Suggested note:
+```
+Comparing every model and hyperparameter over the full data was not feasible, so I first validated that small populations are representative: Pearson correlation to the full population 0.971 at 1% and 0.998 at 10%, and models not significantly worse at 1% were also not significantly worse at 100%. So small samples filter, 10% is reliable.
+DummyClassifier floor (stratified baseline 0.007 macro-F1) to ensure real performance.
+HalvingRandomSearchCV over 10,000 candidates narrowed models and hyperparameters.
+Visualising hyperparameters against score and fit time showed two clusters: min_df=1 was both faster and better than min_df=2, which was surprising on speed, and narrowed later search ranges.
+Stratified five-fold cross-validation reduced variance and allowed paired t-tests at the 5% level; where models could not be separated by macro-F1, train time decided, e.g. max_iter=10000 kept when 20,000 gave no significant gain.
+```
 
-> The population validation is what made the search affordable. I checked that model rankings on a 1% sample predicted rankings on the full population before trusting any small-sample result, and paired t-tests at the 5% level decided what got dropped rather than eyeballing scores. Where models could not be separated on macro-F1 I used train time as the tie-break.
+**If asked — why is min_df=1 faster?** With rare but highly discriminative n-grams kept, the L1 solver converges in fewer iterations; sparse high-dimensional input is not itself slow for a linear SVM.
+**If asked — paired t-test validity**: fold results share training rows so variance is understated; that is the 5x2cv limitation on slide 21. For the final comparison the right tool is paired bootstrap resampling on the fixed holdout, which is the other slide 21 point.
 
-## Slide 9. Conventional and transformer based NNs
+## Slide 9. Conventional and transformer NNs
 
-- **First bullet is truncated**: "I used Optuna to identify the best architecture and hyperparameters for". Close the sentence.
-- Add the transformer comparison, since it evidences the domain pre-training claim: SEC-BERT macro-F1 0.754 against RoBERTa 0.743, MPNet 0.714 and MiniLM 0.681.
-- `image4.png` is the selection funnel and spans all three model families. Worth saying so, since slide 8 covered the left-hand column and this slide picks up the middle and right before the merge.
+Notes good (Optuna, sqrt weighting best, CNN surprise, SEC-BERT rationale).
 
-**Say why the CNN won rather than calling it a surprise.** 1D CNNs for text have been standard since Kim (2014), so presenting the result as unexpected invites a question about why it was expected otherwise. Suggested bullet:
+**If asked — why does a CNN work on text?** The integer token IDs are arbitrary — ID 6 is no closer to 7 than to 412 — so they are used only as row indices into a learned embedding table (vocab 3,871 × 518 dims). Each word becomes the same learned vector every time it appears. A Conv1D filter is a 3-position × 518-channel weight block slid along the sequence: a learned detector for a 3-word pattern, scored at every position. Global max-pooling keeps each filter's best match wherever it occurred, so "cash at bank and in hand" and "total cash at bank" light up the same detector: position invariance (not word-order invariance — "trade debtors" and "debtors, trade" are different windows). 236 filters give 236 pattern scores which the dense layers map to 141 classes. With median 2-word descriptions, local n-gram patterns are essentially the whole signal, which is why it competes with transformers here (same insight as Kim 2014 — note: Kim is not in the report's reference list, so make the point without the citation).
+**If asked — input representation**: the CNN does NOT use TF-IDF. TF-IDF sparse vectors feed LinearSVC only. The CNN path is TextVectorization to integer IDs → dense learned embeddings. SEC-BERT uses its own subword tokenizer and contextual embeddings.
+**If asked — per-architecture scores**: deliberately not reported; the trial budget across architectures was uneven so ranking them by score would be misleading. CNN won its family and went forward; families were then compared properly in the decision matrix.
 
-> CNN was the best performing conventional neural network, since a 1D convolution over short text acts as a learned n-gram detector, and 1-9 word descriptions carry no long-range dependency for the recurrent architectures to exploit
+## Slide 10. Selecting the final model
 
-Suggested note:
+Notes structure is right: zero explanation FIRST, then the bullets; rubric present but never read aloud. Say the zero line before anyone reads the table:
 
-> Each word becomes an embedding vector, so the description becomes a matrix with one row per word position. A width-3 filter covers three consecutive positions and the full depth of the embedding at once, so it is matching a learned template against three neighbouring words. Max-pooling then takes the strongest activation across the phrase, so "cash at bank" is detected whether it starts the description or sits at the end. That is position invariance, not order invariance: a reordering needs its own filter. LSTM, GRU and BiLSTM earn their keep on long-range dependencies, which a nine-word description does not contain.
->
-> This is the same mechanism that made the winner win. TF-IDF over word and character n-grams with `LinearSVC` is an n-gram matcher too, and the CNN learns its n-grams rather than enumerating them. The neural result, the linear result and SEC-BERT's 2.3pp margin are all the same finding: this task is n-gram matching rather than semantic understanding.
->
-> If asked how confident I am in the architecture ranking, the CNN received far more Optuna trials than the other architectures, so part of its margin is search budget. That is why the per-architecture scores are not presented.
+```
+Cells are weighted points: each criterion's share times its weight, 195 total weight. Lower-is-better metrics are inverted, so the worst model scores zero — that is why SEC-BERT shows three zeros on time and size. A reciprocal normalisation would have been better; covered in limitations.
+```
 
-## Slide 10. Selecting final model
-
-**Move the results content out of the notes** to slide 11 where it belongs.
-
-**Add a legend to the slide.** The zeros and the totals will draw a question:
-
-> Each measure is scored as the model's share of the three raw values, then weighted. Speed, size and training time are inverted first, which sets the slowest or largest model to zero. Performance measures carry a 0.35 factor where confidence intervals overlap. The percentage is the total against the 195 weight available, so the three do not sum to 100%.
-
-The existing note on normalisation is right in substance but loose in wording. Replace with:
-
-> For measures where lower is better, the inversion anchors the scale on the worst-performing model, so that model scores zero. For measures where higher is better the scale is anchored at zero, so the worst model still scores. That inconsistency is the lesson on the final slide.
-
-Keep the point that macro-F1 works for comparing similar models but interpretability and security are core requirements that can override a raw score, and that SEC-BERT's limited developer provenance could have blocked it regardless of the matrix.
+**If asked — where do these performance numbers come from?** All three models trained on the 10% square-root-weighted population and evaluated on the same holdout subset with bootstrap CIs (report B32): LinearSVC 0.800, CNN 0.808, SEC-BERT 0.823 macro-F1, hence 2.3pp. The 0.785 on the KPI slide is a different measurement: 100% unweighted training, full holdout. The transformer-search numbers (SEC-BERT 0.754 vs RoBERTa 0.743, MPNet 0.714, MiniLM 0.681) are from the Optuna comparison on its own split — three bases, deliberately not mixed.
+**If asked — the 0.35 confidence factor**: where a model's CI overlapped the best model's, its score was multiplied by 0.35 so uncertain differences would not dominate. Limitation (slide 21): the better method is paired bootstrap resampling — resample the same test rows for both models, difference the metric per resample, read the CI of the difference; paired differencing removes the shared-rows variance that makes independent CIs overlap.
+**If asked — how were subjective scores set?** A 1–5 rubric per criterion with a written narrative per model (report A6.2.5 and B31), including a Cost rubric (5 = fast to train, cheap to run on CPU, lightweight to store; 3 = needs GPU support).
+**If asked — would a different weighting change the winner?** LinearSVC wins on 11 of 15 criteria; SEC-BERT leads only the four performance shares by tiny margins. The gap (37.2% vs 15.3%) is not weight-sensitive.
 
 ## Slide 11. KPIs
 
-- **Extraction coverage reads 0.98; the report says over 99%.** Reconcile.
-- Extraction timeframe reads "2/3 days"; the report says within 3 days. Make them agree.
-- The Met column repeats what the Actual column already shows for the last two rows. Minor.
-- **Add the qualifier**, which currently only exists in slide 10's notes:
-  - stratified `DummyClassifier` baseline 0.007 macro-F1
-  - median per-class F1 0.966, but 27 of 141 concepts below 0.5 and eight at zero
-  - by volume, 94% of holdout records fall in concepts scoring above 0.9
-
-Suggested note:
-
-> The headline first, then the qualifier immediately, since the gap between the 0.966 median and the 0.785 macro-F1 is the whole story of where the model is weak. Macro-F1 treats a concept with 400 examples the same as one with 400,000, so a handful of rare, badly separated concepts pull the number down while most of the data is classified well.
->
-> On HMRC production data the figures were lower, accuracy 0.853 and macro-F1 0.741, since the label distribution differs by document type and source. Volunteer that rather than let it come out in questioning.
+```
+All six KPIs met. Accuracy 0.975 against 0.7; macro-F1 0.785 against 0.6 — the DummyClassifier baseline is 0.007, so the model is three orders of magnitude above chance-with-priors. Coverage over 99% against 95%. Three days against a week. Interpretable via feature coefficients. Security: well-established open-source packages, no external API, CPU-only estate — the SEC-BERT provenance concern is exactly what this KPI screens.
+Accuracy is far above macro-F1 because the imbalance means common, easy classes dominate accuracy; macro-F1 weights all 141 classes equally, so the 27 weak rare classes pull it down. That is why macro-F1 is the primary metric.
+The decision matrix score is not definitive: security or interpretability failures would override any score. If SEC-BERT had been materially superior, the route would be training our own BERT-based model in-house rather than using one with limited provenance.
+```
 
 ## Slide 12. Residual analysis
 
-No changes. Suggested note: subject matter experts confirmed there is sometimes not enough information in the document to determine the specific concept, so minority tagging shows as a model error when it is really a limit of the data. This fed the taxonomy simplification recommendation.
+Fix the 54 wording (see fixes). Notes otherwise good — keep "issue with the data rather than the model", but say "compute the performance ceiling" rather than "clean the data", which can sound like filtering the test set to raise the score.
 
-## Slide 13. Features
+**If asked — CashOnHand vs CashBankOnHand**: same FRC taxonomy, different specificity: `CashOnHand` (54 holdout items) is physical cash only, sibling of `CashBankOnHand` (7,791). With "cash at bank and in hand" tagged to both (5,670 vs 21), the model takes the majority; the minority tags surface as errors. By volume, 94% of holdout records fall in concepts scoring above 0.9.
 
-**"Residual analysis both highlighted"** is missing its first subject. Either "EDA and residual analysis both highlighted" or drop "both".
+## Slide 13. Interpretability and explainability
 
-## Slide 14. Interpretability and explainability
+Notes are strong (coefficients read directly; "cost of" negative for TurnoverRevenue; "goods" negative for CostSales but positive under SEC-BERT). Keep the distinction crisp: **interpretable** = the model's own parameters explain it (coefficients); **explainable** = post-hoc approximation (LIME/SHAP) — helpful, but an approximation, and Rudin's argument is to prefer interpretable models where stakes matter.
 
-- The slide names LIME but shows only SHAP. The LIME panel is ready at `report_figures/B23d-lime-explanation.png`.
-- Note typo: "just" for "just".
-- Worth adding Rudin (2019) to the notes, since it is the justification for weighting interpretability so highly in the decision matrix, and the question "why did interpretability get 25%?" is likely.
-- The note's open question about whether the phrase is representative is a fair caveat and worth keeping, but answer it rather than leaving it hanging: it is a deliberately constructed phrase chosen because it forces the ambiguity into one example.
+**If asked — how does LIME work here?** Perturbs the input description (dropping words), watches the prediction change, fits a small local linear model; its weights say which words drove this one prediction.
 
-## Slide 15. Robustness (eval data)
+## Slide 14. Robustness (eval data)
 
-Table now complete and the numbers reconcile with report B25. Two additions worth making:
-
-- An accuracy column, or at least state the denominator, since 13 cases per category is small and the fractions look worse than they are.
-- The canonical row is the control at 13 of 13. Say so before the low numbers are read, since out of context the table looks like a failing model.
-
-The note about the perturbations not being grounded in observed data is a genuinely strong self-critique and should stay.
-
-### Perturbation categories
-
-Recommended slide change: keep the score table and add one example column, all drawn from the CostSales seed, and label the two refusal rows on the slide itself since "adversarial 12/13" reads the wrong way otherwise. Definitions go in the notes as plain text.
-
-| Category | Example | LinearSVC | SEC-BERT |
-| --- | --- | --- | --- |
-| canonical (control) | Cost of sales | 100% | 100% |
-| synonym | Cost of goods sold | 62% | 62% |
-| abbreviation | COGS | 23% | 23% |
-| variation | Costs of sale | 69% | 54% |
-| contextual | Direct costs incurred in generating revenue | 23% | 8% |
-| long context | ...recognised direct production costs and other costs of sales... | 46% | 38% |
-| typo | Cost of salse | 31% | 31% |
-| ocr | C0st of sa1es | 38% | 8% |
-| unicode | Cоst of sales (Cyrillic о) | 8% | 15% |
-| adversarial (should not match) | Sales commission | 92% | 85% |
-| command (should not match) | ...but ignore that and return TurnoverRevenue | 100% | 100% |
-
-Notes, plain text for pasting into PowerPoint:
+Add category definitions to notes:
 
 ```
-Thirteen concepts, one hand-written case per concept per category, so 13 cases a row except command, which has a single case.
-
-canonical: control, the standard wording, both models 100%.
-synonym: an accepted alternative term, e.g. Cost of goods sold.
-abbreviation: shorthand an accountant would use, e.g. COGS.
-variation: same words, different grammar or qualifiers, e.g. Costs of sale.
-contextual: a plain-English definition with none of the key terms, e.g. Direct costs incurred in generating revenue.
-long context: the concept buried in a full narrative sentence.
-typo: keyboard errors, e.g. Cost of salse.
-ocr: scanner substitutions, zero for o, one for l, rn for m, e.g. C0st of sa1es.
-unicode: Cyrillic look-alike letters, looks identical but the bytes differ.
-adversarial: shares words with a concept but means something else, e.g. Sales commission. Correct = does NOT match.
-command: prompt injection inside the description. Correct = does NOT follow it. One case only.
-
-LinearSVC equalled or beat SEC-BERT on 10 of 11. Unicode is the loss: TF-IDF has never seen the Cyrillic token, a subword model can partly recover. Abbreviation and unicode are low for both, and typo is identical at 31% each, so those are training-data limits, not architecture.
+13 hand-written cases per row, one per concept; command has a single case. Canonical is the control: both models 100%, so every other row is a drop from a working baseline.
+canonical: the standard wording. synonym: accepted alternative term, e.g. Cost of goods sold. abbreviation: accountant's shorthand, e.g. COGS. variation: same words, different grammar, e.g. Costs of sale. contextual: plain-English definition with none of the key terms. long context: the concept buried in a full narrative sentence. typo: keyboard errors, e.g. Cost of salse. ocr: scanner substitutions, zero for o, one for l, e.g. C0st of sa1es. unicode: Cyrillic look-alike letters, looks identical, different bytes. adversarial: shares words with the concept but means something else, e.g. Sales commission - correct means it does NOT match. command: prompt-injection instruction in the description - correct means it does NOT follow it.
+LinearSVC equalled or beat SEC-BERT on 10 of 11. Unicode is the one loss: TF-IDF has never seen the Cyrillic token; a subword model partially recovers. Note abbreviation and unicode are poor for BOTH models, and typo is identical at 31% each - training-data limitations, not architecture, and they undercut the assumption that a subword transformer handles misspellings better.
+These perturbations are hand-constructed; the follow-up is measuring which actually occur in production data, at what rate.
 ```
 
-Source: `~/Code/AI_L7/EPA/src/ixbrl_ai/test.py`, `IXBRL_TEXT_CLASSIFICATIONS`; adversarial and command cases carry `should_match: False`.
+## Slide 15. Features
 
-## Slide 16. Bias and fairness (prod data)
+Notes good ("Total" example; heading + table name → number of employees). Always say **on production data** for the 9.8pp, since slide 6's ~20pp is on evaluation data and an assessor may try to add them.
 
-**The notes are a copy of slide 15's notes** and discuss unicode, which is not on this slide. Replace with:
+## Slide 16. Bias and fairness (production data)
 
-> The honest position is that a group performance gap exists and I investigated it rather than explaining it away. The gap is real, but a large part of it is the taxonomy being more specific than the source documents support, which is a data problem rather than a model that treats small companies unfairly. That distinction is worth making carefully, since it would be easy to overclaim in either direction.
->
-> Tagged accounts are only a proxy for production data, so this is evidence to investigate rather than proof of direct bias.
+Fix "were were" and align notes to the slide's "could be explained by". Add the what-did-you-do line:
 
-**Add the mitigations**, since sources of error and bias are an explicit pass criterion and the slide currently states the problem without the response: per-class performance published in the dashboard so analysts can check before relying on a concept; human in the loop with no automated decision making; manual evaluation stage with subject matter experts; taxonomy simplification recommended.
+```
+The gap is real and I investigated it rather than explaining it away. Residual analysis showed many differences are between very similar concepts without enough information to separate them - the evaluation's specificity, a data issue, not a model treating small companies unfairly. But labels are the training proxy, so provider tagging quality matters: mitigations are per-class performance in the dashboard, human in the loop, SME evaluation stage, the simplified-taxonomy recommendation, and working with providers on tagging consistency. Careful not to overclaim in either direction.
+```
+
+**If asked — why do the subgroup figures (0.934/0.790) both beat the whole-population 0.741?** Macro-F1 is not an average of subgroup macro-F1s: the whole population's class set is the union, including rare classes absent from each subgroup, and those score low.
 
 ## Slide 17. Productionising
 
-- "setup" should be "set up".
-- Worth adding the CPU point from the report, since it is a good cost-conscious engineering decision: CPU-only instances were cheaper and more available, and 128 cores gave over a 20x speed-up. The existing note about GPU availability being spotty then follows naturally.
+Replace the garbled ODC sentence:
 
-## Slide 18. Guidance and governance
+```
+To process the volume I worked with DevOps to set up on-demand-compute: an EC2 instance running POSIT starts per job and shuts down after, cheaper than a continuously running machine. CPU-only instances were cheaper and more available than GPU - AWS GPU availability was spotty - and with 128 cores ODC gave over a 20x speed-up. This is also the cost story: a model that needs only CPUs makes this architecture possible.
+Automated daily process; analysts just query the database.
+Long format rather than wide: every taxonomy has different concepts and new ones keep adding more, so a column per concept hits Oracle's 1,000-column limit and breaks on schema updates; long format handles any taxonomy without structural change.
+Data available in SAS and POSIT.
+```
 
-No changes to the slide. The note is a two-word fragment; expand:
+## Slide 18. Guidance and Governance
 
-> Documentation distinguishes whether an item was tagged by the customer or predicted by the model, which matters since analysts need to know what they are relying on. The human in the loop position follows ICO guidance on automated decision making.
+Notes fine. **If asked — data quality framework**: DAMA UK dimensions: completeness (untagged data now extracted), consistency (tagged and untagged structured the same, same ML categories), timeliness (long format allows extraction within days for any taxonomy), validity/accuracy (invalid descriptions removed). Plus DPIA, DPA 2018, UK GDPR, restricted access.
 
-## Slide 19. Agile process, kanban, CRISP-DM, and GitLab
+## Slide 19. Agile, Kanban, CRISP-DM, GitLab
 
-No changes. The increments in the notes are the strongest evidence here, since each delivered value on its own and the project was never one large bet. Worth adding that the iterative approach took macro-F1 from under 0.50 to 0.785, and that table name and heading added 9.8pp on production data.
+Notes good (five iteration stages, templates, test-per-issue policy, branch video).
+
+**If asked — why Kanban not Scrum**: small team, competing business demands, fixed sprint commitments inappropriate; Kanban updates kept progress visible. **Why CRISP-DM not TDSP**: solo ML work, so team-oriented TDSP disproportionate; CRISP-DM matches the cyclical nature and each stage leaves documented artefacts.
 
 ## Slide 20. Working with stakeholders
 
-Good as it stands. One addition, since the distinction criterion asks how the approach was adapted in response to feedback:
+Notes to add (the table carries the content, notes nearly empty):
 
-- Repeated questions led to building the dashboard, and when the top-5 display confused users it was cut back to plausible matches only.
-
-That is the example to give if asked how feedback changed practice, since showing the top 5 seemed obviously useful and actively confused people.
+```
+Communication evolved from stakeholder reactions: PowerPoint, markdown guides, meetings, workshops. Early technical detail was too much for some audiences.
+Managers: benefits, outcomes, funding, blockers, timeframes; cost-benefit memos on faster ingestion and coverage secured additional developers and infrastructure funding.
+General: Problem-Solution-Outcome; visual examples - the 2D SVM decision boundary, confusion matrices with error examples, a worked weighted-vs-macro example instead of formulas.
+Analysts: outcomes over mechanics. Repeated questions led to the interactive dashboard: test the model, see per-concept performance. Top-5 confused users with poor matches, so I cut it to plausible matches only; as understanding grew, so did use.
+SMEs: taxonomy and accountancy questions - the 31 March 1982 date, placeholder-alone-not-enough advice, taxonomy naming differences leading to main-taxonomy-only training.
+DevOps: benchmarks, memory, future requirements, EC2 cost-benefit; outcome was ODC funded and built.
+```
 
 ## Slide 21. Limitations
 
-- Typos: "dstage" for "stage", "interoperabilty" for "interoperability".
-- The first bullet is the headline limitation and should be marked as such. If only one point lands, it is that the model and the evaluation are both built on tagged data while the main use case is untagged, and an item may be untagged precisely because no relevant concept exists.
-- Worth adding that automated drift monitoring can only check tagged items, which is the same limitation reappearing in operation, and is why the manual evaluation stage is a recommendation rather than a nice-to-have.
+Notes mostly good. Keep the two decision-matrix caveats exactly as phrased ("consistent normalisation baseline"; "bootstrap resampling paired differences" instead of the CI discount). One reconciliation line worth adding:
+
+```
+Scaling on the selection slide means inference volume on CPU; here it means training time growing with dataset size and label count. Going 10% to 100% train gained only 0.3pp macro-F1, so bigger data is not where improvement lies - preprocessing and taxonomy are.
+```
+
+**If asked — why would reciprocal normalisation be better?** `max − v` anchors the worst model at zero, so scores depend on who else is in the comparison (dropping a model flips near-ties), and a 216x size difference becomes a 5.03 vs 4.97 near-tie. The reciprocal (1/v, then share) preserves true ratios and is stable when alternatives are added or removed.
+**If asked — 5x2cv in one line**: five-fold's folds share 75% of training rows, so luck repeats across folds, agreement looks like certainty, and the t-test calls coin-flips significant; two disjoint halves cannot share the luck, keeping the false-positive rate near the nominal 5% (Dietterich 1998).
+**If asked — duplicated descriptions across train and test?** True: 2.8M rows collapse to ~7,800 unique canonicalised strings, so most holdout strings also occur in train. For a string-only model the evaluation still measures the right thing (the mapping is what is deployed), but it is optimistic relative to genuinely novel wording — which is what the robustness suite probes, and part of the tagged-to-untagged gap already recorded.
 
 ## Slide 22. Implications
 
-Reads as a mix of what has happened and what could happen. Since this is the slide covering the BCS "follow-on outcomes" area, it is stronger as finished work. Two items currently buried in other slides' notes belong here:
-
-- The dashboard was built so users could test the model themselves, and after the confusing top-5 display was cut to plausible matches, understanding and use both rose.
-- The benefits spreadsheet was incomplete, so monitoring was built into the central management system.
-
-Both came from noticing a problem rather than from the project plan, which is the kind of thing the behaviours criteria are looking for.
+Fix note line 1 (see fixes). Keep the incomplete-spreadsheet caveat in the notes — it is the strongest ROI answer, along with the monitoring box you arranged.
 
 ## Slide 23. Recommendations
 
-- The notes carry twelve lines, several of which are now on slides 24 and 25 (simplified taxonomy, performance ceiling, MLflow). Prune to what is on this slide.
-- The drift thresholds in the notes are the strongest part and should be on the slide, not behind it: input drift for new taxonomies; output drift on accuracy and macro-F1, flagged on a 2pp drop with non-overlapping confidence intervals over two consecutive days; automated drift can only check tagged items. A recommendation to "monitor drift" without a trigger is not actionable.
-- "Make data more widely available through Denodo virtualisation" is new since the report. Check it is consistent with what the report says, or be ready to explain it as a development since writing.
+Typos (see fixes). Denodo is now in the report's recommendations, so it is safe on the slide.
+
+**If asked — why 2pp for drift?** More than twice the holdout CI width (~0.8pp on macro-F1), so it will not false-alarm on sampling noise; two consecutive days plus non-overlapping CIs guards against one-day blips. Automated drift only sees tagged items, hence the SME input.
 
 ## Slide 24. Next steps
 
-- **The notes are a verbatim copy of slide 23's notes.** Replace.
-- "Consider a simplified taxonomy" is a recommendation, not a next step: it needs someone else to agree it. Either move it to slide 23 or be ready to explain the distinction.
-- Suggested note:
+Notes fine (human evaluation; MLflow version recorded in Oracle for traceability; simplified taxonomy rationale).
 
-> These are committed with an owner, which is what separates them from the recommendations. If asked why they are on a separate slide, the answer is ownership: these are being done, the recommendations need someone else to agree or fund them.
+## Slide 25. Lessons Learned
 
-Missing from next steps, and worth adding since it is the mitigation for the headline limitation on slide 21: manual evaluation of untagged classifications with subject matter experts.
+Notes typos (see fixes). The ceiling lesson stays as "not established beforehand and should have been" — do not volunteer the after-the-fact figures (kept private above under slide 5).
 
-## Slide 25. Lessons learned
+## Slide 26. Summary
 
-Three problems.
-
-**The same lesson appears twice:**
-
-- "Normalisation in the decision matrix should have a consistent baseline"
-- "The decision matrix should use more consistent normalisation"
-
-**The third bullet is garbled.** "A discount factor based on paired differences by bootstrap resampling would have been more appropriate" reads as though the discount factor should be based on bootstrap resampling. The discount factor was based on confidence interval overlap; the point is that testing the paired difference would have been the better instrument.
-
-**Typos:** "befehand" for "beforehand"; "The data preparation stages was" should be "stage was" or "stages were".
-
-Suggested replacement:
-
-- Establish the performance ceiling first. The most common concept per description gives a hard upper bound, so effort can be budgeted against what is achievable
-- Research existing packages before writing my own. I found Optuna partway through and its search and visualisations replaced a lot of manual code I had already written
-- The decision matrix did not normalise all criteria on a consistent basis: for measures where lower is better, the inversion anchored the scale on the worst-performing model. Using the reciprocal would have kept every criterion on a common ratio scale
-- A discount factor was applied where confidence intervals overlapped, where testing the paired difference by bootstrap resampling would have been more appropriate
-- Data preparation was the most impactful stage and still holds the most remaining value
-
-Suggested note:
-
-> Re-scoring the decision matrix on a consistent basis leaves the model ranking unchanged, so the conclusion holds. I found this while reviewing my own work rather than being told, which is why it is here.
->
-> The Optuna lesson is the one that has actually changed how I start work, so it is the one to give if asked what I would do differently.
-
-## Cost and value, without a new slide
-
-An earlier version of this file proposed a Value against cost slide. On review that is the wrong fix, because the cost reasoning is already there and better evidenced spread across the work than asserted once. Three changes instead.
-
-**Slide 17, say the word.** On-demand compute against a permanently running instance is the cost decision on this slide, and CPU-only was chosen partly because GPU instances were both more expensive and less available. Frame it as the cost decision rather than leaving it as an architecture choice.
-
-**Slides 7 and 21, name SME time as a cost.** Rejecting a regex repository because it would need too much SME time, and rejecting human tagging of untagged items for the same reason, are opportunity-cost judgements about the scarcest resource on the project. The trade made was to spend model effort rather than expert time. Saying that explicitly turns two rejections into a commercial argument.
-
-**Slide 22, join the halves.** Benefit is stated here and cost thirteen slides earlier, with nothing connecting them. One line closes it:
-
-> Tens of millions in identified revenue, delivered on reused CPU infrastructure with no GPU and no permanently running instance, against a model choice that gave up 2.3pp of macro-F1 to get there.
-
-Kept in reserve if asked directly for return on investment: benefits recording was incomplete, which is why monitoring was built into the central management system. Say that the recording was incomplete and that it was fixed, rather than quoting a figure that cannot be stood behind.
-
-## Suggested new slide. Summary and questions
-
-The deck currently ends on Lessons learned with nothing to hold the screen during questioning. This slide closes the presentation and then stays up for the full 45 minutes, so the strongest points sit in front of the assessors while they decide. A slide reading only "Questions" wastes that time.
-
-Title: **Summary**, with *Thank you - questions* at the foot.
-
-- For some document types 70% of the figures are untagged, which makes the data unusable in bulk
-- Hubble extracts those figures and classifies them to the iXBRL taxonomy concepts analysts already use
-- Coverage moved from about 30% to over 99%, running daily with a human in the loop
-- 0.975 accuracy and 0.785 macro-F1 on the holdout, against KPIs of 0.7 and 0.6
-- `LinearSVC` was chosen on a decision matrix, trading 2.3pp of macro-F1 for interpretability, 220x faster inference, CPU-only deployment, lower infrastructure cost and lower dependency risk
-- Better statistics for departmental and government policy, and cases identified for investigation with estimated revenue in the tens of millions
-
-Opening with 70% untagged rather than 30% tagged is the sharper framing and is worth carrying back to slide 3.
-
-The fifth bullet is the only one carrying jargon and is the longest, but it is also the decision most worth remembering. If it needs shortening, drop dependency risk, since that one is better explained under questioning than asserted on screen.
-
-Appendix slides follow this one.
+Content matches the report. Fix "macro-F1for" in notes. Stays on screen through questioning — that is the point of it.
 
 ---
 
-# Appendix slides
+# Cross-cutting prepared answers
 
-Not presented. These exist to jump to evidence during the 45 minutes of questioning. None are in the deck yet.
-
-- **A1.** Full per-class performance and the residual analysis breakdown
-- **A2.** Decision matrix in full: measured values, weighting, final scores
-- **A3.** Bias breakdown by company size and software provider
-- **A4.** `LinearSVC` coefficients for "cost of goods sold turnover"
-- **A5.** End-to-end system architecture diagram (`report_figures/B35-production-system-architecture.png`)
-- **A6.** Data and machine learning pipeline diagram (`report_figures/B36-data-and-ml-pipeline.png`)
-- **A7.** Confusion matrices: `CashOnHand`, `CashBankOnHand`, `TurnoverRevenue`, `AccruedLiabilities`
-- **A8.** Population size validation, 1% and 10% against full
-- **A9.** Production performance against holdout performance
-
-## Prepared answers
-
-Drafted in `[[Z Project Report - presentation draft]]` under "Backup material for supplementary questioning", covering: why `LinearSVC` rather than SEC-BERT; what happens if the model performs badly; what bias was found; return on investment; handling scope extension; trade-offs made; the classification metrics; and what would change for an external audience.
-
-Still to draft against `[[Z Project Report - AM1 Previously Asked Questions in Presentation]]`:
-
-- How did this project start and where did it come from?
-- What is the data pipeline, and does the data come from one source or several?
-- How does this project affect people day to day?
-- How do you communicate with higher management?
-
-Two more worth preparing, both arising from the decision matrix:
-
-- **Why does SEC-BERT score zero on three measures?** The inversion for lower-is-better measures subtracts from the maximum, which puts the worst model at zero by construction. It is a normalisation artefact, not a claim that the model has no merit. Re-scoring consistently leaves the ranking unchanged and widens the margin.
-- **What did each model take as input?** The three families use three different representations. `LinearSVC` takes sparse TF-IDF over word and character n-grams. The CNN takes integer token IDs from `TextVectorization` into a 518-dimension embedding learned from scratch, so the tensor reaching `Conv1D` has word positions on one axis and embedding channels on the other, and the width-3 kernel slides over word positions. SEC-BERT uses its own pretrained wordpiece tokeniser and embeddings. Learning the embedding from scratch works here because the vocabulary is small and domain-specific, with 7,795 canonical descriptions and 2.4 million rows to learn from.
-- **Why did the CNN win among the neural architectures?** Best macro-F1 in the Optuna study, but the trial budget was uneven across architectures, so the per-architecture scores are not a fair comparison and are deliberately not presented.
+- **"Walk me through your data splits."** Stratified 80/10/10 train/test/holdout created upfront before any modelling, plus sub-splits and square-root-weighted variants, shared across all model families for fair comparison. Holdout only for final evaluation.
+- **"What did YOU do versus the team?"** Vast majority of the code and all of the machine learning; led the virtual team as it grew; SMEs advised on taxonomy/accountancy; DevOps built ODC with me; engineers reviewed the codebase.
+- **"What would you do differently?"** Slide 25, plus: paired bootstrap instead of the CI discount, reciprocal normalisation, 5x2cv at later selection stages, ceiling first, Optuna from the start and for preprocessing choices.
+- **"Is the model fair?"** Slide 16 framing: gap is real, investigated, mostly evaluation specificity and provider tagging; mitigations in place; overclaiming in either direction is the trap.
+- **"Cost?"** Decision matrix Cost criterion (weight 20; LinearSVC 9.09 vs 5.45), CPU-only vs GPU estate, 220x inference, ODC pay-per-job, SME time saved (slides 4, 7, 22).
+- **"Why not fine-tune an LLM / use ChatGPT?"** Security (no taxpayer data through external APIs), excessive for 1-15 word strings, cost at daily-population scale, interpretability KPI.
+- **"How do you know it works on untagged data?"** Honestly: we don't fully — that is the recorded limitation. Proxy evidence: robustness suite, production figures on HMRC data (0.853/0.741), heading/table features +9.8pp, SME manual evaluation stage as the control.
 
 # TODO
 
-- Reconcile extraction coverage: 0.98 on slide 11 against over 99% in the report
-- Rewrite slide 25 to remove the duplicate lesson and fix the garbled bullet
-- Replace the copied notes on slides 16 and 24
-- Move the results content out of slide 10's notes into slide 11
-- Answer the `@TODO` in slide 5's notes
-- Add the closing Summary and questions slide
-- Name cost explicitly on slides 17 and 21, and add the benefit-against-cost line to slide 22
-- Add the LIME panel to slide 14 from `report_figures/B23d-lime-explanation.png`
-- Close the truncated first bullet on slide 9
-- Typos: "oracle" (3), "Residual analysis both" (13), "just" (14 notes), "setup" (17), "dstage" and "interoperabilty" (21), "befehand" and "stages was" (25)
-- Rehearse against the timing table, since 25 slides in 30 minutes leaves little recovery time
+- [ ] Apply fixes 1–7 in the pptx (54 wording, slide 8 t-test line, slide 22 note, typos, ODC sentence, slide 20 notes, slide 14 definitions).
+- [ ] Re-export the report PDF (13 Appendix D links were repaired after the 15:50 export) and rerun `Code/update_contents.py` if page numbers shift.
+- [ ] Rehearse slides 10 and 14 against the timing table.

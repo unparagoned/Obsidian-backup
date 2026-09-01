@@ -12,7 +12,7 @@ author: user
 
 Filename corrected from `Claud Code.md`.
 
-Related: [[LLM guidance]] · [[Compare LLM]] · [[AI tools and learning sources]] · [[llm-wiki]]
+Related: [[LLM guidance]] · [[Compare LLM]] · [[AI tools and learning sources]] · [[llm-wiki]] · [[grok-cli-uploaded-home-directory]] (July 2026 wire capture: Claude Code sent only the model turn while Grok CLI bundled the whole repo)
 
 # Settings
 

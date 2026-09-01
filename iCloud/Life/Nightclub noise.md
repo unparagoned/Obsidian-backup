@@ -11,4 +11,5 @@
 2026-05-24 One song at ~01:30 woke me up.
 2026-05-30 2am woke up bass, need air plugs
 2026-05-30 11pm loud, needed air plugs but could still hear it
-
+2026-08-29 could hear bass needed earplugs
+2026-08-30 could hear bass needed ear plugs

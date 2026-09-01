@@ -13,7 +13,7 @@ author: user
 
 **Evidence:** *Strong evidence* for mortality, cardiovascular and mental-health benefits. Dose: exercise snacks (1 min burpees/squats); Norwegian 4x4 at ~155-170 bpm.
 
-Related: [[Gym]] · [[Abs]] · [[Lunges]] · [[Cold exposure]] · [[Depression#Exercise]] · [[Sleep]] · [[Dementia alzheimer#Exercise]] · [[Metformin]] · [[Creatine]] · [[Protein]]
+Related: [[Gym]] · [[High-rep training]] · [[Abs]] · [[Lunges]] · [[Cold exposure]] · [[Depression#Exercise]] · [[Sleep]] · [[Dementia alzheimer#Exercise]] · [[Metformin]] · [[Creatine]] · [[Protein]]
 
 - Exercise snacks - 1minute of burpees or swats.
 - Vigorous activity is good for the brain and body. 
