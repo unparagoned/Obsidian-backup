@@ -223,7 +223,7 @@ Procedures, tools and how-to notes — no evidence grading applies.
 - [[Ingredients, brands and tools]] *(user)* — Butter, mayo, canned fish and tomatoes, fish to avoid, meal-planning app. Merged from seven notes.
 - [[Eating out and tasting notes]] *(user)* — Wagamama, Munch Box, whisky scores.
 - [[Pans]] — Five "titanium" pans tested against plain stainless: Viking PureGlide Pro and Hestan NanoBond win; Our Place releases a dry egg; Taima warps. One YouTube review, affiliate-linked.
-- `reference/food/recipes/` — 27 meal-kit recipe cards with the user's ratings and cooking notes.
+- `reference/food/recipes/` — 28 meal-kit recipe cards with the user's ratings and cooking notes. Latest: [[wiki/reference/food/recipes/Warming Spiced Salmon Harvest Bowl with Roasted Veg Couscous, Harissa Dressing and Yoghurt Drizzle|Warming Spiced Salmon Harvest Bowl]] (9.5/10, verified against the HelloFresh card PDF).
 - [[Knife sharpening]] *(user)* — Angles and pressure.
 - [[Memory os]] *(user)* — Rhyme pegs, the 0-100 Major system, the pi story, encoded phone numbers.
 - [[Household and admin]] *(user)* — Flat, insurance, Companies House code, nightclub noise log, cinema, train. **Contains secrets — never publish.**

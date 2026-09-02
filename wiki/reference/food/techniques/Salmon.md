@@ -12,7 +12,7 @@ author: user
 
 **Summary:** Pan method plus which type to buy.
 
-Related: [[Cooking techniques]] · [[Ingredients, brands and tools]] · [[Oil and cooking]] · [[wiki/reference/food/techniques/Tuna steak|Tuna steak]] · [[Ingredients, brands and tools#Canned fish|Canned fish]]
+Related: [[Cooking techniques]] · [[Ingredients, brands and tools]] · [[Oil and cooking]] · [[wiki/reference/food/techniques/Tuna steak|Tuna steak]] · [[Ingredients, brands and tools#Canned fish|Canned fish]] · [[wiki/reference/food/recipes/Warming Spiced Salmon Harvest Bowl with Roasted Veg Couscous, Harissa Dressing and Yoghurt Drizzle|Warming Spiced Salmon Harvest Bowl]]
 
 # Method
 

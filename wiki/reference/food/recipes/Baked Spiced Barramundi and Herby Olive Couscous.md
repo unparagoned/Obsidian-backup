@@ -11,7 +11,7 @@ author: user
 
 **Rating:** 9.5/10 (the user's own score).
 
-Related: [[Cooking techniques]] · [[Ingredients, brands and tools]] · [[Oil and cooking]]
+Related: [[Cooking techniques]] · [[Ingredients, brands and tools]] · [[Oil and cooking]] · [[wiki/reference/food/recipes/Warming Spiced Salmon Harvest Bowl with Roasted Veg Couscous, Harissa Dressing and Yoghurt Drizzle|Warming Spiced Salmon Harvest Bowl]]
 
 9.5/10
 
