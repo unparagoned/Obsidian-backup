@@ -8,43 +8,16 @@ source: raw/notes/food/
 author: user
 ---
 
-**Summary:** The user's own scores, merged from `Wagamama`, `Munch Box` and `Whisky whiskey`.
+**Summary:** Hub for the user's restaurant and tasting scores. Each venue now has its own page in `reference/food/eating-out/`; whisky has its own page. Split on 2026-09-04 so the venues are easier to find.
 
-Related: [[Cooking techniques]] · [[Alcohol]] · [[Objective art]]
+Related: [[Cooking techniques]] · [[Alcohol]] · [[Objective art]] · `reference/food/recipes/`
 
-# Wagamama
+# Restaurants and takeaways
 
-Really good actually.
+- [[wiki/reference/food/eating-out/Wagamama|Wagamama]] — really good; pork ribs 9.5, buldak bibimbap 9.
+- [[wiki/reference/food/eating-out/Munch Box|Munch Box]] — 8/10; fresh, garlic chilli naan 9, mutton pepper fry and keema samosa 7.
+- [[wiki/reference/food/eating-out/Fish n Chickn|Fish 'n' Chickn]] — not great; oily, fishy hake and a poor curry sauce. Page explains why that isn't normal for hake.
 
-- Gochujang tamarind pork ribs — 9.5/10
-- Buldak bibimbap — 9/10 (with buldak spicy hot sauce (vg), extra beef)
-- White chocolate + ginger cheesecake (v)
+# Drinks
 
-# Munch Box — 8/10
-
-Everything tastes fresh and good quality, 9/10.
-
-- Mutton pepper fry (extra hot) — 7/10, good quality, nice spice but just not for me
-- Garlic chilli naan — 9/10, different but great flavour and fresh, can really taste the flavour
-- Lamb keema samosa — 7/10, feels fresh but flavour just OK
-
-# Whisky
-
-## Islay
-
-- Bunnahabhain 12 year — 6/10. OK but not enough punch or peaty aftertaste.
-- Bruichladdich Scotch Barley — 1/10. Very artificial fruity smell, combined taste meh.
-- Bowmore 12 year old — 9.5/10. Subtle smell, but perfect taste and amount of peat.
-- Bowmore 18 year old — 9/10.
-- Laphroaig Quarter Cask — 8.5/10. Perfect smell, good taste but a touch too strong overall.
-- Ardbeg — 8.5/10. Really strong kick in terms of smell. Nice taste.
-- Johnnie Walker Island Green — 8/10. Really nice and balanced.
-
-## Misc
-
-- Singleton of Dufftown — 8/10. Nice but not enough peaty kick.
-
-# TODO
-
-- "lagoon quarter cask" in the original is read here as Laphroaig Quarter Cask; confirm.
-- Whisky notes sit oddly against [[Alcohol]], which records the no-safe-level position. Not a contradiction to resolve, just worth linking.
+- [[Whisky]] — Islay scores; Bowmore 12 top at 9.5, Bruichladdich Scotch Barley bottom at 1.

@@ -19,6 +19,10 @@ She said a bunch of neurotoxins were psychoactive, then in the comments defended
 
 No sources at all but they sound like small studies: https://vm.tiktok.com/ZN8LxHton/
 
+Talking as if adhd is due to low levels of dopamine. And self diagnosis. A lot sounds like myths rather than true
+https://vm.tiktok.com/ZN8Y6Mwcd/
+
+
 # TODO
 
 - The name is probably misspelled; confirm the handle before linking this from anywhere else.

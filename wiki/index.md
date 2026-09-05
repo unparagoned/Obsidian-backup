@@ -81,7 +81,7 @@ Catalog of wiki pages. Keep useful, not exhaustive. Pages marked *(user)* are th
 - [[Time Travel]] *(user)* — Stub: grandfather paradox as a Newcomb-style problem.
 - [[Claims and testimony]] *(user)* — A claim is not evidence for itself; testimony is weak evidence. The vault's own evidence principle in miniature.
 - [[Is ought gap]] *(user)* — Stub: universal preference wouldn't make a colour objectively best.
-- [[Stoicism]] *(user)* — Stub: CBT's descent from Stoicism, plus the Stoics-are-compatibilists note.
+- [[Stoicism]] *(user)* — Hub: core idea, the five Stoics, negative visualisation, control and goals, hardship, dealing with people, minimalism, CBT lineage, compatibilism; each section links into the book page.
 - [[A guide to the good life]] *(user)* — Irvine's book: the Stoic school, the five main Stoics with memory hooks, hardship as training.
 
 ### physics/
@@ -221,7 +221,11 @@ Procedures, tools and how-to notes — no evidence grading applies.
   - [[Poached eggs]] — simmer, 3min 30s.
   - [[wiki/reference/food/techniques/Bolognese|Bolognese]] — stub; bookmarked video only.
 - [[Ingredients, brands and tools]] *(user)* — Butter, mayo, canned fish and tomatoes, fish to avoid, meal-planning app. Merged from seven notes.
-- [[Eating out and tasting notes]] *(user)* — Wagamama, Munch Box, whisky scores.
+- [[Eating out and tasting notes]] *(user)* — hub for the venue and tasting pages below; one line each.
+  - [[wiki/reference/food/eating-out/Wagamama|Wagamama]] — really good; ribs 9.5, bibimbap 9.
+  - [[wiki/reference/food/eating-out/Munch Box|Munch Box]] — 8/10; naan 9, mains 7.
+  - [[wiki/reference/food/eating-out/Fish n Chickn|Fish 'n' Chickn]] — not great; oily, fishy hake (not normal for hake), poor curry sauce.
+  - [[Whisky]] — Islay scores; Bowmore 12 at 9.5.
 - [[Pans]] — Five "titanium" pans tested against plain stainless: Viking PureGlide Pro and Hestan NanoBond win; Our Place releases a dry egg; Taima warps. One YouTube review, affiliate-linked.
 - `reference/food/recipes/` — 28 meal-kit recipe cards with the user's ratings and cooking notes. Latest: [[wiki/reference/food/recipes/Warming Spiced Salmon Harvest Bowl with Roasted Veg Couscous, Harissa Dressing and Yoghurt Drizzle|Warming Spiced Salmon Harvest Bowl]] (9.5/10, verified against the HelloFresh card PDF).
 - [[Knife sharpening]] *(user)* — Angles and pressure.

@@ -70,14 +70,14 @@ https://philpapers.org/archive/KASAIA-3.pdf
 
 #panpsychism
 
-Does consciousness have causal impact on the brain separate to the laws of physics.
+Does consciousness have causal impact on the brain separate to the laws of physics?
 
 1. No.
 	1. Then either it's an epiphenomena or equivalent. It suffers from the closure problem since we can talk about our conscious experiences, but what we say is fully determined by physics.
 	2. Or the physical construct is directly related to consciousness and it suffers from a simulation problem, in that a silicon based simulation of a human brain, would be talking about its phenomenal experience but the conscious foundation and structure would be completely different than the biological style consciousness it's talking about.
 2. Yes. Then it means that electrons in the brain don't act in line with the laws of physics and we could in theory detect it. Funny enough this is the only non-physicalist approach that I think is tenable from a philosophical level if you ignore science.
 
-You could also think about what would happen if we just simulated the laws of physics of a person. If like the OP you accept that your theory aligns with the laws of physics, then the simulation would perfectly simulate a human and would talk about their conscious experience. Which would suggest that the conscious experience is fully embedded and explained by the laws of physics, and is substrate independent. It's a type of computation.
+You could also think about what would happen if we just simulated the laws of physics of a person. If you accept that your theory aligns with the laws of physics, then the simulation would perfectly simulate a human and would talk about their conscious experience. Which would suggest that the conscious experience is fully embedded and explained by the laws of physics, and is substrate independent. It's a type of computation.
 
 Either it does create a subjective experience or it doesn't. Both situations have major issues.
 
