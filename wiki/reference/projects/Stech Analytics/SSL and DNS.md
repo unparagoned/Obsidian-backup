@@ -5,11 +5,13 @@ tags:
 type: reference
 source: raw/notes/projects/Stech Analytics/SSL certificates and DNS.md
 author: user
+aliases:
+  - Stech Analytics - SSL and DNS
 ---
 
 **Summary:** SSL/DNS runbook for api.stechanalytics.com: generating the key and CSR, the CSR field values, the CNAME validation record, the expected filenames on the EC2 host, and the service restart.
 
-Related: [[Stech Analytics - Website]] · [[Stech Analytics - Email and domains]] · [[Mac]]
+Related: [[wiki/reference/projects/Stech Analytics/Website|Website]] · [[wiki/reference/projects/Stech Analytics/Email and domains|Email and domains]] · [[Mac]]
 
 Can use old crs.pem
 

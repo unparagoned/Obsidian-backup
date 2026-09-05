@@ -5,11 +5,13 @@ tags:
 type: reference
 source: raw/notes/projects/Stech Analytics/Examples.md
 author: user
+aliases:
+  - Stech Analytics - Examples
 ---
 
 **Summary:** Two iXBRL tagging defects found in filings: a Wickes figure shown in pence but tagged GBP, and untagged "other creditors".
 
-Related: [[Stech Analytics - SSL and DNS]] · [[Stech Analytics - Website]]
+Related: [[wiki/reference/projects/Stech Analytics/SSL and DNS|SSL and DNS]] · [[wiki/reference/projects/Stech Analytics/Website|Website]]
 
 # Wicks.zip
 

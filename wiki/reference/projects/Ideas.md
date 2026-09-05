@@ -9,7 +9,7 @@ author: user
 
 **Summary:** Project and story ideas: AI upscaling of old music videos, contact-detail sharing, an LLM that judges films objectively against declared criteria, an API-based terminal tool so nothing is installed locally, and three story premises (including one where humanity destroys the AI that was keeping the world habitable).
 
-Related: [[Objective art]] · [[Do people prefer AI]] · [[Dare Devil]] · [[LLM guidance]]
+Related: [[Objective art]] · [[Do people prefer AI]] · [[Dare Devil]] · [[LLM guidance]] · [[Balloons]]
 
 # Upscale music videos
 

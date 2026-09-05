@@ -5,11 +5,13 @@ tags:
 type: reference
 source: raw/notes/projects/Stech Analytics/Email and domains.md
 author: user
+aliases:
+  - Stech Analytics - Email and domains
 ---
 
 **Summary:** Microsoft 365 domain admin: the options are hidden behind "show more", and aliases are wanted rather than a catch-all.
 
-Related: [[Stech Analytics - SSL and DNS]]
+Related: [[wiki/reference/projects/Stech Analytics/SSL and DNS|SSL and DNS]]
 
 https://admin.cloud.microsoft/
 

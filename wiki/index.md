@@ -231,7 +231,7 @@ Procedures, tools and how-to notes — no evidence grading applies.
 - `reference/personal/` — [[Jokes]], [[Stories]] (skydiving), [[Strange coffee taste]].
 - `reference/systems/` — [[Mac]], [[Obsidian]], [[Openhab]], [[Home Assistant]], [[TV]], [[Headphones]], [[VLC]], [[VSCode]], [[Display-KVM]], [[HDMI cec]], [[new tasks]].
 - `reference/media/` — [[Films]], [[Dare Devil]], [[To read]], and [[00 Warhammer reading guide|Warhammer reading guide]] with 68 Horus Heresy book notes, each filename prefixed with its series number so the folder sorts in reading order.
-- `reference/projects/` — [[Ideas]], [[Graffiti - Models]] (source folder since deleted by the user), and six Stech Analytics runbooks (SSL/DNS, website, email, sales, examples, architecture).
+- `reference/projects/` — [[Ideas]], [[Graffiti - Models]] (source folder since deleted by the user), [[Balloons]] (pattern on a balloon via a nested balloon and cutout, one idea), and `Stech Analytics/` holding six runbooks: [[wiki/reference/projects/Stech Analytics/SSL and DNS|SSL and DNS]], [[wiki/reference/projects/Stech Analytics/Website|Website]], [[wiki/reference/projects/Stech Analytics/Email and domains|Email and domains]], [[wiki/reference/projects/Stech Analytics/Sales|Sales]], [[wiki/reference/projects/Stech Analytics/Examples|Examples]], [[wiki/reference/projects/Stech Analytics/Architecture|Architecture]].
 - [[Personal contacts]] *(user)* — Private notes on people the user knows.
 
 ## Sources

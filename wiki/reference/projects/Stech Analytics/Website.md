@@ -5,11 +5,13 @@ tags:
 type: reference
 source: raw/notes/projects/Stech Analytics/Website.md
 author: user
+aliases:
+  - Stech Analytics - Website
 ---
 
 **Summary:** One gotcha: updating the certificate in cPanel needs a remove-wait-fetch cycle on Supersonic.
 
-Related: [[Stech Analytics - SSL and DNS]]
+Related: [[wiki/reference/projects/Stech Analytics/SSL and DNS|SSL and DNS]]
 
 # SSL
 
